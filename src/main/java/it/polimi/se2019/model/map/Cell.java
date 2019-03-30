@@ -1,16 +1,20 @@
 package it.polimi.se2019.model.map;
 
 public abstract class Cell {
-    private final Coordinate coordinate;
+
     private Border northBorder;
     private Border eastBorder;
     private Border southBorder;
     private Border westBorder;
     private ArrayList<Player> playerHere;
     private Room room;
+    private int ID;
+    private int coordinateX;
+    private int coordinateY;
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public int getCoordinateX() { return coordinateX; }
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
     public Border getNorthBorder() {
