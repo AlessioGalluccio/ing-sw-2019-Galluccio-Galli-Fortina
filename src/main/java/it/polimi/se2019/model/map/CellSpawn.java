@@ -30,5 +30,7 @@ public class CellSpawn extends Cell {
 
     }
 
+    public void updateWeaponCard(){
 
+    }
 }
