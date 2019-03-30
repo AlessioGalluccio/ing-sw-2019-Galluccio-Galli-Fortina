@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.deck;
 
+import java.util.ArrayList;
+
 public abstract class Deck {
 
     private ArrayList<Card> unusedCard;

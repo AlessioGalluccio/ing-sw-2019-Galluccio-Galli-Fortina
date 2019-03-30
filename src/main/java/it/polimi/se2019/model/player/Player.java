@@ -1,6 +1,10 @@
 package it.polimi.se2019.model.player;
 
 
+import it.polimi.se2019.model.deck.PowerupCard;
+import it.polimi.se2019.model.deck.WeaponCard;
+
+import java.util.ArrayList;
 
 public class Player {
     private String nickname;
@@ -11,7 +15,7 @@ public class Player {
     private Character character;
     private AmmoBag ammoBag;
     private Action actionChosen;
-    private ArratList<PowerupCard> powerupCard;
+    private ArrayList<PowerupCard> powerupCard;
     private ArrayList<WeaponCard> weaponCard;
 
     public Player(String nickname) {

@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.player;
 
+import java.util.ArrayList;
+
 public class Mark {
     private ArrayList<Player> markDone;
     private ArrayList<Player> markReceived;
