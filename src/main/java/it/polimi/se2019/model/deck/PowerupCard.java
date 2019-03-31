@@ -1,11 +1,19 @@
 package it.polimi.se2019.model.deck;
 
-public abstract class PowerupCard implements AmmoCard {
+import it.polimi.se2019.model.player.Color;
+import it.polimi.se2019.model.player.Player;
 
-    public PowerupCard(Color color) {
-        this.color = color;
-    }
+public abstract class PowerupCard implements Card {
 
     private Color color;
+
+    public PowerupCard() {}
+
+    @Override
+    public void useCard() {
+
+    }
+
+
 
 }

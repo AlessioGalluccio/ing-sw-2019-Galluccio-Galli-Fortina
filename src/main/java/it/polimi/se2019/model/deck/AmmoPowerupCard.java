@@ -1,8 +1,11 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.player.Player;
+
 public class AmmoPowerupCard implements AmmoCard {
 
-
+    private Color color1;
+    private Color color2;
 
     public AmmoPowerupCard() {
     }
@@ -16,9 +19,6 @@ public class AmmoPowerupCard implements AmmoCard {
     public void useCard() {
 
     }
-
-    private Color color1;
-    private Color color2;
 
     private void pickPowerup(){
 

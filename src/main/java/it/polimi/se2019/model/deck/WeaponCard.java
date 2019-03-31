@@ -1,8 +1,10 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.player.Color;
+
 import java.util.ArrayList;
 
-public abstract class WeaponCard {
+public abstract class WeaponCard implements Card {
 
     private Color ammoGranted;
     private ArrayList<Color> ammoNotGranted;
@@ -24,6 +26,11 @@ public abstract class WeaponCard {
     }
 
     public boolean isReloaded(){
+
+    }
+
+    @Override
+    public void useCard() {
 
     }
 }

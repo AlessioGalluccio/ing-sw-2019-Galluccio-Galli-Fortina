@@ -5,13 +5,8 @@ import it.polimi.se2019.model.player.Player;
 
 public class TeleporterCard extends PowerupCard{
 
-    public TeleporterCard(Color color) {
-        super(color);
+    public TeleporterCard() {
 
-    }
-
-    @Override
-    public void reloadAmmo(Player p) {
 
     }
 
