@@ -15,4 +15,9 @@ public class TargetingScopeCard extends PowerupCard{
     public void useCard() {
 
     }
+
+    @Override
+    public void reloadAmmo(Player p) {
+
+    }
 }

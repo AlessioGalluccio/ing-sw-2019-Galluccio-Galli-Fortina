@@ -1,8 +1,9 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.player.Color;
 import it.polimi.se2019.model.player.Player;
 
-public class AmmoPowerupCard implements AmmoCard {
+public class AmmoPowerupCard implements AmmoConvertibleCard {
 
     private Color color1;
     private Color color2;
