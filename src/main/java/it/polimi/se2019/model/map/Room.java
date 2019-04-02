@@ -1,5 +1,9 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.player.Player;
+import java.util.ArrayList;
+
+
 public class Room {
     private final CellSpawn spawnCell;
     private final String color;
@@ -19,7 +23,7 @@ public class Room {
      * @return list of cell in this room
      */
     public ArrayList<Cell> getCellRoom() {
-        return cellRoom.clone();
+
     }
 
     /**

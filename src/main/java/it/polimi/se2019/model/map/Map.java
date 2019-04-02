@@ -1,9 +1,11 @@
 package it.polimi.se2019.model.map;
+import java.util.ArrayList;
+
 
 //Immutable
 public abstract class Map {
-    private final ArrayList<Cell> cell;
-    private final ArryList<Room> room;
+    private final Cell[][] cell;
+    private final ArrayList<Room> room;
     private final String description;
 
     public Map(String description) {
@@ -12,11 +14,11 @@ public abstract class Map {
     }
 
     public ArrayList<Cell> getCell() {
-        return cell.clone();
+
     }
 
-    public ArryList<Room> getRoom() {
-        return room.clone();
+    public ArrayList<Room> getRoom() {
+
     }
 
     public String getDescription() {

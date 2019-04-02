@@ -1,5 +1,11 @@
 package it.polimi.se2019.model.map;
 
+import java.util.ArrayList;
+
+import it.polimi.se2019.model.deck.Card;
+import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.player.Color;
+
 public class CellSpawn extends Cell {
     private ArrayList<WeaponCard> weapon;
     private Color color;
@@ -10,7 +16,7 @@ public class CellSpawn extends Cell {
      * @return list of WeaponCard that can be pick here
      */
     public ArrayList<WeaponCard> getWeapon() {
-        return weapon;
+
     }
 
     public Color getColor() {
@@ -30,7 +36,4 @@ public class CellSpawn extends Cell {
 
     }
 
-    public void updateWeaponCard(){
-
-    }
 }

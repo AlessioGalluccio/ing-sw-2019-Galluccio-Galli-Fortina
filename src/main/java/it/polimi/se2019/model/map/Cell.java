@@ -1,5 +1,10 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.deck.Card;
+import it.polimi.se2019.model.player.Player;
+import java.util.ArrayList;
+
+
 public abstract class Cell {
 
     private Border northBorder;
@@ -8,11 +13,12 @@ public abstract class Cell {
     private Border westBorder;
     private ArrayList<Player> playerHere;
     private Room room;
-    private int ID;
+    //private int ID;
     private int coordinateX;
     private int coordinateY;
 
     public int getCoordinateX() { return coordinateX; }
+
     public int getCoordinateY() {
         return coordinateY;
     }

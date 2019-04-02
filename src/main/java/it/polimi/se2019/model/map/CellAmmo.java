@@ -1,23 +1,26 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.deck.AmmoConvertibleCard;
+import it.polimi.se2019.model.deck.Card;
+
 public class CellAmmo extends Cell {
-    private AmmoCard ammo;
+    private AmmoConvertibleCard ammo;
 
     /**
      *
      * @return ammmo card that can be grab here
      */
-    public AmmoCard getAmmo(){
+    public AmmoConvertibleCard getAmmo(){
 
     }
 
     @Override
     public Card grabCard() {
-        return super.grabCard();
+
     }
 
     @Override
     public void reloadCard() {
-        super.reloadCard();
+
     }
 }
