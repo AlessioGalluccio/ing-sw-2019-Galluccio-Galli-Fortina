@@ -17,4 +17,8 @@ public class BaseWeapon extends WeaponCard {
 
     }
 
+    public FireMode getFireModeByID(int ID) {
+
+    }
+
 }

@@ -7,9 +7,14 @@ public abstract class FireMode extends java.util.Observable {
     private final Color cost;
     private ArrayList<Target> target;
     private final String description;
+    private int ID;
 
     public Color getCost(){
 
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String getDescription() {

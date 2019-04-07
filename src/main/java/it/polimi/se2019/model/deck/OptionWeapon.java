@@ -19,6 +19,10 @@ public class OptionWeapon {
 
     }
 
+    public FireMode getFireModeByID(int ID) {
+
+    }
+
     public void verify(){ //lancia delle eccezioni
 
     }
