@@ -91,22 +91,6 @@ public class Player extends java.util.Observable implements Target {
     }
 
     /**
-     *
-     * @return the action choosen b y the user
-     */
-    public Action chooseAction() {
-
-    }
-
-    /**
-     * it executes the action chosen
-      */
-    public void doAction() {
-        actionChosen.executeAction(this);
-
-    }
-
-    /**
      * it respawns the player after death
      */
     public void resurrection() {

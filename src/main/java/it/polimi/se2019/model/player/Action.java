@@ -1,8 +1,24 @@
 package it.polimi.se2019.model.player;
 
-public abstract class Action {
 
-    public void executeAction(ViewControllerMessage msg) {
+import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+
+import java.util.ArrayList;
+
+public abstract class Action {
+    protected GameHandler gameHandler;
+    protected ArrayList<ViewControllerMessage> correctMessages;
+
+    public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
 
     }
+    public StringAndMessage getStringAndMessageExpected() {
+
+    }
+
+    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
+
+    }
+
 }
