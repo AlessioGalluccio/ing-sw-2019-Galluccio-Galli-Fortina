@@ -1,10 +1,11 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
 
 
-public class Room {
+public class Room implements Target {
     private final CellSpawn spawnCell;
     private final String color;
     private final ArrayList<Cell> cellRoom;

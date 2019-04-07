@@ -1,11 +1,12 @@
 package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.model.deck.Card;
+import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
 
 
-public abstract class Cell {
+public abstract class Cell implements Target {
 
     private Border northBorder;
     private Border eastBorder;

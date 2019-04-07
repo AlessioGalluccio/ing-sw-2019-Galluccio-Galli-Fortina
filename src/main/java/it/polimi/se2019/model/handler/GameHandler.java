@@ -8,7 +8,7 @@ import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
 
-public class GameHandler {
+public class GameHandler extends java.util.Observable {
 
     private AmmoDeck ammoDeck;
     private PowerupDeck powerupDeck;

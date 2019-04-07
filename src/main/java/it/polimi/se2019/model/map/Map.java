@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 //Immutable
-public abstract class Map {
+public abstract class Map extends java.util.Observable {
     private final Cell[][] cell;
     private final ArrayList<Room> room;
     private final String description;
