@@ -18,11 +18,16 @@ public class Player extends java.util.Observable implements Target {
     private Action actionChosen;
     private ArrayList<PowerupCard> powerupCard;
     private ArrayList<WeaponCard> weaponCard;
+    private int ID;
 
     public Player(String nickname) {
         this.nickname = nickname;
         this.skull = 0;
         //TODO complete the constructor
+    }
+
+    public int getID() {
+
     }
 
     /**
