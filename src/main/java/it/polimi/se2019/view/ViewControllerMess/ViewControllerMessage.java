@@ -1,4 +1,6 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.ViewControllerMess;
+
+import it.polimi.se2019.view.PlayerView;
 
 import java.util.ArrayList;
 

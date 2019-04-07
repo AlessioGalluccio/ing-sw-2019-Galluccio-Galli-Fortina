@@ -1,7 +1,13 @@
 package it.polimi.se2019.view;
 
+import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.Grab;
+import it.polimi.se2019.model.player.Move;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.Shoot;
+import it.polimi.se2019.view.ViewControllerMess.*;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,60 +30,62 @@ public class PlayerView extends Observable implements Observer {
 
 
 
-    public void createTargetMessage(){
-        TargetMessage message = new TargetMessage(ArrayList<Target>);
+    public void createTargetMessage(ArrayList<Target> target){
+        TargetMessage message = new TargetMessage(target);
         notifyObservers(message);
 
     }
 
-    public void createCellMessage(){
-        CellMessage message = new CellMessage(int x, int y);
+    public void createCellMessage(int x, int y){
+        CellMessage message = new CellMessage(x,y);
         notifyObservers(message);
 
     }
 
-    public void createPlayerViewMessage(){
-
+    public void createPlayerViewMessage(int playerID){
+        PlayerViewMessage message = new PlayerViewMessage(playerID);
+        notifyObservers(message);
     }
 
-    public void createCardSpawnChooseMessage(){
-
+    public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded){
+        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded);
+        notifyObservers(message);
     }
 
     public void createNopeMessage(){
-
+        NopeMessage message = new NopeMessage();
+        notifyObservers(message);
     }
 
-    public void createMoveMessage(){
+    public void createActionMessage(int actionID){
+        ActionMessage message = new ActionMessage(actionID);
+        notifyObservers(message);
+    }
+    
 
+    public void createNewtonMessage(NewtonCard usedCard){
+        NewtonMessage message = new NewtonMessage(usedCard);
+        notifyObservers(message);
     }
 
-    public void createShootMessage(){
-
+    public void createReloadMessage(ArrayList<WeaponCard> weapon){
+        ReloadMessage message = new ReloadMessage(weapon);
+        notifyObservers(message);
     }
 
-    public void createGrabMessage(){
-
+    public void createTeleporterMessage(TeleporterCard usedCard){
+        TeleporterMessage message = new TeleporterMessage(usedCard);
+        notifyObservers(message);
     }
 
-    public void createNewtonMessage(){
-
+    public void createTargetingScopeMessage(TargetingScopeCard usedCard){
+        TargetingScopeMessage message = new TargetingScopeMessage(usedCard);
+        notifyObservers(message);
     }
 
-    public void createReloadMessage(){
-
-    }
-
-    public void createTeleporterMessage(){
-
-    }
-
-    public void createTargetingScopeMessage(){
-
-    }
-
-    public void createTagbackGranadeMessage(){
-
+    public void createTagbackGranadeMessage(TagbackGranedCard usedCard){
+        TagbackGranateMessage message = new TagbackGranateMessage(usedCard);
+        notifyObservers(message);
     }
 
 

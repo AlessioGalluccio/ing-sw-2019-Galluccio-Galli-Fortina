@@ -1,6 +1,7 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 
 public class MapMessage implements ModelViewMessage {
 

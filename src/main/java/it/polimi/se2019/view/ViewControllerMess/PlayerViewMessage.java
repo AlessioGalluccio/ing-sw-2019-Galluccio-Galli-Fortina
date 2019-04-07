@@ -1,4 +1,4 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.ViewControllerMess;
 
 public class PlayerViewMessage extends ViewControllerMessage {
 

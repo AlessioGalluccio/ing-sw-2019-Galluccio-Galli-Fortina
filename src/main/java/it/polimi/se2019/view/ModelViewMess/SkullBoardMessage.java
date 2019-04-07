@@ -1,6 +1,7 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.model.handler.Death;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 
 import java.util.ArrayList;
 

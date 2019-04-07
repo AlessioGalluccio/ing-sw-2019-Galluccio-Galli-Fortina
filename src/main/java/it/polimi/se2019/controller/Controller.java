@@ -2,7 +2,7 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.player.Action;
-import it.polimi.se2019.view.ViewControllerMessage;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.Observable;

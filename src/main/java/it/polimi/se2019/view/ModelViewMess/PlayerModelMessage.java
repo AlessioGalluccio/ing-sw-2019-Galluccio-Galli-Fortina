@@ -1,6 +1,7 @@
-package it.polimi.se2019.view;
+package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 
 public class PlayerModelMessage implements ModelViewMessage {
 
