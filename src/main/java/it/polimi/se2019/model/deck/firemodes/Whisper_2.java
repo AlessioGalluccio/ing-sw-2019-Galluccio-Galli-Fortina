@@ -4,4 +4,13 @@ import it.polimi.se2019.model.deck.FireMode;
 
 
 public class Whisper_2 extends FireMode {
+    @Override
+    public void verify() {
+
+    }
+
+    @Override
+    public void fire() {
+
+    }
 }
