@@ -1,10 +1,9 @@
 package it.polimi.se2019.view;
 
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.player.Grab;
-import it.polimi.se2019.model.player.Move;
+
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.Shoot;
+
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
@@ -61,7 +60,7 @@ public class PlayerView extends Observable implements Observer {
         ActionMessage message = new ActionMessage(actionID);
         notifyObservers(message);
     }
-    
+
 
     public void createNewtonMessage(NewtonCard usedCard){
         NewtonMessage message = new NewtonMessage(usedCard);
