@@ -1,12 +1,11 @@
 package it.polimi.se2019.model.player;
 
-
 import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
-public class ShootFrenzy extends Shoot {
+public class GarbAdrenaline extends Grab {
     @Override
     public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
         super.executeAction(author, msg);
