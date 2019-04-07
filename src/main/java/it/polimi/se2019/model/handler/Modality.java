@@ -8,7 +8,7 @@ public abstract class Modality {
     public Modality() {}
 
     public int getNumSkulls(){
-
+        return numSkulls;
     }
 
 }

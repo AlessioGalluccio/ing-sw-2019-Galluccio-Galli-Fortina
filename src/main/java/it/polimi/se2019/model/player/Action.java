@@ -23,6 +23,7 @@ public abstract class Action {
 
     public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
 
+        return false; //TODO implementare
     }
 
 }

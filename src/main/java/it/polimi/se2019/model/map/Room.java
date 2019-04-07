@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 
 public class Room implements Target {
-    private final CellSpawn spawnCell;
-    private final String color;
-    private final ArrayList<Cell> cellRoom;
+    private CellSpawn spawnCell;
+    private String color;
+    private ArrayList<Cell> cellRoom;
     private ArrayList<Player> playerHere;
 
     public Cell getSpawnCell() {
@@ -25,6 +25,7 @@ public class Room implements Target {
      */
     public ArrayList<Cell> getCellRoom() {
 
+        return null; //TODO implementare
     }
 
     /**
@@ -33,6 +34,7 @@ public class Room implements Target {
      */
     public ArrayList<Player> getPlayerHere() {
 
+        return null; //TODO implementare
     }
 
 

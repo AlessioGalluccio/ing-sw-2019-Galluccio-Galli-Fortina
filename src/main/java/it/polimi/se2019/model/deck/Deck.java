@@ -18,6 +18,7 @@ public abstract class Deck {
 
     public Card pick(){
 
+        return null; //TODO implementare
     }
 
     public void discard( Card A ){

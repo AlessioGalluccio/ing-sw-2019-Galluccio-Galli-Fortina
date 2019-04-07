@@ -50,18 +50,15 @@ public abstract class Cell implements Target {
      */
     public ArrayList<Player> getPlayerHere() {
 
+        return null;    //TODO implementare
     }
 
     /**
      *
      * @return the card on the cell
      */
-    public Card grabCard() {    //abstract
+    public abstract Card grabCard();
 
-    }
-
-    public void reloadCard() {  //abstract
-
-    }
+    public abstract void reloadCard();
 
 }

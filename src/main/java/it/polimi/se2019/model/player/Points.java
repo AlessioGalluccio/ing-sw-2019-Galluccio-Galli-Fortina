@@ -13,10 +13,12 @@ public class Points {
 
     public ArrayList<PointCard> getPointCard() {
 
+        return null; //TODO implementare
     }
 
     public int getSum() {
 
+        return 0; //TODO implementare
     }
 
     public void addNewPoints(int num) {

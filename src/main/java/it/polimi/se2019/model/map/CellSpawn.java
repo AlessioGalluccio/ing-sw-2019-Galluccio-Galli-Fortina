@@ -17,6 +17,7 @@ public class CellSpawn extends Cell {
      */
     public ArrayList<WeaponCard> getWeapon() {
 
+        return null; //TODO implementare
     }
 
     public Color getColor() {
@@ -29,6 +30,7 @@ public class CellSpawn extends Cell {
 
     @Override
     public Card grabCard(){
+        return null; //TODO implementare
     }
 
     @Override

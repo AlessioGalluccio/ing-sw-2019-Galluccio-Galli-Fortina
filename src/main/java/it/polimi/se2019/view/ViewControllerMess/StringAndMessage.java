@@ -10,10 +10,10 @@ public class StringAndMessage {
     }
 
     public ViewControllerMessage getMessage() {
-
+        return message;
     }
 
     public boolean isOptional() {
-
+        return optional;
     }
 }

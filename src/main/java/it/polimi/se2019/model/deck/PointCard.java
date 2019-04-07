@@ -15,6 +15,7 @@ public class PointCard implements Card{
 
     public int getValue(){
 
+        return value;
     }
 
 }

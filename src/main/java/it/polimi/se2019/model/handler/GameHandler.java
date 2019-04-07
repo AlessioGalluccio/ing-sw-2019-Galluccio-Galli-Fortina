@@ -33,6 +33,7 @@ public class GameHandler extends java.util.Observable {
      */
     public boolean isFinished(){
 
+        return false; //TODO implementare
     }
 
     /**
@@ -55,6 +56,7 @@ public class GameHandler extends java.util.Observable {
      */
     public int getTurnPlayerID() {
 
+        return 0; //TODO implementare
     }
 
     /**
@@ -64,6 +66,7 @@ public class GameHandler extends java.util.Observable {
      */
     public Player getPlayerByID(int id) {
 
+        return null; //TODO implementare
     }
 
     /**
@@ -74,6 +77,7 @@ public class GameHandler extends java.util.Observable {
      */
     public Cell getCellByCoordinate(int x, int y) {
 
+        return null; //TODO implementare
     }
 
     /**
@@ -83,6 +87,7 @@ public class GameHandler extends java.util.Observable {
      */
     public Room getRoomByID(String colorRoom) {
 
+        return null; //TODO implementare
     }
 
     /**
@@ -93,5 +98,6 @@ public class GameHandler extends java.util.Observable {
     public Action getActionByID(int actionID) {
         //return action = Grab(this)
 
+        return null; //TODO implementare
     }
 }

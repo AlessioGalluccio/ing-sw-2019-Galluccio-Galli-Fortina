@@ -18,18 +18,22 @@ public abstract class WeaponCard implements Card {
 
     public ArrayList<Color> getBuyCost(){
 
+        return null; //TODO implementare
     }
 
     public ArrayList<Color> getReloadCost() {
 
+        return null; //TODO implementare
     }
 
     public String getName(){
 
+        return null; //TODO implementare
     }
 
     public boolean isReloaded(){
 
+        return reload; //TODO implementare
     }
 
     @Override
