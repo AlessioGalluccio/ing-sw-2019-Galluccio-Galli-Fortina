@@ -87,6 +87,10 @@ public class PlayerView extends Observable implements Observer {
         notifyObservers(message);
     }
 
+    public void createFireModeMessage(int firemodeID){
+        FireModeMessage message = new FireModeMessage(firemodeID);
+        notifyObservers(message);
+    }
 
 
 }
