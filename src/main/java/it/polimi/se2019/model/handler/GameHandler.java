@@ -26,30 +26,72 @@ public class GameHandler extends java.util.Observable {
     public GameHandler() {
     }
 
+    /**
+     * controlls if the game is finished
+     * @return  1 if the game is finished
+     *          0 if not
+     */
     public boolean isFinished(){
 
     }
 
+    /**
+     * Called when a player has finished his turn
+     */
     public void nextTurn(){
-
+        //TODO notify();
     }
 
+    /**
+     * Called at the end of the game
+     */
     public void finishGame(){
 
     }
 
+    /**
+     *
+     * @return ID of the Player of the current turn
+     */
+    public int getTurnPlayerID() {
+
+    }
+
+    /**
+     *
+     * @param id ID of a Player
+     * @return the Player object who has this ID
+     */
     public Player getPlayerByID(int id) {
 
     }
 
+    /**
+     *
+     * @param x coordinate x of the Cell
+     * @param y coordinate x of the Cell
+     * @return the Cell which has x and y coordinates
+     */
     public Cell getCellByCoordinate(int x, int y) {
 
     }
 
+    /**
+     *
+     * @param colorRoom color of the Room
+     * @return the Room object that has that color
+     */
     public Room getRoomByID(String colorRoom) {
 
     }
+
+    /**
+     * It generates an Action object with reference to this GameHandler
+     * @param actionID the int ID of the action
+     * @return
+     */
     public Action getActionByID(int actionID) {
+        //return action = Grab(this)
 
     }
 }

@@ -10,6 +10,10 @@ public abstract class Action {
     protected GameHandler gameHandler;
     protected ArrayList<StringAndMessage> correctMessages;
 
+    public Action(GameHandler gameHandler) {
+        this.gameHandler = gameHandler;
+    }
+
     public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
 
     }
