@@ -6,6 +6,7 @@ import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.deck.WeaponCard;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class Player extends java.util.Observable implements Target {
     private String nickname;

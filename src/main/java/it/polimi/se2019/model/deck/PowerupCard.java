@@ -16,6 +16,6 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
 
     @Override
     public void reloadAmmo(Player p) {
-        
+
     }
 }
