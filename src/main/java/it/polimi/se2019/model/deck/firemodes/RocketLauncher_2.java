@@ -9,7 +9,7 @@ public class RocketLauncher_2 extends FireMode {
     private boolean used;
 
     public boolean isUsed(){
-
+        return used;
     }
 
     @Override

@@ -4,9 +4,9 @@ import it.polimi.se2019.model.player.Color;
 import java.util.ArrayList;
 
 public abstract class FireMode {
-    private final Color cost;
+    private Color cost;
     private ArrayList<Target> target;
-    private final String description;
+    private String description;
     private int ID;
 
     public Color getCost(){

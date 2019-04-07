@@ -2,23 +2,26 @@ package it.polimi.se2019.model.map;
 import java.util.ArrayList;
 
 
-//Immutable
+//TODO rendere immutable
 public abstract class Map extends java.util.Observable {
-    private final Cell[][] cell;
-    private final ArrayList<Room> room;
+    private Cell[][] cell;
+    private ArrayList<Room> room;
     private final String description;
 
     public Map(String description) {
         this.description = description;
+        //TODO implementare
 
     }
 
     public ArrayList<Cell> getCell() {
 
+        return null; //TODO implementare
     }
 
     public ArrayList<Room> getRoom() {
 
+        return null; //TODO implementare
     }
 
     public String getDescription() {
@@ -34,6 +37,7 @@ public abstract class Map extends java.util.Observable {
      */
     public int getDistance(Cell start, Cell end) {
 
+        return 0; //TODO implementare
     }
 
 

@@ -13,6 +13,7 @@ public class Terminator extends Modality {
     }
     public Modality getOtherMode(){
 
+        return null; //TODO implementare
     }
 
 }

@@ -15,10 +15,12 @@ public class BaseWeapon extends WeaponCard {
 
     public List<StringAndMessage> getCorrectMessages() {
 
+        return correctMessages;
     }
 
     public FireMode getFireModeByID(int ID) {
 
+        return null; //TODO implementare
     }
 
 }

@@ -11,12 +11,13 @@ public class CellAmmo extends Cell {
      * @return ammmo card that can be grab here
      */
     public AmmoConvertibleCard getAmmo(){
-
+        return null; //TODO implementare
     }
 
     @Override
     public Card grabCard() {
 
+        return null; //TODO implementare
     }
 
     @Override

@@ -5,6 +5,7 @@ public class Door implements Border {
     @Override
     public boolean isCrossable(){
 
+        return true; //TODO implementare
     }
 
 }

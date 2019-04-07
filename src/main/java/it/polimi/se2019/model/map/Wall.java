@@ -4,7 +4,7 @@ public class Wall implements Border {
 
     @Override
     public boolean isCrossable() {
-
+        return false; //TODO implementare
     }
 
 }
