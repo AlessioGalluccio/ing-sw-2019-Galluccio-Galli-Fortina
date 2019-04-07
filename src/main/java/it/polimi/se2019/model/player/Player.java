@@ -5,6 +5,7 @@ import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 public class Player {
     private String nickname;
