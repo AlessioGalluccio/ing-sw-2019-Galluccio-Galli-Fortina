@@ -21,13 +21,9 @@ public abstract class FireMode {
         return description;
     }
 
-    public abstract void verify(){  //throws some exception
+    public abstract void verify(); //throws some exception
 
-    }
-
-    public abstract void fire() {
-
-    }
+    public abstract void fire();
 
     public void setTarget(ArrayList<Target> target) {
         this.target = target;

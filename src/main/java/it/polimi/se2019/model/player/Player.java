@@ -28,7 +28,7 @@ public class Player extends java.util.Observable implements Target {
     }
 
     public int getID() {
-
+        return ID;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Player extends java.util.Observable implements Target {
      * @return nickname of user
      */
     public String getNickname() {
-
+        return nickname;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Player extends java.util.Observable implements Target {
      * @return list of players who damaged this player in correct order
      */
     public ArrayList<Player> getDamage() {
-
+        return null; //TODO implementare la clone di damage
     }
 
     /**
@@ -52,7 +52,7 @@ public class Player extends java.util.Observable implements Target {
      * @return numer of skull of this player (numer of deaths)
      */
     public int getSkull() {
-
+        return skull;
     }
 
     /**
@@ -80,6 +80,7 @@ public class Player extends java.util.Observable implements Target {
      */
     public boolean isDead() {
 
+        return false; //TODO implementare
     }
 
     /**
@@ -87,7 +88,7 @@ public class Player extends java.util.Observable implements Target {
      * @return 1 if the player has been over killed, 0 if not
      */
     public boolean isOverKilled() {
-
+        return false; //TODO implementare
     }
 
     /**
