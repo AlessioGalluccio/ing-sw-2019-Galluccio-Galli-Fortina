@@ -1,7 +1,9 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.PowerupCard;
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Action;
+import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class Controller implements Observer {
 
     private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<ViewControllerMessage> messageListExpected;
+    private GameHandler gameHandler;
 
     public Controller() {
     }
@@ -37,7 +40,13 @@ public class Controller implements Observer {
         this.messageListExpected = messageListExpected;
     }
 
-    private void modifyModel(Action action) {
+    /**
+     * It verififies the list of messages and, if it is correct, it modifies the model accordingly
+     * @param actionMessage the first message in the list. It defines what type of action
+     */
+    private void modifyModel(ActionMessage actionMessage) {
+        //TODO verify()
+        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
 
     }
 

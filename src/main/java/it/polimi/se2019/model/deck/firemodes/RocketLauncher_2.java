@@ -11,4 +11,14 @@ public class RocketLauncher_2 extends FireMode {
     public boolean isUsed(){
 
     }
+
+    @Override
+    public void verify() {
+
+    }
+
+    @Override
+    public void fire() {
+
+    }
 }

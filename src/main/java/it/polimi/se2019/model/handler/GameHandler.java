@@ -6,6 +6,7 @@ import it.polimi.se2019.model.deck.PowerupDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Room;
+import it.polimi.se2019.model.player.Action;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
@@ -46,6 +47,9 @@ public class GameHandler extends java.util.Observable {
     }
 
     public Room getRoomByID(String colorRoom) {
+
+    }
+    public Action getActionByID(int actionID) {
 
     }
 }
