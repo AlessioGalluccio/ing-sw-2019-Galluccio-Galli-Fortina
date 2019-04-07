@@ -3,7 +3,9 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Action;
+import it.polimi.se2019.view.PlayerView;
 import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
+import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.Observer;
 public class Controller implements Observer {
 
     private ArrayList<ViewControllerMessage> messageListReceived;
-    private ArrayList<ViewControllerMessage> messageListExpected;
+    private ArrayList<StringAndMessage> messageListExpected;
     private GameHandler gameHandler;
 
     public Controller() {
@@ -22,22 +24,6 @@ public class Controller implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-    }
-
-    public ArrayList<ViewControllerMessage> getMessageListReceived() {
-        return messageListReceived;
-    }
-
-    public ArrayList<ViewControllerMessage> getMessageListExpected() {
-        return messageListExpected;
-    }
-
-    public void setMessageListReceived(ArrayList<ViewControllerMessage> messageListReceived) {
-        this.messageListReceived = messageListReceived;
-    }
-
-    public void setMessageListExpected(ArrayList<ViewControllerMessage> messageListExpected) {
-        this.messageListExpected = messageListExpected;
     }
 
     /**
@@ -51,6 +37,20 @@ public class Controller implements Observer {
     }
 
     private void modifyModel(PowerupCard powerupCard) {
+
+    }
+
+    /**
+     * it empties the messages after Model is modified
+     */
+    private void flushMessages() {
+
+    }
+
+    /**
+     * it empties only the messages of the optional firemode
+     */
+    private void flushOptionalMessages() {
 
     }
 

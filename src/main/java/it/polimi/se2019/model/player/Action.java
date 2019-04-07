@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public abstract class Action {
     protected GameHandler gameHandler;
-    protected ArrayList<ViewControllerMessage> correctMessages;
+    protected ArrayList<StringAndMessage> correctMessages;
 
     public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
 
     }
-    public StringAndMessage getStringAndMessageExpected() {
-
+    public ArrayList<StringAndMessage> getStringAndMessageExpected() {
+        return correctMessages;
     }
 
     public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
