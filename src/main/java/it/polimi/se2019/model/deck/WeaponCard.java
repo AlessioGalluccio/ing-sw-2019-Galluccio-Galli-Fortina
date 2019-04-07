@@ -1,7 +1,6 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.model.player.Color;
-
 import java.util.ArrayList;
 
 public abstract class WeaponCard implements Card {
@@ -22,6 +21,10 @@ public abstract class WeaponCard implements Card {
     }
 
     public ArrayList<Color> getReloadCost() {
+
+    }
+
+    public String getName(){
 
     }
 
