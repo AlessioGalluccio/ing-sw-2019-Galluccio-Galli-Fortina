@@ -16,15 +16,27 @@ public class Player extends java.util.Observable implements Target {
     private Mark mark;
     private Character character;
     private AmmoBag ammoBag;
-    private Action actionChosen;
     private ArrayList<PowerupCard> powerupCard;
     private ArrayList<WeaponCard> weaponCard;
     private int ID;
 
-    public Player(String nickname) {
+    //starting ammo
+    private static final int NUM_START_RED = 2;
+    private static final int NUM_START_YELLOW = 2;
+    private static final int NUM_START_BLUE = 2;
+    private static final int STARTING_POINTS = 0;
+
+    public Player(String nickname, Character character, int ID) {
         this.nickname = nickname;
+        this.damage = new ArrayList<Player>();  //empty
         this.skull = 0;
-        //TODO complete the constructor
+        this.points = new Points(STARTING_POINTS);
+        this.mark = new Mark();
+        this.character = character;
+        this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
+        this.powerupCard = new ArrayList<PowerupCard>();
+        this.weaponCard = new ArrayList<WeaponCard>();
+        this.ID = ID;
     }
 
     public int getID() {
