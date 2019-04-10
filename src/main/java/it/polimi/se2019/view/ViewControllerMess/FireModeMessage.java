@@ -1,14 +1,22 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
-public class FireModeMessage extends ViewControllerMessage {
+import it.polimi.se2019.model.handler.Identificator;
 
+public class FireModeMessage extends ViewControllerMessage {
+    private int messageID;
     private int firemodeID;
 
     public FireModeMessage(int firemodeID) {
         this.firemodeID = firemodeID;
+        this.messageID = Identificator.FIRE_MODE_MESSAGE;
     }
 
     public int getFiremodeID() {
         return firemodeID;
+    }
+
+    @Override
+    public int getMessageID() {
+        return messageID;
     }
 }

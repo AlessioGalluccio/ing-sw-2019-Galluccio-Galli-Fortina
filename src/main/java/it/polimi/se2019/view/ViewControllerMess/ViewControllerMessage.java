@@ -20,5 +20,11 @@ public abstract class ViewControllerMessage {
         return authorView;
     }
 
+    /**
+     * it returns the ID of the message
+     * @return the integer value of the ID of the message
+     */
+    public abstract int getMessageID();
+
 
 }
