@@ -20,8 +20,10 @@ public class JsonAdapter<T>
     public final JsonElement serialize(final T object, final Type interfaceType, final JsonSerializationContext context) {
         final JsonObject member = new JsonObject();
 
+        //Per ogni figlio di una classe NON concreta indica il suo nome, così gson sa qual è il figlio corretto
         member.addProperty("type", object.getClass().getName());
 
+        //Per ogni figlio aggunge i suoi attributi e il loro valore
         member.add("data", context.serialize(object));
 
         return member;

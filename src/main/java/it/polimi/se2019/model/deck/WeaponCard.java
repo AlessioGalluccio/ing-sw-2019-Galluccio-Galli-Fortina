@@ -1,22 +1,20 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.model.player.Color;
+import it.polimi.se2019.model.player.ColorRYB;
+
 import java.util.ArrayList;
 
 public abstract class WeaponCard implements Card {
 
-    private Color ammoGranted;
-    private ArrayList<Color> ammoNotGranted;
+    private ColorRYB ammoGranted;
+    private ArrayList<ColorRYB> ammoNotGranted;
     private String name;
     private String description;
-    private Color color;
+    private ColorRYB color;
     private boolean reload;
 
-    public WeaponCard() {
-
-    }
-
-    public ArrayList<Color> getBuyCost(){
+    public ArrayList<ColorRYB> getBuyCost(){
 
         return null; //TODO implementare
     }

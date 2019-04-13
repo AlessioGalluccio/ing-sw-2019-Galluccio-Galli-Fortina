@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
 
-public class OptionWeapon {
+public class OptionWeapon extends WeaponCard {
 
     private List<StringAndMessage> correctMessages;
-    private ArrayList<FireMode> optionalFireModeList;
+    private ArrayList<? extends FireMode> optionalFireModeList;
     private FireMode primaryFireMode;
     private ArrayList<FireMode> fireModeChoosen;
 

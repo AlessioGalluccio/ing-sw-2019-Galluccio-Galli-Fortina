@@ -9,7 +9,6 @@ import it.polimi.se2019.model.player.Color;
 public class CellSpawn extends Cell {
     private ArrayList<WeaponCard> weapon;
     private Color color;
-    private Room room;
 
     /**
      *
@@ -25,7 +24,7 @@ public class CellSpawn extends Cell {
     }
 
     public Room getRoom() {
-        return room;
+        return super.getRoom();
     }
 
     @Override

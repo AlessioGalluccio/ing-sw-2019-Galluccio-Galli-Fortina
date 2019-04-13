@@ -1,15 +1,17 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.model.player.Color;
+import it.polimi.se2019.model.player.ColorRYB;
+
 import java.util.ArrayList;
 
 public abstract class FireMode {
-    private Color cost;
-    private ArrayList<Target> target;
+    private ArrayList<ColorRYB> cost;
+    private ArrayList<? extends Target> target;
     private String description;
     private int ID;
 
-    public Color getCost(){
+    public ArrayList<ColorRYB> getCost() {
         return cost;
     }
 

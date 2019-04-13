@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 public abstract class Deck {
 
-    private ArrayList<Card> unusedCard;
+    private ArrayList<? extends Card> unusedCard;
     private ArrayList<Card> inUseCard;
     private ArrayList<Card> usedCard;
 
 
-    public Deck() {
+    public Deck(ArrayList<? extends Card> unusedCard) {
+        this.unusedCard = unusedCard;
+    }
+
+    public ArrayList<? extends Card> getUnusedCard() {
+        return unusedCard;
     }
 
     public void mix(){
