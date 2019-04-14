@@ -1,32 +1,51 @@
 package it.polimi.se2019.model.deck;
 
-import java.util.ArrayList;
+import java.util.*;
 
-public abstract class Deck {
+public abstract class Deck<T> {
 
-    private ArrayList<? extends Card> unusedCard;
-    private ArrayList<Card> inUseCard;
-    private ArrayList<Card> usedCard;
+    private Stack<T> unusedCard;
+    private ArrayList<T> inUseCard;
+    private Stack<T> usedCard;
 
-
-    public Deck(ArrayList<? extends Card> unusedCard) {
+    public Deck(Stack<T> unusedCard) {
         this.unusedCard = unusedCard;
+        this.inUseCard = new ArrayList<>();
+        this.usedCard = new Stack();
     }
 
-    public ArrayList<? extends Card> getUnusedCard() {
+    public Stack<T> getUnusedCard() {
         return unusedCard;
     }
 
+    public ArrayList<T> getInUseCard() {
+        return inUseCard;
+    }
+
+    public Stack<T> getUsedCard() {
+        return usedCard;
+    }
+    /**
+     * Shuffle the discarded cards of usedCard and refill the unsedCard stack
+     * At the end usedcard is empty
+     */
     public void mix(){
-
+        Collections.shuffle(usedCard);
+        unusedCard.addAll(usedCard);
+        usedCard.clear();
     }
 
-    public Card pick(){
-
-        return null; //TODO implementare
+    /**
+     * Pick the first card of the deck
+     * @return The first elements of the deck
+     */
+    public T pick(){
+        T picked = unusedCard.pop();
+        inUseCard.add(picked);
+        return picked;
     }
 
-    public void discard( Card A ){
+    public void discard( T A ){
 
     }
 }

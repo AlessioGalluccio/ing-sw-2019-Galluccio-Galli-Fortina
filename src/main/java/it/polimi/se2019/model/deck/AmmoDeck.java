@@ -1,11 +1,11 @@
 package it.polimi.se2019.model.deck;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
-public class AmmoDeck extends Deck {
+public class AmmoDeck extends Deck<AmmoConvertibleCard> {
 
 
-    public AmmoDeck(ArrayList<? extends Card> unusedCard) {
+    public AmmoDeck(Stack<AmmoConvertibleCard> unusedCard) {
         super(unusedCard);
     }
 }

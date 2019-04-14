@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public class WeaponDeck extends Deck {
+public class WeaponDeck extends Deck<WeaponCard> {
 
     public WeaponDeck(){
         super(initializeCard());
@@ -22,8 +22,8 @@ public class WeaponDeck extends Deck {
      * Read Card form Json file
      * @return List of cards just read
      */
-    private static ArrayList<WeaponCard> initializeCard(){
-        ArrayList<WeaponCard> deck;
+    private static Stack<WeaponCard> initializeCard(){
+        Stack<WeaponCard> deck;
         BufferedReader bufferedReader = null;
 
         /*
@@ -43,10 +43,10 @@ public class WeaponDeck extends Deck {
         }
 
         //Mi serve per passarlo al deserealizzatore
-        Type WEAPON_TYPE = new TypeToken<ArrayList<WeaponCard>>() {
+        Type DECK_TYPE = new TypeToken<Stack<WeaponCard>>() {
         }.getType();
 
-        deck  = gson.fromJson(bufferedReader, WEAPON_TYPE);
+        deck  = gson.fromJson(bufferedReader, DECK_TYPE);
         return deck;
     }
 }

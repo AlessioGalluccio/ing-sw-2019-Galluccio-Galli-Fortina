@@ -1,10 +1,13 @@
 package it.polimi.se2019.model.deck;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
-public class PointDeck extends Deck {
+/**
+ * Deprecated
+ */
+public class PointDeck extends Deck<PointCard> {
 
-    public PointDeck(ArrayList<? extends Card> unusedCard) {
+    public PointDeck(Stack<PointCard> unusedCard) {
         super(unusedCard);
     }
 }

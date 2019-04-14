@@ -25,8 +25,7 @@ public abstract class WeaponCard implements Card {
     }
 
     public String getName(){
-
-        return null; //TODO implementare
+        return name;
     }
 
     public boolean isReloaded(){

@@ -17,4 +17,10 @@ WeaponDeck deck;
     public void testSizeDeck(){
         assertEquals(21, deck.getUnusedCard().size());
     }
+
+    @Test
+    public void testPick() {
+        deck.pick();
+        assertEquals(1, deck.getInUseCard().size());
+        assertEquals(20, deck.getUnusedCard().size());}
 }
