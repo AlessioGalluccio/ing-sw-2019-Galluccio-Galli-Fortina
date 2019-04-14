@@ -12,6 +12,16 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     }
 
     @Override
+    public void setDeck(Deck deck) throws AlreadyDeckException {
+
+    }
+
+    @Override
+    public void discard() {
+
+    }
+
+    @Override
     public void useCard() {
 
     }

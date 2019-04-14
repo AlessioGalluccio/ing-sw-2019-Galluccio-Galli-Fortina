@@ -45,10 +45,7 @@ public abstract class Deck<T> {
         return picked;
     }
 
-    /**
-     * Discard a card
-     * @param A is the card you want to discard
-     */
+
     public void discard(T A) {
 
     }

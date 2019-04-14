@@ -7,9 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TestDeck {
-    WeaponDeck weaponDeck;
-    AmmoDeck ammoDeck;
-    PowerupDeck powerupDeck;
+    private WeaponDeck weaponDeck;
+    private AmmoDeck ammoDeck;
+    private PowerupDeck powerupDeck;
 
     @Before
     public void testCostructor(){
@@ -29,5 +29,28 @@ public class TestDeck {
     public void testPick() {
         weaponDeck.pick();
         assertEquals(1, weaponDeck.getInUseCard().size());
-        assertEquals(20, weaponDeck.getUnusedCard().size());}
+        assertEquals(20, weaponDeck.getUnusedCard().size());
+        ammoDeck.pick();
+        assertEquals(1, ammoDeck.getInUseCard().size());
+    }
+
+    @Test(expected = AlreadyDeckException.class)
+    public void testAlreadyDeckException() {
+        ammoDeck.pick().setDeck(ammoDeck);
+    }
+
+    @Test
+    public void testDiscard() {
+        AmmoConvertibleCard acc = ammoDeck.pick();;
+        for(int i=0; i<15; i++) {
+            acc = ammoDeck.pick();
+        }
+        acc.discard();
+        assertEquals(1, ammoDeck.getUsedCard().size());
+        assertEquals(36, ammoDeck.getInUseCard().size() +
+                        ammoDeck.getUnusedCard().size() +
+                ammoDeck.getUsedCard().size());
+        assertEquals(acc, ammoDeck.getUsedCard().get(0));
+
+    }
 }

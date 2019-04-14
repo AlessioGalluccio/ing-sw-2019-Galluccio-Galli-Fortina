@@ -34,6 +34,16 @@ public abstract class WeaponCard implements Card {
     }
 
     @Override
+    public void setDeck(Deck deck) throws AlreadyDeckException {
+
+    }
+
+    @Override
+    public void discard() {
+
+    }
+
+    @Override
     public void useCard() {
 
     }

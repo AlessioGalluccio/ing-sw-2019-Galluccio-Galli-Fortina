@@ -6,9 +6,9 @@ import java.util.Stack;
 
 public class AmmoDeck extends Deck<AmmoConvertibleCard> {
 
-
     public AmmoDeck() {
         super(initializeCard());
+        getUnusedCard().forEach(c -> c.setDeck(this));
     }
 
     /**
