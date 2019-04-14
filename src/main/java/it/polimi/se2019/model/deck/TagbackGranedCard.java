@@ -1,12 +1,14 @@
 package it.polimi.se2019.model.deck;
 
 
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 
 public class TagbackGranedCard extends PowerupCard{
 
-    public TagbackGranedCard() {
 
+    public TagbackGranedCard(ColorRYB color) {
+        super(color);
     }
 
     @Override

@@ -1,13 +1,15 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.model.player.Color;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 
 public abstract class PowerupCard implements AmmoConvertibleCard {
+    private ColorRYB color;
 
-    private Color color;
-
-    public PowerupCard() {}
+    public PowerupCard(ColorRYB color) {
+        this.color = color;
+    }
 
     @Override
     public void useCard() {
