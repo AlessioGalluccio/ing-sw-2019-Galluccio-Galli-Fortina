@@ -4,11 +4,9 @@ import it.polimi.se2019.model.deck.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.security.PublicKey;
-
 import static org.junit.Assert.*;
 
-public class TestWeaponDeck {
+public class TestDeck {
     WeaponDeck weaponDeck;
     AmmoDeck ammoDeck;
     PowerupDeck powerupDeck;
