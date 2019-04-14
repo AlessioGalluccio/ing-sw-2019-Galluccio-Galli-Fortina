@@ -25,9 +25,9 @@ public abstract class Deck<T> {
     public Stack<T> getUsedCard() {
         return usedCard;
     }
+
     /**
-     * Shuffle the discarded cards of usedCard and refill the unsedCard stack
-     * At the end usedcard is empty
+     * Shuffle the discarded cards and refill the deck
      */
     public void mix(){
         Collections.shuffle(usedCard);
@@ -45,7 +45,11 @@ public abstract class Deck<T> {
         return picked;
     }
 
-    public void discard( T A ){
+    /**
+     * Discard a card
+     * @param A is the card you want to discard
+     */
+    public void discard(T A) {
 
     }
 }
