@@ -14,14 +14,26 @@ public abstract class Deck<T> {
         this.usedCard = new Stack();
     }
 
+    /**
+     *
+     * @return Reference to UnsedCard stack
+     */
     public Stack<T> getUnusedCard() {
         return unusedCard;
     }
 
+    /**
+     *
+     * @returnReference to InUsedCard stack
+     */
     public ArrayList<T> getInUseCard() {
         return inUseCard;
     }
 
+    /**
+     * Reference to UsedCard stack
+     * @return
+     */
     public Stack<T> getUsedCard() {
         return usedCard;
     }

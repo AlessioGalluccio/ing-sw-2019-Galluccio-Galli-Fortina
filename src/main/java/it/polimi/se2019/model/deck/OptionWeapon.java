@@ -1,30 +1,22 @@
 package it.polimi.se2019.model.deck;
 
-import java.util.ArrayList;
-import java.util.List;
-import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
+import java.util.*;
+
 
 public class OptionWeapon extends WeaponCard {
 
-    private List<StringAndMessage> correctMessages;
     private ArrayList<? extends FireMode> optionalFireModeList;
     private FireMode primaryFireMode;
-    private ArrayList<FireMode> fireModeChoosen;
 
     public void setFireMode(ArrayList<FireMode> fire) {
 
     }
 
-    public List<StringAndMessage> getCorrectMessages() {
+    @Override
+    public List<FireMode> getFireMode() {
+        List<FireMode> fireModeReturned = new ArrayList(optionalFireModeList);
+        fireModeReturned.add(primaryFireMode);
 
-        return correctMessages;
-    }
-
-    public FireMode getFireModeByID(int ID) {
-        return null; //TODO implementare
-    }
-
-    public void verify(){ //lancia delle eccezioni
-
+        return duplicateFireMode(fireModeReturned);
     }
 }
