@@ -92,5 +92,9 @@ public class PlayerView extends Observable implements Observer {
         notifyObservers(message);
     }
 
+    public void printFromController(String string) {
+
+    }
+
 
 }
