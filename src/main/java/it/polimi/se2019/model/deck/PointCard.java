@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.player.Player;
+
 public class PointCard implements Card{
 
     private int value;
@@ -19,7 +21,7 @@ public class PointCard implements Card{
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 

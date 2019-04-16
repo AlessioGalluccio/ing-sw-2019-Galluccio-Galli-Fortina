@@ -17,8 +17,8 @@ public class TestDeck {
     @Before
     public void testCostructor(){
         weaponDeck = new WeaponDeck();
-        ammoDeck = new AmmoDeck();
         powerupDeck = new PowerupDeck();
+        ammoDeck = new AmmoDeck(powerupDeck);
     }
 
     @Test

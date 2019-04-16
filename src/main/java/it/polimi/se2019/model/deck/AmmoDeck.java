@@ -8,26 +8,26 @@ import java.util.*;
 
 public class AmmoDeck extends Deck<AmmoConvertibleCard> {
 
-    public AmmoDeck() {
-        super(initializeCard());
+    public AmmoDeck(PowerupDeck powerupDeck) {
+        super(initializeCard(powerupDeck));
     }
 
     /**
      * Generate 36 cards according to the game rule
      * @return deck of Ammo Cards
      */
-    private static Stack<AmmoConvertibleCard> initializeCard(){
+    private static Stack<AmmoConvertibleCard> initializeCard(PowerupDeck powerupDeck){
         Stack<AmmoConvertibleCard> deck = new Stack<>();
         for(int i=0; i<2; i++) {
             for(ColorRYB c: ColorRYB.values()) {
-                deck.add(new AmmoPowerupCard(c,c));
+                deck.add(new AmmoPowerupCard(c,c, powerupDeck));
             }
         }
 
         for(int i=0; i<4; i++) {
             for(ColorRYB c1: ColorRYB.values()) {
                 for (ColorRYB c2 : ColorRYB.values()) {
-                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2));
+                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2, powerupDeck));
                 }
             }
         }

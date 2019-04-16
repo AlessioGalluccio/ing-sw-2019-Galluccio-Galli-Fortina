@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
-import it.polimi.se2019.model.player.Color;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
 
 import java.lang.reflect.Type;
@@ -32,14 +32,14 @@ public abstract class WeaponCard implements Card {
         return ID;
     }
 
-    public List<ColorRYB> getBuyCost(){
-
-        return null; //TODO implementare
+    public ColorRYB getBuyCost(){
+        return ammoGranted;
     }
 
-    public List<Color> getReloadCost() {
-
-        return null; //TODO implementare
+    public List<ColorRYB> getReloadCost() {
+        ArrayList<ColorRYB> reloadCost = new ArrayList<>(ammoNotGranted);
+        reloadCost.add(ammoGranted);
+        return reloadCost;
     }
 
     public String getName(){
@@ -47,8 +47,7 @@ public abstract class WeaponCard implements Card {
     }
 
     public boolean isReloaded(){
-
-        return reload; //TODO implementare
+        return reload;
     }
 
     /**
@@ -56,15 +55,11 @@ public abstract class WeaponCard implements Card {
      * @return A deep copy of correctMessages
      */
     public List<StringAndMessage> getCorrectMessages() {
-        return new ArrayList(correctMessages);  //basta una copia dell'array perchè StringAndMessage è immutabile
+        return new ArrayList<>(correctMessages);  //basta una copia dell'array perchè StringAndMessage è immutabile
     }
 
     public void setFireMode(FireMode fireModeChoosen) {
-
-    }
-
-    public FireMode getFireModeByID(int ID) {
-        return null; //TODO implementare
+        this.fireModeChoosen = fireModeChoosen;
     }
 
     public abstract List<FireMode> getFireMode();
@@ -96,11 +91,11 @@ public abstract class WeaponCard implements Card {
 
     @Override
     public void discard() {
-
+        //TODO ATTENZIONE: nello scarto non vanno messe in usedCard, perchè rimangono sempre in gioco!
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 }

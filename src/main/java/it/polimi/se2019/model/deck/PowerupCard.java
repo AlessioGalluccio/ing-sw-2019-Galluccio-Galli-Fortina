@@ -8,7 +8,8 @@ import java.util.List;
 
 public abstract class PowerupCard implements AmmoConvertibleCard {
     private transient PowerupDeck deck;
-    private ColorRYB color;
+    private final ColorRYB color;
+    //Due to his immutable nature, ID is not necessary
 
     public PowerupCard(ColorRYB color) {
         this.color = color;
@@ -31,7 +32,7 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 
