@@ -39,6 +39,7 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
                 }
             }
         }
+        Collections.shuffle(deck);
         return deck;
     }
 

@@ -5,6 +5,7 @@ import it.polimi.se2019.model.player.ColorRYB;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 public class PowerupDeck extends Deck<PowerupCard> {
@@ -29,6 +30,7 @@ public class PowerupDeck extends Deck<PowerupCard> {
                 deck.add(new TagbackGranedCard(c));
             }
         }
+        Collections.shuffle(deck);
         return deck;
     }
 
