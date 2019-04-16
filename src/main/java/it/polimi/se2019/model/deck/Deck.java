@@ -1,5 +1,11 @@
 package it.polimi.se2019.model.deck;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.model.JsonAdapter;
+
+import java.lang.reflect.Type;
 import java.util.*;
 
 public abstract class Deck<T> {
@@ -12,30 +18,67 @@ public abstract class Deck<T> {
         this.unusedCard = unusedCard;
         this.inUseCard = new ArrayList<>();
         this.usedCard = new Stack();
+
+        for(int i=0; i<unusedCard.size(); i++) {
+            Card c = (Card) unusedCard.get(i);
+            c.setDeck(this);
+        }
     }
 
     /**
      *
-     * @return Reference to UnsedCard stack
+     * @return Deep copy of unsedCard stack
      */
     public Stack<T> getUnusedCard() {
-        return unusedCard;
+        Gson gson = createGson();
+        Type TYPE = getType(false);
+
+        return gson.fromJson(gson.toJson(unusedCard, TYPE), TYPE);
     }
 
     /**
      *
-     * @returnReference to InUsedCard stack
+     * @return Deep copy of inUsedCard stack
      */
     public ArrayList<T> getInUseCard() {
-        return inUseCard;
+        Gson gson = createGson();
+        Type TYPE = getType(true);
+
+        return gson.fromJson(gson.toJson(inUseCard, TYPE), TYPE);
     }
 
     /**
-     * Reference to UsedCard stack
-     * @return
+     *
+     * @return Deep copy of usedCard
      */
     public Stack<T> getUsedCard() {
-        return usedCard;
+        Gson gson = createGson();
+        Type TYPE = getType(false);
+
+        return gson.fromJson(gson.toJson(usedCard, TYPE), TYPE);
+    }
+
+    /**
+     * HELPER METHOD
+     * @param ArrayListORStack true if you want an ArrayList, false for a Stack
+     * @return Type parametrized of the deck (WeaponCard, PowerupCard, AmmoConvertibleCard)
+     */
+    protected abstract Type getType(boolean ArrayListORStack);
+
+    /**
+     * HELPER METHOD
+     * Create a serializer and deserializer for the deck
+     * @return a Gson objcet for a deep copy of deck
+     */
+    private Gson createGson() {
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new JsonAdapter<Card>())
+                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
+
+        return g.create();
     }
 
     /**
@@ -59,6 +102,7 @@ public abstract class Deck<T> {
 
 
     public void discard(T A) {
-
+        inUseCard.remove(A);
+        usedCard.add(A);
     }
 }

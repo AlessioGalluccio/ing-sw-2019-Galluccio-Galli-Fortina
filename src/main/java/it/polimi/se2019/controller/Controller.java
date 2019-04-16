@@ -29,7 +29,7 @@ public class Controller implements Observer {
 
     }
 
-    @Override
+
     public void update(Observable o, PlayerViewMessage arg) {
         //TODO
 

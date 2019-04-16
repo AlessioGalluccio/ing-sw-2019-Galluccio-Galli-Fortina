@@ -48,4 +48,11 @@ public class WeaponDeck extends Deck<WeaponCard> {
         deck  = gson.fromJson(bufferedReader, DECK_TYPE);
         return deck;
     }
+
+    @Override
+    protected Type getType(boolean ArrayListORStack) {
+        return ArrayListORStack ?
+                new TypeToken<ArrayList<WeaponCard>>() {}.getType() :
+                new TypeToken<Stack<WeaponCard>>() {}.getType();
+    }
 }

@@ -3,8 +3,11 @@ package it.polimi.se2019.model.deck;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class AmmoOnlyCard implements AmmoConvertibleCard {
-    private AmmoDeck deck;
+    private transient AmmoDeck deck;
     private ColorRYB colorSingle;
     private ColorRYB colorDouble;
 
@@ -13,6 +16,14 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
         this.colorDouble = colorDouble;
     }
 
+    @Override
+    public List<ColorRYB> getAmmo() {
+        ArrayList<ColorRYB> ammo = new ArrayList<>();
+        ammo.add(colorSingle);
+        ammo.add(colorDouble);
+        ammo.add(colorDouble);
+        return ammo;
+    }
 
     @Override
     public void reloadAmmo(Player p) {
@@ -27,8 +38,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
 
     @Override
     public void discard() {
-        deck.getInUseCard().remove(this);
-        deck.getUsedCard().add(this);
+        deck.discard(this);
     }
 
     @Override

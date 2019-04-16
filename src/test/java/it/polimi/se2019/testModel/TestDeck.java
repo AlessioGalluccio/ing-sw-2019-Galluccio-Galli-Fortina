@@ -10,6 +10,9 @@ public class TestDeck {
     private WeaponDeck weaponDeck;
     private AmmoDeck ammoDeck;
     private PowerupDeck powerupDeck;
+    private final int WEAPON_SIZE_DECK = 21;
+    private final int AMMO_SIZE_DECK = 36;
+    private final int POWERUP_SIZE_DECK = 24;
 
     @Before
     public void testCostructor(){
@@ -20,9 +23,9 @@ public class TestDeck {
 
     @Test
     public void testSizeDeck(){
-        assertEquals(21, weaponDeck.getUnusedCard().size());
-        assertEquals(36, ammoDeck.getUnusedCard().size());
-        assertEquals(24, powerupDeck.getUnusedCard().size());
+        assertEquals(WEAPON_SIZE_DECK, weaponDeck.getUnusedCard().size());
+        assertEquals(AMMO_SIZE_DECK , ammoDeck.getUnusedCard().size());
+        assertEquals(POWERUP_SIZE_DECK, powerupDeck.getUnusedCard().size());
     }
 
     @Test
@@ -41,16 +44,16 @@ public class TestDeck {
 
     @Test
     public void testDiscard() {
-        AmmoConvertibleCard acc = ammoDeck.pick();;
-        for(int i=0; i<15; i++) {
-            acc = ammoDeck.pick();
-        }
+        AmmoConvertibleCard acc = ammoDeck.pick();
         acc.discard();
         assertEquals(1, ammoDeck.getUsedCard().size());
-        assertEquals(36, ammoDeck.getInUseCard().size() +
+
+        assertEquals(AMMO_SIZE_DECK , ammoDeck.getInUseCard().size() +
                         ammoDeck.getUnusedCard().size() +
                 ammoDeck.getUsedCard().size());
-        assertEquals(acc, ammoDeck.getUsedCard().get(0));
+
+        assertEquals(true, acc.getAmmo().equals(ammoDeck.getUsedCard().get(0).getAmmo()));
+
 
     }
 }
