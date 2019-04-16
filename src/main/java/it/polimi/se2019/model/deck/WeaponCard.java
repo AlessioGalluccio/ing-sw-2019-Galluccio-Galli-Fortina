@@ -1,27 +1,45 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.Color;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class WeaponCard implements Card {
 
+    private List<StringAndMessage> correctMessages;
     private ColorRYB ammoGranted;
     private ArrayList<ColorRYB> ammoNotGranted;
     private String name;
     private String description;
     private ColorRYB color;
     private boolean reload;
+    private FireMode fireModeChoosen;
+    private int ID;
 
-    public ArrayList<ColorRYB> getBuyCost(){
-
-        return null; //TODO implementare
+    /**
+     *
+     * @return WeaponCard's ID
+     */
+    public int getID(){
+        return ID;
     }
 
-    public ArrayList<Color> getReloadCost() {
+    public ColorRYB getBuyCost(){
+        return ammoGranted;
+    }
 
-        return null; //TODO implementare
+    public List<ColorRYB> getReloadCost() {
+        ArrayList<ColorRYB> reloadCost = new ArrayList<>(ammoNotGranted);
+        reloadCost.add(ammoGranted);
+        return reloadCost;
     }
 
     public String getName(){
@@ -29,8 +47,41 @@ public abstract class WeaponCard implements Card {
     }
 
     public boolean isReloaded(){
+        return reload;
+    }
 
-        return reload; //TODO implementare
+    /**
+     *
+     * @return A deep copy of correctMessages
+     */
+    public List<StringAndMessage> getCorrectMessages() {
+        return new ArrayList<>(correctMessages);  //basta una copia dell'array perchè StringAndMessage è immutabile
+    }
+
+    public void setFireMode(FireMode fireModeChoosen) {
+        this.fireModeChoosen = fireModeChoosen;
+    }
+
+    public abstract List<FireMode> getFireMode();
+
+    /**
+     * HELPER METHOD
+     * Serialize and deserialize FireMode in order to make a deep copy
+     * @param fireModeList fire modes to copy
+     * @return deep copy of fireModeList
+     */
+    protected List<FireMode> duplicateFireMode(List<FireMode> fireModeList) {
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>());
+        Gson gson = g.create();
+
+        Type TYPE = new TypeToken<List<FireMode>>() {
+        }.getType();
+
+        fireModeList =  gson.fromJson(gson.toJson(fireModeList, TYPE), TYPE);
+
+        return fireModeList;
     }
 
     @Override
@@ -40,11 +91,11 @@ public abstract class WeaponCard implements Card {
 
     @Override
     public void discard() {
-
+        //TODO ATTENZIONE: nello scarto non vanno messe in usedCard, perchè rimangono sempre in gioco!
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 }

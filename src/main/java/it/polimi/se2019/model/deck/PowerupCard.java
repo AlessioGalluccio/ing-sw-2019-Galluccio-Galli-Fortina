@@ -7,8 +7,12 @@ import it.polimi.se2019.view.PlayerView;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 public abstract class PowerupCard implements AmmoConvertibleCard {
-    private ColorRYB color;
+    private transient PowerupDeck deck;
+    private final ColorRYB color;
+    //Due to his immutable nature, ID is not necessary
 
     public PowerupCard(ColorRYB color) {
         this.color = color;
@@ -22,8 +26,14 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     public abstract ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView);
 
     @Override
-    public void setDeck(Deck deck) throws AlreadyDeckException {
+    public List<ColorRYB> getAmmo() {
+        return null; //TODO
+    }
 
+    @Override
+    public void setDeck(Deck deck) throws AlreadyDeckException {
+        if(this.deck==null) this.deck = (PowerupDeck) deck;
+        else throw new AlreadyDeckException("This card " + this +" has already a deck!");
     }
 
     @Override
@@ -32,7 +42,7 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 

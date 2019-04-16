@@ -15,7 +15,7 @@ public class TargetingScopeCard extends PowerupCard{
     }
 
     @Override
-    public void useCard() {
+    public void useCard(Player author) {
 
     }
 

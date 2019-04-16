@@ -3,6 +3,7 @@ package it.polimi.se2019.model.deck;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import it.polimi.se2019.model.JsonAdapter;
 
 import java.io.BufferedReader;
@@ -46,6 +47,14 @@ public class WeaponDeck extends Deck<WeaponCard> {
         }.getType();
 
         deck  = gson.fromJson(bufferedReader, DECK_TYPE);
+        Collections.shuffle(deck);
         return deck;
+    }
+
+    @Override
+    protected Type getType(boolean ArrayListORStack) {
+        return ArrayListORStack ?
+                new TypeToken<ArrayList<WeaponCard>>() {}.getType() :
+                new TypeToken<Stack<WeaponCard>>() {}.getType();
     }
 }

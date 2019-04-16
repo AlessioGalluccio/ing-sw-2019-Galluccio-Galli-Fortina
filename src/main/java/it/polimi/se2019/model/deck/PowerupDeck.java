@@ -1,7 +1,11 @@
 package it.polimi.se2019.model.deck;
 
+import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.player.ColorRYB;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 public class PowerupDeck extends Deck<PowerupCard> {
@@ -26,7 +30,15 @@ public class PowerupDeck extends Deck<PowerupCard> {
                 deck.add(new TagbackGranedCard(c));
             }
         }
+        Collections.shuffle(deck);
         return deck;
+    }
+
+    @Override
+    protected Type getType(boolean ArrayListORStack) {
+        return ArrayListORStack ?
+                new TypeToken<ArrayList<PowerupCard>>() {}.getType() :
+                new TypeToken<Stack<PowerupCard>>() {}.getType();
     }
 }
 
