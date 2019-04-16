@@ -1,9 +1,6 @@
 package it.polimi.se2019.model.handler;
 
-import it.polimi.se2019.model.deck.AmmoDeck;
-import it.polimi.se2019.model.deck.PointDeck;
-import it.polimi.se2019.model.deck.PowerupDeck;
-import it.polimi.se2019.model.deck.WeaponDeck;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.Action;
@@ -98,6 +95,10 @@ public class GameHandler extends java.util.Observable {
     public Action getActionByID(int actionID) {
         //return action = Grab(this)
 
+        return null; //TODO implementare
+    }
+
+    public FireMode getFireModeByID(int fireModeID){
         return null; //TODO implementare
     }
 }
