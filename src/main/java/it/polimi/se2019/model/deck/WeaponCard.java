@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
+import it.polimi.se2019.view.StringAndMessage;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

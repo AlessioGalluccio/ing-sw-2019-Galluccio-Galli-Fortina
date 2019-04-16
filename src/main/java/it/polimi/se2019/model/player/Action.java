@@ -3,7 +3,7 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.ViewControllerMess.StringAndMessage;
+import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 
 public abstract class Action {
