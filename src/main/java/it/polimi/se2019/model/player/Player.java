@@ -31,6 +31,7 @@ public class Player extends java.util.Observable implements Target {
     private static final int STARTING_SKULLS = 0;
     private static final int NUM_DAMAGE_DEATH = 11;
     private static final int NUM_DAMAGE_OVERKILL = 12;
+    private static final int MAX_CARD = 3;
 
     public Player(String nickname, Character character, int ID) {
         this.nickname = nickname;
@@ -40,8 +41,8 @@ public class Player extends java.util.Observable implements Target {
         this.mark = new Mark();
         this.character = character;
         this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
-        this.powerupCard = new ArrayList<PowerupCard>();
-        this.weaponCard = new ArrayList<WeaponCard>();
+        this.powerupCard = new ArrayList<>();
+        this.weaponCard = new ArrayList<>();
         this.ID = ID;
     }
 
@@ -155,6 +156,16 @@ public class Player extends java.util.Observable implements Target {
         cellPosition = cellSpawn;
     }
 
+    /**
+     * Add a powerup to the player list
+     * @param powerupToAdd powerup to add
+     * @throws TooManyCardException if the player has already three powerups
+     */
+    public void addPowerupCard(PowerupCard powerupToAdd) throws TooManyCardException {
+        //if is dead the player can has 4 powerup in order to respawn
+        if (powerupCard.size() < MAX_CARD || isDead()) powerupCard.add(powerupToAdd);
+        else throw new TooManyCardException("You, " + getNickname() + ", have already three powerups");
+    }
 
 
 

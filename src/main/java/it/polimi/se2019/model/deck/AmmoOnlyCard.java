@@ -3,6 +3,7 @@ package it.polimi.se2019.model.deck;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyCardException;
 
 import java.util.*;
 
@@ -52,6 +53,10 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
         deck.discard(this);
     }
 
+    /**
+     * Add to player AmmoBag the new ammo
+     * @param author Who use the card
+     */
     @Override
     public void useCard(Player author) {
         reloadAmmo(author);
