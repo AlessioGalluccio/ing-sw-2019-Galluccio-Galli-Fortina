@@ -20,6 +20,10 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
         this.colorDouble = colorDouble;
     }
 
+    /**
+     *
+     * @return List of ammo included in the card
+     */
     @Override
     public List<ColorRYB> getAmmo() {
         ArrayList<ColorRYB> ammo = new ArrayList<>();
@@ -31,7 +35,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
 
     /**
      * Reload a player's ammo using this card
-     * @param p player to relaod()
+     * @param p player to relaod
      */
     @Override
     public void reloadAmmo(Player p) {

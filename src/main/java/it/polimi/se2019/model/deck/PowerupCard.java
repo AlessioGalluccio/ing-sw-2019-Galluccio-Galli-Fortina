@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Color;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
@@ -7,7 +8,10 @@ import it.polimi.se2019.view.PlayerView;
 
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
+
+import static it.polimi.se2019.model.player.ColorRYB.*;
 
 public abstract class PowerupCard implements AmmoConvertibleCard {
     private transient PowerupDeck deck;
@@ -25,9 +29,15 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
      */
     public abstract ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView);
 
+    /**
+     *
+     * @return Ammo that can be change for this powerup
+     */
     @Override
     public List<ColorRYB> getAmmo() {
-        return null; //TODO
+        ArrayList<ColorRYB> ammo = new ArrayList<>();
+        ammo.add(color);
+        return ammo;
     }
 
     @Override
@@ -38,16 +48,29 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
 
     @Override
     public void discard() {
-
+        deck.discard(this);
     }
 
     @Override
-    public void useCard(Player author) {
+    public abstract void useCard(Player author);
 
-    }
-
+    /**
+     * Reload a player's ammo using this card
+     * @param p player to relaod
+     */
     @Override
     public void reloadAmmo(Player p) {
-
+        AmmoBag ammoPlayer = p.getAmmo();
+        switch (color) {
+            case BLUE:
+                p.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo() + 1);
+                break;
+            case YELLOW:
+                p.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo() + 1, ammoPlayer.getBlueAmmo());
+                break;
+            case RED:
+                p.setAmmoBag(ammoPlayer.getRedAmmo() + 1, ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo());
+                break;
+        }
     }
 }

@@ -11,7 +11,7 @@ import org.junit.Test;
 import static it.polimi.se2019.model.player.ColorRYB.*;
 import static org.junit.Assert.*;
 
-public class TestAmmoCard {
+public class TestAmmoConvertibleCard {
     private AmmoDeck deck;
     private Player player;
 
@@ -40,6 +40,11 @@ public class TestAmmoCard {
             assertEquals(red, player.getAmmo().getRedAmmo());
             assertEquals(yellow, player.getAmmo().getYellowAmmo());
             assertEquals(blue, player.getAmmo().getBlueAmmo());
+
+            player.setAmmoBag(1, 1, 1);
+            new TargetingScopeCard(RED).reloadAmmo(player);
+            assertEquals(2, player.getAmmo().getRedAmmo());
+
         }
     }
 

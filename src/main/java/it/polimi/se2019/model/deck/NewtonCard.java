@@ -21,11 +21,6 @@ public class NewtonCard extends PowerupCard{
     }
 
     @Override
-    public void reloadAmmo(Player p) {
-
-    }
-
-    @Override
     public ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView) {
         return null;
     }

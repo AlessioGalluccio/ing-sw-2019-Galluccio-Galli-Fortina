@@ -30,6 +30,10 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
         else throw new AlreadyDeckException("This card " + this + " has already a deck!");
     }
 
+    /**
+     *
+     * @return List of ammo included in the card
+     */
     @Override
     public List<ColorRYB> getAmmo() {
         ArrayList<ColorRYB> ammo = new ArrayList<>();
@@ -40,7 +44,7 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
 
     /**
      * Reload a player's ammo using this card
-     * @param p player to relaod()
+     * @param p player to relaod
      */
     @Override
     public void reloadAmmo(Player p) {
@@ -60,7 +64,7 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
     }
 
     /**
-     * Add to player AmmoBag the new ammo and pick a powerup card
+     * Add to player's AmmoBag the new ammos and pick a powerup card
      * @param author Who use the card
      * @throws TooManyCardException if the player has already three powerup (the maximum)
      */

@@ -20,11 +20,6 @@ public class TargetingScopeCard extends PowerupCard{
     }
 
     @Override
-    public void reloadAmmo(Player p) {
-
-    }
-
-    @Override
     public ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView) {
         //TODO this card has NO TARGETS!
         return null;
