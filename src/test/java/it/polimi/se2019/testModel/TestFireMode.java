@@ -29,5 +29,6 @@ public class TestFireMode {
         List<ColorRYB> color2 = fireMode.get(0).getCost();
 
         assertNotEquals(color1.size(), color2.size());
+        assertEquals(true, color2.equals(fireMode.get(0).getCost()));
     }
 }

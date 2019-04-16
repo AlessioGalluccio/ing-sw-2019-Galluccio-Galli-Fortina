@@ -9,7 +9,7 @@ public class BaseWeapon extends WeaponCard {
 
     @Override
     public List<FireMode> getFireMode() {
-        List<FireMode> fireModeReturned = new ArrayList(fireModeList);
+        List<FireMode> fireModeReturned = new ArrayList<>(fireModeList);
 
         return duplicateFireMode(fireModeReturned);
     }

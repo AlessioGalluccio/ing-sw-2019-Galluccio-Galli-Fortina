@@ -17,9 +17,14 @@ public class TestWeaponCard {
     }
 
     @Test
+    //Testing that is a deep copy
     public void testGetFiremode() {
         WeaponCard card = deck.pick();
-        List<FireMode> list =  card.getFireMode();
-        assertNotEquals(list, card.getFireMode());
+        List<FireMode> fireModeList =  card.getFireMode();
+        assertNotEquals(fireModeList, card.getFireMode());
+        assertFalse(fireModeList.equals(card.getFireMode()));
+        for(FireMode f : fireModeList) {
+            assertTrue(f.getID() == card.getFireMode().get(fireModeList.indexOf(f)).getID());
+        }
     }
 }

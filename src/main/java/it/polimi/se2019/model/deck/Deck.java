@@ -2,7 +2,6 @@ package it.polimi.se2019.model.deck;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 
 import java.lang.reflect.Type;
@@ -76,7 +75,8 @@ public abstract class Deck<T> {
                 .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
                 .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
-                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>());
 
         return g.create();
     }
@@ -100,7 +100,11 @@ public abstract class Deck<T> {
         return picked;
     }
 
-
+    /**
+     * Move the card in the discarted pile
+     * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARTED PILE
+     * @param A Card to discard
+     */
     public void discard(T A) {
         inUseCard.remove(A);
         usedCard.add(A);

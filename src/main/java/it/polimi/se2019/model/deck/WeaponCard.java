@@ -22,14 +22,22 @@ public abstract class WeaponCard implements Card {
     private ColorRYB color;
     private boolean reload;
     private FireMode fireModeChoosen;
+    private int ID;
 
+    /**
+     *
+     * @return WeaponCard's ID
+     */
+    public int getID(){
+        return ID;
+    }
 
-    public ArrayList<ColorRYB> getBuyCost(){
+    public List<ColorRYB> getBuyCost(){
 
         return null; //TODO implementare
     }
 
-    public ArrayList<Color> getReloadCost() {
+    public List<Color> getReloadCost() {
 
         return null; //TODO implementare
     }
@@ -68,7 +76,9 @@ public abstract class WeaponCard implements Card {
      * @return deep copy of fireModeList
      */
     protected List<FireMode> duplicateFireMode(List<FireMode> fireModeList) {
-        GsonBuilder g = new GsonBuilder().registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>());
         Gson gson = g.create();
 
         Type TYPE = new TypeToken<List<FireMode>>() {
