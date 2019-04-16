@@ -3,7 +3,6 @@ package it.polimi.se2019.model.deck;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import it.polimi.se2019.model.JsonAdapter;
 
 import java.io.BufferedReader;
@@ -14,15 +13,20 @@ import java.util.*;
 
 public class WeaponDeck extends Deck<WeaponCard> {
 
-    public WeaponDeck(){
+    /**
+     *
+     * @throws FileNotFoundException If can't find the Json file from which deserialize the cards
+     */
+    public WeaponDeck() throws FileNotFoundException{
         super(initializeCard());
     }
 
     /**
      * Read Card form Json file
      * @return List of cards just read
+     * @throws FileNotFoundException If can't find the Json file from which deserialize the cards
      */
-    private static Stack<WeaponCard> initializeCard(){
+    private static Stack<WeaponCard> initializeCard() throws FileNotFoundException{
         Stack<WeaponCard> deck;
         BufferedReader bufferedReader = null;
 
@@ -36,11 +40,10 @@ public class WeaponDeck extends Deck<WeaponCard> {
         Gson gson = g.create();
 
         //Creo un reader per leggere da file
-        try {
-            bufferedReader = new BufferedReader(new FileReader("WeaponCard"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
+        bufferedReader = new BufferedReader(new FileReader("WeaponCard"));
+
+
 
         //Mi serve per passarlo al deserealizzatore
         Type DECK_TYPE = new TypeToken<Stack<WeaponCard>>() {

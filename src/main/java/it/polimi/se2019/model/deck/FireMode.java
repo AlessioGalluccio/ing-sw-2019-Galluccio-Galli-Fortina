@@ -17,7 +17,7 @@ public abstract class FireMode {
      * @return If the FireMode is free (cost==null) an empty list, else a deep copy of cost
      */
     public List<ColorRYB> getCost() {
-        return cost==null ? new ArrayList() : new ArrayList(cost);     //basta una copia dell'array perchè ColorTYB è enum
+        return cost==null ? new ArrayList<>() : new ArrayList<>(cost);     //basta una copia dell'array perchè ColorTYB è enum
     }
 
     public int getID() {

@@ -4,6 +4,8 @@ import it.polimi.se2019.model.deck.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.*;
 
 public class TestDeck {
@@ -16,7 +18,11 @@ public class TestDeck {
 
     @Before
     public void testCostructor(){
-        weaponDeck = new WeaponDeck();
+        try {
+            weaponDeck = new WeaponDeck();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         powerupDeck = new PowerupDeck();
         ammoDeck = new AmmoDeck(powerupDeck);
     }
