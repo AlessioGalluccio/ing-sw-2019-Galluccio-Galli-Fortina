@@ -3,10 +3,9 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
-import it.polimi.se2019.model.player.Action;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ public class Controller implements Observer {
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
     private GameHandler gameHandler;
+    private StateController state;
 
     public Controller(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
