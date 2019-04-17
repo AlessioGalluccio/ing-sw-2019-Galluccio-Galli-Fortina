@@ -17,20 +17,73 @@ public class Controller implements Observer {
     private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
-    private GameHandler gameHandler;
+    private final GameHandler gameHandler;
     private StateController state;
+    private int numOfActionTaken;
+    public final int MAX_NUM_OF_ACTION = 2;
 
     public Controller(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
         this.messageListReceived = new ArrayList<ViewControllerMessage>();
         this.messageListExpected = new ArrayList<StringAndMessage>();
+        this.numOfActionTaken = 0;
     }
+
+    //getter and Setters
+
+    public ArrayList<ViewControllerMessage> getMessageListReceived() {
+        return messageListReceived;
+    }
+
+    public ArrayList<StringAndMessage> getMessageListExpected() {
+        return messageListExpected;
+    }
+
+    public int getIndexExpected() {
+        return indexExpected;
+    }
+
+    public GameHandler getGameHandler() {
+        return gameHandler;
+    }
+
+    public StateController getState() {
+        return state;
+    }
+
+    public int getNumOfActionTaken() {
+        return numOfActionTaken;
+    }
+
+    public void setMessageListReceived(ArrayList<ViewControllerMessage> messageListReceived) {
+        this.messageListReceived = messageListReceived;
+    }
+
+    public void setMessageListExpected(ArrayList<StringAndMessage> messageListExpected) {
+        this.messageListExpected = messageListExpected;
+    }
+
+    public void setIndexExpected(int indexExpected) {
+        this.indexExpected = indexExpected;
+    }
+
+    public void setState(StateController state) {
+        this.state = state;
+    }
+
+    public void setNumOfActionTaken(int numOfActionTaken) {
+        this.numOfActionTaken = numOfActionTaken;
+    }
+
+    //methods
 
     @Override
     public void update(Observable o, Object arg) {
-        handleMessage(arg);
+        state.handle(arg);
 
     }
+
+    /*
 
     public void handleMessage(Object arg) {
         //TODO lancia eccezione, è un tipo di messaggio non aspettato
@@ -95,11 +148,13 @@ public class Controller implements Observer {
 
     }
 
+    /*
+
     /**
      * command the model to send to the view the possible targets of this firemode
      * @param arg the message of this firemode
      */
-    private void sendTargetsToView(FireModeMessage arg) {
+    public void sendTargetsToView(FireModeMessage arg) {
         Player playerTemp = gameHandler.getPlayerByID(arg.getAuthorID());
         AmmoBag ammoTemp = playerTemp.getAmmo();
         FireMode fireModeTemp = gameHandler.getFireModeByID(arg.getAuthorID());
@@ -112,7 +167,7 @@ public class Controller implements Observer {
      * command the model to send to the view the possible targets of this tagbackGranate card
      * @param arg the message of this tagbackGranade card
      */
-    private void sendTargetsToView(TagbackGranateMessage arg) {
+    public void sendTargetsToView(TagbackGranateMessage arg) {
         Player author = gameHandler.getPlayerByID(arg.getAuthorID());
         TagbackGranedCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
@@ -123,7 +178,7 @@ public class Controller implements Observer {
      * command the model to send to the view the possible targets of this Newton card
      * @param arg the message of this Newton card
      */
-    private void sendTargetsToView(NewtonMessage arg) {
+    public void sendTargetsToView(NewtonMessage arg) {
         Player author = gameHandler.getPlayerByID(arg.getAuthorID());
         NewtonCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
@@ -134,7 +189,7 @@ public class Controller implements Observer {
      * overloading has failed, send message error
      * @param arg the wrong type of message
      */
-    private void sendTargetsToView(PlayerViewMessage arg) {
+    public void sendTargetsToView(PlayerViewMessage arg) {
         //TODO eccezione messaggio inaspettato
     }
 
@@ -143,20 +198,28 @@ public class Controller implements Observer {
      * It verififies the list of messages and, if it is correct, it modifies the model accordingly
      * @param actionMessage the first message in the list. It defines what type of action
      */
-    private void modifyModel(ActionMessage actionMessage) {
+    public void modifyModel(ActionMessage actionMessage) {
         //TODO verify()
         gameHandler.getActionByID(actionMessage.getActionID()).executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
 
     }
 
-    private void modifyModel(PowerupCard powerupCard) {
+    public void modifyModel(PowerupCard powerupCard) {
+        //TODO
+    }
 
+    /**
+     * general case, should not be used
+     * @param message
+     */
+    public void modifyModel(ViewControllerMessage message) {
+        //TODO scrivi eccezione!
     }
 
     /**
      * it empties the messages after Model is modified
      */
-    private void flushMessages() {
+    public void flushMessages() {
         messageListReceived = new ArrayList<ViewControllerMessage>();
         this.messageListExpected = new ArrayList<StringAndMessage>();
         indexExpected = 0;
@@ -165,7 +228,7 @@ public class Controller implements Observer {
     /**
      * it empties only the messages of the optional firemode
      */
-    private void flushOptionalMessages() {
+    public void flushOptionalMessages() {
         //TODO
     }
 

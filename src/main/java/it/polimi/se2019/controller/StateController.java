@@ -33,6 +33,6 @@ public interface StateController {
      * default method. SHould not be used
      * @param arg
      */
-    public void handle(ViewControllerMessage arg);
+    public void handle(Object arg);
 
 }
