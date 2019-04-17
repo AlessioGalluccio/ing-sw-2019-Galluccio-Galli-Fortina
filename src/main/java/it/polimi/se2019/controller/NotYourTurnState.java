@@ -89,8 +89,8 @@ public class NotYourTurnState implements StateController {
 
     @Override
     public void handle(TeleporterMessage arg) {
-        arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
         controllTurn(arg);
+        arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
     }
 
     @Override
