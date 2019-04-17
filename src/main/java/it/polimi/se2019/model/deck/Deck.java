@@ -103,10 +103,10 @@ public abstract class Deck<T> {
     /**
      * Move the card in the discarted pile
      * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARTED PILE
-     * @param A Card to discard
+     * @param card Card to discard
      */
-    public void discard(T A) {
-        inUseCard.remove(A);
-        usedCard.add(A);
+    public void discard(T card) {
+        inUseCard.remove(card);
+        usedCard.add(card);
     }
 }

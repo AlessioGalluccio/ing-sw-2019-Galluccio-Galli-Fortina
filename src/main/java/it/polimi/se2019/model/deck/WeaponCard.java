@@ -32,20 +32,36 @@ public abstract class WeaponCard implements Card {
         return ID;
     }
 
+    /**
+     *
+     * @return WeaponCard's buy cost
+     */
     public ColorRYB getBuyCost(){
         return ammoGranted;
     }
 
+    /**
+     *
+     * @return A copy of WeaponCard's reload cost
+     */
     public List<ColorRYB> getReloadCost() {
         ArrayList<ColorRYB> reloadCost = new ArrayList<>(ammoNotGranted);
         reloadCost.add(ammoGranted);
         return reloadCost;
     }
 
+    /**
+     *
+     * @return WeaponCard's name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     *
+     * @return True if weapon is reloaded, else false
+     */
     public boolean isReloaded(){
         return reload;
     }
@@ -58,10 +74,18 @@ public abstract class WeaponCard implements Card {
         return new ArrayList<>(correctMessages);  //basta una copia dell'array perchè StringAndMessage è immutabile
     }
 
-    public void setFireMode(FireMode fireModeChoosen) {
-        this.fireModeChoosen = fireModeChoosen;
+    /**
+     * Set the fire mode chosen by the player for the very next shoot, it will used in order to fire
+     * @param fireModeChosen fire mode chosen by the player
+     */
+    public void setFireMode(FireMode fireModeChosen) {
+        this.fireModeChoosen = fireModeChosen;
     }
 
+    /**
+     *
+     * @return Deep copy of the fire mode list available with this weapon
+     */
     public abstract List<FireMode> getFireMode();
 
     /**

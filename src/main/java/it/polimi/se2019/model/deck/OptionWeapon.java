@@ -12,6 +12,10 @@ public class OptionWeapon extends WeaponCard {
 
     }
 
+    /**
+     *
+     * @return Deep copy of the fire mode list available with this weapon
+     */
     @Override
     public List<FireMode> getFireMode() {
         List<FireMode> fireModeReturned = new ArrayList<>(optionalFireModeList);

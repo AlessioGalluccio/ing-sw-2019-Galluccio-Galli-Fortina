@@ -23,8 +23,9 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     }
 
     /**
-     * create and send a message containg the possible targets to the view of player
+     * Create and send a message containing the possible targets to the view of player
      * @param player the player who wants to use this card
+     * @param playerView receiver of the message
      * @return the possible target that player can hit. It return null if there is no target
      */
     public abstract ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView);
@@ -40,12 +41,20 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
         return ammo;
     }
 
+    /**
+     * Set his deck for the card
+     * @param deck Deck of relatives cards to set
+     * @throws AlreadyDeckException If you try to reset the deck, it can change during game
+     */
     @Override
     public void setDeck(Deck deck) throws AlreadyDeckException {
         if(this.deck==null) this.deck = (PowerupDeck) deck;
         else throw new AlreadyDeckException("This card " + this +" has already a deck!");
     }
 
+    /**
+     * Discard a card
+     */
     @Override
     public void discard() {
         deck.discard(this);
@@ -56,20 +65,20 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
 
     /**
      * Reload a player's ammo using this card
-     * @param p player to relaod
+     * @param playerToReload player to reload
      */
     @Override
-    public void reloadAmmo(Player p) {
-        AmmoBag ammoPlayer = p.getAmmo();
+    public void reloadAmmo(Player playerToReload) {
+        AmmoBag ammoPlayer = playerToReload.getAmmo();
         switch (color) {
             case BLUE:
-                p.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo() + 1);
+                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo() + 1);
                 break;
             case YELLOW:
-                p.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo() + 1, ammoPlayer.getBlueAmmo());
+                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo() + 1, ammoPlayer.getBlueAmmo());
                 break;
             case RED:
-                p.setAmmoBag(ammoPlayer.getRedAmmo() + 1, ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo());
+                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo() + 1, ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo());
                 break;
         }
     }

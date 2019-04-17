@@ -46,19 +46,27 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
                 ammoPlayer.getBlueAmmo() + Collections.frequency(ammoList, BLUE));
     }
 
+    /**
+     * Set his deck for the card
+     * @param deck Deck of relatives cards to set
+     * @throws AlreadyDeckException If you try to reset the deck, it can change during game
+     */
     @Override
     public void setDeck(Deck deck) throws AlreadyDeckException{
         if(this.deck==null) this.deck = (AmmoDeck) deck;
         else throw new AlreadyDeckException("This card " + this +" has already a deck!");
     }
 
+    /**
+     * Discard a card
+     */
     @Override
     public void discard() {
         deck.discard(this);
     }
 
     /**
-     * Add to player AmmoBag the new ammo
+     * Add to player AmmoBag the new ammos
      * @param author Who use the card
      */
     @Override

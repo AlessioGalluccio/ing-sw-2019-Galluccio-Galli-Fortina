@@ -10,11 +10,20 @@ public class PointCard implements Card{
         this.value = value;
     }
 
+    /**
+     *
+     * @param deck Deck of relatives cards to set
+     * @throws UnsupportedOperationException Alaways thrown because pointCard dose not have a deck
+     */
     @Override
     public void setDeck(Deck deck) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Point dose not have a deck!");
     }
 
+    /**
+     * DO NOTHING
+     * @throws UnsupportedOperationException This card doesn't have a deck, can't be discarded
+     */
     @Override
     public void discard() throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Point cannot be discarded!");
@@ -25,6 +34,10 @@ public class PointCard implements Card{
 
     }
 
+    /**
+     *
+     * @return value of point available in this card
+     */
     public int getValue(){
         return value;
     }

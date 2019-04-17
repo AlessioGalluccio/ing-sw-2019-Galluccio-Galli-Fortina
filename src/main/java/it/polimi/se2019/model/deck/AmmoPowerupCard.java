@@ -24,6 +24,11 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
         this.powerupDeck = powerupDeck;
     }
 
+    /**
+     * Set his deck for the card
+     * @param deck Deck of relatives cards to set
+     * @throws AlreadyDeckException If you try to reset the deck, it can change during game
+     */
     @Override
     public void setDeck(Deck deck) throws AlreadyDeckException {
         if(this.deck==null) this.deck = (AmmoDeck) deck;
