@@ -17,7 +17,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(ActionMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -25,7 +25,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(CardSpawnChooseMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -41,7 +41,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(FireModeMessage arg) {
         startingHandler(arg);
         controller.sendTargetsToView(arg);
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -49,7 +49,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(NewtonMessage arg) {
         startingHandler(arg);
         controller.sendTargetsToView(arg);
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -63,7 +63,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(PlayerViewMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -71,7 +71,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(ReloadMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -79,7 +79,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(TagbackGranateMessage arg) {
         startingHandler(arg);
         controller.sendTargetsToView(arg);
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -87,7 +87,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(TargetingScopeMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -95,7 +95,7 @@ public class NotEmptyControllerState implements StateController {
     public void handle(TargetMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
@@ -103,10 +103,14 @@ public class NotEmptyControllerState implements StateController {
     public void handle(TeleporterMessage arg) {
         startingHandler(arg);
         //TODO
-        startingHandler(arg);
+        endingHandler();
 
     }
 
+    /**
+     * it should be not used
+     * @param arg
+     */
     @Override
     public void handle(Object arg) {
         //TODO scrivi eccezione
