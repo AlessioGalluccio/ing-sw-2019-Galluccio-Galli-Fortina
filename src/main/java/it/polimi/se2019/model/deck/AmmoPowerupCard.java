@@ -14,9 +14,9 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 public class AmmoPowerupCard implements AmmoConvertibleCard {
     private transient AmmoDeck deck;
-    private transient PowerupDeck powerupDeck;
-    private ColorRYB color1;
-    private ColorRYB color2;
+    private final transient PowerupDeck powerupDeck;
+    private final ColorRYB color1;
+    private final ColorRYB color2;
 
     public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck) {
         this.color1 = color1;

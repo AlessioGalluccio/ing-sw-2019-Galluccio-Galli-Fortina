@@ -12,8 +12,8 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 public class AmmoOnlyCard implements AmmoConvertibleCard {
     private transient AmmoDeck deck;
-    private ColorRYB colorSingle;
-    private ColorRYB colorDouble;
+    private final ColorRYB colorSingle;
+    private final ColorRYB colorDouble;
 
     public AmmoOnlyCard(ColorRYB colorSingle, ColorRYB colorDouble) {
         this.colorSingle = colorSingle;
