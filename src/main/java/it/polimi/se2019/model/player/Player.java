@@ -5,10 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
-import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.PowerupCard;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 
@@ -135,8 +132,8 @@ public class Player extends java.util.Observable implements Target {
      *
      * @return ArrayList of PointCard of player
      */
-    public List<Points> getListPointCards() {
-        return null; //TODO clone of points
+    public List<PointCard> getPointCardList() {
+        return points.getPointCard();
     }
 
     /**

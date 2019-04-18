@@ -4,7 +4,7 @@ import it.polimi.se2019.model.player.Player;
 
 public class PointCard implements Card{
 
-    private int value;
+    private final int value;
 
     public PointCard(int value) {
         this.value = value;

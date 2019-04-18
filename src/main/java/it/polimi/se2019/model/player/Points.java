@@ -3,26 +3,32 @@ package it.polimi.se2019.model.player;
 import it.polimi.se2019.model.deck.PointCard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Points {
-    private ArrayList<PointCard> pointCard;
+    private ArrayList<PointCard> pointCard = new ArrayList<>();
     private int sum = 0;
 
     public Points(int num) {
         addNewPoints(num);
     }
 
-    public ArrayList<PointCard> getPointCard() {
-
-        return pointCard;
+    public List<PointCard> getPointCard() {
+        return new ArrayList<>(pointCard);
     }
 
     public int getSum() {
-
         return sum;
     }
 
+    /**
+     * Create new Point Card for a sum of num and add them to the player's list
+     * @param num number of points to add
+     */
+    //Tested through Player addPoints()
     public void addNewPoints(int num) {
+        sum = sum + num;
+
         int num4PointsCards = num / 4;  //division without remainder
         num = num - num4PointsCards * 4;
         int num2PointsCards = num / 2;  //division without remainder
@@ -43,7 +49,5 @@ public class Points {
             PointCard temp = new PointCard(1);
             pointCard.add(temp);
         }
-
-        sum = sum + num;
     }
 }
