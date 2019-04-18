@@ -1,6 +1,11 @@
 package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.Target;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.PlayerView;
+
+import java.util.List;
 
 /**
  * FireMode for move player up to two cells, can be used only once
@@ -8,8 +13,8 @@ import it.polimi.se2019.model.deck.FireMode;
 public class RocketLauncher_2 extends FireMode {
 
     @Override
-    public void verify() {
-
+    public List<Target> sendPossibleTarget(Player player, PlayerView playerView) {
+        return null;
     }
 
     @Override

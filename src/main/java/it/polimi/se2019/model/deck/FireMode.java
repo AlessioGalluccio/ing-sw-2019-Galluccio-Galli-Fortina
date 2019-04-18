@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class FireMode {
     private ArrayList<ColorRYB> cost;
-    private ArrayList<? extends Target> target;
+    private transient ArrayList<? extends Target> target;
     private String description;
     private int ID;
     private boolean used;

@@ -1,14 +1,20 @@
 package it.polimi.se2019.model.player;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Observable;
+import java.util.List;
 
 public class Player extends java.util.Observable implements Target {
     private String nickname;
@@ -18,8 +24,8 @@ public class Player extends java.util.Observable implements Target {
     private Mark mark;
     private Character character;
     private AmmoBag ammoBag;
-    private ArrayList<PowerupCard> powerupCard;
-    private ArrayList<WeaponCard> weaponCard;
+    private ArrayList<PowerupCard> powerupCardList;
+    private ArrayList<WeaponCard> weaponCardList;
     private Cell cellPosition;
     private int ID;
 
@@ -41,8 +47,8 @@ public class Player extends java.util.Observable implements Target {
         this.mark = new Mark();
         this.character = character;
         this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
-        this.powerupCard = new ArrayList<>();
-        this.weaponCard = new ArrayList<>();
+        this.powerupCardList = new ArrayList<>();
+        this.weaponCardList = new ArrayList<>();
         this.ID = ID;
     }
 
@@ -66,7 +72,7 @@ public class Player extends java.util.Observable implements Target {
      *
      * @return list of players who damaged this player in correct order
      */
-    public ArrayList<Player> getDamage() {
+    public List<Player> getDamage() {
         return null; //TODO implementare la clone di damage
     }
 
@@ -96,9 +102,40 @@ public class Player extends java.util.Observable implements Target {
 
     /**
      *
+     * @return Deep copy of player's weapon card list
+     */
+    public List<WeaponCard> getWeaponCardList() {
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
+        Gson gson = g.create();
+
+        Type TYPE = new TypeToken<List<WeaponCard>>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(weaponCardList, TYPE), TYPE);
+    }
+
+    /**
+     *
+     * @return Deep copy of player's powerup card list
+     */
+    public List<PowerupCard> getPowerupCardList() {
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>());
+        Gson gson = g.create();
+
+        Type TYPE = new TypeToken<List<PowerupCard>>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(powerupCardList, TYPE), TYPE);
+    }
+
+    /**
+     *
      * @return ArrayList of PointCard of player
      */
-    public ArrayList<Points> getListPointCards() {
+    public List<Points> getListPointCards() {
         return null; //TODO clone of points
     }
 
@@ -163,11 +200,22 @@ public class Player extends java.util.Observable implements Target {
      */
     public void addPowerupCard(PowerupCard powerupToAdd) throws TooManyCardException {
         //if is dead the player can has 4 powerup in order to respawn
-        if (powerupCard.size() < MAX_CARD || isDead()) powerupCard.add(powerupToAdd);
+        if (powerupCardList.size() < MAX_CARD || isDead()) powerupCardList.add(powerupToAdd);
         else throw new TooManyCardException("You, " + getNickname() + ", have already three powerups");
+        //TODO add notify()
     }
 
-
+    /**
+     * Add a weapon to the player list
+     * @param weaponToAdd weapon to add
+     * @throws TooManyCardException if the player has already three weapon
+     */
+    public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyCardException {
+        //if is dead the player can has 4 powerup in order to respawn
+        if (weaponCardList.size() < MAX_CARD) weaponCardList.add(weaponToAdd);
+        else throw new TooManyCardException("You, " + getNickname() + ", have already three weapons");
+        //TODO add notify()
+    }
 
 
 
