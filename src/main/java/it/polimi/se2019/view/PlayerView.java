@@ -4,6 +4,7 @@ import it.polimi.se2019.model.deck.*;
 
 import it.polimi.se2019.model.player.Player;
 
+import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
@@ -13,13 +14,21 @@ import java.util.Observer;
 
 public class PlayerView extends Observable implements Observer {
     private Player playerCopy;
+    private ArrayList<Target> possibleTarget;
+    private ArrayList<Target> selectedTarget;
 
-    public PlayerView(Player playerCopy) {
+    public PlayerView(Player playerCopy, ArrayList<Target> possibleTarget, ArrayList<Target> selectedTarget) {
         this.playerCopy = playerCopy;
+        this.possibleTarget = possibleTarget;
+        this.selectedTarget = selectedTarget;
     }
 
     public Player getPlayerCopy() {
         return playerCopy;
+    }
+
+    public ArrayList<Target> getSelectedTarget() {
+        return selectedTarget;
     }
 
     @Override
@@ -92,9 +101,24 @@ public class PlayerView extends Observable implements Observer {
         notifyObservers(message);
     }
 
+
+    public void createEndMessage (int messageID){
+        EndMessage message = new EndMessage(messageID);
+        notifyObservers(message);
+    }
+
+    public void createUndoMessage(int messageID){
+        UndoMessage message = new UndoMessage(messageID);
+        notifyObservers(message);
+    }
+
+
     public void printFromController(String string) {
 
     }
 
+    private boolean verifyTarget(){
+        return true;
+    }
 
 }
