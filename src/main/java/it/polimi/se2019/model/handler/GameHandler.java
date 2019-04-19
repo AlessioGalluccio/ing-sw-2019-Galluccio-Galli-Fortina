@@ -14,13 +14,16 @@ public class GameHandler extends java.util.Observable {
     private PowerupDeck powerupDeck;
     private PointDeck pointDeck;
     private WeaponDeck weaponDeck;
-    private ArrayList<Player> orderPlayerList;
+    private static ArrayList<Player> orderPlayerList;
     private int turn;
     private Death death;
     private Modality mode;
 
-
-    public GameHandler() {
+    //Implementato SOLO PER TESTARE getPlayerByID()
+    //Usato in TestPlayer -> testReceiveMark() per getMarkReveived e getMarkDone della classe Mark
+    //TODO Da fare decenetemente
+    public GameHandler(ArrayList<Player> list) {
+        orderPlayerList = list;
     }
 
     /**
@@ -61,9 +64,14 @@ public class GameHandler extends java.util.Observable {
      * @param id ID of a Player
      * @return the Player object who has this ID
      */
-    public Player getPlayerByID(int id) {
+    public static Player getPlayerByID(int id) {
+        for(Player p : orderPlayerList) {
+            if (p.getID() == id) return p;
+        }
 
-        return null; //TODO implementare
+        //If there's not a player whit that id: return null
+        //TODO lanciare eccezione se non c'è il player!
+        return null;
     }
 
     /**

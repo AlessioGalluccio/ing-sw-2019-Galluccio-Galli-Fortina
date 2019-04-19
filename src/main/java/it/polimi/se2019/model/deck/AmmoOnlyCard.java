@@ -35,7 +35,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
      * @param p player to relaod
      */
     @Override
-    public void reloadAmmo(Player p) throws TooManyAmmoException {
+    public void reloadAmmo(Player p) throws TooManyException {
         AmmoBag ammoPlayer = p.getAmmo();
         List<ColorRYB> ammoList = getAmmo();
         p.setAmmoBag(ammoPlayer.getRedAmmo() + Collections.frequency(ammoList, RED),
@@ -67,7 +67,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
      * @param author Who use the card
      */
     @Override
-    public void useCard(Player author) throws TooManyAmmoException {
+    public void useCard(Player author) throws TooManyException {
         reloadAmmo(author);
     }
 }

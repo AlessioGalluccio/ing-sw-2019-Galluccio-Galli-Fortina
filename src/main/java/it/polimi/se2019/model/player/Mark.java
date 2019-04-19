@@ -1,39 +1,78 @@
 package it.polimi.se2019.model.player;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Mark {
-    private ArrayList<Player> markDone;
-    private ArrayList<Player> markReceived;
+    private static final int MAX_MARK = 3;
+    private ArrayList<Integer> markDone = new ArrayList<>();
+    private ArrayList<Integer> markReceived = new ArrayList<>();
 
-    Mark() {
-
-    }
+    //Default constructor
 
     /**
      *
      * @return list of marks done to other players
      */
     public List<Player> getMarkDone() {
-
-        return null; //TODO implementare
+        return duplicateList(markDone);
     }
 
     /**
      *
-     * @return list of marks recieved by other players
+     * @return list of marks received by other players
      */
     public List<Player> getMarkReceived() {
-        return markReceived;
+        return duplicateList(markReceived);
+    }
+
+    /**
+     * HELPER METHOD
+     * @param listToCopy List to copy
+     * @return duplicate list of listToCopy
+     */
+    private List<Player> duplicateList (List<Integer> listToCopy) {
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(Card.class, new JsonAdapter<Card>())
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>())
+                .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>());
+
+        Gson gson = g.create();
+
+        Type TYPE = new TypeToken<ArrayList<Player>>() {}.getType();
+
+        List<Player> listToReturn = new ArrayList<>();
+        for(Integer i : listToCopy) {
+            listToReturn.add(GameHandler.getPlayerByID(i));
+        }
+
+        return gson.fromJson(gson.toJson(listToReturn, TYPE), TYPE);
     }
 
     /**
      *
-     * @param target opponent player you want to mark
+     * @param enemyToMark opponent player you want to mark
      */
-    protected void setMark(Player target) {
+    protected void addMarkDone(Player enemyToMark) throws TooManyException {
+        if(Collections.frequency(markDone, enemyToMark.getID()) == MAX_MARK) throw new TooManyException("You have already marked three times " + enemyToMark.getNickname());
+        else markDone.add(enemyToMark.getID());
+    }
 
+    protected void addMarkReceived(Player enemy) {
+        markReceived.add(enemy.getID());
     }
 
     /**

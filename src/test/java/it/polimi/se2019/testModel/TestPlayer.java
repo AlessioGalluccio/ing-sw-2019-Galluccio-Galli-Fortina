@@ -2,37 +2,47 @@ package it.polimi.se2019.testModel;
 
 import it.polimi.se2019.model.deck.PointCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class TestPlayer {
     private Player player;
+    private Player enemy;
+    private GameHandler gameHandler;
     private int MAX_AMMO = 3;
 
     @Before
     public void initTest() {
-        player = new Player("Elon Musk", new Character("FalconHeavy", "White"), 1971);
+        player = new Player("Nikola Tesla", new Character("CoilMan", "yellow"), 1856);
+        enemy = new Player("Thomas Edison", new Character("LightBulbMan", "white"), 1931);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(player);
+        players.add(enemy);
+        gameHandler = new GameHandler(players);
+
     }
 
     @Test
     public void testAddPowerup(){
         try {
             player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
-        } catch (TooManyCardException e) {
+        } catch (TooManyException e) {
             e.printStackTrace();
         }
 
         assertEquals(1, player.getPowerupCardList().size());
     }
 
-    @Test(expected = TooManyCardException.class)
-    public void testAddPowerupException() throws TooManyCardException{
+    @Test(expected = TooManyException.class)
+    public void testAddPowerupException() throws TooManyException {
         player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
         player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
         player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
@@ -58,8 +68,8 @@ public class TestPlayer {
         assertEquals(2, pointCards.get(5).getValue());
     }
 
-    @Test(expected = TooManyAmmoException.class)
-    public void testSetAmmoException() throws TooManyAmmoException {
+    @Test(expected = TooManyException.class)
+    public void testSetAmmoException() throws TooManyException {
         player.setAmmoBag(4,2,1);
     }
 
@@ -67,7 +77,7 @@ public class TestPlayer {
     public void testSetAmmo() {
         try {
             player.setAmmoBag(4,5,8);
-        } catch (TooManyAmmoException e) {
+        } catch (TooManyException e) {
             e.printStackTrace();
         }
         finally {
@@ -76,4 +86,16 @@ public class TestPlayer {
             assertEquals(MAX_AMMO, player.getAmmo().getYellowAmmo());
         }
     }
+
+    @Test
+    public void testReceiveMark() {
+        try {
+            player.receiveMark(enemy);
+        } catch (TooManyException e) {
+            e.printStackTrace();
+        }
+        assertEquals(enemy.getID(), player.getMark().getMarkReceived().get(0).getID());
+        assertEquals(player.getID(), enemy.getMark().getMarkDone().get(0).getID());
+    }
+
 }

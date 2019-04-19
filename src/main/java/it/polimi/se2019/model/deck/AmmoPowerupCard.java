@@ -49,7 +49,7 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
      * @param p player to relaod
      */
     @Override
-    public void reloadAmmo(Player p) throws TooManyAmmoException {
+    public void reloadAmmo(Player p) throws TooManyException {
         AmmoBag ammoPlayer = p.getAmmo();
         List<ColorRYB> ammoList = getAmmo();
         p.setAmmoBag(ammoPlayer.getRedAmmo() + Collections.frequency(ammoList, RED),
@@ -68,10 +68,10 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
     /**
      * Add to player's AmmoBag the new ammos and pick a powerup card
      * @param author Who use the card
-     * @throws TooManyCardException if the player has already three powerup (the maximum)
+     * @throws TooManyException if the player has already three powerup (the maximum)
      */
     @Override
-    public void useCard(Player author) throws TooManyCardException, TooManyAmmoException {
+    public void useCard(Player author) throws TooManyException {
         reloadAmmo(author);
         author.addPowerupCard(powerupDeck.pick());
 

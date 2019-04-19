@@ -45,11 +45,11 @@ public class TestAmmoConvertibleCard {
                 assertEquals(2, player.getAmmo().getRedAmmo());
             }
         }
-        catch (TooManyAmmoException e ) {fail();}
+        catch (TooManyException e ) {fail();}
     }
 
-    @Test(expected = TooManyCardException.class)
-    public void testUseCard() throws TooManyCardException {
+    @Test(expected = TooManyException.class)
+    public void testUseCard() throws TooManyException {
             player.addPowerupCard(new TargetingScopeCard(BLUE));
             player.addPowerupCard(new TargetingScopeCard(RED));
             player.addPowerupCard(new TargetingScopeCard(RED));
@@ -67,7 +67,7 @@ public class TestAmmoConvertibleCard {
                 player.setAmmoBag(0,0,0);
                 deck.pick().useCard(player);
             }
-            catch (TooManyAmmoException e) { /*Do nothing, it's only a test*/ }
+            catch (TooManyException e) { /*Do nothing, it's only a test*/ }
     }
 
 }

@@ -137,15 +137,20 @@ public class Player extends java.util.Observable implements Target {
         return points.getPointCard();
     }
 
+    public Mark getMark() {
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(mark), Mark.class);
+    }
+
     /**
      * Set player's ammo to value indicated by params
      * If some param is grater than three the relative ammo is set to 3
      * @param numRed new value of red ammo
      * @param numYellow new value of yellow ammo
      * @param numBlue new value of blue ammo
-     * @throws TooManyAmmoException if some of param are grater then 3
+     * @throws TooManyException if some of param are grater then 3
      */
-    public void setAmmoBag(int numRed, int numYellow, int numBlue) throws TooManyAmmoException {
+    public void setAmmoBag(int numRed, int numYellow, int numBlue) throws TooManyException {
         boolean exception = false;
         if(numRed > MAX_AMMO) {
             numRed = MAX_AMMO;
@@ -161,7 +166,7 @@ public class Player extends java.util.Observable implements Target {
         }
 
         ammoBag = new AmmoBag(numRed, numYellow, numBlue);
-        if(exception) throw new TooManyAmmoException("You have too many ammo of some color, they have been set to the maximum (3)");
+        if(exception) throw new TooManyException("You have too many ammo of some color, they have been set to the maximum (3)");
     }
 
     /**
@@ -210,29 +215,48 @@ public class Player extends java.util.Observable implements Target {
     /**
      * Add a powerup to the player list
      * @param powerupToAdd powerup to add
-     * @throws TooManyCardException if the player has already three powerups
+     * @throws TooManyException if the player has already three powerups
      */
-    public void addPowerupCard(PowerupCard powerupToAdd) throws TooManyCardException {
+    public void addPowerupCard(PowerupCard powerupToAdd) throws TooManyException {
         //if is dead the player can has 4 powerup in order to respawn
         if (powerupCardList.size() < MAX_CARD || isDead()) powerupCardList.add(powerupToAdd);
-        else throw new TooManyCardException("You, " + getNickname() + ", have already three powerups");
+        else throw new TooManyException("You, " + getNickname() + ", have already three powerups");
         //TODO add notify()
     }
 
     /**
      * Add a weapon to the player list
      * @param weaponToAdd weapon to add
-     * @throws TooManyCardException if the player has already three weapon
+     * @throws TooManyException if the player has already three weapon
      */
-    public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyCardException {
+    public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyException {
         //if is dead the player can has 4 powerup in order to respawn
         if (weaponCardList.size() < MAX_CARD) weaponCardList.add(weaponToAdd);
-        else throw new TooManyCardException("You, " + getNickname() + ", have already three weapons");
+        else throw new TooManyException("You, " + getNickname() + ", have already three weapons");
         //TODO add notify()
     }
 
+    /**
+     * Mark this player with a enemy's mark
+     * @param enemy who had marked you
+     * @throws TooManyException if enemy had already marked you three times
+     */
+    public void receiveMark(Player enemy) throws TooManyException {
+        this.mark.addMarkReceived(enemy);
 
+        //Add a mark to the enemy's list of done marks
+        enemy.addMarkDone(this); //Throws TooManyException
+    }
 
-
+    /**
+     * HELPER
+     * Add a mark to my list of markDone
+     * @param enemyToMark the enemy I have marked
+     * @throws TooManyException if you have already marked this enemy three times
+     */
+    //Called by receiveMark()
+    private void addMarkDone (Player enemyToMark) throws TooManyException {
+        this.mark.addMarkDone(enemyToMark); //Throws TooManyException
+    }
 
 }
