@@ -118,7 +118,11 @@ public class PlayerView extends Observable implements Observer {
     }
 
     private boolean verifyTarget(){
-        return true;
+        if (this.possibleTarget.containsAll(this.selectedTarget))
+            return true;
+
+
+        return false;
     }
 
 }
