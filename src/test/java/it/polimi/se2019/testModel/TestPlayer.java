@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class TestPlayer {
     private Player player;
     private Player enemy;
+    private Player enemy_2;
     private GameHandler gameHandler;
     private int MAX_AMMO = 3;
 
@@ -23,9 +24,12 @@ public class TestPlayer {
     public void initTest() {
         player = new Player("Nikola Tesla", new Character("CoilMan", "yellow"), 1856);
         enemy = new Player("Thomas Edison", new Character("LightBulbMan", "white"), 1931);
+        enemy_2 = new Player("JP Morgan", new Character("MoneyMan", "green"), 1913);
+
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);
         players.add(enemy);
+        players.add(enemy_2);
         gameHandler = new GameHandler(players);
 
     }
@@ -90,12 +94,59 @@ public class TestPlayer {
     @Test
     public void testReceiveMark() {
         try {
-            player.receiveMark(enemy);
+            player.receiveMarkBy(enemy);
         } catch (TooManyException e) {
             e.printStackTrace();
         }
         assertEquals(enemy.getID(), player.getMark().getMarkReceived().get(0).getID());
         assertEquals(player.getID(), enemy.getMark().getMarkDone().get(0).getID());
+    }
+
+    @Test
+    public void testRemoveReceivedMark() throws TooManyException {
+        player.receiveMarkBy(enemy);
+        player.receiveMarkBy(enemy);
+        player.receiveMarkBy(enemy_2);
+        player.receiveMarkBy(enemy);
+
+        //Assert enemy have successfully marked three time player
+        List<Player> list = player.getMark().getMarkReceived();
+        int cont = 0;
+        for(Player p  : list) {
+            if(p.getID() == enemy.getID()) cont++;
+        }
+        assertEquals(3, cont);
+        list = enemy.getMark().getMarkDone();
+        cont = 0;
+        for(Player p  : list) {
+            if(p.getID() == player.getID()) cont++;
+        }
+        assertEquals(3, cont);
+
+        //Now remove those mark
+        player.removeMarkReceivedBy(enemy);
+
+        list = player.getMark().getMarkReceived();
+        cont = 0;
+        for(Player p  : list) {
+            if(p.getID() == enemy.getID()) cont++;
+        }
+        assertEquals(0, cont);
+
+        list = enemy.getMark().getMarkDone();
+        cont = 0;
+        for(Player p  : list) {
+            if(p.getID() == player.getID()) cont++;
+        }
+        assertEquals(0, cont);
+
+        //Assert marks made my enemy_2 were not removed
+        list = player.getMark().getMarkReceived();
+        cont = 0;
+        for(Player p  : list) {
+            if(p.getID() == enemy_2.getID()) cont++;
+        }
+        assertEquals(1, cont);
     }
 
 }

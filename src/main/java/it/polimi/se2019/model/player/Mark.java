@@ -66,21 +66,27 @@ public class Mark {
      *
      * @param enemyToMark opponent player you want to mark
      */
-    protected void addMarkDone(Player enemyToMark) throws TooManyException {
+    protected void addMarkDoneTo(Player enemyToMark) throws TooManyException {
         if(Collections.frequency(markDone, enemyToMark.getID()) == MAX_MARK) throw new TooManyException("You have already marked three times " + enemyToMark.getNickname());
         else markDone.add(enemyToMark.getID());
     }
 
-    protected void addMarkReceived(Player enemy) {
+    protected void addMarkReceivedBy(Player enemy) {
         markReceived.add(enemy.getID());
     }
 
     /**
      *
-     * @param target opponent player whose mark you want to remove from yourself
+     * @param enemy opponent player whose mark you want to remove from yourself
      */
-    protected void removeMark(Player target) {
+    protected void removeMarkReceivedBy(Player enemy) {
+        Integer enemyID = enemy.getID();
+        while(markReceived.remove(enemyID));
+    }
 
+    protected void removeMarkDoneTo(Player enemyMarked) {
+        Integer enemyID = enemyMarked.getID();
+        while(markDone.remove(enemyID));
     }
 
 

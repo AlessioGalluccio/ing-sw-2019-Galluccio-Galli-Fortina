@@ -241,11 +241,10 @@ public class Player extends java.util.Observable implements Target {
      * @param enemy who had marked you
      * @throws TooManyException if enemy had already marked you three times
      */
-    public void receiveMark(Player enemy) throws TooManyException {
-        this.mark.addMarkReceived(enemy);
-
+    public void receiveMarkBy(Player enemy) throws TooManyException {
         //Add a mark to the enemy's list of done marks
-        enemy.addMarkDone(this); //Throws TooManyException
+        enemy.addMarkDoneTo(this); //Throws TooManyException
+        this.mark.addMarkReceivedBy(enemy);
     }
 
     /**
@@ -254,9 +253,26 @@ public class Player extends java.util.Observable implements Target {
      * @param enemyToMark the enemy I have marked
      * @throws TooManyException if you have already marked this enemy three times
      */
-    //Called by receiveMark()
-    private void addMarkDone (Player enemyToMark) throws TooManyException {
-        this.mark.addMarkDone(enemyToMark); //Throws TooManyException
+    //Called by receiveMarkBy()
+    private void addMarkDoneTo(Player enemyToMark) throws TooManyException {
+        this.mark.addMarkDoneTo(enemyToMark); //Throws TooManyException
     }
 
+    /**
+     * Remove all marks made by enemy
+     * @param enemy who made marks I want to remove
+     */
+    public void removeMarkReceivedBy(Player enemy) {
+        this.mark.removeMarkReceivedBy(enemy);
+        enemy.removeMarkDoneTo(this);
+    }
+
+    /**
+     * Remove all marks by my list of markDone
+     * @param enemyMarked The enemy I have marked
+     */
+    //Called by removeMarkReceivedBy()
+    private void removeMarkDoneTo(Player enemyMarked) {
+        this.mark.removeMarkDoneTo(enemyMarked);
+    }
 }
