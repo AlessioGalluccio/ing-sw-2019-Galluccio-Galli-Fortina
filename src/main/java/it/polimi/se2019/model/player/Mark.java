@@ -1,12 +1,13 @@
 package it.polimi.se2019.model.player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Mark {
     private ArrayList<Player> markDone;
     private ArrayList<Player> markReceived;
 
-    public Mark() {
+    Mark() {
 
     }
 
@@ -14,7 +15,7 @@ public class Mark {
      *
      * @return list of marks done to other players
      */
-    public ArrayList<Player> getMarkDone() {
+    public List<Player> getMarkDone() {
 
         return null; //TODO implementare
     }
@@ -23,7 +24,7 @@ public class Mark {
      *
      * @return list of marks recieved by other players
      */
-    public ArrayList<Player> getMarkReceived() {
+    public List<Player> getMarkReceived() {
         return markReceived;
     }
 
@@ -31,7 +32,7 @@ public class Mark {
      *
      * @param target opponent player you want to mark
      */
-    public void setMark(Player target) {
+    protected void setMark(Player target) {
 
     }
 
@@ -39,7 +40,7 @@ public class Mark {
      *
      * @param target opponent player whose mark you want to remove from yourself
      */
-    public void removeMark(Player target) {
+    protected void removeMark(Player target) {
 
     }
 

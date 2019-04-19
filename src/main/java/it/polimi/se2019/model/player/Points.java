@@ -26,7 +26,7 @@ public class Points {
      * @param num number of points to add
      */
     //Tested through Player addPoints()
-    public void addNewPoints(int num) {
+    protected void addNewPoints(int num) {
         sum = sum + num;
 
         int num4PointsCards = num / 4;  //division without remainder
