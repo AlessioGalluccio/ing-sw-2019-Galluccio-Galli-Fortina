@@ -1,9 +1,6 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.Color;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.PlayerView;
 
 import java.util.ArrayList;
@@ -68,7 +65,7 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
      * @param playerToReload player to reload
      */
     @Override
-    public void reloadAmmo(Player playerToReload) {
+    public void reloadAmmo(Player playerToReload) throws TooManyAmmoException {
         AmmoBag ammoPlayer = playerToReload.getAmmo();
         switch (color) {
             case BLUE:

@@ -1,9 +1,6 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.TooManyCardException;
+import it.polimi.se2019.model.player.*;
 
 import java.util.*;
 
@@ -38,7 +35,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
      * @param p player to relaod
      */
     @Override
-    public void reloadAmmo(Player p) {
+    public void reloadAmmo(Player p) throws TooManyAmmoException {
         AmmoBag ammoPlayer = p.getAmmo();
         List<ColorRYB> ammoList = getAmmo();
         p.setAmmoBag(ammoPlayer.getRedAmmo() + Collections.frequency(ammoList, RED),
@@ -70,7 +67,7 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
      * @param author Who use the card
      */
     @Override
-    public void useCard(Player author) {
+    public void useCard(Player author) throws TooManyAmmoException {
         reloadAmmo(author);
     }
 }

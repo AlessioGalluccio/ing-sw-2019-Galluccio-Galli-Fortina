@@ -1,10 +1,8 @@
 package it.polimi.se2019.testModel;
 
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.TooManyCardException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,28 +22,30 @@ public class TestAmmoConvertibleCard {
     @Test
     public void testReload(){
         //Test half + 1 of the deck, in this way I'm sure I test both AmmoOnly and AmmoPowerup
-        for(int i=0; i<deck.getUnusedCard().size() - 17; i++) {
-            player.setAmmoBag(1, 1, 1);
-            AmmoConvertibleCard card = deck.pick();
-            card.reloadAmmo(player);
+        try {
+            for (int i = 0; i < deck.getUnusedCard().size() - 17; i++) {
+                player.setAmmoBag(1, 1, 1);
+                AmmoConvertibleCard card = deck.pick();
+                card.reloadAmmo(player);
 
-            int blue = 1;
-            int red = 1;
-            int yellow = 1;
-            for (ColorRYB c : card.getAmmo()) {
-                if (c == BLUE) blue++;
-                if (c == YELLOW) yellow++;
-                if (c == RED) red++;
+                int blue = 1;
+                int red = 1;
+                int yellow = 1;
+                for (ColorRYB c : card.getAmmo()) {
+                    if (c == BLUE) blue++;
+                    if (c == YELLOW) yellow++;
+                    if (c == RED) red++;
+                }
+                assertEquals(red, player.getAmmo().getRedAmmo());
+                assertEquals(yellow, player.getAmmo().getYellowAmmo());
+                assertEquals(blue, player.getAmmo().getBlueAmmo());
+
+                player.setAmmoBag(1, 1, 1);
+                new TargetingScopeCard(RED).reloadAmmo(player);
+                assertEquals(2, player.getAmmo().getRedAmmo());
             }
-            assertEquals(red, player.getAmmo().getRedAmmo());
-            assertEquals(yellow, player.getAmmo().getYellowAmmo());
-            assertEquals(blue, player.getAmmo().getBlueAmmo());
-
-            player.setAmmoBag(1, 1, 1);
-            new TargetingScopeCard(RED).reloadAmmo(player);
-            assertEquals(2, player.getAmmo().getRedAmmo());
-
         }
+        catch (TooManyAmmoException e ) {fail();}
     }
 
     @Test(expected = TooManyCardException.class)
@@ -54,11 +54,20 @@ public class TestAmmoConvertibleCard {
             player.addPowerupCard(new TargetingScopeCard(RED));
             player.addPowerupCard(new TargetingScopeCard(RED));
 
-            deck.pick().useCard(player);
-            deck.pick().useCard(player);
-            deck.pick().useCard(player);
-            deck.pick().useCard(player);
-            deck.pick().useCard(player);
+            try {
+                //Reset ammoBag to 0 in order to don't thrown TooManyAmmoException
+                player.setAmmoBag(0,0,0);
+                deck.pick().useCard(player);
+                player.setAmmoBag(0,0,0);
+                deck.pick().useCard(player);
+                player.setAmmoBag(0,0,0);
+                deck.pick().useCard(player);
+                player.setAmmoBag(0,0,0);
+                deck.pick().useCard(player);
+                player.setAmmoBag(0,0,0);
+                deck.pick().useCard(player);
+            }
+            catch (TooManyAmmoException e) { /*Do nothing, it's only a test*/ }
     }
 
 }

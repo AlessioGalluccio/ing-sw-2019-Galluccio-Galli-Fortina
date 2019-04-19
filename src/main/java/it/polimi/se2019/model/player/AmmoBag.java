@@ -8,9 +8,9 @@ public class AmmoBag {
     /**
      * Create a new ammo bag for the player
      * (Accessible only in model.player package)
-     * @param redAmmo the new red ammmo to set
-     * @param yellowAmmo the new yellow ammmo to set
-     * @param blueAmmo the new blue ammmo to set
+     * @param redAmmo the new red ammo to set
+     * @param yellowAmmo the new yellow ammo to set
+     * @param blueAmmo the new blue ammo to set
      */
     AmmoBag(int redAmmo, int yellowAmmo, int blueAmmo) {
         this.redAmmo = redAmmo;

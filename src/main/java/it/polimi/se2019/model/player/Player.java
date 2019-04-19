@@ -35,6 +35,7 @@ public class Player extends java.util.Observable implements Target {
     private static final int NUM_DAMAGE_DEATH = 11;
     private static final int NUM_DAMAGE_OVERKILL = 12;
     private static final int MAX_CARD = 3;
+    private static final int MAX_AMMO = 3;
 
     public Player(String nickname, Character character, int ID) {
         this.nickname = nickname;
@@ -137,14 +138,30 @@ public class Player extends java.util.Observable implements Target {
     }
 
     /**
-     *
+     * Set player's ammo to value indicated by params
+     * If some param is grater than three the relative ammo is set to 3
      * @param numRed new value of red ammo
      * @param numYellow new value of yellow ammo
      * @param numBlue new value of blue ammo
+     * @throws TooManyAmmoException if some of param are grater then 3
      */
-    public void setAmmoBag(int numRed, int numYellow, int numBlue ) {
-        //TODO control on the values, create the exception for incorrect values of ammo
+    public void setAmmoBag(int numRed, int numYellow, int numBlue) throws TooManyAmmoException {
+        boolean exception = false;
+        if(numRed > MAX_AMMO) {
+            numRed = MAX_AMMO;
+            exception = true;
+        }
+        if(numBlue > MAX_AMMO) {
+            numBlue = MAX_AMMO;
+            exception = true;
+        }
+        if(numYellow > 3) {
+            numYellow = 3;
+            exception = true;
+        }
+
         ammoBag = new AmmoBag(numRed, numYellow, numBlue);
+        if(exception) throw new TooManyAmmoException("You have too many ammo of some color, they have been set to the maximum (3)");
     }
 
     /**

@@ -1,9 +1,6 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.TooManyCardException;
+import it.polimi.se2019.model.player.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -52,7 +49,7 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
      * @param p player to relaod
      */
     @Override
-    public void reloadAmmo(Player p) {
+    public void reloadAmmo(Player p) throws TooManyAmmoException {
         AmmoBag ammoPlayer = p.getAmmo();
         List<ColorRYB> ammoList = getAmmo();
         p.setAmmoBag(ammoPlayer.getRedAmmo() + Collections.frequency(ammoList, RED),
@@ -74,7 +71,7 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
      * @throws TooManyCardException if the player has already three powerup (the maximum)
      */
     @Override
-    public void useCard(Player author) throws TooManyCardException {
+    public void useCard(Player author) throws TooManyCardException, TooManyAmmoException {
         reloadAmmo(author);
         author.addPowerupCard(powerupDeck.pick());
 
