@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
@@ -7,10 +8,12 @@ import java.util.ArrayList;
 public class NotEmptyControllerState implements StateController {
 
     private Controller controller;
+    private GameHandler gameHandler;
     private final int FIRST_MESSAGE = 0;
 
-    NotEmptyControllerState(Controller controller) {
+    NotEmptyControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
+        this.gameHandler = gameHandler;
     }
 
     @Override
@@ -114,6 +117,7 @@ public class NotEmptyControllerState implements StateController {
     @Override
     public void handle(Object arg) {
         //TODO scrivi eccezione
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -125,16 +129,14 @@ public class NotEmptyControllerState implements StateController {
      */
     private boolean startingHandler(ViewControllerMessage arg) {
         int index = controller.getIndexExpected();
-        int expectedID = controller.getMessageListExpected().get(index).getMessage().getMessageID();
+        int expectedID = controller.getCopyMessageListExpected().get(index).getMessage().getMessageID();
         if(arg.getMessageID() == expectedID) {
-            ArrayList<ViewControllerMessage> messageListReceived = controller.getMessageListReceived();
-            messageListReceived.add(arg);
-            controller.setMessageListReceived(messageListReceived);
+            controller.addMessageListReceived(arg);
             controller.setIndexExpected(index + 1);
             return true;
         }
         else {
-            String response = controller.getMessageListExpected().get(index).getString();
+            String response = controller.getCopyMessageListExpected().get(index).getString();
             arg.getAuthorView().printFromController(response);
             return false;
         }
@@ -144,9 +146,9 @@ public class NotEmptyControllerState implements StateController {
      * it handles the end of this entire State. If the sequence of message is ended, it sends them to the model and it changes the State of the controller
      */
     private void endingHandler() {
-        if(controller.getMessageListExpected().size() == controller.getIndexExpected()) {
+        if(controller.getCopyMessageListExpected().size() == controller.getIndexExpected()) {
             //Model is modified
-            ViewControllerMessage firstMessage = controller.getMessageListReceived().get(FIRST_MESSAGE);
+            ViewControllerMessage firstMessage = controller.getCopyMessageListReceived().get(FIRST_MESSAGE);
             controller.modifyModel(firstMessage);
 
             int num = controller.getNumOfActionTaken();
@@ -156,11 +158,11 @@ public class NotEmptyControllerState implements StateController {
             controller.flushMessages();
 
             if(controller.getNumOfActionTaken() == controller.MAX_NUM_OF_ACTION) {
-                controller.setState(new NotYourTurnState(controller));
-                controller.getGameHandler().nextTurn();
+                controller.setState(new NotYourTurnState(controller, gameHandler));
+                gameHandler.nextTurn();
             }
             else {
-                controller.setState(new EmptyControllerState(controller));
+                controller.setState(new EmptyControllerState(controller, gameHandler));
             }
         }
     }

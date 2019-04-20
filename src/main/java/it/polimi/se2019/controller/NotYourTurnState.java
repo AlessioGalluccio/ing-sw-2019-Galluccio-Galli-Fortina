@@ -1,14 +1,17 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 public class NotYourTurnState implements StateController {
 
     private Controller controller;
+    private GameHandler gameHandler;
     private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
 
-    NotYourTurnState(Controller controller) {
+    NotYourTurnState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
+        this.gameHandler = gameHandler;
         controller.setNumOfActionTaken(0);
     }
 
@@ -96,6 +99,7 @@ public class NotYourTurnState implements StateController {
     @Override
     public void handle(Object arg) {
         //TODO scrivi eccezione
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -104,8 +108,8 @@ public class NotYourTurnState implements StateController {
      */
     private void controllTurn(ViewControllerMessage arg) {
         int IDPlayer = arg.getAuthorID();
-        if(IDPlayer == controller.getGameHandler().getTurnPlayerID()) {
-            StateController nextState = new EmptyControllerState(controller);
+        if(IDPlayer == gameHandler.getTurnPlayerID()) {
+            StateController nextState = new EmptyControllerState(controller, gameHandler);
             nextState.handle(arg);
             controller.setState(nextState);
         }

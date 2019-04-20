@@ -10,29 +10,30 @@ import java.util.ArrayList;
 public class EmptyControllerState implements  StateController {
 
     private Controller controller;
+    private GameHandler gameHandler;
     private final String SELECT_ACTION_REQUEST = "Please, select an action";
 
-    EmptyControllerState(Controller controller) {
+    EmptyControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
+        this.gameHandler = gameHandler;
     }
 
     @Override
     public void handle(ActionMessage arg) {
 
         //messageListReceived
-        ArrayList<ViewControllerMessage> messageListReceived = new ArrayList<ViewControllerMessage>();
+        ArrayList<ViewControllerMessage> messageListReceived = new ArrayList<>();
         messageListReceived.add(arg);
         controller.setMessageListReceived(messageListReceived);
 
         //messageListExpected
-        GameHandler gameHandler = controller.getGameHandler();
         int messageID = arg.getMessageID();
         Action action = gameHandler.getActionByID(messageID);
         ArrayList<StringAndMessage> stringAndMessage = action.getStringAndMessageExpected();
         controller.setMessageListExpected(stringAndMessage);
 
         //Change State
-        controller.setState(new NotEmptyControllerState(controller));
+        controller.setState(new NotEmptyControllerState(controller, gameHandler));
 
     }
 
@@ -99,5 +100,6 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handle(Object arg) {
         //TODO scrivi eccezione
+        throw new IllegalArgumentException();
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.se2019.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -8,9 +10,13 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+
+import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class Controller implements Observer {
 
@@ -24,27 +30,42 @@ public class Controller implements Observer {
 
     public Controller(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
-        this.messageListReceived = new ArrayList<ViewControllerMessage>();
-        this.messageListExpected = new ArrayList<StringAndMessage>();
+        this.messageListReceived = new ArrayList<>();
+        this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
+        this.state = new NotYourTurnState(this, gameHandler);
     }
 
     //getter and Setters
 
-    public ArrayList<ViewControllerMessage> getMessageListReceived() {
+    public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {
+        //TODO implementare la serializzazione e la deserializzazione
+        /*
+        Gson gson = new Gson();
+
+        Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(this.messageListReceived, TYPE), TYPE);
+        */
         return messageListReceived;
     }
 
-    public ArrayList<StringAndMessage> getMessageListExpected() {
+    public ArrayList<StringAndMessage> getCopyMessageListExpected() {
+        //TODO implementare la serializzazione e la deserializzazione
+        /*
+        Gson gson = new Gson();
+
+        Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
+        */
         return messageListExpected;
     }
 
     public int getIndexExpected() {
         return indexExpected;
-    }
-
-    public GameHandler getGameHandler() {
-        return gameHandler;
     }
 
     public StateController getState() {
@@ -59,8 +80,16 @@ public class Controller implements Observer {
         this.messageListReceived = messageListReceived;
     }
 
+    public void addMessageListReceived(ViewControllerMessage arg) {
+        this.messageListReceived.add(arg);
+    }
+
     public void setMessageListExpected(ArrayList<StringAndMessage> messageListExpected) {
         this.messageListExpected = messageListExpected;
+    }
+
+    public void addMessageListExpected(StringAndMessage arg) {
+        this.messageListExpected.add(arg);
     }
 
     public void setIndexExpected(int indexExpected) {
@@ -75,11 +104,18 @@ public class Controller implements Observer {
         this.numOfActionTaken = numOfActionTaken;
     }
 
+
     //methods
 
     @Override
     public void update(Observable o, Object arg) {
-        state.handle(arg);
+        try {
+            state.handle(arg);
+        }catch (Exception e) {
+            System.err.println("Controller exception: " + e.toString());
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -154,8 +190,8 @@ public class Controller implements Observer {
      * command the model to send to the view the possible targets of this firemode
      * @param arg the message of this firemode
      */
-    public void sendTargetsToView(FireModeMessage arg) {
-        Player playerTemp = gameHandler.getPlayerByID(arg.getAuthorID());
+    public synchronized void sendTargetsToView(FireModeMessage arg) {
+        Player playerTemp = getPlayerByID(arg.getAuthorID());
         AmmoBag ammoTemp = playerTemp.getAmmo();
         FireMode fireModeTemp = gameHandler.getFireModeByID(arg.getAuthorID());
         //TODO metodo che compara fireModeTemp.getCost() con ammoTemp. Se non bastano, chiedono a giocatore di scartare un potenziamento se ce l'ha
@@ -167,8 +203,8 @@ public class Controller implements Observer {
      * command the model to send to the view the possible targets of this tagbackGranate card
      * @param arg the message of this tagbackGranade card
      */
-    public void sendTargetsToView(TagbackGranateMessage arg) {
-        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
+    public synchronized void sendTargetsToView(TagbackGranateMessage arg) {
+        Player author = getPlayerByID(arg.getAuthorID());
         TagbackGranedCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
         //TODO
@@ -178,8 +214,8 @@ public class Controller implements Observer {
      * command the model to send to the view the possible targets of this Newton card
      * @param arg the message of this Newton card
      */
-    public void sendTargetsToView(NewtonMessage arg) {
-        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
+    public synchronized void sendTargetsToView(NewtonMessage arg) {
+        Player author = getPlayerByID(arg.getAuthorID());
         NewtonCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
         //TODO
@@ -189,7 +225,7 @@ public class Controller implements Observer {
      * overloading has failed, send message error
      * @param arg the wrong type of message
      */
-    public void sendTargetsToView(PlayerViewMessage arg) {
+    public synchronized void sendTargetsToView(PlayerViewMessage arg) {
         //TODO eccezione messaggio inaspettato
     }
 
@@ -198,13 +234,13 @@ public class Controller implements Observer {
      * It verififies the list of messages and, if it is correct, it modifies the model accordingly
      * @param actionMessage the first message in the list. It defines what type of action
      */
-    public void modifyModel(ActionMessage actionMessage) {
+    public synchronized void modifyModel(ActionMessage actionMessage) {
         //TODO verify()
-        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
+        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
 
     }
 
-    public void modifyModel(PowerupCard powerupCard) {
+    public synchronized void modifyModel(PowerupCard powerupCard) {
         //TODO
     }
 
@@ -212,7 +248,7 @@ public class Controller implements Observer {
      * general case, should not be used
      * @param message
      */
-    public void modifyModel(ViewControllerMessage message) {
+    public synchronized void modifyModel(ViewControllerMessage message) {
         //TODO scrivi eccezione!
     }
 
@@ -220,8 +256,8 @@ public class Controller implements Observer {
      * it empties the messages after Model is modified
      */
     public void flushMessages() {
-        messageListReceived = new ArrayList<ViewControllerMessage>();
-        this.messageListExpected = new ArrayList<StringAndMessage>();
+        messageListReceived = new ArrayList<>();
+        this.messageListExpected = new ArrayList<>();
         indexExpected = 0;
     }
 
