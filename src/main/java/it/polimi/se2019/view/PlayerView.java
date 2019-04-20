@@ -2,6 +2,7 @@ package it.polimi.se2019.view;
 
 import it.polimi.se2019.model.deck.*;
 
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 
 import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
@@ -16,11 +17,17 @@ public class PlayerView extends Observable implements Observer {
     private Player playerCopy;
     private ArrayList<Target> possibleTarget;
     private ArrayList<Target> selectedTarget;
+    private ArrayList<Character> possibleCharacter;
+    private Character choosenCharacter;
 
-    public PlayerView(Player playerCopy, ArrayList<Target> possibleTarget, ArrayList<Target> selectedTarget) {
+    public PlayerView(Player playerCopy, ArrayList<Target> possibleTarget, ArrayList<Target> selectedTarget,
+                      ArrayList<Character> possibleCharacter, Character choosenCharacter ) {
+
         this.playerCopy = playerCopy;
         this.possibleTarget = possibleTarget;
         this.selectedTarget = selectedTarget;
+        this.possibleCharacter = possibleCharacter;
+        this.choosenCharacter = choosenCharacter;
     }
 
     public Player getPlayerCopy() {
@@ -36,7 +43,18 @@ public class PlayerView extends Observable implements Observer {
 
     }
 
+    public Character getChoosenCharacter() {
+        return choosenCharacter;
+    }
 
+    public ArrayList<Character> getPossibleCharacter() {
+        return possibleCharacter;
+    }
+
+    public ArrayList<Target> getPossibleTarget() {
+
+        return possibleTarget;
+    }
 
     public void createTargetMessage(ArrayList<Target> target){
         TargetMessage message = new TargetMessage(target);
@@ -112,6 +130,11 @@ public class PlayerView extends Observable implements Observer {
         notifyObservers(message);
     }
 
+    public void createLoginMessage(int messageID, String nickname, Character choosenCharacter){
+        LoginMessage message = new LoginMessage(messageID,nickname,choosenCharacter);
+        notifyObservers(message);
+    }
+
 
     public void printFromController(String string) {
 
@@ -121,6 +144,13 @@ public class PlayerView extends Observable implements Observer {
         if (this.possibleTarget.containsAll(this.selectedTarget))
             return true;
 
+
+        return false;
+    }
+
+    private boolean verifyCharacter(){
+        if (this.possibleCharacter.contains(this.choosenCharacter))
+            return true;
 
         return false;
     }
