@@ -49,25 +49,22 @@ public class TestAmmoConvertibleCard {
     }
 
     @Test(expected = TooManyException.class)
-    public void testUseCard() throws TooManyException {
+    public void testUseCardException() throws TooManyException {
             player.addPowerupCard(new TargetingScopeCard(BLUE));
             player.addPowerupCard(new TargetingScopeCard(RED));
             player.addPowerupCard(new TargetingScopeCard(RED));
 
-            try {
-                //Reset ammoBag to 0 in order to don't thrown TooManyAmmoException
-                player.setAmmoBag(0,0,0);
-                deck.pick().useCard(player);
-                player.setAmmoBag(0,0,0);
-                deck.pick().useCard(player);
-                player.setAmmoBag(0,0,0);
-                deck.pick().useCard(player);
-                player.setAmmoBag(0,0,0);
-                deck.pick().useCard(player);
-                player.setAmmoBag(0,0,0);
-                deck.pick().useCard(player);
-            }
-            catch (TooManyException e) { /*Do nothing, it's only a test*/ }
+            //Reset ammoBag to 0 in order to don't thrown TooManyException due to ammo
+            player.setAmmoBag(0,0,0);
+            deck.pick().useCard(player);
+            player.setAmmoBag(0,0,0);
+            deck.pick().useCard(player);
+            player.setAmmoBag(0,0,0);
+            deck.pick().useCard(player);
+            player.setAmmoBag(0,0,0);
+            deck.pick().useCard(player);
+            player.setAmmoBag(0,0,0);
+            deck.pick().useCard(player);
     }
 
 }
