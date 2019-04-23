@@ -121,17 +121,17 @@ public class PlayerView extends Observable implements Observer {
 
 
     public void createEndMessage (int messageID){
-        EndMessage message = new EndMessage(messageID);
+        EndMessage message = new EndMessage();
         notifyObservers(message);
     }
 
     public void createUndoMessage(int messageID){
-        UndoMessage message = new UndoMessage(messageID);
+        UndoMessage message = new UndoMessage();
         notifyObservers(message);
     }
 
     public void createLoginMessage(int messageID, String nickname, Character choosenCharacter){
-        LoginMessage message = new LoginMessage(messageID,nickname,choosenCharacter);
+        LoginMessage message = new LoginMessage(nickname,choosenCharacter);
         notifyObservers(message);
     }
 

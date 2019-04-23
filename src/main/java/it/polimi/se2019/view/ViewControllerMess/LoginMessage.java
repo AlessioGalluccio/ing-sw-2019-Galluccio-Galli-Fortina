@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.Character;
 
 public class LoginMessage extends ViewControllerMessage{
@@ -8,9 +9,9 @@ public class LoginMessage extends ViewControllerMessage{
     private String playerNickname;
     private Character choosenCharacter;
 
-    public LoginMessage(int messageID, String playerNickname, Character choosenCharacter) {
+    public LoginMessage(String playerNickname, Character choosenCharacter) {
 
-        this.messageID = messageID;
+        this.messageID = Identificator.LOGIN_MESSAGE;
 
         this.playerNickname = playerNickname;
 
