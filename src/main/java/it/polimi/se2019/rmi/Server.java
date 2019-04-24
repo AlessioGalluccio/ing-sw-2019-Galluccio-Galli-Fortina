@@ -7,6 +7,9 @@ import it.polimi.se2019.view.PlayerView;
 
 
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
 public class Server implements ServerInterface{
 
@@ -68,4 +71,35 @@ public class Server implements ServerInterface{
         playerView.createLoginMessage(Identificator.LOGIN_MESSAGE, nickname, choosenCharacter);
 
     }
+
+
+
+
+
+
+
+
+
+    public static void main(String args[]) {
+
+        try {
+            Server obj = new Server();
+            ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(obj, 0);
+
+            // Bind the remote object's stub in the registry
+            Registry registry = LocateRegistry.getRegistry();
+            registry.bind("Server", stub);
+
+            System.err.println("Server ready");
+        } catch (Exception e) {
+            System.err.println("Server exception: " + e.toString());
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
+
+
