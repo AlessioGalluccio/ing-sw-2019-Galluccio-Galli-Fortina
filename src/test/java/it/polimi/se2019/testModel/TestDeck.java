@@ -18,11 +18,7 @@ public class TestDeck {
 
     @Before
     public void testCostructor(){
-        try {
-            weaponDeck = new WeaponDeck();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        weaponDeck = new WeaponDeck();
         powerupDeck = new PowerupDeck();
         ammoDeck = new AmmoDeck(powerupDeck);
     }

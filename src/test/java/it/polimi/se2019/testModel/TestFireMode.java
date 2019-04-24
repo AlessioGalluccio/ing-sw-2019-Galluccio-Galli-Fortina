@@ -16,12 +16,8 @@ public class TestFireMode {
 
     @Before
     public void initTest(){
-        WeaponDeck deck = null;
-        try {
-            deck = new WeaponDeck();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        WeaponDeck deck = new WeaponDeck();
+
         Collections.shuffle(deck.getUnusedCard());
         WeaponCard card = deck.pick();
         fireMode = card.getFireMode();

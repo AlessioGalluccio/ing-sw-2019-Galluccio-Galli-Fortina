@@ -15,11 +15,7 @@ public class TestWeaponCard {
 
     @Before
     public void initTest(){
-        try {
-            this.deck = new WeaponDeck();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.deck = new WeaponDeck();
     }
 
     @Test

@@ -8,8 +8,11 @@ import it.polimi.se2019.model.JsonAdapter;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WeaponDeck extends Deck<WeaponCard> {
 
@@ -17,40 +20,34 @@ public class WeaponDeck extends Deck<WeaponCard> {
      *
      * @throws FileNotFoundException If can't find the Json file from which deserialize the cards
      */
-    public WeaponDeck() throws FileNotFoundException{
+    public WeaponDeck() {
         super(initializeCard());
     }
 
     /**
      * Read Card form Json file
-     * @return List of cards just read
-     * @throws FileNotFoundException If can't find the Json file from which deserialize the cards
+     * @return List of cards just read, null if FileNotFoundException is thrown
      */
-    private static Stack<WeaponCard> initializeCard() throws FileNotFoundException{
-        Stack<WeaponCard> deck;
-        BufferedReader bufferedReader = null;
+    private static Stack<WeaponCard> initializeCard() {
+        Stack<WeaponCard> deck = null;
 
-        /*
-        Bisogna registrare tutti tutte le classi astratte o interfacce che vengono usate nell'oggetto
-        Ex. FireMode è una classe astratta con tanti figli, devo registarla in modo che json sappia risalire al figlio corretto
-         */
         GsonBuilder g = new GsonBuilder()
                 .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>());
         Gson gson = g.create();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("WeaponCard"))) {
+            //Create a reader for the file
 
-        //Creo un reader per leggere da file
+            Type DECK_TYPE = new TypeToken<Stack<WeaponCard>>() {
+            }.getType();
 
-        bufferedReader = new BufferedReader(new FileReader("WeaponCard"));
-
-
-
-        //Mi serve per passarlo al deserealizzatore
-        Type DECK_TYPE = new TypeToken<Stack<WeaponCard>>() {
-        }.getType();
-
-        deck  = gson.fromJson(bufferedReader, DECK_TYPE);
-        Collections.shuffle(deck);
+            deck  = gson.fromJson(bufferedReader, DECK_TYPE);
+            Collections.shuffle(deck);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger("it.polimi.se2019.model.deck").log(Level.WARNING, "WeaponCard.json don't found!", e);
+        } catch (IOException e) {
+            Logger.getLogger("it.polimi.se2019.model.deck").log(Level.WARNING, "Reader file close", e);
+        }
         return deck;
     }
 
