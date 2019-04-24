@@ -1,6 +1,4 @@
-package it.polimi.se2019.rmi;
-
-import it.polimi.se2019.model.deck.Target;
+package it.polimi.se2019.network.rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

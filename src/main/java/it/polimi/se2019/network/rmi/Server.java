@@ -1,4 +1,4 @@
-package it.polimi.se2019.rmi;
+package it.polimi.se2019.network.rmi;
 
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.Character;
