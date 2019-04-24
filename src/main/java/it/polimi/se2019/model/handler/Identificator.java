@@ -19,4 +19,8 @@ public class Identificator {
     public static final int END_MESSAGE = 13;
     public static final int UNDO_MESSAGE = 14;
 
+    public static final int MOVE = 1;
+    public static final int GRAB = 2;
+    public static final int SHOOT = 3;
+
 }

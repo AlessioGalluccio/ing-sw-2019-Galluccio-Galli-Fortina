@@ -2,8 +2,9 @@ package it.polimi.se2019.rmi;
 
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.view.PlayerView;
+
+
 
 import java.rmi.RemoteException;
 
@@ -17,15 +18,15 @@ public class Server implements ServerInterface{
     public void chooseAction(String choosenAction) throws RemoteException {
         switch (choosenAction){
             case "move" :
-                playerView.createActionMessage(1);
+                playerView.createActionMessage(Identificator.MOVE);
                 break;
 
             case "grab" :
-                playerView.createActionMessage(2);
+                playerView.createActionMessage(Identificator.GRAB);
                 break;
 
             case "shoot" :
-                playerView.createActionMessage(3);
+                playerView.createActionMessage(Identificator.SHOOT);
                 break;
         }
     }
