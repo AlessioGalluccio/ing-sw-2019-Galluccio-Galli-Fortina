@@ -1,7 +1,9 @@
 package it.polimi.se2019.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -39,29 +41,24 @@ public class Controller implements Observer {
     //getter and Setters
 
     public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {
-        //TODO implementare la serializzazione e la deserializzazione
-        /*
-        Gson gson = new Gson();
+        GsonBuilder g = new GsonBuilder()
+                .registerTypeAdapter(ViewControllerMessage.class, new JsonAdapter<ViewControllerMessage>())
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>());
+        Gson gson = g.create();
 
         Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
         }.getType();
 
-        return gson.fromJson(gson.toJson(this.messageListReceived, TYPE), TYPE);
-        */
-        return messageListReceived;
+        return gson.fromJson(gson.toJson(messageListReceived, TYPE), TYPE);
     }
 
     public ArrayList<StringAndMessage> getCopyMessageListExpected() {
-        //TODO implementare la serializzazione e la deserializzazione
-        /*
         Gson gson = new Gson();
 
-        Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
+        Type TYPE = new TypeToken<ArrayList<StringAndMessage>>() {
         }.getType();
 
         return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
-        */
-        return messageListExpected;
     }
 
     public int getIndexExpected() {

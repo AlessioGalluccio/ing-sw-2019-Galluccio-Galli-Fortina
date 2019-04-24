@@ -41,6 +41,7 @@ public class TestController {
         assertEquals(nopeMessage.getMessageID(), received.get(0).getMessageID());
         TeleporterMessage teleporterMessage = new TeleporterMessage(new TeleporterCard(ColorRYB.RED));
         controller.addMessageListReceived(teleporterMessage);
+        received = controller.getCopyMessageListReceived();
         assertEquals(teleporterMessage.getMessageID(), received.get(1).getMessageID());
     }
 
