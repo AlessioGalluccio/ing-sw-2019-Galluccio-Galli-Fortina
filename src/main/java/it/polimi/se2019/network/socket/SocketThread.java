@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 public class SocketThread implements Runnable {
     private Socket socket;
+    PrintWriter printSocket;
 
     SocketThread(Socket socket) {
         this.socket = socket;
@@ -16,8 +17,9 @@ public class SocketThread implements Runnable {
 
     @Override
     public void run() {
-        try (   Scanner scannerSocket =  new Scanner(socket.getInputStream());
-                PrintWriter printSocket = new PrintWriter(socket.getOutputStream()) ) {
+        try (Scanner scannerSocket =  new Scanner(socket.getInputStream())) {
+
+            printSocket = new PrintWriter(socket.getOutputStream());
 
             while(true) {
                 //Receive message
@@ -29,7 +31,11 @@ public class SocketThread implements Runnable {
             // Closing sockets
             socket.close();
         } catch (IOException e) {
-            Logger.getLogger("it.polimi.se2019.network.socket").log(Level.WARNING, "Scanner socket closed", e);
+            Logger.getLogger(SocketThread.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
+
+        }
+        finally {
+            printSocket.close();
         }
     }
 

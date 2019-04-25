@@ -9,21 +9,23 @@ import java.util.logging.*;
 
 public class SocketServer {
     private int port;
+    private boolean open;
 
     public SocketServer(int port) {
         this.port = port;
+        this.open = true;
     }
 
     public void start() {
         ExecutorService executor = Executors.newCachedThreadPool();
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            while(!executor.isTerminated()) { // Fake condition: it's always true
+            while(open) { // Fake condition: it's always true
                 Socket socket = serverSocket.accept();
                 executor.submit(new SocketThread(socket));
                 //Server ready on port this.port
             }
         } catch (IOException e) { //Go here if serverSocket is closed
-            Logger.getLogger("it.polimi.se2019.network.socket").log(Level.WARNING, "Socket close", e);
+            Logger.getLogger(SocketServer.class.getName()).log(Level.WARNING, "Socket close", e);
         }
         executor.shutdown();
     }
