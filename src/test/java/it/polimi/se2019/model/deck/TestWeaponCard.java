@@ -1,10 +1,8 @@
-package it.polimi.se2019.testModel;
+package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.deck.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 import static org.junit.Assert.*;

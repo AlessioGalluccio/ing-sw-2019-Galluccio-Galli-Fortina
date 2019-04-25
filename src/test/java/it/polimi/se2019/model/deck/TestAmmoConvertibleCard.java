@@ -1,6 +1,5 @@
-package it.polimi.se2019.testModel;
+package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
@@ -50,21 +49,21 @@ public class TestAmmoConvertibleCard {
 
     @Test(expected = TooManyException.class)
     public void testUseCardException() throws TooManyException {
-            player.addPowerupCard(new TargetingScopeCard(BLUE));
-            player.addPowerupCard(new TargetingScopeCard(RED));
-            player.addPowerupCard(new TargetingScopeCard(RED));
+        player.addPowerupCard(new TargetingScopeCard(BLUE));
+        player.addPowerupCard(new TargetingScopeCard(RED));
+        player.addPowerupCard(new TargetingScopeCard(RED));
 
-            //Reset ammoBag to 0 in order to don't thrown TooManyException due to ammo
-            player.setAmmoBag(0,0,0);
-            deck.pick().useCard(player);
-            player.setAmmoBag(0,0,0);
-            deck.pick().useCard(player);
-            player.setAmmoBag(0,0,0);
-            deck.pick().useCard(player);
-            player.setAmmoBag(0,0,0);
-            deck.pick().useCard(player);
-            player.setAmmoBag(0,0,0);
-            deck.pick().useCard(player);
+        //Reset ammoBag to 0 in order to don't thrown TooManyException due to ammo
+        player.setAmmoBag(0,0,0);
+        deck.pick().useCard(player);
+        player.setAmmoBag(0,0,0);
+        deck.pick().useCard(player);
+        player.setAmmoBag(0,0,0);
+        deck.pick().useCard(player);
+        player.setAmmoBag(0,0,0);
+        deck.pick().useCard(player);
+        player.setAmmoBag(0,0,0);
+        deck.pick().useCard(player);
     }
 
 }

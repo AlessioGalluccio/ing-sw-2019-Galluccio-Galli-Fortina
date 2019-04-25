@@ -1,10 +1,8 @@
-package it.polimi.se2019.testModel;
+package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.deck.PointCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
 import org.junit.Test;
 

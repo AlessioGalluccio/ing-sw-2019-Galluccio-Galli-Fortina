@@ -1,10 +1,8 @@
-package it.polimi.se2019.testModel;
+package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.deck.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
@@ -51,11 +49,10 @@ public class TestDeck {
         assertEquals(1, ammoDeck.getUsedCard().size());
 
         assertEquals(AMMO_SIZE_DECK , ammoDeck.getInUseCard().size() +
-                        ammoDeck.getUnusedCard().size() +
+                ammoDeck.getUnusedCard().size() +
                 ammoDeck.getUsedCard().size());
 
         assertEquals(true, acc.getAmmo().equals(ammoDeck.getUsedCard().get(0).getAmmo()));
-
 
     }
 }
