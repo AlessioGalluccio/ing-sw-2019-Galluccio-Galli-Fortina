@@ -1,11 +1,13 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.player.Action;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmptyControllerState implements  StateController {
 
@@ -73,6 +75,21 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handle(ReloadMessage arg) {
         //TODO
+        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
+        int weaponID = arg.getWeaponID();
+        boolean isLoaded = false;
+        try{
+            player.loadWeapon(weaponID);
+        }catch(WeaponNotPresentException e){
+            arg.getAuthorView().printFromController("Error: Player doesn't have this Weapon");
+            arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        }catch(WeaponIsLoadedException e){
+            arg.getAuthorView().printFromController("This weapon is already loaded");
+            arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        }catch(JustOneAmmoNeededException e){
+            arg.getAuthorView().printFromController("To reload this weapon, you need one more ammo. Discard a correct PowerUp or cancel action");
+        }
+
 
     }
 

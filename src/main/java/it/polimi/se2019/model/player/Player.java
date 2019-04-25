@@ -267,6 +267,34 @@ public class Player extends java.util.Observable implements Target {
         enemy.removeMarkDoneTo(this);
     }
 
+    public void loadWeapon(int weaponID) throws WeaponNotPresentException, WeaponIsLoadedException, JustOneAmmoNeededException {
+        for(WeaponCard weaponCard : weaponCardList) {
+            if(weaponCard.getID() == weaponID) {
+                if (weaponCard.isReloaded() == true) {
+                    throw new WeaponIsLoadedException();
+                } else {
+                    List<ColorRYB> cost = weaponCard.getReloadCost();
+                    //TODO finire la ricarica
+                }
+            }
+        }
+        //weapon not found
+        throw new WeaponNotPresentException();
+
+    }
+
+    public void loadWeaponWithPowerUp(int weaponID, PowerupCard powerupCardFromEx) throws WeaponNotPresentException, WeaponIsLoadedException, WrongColorException {
+        //TODO implementare
+        for(PowerupCard powerupCard : powerupCardList) {
+            if(powerupCard == powerupCardFromEx) {
+                ColorRYB ammoNeeded = powerupCard.getAmmo();
+                //TODO completare
+
+            }
+
+        }
+    }
+
     /**
      * Remove all marks by my list of markDone
      * @param enemyMarked The enemy I have marked
@@ -274,5 +302,48 @@ public class Player extends java.util.Observable implements Target {
     //Called by removeMarkReceivedBy()
     private void removeMarkDoneTo(Player enemyMarked) {
         this.mark.removeMarkDoneTo(enemyMarked);
+    }
+
+    /**
+     *
+     * @param weapon
+     * @return
+     * @throws NotOnlyOneException
+     * @throws PowerupNotNeededException
+     */
+    private ColorRYB colorNeeded(WeaponCard weapon) throws NotOnlyOneException, PowerupNotNeededException {
+        int numRed = this.ammoBag.getRedAmmo();
+        int numYellow = this.ammoBag.getYellowAmmo();
+        int numBlue = this.ammoBag.getBlueAmmo();
+
+        for(ColorRYB ammo : weapon.getReloadCost()) {
+            if(ammo == ColorRYB.RED){
+                numRed -= 1;
+            }
+            else if(ammo == ColorRYB.YELLOW){
+                numYellow -= 1;
+            }
+            else if(ammo == ColorRYB.BLUE){
+                numBlue -= 1;
+            }
+        }
+
+        if(numRed >= 0 && numYellow >= 0 && numBlue >= 0){
+            throw new PowerupNotNeededException();
+        }
+        else if(numRed == -1 && numYellow >= 0 && numBlue >= 0){
+            return ColorRYB.RED;
+        }
+        else if(numRed >= 0 && numYellow == -1 && numBlue >= 0){
+            return ColorRYB.YELLOW;
+        }
+        else if(numRed >= 0 && numYellow >= 0 && numBlue == -1){
+            return ColorRYB.BLUE;
+        }
+        else{
+            throw new NotOnlyOneException();
+        }
+
+
     }
 }

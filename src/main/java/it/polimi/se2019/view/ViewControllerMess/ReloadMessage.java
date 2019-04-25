@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 public class ReloadMessage extends ViewControllerMessage {
     private int messageID;
-    private ArrayList<WeaponCard> weapon;
+    private int weaponID;
 
-    public ReloadMessage(ArrayList<WeaponCard> weapon) {
-        this.weapon = weapon;
+    public ReloadMessage(WeaponCard weapon) {
+        this.weaponID = weapon.getID();
         this.messageID = Identificator.RELOAD_MESSAGE;
     }
 
-    public ArrayList<WeaponCard> getWeapon() {
-        return weapon;
+    public int getWeaponID() {
+        return weaponID;
     }
 
     @Override

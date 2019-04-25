@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-public abstract class PowerupCard implements AmmoConvertibleCard {
+public abstract class PowerupCard implements Card {
     private transient PowerupDeck deck;
     private final ColorRYB color;
     //Due to his immutable nature, ID is not necessary
@@ -28,11 +28,8 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
      *
      * @return Ammo that can be change for this powerup
      */
-    @Override
-    public List<ColorRYB> getAmmo() {
-        ArrayList<ColorRYB> ammo = new ArrayList<>();
-        ammo.add(color);
-        return ammo;
+    public ColorRYB getAmmo() {
+        return color;
     }
 
     /**
@@ -57,23 +54,4 @@ public abstract class PowerupCard implements AmmoConvertibleCard {
     @Override
     public abstract void useCard(Player author);
 
-    /**
-     * Reload a player's ammo using this card
-     * @param playerToReload player to reload
-     */
-    @Override
-    public void reloadAmmo(Player playerToReload) throws TooManyException {
-        AmmoBag ammoPlayer = playerToReload.getAmmo();
-        switch (color) {
-            case BLUE:
-                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo() + 1);
-                break;
-            case YELLOW:
-                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo(), ammoPlayer.getYellowAmmo() + 1, ammoPlayer.getBlueAmmo());
-                break;
-            case RED:
-                playerToReload.setAmmoBag(ammoPlayer.getRedAmmo() + 1, ammoPlayer.getYellowAmmo(), ammoPlayer.getBlueAmmo());
-                break;
-        }
-    }
 }
