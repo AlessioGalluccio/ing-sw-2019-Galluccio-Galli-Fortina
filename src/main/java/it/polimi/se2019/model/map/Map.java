@@ -1,25 +1,25 @@
 package it.polimi.se2019.model.map;
+
 import java.util.ArrayList;
+import java.util.List;
 
-
-//TODO rendere immutable
 public abstract class Map extends java.util.Observable {
-    private Cell[][] cell;
-    private ArrayList<Room> room;
+    private final Cell[][] cell;
+    private final ArrayList<Room> room;
     private final String description;
 
-    public Map(String description) {
+    Map(InitializeMap init, String description) {
+        this.cell = init.cell;
+        this.room = init.room;
         this.description = description;
-        //TODO implementare
-
     }
 
-    public ArrayList<Cell> getCell() {
+    public List<Cell> getCell() {
 
         return null; //TODO implementare
     }
 
-    public ArrayList<Room> getRoom() {
+    public List<Room> getRoom() {
 
         return null; //TODO implementare
     }
@@ -39,7 +39,14 @@ public abstract class Map extends java.util.Observable {
 
         return 0; //TODO implementare
     }
+}
 
+class InitializeMap {
+    Cell[][] cell;
+    ArrayList<Room> room = new ArrayList<>();
 
+    InitializeMap(int numOfRow, int numOfColumn) {
+        cell = new Cell[numOfRow][numOfColumn];
+    }
 }
 

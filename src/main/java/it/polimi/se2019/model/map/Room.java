@@ -9,7 +9,17 @@ public class Room implements Target {
     private CellSpawn spawnCell;
     private String color;
     private ArrayList<Cell> cellRoom;
-    private ArrayList<Player> playerHere;
+    private ArrayList<Player> playerHere = new ArrayList<>();
+
+    public Room(CellSpawn spawnCell, String color, ArrayList<Cell> cellRoom) {
+        this.spawnCell = spawnCell;
+        this.color = color;
+        this.cellRoom = cellRoom;
+
+        for(Cell c : cellRoom) {
+            c.setRoom(this);
+        }
+    }
 
     public Cell getSpawnCell() {
         return spawnCell;
