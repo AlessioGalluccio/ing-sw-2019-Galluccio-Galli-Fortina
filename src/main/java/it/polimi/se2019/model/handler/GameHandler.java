@@ -40,6 +40,14 @@ public class GameHandler extends java.util.Observable {
      * Called when a player has finished his turn
      */
     public void nextTurn(){
+        Player player = orderPlayerList.get(turn);
+        player.endTurnSetting();
+        if(turn == orderPlayerList.size()){
+            turn = 0;
+        }
+        else{
+            turn++;
+        }
         //TODO notify();
     }
 
@@ -55,8 +63,8 @@ public class GameHandler extends java.util.Observable {
      * @return ID of the Player of the current turn
      */
     public int getTurnPlayerID() {
-
-        return 0; //TODO implementare
+        Player playerOfTurn = orderPlayerList.get(turn);
+        return playerOfTurn.getID();
     }
 
     /**
