@@ -89,6 +89,20 @@ public abstract class WeaponCard implements Card {
     public abstract List<FireMode> getFireMode();
 
     /**
+     * reload the weapon
+     */
+    public void reload() {
+        reload = true;
+    }
+
+    /**
+     * set reload parameter to false
+     */
+    public void useAmmo(){
+        reload = false;
+    }
+
+    /**
      * HELPER METHOD
      * Serialize and deserialize FireMode in order to make a deep copy
      * @param fireModeList fire modes to copy

@@ -3,9 +3,11 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
-import it.polimi.se2019.model.player.WeaponNotPresentException;
+import it.polimi.se2019.model.player.CardNotPresentException;
 import it.polimi.se2019.model.player.WrongColorException;
 import it.polimi.se2019.view.ViewControllerMess.*;
+
+//TODO RIMOUVIMI!!!!
 
 public class AmmoNeededFirstReload implements StateController {
 
@@ -47,9 +49,10 @@ public class AmmoNeededFirstReload implements StateController {
     @Override
     public void handle(NewtonMessage arg) {
         Player player = gameHandler.getPlayerByID(arg.getAuthorID());
+        /*
         try{
             player.loadWeaponWithPowerUp(weaponIdReloading, arg.getUsedCard());
-        }catch(WeaponNotPresentException e){
+        }catch(CardNotPresentException e){
             arg.getAuthorView().printFromController(WEAPON_ALREADY_LOADED);
             controller.setState(new EmptyControllerState(controller, gameHandler));
 
@@ -60,6 +63,9 @@ public class AmmoNeededFirstReload implements StateController {
         }catch(WrongColorException e){
             arg.getAuthorView().printFromController(WRONG_COLOR);
         }
+        /*
+
+         */
 
     }
 

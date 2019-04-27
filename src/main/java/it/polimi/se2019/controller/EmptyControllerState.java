@@ -1,13 +1,13 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class EmptyControllerState implements  StateController {
 
@@ -75,21 +75,20 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handle(ReloadMessage arg) {
         //TODO
-        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
+        Player player = getPlayerByID(arg.getAuthorID());
         int weaponID = arg.getWeaponID();
-        boolean isLoaded = false;
+
         try{
             player.loadWeapon(weaponID);
-        }catch(WeaponNotPresentException e){
+        }catch(CardNotPresentException e){
             arg.getAuthorView().printFromController("Error: Player doesn't have this Weapon");
             arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
         }catch(WeaponIsLoadedException e){
             arg.getAuthorView().printFromController("This weapon is already loaded");
             arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        }catch(JustOneAmmoNeededException e){
-            arg.getAuthorView().printFromController("To reload this weapon, you need one more ammo. Discard a correct PowerUp or cancel action");
+        }catch(NotEnoughAmmoException e){
+            arg.getAuthorView().printFromController("To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again");
         }
-
 
     }
 

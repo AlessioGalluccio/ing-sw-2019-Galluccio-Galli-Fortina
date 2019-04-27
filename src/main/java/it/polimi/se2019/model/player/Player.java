@@ -21,6 +21,7 @@ public class Player extends java.util.Observable implements Target {
     private Mark mark;
     private Character character;
     private AmmoBag ammoBag;
+    private AmmoBag tempAmmo;   //used for discarded cards
     private ArrayList<PowerupCard> powerupCardList;
     private ArrayList<WeaponCard> weaponCardList;
     private Cell cellPosition;
@@ -45,6 +46,7 @@ public class Player extends java.util.Observable implements Target {
         this.mark = new Mark();
         this.character = character;
         this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
+        this.tempAmmo = new AmmoBag(0,0,0);
         this.powerupCardList = new ArrayList<>();
         this.weaponCardList = new ArrayList<>();
         this.ID = ID;
@@ -267,33 +269,80 @@ public class Player extends java.util.Observable implements Target {
         enemy.removeMarkDoneTo(this);
     }
 
-    public void loadWeapon(int weaponID) throws WeaponNotPresentException, WeaponIsLoadedException, JustOneAmmoNeededException {
+    /**
+     * load the weapon selected, using ordinary ammo and ammo gained from diascarded Powerups
+     * @param weaponID the ID of the weapon
+     * @throws CardNotPresentException  if the Player doesn't have this weapon
+     * @throws WeaponIsLoadedException  if the weapon is already loaded
+     * @throws NotEnoughAmmoException   if there's not enough ammo from ordinary ammo and discarded Powerups
+     */
+    public void loadWeapon(int weaponID) throws CardNotPresentException, WeaponIsLoadedException, NotEnoughAmmoException {
         for(WeaponCard weaponCard : weaponCardList) {
             if(weaponCard.getID() == weaponID) {
-                if (weaponCard.isReloaded() == true) {
+                if (weaponCard.isReloaded()) {
                     throw new WeaponIsLoadedException();
                 } else {
-                    List<ColorRYB> cost = weaponCard.getReloadCost();
-                    //TODO finire la ricarica
+                    AmmoBag cost = createAmmoFromList(weaponCard.getReloadCost());
+                    if( cost.getRedAmmo() <= (ammoBag.getRedAmmo() + tempAmmo.getRedAmmo())
+                            && cost.getYellowAmmo() <= (ammoBag.getYellowAmmo() + tempAmmo.getYellowAmmo())
+                            && cost.getBlueAmmo() <= (ammoBag.getBlueAmmo() + tempAmmo.getBlueAmmo())) {
+
+                        weaponCard.reload();
+                    }
+                    else{
+                        throw new NotEnoughAmmoException();
+                    }
                 }
             }
         }
         //weapon not found
-        throw new WeaponNotPresentException();
-
+        throw new CardNotPresentException();
     }
 
-    public void loadWeaponWithPowerUp(int weaponID, PowerupCard powerupCardFromEx) throws WeaponNotPresentException, WeaponIsLoadedException, WrongColorException {
-        //TODO implementare
-        for(PowerupCard powerupCard : powerupCardList) {
-            if(powerupCard == powerupCardFromEx) {
-                ColorRYB ammoNeeded = powerupCard.getAmmo();
-                //TODO completare
+    /**
+     * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
+     * @param powerupCard the card which has to be discarded
+     * @throws CardNotPresentException if the card is not possessed by the Player
+     */
+    public void discardCard(PowerupCard powerupCard) throws CardNotPresentException {
+        for(PowerupCard card : powerupCardList){
+            if(card == powerupCard){
+                ColorRYB colorOfCard = card.getAmmo();
+                int tempRed = tempAmmo.getRedAmmo();
+                int tempYellow = tempAmmo.getYellowAmmo();
+                int tempBlue = tempAmmo.getBlueAmmo();
 
+                switch(colorOfCard){
+                    case RED:
+                        tempRed++;
+                        break;
+                    case YELLOW:
+                        tempYellow++;
+                        break;
+                    case BLUE:
+                        tempBlue++;
+                        break;
+                }
+                tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
+                card.discard();
+                powerupCardList.remove(powerupCardList.indexOf(card));
+                return;
             }
-
         }
+        throw new CardNotPresentException();
     }
+
+    /**
+     * must be called after the turn of the player to set parameters
+     */
+    public void endTurnSetting() {
+        tempAmmo = new AmmoBag(0, 0, 0);
+    }
+
+
+
+
+
 
     /**
      * Remove all marks by my list of markDone
@@ -304,46 +353,25 @@ public class Player extends java.util.Observable implements Target {
         this.mark.removeMarkDoneTo(enemyMarked);
     }
 
-    /**
-     *
-     * @param weapon
-     * @return
-     * @throws NotOnlyOneException
-     * @throws PowerupNotNeededException
-     */
-    private ColorRYB colorNeeded(WeaponCard weapon) throws NotOnlyOneException, PowerupNotNeededException {
-        int numRed = this.ammoBag.getRedAmmo();
-        int numYellow = this.ammoBag.getYellowAmmo();
-        int numBlue = this.ammoBag.getBlueAmmo();
 
-        for(ColorRYB ammo : weapon.getReloadCost()) {
-            if(ammo == ColorRYB.RED){
-                numRed -= 1;
-            }
-            else if(ammo == ColorRYB.YELLOW){
-                numYellow -= 1;
-            }
-            else if(ammo == ColorRYB.BLUE){
-                numBlue -= 1;
+    private AmmoBag createAmmoFromList(List<ColorRYB> list){
+        int red = 0;
+        int yellow = 0;
+        int blue = 0;
+        for(ColorRYB color : list){
+            switch (color){
+                case RED:
+                    red++;
+                    break;
+                case YELLOW:
+                    yellow++;
+                    break;
+                case BLUE:
+                    blue++;
+                    break;
             }
         }
-
-        if(numRed >= 0 && numYellow >= 0 && numBlue >= 0){
-            throw new PowerupNotNeededException();
-        }
-        else if(numRed == -1 && numYellow >= 0 && numBlue >= 0){
-            return ColorRYB.RED;
-        }
-        else if(numRed >= 0 && numYellow == -1 && numBlue >= 0){
-            return ColorRYB.YELLOW;
-        }
-        else if(numRed >= 0 && numYellow >= 0 && numBlue == -1){
-            return ColorRYB.BLUE;
-        }
-        else{
-            throw new NotOnlyOneException();
-        }
-
-
+        return new AmmoBag(red, yellow, blue);
     }
+
 }
