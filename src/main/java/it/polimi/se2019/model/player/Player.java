@@ -13,6 +13,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.polimi.se2019.model.player.AmmoBag.createAmmoFromList;
+
 public class Player extends java.util.Observable implements Target {
     private String nickname;
     private ArrayList<Player> damage;
@@ -287,6 +289,7 @@ public class Player extends java.util.Observable implements Target {
                     if( canPayAmmo(cost)) {
 
                         weaponCard.reload();
+                        this.payAmmoCost(cost);
                     }
                     else{
                         throw new NotEnoughAmmoException();
@@ -355,14 +358,13 @@ public class Player extends java.util.Observable implements Target {
      * @return true if the Player can pay it, false if not
      */
     public boolean canPayAmmo(AmmoBag cost){
-        if( cost.getRedAmmo() <= (ammoBag.getRedAmmo() + tempAmmo.getRedAmmo())
-                && cost.getYellowAmmo() <= (ammoBag.getYellowAmmo() + tempAmmo.getYellowAmmo())
-                && cost.getBlueAmmo() <= (ammoBag.getBlueAmmo() + tempAmmo.getBlueAmmo())){
+        if(cost == null){
             return true;
         }
-        else {
-            return false;
-        }
+
+        return( cost.getRedAmmo() <= (ammoBag.getRedAmmo() + tempAmmo.getRedAmmo())
+                && cost.getYellowAmmo() <= (ammoBag.getYellowAmmo() + tempAmmo.getYellowAmmo())
+                && cost.getBlueAmmo() <= (ammoBag.getBlueAmmo() + tempAmmo.getBlueAmmo()));
     }
 
     /**
@@ -432,24 +434,6 @@ public class Player extends java.util.Observable implements Target {
     }
 
 
-    private AmmoBag createAmmoFromList(List<ColorRYB> list){
-        int red = 0;
-        int yellow = 0;
-        int blue = 0;
-        for(ColorRYB color : list){
-            switch (color){
-                case RED:
-                    red++;
-                    break;
-                case YELLOW:
-                    yellow++;
-                    break;
-                case BLUE:
-                    blue++;
-                    break;
-            }
-        }
-        return new AmmoBag(red, yellow, blue);
-    }
+
 
 }

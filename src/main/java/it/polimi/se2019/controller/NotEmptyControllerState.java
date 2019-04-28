@@ -1,15 +1,21 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
+
+import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
+import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class NotEmptyControllerState implements StateController {
 
     private Controller controller;
     private GameHandler gameHandler;
-    private final int FIRST_MESSAGE = 0;
+    private static final int FIRST_MESSAGE = 0;
 
     NotEmptyControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
@@ -18,95 +24,116 @@ public class NotEmptyControllerState implements StateController {
 
     @Override
     public void handle(ActionMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(CardSpawnChooseMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(CellMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
-
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
     }
 
     @Override
     public void handle(FireModeMessage arg) {
-        startingHandler(arg);
-        controller.sendTargetsToView(arg);
-        endingHandler();
+        Player player = getPlayerByID(arg.getAuthorID());
+        FireMode fireMode = getFireModeByID(arg.getFiremodeID());
+        AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
 
+        if(!player.canPayAmmo(cost)){
+            arg.getAuthorView().printFromController("Not enough ammo for this firemode");
+            return;
+        }
+        else{
+            controller.sendTargetsToView(arg);
+            endingHandler(arg);
+        }
     }
 
     @Override
     public void handle(NewtonMessage arg) {
-        startingHandler(arg);
-        controller.sendTargetsToView(arg);
-        endingHandler();
-
+        if(startingHandler(arg)){
+            controller.sendTargetsToView(arg);
+            endingHandler(arg);
+        }
     }
 
     @Override
     public void handle(NopeMessage arg) {
-        //TODO è diverso rispetto agli altri!
-
+        int index = controller.getIndexExpected();
+        if(controller.getCopyMessageListExpected().get(index).isOptional()){
+            endingHandler(arg);
+        }
+        else{
+            String response = controller.getCopyMessageListExpected().get(index).getString();
+            arg.getAuthorView().printFromController(response);
+        }
     }
 
     @Override
     public void handle(PlayerViewMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(ReloadMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
-
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
     }
 
     @Override
     public void handle(TagbackGranateMessage arg) {
-        startingHandler(arg);
-        controller.sendTargetsToView(arg);
-        endingHandler();
+        if(startingHandler(arg)){
+            controller.sendTargetsToView(arg);
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(TargetingScopeMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(TargetMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
     @Override
     public void handle(TeleporterMessage arg) {
-        startingHandler(arg);
-        //TODO
-        endingHandler();
+        if(startingHandler(arg)){
+            //TODO
+            endingHandler(arg);
+        }
 
     }
 
@@ -116,7 +143,6 @@ public class NotEmptyControllerState implements StateController {
      */
     @Override
     public void handle(Object arg) {
-        //TODO scrivi eccezione
         throw new IllegalArgumentException();
     }
 
@@ -131,8 +157,6 @@ public class NotEmptyControllerState implements StateController {
         int index = controller.getIndexExpected();
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessage().getMessageID();
         if(arg.getMessageID() == expectedID) {
-            controller.addMessageListReceived(arg);
-            controller.setIndexExpected(index + 1);
             return true;
         }
         else {
@@ -145,7 +169,10 @@ public class NotEmptyControllerState implements StateController {
     /**
      * it handles the end of this entire State. If the sequence of message is ended, it sends them to the model and it changes the State of the controller
      */
-    private void endingHandler() {
+    private void endingHandler(ViewControllerMessage arg) {
+        int index = controller.getIndexExpected();
+        controller.addMessageListReceived(arg);
+        controller.setIndexExpected(index + 1);
         if(controller.getCopyMessageListExpected().size() == controller.getIndexExpected()) {
             //Model is modified
             ViewControllerMessage firstMessage = controller.getCopyMessageListReceived().get(FIRST_MESSAGE);

@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.player;
 
+import java.util.List;
+
 public class AmmoBag {
     private final int redAmmo;
     private final int yellowAmmo;
@@ -28,5 +30,28 @@ public class AmmoBag {
 
     public int getYellowAmmo() {
         return yellowAmmo;
+    }
+
+    public static AmmoBag createAmmoFromList(List<ColorRYB> list){
+        if(list == null){
+            return new AmmoBag(0,0,0);
+        }
+        int red = 0;
+        int yellow = 0;
+        int blue = 0;
+        for(ColorRYB color : list){
+            switch (color){
+                case RED:
+                    red++;
+                    break;
+                case YELLOW:
+                    yellow++;
+                    break;
+                case BLUE:
+                    blue++;
+                    break;
+            }
+        }
+        return new AmmoBag(red, yellow, blue);
     }
 }
