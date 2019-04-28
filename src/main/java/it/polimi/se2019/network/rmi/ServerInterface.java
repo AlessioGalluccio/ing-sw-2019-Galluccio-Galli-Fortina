@@ -11,4 +11,9 @@ public interface ServerInterface extends Remote {
     public void chooseTarget(String choosenTarget ) throws RemoteException;
     public void login (String nickname, String Character ) throws RemoteException;
     public void chooseAction (String choosenAction) throws RemoteException;
+    public void reloadWeapon (String weapon) throws RemoteException;
+
+
+
+
 }

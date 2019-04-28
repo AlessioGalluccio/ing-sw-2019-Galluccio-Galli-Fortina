@@ -3,6 +3,7 @@ package it.polimi.se2019.view.ViewControllerMess;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.Identificator;
 
+
 public class CardSpawnChooseMessage extends ViewControllerMessage {
     private int messageID;
     private PowerupCard cardChoosen;

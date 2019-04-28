@@ -1,7 +1,12 @@
 package it.polimi.se2019.network.rmi;
 
+import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.EnemyView;
 import it.polimi.se2019.view.PlayerView;
 
 
@@ -10,11 +15,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class RMIServer implements ServerInterface{
 
     private PlayerView playerView;
     private Character choosenCharacter;
+    private WeaponCard weaponCard;
 
     /* TODO impementare tutti i metodi che inviano messaggi */
     @Override
@@ -73,12 +80,20 @@ public class RMIServer implements ServerInterface{
     }
 
 
+    @Override
+    public void reloadWeapon(String weapon) throws RemoteException {
+        switch (weapon){
 
-
-
-
-
-
+            case("weapon name"):
+                weaponCard = new WeaponCard() {
+                    @Override
+                    public List<FireMode> getFireMode() {
+                        return null;
+                    }
+                };
+                playerView.createReloadMessage(weaponCard);
+        }
+    }
 
     public static void main(String args[]) {
 
@@ -96,6 +111,14 @@ public class RMIServer implements ServerInterface{
             e.printStackTrace();
         }
     }
+
+
+
+
+
+
+
+
 }
 
 
