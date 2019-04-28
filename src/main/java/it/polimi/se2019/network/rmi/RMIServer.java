@@ -46,10 +46,6 @@ public class RMIServer implements ServerInterface{
 
     }
 
-    @Override
-    public void chooseTarget(String choosenTarget) throws RemoteException {
-
-    }
 
     @Override
     public void login(String nickname, String character) throws RemoteException {
@@ -116,7 +112,7 @@ public class RMIServer implements ServerInterface{
     }
 
     @Override
-    public void Nope(String nope) throws RemoteException {
+    public void nope(String nope) throws RemoteException {
 
     }
 

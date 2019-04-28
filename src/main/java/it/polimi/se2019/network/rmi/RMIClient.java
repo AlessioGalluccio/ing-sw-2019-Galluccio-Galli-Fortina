@@ -28,11 +28,44 @@ public class RMIClient {
 
                 case "action":
                     stub.chooseAction(response);
+                    break;
+
+                case "end":
+                    stub.endTurn(response);
+
+                case "firemode":
+                    stub.chooseFireMode(response);
+
+                case "newton":
+                    stub.chooseNewton(response);
+
+                case "nope":
+                    stub.nope(response);
+
+                case "reload":
+                    stub.reloadWeapon(response);
+
+                case "tagback":
+                    stub.reloadWeapon(response);
+
+                case "targeting scope":
+                    stub.chooseTargetingScope(response);
+
+                case "target":
+                    stub.chooseTargetingScope(response);
+
+                case "teleporter":
+                    stub.chooseTeleporter(response);
+
+                case "undo":
+                    stub.undo(response);
+
 
                     /* TODO
                      * implementare tutti i possibili case
                      *
                     */
+
             }
 
             //String response = stub.sayHello();
