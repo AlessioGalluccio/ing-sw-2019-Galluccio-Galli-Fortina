@@ -11,12 +11,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Server implements ServerInterface{
+public class RMIServer implements ServerInterface{
 
     private PlayerView playerView;
     private Character choosenCharacter;
 
-
+    /* TODO impementare tutti i metodi che inviano messaggi */
     @Override
     public void chooseAction(String choosenAction) throws RemoteException {
         switch (choosenAction){
@@ -83,7 +83,7 @@ public class Server implements ServerInterface{
     public static void main(String args[]) {
 
         try {
-            Server obj = new Server();
+            RMIServer obj = new RMIServer();
             ServerInterface stub = (ServerInterface) UnicastRemoteObject.exportObject(obj, 0);
 
             // Bind the remote object's stub in the registry
