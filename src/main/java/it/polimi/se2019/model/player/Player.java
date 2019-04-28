@@ -238,6 +238,7 @@ public class Player extends java.util.Observable implements Target {
         //TODO add notify()
     }
 
+
     /**
      * Mark this player with a enemy's mark
      * @param enemy who had marked you
@@ -283,9 +284,7 @@ public class Player extends java.util.Observable implements Target {
                     throw new WeaponIsLoadedException();
                 } else {
                     AmmoBag cost = createAmmoFromList(weaponCard.getReloadCost());
-                    if( cost.getRedAmmo() <= (ammoBag.getRedAmmo() + tempAmmo.getRedAmmo())
-                            && cost.getYellowAmmo() <= (ammoBag.getYellowAmmo() + tempAmmo.getYellowAmmo())
-                            && cost.getBlueAmmo() <= (ammoBag.getBlueAmmo() + tempAmmo.getBlueAmmo())) {
+                    if( canPayAmmo(cost)) {
 
                         weaponCard.reload();
                     }
@@ -325,12 +324,91 @@ public class Player extends java.util.Observable implements Target {
                 }
                 tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
                 card.discard();
-                powerupCardList.remove(powerupCardList.indexOf(card));
+                powerupCardList.remove(card);
+                //TODO notify
                 return;
             }
         }
         throw new CardNotPresentException();
     }
+
+    /**
+     * discard a weapon
+     * @param weaponToDiscard the weapon to discard
+     * @throws CardNotPresentException if the player doesn't have the card
+     */
+    public void discardCard(WeaponCard weaponToDiscard) throws CardNotPresentException{
+        for(WeaponCard weapon : weaponCardList){
+            if(weapon.getID() == weaponToDiscard.getID()){
+                weapon.discard();
+                weaponCardList.remove(weapon);
+                //TODO notify
+                return;
+            }
+        }
+        throw new CardNotPresentException();
+    }
+
+    /**
+     * controll if the player can pay the cost (powerup discarded are counted in the calculation)
+     * @param cost AmmoBag cost
+     * @return true if the Player can pay it, false if not
+     */
+    public boolean canPayAmmo(AmmoBag cost){
+        if( cost.getRedAmmo() <= (ammoBag.getRedAmmo() + tempAmmo.getRedAmmo())
+                && cost.getYellowAmmo() <= (ammoBag.getYellowAmmo() + tempAmmo.getYellowAmmo())
+                && cost.getBlueAmmo() <= (ammoBag.getBlueAmmo() + tempAmmo.getBlueAmmo())){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * the Player pays the ammo cost
+     * @param cost the AmmoBag cost
+     * @throws NotEnoughAmmoException if the Player can't pay
+     */
+    public void payAmmoCost(AmmoBag cost) throws NotEnoughAmmoException {
+        if (!canPayAmmo(cost)) {
+            throw new NotEnoughAmmoException();
+        } else {
+            int newRed, newYellow, newBlue, newTempRed, newTempYellow, newTempBlue;
+            //RED
+            if (tempAmmo.getRedAmmo() >= cost.getRedAmmo()) {
+                newTempRed = tempAmmo.getRedAmmo() - cost.getRedAmmo();
+                newRed = ammoBag.getRedAmmo();
+            } else {
+                newTempRed = 0;
+                newRed = tempAmmo.getRedAmmo() + ammoBag.getRedAmmo() - cost.getRedAmmo();
+            }
+
+            //YELLOW
+            if (tempAmmo.getYellowAmmo() >= cost.getYellowAmmo()) {
+                newTempYellow = tempAmmo.getYellowAmmo() - cost.getYellowAmmo();
+                newYellow = ammoBag.getYellowAmmo();
+            } else {
+                newTempYellow = 0;
+                newYellow = tempAmmo.getYellowAmmo() + ammoBag.getYellowAmmo() - cost.getYellowAmmo();
+            }
+
+            //BLUE
+            if (tempAmmo.getBlueAmmo() >= cost.getBlueAmmo()) {
+                newTempBlue = tempAmmo.getBlueAmmo() - cost.getBlueAmmo();
+                newBlue = ammoBag.getBlueAmmo();
+            } else {
+                newTempBlue = 0;
+                newBlue = tempAmmo.getBlueAmmo() + ammoBag.getBlueAmmo() - cost.getBlueAmmo();
+            }
+
+            ammoBag = new AmmoBag(newRed, newYellow, newBlue);
+            tempAmmo = new AmmoBag(newTempRed, newTempYellow, newTempBlue);
+
+        }
+    }
+
+
 
     /**
      * must be called after the turn of the player to set parameters
