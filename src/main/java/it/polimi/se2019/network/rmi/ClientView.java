@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class ClientView {
 
+
+
+
     public String send(){
 
         Scanner myObj = new Scanner(System.in);

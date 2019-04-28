@@ -94,7 +94,7 @@ public class PlayerView extends Observable implements Observer {
         notifyObservers(message);
     }
 
-    public void createReloadMessage(ArrayList<WeaponCard> weapon){
+    public void createReloadMessage(WeaponCard weapon){
         ReloadMessage message = new ReloadMessage(weapon);
         notifyObservers(message);
     }
