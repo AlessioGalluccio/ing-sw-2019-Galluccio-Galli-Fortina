@@ -95,6 +95,56 @@ public class RMIServer implements ServerInterface{
         }
     }
 
+    @Override
+    public void chooseCell(String cell) throws RemoteException {
+
+    }
+
+    @Override
+    public void endTurn(String ending) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseFireMode(String choosenFireMode) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseNewton(String choosenNewton) throws RemoteException {
+
+    }
+
+    @Override
+    public void Nope(String nope) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseTagbackGranate(String choosenTagback) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseTargetingScope(String choosenTargeting) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseTarger(String choosenTarget) throws RemoteException {
+
+    }
+
+    @Override
+    public void chooseTeleporter(String choosenTeleporter) throws RemoteException {
+
+    }
+
+    @Override
+    public void undo(String undo) throws RemoteException {
+
+    }
+
     public static void main(String args[]) {
 
         try {
