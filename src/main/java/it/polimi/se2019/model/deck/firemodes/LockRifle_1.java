@@ -11,7 +11,7 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public List<Target> sendPossibleTarget(Player player, PlayerView playerView) {
-
+        return null;
     }
 
     @Override
