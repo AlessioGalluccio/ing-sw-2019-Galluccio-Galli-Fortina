@@ -2,6 +2,7 @@ package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.Action;
 import it.polimi.se2019.model.player.Player;
@@ -14,6 +15,7 @@ public class GameHandler extends java.util.Observable {
     private PowerupDeck powerupDeck;
     private PointDeck pointDeck;
     private WeaponDeck weaponDeck;
+    private static Map map;
     private static ArrayList<Player> orderPlayerList;
     private int turn;
     private Death death;
@@ -88,9 +90,9 @@ public class GameHandler extends java.util.Observable {
      * @param y coordinate x of the Cell
      * @return the Cell which has x and y coordinates
      */
-    public Cell getCellByCoordinate(int x, int y) {
+    public static Cell getCellByCoordinate(int x, int y) {
 
-        return null; //TODO implementare
+        return map.getCellByCoo(x, y);
     }
 
     /**
@@ -112,6 +114,15 @@ public class GameHandler extends java.util.Observable {
         //return action = Grab(this)
 
         return null; //TODO implementare
+    }
+
+    /**
+     * return all the players of the game
+     * @return all the players in order
+     */
+    public  ArrayList<Player> getOrderPlayerList(){
+        //TODO fai copia
+        return getOrderPlayerList();
     }
 
     public static FireMode getFireModeByID(int fireModeID){

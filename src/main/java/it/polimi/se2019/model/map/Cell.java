@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
 
@@ -48,6 +49,22 @@ public abstract class Cell implements Target {
 
     public Border getWestBorder() {
         return westBorder;
+    }
+
+    public Cell getNorthCell(){
+        return GameHandler.getCellByCoordinate(coordinateX , coordinateY + 1);
+    }
+
+    public Cell getEastCell(){
+        return GameHandler.getCellByCoordinate(coordinateX + 1 , coordinateY);
+    }
+
+    public Cell getSouthCell(){
+        return GameHandler.getCellByCoordinate(coordinateX , coordinateY - 1);
+    }
+
+    public Cell getWestCell(){
+        return GameHandler.getCellByCoordinate(coordinateX - 1, coordinateY);
     }
 
     public Room getRoom() {

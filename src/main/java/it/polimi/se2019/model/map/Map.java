@@ -39,6 +39,11 @@ public abstract class Map extends java.util.Observable {
 
         return 0; //TODO implementare
     }
+
+    public Cell getCellByCoo(int x, int y){
+        //TODO fai copia
+        return cell[x][y];
+    }
 }
 
 class InitializeMap {

@@ -47,5 +47,12 @@ public class Room implements Target {
         return null; //TODO implementare
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
 
+    public boolean equals(Room room){
+        return (room.color == this.color);
+    }
 }

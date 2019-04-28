@@ -6,8 +6,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.map.Room;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -144,6 +146,16 @@ public class Player extends java.util.Observable implements Target {
     public Mark getMark() {
         Gson gson = new Gson();
         return gson.fromJson(gson.toJson(mark), Mark.class);
+    }
+
+    /**
+     * return a copy of the Cell where the player is
+     * @return a copy of cellPosition
+     */
+    public Cell getCell(){
+        //TODO Controllare
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(cellPosition), Cell.class);
     }
 
     /**
@@ -285,7 +297,7 @@ public class Player extends java.util.Observable implements Target {
                 if (weaponCard.isReloaded()) {
                     throw new WeaponIsLoadedException();
                 } else {
-                    AmmoBag cost = createAmmoFromList(weaponCard.getReloadCost());
+                    AmmoBag cost = AmmoBag.createAmmoFromList(weaponCard.getReloadCost());
                     if( canPayAmmo(cost)) {
 
                         weaponCard.reload();
@@ -407,6 +419,37 @@ public class Player extends java.util.Observable implements Target {
             ammoBag = new AmmoBag(newRed, newYellow, newBlue);
             tempAmmo = new AmmoBag(newTempRed, newTempYellow, newTempBlue);
 
+        }
+    }
+
+
+    public boolean isVisibleBy(Player shooter){
+        Cell enemyCell = shooter.getCell();
+        Room enemyRoom = enemyCell.getRoom();
+        Room roomOfThis = this.cellPosition.getRoom();
+        //it's the same player
+        if(shooter.getID() == ID){
+            return false;
+        }
+        //in the same room
+        else if(enemyRoom.equals(cellPosition.getRoom())){
+            return true;
+        }
+        //
+        else if(enemyCell.getNorthBorder().isCrossable() && roomOfThis.equals(enemyCell.getNorthCell().getRoom())){
+            return true;
+        }
+        else if(enemyCell.getEastBorder().isCrossable() && roomOfThis.equals(enemyCell.getEastCell().getRoom())){
+            return true;
+        }
+        else if(enemyCell.getSouthBorder().isCrossable() && roomOfThis.equals(enemyCell.getSouthCell().getRoom())){
+            return true;
+        }
+        else if(enemyCell.getWestBorder().isCrossable() && roomOfThis.equals(enemyCell.getWestCell().getRoom())){
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
