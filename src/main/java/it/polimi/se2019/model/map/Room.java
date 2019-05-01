@@ -53,6 +53,22 @@ public class Room implements Target {
     }
 
     public boolean equals(Room room){
-        return (room.color == this.color);
+        return (room.color.equals(this.color));
+    }
+
+    /**
+     * When a player is moved in this room, he is added to a list
+     * @param playerToAdd the new player in the room to add
+     */
+    protected void addPlayer(Player playerToAdd) {
+        playerHere.add(playerToAdd);
+    }
+
+    /**
+     * When a player is moved from this room, he is removed from the list
+     * @param playerToRemove the player who was moved
+     */
+    protected void removePlayer(Player playerToRemove) {
+        playerHere.remove(playerToRemove);
     }
 }

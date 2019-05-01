@@ -92,4 +92,24 @@ public abstract class Cell implements Target {
         if(this.room==null) this.room = room;
         else throw new AlreadyRoomException("This cell " + this +" has already a room!");
     }
+
+    /**
+     * When a player is moved in this cell, he is added to a list
+     * @param playerToAdd the new player in the cell to add
+     */
+    public void addPlayer(Player playerToAdd) {
+        playerHere.add(playerToAdd);
+        room.addPlayer(playerToAdd);
+    }
+
+    /**
+     * When a player is moved from this cell, he is removed from the list
+     * @param playerToRemove the player who was moved
+     */
+    public void removePlayer(Player playerToRemove) {
+        playerHere.remove(playerToRemove);
+        room.removePlayer(playerToRemove);
+    }
+
+
 }
