@@ -62,97 +62,12 @@ public class PlayerView extends Observable implements Observer {
 
     }
 
-    public void createCellMessage(int x, int y){
-        CellMessage message = new CellMessage(x,y);
-        notifyObservers(message);
-
-    }
-
-    public void createPlayerViewMessage(int playerID){
-        PlayerViewMessage message = new PlayerViewMessage(playerID);
-        notifyObservers(message);
-    }
-
-    public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded){
-        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded);
-        notifyObservers(message);
-    }
-
-    public void createNopeMessage(){
-        NopeMessage message = new NopeMessage();
-        notifyObservers(message);
-    }
-
-    public void createActionMessage(int actionID){
-        ActionMessage message = new ActionMessage(actionID);
-        notifyObservers(message);
-    }
-
-
-    public void createNewtonMessage(NewtonCard usedCard){
-        NewtonMessage message = new NewtonMessage(usedCard);
-        notifyObservers(message);
-    }
-
-    public void createReloadMessage(WeaponCard weapon){
-        ReloadMessage message = new ReloadMessage(weapon);
-        notifyObservers(message);
-    }
-
-    public void createTeleporterMessage(TeleporterCard usedCard){
-        TeleporterMessage message = new TeleporterMessage(usedCard);
-        notifyObservers(message);
-    }
-
-    public void createTargetingScopeMessage(TargetingScopeCard usedCard){
-        TargetingScopeMessage message = new TargetingScopeMessage(usedCard);
-        notifyObservers(message);
-    }
-
-    public void createTagbackGranadeMessage(TagbackGranedCard usedCard){
-        TagbackGranateMessage message = new TagbackGranateMessage(usedCard);
-        notifyObservers(message);
-    }
-
-    public void createFireModeMessage(int firemodeID){
-        FireModeMessage message = new FireModeMessage(firemodeID);
-        notifyObservers(message);
-    }
-
-
-    public void createEndMessage (int messageID){
-        EndMessage message = new EndMessage();
-        notifyObservers(message);
-    }
-
-    public void createUndoMessage(int messageID){
-        UndoMessage message = new UndoMessage();
-        notifyObservers(message);
-    }
-
-    public void createLoginMessage(int messageID, String nickname, Character choosenCharacter){
-        LoginMessage message = new LoginMessage(nickname,choosenCharacter);
-        notifyObservers(message);
-    }
 
 
     public void printFromController(String string) {
 
     }
 
-    private boolean verifyTarget(){
-        if (this.possibleTarget.containsAll(this.selectedTarget))
-            return true;
-
-
-        return false;
-    }
-
-    private boolean verifyCharacter(){
-        if (this.possibleCharacter.contains(this.choosenCharacter))
-            return true;
-
-        return false;
-    }
+   
 
 }
