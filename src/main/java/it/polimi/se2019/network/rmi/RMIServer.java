@@ -8,7 +8,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.EnemyView;
 import it.polimi.se2019.view.PlayerView;
-
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 
 import java.rmi.RemoteException;
@@ -23,123 +23,12 @@ public class RMIServer implements ServerInterface{
     private Character choosenCharacter;
     private WeaponCard weaponCard;
 
-    /* TODO impementare tutti i metodi che inviano messaggi */
-    @Override
-    public void chooseAction(String choosenAction) throws RemoteException {
-        switch (choosenAction){
-            case "move" :
-                playerView.createActionMessage(Identificator.MOVE);
-                break;
 
-            case "grab" :
-                playerView.createActionMessage(Identificator.GRAB);
-                break;
-
-            case "shoot" :
-                playerView.createActionMessage(Identificator.SHOOT);
-                break;
-        }
-    }
-
-    @Override
-    public void chooseCharacter(String choosenCharacter) throws RemoteException {
+    public void send (ViewControllerMessage message){
 
     }
 
 
-    @Override
-    public void login(String nickname, String character) throws RemoteException {
-        switch (character) {
-            case "VIOLET" :
-                choosenCharacter = new Character(character, "violet" );
-                break;
-
-            case ":D-STRUCT-OR":
-                choosenCharacter = new Character(character, "yellow");
-                break;
-
-            case "BANSHEE":
-                choosenCharacter = new Character(character, "blue");
-                break;
-
-            case "DOZEN":
-                choosenCharacter = new Character(character, "grey");
-                break;
-
-            case "SPROG":
-                choosenCharacter = new Character(character, "green");
-                break;
-
-        }
-        playerView.createLoginMessage(Identificator.LOGIN_MESSAGE, nickname, choosenCharacter);
-
-    }
-
-
-    @Override
-    public void reloadWeapon(String weapon) throws RemoteException {
-        switch (weapon){
-
-            case("weapon name"):
-                weaponCard = new WeaponCard() {
-                    @Override
-                    public List<FireMode> getFireMode() {
-                        return null;
-                    }
-                };
-                playerView.createReloadMessage(weaponCard);
-        }
-    }
-
-    @Override
-    public void chooseCell(String cell) throws RemoteException {
-
-    }
-
-    @Override
-    public void endTurn(String ending) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseFireMode(String choosenFireMode) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseNewton(String choosenNewton) throws RemoteException {
-
-    }
-
-    @Override
-    public void nope(String nope) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseTagbackGranate(String choosenTagback) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseTargetingScope(String choosenTargeting) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseTarger(String choosenTarget) throws RemoteException {
-
-    }
-
-    @Override
-    public void chooseTeleporter(String choosenTeleporter) throws RemoteException {
-
-    }
-
-    @Override
-    public void undo(String undo) throws RemoteException {
-
-    }
 
     public static void main(String args[]) {
 

@@ -3,6 +3,7 @@ package it.polimi.se2019.network.rmi;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.EnemyView;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -11,6 +12,12 @@ public class RMIClient {
     private static ClientView clientView;
 
     public RMIClient() {
+
+    }
+
+
+    public void send (ViewControllerMessage message){
+
     }
 
     public static void main(String[] args) {
@@ -19,54 +26,10 @@ public class RMIClient {
         try {
             Registry registry = LocateRegistry.getRegistry(host);
             ServerInterface stub = (ServerInterface) registry.lookup("Server");
-            String response = clientView.send();
-            switch (response){
-
-                case "character":
-                    stub.chooseCharacter(response);
-                    break;
-
-                case "action":
-                    stub.chooseAction(response);
-                    break;
-
-                case "end":
-                    stub.endTurn(response);
-
-                case "firemode":
-                    stub.chooseFireMode(response);
-
-                case "newton":
-                    stub.chooseNewton(response);
-
-                case "nope":
-                    stub.nope(response);
-
-                case "reload":
-                    stub.reloadWeapon(response);
-
-                case "tagback":
-                    stub.reloadWeapon(response);
-
-                case "targeting scope":
-                    stub.chooseTargetingScope(response);
-
-                case "target":
-                    stub.chooseTargetingScope(response);
-
-                case "teleporter":
-                    stub.chooseTeleporter(response);
-
-                case "undo":
-                    stub.undo(response);
 
 
-                    /* TODO
-                     * implementare tutti i possibili case
-                     *
-                    */
 
-            }
+
 
             //String response = stub.sayHello();
             //System.out.println("response: " + response);
