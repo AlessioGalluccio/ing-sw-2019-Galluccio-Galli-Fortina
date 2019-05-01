@@ -66,6 +66,7 @@ public class PlayerView extends Observable implements Observer {
 
     public void printFromController(String string) {
 
+
     }
 
 
