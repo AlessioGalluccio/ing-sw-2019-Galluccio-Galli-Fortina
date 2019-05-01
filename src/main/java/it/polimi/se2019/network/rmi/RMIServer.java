@@ -28,6 +28,17 @@ public class RMIServer implements ServerInterface{
     }
 
 
+    public void printFromController(String string) {
+
+        try {
+            Registry registry = LocateRegistry.getRegistry("client");
+            ClientInterface skeleton = (ClientInterface) registry.lookup("client");
+            skeleton.printFromController(string);
+        } catch (Exception e) {
+
+        }
+    }
+
 
     public static void main(String args[]) {
 
@@ -37,13 +48,17 @@ public class RMIServer implements ServerInterface{
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.getRegistry();
-            registry.bind("Server", stub);
+            registry.bind("server", stub);
 
             System.err.println("Server ready");
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
+
+
+
+
     }
 
 
