@@ -17,7 +17,7 @@ public abstract class Cell implements Target {
     private int coordinateY;
 
     private ArrayList<Player> playerHere;
-    private Deck deck;
+    private transient Deck deck;
 
     protected Cell(Border north, Border east, Border south, Border west, int x, int y, Deck deck) {
         this.northBorder = north;

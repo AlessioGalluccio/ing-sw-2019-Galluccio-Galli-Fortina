@@ -20,7 +20,7 @@ public class Map1 extends Map {
         InitializeMap init = new InitializeMap(3, 4);
 
         init.cell[0][0] = new CellAmmo(new Wall(), new Passage(), new Door(), new Wall(), 0, 0, ammoDeck);
-        init.cell[0][1] = new CellAmmo(new Passage(), new Passage(), new Wall(), new Passage(), 0, 1, ammoDeck);
+        init.cell[0][1] = new CellAmmo(new Wall(), new Passage(), new Wall(), new Passage(), 0, 1, ammoDeck);
         init.cell[0][2] = new CellSpawn(new Wall(), new Wall(), new Door(), new Passage(), 0, 2, weaponDeck);
         init.cell[0][3] = null;
 
