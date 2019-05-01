@@ -1,14 +1,15 @@
-package it.polimi.se2019.model.player;
+package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
-public class Shoot extends Action{
-    public Shoot(GameHandler gameHandler) {
+public class ShootFrenzy extends Shoot {
+    public ShootFrenzy(GameHandler gameHandler) {
         super(gameHandler);
     }
 

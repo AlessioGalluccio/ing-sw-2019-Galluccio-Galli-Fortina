@@ -1,8 +1,8 @@
-package it.polimi.se2019.model.player;
+package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.CellMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;

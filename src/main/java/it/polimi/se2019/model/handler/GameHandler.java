@@ -4,7 +4,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
-import it.polimi.se2019.model.player.Action;
+import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.ArrayList;
