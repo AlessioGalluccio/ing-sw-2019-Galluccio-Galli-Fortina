@@ -9,37 +9,26 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient {
-    private static ClientView clientView;
+
 
     public RMIClient() {
-
     }
-
 
     public void send (ViewControllerMessage message){
-
-    }
-
-    public static void main(String[] args) {
-
-        String host = (args.length < 1) ? null : args[0];
         try {
-            Registry registry = LocateRegistry.getRegistry(host);
-            ServerInterface stub = (ServerInterface) registry.lookup("Server");
-
-
-
-
-
-            //String response = stub.sayHello();
-            //System.out.println("response: " + response);
+        Registry registry = LocateRegistry.getRegistry("server");
+        ServerInterface stub = (ServerInterface) registry.lookup("Server");
+        stub.send(message);
         } catch (Exception e) {
-            System.err.println("Client exception: " + e.toString());
-            e.printStackTrace();
+
         }
 
-
     }
+
+
+
+
+
 
     /*
     the following methods will be used by the RMIServer

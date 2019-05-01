@@ -56,8 +56,8 @@ public class PlayerView extends Observable implements Observer {
         return possibleTarget;
     }
 
-    public void createTargetMessage(ArrayList<Target> target){
-        TargetMessage message = new TargetMessage(target);
+    public void send (ViewControllerMessage message){
+
         notifyObservers(message);
 
     }
@@ -68,6 +68,6 @@ public class PlayerView extends Observable implements Observer {
 
     }
 
-   
+
 
 }

@@ -8,7 +8,7 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
 
-import java.util.Scanner;
+
 
 public class ClientView {
 
@@ -18,16 +18,10 @@ public class ClientView {
     private ArrayList<Target> selectedTarget;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
+    private RMIClient rmiClient;
 
 
 
-    public String send(){
-
-        Scanner myObj = new Scanner(System.in);
-        String userLine = myObj.nextLine();
-        return userLine;
-
-    }
 
 
     public ClientView(Player playerCopy, Map mapCopy, ArrayList<Target> possibleTarget,
@@ -66,93 +60,93 @@ public class ClientView {
 
     public TargetMessage createTargetMessage(ArrayList<Target> target){
         TargetMessage message = new TargetMessage(target);
-
+        rmiClient.send(message);
         return message;
     }
 
     public CellMessage createCellMessage(int x, int y){
         CellMessage message = new CellMessage(x,y);
-
+        rmiClient.send(message);
         return message;
     }
 
     public PlayerViewMessage createPlayerViewMessage(int playerID){
         PlayerViewMessage message = new PlayerViewMessage(playerID);
-
+        rmiClient.send(message);
         return message;
     }
 
     public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded){
         CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded);
-
+        rmiClient.send(message);
         return message;
     }
 
     public NopeMessage createNopeMessage(){
         NopeMessage message = new NopeMessage();
-
+        rmiClient.send(message);
         return message;
     }
 
     public ActionMessage createActionMessage(int actionID){
         ActionMessage message = new ActionMessage(actionID);
-
+        rmiClient.send(message);
         return message;
     }
 
 
     public NewtonMessage createNewtonMessage(NewtonCard usedCard){
         NewtonMessage message = new NewtonMessage(usedCard);
-
+        rmiClient.send(message);
         return message;
     }
 
     public ReloadMessage createReloadMessage(WeaponCard weapon){
         ReloadMessage message = new ReloadMessage(weapon);
-
+        rmiClient.send(message);
         return message;
     }
 
     public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard){
         TeleporterMessage message = new TeleporterMessage(usedCard);
-
+        rmiClient.send(message);
         return message;
     }
 
     public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard){
         TargetingScopeMessage message = new TargetingScopeMessage(usedCard);
-
+        rmiClient.send(message);
         return message;
     }
 
     public TagbackGranateMessage createTagbackGranadeMessage(TagbackGranedCard usedCard){
         TagbackGranateMessage message = new TagbackGranateMessage(usedCard);
-
+        rmiClient.send(message);
         return message;
     }
 
     public FireModeMessage createFireModeMessage(int firemodeID){
         FireModeMessage message = new FireModeMessage(firemodeID);
-
+        rmiClient.send(message);
         return message;
     }
 
 
     public EndMessage createEndMessage (int messageID){
         EndMessage message = new EndMessage();
-
+        rmiClient.send(message);
         return message;
     }
 
     public UndoMessage createUndoMessage(int messageID){
         UndoMessage message = new UndoMessage();
-
+        rmiClient.send(message);
         return message;
     }
 
     public LoginMessage createLoginMessage(int messageID, String nickname, Character choosenCharacter){
         LoginMessage message = new LoginMessage(nickname,choosenCharacter);
-
+        rmiClient.send(message);
         return message;
     }
 

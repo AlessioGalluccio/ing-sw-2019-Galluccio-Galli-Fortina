@@ -1,5 +1,7 @@
 package it.polimi.se2019.network.rmi;
 
-public interface ClientInterface {
+import java.rmi.Remote;
+
+public interface ClientInterface extends Remote {
 
 }

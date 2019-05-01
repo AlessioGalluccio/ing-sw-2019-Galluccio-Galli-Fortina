@@ -20,12 +20,11 @@ import java.util.List;
 public class RMIServer implements ServerInterface{
 
     private PlayerView playerView;
-    private Character choosenCharacter;
-    private WeaponCard weaponCard;
+
 
 
     public void send (ViewControllerMessage message){
-
+            playerView.send(message);
     }
 
 
