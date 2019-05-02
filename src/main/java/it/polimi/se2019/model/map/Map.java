@@ -1,9 +1,7 @@
 package it.polimi.se2019.model.map;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,13 +34,26 @@ public abstract class Map extends java.util.Observable {
 
     /**
      * compute distance from start to end according to Manhattan
-     * @param start cell to start the distance
-     * @param end cell to end the distance
+     * @param cellStart cell to start the distance
+     * @param cellEnd cell to end the distance
      * @return distance
      */
-    public int getDistance(Cell start, Cell end) {
+    public int getDistance(Cell cellStart, Cell cellEnd) {
+        if(cellEnd == cellStart) return 0;
+        int distance;
 
-        return 0; //TODO implementare
+        //It's not very optimized
+        for(distance=0; !getCellAtDistance(cellStart, distance).contains(cellEnd); distance++);
+        return distance;
+
+        /*if(cellEnd == cellStart) return 0;
+        if(cellStart.getNorthBorder().isCrossable()) {
+            return getDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()+1], cellEnd) +1;
+        }
+        if(cellStart.getEastBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()+1][cellStart.getCoordinateY()], cellEnd) +1;
+        if(cellStart.getSouthBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()-1], cellEnd) +1;
+        if(cellStart.getWestBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()-1][cellStart.getCoordinateY()], cellEnd) +1;
+        return 0;*/
     }
 
     public Cell getCellByCoo(int x, int y){
@@ -70,9 +81,7 @@ public abstract class Map extends java.util.Observable {
         }
 
         set.add(cellStart);
-        List<Cell> listToReturn = new ArrayList<>();
-        listToReturn.addAll(set);
-        return listToReturn;
+        return new ArrayList<>(set);
     }
 
     /**

@@ -77,4 +77,12 @@ public class TestMap {
     public void testGetCellAtDistanceException() throws IllegalArgumentException {
         map1.getCellAtDistance(cell[1][1], -2);
     }
+
+    @Test
+    public void testGetDistance() {
+        assertEquals(0, map1.getDistance(cell[1][1], cell[1][1]));
+        assertEquals(1, map1.getDistance(cell[1][1], cell[0][1]));
+        assertEquals(2, map1.getDistance(cell[1][1], cell[0][2]));
+        assertEquals(3, map1.getDistance(cell[1][1], cell[3][0]));
+    }
 }
