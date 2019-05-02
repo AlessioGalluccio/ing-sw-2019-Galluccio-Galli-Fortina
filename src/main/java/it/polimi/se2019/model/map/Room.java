@@ -3,6 +3,7 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Room implements Target {
@@ -47,13 +48,24 @@ public class Room implements Target {
         return playerHere; //TODO implementare
     }
 
+    /**
+     * Compare two room in order to determinate if are equals
+     * @param o the second room to compare
+     * @return true if the rooms have the same ID and SpawnCell
+     */
     @Override
-    public boolean equals(Object obj) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return spawnCell.getCoordinateX()== room.spawnCell.getCoordinateX() &&
+                spawnCell.getCoordinateY()== room.spawnCell.getCoordinateY() &&
+                color.equals(room.color);
     }
 
-    public boolean equals(Room room){
-        return (room.color.equals(this.color));
+    @Override
+    public int hashCode() {
+        return Objects.hash(spawnCell.getCoordinateX(), spawnCell.getCoordinateY(), color);
     }
 
     /**

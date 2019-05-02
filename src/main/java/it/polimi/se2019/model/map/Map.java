@@ -44,6 +44,10 @@ public abstract class Map extends java.util.Observable {
         //TODO fai copia
         return cell[x][y];
     }
+
+    public List<Cell> getCellAtDistance(Cell cellStart, int range) {
+        return null;
+    }
 }
 
 class InitializeMap {
