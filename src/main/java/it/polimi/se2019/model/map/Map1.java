@@ -22,7 +22,7 @@ public class Map1 extends Map {
         //cell[X][Y]
         init.cell[0][0] = null;
 
-        init.cell[1][0] = new CellAmmo(new Wall(), new Passage(), new Wall(), new Door(), 1, 0, ammoDeck);
+        init.cell[1][0] = new CellAmmo(new Door(), new Passage(), new Wall(), new Wall(), 1, 0, ammoDeck);
         init.cell[2][0] = new CellAmmo(new Wall(), new Door(), new Wall(), new Passage(), 2, 0, ammoDeck);
 
         ArrayList<Cell> cellForRoom = new ArrayList<>();

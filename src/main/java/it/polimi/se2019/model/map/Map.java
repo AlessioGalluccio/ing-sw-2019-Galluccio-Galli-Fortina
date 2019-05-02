@@ -1,7 +1,12 @@
 package it.polimi.se2019.model.map;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import com.sun.jmx.remote.internal.ArrayQueue;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Map extends java.util.Observable {
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 bottom-left)
@@ -45,13 +50,34 @@ public abstract class Map extends java.util.Observable {
         return cell[x][y];
     }
 
-    public List<Cell> getCellAtDistance(Cell cellStart, int range) {
-        return null;
+    /**
+     * Return all cells up to distance indicated by range
+     * @param cellStart Cell from which start
+     * @param range the maximum distance
+     * @return list of cell in the range
+     * @throws IllegalArgumentException Range must be >= 0
+     */
+    public List<Cell> getCellAtDistance(Cell cellStart, int range) throws IllegalArgumentException {
+        if(range < 0) throw new IllegalArgumentException();
+
+        //Using set we avoid duplicates
+        Set<Cell> set = new HashSet<>();
+        if(range != 0) {
+            if(cellStart.getNorthBorder().isCrossable()) set.addAll(getCellAtDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY() + 1], range-1));
+            if(cellStart.getEastBorder().isCrossable()) set.addAll(getCellAtDistance(cell[cellStart.getCoordinateX() + 1][cellStart.getCoordinateY()], range-1));
+            if(cellStart.getSouthBorder().isCrossable()) set.addAll(getCellAtDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY() - 1], range-1));
+            if(cellStart.getWestBorder().isCrossable()) set.addAll(getCellAtDistance(cell[cellStart.getCoordinateX() - 1][cellStart.getCoordinateY()], range-1));
+        }
+
+        set.add(cellStart);
+        List<Cell> listToReturn = new ArrayList<>();
+        listToReturn.addAll(set);
+        return listToReturn;
     }
 
     /**
      * Return all cells in the direction indicated
-     * @param cellStart Cell from which starts
+     * @param cellStart Cell from which start
      * @param NESW The direction (N - north, E - East, S - South, W - West)
      * @return If direction is correct return a list of cell in the direction
      * @throws IllegalArgumentException if direction doesn't exist
@@ -61,24 +87,28 @@ public abstract class Map extends java.util.Observable {
         NESW = Character.toUpperCase(NESW);
         switch (NESW) {
             case 'N':
+                //Fix the column (X) and scroll the row (Y) up to the top
                 for(int i = cellStart.getCoordinateY(); i < cell[cellStart.getCoordinateY()].length; i++) {
                     if(cell[cellStart.getCoordinateX()][i] == null) break;
                     cells.add(cell[cellStart.getCoordinateX()][i]);
                 }
                 break;
             case 'E':
+                //Fix the row (Y) and scroll the column (X) up to the right margin
                 for(int i = cellStart.getCoordinateX(); i < cell.length; i++) {
                     if(cell[i][cellStart.getCoordinateY()] == null) break;
                     cells.add(cell[i][cellStart.getCoordinateY()]);
                 }
                 break;
             case 'S':
+                //Fix the column (X) and scroll the row (Y) down to the bottom
                 for(int i = cellStart.getCoordinateY(); i >= 0; i--) {
                     if(cell[cellStart.getCoordinateX()][i] == null) break;
                     cells.add(cell[cellStart.getCoordinateX()][i]);
                 }
                 break;
             case 'W':
+                //Fix the row (Y) and scroll the column (X) up to the left margin
                 for(int i = cellStart.getCoordinateX(); i >= 0; i--) {
                     if(cell[i][cellStart.getCoordinateY()] == null) break;
                     cells.add(cell[i][cellStart.getCoordinateY()]);

@@ -111,5 +111,11 @@ public abstract class Cell implements Target {
         room.removePlayer(playerToRemove);
     }
 
-
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "X=" + coordinateX +
+                ", Y=" + coordinateY +
+                '}';
+    }
 }

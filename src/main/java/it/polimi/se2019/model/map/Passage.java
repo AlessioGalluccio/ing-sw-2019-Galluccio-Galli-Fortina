@@ -4,8 +4,7 @@ public class Passage implements Border {
 
     @Override
     public boolean isCrossable() {
-
-        return true; //TODO implementare
+        return true;
     }
 
 }
