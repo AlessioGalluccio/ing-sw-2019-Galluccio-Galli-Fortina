@@ -16,7 +16,7 @@ public abstract class Cell implements Target {
     private int coordinateX;
     private int coordinateY;
 
-    private ArrayList<Player> playerHere;
+    private ArrayList<Player> playerHere = new ArrayList<>();
     private transient Deck deck;
 
     protected Cell(Border north, Border east, Border south, Border west, int x, int y, Deck deck) {
@@ -77,7 +77,7 @@ public abstract class Cell implements Target {
      */
     public ArrayList<Player> getPlayerHere() {
 
-        return null;    //TODO implementare
+        return playerHere;    //TODO implementare
     }
 
     /**

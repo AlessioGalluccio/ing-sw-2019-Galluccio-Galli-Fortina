@@ -3,6 +3,7 @@ package it.polimi.se2019.model.player;
 import it.polimi.se2019.model.deck.PointCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -145,6 +146,31 @@ public class TestPlayer {
             if(p.getID() == enemy_2.getID()) cont++;
         }
         assertEquals(1, cont);
+    }
+
+    @Test
+    public void testSetCell() {
+        Cell cell1 = new CellAmmo(new Wall(), new Passage(), new Door(), new Wall(), 0, 0, null);
+        ArrayList<Cell> cells = new ArrayList<>();
+        cells.add(cell1);
+        Room room = new Room(null, null, cells);
+        cells.clear();
+        player.setPosition(cell1);
+
+
+        Cell cell2 = new CellAmmo(new Passage(), new Passage(), new Door(), new Wall(), 1, 0, null);
+        cells = new ArrayList<>();
+        cells.add(cell2);
+        Room room2 = new Room(null, null, cells);
+        player.setPosition(cell2);
+
+        assertEquals(cell2.getCoordinateX(), player.getCell().getCoordinateX());
+        assertEquals(cell2.getCoordinateY(), player.getCell().getCoordinateY());
+        assertTrue(cell2.getPlayerHere().contains(player));
+        assertTrue(cell2.getRoom().getPlayerHere().contains(player));
+        assertTrue(cell2.getPlayerHere().contains(player));
+        assertFalse(cell1.getPlayerHere().contains(player));
+
     }
 
 }

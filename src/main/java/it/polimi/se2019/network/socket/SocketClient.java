@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.socket;
 
 import it.polimi.se2019.network.Client;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,7 +45,7 @@ public class SocketClient implements Client {
     }
 
     @Override
-    public void send(String message) {
+    public void send(ViewControllerMessage message) {
         printSocket.println(message);
         printSocket.flush();
     }

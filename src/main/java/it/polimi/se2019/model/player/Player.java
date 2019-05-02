@@ -154,8 +154,7 @@ public class Player extends java.util.Observable implements Target {
      */
     public Cell getCell(){
         //TODO Controllare
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(cellPosition), Cell.class);
+        return cellPosition;
     }
 
     /**
@@ -453,19 +452,12 @@ public class Player extends java.util.Observable implements Target {
         }
     }
 
-
-
     /**
      * must be called after the turn of the player to set parameters
      */
     public void endTurnSetting() {
         tempAmmo = new AmmoBag(0, 0, 0);
     }
-
-
-
-
-
 
     /**
      * Remove all marks by my list of markDone
@@ -476,6 +468,11 @@ public class Player extends java.util.Observable implements Target {
         this.mark.removeMarkDoneTo(enemyMarked);
     }
 
+    public void setPosition(Cell position) {
+        if(this.cellPosition != null) this.cellPosition.removePlayer(this);
+        cellPosition = position;
+        position.addPlayer(this);
+    }
 
 
 

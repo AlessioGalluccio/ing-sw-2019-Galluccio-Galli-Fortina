@@ -44,7 +44,7 @@ public class Room implements Target {
      */
     public ArrayList<Player> getPlayerHere() {
 
-        return null; //TODO implementare
+        return playerHere; //TODO implementare
     }
 
     @Override
