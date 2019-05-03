@@ -122,7 +122,7 @@ public class RMIServer implements ServerInterface{
 
     public void sendPossibleTarget (ArrayList<Target> possibleTarget){
 
-        skeleton.getPossibleTarghet(possibleTarget);
+        skeleton.getPossibleTarget(possibleTarget);
 
     }
 
