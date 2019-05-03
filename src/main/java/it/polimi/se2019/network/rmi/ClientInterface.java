@@ -12,7 +12,7 @@ public interface ClientInterface extends Remote {
     public void send (ViewControllerMessage message);
 
 
-    public Map sendMap(Map map);
+    public void sendMap(Map map);
 
 
 

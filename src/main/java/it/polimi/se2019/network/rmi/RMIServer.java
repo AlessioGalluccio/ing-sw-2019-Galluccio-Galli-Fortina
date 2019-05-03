@@ -96,6 +96,9 @@ public class RMIServer implements ServerInterface{
     }
 
 
+    /*
+    with sendMap() server send a copy of the map to the client to let teh user see all the changes in the map
+     */
 
     public void sendMap(Map map){
 

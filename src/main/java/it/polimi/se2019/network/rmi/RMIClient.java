@@ -15,6 +15,8 @@ public class RMIClient implements ClientInterface{
 
     private ClientView clientView;
 
+    private ClientViewMap clientViewMap;
+
 
 
     public RMIClient() {
@@ -95,13 +97,13 @@ public class RMIClient implements ClientInterface{
 
 
     /*
-    the following methods will be used by the RMIServer
+    sendMap() is used by the serve with rmi connection to send the map copy
      */
 
 
-    public Map sendMap(Map map) {
+    public void sendMap(Map map) {
 
-        return map;
+        clientViewMap.setMapCopy(map);
     }
 
 

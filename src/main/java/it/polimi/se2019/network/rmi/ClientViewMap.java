@@ -10,9 +10,19 @@ public class ClientViewMap {
         this.mapCopy = mapCopy;
     }
 
-    public Map getMapCopy(Map mapCopy) {
-
+    public Map getMapCopy() {
 
         return mapCopy;
     }
+
+
+    /*
+    setMapCopy() is used by RMIClient to update the map.
+     */
+    public void setMapCopy(Map mapCopy){
+
+        this.mapCopy = mapCopy;
+    }
+
+
 }
