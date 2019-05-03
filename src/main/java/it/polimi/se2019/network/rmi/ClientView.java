@@ -182,9 +182,17 @@ public class ClientView {
     }
 
 
+    /*
+    setPossibleTarget() is used by RMIClient
+
+     */
+     /* TODO create the targetmessage after receiving the Arraylist
+
+      */
+
     public void setPossibleTarget( ArrayList<Target> possibleTarget){
         this.possibleTarget = possibleTarget;
-        
+
     }
 
 }

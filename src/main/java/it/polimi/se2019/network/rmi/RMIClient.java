@@ -115,6 +115,10 @@ public class RMIClient implements ClientInterface{
         return player;
     }
 
+    /*
+    getPossibleTarget() is used by RMIServer to send an Arraylist of possible target
+     */
+
 
     public void getPossibleTarghet( ArrayList <Target> possibleTarget){
 

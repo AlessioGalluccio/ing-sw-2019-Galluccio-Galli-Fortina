@@ -116,6 +116,10 @@ public class RMIServer implements ServerInterface{
     }
 
 
+    /*
+    sendPossibleTarget() send possible target to client using rmi connection
+     */
+
     public void sendPossibleTarget (ArrayList<Target> possibleTarget){
 
         skeleton.getPossibleTarghet(possibleTarget);
