@@ -58,10 +58,17 @@ public class ClientView {
         return possibleTarget;
     }
 
-    public TargetMessage createTargetMessage(ArrayList<Target> target){
-        TargetMessage message = new TargetMessage(target);
-        rmiClient.send(message);
-        return message;
+    public void createTargetMessage(ArrayList<Target> target){
+        /* TODO
+                la verifica dei target non può avvenire allo stesso modo ( esempio selezionare un movimento comporta la
+                selezione di una sola cella e non multiple.
+         */
+        if(verifyTarget()) {
+            TargetMessage message = new TargetMessage(target);
+            rmiClient.send(message);
+
+        }
+
     }
 
     public CellMessage createCellMessage(int x, int y){
@@ -155,6 +162,8 @@ public class ClientView {
 
 
 
+ //TODO se i target sono anche i soli movimento allora può essere selezionata una sola cella
+
 
     private boolean verifyTarget(){
         if (this.possibleTarget.containsAll(this.selectedTarget))
@@ -194,6 +203,15 @@ public class ClientView {
         this.possibleTarget = possibleTarget;
 
     }
+
+
+
+
+
+
+
+
+
 
 }
 

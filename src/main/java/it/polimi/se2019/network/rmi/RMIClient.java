@@ -120,7 +120,7 @@ public class RMIClient implements ClientInterface{
      */
 
 
-    public void getPossibleTarghet( ArrayList <Target> possibleTarget){
+    public void getPossibleTarget( ArrayList <Target> possibleTarget){
 
         clientView.setPossibleTarget(possibleTarget);
     }

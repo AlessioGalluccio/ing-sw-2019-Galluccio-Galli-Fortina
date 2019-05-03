@@ -24,6 +24,6 @@ public interface ClientInterface extends Remote {
     public void printFromController(String string);
 
 
-    public void getPossibleTarghet(ArrayList <Target> possibleTarget);
+    public void getPossibleTarget(ArrayList <Target> possibleTarget);
 
 }
