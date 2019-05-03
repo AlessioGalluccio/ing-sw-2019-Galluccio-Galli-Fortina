@@ -20,7 +20,7 @@ import java.util.List;
 public class RMIServer implements ServerInterface{
 
     private PlayerView playerView;
-
+    private ClientInterface skeleton;
 
 
     public void send (ViewControllerMessage message){
@@ -30,17 +30,18 @@ public class RMIServer implements ServerInterface{
 
     public void printFromController(String string) {
 
-        try {
-            Registry registry = LocateRegistry.getRegistry("client");
-            ClientInterface skeleton = (ClientInterface) registry.lookup("client");
-            skeleton.printFromController(string);
-        } catch (Exception e) {
 
-        }
+            skeleton.printFromController(string);
+
     }
 
 
-    public static void main(String args[]) {
+    public static void startServer() {
+
+        /*
+        RMIServer is registered in a registry so it can be use as a server by the RMIClass class to send messages.
+         */
+
 
         try {
             RMIServer obj = new RMIServer();
@@ -55,6 +56,22 @@ public class RMIServer implements ServerInterface{
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
+
+
+        /*
+        server is connected with the client and can send model's changes or strings to the RMIClient class
+         */
+        
+
+
+        try {
+            Registry registry = LocateRegistry.getRegistry("client");
+            ClientInterface skeleton = (ClientInterface) registry.lookup("client");
+
+        } catch (Exception e) {
+
+        }
+
 
 
 

@@ -11,27 +11,20 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RMIClient implements ClientInterface{
 
+    private ServerInterface stub;
+
+
 
     public RMIClient() {
     }
 
-    public void send (ViewControllerMessage message){
-        try {
-        Registry registry = LocateRegistry.getRegistry("server");
-        ServerInterface stub = (ServerInterface) registry.lookup("server");
-        stub.send(message);
-        } catch (Exception e) {
 
-        }
+    public static void startClient() {
 
-    }
-
-    public void printFromController(String string) {
-
-    }
-
-    public static void main(String args[]) {
-
+        /*
+        RMIClient is registered in a registry so it can be use as a server by the RMIServer class to send model's
+        changes or strings.
+         */
         try {
             RMIClient obj = new RMIClient();
             ClientInterface skeleton = (ClientInterface) UnicastRemoteObject.exportObject(obj, 1);
@@ -45,7 +38,41 @@ public class RMIClient implements ClientInterface{
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
         }
+
+
+        /*
+        client is connected with the server and can send messages to the RMIServer class
+         */
+
+
+        try {
+            Registry registry = LocateRegistry.getRegistry("server");
+            ServerInterface stub = (ServerInterface) registry.lookup("server");
+
+        } catch (Exception e) {
+
+        }
+
     }
+
+    /*
+    send() method is used to send messages to the RMIServer.
+     */
+
+
+    public void send (ViewControllerMessage message){
+        try {
+            stub.send(message);
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void printFromController(String string) {
+
+    }
+
 
 
 
