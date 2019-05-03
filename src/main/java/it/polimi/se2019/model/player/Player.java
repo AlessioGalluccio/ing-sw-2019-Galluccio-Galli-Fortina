@@ -474,6 +474,12 @@ public class Player extends java.util.Observable implements Target {
         position.addPlayer(this);
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Player{" +
+                "nickname='" + nickname + '\'' +
+                ", character=" + character +
+                ", ID=" + ID +
+                '}';
+    }
 }

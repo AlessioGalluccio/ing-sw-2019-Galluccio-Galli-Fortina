@@ -74,7 +74,13 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
     public void useCard(Player author) throws TooManyException {
         reloadAmmo(author);
         author.addPowerupCard(powerupDeck.pick());
-
     }
 
+    @Override
+    public String toString() {
+        return "AmmoPowerupCard{" +
+                "color1=" + color1 +
+                ", color2=" + color2 +
+                '}';
+    }
 }

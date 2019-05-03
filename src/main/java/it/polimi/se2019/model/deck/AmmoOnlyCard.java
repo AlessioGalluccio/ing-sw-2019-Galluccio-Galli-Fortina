@@ -70,4 +70,12 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
     public void useCard(Player author) throws TooManyException {
         reloadAmmo(author);
     }
+
+    @Override
+    public String toString() {
+        return "AmmoOnlyCard{" +
+                "colorSingle=" + colorSingle +
+                ", colorDouble=" + colorDouble +
+                '}';
+    }
 }
