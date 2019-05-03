@@ -19,6 +19,11 @@ public class RMIClient implements ClientInterface{
     }
 
 
+
+    /*
+    startClient() is used to create the connection between Client and Server
+     */
+
     public static void startClient() {
 
         /*
@@ -69,6 +74,11 @@ public class RMIClient implements ClientInterface{
 
     }
 
+    /*
+    printFromController() is used by the server to send string to the client with the rmi connection
+     */
+
+
     public void printFromController(String string) {
 
     }
@@ -90,11 +100,6 @@ public class RMIClient implements ClientInterface{
         return map;
     }
 
-
-    public EnemyView sendEnemy(EnemyView enemy){
-
-        return enemy;
-    }
 
 
     public Player sendPlayer (Player player){

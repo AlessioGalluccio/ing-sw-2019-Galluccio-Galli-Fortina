@@ -22,10 +22,23 @@ public class RMIServer implements ServerInterface{
     private PlayerView playerView;
     private ClientInterface skeleton;
 
+    public RMIServer() {
+
+    }
+
+
+    /*
+    send() is used by the RMIClient to send messages with rmi network
+     */
 
     public void send (ViewControllerMessage message){
-            playerView.send(message);
+
+        playerView.send(message);
     }
+
+    /*
+    printFromController() is used by the server to send string to the RMIClient
+     */
 
 
     public void printFromController(String string) {
@@ -35,6 +48,10 @@ public class RMIServer implements ServerInterface{
 
     }
 
+
+    /*
+    startServer() is used to create the connection between Client and Server
+     */
 
     public static void startServer() {
 
@@ -61,7 +78,7 @@ public class RMIServer implements ServerInterface{
         /*
         server is connected with the client and can send model's changes or strings to the RMIClient class
          */
-        
+
 
 
         try {
@@ -76,6 +93,21 @@ public class RMIServer implements ServerInterface{
 
 
 
+    }
+
+
+
+    public void sendMap(Map map){
+
+        skeleton.sendMap(map);
+    }
+
+
+
+
+    public void sendPlayer (Player player){
+
+        skeleton.sendPlayer(player);
     }
 
 

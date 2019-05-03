@@ -13,9 +13,7 @@ public interface ClientInterface extends Remote {
 
 
     public Map sendMap(Map map);
-
-
-    public EnemyView sendEnemy(EnemyView enemy);
+    
 
 
     public Player sendPlayer (Player player);
