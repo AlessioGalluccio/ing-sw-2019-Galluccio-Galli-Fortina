@@ -1,11 +1,13 @@
 package it.polimi.se2019.network.rmi;
 
+import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.EnemyView;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.rmi.Remote;
+import java.util.ArrayList;
 
 public interface ClientInterface extends Remote {
 
@@ -20,5 +22,8 @@ public interface ClientInterface extends Remote {
 
 
     public void printFromController(String string);
+
+
+    public void getPossibleTarghet(ArrayList <Target> possibleTarget);
 
 }

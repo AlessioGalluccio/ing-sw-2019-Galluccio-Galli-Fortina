@@ -153,6 +153,9 @@ public class ClientView {
 
 
 
+
+
+
     private boolean verifyTarget(){
         if (this.possibleTarget.containsAll(this.selectedTarget))
             return true;
@@ -176,6 +179,12 @@ public class ClientView {
     public void printFromController(String string) {
 
         System.out.println(string);
+    }
+
+
+    public void setPossibleTarget( ArrayList<Target> possibleTarget){
+        this.possibleTarget = possibleTarget;
+        
     }
 
 }

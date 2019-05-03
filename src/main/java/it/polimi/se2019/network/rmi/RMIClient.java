@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.rmi;
 
+import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.EnemyView;
@@ -8,6 +9,7 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class RMIClient implements ClientInterface{
 
@@ -111,6 +113,12 @@ public class RMIClient implements ClientInterface{
     public Player sendPlayer (Player player){
 
         return player;
+    }
+
+
+    public void getPossibleTarghet( ArrayList <Target> possibleTarget){
+
+        clientView.setPossibleTarget(possibleTarget);
     }
 
 

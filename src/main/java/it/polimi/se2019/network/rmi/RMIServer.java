@@ -1,6 +1,7 @@
 package it.polimi.se2019.network.rmi;
 
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Map;
@@ -15,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RMIServer implements ServerInterface{
@@ -114,6 +116,11 @@ public class RMIServer implements ServerInterface{
     }
 
 
+    public void sendPossibleTarget (ArrayList<Target> possibleTarget){
+
+        skeleton.getPossibleTarghet(possibleTarget);
+
+    }
 
 
 
