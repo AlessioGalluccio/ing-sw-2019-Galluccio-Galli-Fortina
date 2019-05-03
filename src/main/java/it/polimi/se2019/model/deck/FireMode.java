@@ -1,8 +1,11 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.*;
 
@@ -63,9 +66,20 @@ public abstract class FireMode {
     public abstract List<Target> sendPossibleTarget(Player player, PlayerView playerView);
 
     /**
-     * Fires to the target set by setTarget()
+     * Fires to the target set by setTarget(
+     * @param stack the correct messages sent by the Player
+     * @param gameHandler the handler of the match
      */
-    public abstract void fire();
+    public abstract void fire(List<ViewControllerMessage> stack, GameHandler gameHandler);
+
+    /**
+     *
+     * @param stack the messages sent by the Player. On ly the last one can be incorrect
+     * @param gameHandler the handler of the match
+     * @return true if the last message is correct, false if not
+     * @throws NotEnoughAmmoException if the Player doesn't have enough ammo for the firemode
+     */
+    public abstract boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException;
 
     /**
      * Set targets in order to fire it
