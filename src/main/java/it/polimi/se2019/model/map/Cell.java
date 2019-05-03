@@ -17,16 +17,14 @@ public abstract class Cell implements Target {
     private int coordinateY;
 
     private ArrayList<Player> playerHere = new ArrayList<>();
-    private transient Deck deck;
 
-    protected Cell(Border north, Border east, Border south, Border west, int x, int y, Deck deck) {
+    protected Cell(Border north, Border east, Border south, Border west, int x, int y) {
         this.northBorder = north;
         this.eastBorder = east;
         this.southBorder = south;
         this.westBorder = west;
         this.coordinateX = x;
         this.coordinateY = y;
-        this.deck = deck;
     }
 
     public int getCoordinateX() { return coordinateX; }
@@ -86,9 +84,12 @@ public abstract class Cell implements Target {
      */
     public abstract Card grabCard();
 
-    public abstract void reloadCard();
+    /**
+     * If the card on the cell was picked, put a new card on the cell
+     */
+    protected abstract void reloadCard();
 
-    public void setRoom(Room room) {
+    protected void setRoom(Room room) {
         if(this.room==null) this.room = room;
         else throw new AlreadyRoomException("This cell " + this +" has already a room!");
     }

@@ -1,13 +1,15 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.deck.AmmoDeck;
+import it.polimi.se2019.model.deck.WeaponDeck;
+
 import java.util.ArrayList;
-import java.util.ArrayDeque;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Map extends java.util.Observable {
-    private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 bottom-left)
+    private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private final ArrayList<Room> room;
     private final String description;
 
@@ -126,6 +128,17 @@ public abstract class Map extends java.util.Observable {
                 default: throw new IllegalArgumentException("You can only choose 4 direction: N - north, E - East, S - South, W - West");
         }
         return cells;
+    }
+
+    /**
+     * If the card on a cell was picked, put a new card on the cell
+     */
+    public void reloadAllCell() {
+        for(Cell[] ArrayCell : cell) { //Scan all the row (X)
+            for(Cell c : ArrayCell) { //Scan all the column (Y)
+                if(c != null) c.reloadCard();
+            }
+        }
     }
 }
 

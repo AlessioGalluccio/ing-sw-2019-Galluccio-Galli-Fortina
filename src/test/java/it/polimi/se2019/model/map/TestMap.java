@@ -85,4 +85,10 @@ public class TestMap {
         assertEquals(2, map1.getDistance(cell[1][1], cell[0][2]));
         assertEquals(3, map1.getDistance(cell[1][1], cell[3][0]));
     }
+
+    @Test
+    public void testReloadAllCell() {
+        map1.reloadAllCell();
+    }
+
 }
