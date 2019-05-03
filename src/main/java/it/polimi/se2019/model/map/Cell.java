@@ -13,8 +13,7 @@ public abstract class Cell implements Target {
     private Border southBorder;
     private Border westBorder;
     private Room room;
-    private int coordinateX;
-    private int coordinateY;
+    private Coordinate coordinate;
 
     private ArrayList<Player> playerHere = new ArrayList<>();
 
@@ -23,14 +22,13 @@ public abstract class Cell implements Target {
         this.eastBorder = east;
         this.southBorder = south;
         this.westBorder = west;
-        this.coordinateX = x;
-        this.coordinateY = y;
+        this.coordinate = new Coordinate(x,y);
     }
 
-    public int getCoordinateX() { return coordinateX; }
+    public int getCoordinateX() { return coordinate.getX(); }
 
     public int getCoordinateY() {
-        return coordinateY;
+        return coordinate.getY();
     }
 
     public Border getNorthBorder() {
@@ -50,19 +48,19 @@ public abstract class Cell implements Target {
     }
 
     public Cell getNorthCell(){
-        return GameHandler.getCellByCoordinate(coordinateX , coordinateY + 1);
+        return GameHandler.getCellByCoordinate(coordinate.getX() , coordinate.getY() + 1);
     }
 
     public Cell getEastCell(){
-        return GameHandler.getCellByCoordinate(coordinateX + 1 , coordinateY);
+        return GameHandler.getCellByCoordinate(coordinate.getX() + 1 , coordinate.getY());
     }
 
     public Cell getSouthCell(){
-        return GameHandler.getCellByCoordinate(coordinateX , coordinateY - 1);
+        return GameHandler.getCellByCoordinate(coordinate.getX(), coordinate.getY() - 1);
     }
 
     public Cell getWestCell(){
-        return GameHandler.getCellByCoordinate(coordinateX - 1, coordinateY);
+        return GameHandler.getCellByCoordinate(coordinate.getX() - 1, coordinate.getY());
     }
 
     public Room getRoom() {
@@ -115,8 +113,8 @@ public abstract class Cell implements Target {
     @Override
     public String toString() {
         return "Cell{" +
-                "X=" + coordinateX +
-                ", Y=" + coordinateY +
+                "X=" + coordinate.getX() +
+                ", Y=" + coordinate.getY() +
                 '}';
     }
 }

@@ -2,9 +2,13 @@ package it.polimi.se2019.model.map;
 
 //Immutable
 public class Coordinate {
-    private int x;
-    private int y;
+    private  final int x;
+    private final int y;
 
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public int getX() {
         return x;

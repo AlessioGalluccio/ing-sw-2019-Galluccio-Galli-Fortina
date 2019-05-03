@@ -86,7 +86,7 @@ public class TestMap {
         assertEquals(3, map1.getDistance(cell[1][1], cell[3][0]));
     }
 
-    @Test
+    @Test //TODO test dopo aver fatto i getter opportuni
     public void testReloadAllCell() {
         map1.reloadAllCell();
     }
