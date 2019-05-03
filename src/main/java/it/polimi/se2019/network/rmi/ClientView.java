@@ -168,6 +168,16 @@ public class ClientView {
         return false;
     }
 
+
+    /*
+    printFromController() is used by the RMIClient to print string arrived from the server
+     */
+
+    public void printFromController(String string) {
+
+        System.out.println(string);
+    }
+
 }
 
 

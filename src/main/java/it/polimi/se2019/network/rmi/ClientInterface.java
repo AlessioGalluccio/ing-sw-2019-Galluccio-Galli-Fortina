@@ -13,7 +13,7 @@ public interface ClientInterface extends Remote {
 
 
     public Map sendMap(Map map);
-    
+
 
 
     public Player sendPlayer (Player player);

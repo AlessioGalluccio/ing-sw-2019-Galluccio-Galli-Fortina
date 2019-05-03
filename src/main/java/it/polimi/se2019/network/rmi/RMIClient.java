@@ -13,6 +13,8 @@ public class RMIClient implements ClientInterface{
 
     private ServerInterface stub;
 
+    private ClientView clientView;
+
 
 
     public RMIClient() {
@@ -80,6 +82,8 @@ public class RMIClient implements ClientInterface{
 
 
     public void printFromController(String string) {
+
+        clientView.printFromController(string);
 
     }
 
