@@ -10,14 +10,14 @@ public class TargetMessage extends ViewControllerMessage {
     private int messageID;
 
     //TODO modificare questo ArrayList in un possibile singolo target
-    private ArrayList<Target> target;
+    private Target target;
 
-    public TargetMessage(ArrayList<Target> target) {
+    public TargetMessage(Target target) {
         this.target = target;
         this.messageID = Identificator.TARGET_MESSAGE;
     }
 
-    public ArrayList<Target> getTarget() {
+    public Target getTarget() {
         return target;
     }
 

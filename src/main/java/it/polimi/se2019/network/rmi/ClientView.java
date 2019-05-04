@@ -58,7 +58,7 @@ public class ClientView {
         return possibleTarget;
     }
 
-    public void createTargetMessage(ArrayList<Target> target){
+    public void createTargetMessage(Target target){
         /* TODO
                 la verifica dei target non può avvenire allo stesso modo ( esempio selezionare un movimento comporta la
                 selezione di una sola cella e non multiple.
@@ -166,7 +166,7 @@ public class ClientView {
 
 
     private boolean verifyTarget(){
-        if (this.possibleTarget.containsAll(this.selectedTarget))
+        if (this.possibleTarget.contains(this.selectedTarget))
             return true;
 
 
