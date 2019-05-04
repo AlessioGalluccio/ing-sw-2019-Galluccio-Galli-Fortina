@@ -1,6 +1,8 @@
 package it.polimi.se2019.model.player;
 
-public class Character {
+import java.io.Serializable;
+
+public class Character implements Serializable {
 
     private final String nameCharacter;
     private final String color;

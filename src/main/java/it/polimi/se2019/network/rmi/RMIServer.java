@@ -52,7 +52,7 @@ public class RMIServer implements ServerInterface{
 
 
     /*
-    startServer() is used to create the connection between Client and Server
+    startServer() is used to create the rmi connection between Client and Server
      */
 
     public static void startServer() {
@@ -99,7 +99,7 @@ public class RMIServer implements ServerInterface{
 
 
     /*
-    with sendMap() server send a copy of the map to the client to let teh user see all the changes in the map
+    with sendMap() server send a copy of the map to the client to let the user see all the changes in the map
      */
 
     public void sendMap(Map map){
@@ -112,7 +112,7 @@ public class RMIServer implements ServerInterface{
 
     public void sendPlayer (Player player){
 
-        skeleton.sendPlayer(player);
+        skeleton.sendPlayerCopy(player);
     }
 
 
@@ -124,6 +124,16 @@ public class RMIServer implements ServerInterface{
 
         skeleton.getPossibleTarget(possibleTarget);
 
+    }
+
+    /*
+    sendPossibleCharacter() send possible character to client using rmi connection
+     */
+
+
+    public void sendPossibleCharacter (ArrayList<Character> possibleCharacter){
+
+        skeleton.getPossibleCharacter(possibleCharacter);
     }
 
 

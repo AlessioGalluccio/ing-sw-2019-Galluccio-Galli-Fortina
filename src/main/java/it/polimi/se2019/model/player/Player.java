@@ -11,13 +11,14 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.se2019.model.player.AmmoBag.createAmmoFromList;
 
-public class Player extends java.util.Observable implements Target {
+public class Player extends java.util.Observable implements Target, Serializable {
     private String nickname;
     private ArrayList<Player> damage;
     private int skull;

@@ -1,4 +1,6 @@
 package it.polimi.se2019.model.deck;
 
-public interface Target {
+import java.io.Serializable;
+
+public interface Target extends Serializable {
 }

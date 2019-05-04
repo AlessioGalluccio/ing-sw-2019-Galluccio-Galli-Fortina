@@ -2,9 +2,10 @@ package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.view.PlayerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class ViewControllerMessage {
+public abstract class ViewControllerMessage implements Serializable {
     private int authorID;
     private PlayerView authorView;
     private ArrayList<ViewControllerMessage> nextMessage;

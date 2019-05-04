@@ -43,8 +43,6 @@ public class ClientView {
         return selectedTarget;
     }
 
-
-
     public Character getChoosenCharacter() {
         return choosenCharacter;
     }
@@ -58,7 +56,7 @@ public class ClientView {
         return possibleTarget;
     }
 
-    public void createTargetMessage(ArrayList<Target> target){
+    public void createTargetMessage(Target target){
         /* TODO
                 la verifica dei target non può avvenire allo stesso modo ( esempio selezionare un movimento comporta la
                 selezione di una sola cella e non multiple.
@@ -166,7 +164,7 @@ public class ClientView {
 
 
     private boolean verifyTarget(){
-        if (this.possibleTarget.containsAll(this.selectedTarget))
+        if (this.possibleTarget.contains(this.selectedTarget))
             return true;
 
 
@@ -202,6 +200,18 @@ public class ClientView {
     public void setPossibleTarget( ArrayList<Target> possibleTarget){
         this.possibleTarget = possibleTarget;
 
+    }
+
+
+
+    public void updatePlayerCopy(Player playerCopy){
+
+        this.playerCopy = playerCopy;
+    }
+
+    public void setPossibleCharacter(ArrayList<Character> possibleCharacter){
+
+        this.possibleCharacter = possibleCharacter;
     }
 
 

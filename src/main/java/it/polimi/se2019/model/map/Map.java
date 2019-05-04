@@ -3,12 +3,13 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Map extends java.util.Observable {
+public abstract class Map extends java.util.Observable implements Serializable {
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private final ArrayList<Room> room;
     private final String description;
