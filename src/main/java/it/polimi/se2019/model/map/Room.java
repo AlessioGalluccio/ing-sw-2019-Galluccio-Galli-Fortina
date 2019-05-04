@@ -71,16 +71,20 @@ public class Room implements Target {
     /**
      * When a player is moved in this room, he is added to a list
      * @param playerToAdd the new player in the room to add
+     * @throws NotHereException the player position is not in this room
      */
     protected void addPlayer(Player playerToAdd) {
-        playerHere.add(playerToAdd);
+        if(playerToAdd.getCell().getRoom().getColor().equals(color)) playerHere.add(playerToAdd);
+        else throw new NotHereException(playerToAdd.toString() + " is not in this room, color: " + color);
     }
 
     /**
      * When a player is moved from this room, he is removed from the list
      * @param playerToRemove the player who was moved
+     * @throws NotHereException the player was not moved from here
      */
     protected void removePlayer(Player playerToRemove) {
-        playerHere.remove(playerToRemove);
+        if(playerToRemove.getCell().getRoom().getColor().equals(color))  playerHere.remove(playerToRemove);
+        else throw new NotHereException(playerToRemove.toString() + " was not in this room, color: " + color);
     }
 }

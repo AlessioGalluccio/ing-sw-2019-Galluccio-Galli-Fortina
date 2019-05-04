@@ -150,10 +150,10 @@ public class TestPlayer {
 
     @Test
     public void testSetCell() {
-        Cell cell1 = new CellAmmo(new Wall(), new Passage(), new Door(), new Wall(), 0, 0, null);
+        Cell cell1 = new CellAmmo(new Wall(), new Passage(), new Door(), new Wall(), 0, 1, null);
         ArrayList<Cell> cells = new ArrayList<>();
         cells.add(cell1);
-        Room room = new Room(null, null, cells);
+        Room room = new Room(null, "NotAColor", cells);
         cells.clear();
         player.setPosition(cell1);
 
@@ -161,7 +161,7 @@ public class TestPlayer {
         Cell cell2 = new CellAmmo(new Passage(), new Passage(), new Door(), new Wall(), 1, 0, null);
         cells = new ArrayList<>();
         cells.add(cell2);
-        Room room2 = new Room(null, null, cells);
+        Room room2 = new Room(null, "NeitherAColor", cells);
         player.setPosition(cell2);
 
         assertEquals(cell2.getCoordinateX(), player.getCell().getCoordinateX());

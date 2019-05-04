@@ -153,7 +153,6 @@ public class Player extends java.util.Observable implements Target {
      * @return a copy of cellPosition
      */
     public Cell getCell(){
-        //TODO Controllare
         return cellPosition;
     }
 
@@ -469,6 +468,7 @@ public class Player extends java.util.Observable implements Target {
     }
 
     public void setPosition(Cell position) {
+        //if cellPosition==null is the first spawn, can't be removed anywhere
         if(this.cellPosition != null) this.cellPosition.removePlayer(this);
         cellPosition = position;
         position.addPlayer(this);

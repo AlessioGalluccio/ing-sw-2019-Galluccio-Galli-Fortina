@@ -95,19 +95,29 @@ public abstract class Cell implements Target {
     /**
      * When a player is moved in this cell, he is added to a list
      * @param playerToAdd the new player in the cell to add
+     * @throws NotHereException the player position is not this cell
      */
     public void addPlayer(Player playerToAdd) {
-        playerHere.add(playerToAdd);
-        room.addPlayer(playerToAdd);
+        //Add here the player ONLY IF its position is this cell
+        if (playerToAdd.getCell().getCoordinateX() == coordinate.getX() &&
+                playerToAdd.getCell().getCoordinateY() == coordinate.getY()) {
+            playerHere.add(playerToAdd);
+            room.addPlayer(playerToAdd);
+        } else throw new NotHereException(playerToAdd.toString() + " is not here " +toString());
     }
 
     /**
      * When a player is moved from this cell, he is removed from the list
      * @param playerToRemove the player who was moved
+     * @throws NotHereException the player was not moved from here
      */
     public void removePlayer(Player playerToRemove) {
-        playerHere.remove(playerToRemove);
-        room.removePlayer(playerToRemove);
+        if (playerToRemove.getCell().getCoordinateX() == coordinate.getX() &&
+                playerToRemove.getCell().getCoordinateY() == coordinate.getY()) {
+            playerHere.remove(playerToRemove);
+            room.removePlayer(playerToRemove);
+        }
+        else throw new NotHereException(playerToRemove.toString() + " was not here " +toString());
     }
 
     @Override
