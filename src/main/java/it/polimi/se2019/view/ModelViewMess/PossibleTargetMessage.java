@@ -5,6 +5,7 @@ import it.polimi.se2019.model.deck.Target;
 import java.util.ArrayList;
 
 public class PossibleTargetMessage implements ModelViewMessage{
+
     private ArrayList<Target> possibleTarget;
 
     public PossibleTargetMessage(ArrayList<Target> possibleTarget) {

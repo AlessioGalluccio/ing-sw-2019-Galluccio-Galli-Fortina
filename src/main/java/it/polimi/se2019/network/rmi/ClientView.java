@@ -43,8 +43,6 @@ public class ClientView {
         return selectedTarget;
     }
 
-
-
     public Character getChoosenCharacter() {
         return choosenCharacter;
     }
@@ -202,6 +200,18 @@ public class ClientView {
     public void setPossibleTarget( ArrayList<Target> possibleTarget){
         this.possibleTarget = possibleTarget;
 
+    }
+
+
+
+    public void updatePlayerCopy(Player playerCopy){
+
+        this.playerCopy = playerCopy;
+    }
+
+    public void setPossibleCharacter(ArrayList<Character> possibleCharacter){
+
+        this.possibleCharacter = possibleCharacter;
     }
 
 

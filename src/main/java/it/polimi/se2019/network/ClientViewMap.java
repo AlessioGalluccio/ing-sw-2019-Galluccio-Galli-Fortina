@@ -1,4 +1,4 @@
-package it.polimi.se2019.network.rmi;
+package it.polimi.se2019.network;
 
 import it.polimi.se2019.model.map.Map;
 

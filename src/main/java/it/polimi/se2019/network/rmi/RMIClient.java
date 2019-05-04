@@ -2,8 +2,9 @@ package it.polimi.se2019.network.rmi;
 
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.EnemyView;
+import it.polimi.se2019.network.ClientViewMap;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.rmi.registry.LocateRegistry;
@@ -110,10 +111,6 @@ public class RMIClient implements ClientInterface{
 
 
 
-    public Player sendPlayer (Player player){
-
-        return player;
-    }
 
     /*
     getPossibleTarget() is used by RMIServer to send an Arraylist of possible target
@@ -125,6 +122,18 @@ public class RMIClient implements ClientInterface{
         clientView.setPossibleTarget(possibleTarget);
     }
 
+
+    public void sendPlayerCopy (Player playerCopy){
+
+        clientView.updatePlayerCopy(playerCopy);
+
+    }
+
+
+    public void getPossibleCharacter (ArrayList<Character> possibleCharacter){
+
+        clientView.setPossibleCharacter(possibleCharacter);
+    }
 
 
 
