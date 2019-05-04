@@ -91,4 +91,7 @@ public abstract class FireMode {
     }
 
     public abstract List<StringAndMessage> getMessageListExpected();
+
+    public abstract boolean giveOnlyMarks();
+
 }

@@ -1,5 +1,8 @@
 package it.polimi.se2019.model.handler;
 
+import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.firemodes.*;
+
 public class Identificator {
 
     //list of ID of messages
@@ -19,8 +22,41 @@ public class Identificator {
     public static final int END_MESSAGE = 13;
     public static final int UNDO_MESSAGE = 14;
 
+    //list of ID of actions
     public static final int MOVE = 1;
     public static final int GRAB = 2;
     public static final int SHOOT = 3;
+
+    //list of ID of Firemodes
+    public static final int CYBERBLADE_1 = 1;
+    public static final int CYBERBLADE_2 = 2;
+    public static final int CYBERBLADE_3 = 3;
+    public static final int ELECTROSCYTHE_1 = 4;
+    public static final int ELECTROSCYTHE_2 = 5;
+    public static final int FLAMETHROWER_1 = 6;
+    public static final int FLAMETHROWER_2 = 7;
+    //TODO finisci
+
+
+
+
+
+
+
+    public static FireMode getFiremodeByID(int id){
+        switch(id){
+            case CYBERBLADE_1 : return new CyberBlade_1();
+            case CYBERBLADE_2 : return new CyberBlade_2();
+            case CYBERBLADE_3 : return new CyberBlade_3();
+            case ELECTROSCYTHE_1 : return new ElectroScythe_1();
+            case ELECTROSCYTHE_2: return new ElectroScythe_2();
+            case FLAMETHROWER_1 : return new FlameThrower_1();
+            case FLAMETHROWER_2: return new FlameThrower_2();
+            //TODO finisci
+
+            default: throw new WrongIdRuntimeException(); //should not happen. Runtime Exception
+        }
+
+    }
 
 }

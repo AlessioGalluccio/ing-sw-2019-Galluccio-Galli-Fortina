@@ -47,6 +47,15 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException {
+        //TODO provvisorio, controllalo e scrivilo meglio
+        if(stack.get(0).getMessageID() == Identificator.PLAYER_VIEW_MESSAGE){
+            for(int i = 1; i < stack.size(); i++){
+                if(stack.get(i).getMessageID() != Identificator.TARGETING_SCOPE_MESSAGE){
+                    return false;
+                }
+            }
+            return true;
+        }
         return false;
 
     }
@@ -61,6 +70,16 @@ public class LockRifle_1 extends FireMode {
         return messageListExpected;
     }
 
+    @Override
+    public boolean giveOnlyMarks() {
+        return false;
+    }
+
+    /**
+     * handle the effect of the first target
+     * @param target the target
+     * @param gameHandler the handler of the game
+     */
     private void firstTarget(PlayerViewMessage target, GameHandler gameHandler){
         Player authorPlayer = gameHandler.getPlayerByID(target.getAuthorID());
         Player targetPlayer = gameHandler.getPlayerByID(target.getPlayerID());
@@ -77,6 +96,11 @@ public class LockRifle_1 extends FireMode {
 
     }
 
+    /**
+     * this method should be not used if program works correctly, but needed for Polymorphism
+     * @param target the target
+     * @param gameHandler the handler of the game
+     */
     private void firstTarget(ViewControllerMessage target, GameHandler gameHandler) {
         //TODO non deve far nulla, decidi se aggiungere una eccezione
     }

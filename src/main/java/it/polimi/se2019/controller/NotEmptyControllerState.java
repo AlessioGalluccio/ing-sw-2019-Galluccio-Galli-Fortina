@@ -1,12 +1,15 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
 
@@ -111,9 +114,28 @@ public class NotEmptyControllerState implements StateController {
 
     @Override
     public void handle(TargetingScopeMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
+        int indexOfPrevious = (controller.getIndexExpected() - 1);
+        List<ViewControllerMessage> stack = controller.getCopyMessageListReceived();
+        if(isPlayerTargetMessage(stack.get(indexOfPrevious))){
+            for(int i = 0; i < indexOfPrevious; i++){
+                try{
+                    if(isFiremode(stack.get(i))){
+                        //you can add targeting massage
+                        if(isThisTargetingAlreadyPresent(stack, arg.getUsedCard())){
+                            controller.addMessageListReceived(arg);
+                            return;
+                        }
+                    }
+                }catch(FiremodeOfOnlyMarksException e){
+                    //this firemode adds only marks, you can't use this card
+                    arg.getAuthorView().printFromController("You can't use targeting scope with this firemode");
+                    return;
+                }
+
+            }
+        }
+        else{
+            return;
         }
 
     }
@@ -191,5 +213,46 @@ public class NotEmptyControllerState implements StateController {
                 controller.setState(new EmptyControllerState(controller, gameHandler));
             }
         }
+    }
+
+    private boolean isPlayerTargetMessage(ViewControllerMessage arg){
+        return false;
+    }
+
+    private boolean isPlayerTargetMessage(PlayerViewMessage arg){
+        return true;
+    }
+
+    private boolean isFiremode(ViewControllerMessage arg) throws FiremodeOfOnlyMarksException {
+        return false;
+    }
+
+    private boolean isFiremode(FireModeMessage arg) throws FiremodeOfOnlyMarksException{
+        //TODO sistema controllo per il lancio dell'eccezione
+        if(getFireModeByID(arg.getFiremodeID()).giveOnlyMarks()){
+            throw new FiremodeOfOnlyMarksException();
+        }
+        return true;
+    }
+
+    private boolean isTargetingScopeUsed(ViewControllerMessage arg, TargetingScopeCard targetingScopeCard){
+        return false;
+    }
+
+    private boolean isTargetingScopeUsed(TargetingScopeMessage arg, TargetingScopeCard targetingScopeCard){
+        //TODO sistema
+        return arg.getUsedCard().equals(targetingScopeCard);
+
+    }
+
+
+
+    private boolean isThisTargetingAlreadyPresent(List<ViewControllerMessage> stack, TargetingScopeCard targetingScopeCard){
+        for(ViewControllerMessage msg : stack){
+            if(isTargetingScopeUsed(msg, targetingScopeCard)){
+                return true;
+            }
+        }
+        return false;
     }
 }
