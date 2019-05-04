@@ -5,6 +5,7 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.*;
@@ -63,7 +64,7 @@ public abstract class FireMode {
      * @param playerView receiver of the message
      * @return the possible target that player can hit, return null if there is no target
      */
-    public abstract List<Target> sendPossibleTarget(Player player, PlayerView playerView);
+    public abstract List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler);
 
     /**
      * Fires to the target set by setTarget(
@@ -88,4 +89,6 @@ public abstract class FireMode {
     public void setTarget(ArrayList<Target> target) {
         this.target = target;
     }
+
+    public abstract List<StringAndMessage> getMessageListExpected();
 }

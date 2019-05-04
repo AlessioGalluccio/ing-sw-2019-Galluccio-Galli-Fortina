@@ -74,7 +74,7 @@ public class GameHandler extends java.util.Observable {
      * @param id ID of a Player
      * @return the Player object who has this ID
      */
-    public static Player getPlayerByID(int id) {
+    public Player getPlayerByID(int id) {
         for(Player p : orderPlayerList) {
             if (p.getID() == id) return p;
         }

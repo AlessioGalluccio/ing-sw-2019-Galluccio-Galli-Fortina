@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class Controller implements Observer {
 
@@ -121,7 +120,7 @@ public class Controller implements Observer {
      * @param arg the message of this firemode
      */
     public synchronized void sendTargetsToView(FireModeMessage arg) {
-        Player playerTemp = getPlayerByID(arg.getAuthorID());
+        Player playerTemp = gameHandler.getPlayerByID(arg.getAuthorID());
         AmmoBag ammoTemp = playerTemp.getAmmo();
         FireMode fireModeTemp = gameHandler.getFireModeByID(arg.getAuthorID());
         //TODO metodo che compara fireModeTemp.getCost() con ammoTemp. Se non bastano, chiedono a giocatore di scartare un potenziamento se ce l'ha
@@ -134,7 +133,7 @@ public class Controller implements Observer {
      * @param arg the message of this tagbackGranade card
      */
     public synchronized void sendTargetsToView(TagbackGranateMessage arg) {
-        Player author = getPlayerByID(arg.getAuthorID());
+        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
         TagbackGranedCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
         //TODO
@@ -145,7 +144,7 @@ public class Controller implements Observer {
      * @param arg the message of this Newton card
      */
     public synchronized void sendTargetsToView(NewtonMessage arg) {
-        Player author = getPlayerByID(arg.getAuthorID());
+        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
         NewtonCard card = arg.getUsedCard();
         card.sendPossibleTarget(author, arg.getAuthorView());
         //TODO
@@ -166,7 +165,7 @@ public class Controller implements Observer {
      */
     public synchronized void modifyModel(ActionMessage actionMessage) {
         //TODO verify()
-        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
+        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
 
     }
 

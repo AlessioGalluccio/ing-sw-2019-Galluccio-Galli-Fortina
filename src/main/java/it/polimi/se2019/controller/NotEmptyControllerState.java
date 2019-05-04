@@ -9,7 +9,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 import java.util.ArrayList;
 
 import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
-import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class NotEmptyControllerState implements StateController {
 
@@ -50,7 +49,7 @@ public class NotEmptyControllerState implements StateController {
 
     @Override
     public void handle(FireModeMessage arg) {
-        Player player = getPlayerByID(arg.getAuthorID());
+        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
         FireMode fireMode = getFireModeByID(arg.getFiremodeID());
         AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
 
@@ -155,7 +154,7 @@ public class NotEmptyControllerState implements StateController {
      */
     private boolean startingHandler(ViewControllerMessage arg) {
         int index = controller.getIndexExpected();
-        int expectedID = controller.getCopyMessageListExpected().get(index).getMessage().getMessageID();
+        int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
         if(arg.getMessageID() == expectedID) {
             return true;
         }

@@ -251,6 +251,14 @@ public class Player extends java.util.Observable implements Target, Serializable
         //TODO add notify()
     }
 
+    /**
+     * Add damage to this player
+     * @param enemy who had damaged you
+     */
+    public void receiveDamageBy(Player enemy) {
+        //TODO
+    }
+
 
     /**
      * Mark this player with a enemy's mark
