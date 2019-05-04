@@ -2,8 +2,11 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
+import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.List;
 
@@ -15,7 +18,14 @@ public class Furnace_2 extends FireMode {
     }
 
     @Override
-    public void fire() {
+    public void fire(List<ViewControllerMessage> stack, GameHandler gameHandler) {
+
+    }
+
+    @Override
+    public boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException {
+        //TODO
+        return false;
 
     }
 }

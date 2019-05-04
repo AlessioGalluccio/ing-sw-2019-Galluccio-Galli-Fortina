@@ -54,4 +54,10 @@ public abstract class PowerupCard implements Card {
     @Override
     public abstract void useCard(Player author);
 
+    @Override
+    public String toString() {
+        return "PowerupCard{" +
+                "color=" + color +
+                '}';
+    }
 }

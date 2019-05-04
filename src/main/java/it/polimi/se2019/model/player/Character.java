@@ -10,6 +10,13 @@ public class Character {
         this.color = color;
     }
 
+    @Override
+    public String toString() {
+        return "Character{" +
+                nameCharacter + '\'' +
+                '}';
+    }
+
     /**
      * @return Character's name
      */
