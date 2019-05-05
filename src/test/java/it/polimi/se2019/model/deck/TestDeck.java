@@ -24,8 +24,18 @@ public class TestDeck {
     @Test
     public void testSizeDeck(){
         assertEquals(WEAPON_SIZE_DECK, weaponDeck.getUnusedCard().size());
-        assertEquals(AMMO_SIZE_DECK , ammoDeck.getUnusedCard().size());
+        assertEquals(AMMO_SIZE_DECK , ammoDeck.sizeUnususedCard());
         assertEquals(POWERUP_SIZE_DECK, powerupDeck.getUnusedCard().size());
+
+        weaponDeck.pick();
+        weaponDeck.pick();
+        weaponDeck.pick();
+        assertEquals(WEAPON_SIZE_DECK, weaponDeck.sizeDeck());
+
+        for(int i=10; i>0; i--) ammoDeck.pick();
+        for(int i=3 ; i>0; i--) ammoDeck.pick().discard();
+        assertEquals(AMMO_SIZE_DECK , ammoDeck.sizeDeck());
+
     }
 
     @Test
@@ -35,6 +45,10 @@ public class TestDeck {
         assertEquals(20, weaponDeck.getUnusedCard().size());
         ammoDeck.pick();
         assertEquals(1, ammoDeck.getInUseCard().size());
+
+        for(int i=0; i<ammoDeck.sizeDeck() + 10; i++) ammoDeck.pick().discard();
+        assertEquals(AMMO_SIZE_DECK , ammoDeck.sizeDeck());
+
     }
 
     @Test(expected = AlreadyDeckException.class)
@@ -52,7 +66,7 @@ public class TestDeck {
                 ammoDeck.getUnusedCard().size() +
                 ammoDeck.getUsedCard().size());
 
-        assertEquals(true, acc.getAmmo().equals(ammoDeck.getUsedCard().get(0).getAmmo()));
+        assertTrue(acc.getAmmo().equals(ammoDeck.getUsedCard().get(0).getAmmo()));
 
     }
 }

@@ -60,8 +60,8 @@ public abstract class Deck<T> {
      * Return number of cards not already picked
      * @return number of cards not already picked
      */
-    public int sizeUnsusedCard() {
-        return usedCard.size();
+    public int sizeUnususedCard() {
+        return unusedCard.size();
     }
 
     /**

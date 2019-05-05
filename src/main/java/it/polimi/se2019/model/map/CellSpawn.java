@@ -44,7 +44,7 @@ public class CellSpawn extends Cell {
     @Override
     protected void reloadCard(){
         for(int i=0; i<MAX_WEAPONCARD; i++) {
-            if(weapon[i]==null && deck.sizeUnsusedCard()!=0) weapon[i]=deck.pick();
+            if(weapon[i]==null && deck.sizeUnususedCard()!=0) weapon[i]=deck.pick();
         }
     }
 
