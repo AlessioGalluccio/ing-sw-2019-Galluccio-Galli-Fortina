@@ -84,7 +84,7 @@ public abstract class Deck<T> {
     /**
      * Shuffle the discarded cards and refill the deck
      */
-    public void mix(){
+    private void mix(){
         Collections.shuffle(usedCard);
         unusedCard.addAll(usedCard);
         usedCard.clear();
@@ -92,11 +92,13 @@ public abstract class Deck<T> {
 
     /**
      * Pick the first card of the deck
+     * If the card picked is the last one, mix the deck
      * @return The first elements of the deck
      */
     public T pick(){
         T picked = unusedCard.pop();
         inUseCard.add(picked);
+        if(unusedCard.isEmpty()) mix();
         return picked;
     }
 
@@ -105,7 +107,7 @@ public abstract class Deck<T> {
      * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARTED PILE
      * @param card Card to discard
      */
-    public void discard(T card) {
+    protected void discard(T card) {
         inUseCard.remove(card);
         usedCard.add(card);
     }
