@@ -105,6 +105,7 @@ public class LockRifle_1 extends FireMode {
         //TODO non deve far nulla, decidi se aggiungere una eccezione
     }
 
+
 }
 
 

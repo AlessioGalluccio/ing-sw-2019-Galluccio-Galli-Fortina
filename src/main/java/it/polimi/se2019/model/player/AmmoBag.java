@@ -14,7 +14,7 @@ public class AmmoBag {
      * @param yellowAmmo the new yellow ammo to set
      * @param blueAmmo the new blue ammo to set
      */
-    AmmoBag(int redAmmo, int yellowAmmo, int blueAmmo) {
+    public AmmoBag(int redAmmo, int yellowAmmo, int blueAmmo) {
         this.redAmmo = redAmmo;
         this.yellowAmmo = yellowAmmo;
         this.blueAmmo = blueAmmo;
@@ -53,5 +53,13 @@ public class AmmoBag {
             }
         }
         return new AmmoBag(red, yellow, blue);
+    }
+
+    public static AmmoBag sumAmmoBag(AmmoBag first, AmmoBag second){
+        int newRed = first.getRedAmmo() + second.getRedAmmo();
+        int newYellow = first.getYellowAmmo() + second.getYellowAmmo();
+        int newBlue = first.getBlueAmmo() + second.getBlueAmmo();
+
+        return new AmmoBag(newRed, newYellow, newBlue);
     }
 }

@@ -114,10 +114,18 @@ public class NotEmptyControllerState implements StateController {
 
     @Override
     public void handle(TargetingScopeMessage arg) {
+        AmmoBag cost = arg.getCost();
+        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
         int indexOfPrevious = (controller.getIndexExpected() - 1);
         List<ViewControllerMessage> stack = controller.getCopyMessageListReceived();
         if(isPlayerTargetMessage(stack.get(indexOfPrevious))){
             for(int i = 0; i < indexOfPrevious; i++){
+                addCost(stack.get(i), cost);
+                //cost is controlled (other targeting scopes and the last firemode)
+                if(!player.canPayAmmo(cost)){
+                    arg.getAuthorView().printFromController("You don't have enough Ammo for this Targeting Scope");
+                    return;
+                }
                 try{
                     if(isFiremode(stack.get(i))){
                         //you can add targeting massage
@@ -254,5 +262,32 @@ public class NotEmptyControllerState implements StateController {
             }
         }
         return false;
+    }
+
+    /**
+     * does nothing, because it doesn't have cost like Firemode or TargetingScope
+     * @param msg
+     * @param cost
+     */
+    private void addCost(ViewControllerMessage msg, AmmoBag cost){
+        //it does nothing
+    }
+
+    /**
+     * add the cost of the card in cost
+     * @param msg the message
+     * @param cost the AmmoBag that will be updated
+     */
+    private void addCost(TargetingScopeMessage msg, AmmoBag cost){
+        cost = AmmoBag.sumAmmoBag(cost, msg.getCost());
+    }
+
+    /**
+     * add the cost of the card in cost
+     * @param msg the message
+     * @param cost the AmmoBag that will be updated
+     */
+    private void addCost(FireMode msg, AmmoBag cost){
+        cost = AmmoBag.sumAmmoBag(AmmoBag.createAmmoFromList(msg.getCost()), cost);
     }
 }
