@@ -47,6 +47,24 @@ public abstract class Deck<T> {
     }
 
     /**
+     * Return the number of cards in the deck
+     * @return number of cards in the deck
+     */
+    public int sizeDeck() {
+        return unusedCard.size() +
+                usedCard.size() +
+                inUseCard.size();
+    }
+
+    /**
+     * Return number of cards not already picked
+     * @return number of cards not already picked
+     */
+    public int sizeUnsusedCard() {
+        return usedCard.size();
+    }
+
+    /**
      *
      * @return Deep copy of usedCard
      */
