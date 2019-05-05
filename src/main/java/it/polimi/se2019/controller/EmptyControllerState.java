@@ -8,7 +8,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
 
-import static it.polimi.se2019.model.handler.GameHandler.getPlayerByID;
 
 public class EmptyControllerState implements  StateController {
 
@@ -76,7 +75,7 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handle(ReloadMessage arg) {
         //TODO
-        Player player = getPlayerByID(arg.getAuthorID());
+        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
         int weaponID = arg.getWeaponID();
 
         try{

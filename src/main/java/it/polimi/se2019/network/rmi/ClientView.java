@@ -3,6 +3,7 @@ package it.polimi.se2019.network.rmi;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -118,8 +119,8 @@ public class ClientView {
         return message;
     }
 
-    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard){
-        TargetingScopeMessage message = new TargetingScopeMessage(usedCard);
+    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
+        TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB);
         rmiClient.send(message);
         return message;
     }

@@ -22,7 +22,7 @@ public class Move extends Action {
     public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) throws IllegalArgumentException{
         int i = 0;
         for(ViewControllerMessage arg : msg){
-            if(arg.getMessageID() == getStringAndMessageExpected().get(i).getMessage().getMessageID()) {
+            if(arg.getMessageID() == getStringAndMessageExpected().get(i).getMessageID()) {
                 handle(arg);
             }
             else {

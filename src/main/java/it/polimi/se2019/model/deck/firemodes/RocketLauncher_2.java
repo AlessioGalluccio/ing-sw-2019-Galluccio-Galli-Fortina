@@ -6,6 +6,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.List;
@@ -16,8 +17,18 @@ import java.util.List;
 public class RocketLauncher_2 extends FireMode {
 
     @Override
-    public List<Target> sendPossibleTarget(Player player, PlayerView playerView) {
+    public List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler) {
         return null;
+    }
+
+    @Override
+    public List<StringAndMessage> getMessageListExpected() {
+        return null;
+    }
+
+    @Override
+    public boolean giveOnlyMarks() {
+        return false;
     }
 
     @Override
