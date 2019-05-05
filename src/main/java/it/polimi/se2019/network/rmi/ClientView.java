@@ -25,6 +25,7 @@ public class ClientView {
 
 
 
+
     public ClientView(Player playerCopy, Map mapCopy, ArrayList<Target> possibleTarget,
                       ArrayList<Target> selectedTarget, ArrayList<Character> possibleCharacter,
                       Character choosenCharacter) {
@@ -165,9 +166,12 @@ public class ClientView {
 
 
     private boolean verifyTarget(){
-        if (this.possibleTarget.contains(this.selectedTarget))
-            return true;
 
+        for (int counter = 0; counter < possibleTarget.size(); counter++) {
+            if(possibleTarget.get(counter).equals(selectedTarget)){
+                return true;
+            }
+        }
 
         return false;
     }
