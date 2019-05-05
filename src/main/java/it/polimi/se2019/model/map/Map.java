@@ -1,8 +1,5 @@
 package it.polimi.se2019.model.map;
 
-import it.polimi.se2019.model.deck.AmmoDeck;
-import it.polimi.se2019.model.deck.WeaponDeck;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +17,19 @@ public abstract class Map extends java.util.Observable implements Serializable {
         this.description = description;
     }
 
-    public Cell[][] getCell() {
-
-        return cell; //TODO implementare copia
+    public Cell[][] getCell(){
+        //Create a new matrix with the SAME cell, not deep copy
+        Cell[][] cellToReturn = new Cell[cell.length][cell[1].length];
+        for(int i=0; i<cell.length; i++){
+            for(int j=0; j<cell[i].length; j++){
+                cellToReturn[i][j] = cell[i][j];
+            }
+        }
+        return cellToReturn;
     }
 
-    public List<Room> getRoom() {
-
-        return null; //TODO implementare
+    public List<Room> getRooms() {
+        return new ArrayList<Room>(room);
     }
 
     public String getDescription() {
@@ -135,8 +137,8 @@ public abstract class Map extends java.util.Observable implements Serializable {
      * If the card on a cell was picked, put a new card on the cell
      */
     public void reloadAllCell() {
-        for(Cell[] ArrayCell : cell) { //Scan all the row (X)
-            for(Cell c : ArrayCell) { //Scan all the column (Y)
+        for(Cell[] arrayCell : cell) { //Scan all the row (X)
+            for(Cell c : arrayCell) { //Scan all the column (Y)
                 if(c != null) c.reloadCard();
             }
         }

@@ -4,7 +4,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public abstract class Cell implements Target {
 
@@ -14,7 +14,6 @@ public abstract class Cell implements Target {
     private Border westBorder;
     private Room room;
     private Coordinate coordinate;
-
     private ArrayList<Player> playerHere = new ArrayList<>();
 
     protected Cell(Border north, Border east, Border south, Border west, int x, int y) {
@@ -71,9 +70,8 @@ public abstract class Cell implements Target {
      *
      * @return list of players on this cell
      */
-    public ArrayList<Player> getPlayerHere() {
-
-        return playerHere;    //TODO implementare
+    public List<Player> getPlayerHere() {
+        return new ArrayList<>(playerHere);
     }
 
     /**

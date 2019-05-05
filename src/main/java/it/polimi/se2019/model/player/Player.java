@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
@@ -15,8 +14,6 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import static it.polimi.se2019.model.player.AmmoBag.createAmmoFromList;
 
 public class Player extends java.util.Observable implements Target, Serializable {
     private String nickname;
@@ -145,8 +142,7 @@ public class Player extends java.util.Observable implements Target, Serializable
     }
 
     public Mark getMark() {
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(mark), Mark.class);
+        return mark; //TODO fare una copia
     }
 
     /**
