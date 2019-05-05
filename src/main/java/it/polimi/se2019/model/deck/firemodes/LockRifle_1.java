@@ -5,6 +5,7 @@ import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.PlayerView;
@@ -77,20 +78,24 @@ public class LockRifle_1 extends FireMode {
 
     /**
      * handle the effect of the first target
-     * @param target the target
+     * @param msg the target
      * @param gameHandler the handler of the game
      */
-    private void firstTarget(PlayerViewMessage target, GameHandler gameHandler){
-        Player authorPlayer = gameHandler.getPlayerByID(target.getAuthorID());
-        Player targetPlayer = gameHandler.getPlayerByID(target.getPlayerID());
+    private void firstTarget(PlayerViewMessage msg, GameHandler gameHandler){
+        Player authorPlayer = gameHandler.getPlayerByID(msg.getAuthorID());
+        Player targetPlayer = gameHandler.getPlayerByID(msg.getPlayerID());
         for(int i = 0; i < NUM_DAMAGE; i++){
-            targetPlayer.receiveDamageBy(authorPlayer);
+            try{
+                targetPlayer.receiveDamageBy(authorPlayer);
+            }catch (NotPresentException e){
+                msg.getAuthorView().printFromController("Can't do more damage to this player");
+            }
         }
         for(int i = 0; i < NUM_MARK; i++){
             try{
                 targetPlayer.receiveMarkBy(authorPlayer);
             }catch(TooManyException e){
-                target.getAuthorView().printFromController("You have already three marks on this Player, you will not add more marks");
+                msg.getAuthorView().printFromController("You have already three marks on this Player, you will not add more marks");
             }
         }
 

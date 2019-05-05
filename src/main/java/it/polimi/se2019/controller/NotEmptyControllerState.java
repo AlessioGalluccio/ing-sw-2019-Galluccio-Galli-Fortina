@@ -120,7 +120,7 @@ public class NotEmptyControllerState implements StateController {
         List<ViewControllerMessage> stack = controller.getCopyMessageListReceived();
         if(isPlayerTargetMessage(stack.get(indexOfPrevious))){
             for(int i = 0; i < indexOfPrevious; i++){
-                addCost(stack.get(i), cost);
+                cost = addCost(stack.get(i), cost);
                 //cost is controlled (other targeting scopes and the last firemode)
                 if(!player.canPayAmmo(cost)){
                     arg.getAuthorView().printFromController("You don't have enough Ammo for this Targeting Scope");
@@ -221,6 +221,10 @@ public class NotEmptyControllerState implements StateController {
                 controller.setState(new EmptyControllerState(controller, gameHandler));
             }
         }
+        else{
+            //print the next request
+            arg.getAuthorView().printFromController(controller.getCopyMessageListExpected().get(index).getString());
+        }
     }
 
     private boolean isPlayerTargetMessage(ViewControllerMessage arg){
@@ -269,8 +273,9 @@ public class NotEmptyControllerState implements StateController {
      * @param msg
      * @param cost
      */
-    private void addCost(ViewControllerMessage msg, AmmoBag cost){
+    private AmmoBag addCost(ViewControllerMessage msg, AmmoBag cost){
         //it does nothing
+        return cost;
     }
 
     /**
@@ -278,8 +283,9 @@ public class NotEmptyControllerState implements StateController {
      * @param msg the message
      * @param cost the AmmoBag that will be updated
      */
-    private void addCost(TargetingScopeMessage msg, AmmoBag cost){
-        cost = AmmoBag.sumAmmoBag(cost, msg.getCost());
+    private AmmoBag addCost(TargetingScopeMessage msg, AmmoBag cost){
+        //it return the sum
+        return AmmoBag.sumAmmoBag(cost, msg.getCost());
     }
 
     /**

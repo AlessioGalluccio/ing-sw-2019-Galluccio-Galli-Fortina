@@ -80,7 +80,7 @@ public class EmptyControllerState implements  StateController {
 
         try{
             player.loadWeapon(weaponID);
-        }catch(CardNotPresentException e){
+        }catch(NotPresentException e){
             arg.getAuthorView().printFromController("Error: Player doesn't have this Weapon");
             arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
         }catch(WeaponIsLoadedException e){

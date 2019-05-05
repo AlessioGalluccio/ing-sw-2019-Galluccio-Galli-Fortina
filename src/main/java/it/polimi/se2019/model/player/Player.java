@@ -251,10 +251,14 @@ public class Player extends java.util.Observable implements Target, Serializable
      * Add damage to this player
      * @param enemy who had damaged you
      */
-    public void receiveDamageBy(Player enemy) {
-        //TODO
-    }
+    public void receiveDamageBy(Player enemy) throws NotPresentException {
+        //TODO sistemare se giocatore non è presente
+        if(isOverKilled()){
+            throw new NotPresentException();
+        }
+        //TODO finisci
 
+    }
 
     /**
      * Mark this player with a enemy's mark
@@ -290,11 +294,11 @@ public class Player extends java.util.Observable implements Target, Serializable
     /**
      * load the weapon selected, using ordinary ammo and ammo gained from diascarded Powerups
      * @param weaponID the ID of the weapon
-     * @throws CardNotPresentException  if the Player doesn't have this weapon
+     * @throws NotPresentException  if the Player doesn't have this weapon
      * @throws WeaponIsLoadedException  if the weapon is already loaded
      * @throws NotEnoughAmmoException   if there's not enough ammo from ordinary ammo and discarded Powerups
      */
-    public void loadWeapon(int weaponID) throws CardNotPresentException, WeaponIsLoadedException, NotEnoughAmmoException {
+    public void loadWeapon(int weaponID) throws NotPresentException, WeaponIsLoadedException, NotEnoughAmmoException {
         for(WeaponCard weaponCard : weaponCardList) {
             if(weaponCard.getID() == weaponID) {
                 if (weaponCard.isReloaded()) {
@@ -313,15 +317,15 @@ public class Player extends java.util.Observable implements Target, Serializable
             }
         }
         //weapon not found
-        throw new CardNotPresentException();
+        throw new NotPresentException();
     }
 
     /**
      * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
      * @param powerupCard the card which has to be discarded
-     * @throws CardNotPresentException if the card is not possessed by the Player
+     * @throws NotPresentException if the card is not possessed by the Player
      */
-    public void discardCard(PowerupCard powerupCard) throws CardNotPresentException {
+    public void discardCard(PowerupCard powerupCard) throws NotPresentException {
         for(PowerupCard card : powerupCardList){
             if(card == powerupCard){
                 ColorRYB colorOfCard = card.getAmmo();
@@ -347,15 +351,15 @@ public class Player extends java.util.Observable implements Target, Serializable
                 return;
             }
         }
-        throw new CardNotPresentException();
+        throw new NotPresentException();
     }
 
     /**
      * discard a weapon
      * @param weaponToDiscard the weapon to discard
-     * @throws CardNotPresentException if the player doesn't have the card
+     * @throws NotPresentException if the player doesn't have the card
      */
-    public void discardCard(WeaponCard weaponToDiscard) throws CardNotPresentException{
+    public void discardCard(WeaponCard weaponToDiscard) throws NotPresentException {
         for(WeaponCard weapon : weaponCardList){
             if(weapon.getID() == weaponToDiscard.getID()){
                 weapon.discard();
@@ -364,7 +368,7 @@ public class Player extends java.util.Observable implements Target, Serializable
                 return;
             }
         }
-        throw new CardNotPresentException();
+        throw new NotPresentException();
     }
 
     /**
