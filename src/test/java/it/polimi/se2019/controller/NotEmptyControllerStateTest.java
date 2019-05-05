@@ -66,6 +66,6 @@ public class NotEmptyControllerStateTest {
     @Test
     public void isFireModePositive() {
         ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1);
-        boolean value = isFireModePositive();
+        //boolean value = isFireModePositive(); E' stato commentato perché non compilava
     }
 }

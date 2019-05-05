@@ -1,6 +1,5 @@
 package it.polimi.se2019.network.socket;
 
-
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.*;

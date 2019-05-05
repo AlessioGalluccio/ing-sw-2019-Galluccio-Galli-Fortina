@@ -4,18 +4,19 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.logging.Level;
-import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 public class SocketClient implements Client {
     private int port;
     private String IP;
     private boolean open;
-    private PrintWriter printSocket;
+    private ObjectOutputStream printSocket;
+    private ObjectInputStream scannerSocket;
+    private Socket socket;
 
     public SocketClient(int port, String IP) {
         this.port = port;
@@ -24,29 +25,47 @@ public class SocketClient implements Client {
     }
 
     public void start() {
-        try (Socket socket = new Socket(IP, port); /*Connection established*/
-             Scanner scannerSocket = new Scanner(socket.getInputStream())) {
+        try {
+            socket = new Socket(IP, port); /*Connection established*/
+            printSocket = new ObjectOutputStream(socket.getOutputStream());
+            scannerSocket =  new ObjectInputStream(socket.getInputStream());
 
-            printSocket = new PrintWriter(socket.getOutputStream());
-
-            //TODO inviare il mesaggio al server
-            while(open) { // Fake condition: it's always true
-                String messageSocket = scannerSocket.nextLine();
-                //TODO parse the messagge
-            }
+            new Thread(() -> {
+                try {
+                    while(open) { // Fake condition: it's always true
+                        Object messageSocket = scannerSocket.readObject();
+                        //TODO parse the messagge
+                    }
+                }catch (IOException | ClassNotFoundException e) {
+                    Logger.getLogger(SocketClient.class.getName()).log(Level.INFO, "Problem reading from socket", e);
+                }
+                finally {
+                    closeAll();
+                }
+            }).start();
 
         } catch (IOException e) {
-            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Client socket close", e);
-        } catch (NoSuchElementException e) {
-            Logger.getLogger(SocketClient.class.getName()).log(Level.INFO, "Connection client close", e);
-        } finally {
-            printSocket.close();
+            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't open client socket", e);
         }
     }
 
     @Override
     public void send(ViewControllerMessage message) {
-        printSocket.println(message);
-        printSocket.flush();
+        try {
+            printSocket.writeObject(message);
+            printSocket.flush();
+        } catch (IOException e) {
+            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Problem writing on socket", e);
+        }
+    }
+
+    private void closeAll() {
+        try {
+            printSocket.close();
+            scannerSocket.close();
+            socket.close();
+        } catch (IOException e) {
+            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't close client socket", e);
+        }
     }
 }
