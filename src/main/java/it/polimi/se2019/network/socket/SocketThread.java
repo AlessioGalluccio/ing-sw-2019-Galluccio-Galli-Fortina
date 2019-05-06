@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketThread implements Runnable, Server {
+public class SocketThread implements Server {
     private Socket socket;
     private ObjectOutputStream printSocket;
     private ObjectInputStream scannerSocket;
@@ -21,8 +21,7 @@ public class SocketThread implements Runnable, Server {
         this.socket = socket;
     }
 
-    @Override
-    public void run() {
+    public void start() {
         try {
             printSocket = new ObjectOutputStream(socket.getOutputStream());
             scannerSocket =  new ObjectInputStream(socket.getInputStream());
@@ -47,7 +46,7 @@ public class SocketThread implements Runnable, Server {
         }
     }
 
-    private void closeAll() {
+    public void closeAll() {
        try {
             scannerSocket.close();
             printSocket.close();
