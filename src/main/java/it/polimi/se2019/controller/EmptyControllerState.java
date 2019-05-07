@@ -57,6 +57,11 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
+    public void handle(LoginMessage arg) {
+        //TODO
+    }
+
+    @Override
     public void handle(NewtonMessage arg) {
         //TODO
 
@@ -101,11 +106,6 @@ public class EmptyControllerState implements  StateController {
     public void handle(TargetingScopeMessage arg) {
         arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
 
-    }
-
-    @Override
-    public void handle(TargetMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
     }
 
     @Override

@@ -66,6 +66,11 @@ public class NotEmptyControllerState implements StateController {
     }
 
     @Override
+    public void handle(LoginMessage arg) {
+        //TODO
+    }
+
+    @Override
     public void handle(NewtonMessage arg) {
         if(startingHandler(arg)){
             controller.sendTargetsToView(arg);
@@ -143,15 +148,6 @@ public class NotEmptyControllerState implements StateController {
         }
         else{
             return;
-        }
-
-    }
-
-    @Override
-    public void handle(TargetMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
         }
 
     }

@@ -27,8 +27,6 @@ public interface StateController {
 
     public void handle(TargetingScopeMessage arg);
 
-    public void handle(TargetMessage arg);
-
     public void handle(TeleporterMessage arg);
 
     /**

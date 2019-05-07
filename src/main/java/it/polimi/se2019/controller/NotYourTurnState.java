@@ -42,6 +42,11 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
+    public void handle(LoginMessage arg) {
+        //TODO
+    }
+
+    @Override
     public void handle(NewtonMessage arg) {
         controllTurn(arg);
         arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
@@ -78,13 +83,6 @@ public class NotYourTurnState implements StateController {
 
     @Override
     public void handle(TargetingScopeMessage arg) {
-        controllTurn(arg);
-        arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-
-    }
-
-    @Override
-    public void handle(TargetMessage arg) {
         controllTurn(arg);
         arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
 
