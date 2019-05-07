@@ -33,9 +33,14 @@ public class CellSpawn extends Cell {
 
     @Override
     public Card grabCard(int cardID) throws NotCardException {
-        for(WeaponCard id : weapon) {
-            if(id.getID() == cardID) return id;
+        WeaponCard cardToReturn = null;
+        for(int i=0; i<MAX_WEAPONCARD; i++) {
+            if(weapon[i]!=null && weapon[i].getID() == cardID) {
+                cardToReturn = weapon[i];
+                weapon[i] = null;
+            }
         }
+        if(cardToReturn!=null) return cardToReturn;
         throw new NotCardException("This card is not here! (Already taken or doesn't exist)");
     }
 
@@ -65,7 +70,10 @@ public class CellSpawn extends Cell {
      */
     public void replaceCard(WeaponCard card) throws TooManyException {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
-            if(weapon[i]==null) weapon[i] = card;
+            if(weapon[i]==null) {
+                weapon[i] = card;
+                return;
+            }
         }
         throw new TooManyException("In this cell there are already 3 cards");
     }
