@@ -27,10 +27,9 @@ public class RMIClient implements ClientInterface{
 
 
 
-    /*
-    startClient() is used to create the connection between Client and Server
+    /**
+     * is used to create the connection between Client and Server
      */
-
     public static void startClient() {
 
         /*
@@ -67,11 +66,11 @@ public class RMIClient implements ClientInterface{
 
     }
 
-    /*
-    send() method is used to send messages to the RMIServer.
+
+    /**
+     * is used to send messages to the RMIServer.
+     * @param message
      */
-
-
     public void send (ViewControllerMessage message){
         try {
             stub.send(message);
@@ -81,10 +80,11 @@ public class RMIClient implements ClientInterface{
 
     }
 
-    /*
-    printFromController() is used by the server to send string to the client with the rmi connection
-     */
 
+    /**
+     * is used by the server to send string to the client with the rmi connection
+     * @param string
+     */
 
     public void printFromController(String string) {
 
@@ -93,14 +93,9 @@ public class RMIClient implements ClientInterface{
     }
 
 
-
-
-
-
-
-
-    /*
-    sendMap() is used by the serve with rmi connection to send the map copy
+    /**
+     * is used by the serve with rmi connection to send the map copy
+     * @param map
      */
 
 
@@ -111,9 +106,9 @@ public class RMIClient implements ClientInterface{
 
 
 
-
-    /*
-    getPossibleTarget() is used by RMIServer to send an Arraylist of possible target
+    /**
+     * is used by RMIServer to send an Arraylist of possible target
+     * @param possibleTarget
      */
 
 

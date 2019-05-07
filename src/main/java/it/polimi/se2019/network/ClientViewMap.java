@@ -16,9 +16,11 @@ public class ClientViewMap {
     }
 
 
-    /*
-    setMapCopy() is used by RMIClient to update the map.
+    /**
+     *  is used by RMIClient to update the map.
+     * @param mapCopy
      */
+
     public void setMapCopy(Map mapCopy){
 
         this.mapCopy = mapCopy;
