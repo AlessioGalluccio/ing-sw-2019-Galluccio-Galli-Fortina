@@ -3,7 +3,9 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.deck.AmmoConvertibleCard;
 import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.Card;
-import it.polimi.se2019.model.deck.WeaponDeck;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class CellAmmo extends Cell {
     private AmmoConvertibleCard ammo;
@@ -16,11 +18,18 @@ public class CellAmmo extends Cell {
 
 
     @Override
-    public Card grabCard() {
-        /*Card cardToReturn = ammo;
+    public Card grabCard(int cardID) throws NotCardException {
+        if(ammo == null) throw new NotCardException("Card already taken");
+        Card cardToReturn = ammo;
         ammo = null;
-        return cardToReturn;*/
-         return null; //TODO decidere come implemenatare!
+        return cardToReturn;
+    }
+
+    @Override
+    public List<Integer> getCardID() {
+        ArrayList<Integer> cardId = new ArrayList<>();
+        cardId.add(0);
+        return cardId;
     }
 
     /**

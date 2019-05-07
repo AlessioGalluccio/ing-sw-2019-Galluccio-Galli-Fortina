@@ -76,9 +76,17 @@ public abstract class Cell implements Target {
 
     /**
      *
+     * @param cardID
      * @return the card on the cell
+     * @throws NotCardException
      */
-    public abstract Card grabCard();
+    public abstract Card grabCard(int cardID) throws NotCardException;
+
+    /**
+     *
+     * @return
+     */
+    public abstract List<Integer> getCardID();
 
     /**
      * If the card on the cell was picked, put a new card on the cell
