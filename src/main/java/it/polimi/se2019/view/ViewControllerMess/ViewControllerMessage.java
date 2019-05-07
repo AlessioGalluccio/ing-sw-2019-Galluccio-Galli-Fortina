@@ -1,6 +1,6 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
-import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.io.Serializable;
 import java.util.ArrayList;

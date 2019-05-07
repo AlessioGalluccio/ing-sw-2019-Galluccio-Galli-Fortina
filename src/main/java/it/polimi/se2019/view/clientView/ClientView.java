@@ -1,10 +1,11 @@
-package it.polimi.se2019.network.rmi;
+package it.polimi.se2019.view.clientView;
 
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.rmi.RMIClient;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;

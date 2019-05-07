@@ -1,4 +1,4 @@
-package it.polimi.se2019.network;
+package it.polimi.se2019.view.clientView;
 
 import it.polimi.se2019.model.map.Map;
 

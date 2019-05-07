@@ -1,11 +1,9 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.PlayerView;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
-
-import java.util.List;
 
 public abstract class PowerupCard implements Card {
     private transient PowerupDeck deck;

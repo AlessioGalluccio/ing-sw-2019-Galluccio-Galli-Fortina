@@ -3,7 +3,7 @@ package it.polimi.se2019.network.socket;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.EnemyView;
+import it.polimi.se2019.view.remoteView.EnemyView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

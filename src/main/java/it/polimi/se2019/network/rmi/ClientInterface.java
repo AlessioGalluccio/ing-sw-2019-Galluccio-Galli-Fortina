@@ -4,7 +4,6 @@ import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.EnemyView;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.rmi.Remote;
