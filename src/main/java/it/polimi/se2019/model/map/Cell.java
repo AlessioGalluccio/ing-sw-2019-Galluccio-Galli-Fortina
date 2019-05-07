@@ -5,6 +5,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Cell implements Target {
 
@@ -132,5 +133,23 @@ public abstract class Cell implements Target {
                 "X=" + coordinate.getX() +
                 ", Y=" + coordinate.getY() +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return northBorder.getClass() == cell.northBorder.getClass() &&
+                eastBorder.getClass() == cell.eastBorder.getClass()&&
+                southBorder.getClass() == cell.southBorder.getClass() &&
+                westBorder.getClass()== cell.westBorder.getClass()&&
+                Objects.equals(room, cell.room) &&
+                coordinate.equals(cell.coordinate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(northBorder, eastBorder, southBorder, westBorder, coordinate);
     }
 }

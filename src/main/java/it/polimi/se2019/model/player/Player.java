@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Player extends java.util.Observable implements Target, Serializable {
     private String nickname;
@@ -493,5 +494,20 @@ public class Player extends java.util.Observable implements Target, Serializable
                 ", character=" + character +
                 ", ID=" + ID +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return ID == player.ID &&
+                nickname.equals(player.nickname) &&
+                Objects.equals(character, player.character);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nickname, character, ID);
     }
 }
