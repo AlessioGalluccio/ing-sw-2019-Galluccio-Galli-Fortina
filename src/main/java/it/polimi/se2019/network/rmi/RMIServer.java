@@ -29,8 +29,11 @@ public class RMIServer implements ServerInterface{
     }
 
 
-    /*
-    send() is used by the RMIClient to send messages with rmi network
+
+
+    /**
+     * is used by the RMIClient to send messages with rmi network
+     * @param message
      */
 
     public void send (ViewControllerMessage message){
@@ -38,8 +41,11 @@ public class RMIServer implements ServerInterface{
         playerView.send(message);
     }
 
-    /*
-    printFromController() is used by the server to send string to the RMIClient
+
+
+    /**
+     * is used by the server to send string to the RMIClient
+     * @param string
      */
 
 
@@ -51,10 +57,11 @@ public class RMIServer implements ServerInterface{
     }
 
 
-    /*
-    startServer() is used to create the rmi connection between Client and Server
-     */
 
+
+    /**
+     * is used to create the rmi connection between Client and Server
+     */
     public static void startServer() {
 
         /*
@@ -98,10 +105,10 @@ public class RMIServer implements ServerInterface{
     }
 
 
-    /*
-    with sendMap() server send a copy of the map to the client to let the user see all the changes in the map
+    /**
+     * server send a copy of the map to the client to let the user see all the changes in the map
+     * @param map
      */
-
     public void sendMap(Map map){
 
         skeleton.sendMap(map);
@@ -116,8 +123,10 @@ public class RMIServer implements ServerInterface{
     }
 
 
-    /*
-    sendPossibleTarget() send possible target to client using rmi connection
+
+    /**
+     * send possible target to client using rmi connection
+     * @param possibleTarget
      */
 
     public void sendPossibleTarget (ArrayList<Target> possibleTarget){
@@ -126,8 +135,11 @@ public class RMIServer implements ServerInterface{
 
     }
 
-    /*
-    sendPossibleCharacter() send possible character to client using rmi connection
+
+
+    /**
+     * send possible character to client using rmi connection
+     * @param possibleCharacter
      */
 
 
