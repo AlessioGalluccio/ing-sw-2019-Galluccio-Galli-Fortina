@@ -1,9 +1,11 @@
 package it.polimi.se2019.model.map;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.TooManyException;
 
 public class CellSpawn extends Cell {
     private final int MAX_WEAPONCARD = 3;
@@ -29,13 +31,26 @@ public class CellSpawn extends Cell {
         return color;
     }
 
-    public Room getRoom() {
-        return super.getRoom();
+    @Override
+    public Card grabCard(int cardID) throws NotCardException {
+        WeaponCard cardToReturn = null;
+        for(int i=0; i<MAX_WEAPONCARD; i++) {
+            if(weapon[i]!=null && weapon[i].getID() == cardID) {
+                cardToReturn = weapon[i];
+                weapon[i] = null;
+            }
+        }
+        if(cardToReturn!=null) return cardToReturn;
+        throw new NotCardException("This card is not here! (Already taken or doesn't exist)");
     }
 
     @Override
-    public Card grabCard(){
-        return null; //TODO implementare
+    public List<Integer> getCardID() {
+        ArrayList <Integer> cardId = new ArrayList<>();
+        for(WeaponCard card : weapon) {
+            if(card != null) cardId.add(card.getID());
+        }
+        return cardId;
     }
 
     /**
@@ -46,6 +61,21 @@ public class CellSpawn extends Cell {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
             if(weapon[i]==null && deck.sizeUnususedCard()!=0) weapon[i]=deck.pick();
         }
+    }
+
+    /**
+     * If a player has to discard a Weapon card, this method replace a empty card space with the discarded card
+     * @param card card discarded
+     * @throws TooManyException if there are already 3 cards on this cell
+     */
+    public void replaceCard(WeaponCard card) throws TooManyException {
+        for(int i=0; i<MAX_WEAPONCARD; i++) {
+            if(weapon[i]==null) {
+                weapon[i] = card;
+                return;
+            }
+        }
+        throw new TooManyException("In this cell there are already 3 cards");
     }
 
     @Override

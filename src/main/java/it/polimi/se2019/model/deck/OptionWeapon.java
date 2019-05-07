@@ -19,7 +19,6 @@ public class OptionWeapon extends WeaponCard {
     @Override
     public List<FireMode> getFireMode() {
         List<FireMode> fireModeReturned = new ArrayList<>(optionalFireModeList);
-        fireModeReturned.add(primaryFireMode);
 
         return duplicateFireMode(fireModeReturned);
     }
