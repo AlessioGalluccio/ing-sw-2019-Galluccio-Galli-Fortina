@@ -4,10 +4,7 @@ import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.NotPresentException;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
@@ -89,6 +86,10 @@ public class LockRifle_1 extends FireMode {
                 targetPlayer.receiveDamageBy(authorPlayer);
             }catch (NotPresentException e){
                 msg.getAuthorView().printFromController("Can't do more damage to this player");
+            }catch (YouOverkilledException e) {
+                //TODO
+            }catch (YouDeadException e) {
+                //TODO
             }
         }
         for(int i = 0; i < NUM_MARK; i++){

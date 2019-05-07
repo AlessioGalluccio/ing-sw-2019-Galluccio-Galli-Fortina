@@ -170,7 +170,45 @@ public class TestPlayer {
         assertTrue(cell2.getRoom().getPlayerHere().contains(player));
         assertTrue(cell2.getPlayerHere().contains(player));
         assertFalse(cell1.getPlayerHere().contains(player));
+    }
 
+    @Test (expected = YouDeadException.class)
+    public void testReceiveDamageByEx1() throws YouDeadException{
+        try {
+            for(int i=0; i<11; i++) player.receiveDamageBy(enemy);
+        } catch (YouOverkilledException | NotPresentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test (expected = YouOverkilledException.class)
+    public void testReceiveDamageByEx2() throws YouOverkilledException, NotPresentException {
+        try {
+            for(int i=0; i<12; i++) player.receiveDamageBy(enemy);
+        } catch (YouDeadException e) {
+            try {
+                player.receiveDamageBy(enemy_2);
+            } catch (YouDeadException ex) {
+
+            }
+        }
+    }
+
+    @Test (expected = NotPresentException.class)
+    public void testReceiveDamageByEx3() throws NotPresentException {
+        try {
+            for(int i=0; i<11; i++) player.receiveDamageBy(enemy);
+        } catch (YouDeadException | YouOverkilledException e) {
+            try {
+                player.receiveDamageBy(enemy_2);
+            } catch (YouDeadException | YouOverkilledException ex) {
+                try {
+                    player.receiveDamageBy(enemy_2);
+                } catch (YouDeadException | YouOverkilledException exc) {
+                    exc.printStackTrace();
+                }
+            }
+        }
     }
 
 }

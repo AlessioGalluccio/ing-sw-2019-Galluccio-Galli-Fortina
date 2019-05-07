@@ -250,15 +250,18 @@ public class Player extends java.util.Observable implements Target, Serializable
     /**
      * Add damage to this player
      * @param enemy who had damaged you
+     * @throws NotPresentException If player has been already killed
+     * @throws YouDeadException If player dies in this turn
+     * @throws YouOverkilledException If player is over killed in this turn
      */
-    public void receiveDamageBy(Player enemy) throws NotPresentException {
-        //TODO sistemare se giocatore non è presente
-        if(isOverKilled()){
-            throw new NotPresentException();
-        }
-        //TODO finisci
+    public void receiveDamageBy(Player enemy) throws NotPresentException, YouDeadException, YouOverkilledException {
+        //If player is already kill throw exception, he cannot receive damage!
+        if(isOverKilled()) throw new NotPresentException(toString() + " has been already over killed");
+        damage.add(enemy);
+        if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
+        if(isDead()) throw new YouDeadException(toString() + " has been killed by " + enemy.toString());
 
-    }
+     }
 
     /**
      * Mark this player with a enemy's mark
