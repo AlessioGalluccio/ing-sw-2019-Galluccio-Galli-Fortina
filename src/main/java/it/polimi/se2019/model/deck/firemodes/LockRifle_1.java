@@ -10,7 +10,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.PlayerViewMessage;
+import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
@@ -81,7 +81,7 @@ public class LockRifle_1 extends FireMode {
      * @param msg the target
      * @param gameHandler the handler of the game
      */
-    private void firstTarget(PlayerViewMessage msg, GameHandler gameHandler){
+    private void firstTarget(PlayerMessage msg, GameHandler gameHandler){
         Player authorPlayer = gameHandler.getPlayerByID(msg.getAuthorID());
         Player targetPlayer = gameHandler.getPlayerByID(msg.getPlayerID());
         for(int i = 0; i < NUM_DAMAGE; i++){

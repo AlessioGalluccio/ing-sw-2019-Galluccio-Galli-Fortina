@@ -77,8 +77,8 @@ public class ClientView {
         return message;
     }
 
-    public PlayerViewMessage createPlayerViewMessage(int playerID){
-        PlayerViewMessage message = new PlayerViewMessage(playerID);
+    public PlayerMessage createPlayerViewMessage(int playerID){
+        PlayerMessage message = new PlayerMessage(playerID);
         rmiClient.send(message);
         return message;
     }

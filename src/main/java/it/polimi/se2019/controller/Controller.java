@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
@@ -14,7 +13,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -154,7 +152,7 @@ public class Controller implements Observer {
      * overloading has failed, send message error
      * @param arg the wrong type of message
      */
-    public synchronized void sendTargetsToView(PlayerViewMessage arg) {
+    public synchronized void sendTargetsToView(PlayerMessage arg) {
         //TODO eccezione messaggio inaspettato
     }
 

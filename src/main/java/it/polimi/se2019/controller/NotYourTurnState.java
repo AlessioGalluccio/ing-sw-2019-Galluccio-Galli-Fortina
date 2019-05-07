@@ -56,7 +56,7 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
-    public void handle(PlayerViewMessage arg) {
+    public void handle(PlayerMessage arg) {
         controllTurn(arg);
         arg.getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
 

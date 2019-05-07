@@ -68,7 +68,7 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handle(PlayerViewMessage arg) {
+    public void handle(PlayerMessage arg) {
         arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
     }
 

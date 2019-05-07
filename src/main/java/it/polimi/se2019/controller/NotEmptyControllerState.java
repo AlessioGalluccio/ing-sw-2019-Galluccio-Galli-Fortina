@@ -8,7 +8,6 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
@@ -87,7 +86,7 @@ public class NotEmptyControllerState implements StateController {
     }
 
     @Override
-    public void handle(PlayerViewMessage arg) {
+    public void handle(PlayerMessage arg) {
         if(startingHandler(arg)){
             //TODO
             endingHandler(arg);
@@ -231,7 +230,7 @@ public class NotEmptyControllerState implements StateController {
         return false;
     }
 
-    private boolean isPlayerTargetMessage(PlayerViewMessage arg){
+    private boolean isPlayerTargetMessage(PlayerMessage arg){
         return true;
     }
 

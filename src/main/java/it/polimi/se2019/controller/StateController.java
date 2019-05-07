@@ -13,11 +13,13 @@ public interface StateController {
 
     public void handle(FireModeMessage arg);
 
+    public void handle(LoginMessage arg);
+
     public void handle(NewtonMessage arg);
 
     public void handle(NopeMessage arg);
 
-    public void handle(PlayerViewMessage arg);
+    public void handle(PlayerMessage arg);
 
     public void handle(ReloadMessage arg);
 
@@ -30,7 +32,7 @@ public interface StateController {
     public void handle(TeleporterMessage arg);
 
     /**
-     * default method. SHould not be used
+     * default method. Should not be used
      * @param arg
      */
     public void handle(Object arg);
