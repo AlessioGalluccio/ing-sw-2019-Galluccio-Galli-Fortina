@@ -1,5 +1,8 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.deck.AmmoDeck;
+import it.polimi.se2019.model.deck.WeaponDeck;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,6 +154,68 @@ class InitializeMap {
 
     InitializeMap(int numOfRow, int numOfColumn) {
         cell = new Cell[numOfColumn][numOfRow];
+    }
+
+    /**
+     * Blue room of Map 1 and Map 2 has the same coordinate
+     * This method initialize the common room
+     */
+    void addCommonBlueRoom() {
+        ArrayList<Cell> cellForRoom = new ArrayList<>();
+        cellForRoom.add(cell[0][2]);
+        cellForRoom.add(cell[1][2]);
+        cellForRoom.add(cell[2][2]);
+
+        room.add(new Room((CellSpawn) cell[2][2], "BLUE", new ArrayList<>(cellForRoom)));
+    }
+
+    /**
+     * Map 4 and map 2 have the same yellow  and green room
+     * This method initialize the common room
+     * @param weaponDeck
+     * @param ammoDeck
+     */
+    void createCommonYellowGreenRoom(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
+        cell[2][0] = new CellAmmo(new Passage(), new Passage(), new Wall(), new Door(), 2, 0, ammoDeck);
+        cell[3][0] = new CellSpawn(new Passage(), new Wall(), new Wall(), new Passage(), 3, 0, weaponDeck);
+        cell[3][1] = new CellAmmo(new Door(), new Wall(), new Passage(), new Passage(), 3, 1, ammoDeck);
+        cell[2][1] = new CellAmmo(new Door(), new Passage(), new Passage(), new Wall(), 2, 1, ammoDeck);
+
+        ArrayList<Cell> cellForRoom = new ArrayList<>();
+        cellForRoom.add(cell[2][0]);
+        cellForRoom.add(cell[3][0]);
+        cellForRoom.add(cell[3][1]);
+        cellForRoom.add(cell[2][1]);
+
+        room.add(new Room((CellSpawn) cell[3][0], "YELLOW", new ArrayList<>(cellForRoom)));
+
+        cell[3][2] = new CellAmmo(new Wall(), new Wall(), new Door(), new Door(), 3, 2, ammoDeck);
+
+        cellForRoom.clear();
+        cellForRoom.add(cell[3][2]);
+
+        room.add(new Room(null, "GREEN", new ArrayList<>(cellForRoom)));
+    }
+
+    /**
+     * Map 4 and map 3 have the same red room
+     * This method initialize the common room
+     * @param weaponDeck
+     * @param ammoDeck
+     */
+    void createCommonRedRoom(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
+        cell[0][1] = new CellSpawn(new Passage(), new Wall(), new Door(), new Wall(), 0, 1, weaponDeck);
+        cell[0][2] = new CellAmmo(new Wall(), new Door(), new Passage(), new Wall(), 0, 2, ammoDeck);
+
+        ArrayList<Cell> cellForRoom = new ArrayList<>();
+        cellForRoom.add(cell[0][1]);
+        cellForRoom.add(cell[0][2]);
+
+        room.add(new Room((CellSpawn) cell[0][1], "RED", new ArrayList<>(cellForRoom)));
+
+        //This line is also in common
+        cell[1][2] = new CellAmmo(new Wall(), new Passage(), new Door(), new Door(), 1, 2, ammoDeck);
+
     }
 }
 
