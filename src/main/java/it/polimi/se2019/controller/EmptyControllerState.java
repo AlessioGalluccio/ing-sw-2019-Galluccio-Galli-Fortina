@@ -110,7 +110,7 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handleTeleporting(TeleporterCard usedCard) {
+    public void handleTeleporter(TeleporterCard usedCard) {
         //TODO
     }
 

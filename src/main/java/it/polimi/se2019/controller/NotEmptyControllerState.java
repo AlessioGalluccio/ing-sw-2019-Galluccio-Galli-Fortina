@@ -1,10 +1,11 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.TargetingScopeCard;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -24,110 +25,99 @@ public class NotEmptyControllerState implements StateController {
     }
 
     @Override
-    public void handle(ActionMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
-        }
+    public void handleAction(int actionID) {
+        //TODO
 
     }
 
     @Override
-    public void handle(CardSpawnChooseMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
-        }
+    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
+        //TODO
 
     }
 
     @Override
-    public void handle(CellMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
-        }
-    }
-
-    @Override
-    public void handle(FireModeMessage arg) {
-        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
-        FireMode fireMode = getFireModeByID(arg.getFiremodeID());
-        AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
-
-        if(!player.canPayAmmo(cost)){
-            arg.getAuthorView().printFromController("Not enough ammo for this firemode");
-            return;
-        }
-        else{
-            controller.sendTargetsToView(arg);
-            endingHandler(arg);
-        }
-    }
-
-    @Override
-    public void handle(LoginMessage arg) {
+    public void handleCell(int coordinateX, int coordinateY) {
         //TODO
     }
 
     @Override
-    public void handle(NewtonMessage arg) {
-        if(startingHandler(arg)){
-            controller.sendTargetsToView(arg);
-            endingHandler(arg);
-        }
-    }
+    public void handleFiremode(int firemodeID) {
+        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
+        FireMode fireMode = getFireModeByID(firemodeID);
+        AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
 
-    @Override
-    public void handle(NopeMessage arg) {
-        int index = controller.getIndexExpected();
-        if(controller.getCopyMessageListExpected().get(index).isOptional()){
-            endingHandler(arg);
+        if(!player.canPayAmmo(cost)){
+            controller.getLastReceivedMessage().getAuthorView().printFromController("Not enough ammo for this firemode");
+            controller.removeLastReceivedMessage();
         }
         else{
-            String response = controller.getCopyMessageListExpected().get(index).getString();
-            arg.getAuthorView().printFromController(response);
+            //TODO sistema
+            //controller.sendTargetsToView(controller.getLastReceivedMessage());
         }
     }
 
     @Override
-    public void handle(PlayerMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
-        }
-
+    public void handleLogin(String playerNickname, Character chosenCharacter) {
+        //TODO
     }
 
     @Override
-    public void handle(ReloadMessage arg) {
-        if(startingHandler(arg)){
-            //TODO
-            endingHandler(arg);
-        }
-    }
-
-    @Override
-    public void handle(TagbackGranateMessage arg) {
+    public void handleNewton(NewtonCard usedCard) {
+        //TODO
+        /*
         if(startingHandler(arg)){
             controller.sendTargetsToView(arg);
             endingHandler(arg);
         }
+        */
+    }
+
+    @Override
+    public void handleNope() {
+        int index = controller.getIndexExpected();
+        if(!controller.getCopyMessageListExpected().get(index).isOptional()){
+            String response = controller.getCopyMessageListExpected().get(index).getString();
+            controller.getLastReceivedMessage().getAuthorView().printFromController(response);
+            controller.removeLastReceivedMessage();
+        }
+        else{
+            //do nothing
+        }
 
     }
 
     @Override
-    public void handle(TargetingScopeMessage arg) {
-        AmmoBag cost = arg.getCost();
-        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
+    public void handlePlayer(int playerID) {
+        //TODO
+
+    }
+
+    @Override
+    public void handleReload(int weaponID) {
+        //TODO
+    }
+
+    @Override
+    public void handleTagback(TagbackGranedCard usedCard) {
+        //TODO
+
+    }
+
+    @Override
+    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
+        AmmoBag cost = TargetingScopeMessage.getCost(colorAmmo);
+        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
         int indexOfPrevious = (controller.getIndexExpected() - 1);
         List<ViewControllerMessage> stack = controller.getCopyMessageListReceived();
+        //TODO
+        /*
         if(isPlayerTargetMessage(stack.get(indexOfPrevious))){
             for(int i = 0; i < indexOfPrevious; i++){
                 cost = addCost(stack.get(i), cost);
                 //cost is controlled (other targeting scopes and the last firemode)
                 if(!player.canPayAmmo(cost)){
-                    arg.getAuthorView().printFromController("You don't have enough Ammo for this Targeting Scope");
+                    controller.getLastReceivedMessage().getAuthorView().printFromController("You don't have enough Ammo for this Targeting Scope");
                     return;
                 }
                 try{
@@ -140,7 +130,7 @@ public class NotEmptyControllerState implements StateController {
                     }
                 }catch(FiremodeOfOnlyMarksException e){
                     //this firemode adds only marks, you can't use this card
-                    arg.getAuthorView().printFromController("You can't use targeting scope with this firemode");
+                    controller.getLastReceivedMessage().getAuthorView().printFromController("You can't use targeting scope with this firemode");
                     return;
                 }
 
@@ -150,24 +140,23 @@ public class NotEmptyControllerState implements StateController {
             return;
         }
 
+        */
+
     }
 
     @Override
-    public void handle(TeleporterMessage arg) {
+    public void handleTeleporter(TeleporterCard usedCard) {
+        //TODO
+
+    }
+
+
+    @Override
+    public void handle(ViewControllerMessage arg) {
         if(startingHandler(arg)){
-            //TODO
+            arg.handle(this);
             endingHandler(arg);
         }
-
-    }
-
-    /**
-     * it should be not used
-     * @param arg
-     */
-    @Override
-    public void handle(Object arg) {
-        throw new IllegalArgumentException();
     }
 
     /**
@@ -178,6 +167,7 @@ public class NotEmptyControllerState implements StateController {
      *              0 if not (message is discarded)
      */
     private boolean startingHandler(ViewControllerMessage arg) {
+        //TODO sistemare starting a ending handler
         int index = controller.getIndexExpected();
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
         if(arg.getMessageID() == expectedID) {
@@ -278,10 +268,11 @@ public class NotEmptyControllerState implements StateController {
      * @param msg the message
      * @param cost the AmmoBag that will be updated
      */
-    private AmmoBag addCost(TargetingScopeMessage msg, AmmoBag cost){
-        //it return the sum
-        return AmmoBag.sumAmmoBag(cost, msg.getCost());
-    }
+    //private AmmoBag addCost(TargetingScopeMessage msg, AmmoBag cost){
+        //it returns the sum
+        //return AmmoBag.sumAmmoBag(cost, msg.getCost());
+     // }
+
 
     /**
      * add the cost of the card in cost

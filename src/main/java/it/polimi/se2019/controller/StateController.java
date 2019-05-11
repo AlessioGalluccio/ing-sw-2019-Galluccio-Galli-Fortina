@@ -36,7 +36,7 @@ public interface StateController {
 
     public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo);
 
-    public void handleTeleporting(TeleporterCard usedCard);
+    public void handleTeleporter(TeleporterCard usedCard);
 
 
 

@@ -24,6 +24,6 @@ public class TeleporterMessage extends ViewControllerMessage {
 
     @Override
     public void handle(StateController stateController) {
-        stateController.handleTeleporting(usedCard);
+        stateController.handleTeleporter(usedCard);
     }
 }

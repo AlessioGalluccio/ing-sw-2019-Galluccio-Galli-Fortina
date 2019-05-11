@@ -94,7 +94,7 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
-    public void handleTeleporting(TeleporterCard usedCard) {
+    public void handleTeleporter(TeleporterCard usedCard) {
         controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
         controller.removeLastReceivedMessage();
     }

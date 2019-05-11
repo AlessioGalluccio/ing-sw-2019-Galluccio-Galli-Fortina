@@ -29,7 +29,7 @@ public class TargetingScopeMessage extends ViewControllerMessage {
      * returns the color of the ammo used
      * @return ColorRYB of the ammo used
      */
-    public AmmoBag getCost(){
+    public static AmmoBag getCost(ColorRYB colorAmmo){
         switch (colorAmmo){
             case RED: return new AmmoBag(1,0,0);
             case YELLOW: return new AmmoBag(0,1,0);
