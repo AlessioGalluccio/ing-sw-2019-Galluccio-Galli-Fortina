@@ -243,7 +243,7 @@ public class NotEmptyControllerState implements StateController {
     }
 
 
-
+/*
     private boolean isThisTargetingAlreadyPresent(List<ViewControllerMessage> stack, TargetingScopeCard targetingScopeCard){
         for(ViewControllerMessage msg : stack){
             if(isTargetingScopeUsed(msg, targetingScopeCard)){
@@ -252,6 +252,7 @@ public class NotEmptyControllerState implements StateController {
         }
         return false;
     }
+    */
 
     /**
      * does nothing, because it doesn't have cost like Firemode or TargetingScope
