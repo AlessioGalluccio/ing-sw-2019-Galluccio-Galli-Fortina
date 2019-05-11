@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
 
+import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.Identificator;
 
@@ -8,6 +9,9 @@ import java.util.ArrayList;
 
 public class TargetMessage extends ViewControllerMessage {
     private int messageID;
+
+
+    //TODO classe da eliminare!
 
     //TODO modificare questo ArrayList in un possibile singolo target
     private Target target;
@@ -24,5 +28,10 @@ public class TargetMessage extends ViewControllerMessage {
     @Override
     public int getMessageID() {
         return messageID;
+    }
+
+    @Override
+    public void handle(StateController stateController) {
+        //TODO
     }
 }
