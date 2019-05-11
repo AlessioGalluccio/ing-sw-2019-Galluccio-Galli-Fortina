@@ -16,7 +16,7 @@ public class GameHandler extends java.util.Observable {
     private PointDeck pointDeck;
     private WeaponDeck weaponDeck;
     private static Map map;
-    private static ArrayList<Player> orderPlayerList;
+    private ArrayList<Player> orderPlayerList;
     private int turn;
     private Death death;
     private Modality mode;
@@ -24,8 +24,10 @@ public class GameHandler extends java.util.Observable {
     //Implementato SOLO PER TESTARE getPlayerByID()
     //Usato in TestPlayer -> testReceiveMark() per getMarkReveived e getMarkDone della classe Mark
     //TODO Da fare decenetemente
+    //TODO sistemare gestione degli ID
     public GameHandler(ArrayList<Player> list) {
-        orderPlayerList = list;
+        this.orderPlayerList = list;
+        this.turn = 0;
     }
 
     /**
@@ -122,7 +124,7 @@ public class GameHandler extends java.util.Observable {
      */
     public  ArrayList<Player> getOrderPlayerList(){
         //TODO fai copia
-        return getOrderPlayerList();
+        return orderPlayerList;
     }
 
     public static FireMode getFireModeByID(int fireModeID){
