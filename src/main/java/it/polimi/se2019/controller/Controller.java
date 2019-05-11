@@ -58,6 +58,18 @@ public class Controller implements Observer {
         return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
     }
 
+
+    public ViewControllerMessage getLastReceivedMessage(){
+        //TODO da controllare in casi particolari
+        int last = messageListReceived.size();
+        return messageListReceived.get(last);
+    }
+
+    public void removeLastReceivedMessage(){
+        int last = messageListExpected.size();
+        messageListExpected.remove(last);
+    }
+
     public int getIndexExpected() {
         return indexExpected;
     }
@@ -104,7 +116,8 @@ public class Controller implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         try {
-            state.handle(arg);
+            //TODO sistema tutto l'update
+            //state.handle(arg);
         }catch (Exception e) {
             System.err.println("Controller exception: " + e.toString());
             e.printStackTrace();

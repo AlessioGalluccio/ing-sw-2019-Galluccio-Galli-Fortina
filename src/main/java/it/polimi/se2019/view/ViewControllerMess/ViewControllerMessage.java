@@ -1,5 +1,6 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
+import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public abstract class ViewControllerMessage implements Serializable {
      * @return the integer value of the ID of the message
      */
     public abstract int getMessageID();
+
+    public abstract void handle(StateController stateController);
 
 
 }

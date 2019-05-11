@@ -1,38 +1,44 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 public interface StateController {
 
-
-    public void handle(ActionMessage arg);
-
-    public void handle(CardSpawnChooseMessage arg);
-
-    public void handle(CellMessage arg);
-
-    public void handle(FireModeMessage arg);
-
-    public void handle(LoginMessage arg);
-
-    public void handle(NewtonMessage arg);
-
-    public void handle(NopeMessage arg);
-
-    public void handle(PlayerMessage arg);
-
-    public void handle(ReloadMessage arg);
-
-    public void handle(TagbackGranateMessage arg);
-
-    public void handle(TargetingScopeMessage arg);
-
-    public void handle(TeleporterMessage arg);
-
     /**
-     * default method. Should not be used
+     * used by the controller to pass the new message, the other methods are used by messages themselves
      * @param arg
      */
-    public void handle(Object arg);
+    public void handle(ViewControllerMessage arg);
+
+
+    public void handleAction(int actionID);
+
+    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded);
+
+    public void handleCell(int coordinateX, int coordinateY);
+
+    public void handleFiremode(int firemodeID);
+
+    public void handleLogin(String playerNickname, Character chosenCharacter);
+
+    public void handleNewton(NewtonCard usedCard);
+
+    public void handleNope();
+
+    public void handlePlayer(int playerID);
+
+    public void handleReload(int weaponID);
+
+    public void handleTagback(TagbackGranedCard usedCard);
+
+    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo);
+
+    public void handleTeleporting(TeleporterCard usedCard);
+
+
+
 
 }

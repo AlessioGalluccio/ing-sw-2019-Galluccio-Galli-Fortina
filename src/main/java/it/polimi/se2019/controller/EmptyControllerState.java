@@ -1,8 +1,10 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -21,16 +23,10 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handle(ActionMessage arg) {
-
-        //messageListReceived
-        ArrayList<ViewControllerMessage> messageListReceived = new ArrayList<>();
-        messageListReceived.add(arg);
-        controller.setMessageListReceived(messageListReceived);
+    public void handleAction(int actionID) {
 
         //messageListExpected
-        int messageID = arg.getMessageID();
-        Action action = gameHandler.getActionByID(messageID);
+        Action action = gameHandler.getActionByID(actionID);
         ArrayList<StringAndMessage> stringAndMessage = action.getStringAndMessageExpected();
         controller.setMessageListExpected(stringAndMessage);
 
@@ -40,82 +36,87 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handle(CardSpawnChooseMessage arg) {
+    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         //TODO ??? cosa è?
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(CellMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handleCell(int coordinateX, int coordinateY) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(FireModeMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handleFiremode(int firemodeID) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(LoginMessage arg) {
+    public void handleLogin(String playerNickname, Character chosenCharacter) {
         //TODO
     }
 
     @Override
-    public void handle(NewtonMessage arg) {
+    public void handleNewton(NewtonCard usedCard) {
         //TODO
 
     }
 
     @Override
-    public void handle(NopeMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handleNope() {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(PlayerMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handlePlayer(int playerID) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(ReloadMessage arg) {
+    public void handleReload(int weaponID) {
         //TODO
-        Player player = gameHandler.getPlayerByID(arg.getAuthorID());
-        int weaponID = arg.getWeaponID();
+        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
 
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            arg.getAuthorView().printFromController("Error: Player doesn't have this Weapon");
-            arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+            controller.getLastReceivedMessage().getAuthorView().printFromController("Error: Player doesn't have this Weapon");
+            controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
         }catch(WeaponIsLoadedException e){
-            arg.getAuthorView().printFromController("This weapon is already loaded");
-            arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+            controller.getLastReceivedMessage().getAuthorView().printFromController("This weapon is already loaded");
+            controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
         }catch(NotEnoughAmmoException e){
-            arg.getAuthorView().printFromController("To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again");
+            controller.getLastReceivedMessage().getAuthorView().printFromController("To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again");
         }
 
     }
 
     @Override
-    public void handle(TagbackGranateMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handleTagback(TagbackGranedCard usedCard) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 
     @Override
-    public void handle(TargetingScopeMessage arg) {
-        arg.getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
 
     }
 
     @Override
-    public void handle(TeleporterMessage arg) {
+    public void handleTeleporting(TeleporterCard usedCard) {
         //TODO
     }
 
     @Override
-    public void handle(Object arg) {
-        //TODO scrivi eccezione
-        throw new IllegalArgumentException();
+    public void handle(ViewControllerMessage arg) {
+        controller.addMessageListReceived(arg);
+        arg.handle(this);
     }
 }
