@@ -20,6 +20,10 @@ public abstract class Map extends java.util.Observable implements Serializable {
         this.description = description;
     }
 
+    /**
+     * Create a new map with the same cell, it's not a deep copy
+     * @return A copy of the map
+     */
     public Cell[][] getCell(){
         //Create a new matrix with the SAME cell, not deep copy
         Cell[][] cellToReturn = new Cell[cell.length][cell[1].length];
@@ -31,17 +35,25 @@ public abstract class Map extends java.util.Observable implements Serializable {
         return cellToReturn;
     }
 
+    /**
+     * Return a shallow copy of the rooms
+     * @return copy of the rooms
+     */
     public List<Room> getRooms() {
         return new ArrayList<Room>(room);
     }
 
+    /**
+     * Return the description of this map
+     * @return description fo this map
+     */
     public String getDescription() {
         return description;
     }
 
 
     /**
-     * compute distance from start to end according to Manhattan
+     * Compute distance from start to end
      * @param cellStart cell to start the distance
      * @param cellEnd cell to end the distance
      * @return distance
@@ -64,6 +76,12 @@ public abstract class Map extends java.util.Observable implements Serializable {
         return 0;*/
     }
 
+    /**
+     * Return the cell with coordinate x,y
+     * @param x Coordinate x of the cell
+     * @param y Coordinate y of the cell
+     * @return The cell with coordinate x,y
+     */
     public Cell getCellByCoo(int x, int y){
         //TODO fai copia
         return cell[x][y];
@@ -170,7 +188,7 @@ class InitializeMap {
     }
 
     /**
-     * Map 4 and map 2 have the same yellow  and green room
+     * Map 4 and map 2 have the same yellow and green room
      * This method initialize the common room
      * @param weaponDeck
      * @param ammoDeck

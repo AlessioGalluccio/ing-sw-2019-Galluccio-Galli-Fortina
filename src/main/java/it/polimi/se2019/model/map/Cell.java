@@ -68,7 +68,7 @@ public abstract class Cell implements Target {
     }
 
     /**
-     *
+     * Return a shallow copy of the player on this cell
      * @return list of players on this cell
      */
     public List<Player> getPlayerHere() {
@@ -76,16 +76,16 @@ public abstract class Cell implements Target {
     }
 
     /**
-     *
-     * @param cardID
+     * Each cell has some card on it, this method grab a card
+     * @param cardID ID of the card I wanna grab (ONLY FOR THOSE CELL THAT HAS MORE CARD ON IT) --Not CellAmmo
      * @return the card on the cell
-     * @throws NotCardException
+     * @throws NotCardException If card has already taken or there not a card with the ID
      */
     public abstract Card grabCard(int cardID) throws NotCardException;
 
     /**
-     *
-     * @return
+     * Each cell has some card on it, this method return a list of that cards' IDs
+     * @return the IDs of the cards on this cell
      */
     public abstract List<Integer> getCardID();
 
@@ -94,6 +94,11 @@ public abstract class Cell implements Target {
      */
     protected abstract void reloadCard();
 
+    /**
+     * Each cell has to have a room, this method set the appropriate room
+     * @param room room of this cell
+     * @throws AlreadyRoomException if a room was already set for this cell, it can't be modified!
+     */
     protected void setRoom(Room room) {
         if(this.room==null) this.room = room;
         else throw new AlreadyRoomException("This cell " + this +" has already a room!");
