@@ -7,11 +7,8 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class LoginMessage extends ViewControllerMessage{
 
-    private int messageID;
     private String playerNickname;
     private Character chosenCharacter;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * LoginMessage class's constructor
@@ -20,7 +17,6 @@ public class LoginMessage extends ViewControllerMessage{
      * @param authorID
      * @param authorView
      */
-
     public LoginMessage(String playerNickname, Character choosenCharacter, int authorID, PlayerView authorView) {
 
         this.messageID = Identificator.LOGIN_MESSAGE;

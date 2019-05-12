@@ -8,10 +8,6 @@ public class UndoMessage extends  ViewControllerMessage {
 
     //TODO classe forse da eliminare
 
-    private int messageID;
-    private int authorID;
-    private PlayerView authorView;
-
 
     /**
      * UndoMessage class's constructor

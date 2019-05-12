@@ -8,10 +8,8 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 public class ReloadMessage extends ViewControllerMessage {
-    private int messageID;
+
     private int weaponID;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * ReloadMessage class's constructor
@@ -19,7 +17,6 @@ public class ReloadMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public ReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView) {
 
         this.weaponID = weapon.getID();

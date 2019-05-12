@@ -8,8 +8,6 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 public class ActionMessage extends ViewControllerMessage {
     private int messageID;
     private int actionID;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * ActionMessage class's constructor
@@ -17,7 +15,6 @@ public class ActionMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public ActionMessage(int actionID,int authorID,PlayerView authorView) {
         this.actionID = actionID;
         this.messageID = Identificator.ACTION_MESSAGE;

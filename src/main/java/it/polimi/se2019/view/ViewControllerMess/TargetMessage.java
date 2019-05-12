@@ -10,10 +10,7 @@ import java.util.ArrayList;
 
 public class TargetMessage extends ViewControllerMessage {
 
-    private int messageID;
     private Target target;
-    private int authorID;
-    private PlayerView authorView;
 
 
     //TODO classe da eliminare!

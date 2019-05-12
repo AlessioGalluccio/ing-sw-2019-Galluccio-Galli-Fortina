@@ -7,10 +7,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class NewtonMessage extends ViewControllerMessage {
 
-    private int messageID;
     private NewtonCard usedCard;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * NewtonMessage class's constructor
@@ -18,7 +15,6 @@ public class NewtonMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public NewtonMessage(NewtonCard usedCard, int authorID, PlayerView authorView) {
         this.usedCard = usedCard;
         this.messageID = Identificator.NEWTON_MESSAGE;

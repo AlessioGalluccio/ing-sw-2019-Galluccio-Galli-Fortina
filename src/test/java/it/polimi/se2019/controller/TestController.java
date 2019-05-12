@@ -34,7 +34,7 @@ public class TestController {
 
     @Test
     public void testMessageListReceivedEqual() {
-        /*
+
         NopeMessage nopeMessage = new NopeMessage(authorID, playerView);
         controller.addMessageListReceived(nopeMessage);
         ArrayList<ViewControllerMessage> received = controller.getCopyMessageListReceived();
@@ -43,17 +43,17 @@ public class TestController {
         controller.addMessageListReceived(teleporterMessage);
         received = controller.getCopyMessageListReceived();
         assertEquals(teleporterMessage.getMessageID(), received.get(1).getMessageID());
-        */
+
     }
 
     @Test
     public void testMessageListReceivedNotEqual() {
-        /*
+
         NopeMessage nopeMessage = new NopeMessage(authorID, playerView);
         controller.addMessageListReceived(new TeleporterMessage(new TeleporterCard(ColorRYB.RED), authorID, playerView));
         ArrayList<ViewControllerMessage> received = controller.getCopyMessageListReceived();
         assertNotEquals(nopeMessage.getMessageID(), received.get(0).getMessageID());
-        */
+        
     }
 
 

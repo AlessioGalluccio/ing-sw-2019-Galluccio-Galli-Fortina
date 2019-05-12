@@ -10,8 +10,6 @@ public class CardSpawnChooseMessage extends ViewControllerMessage {
     private int messageID;
     private PowerupCard cardChoosen;
     private PowerupCard cardDiscarded;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * CardSpawnChoooseMessage class's constructor
@@ -20,7 +18,6 @@ public class CardSpawnChooseMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public CardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded, int authorID,
             PlayerView authorView) {
         this.cardChoosen = cardChoosen;

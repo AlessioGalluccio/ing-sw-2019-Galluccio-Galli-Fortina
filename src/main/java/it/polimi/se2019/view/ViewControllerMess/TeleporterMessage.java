@@ -8,10 +8,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TeleporterMessage extends ViewControllerMessage {
 
-    private int messageID;
     private TeleporterCard usedCard;
-    private int authorID;
-    private PlayerView authorView;
 
 
     /**

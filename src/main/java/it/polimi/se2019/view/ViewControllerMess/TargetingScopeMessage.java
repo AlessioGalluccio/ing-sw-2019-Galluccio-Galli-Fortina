@@ -9,11 +9,8 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TargetingScopeMessage extends ViewControllerMessage {
 
-    private int messageID;
     private TargetingScopeCard usedCard;
     private ColorRYB colorAmmo;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * TargetingScopeMessage class's constructor

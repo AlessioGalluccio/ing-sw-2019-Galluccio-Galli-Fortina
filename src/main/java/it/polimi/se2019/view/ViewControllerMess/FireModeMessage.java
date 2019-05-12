@@ -5,10 +5,8 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class FireModeMessage extends ViewControllerMessage {
-    private int messageID;
+
     private int firemodeID;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * FireModeMessage class's constructor
@@ -16,7 +14,6 @@ public class FireModeMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public FireModeMessage(int firemodeID, int authorID, PlayerView authorView) {
         this.firemodeID = firemodeID;
         this.messageID = Identificator.FIRE_MODE_MESSAGE;

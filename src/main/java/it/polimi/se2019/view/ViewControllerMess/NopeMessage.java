@@ -6,18 +6,13 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class NopeMessage extends ViewControllerMessage {
 
-    private int messageID;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * NopeMessage class's constructor
      * @param authorID
      * @param authorView
      */
-
     public NopeMessage(int authorID, PlayerView authorView) {
-
         this.messageID = Identificator.NOPE_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;

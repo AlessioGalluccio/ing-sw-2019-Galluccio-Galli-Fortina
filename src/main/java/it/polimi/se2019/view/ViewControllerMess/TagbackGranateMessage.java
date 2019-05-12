@@ -7,10 +7,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TagbackGranateMessage extends ViewControllerMessage {
 
-    private int messageID;
     private TagbackGranedCard usedCard;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * TagbackGranateMessage class's constructor
@@ -18,7 +15,6 @@ public class TagbackGranateMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-
     public TagbackGranateMessage(TagbackGranedCard usedCard, int authorID, PlayerView authorView) {
 
         this.usedCard = usedCard;

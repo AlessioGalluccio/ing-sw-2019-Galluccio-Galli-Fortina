@@ -6,10 +6,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class PlayerMessage extends ViewControllerMessage {
 
-    private int messageID;
     private int playerID;
-    private int authorID;
-    private PlayerView authorView;
 
     /**
      * PlayerMessage class constructor

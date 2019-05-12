@@ -7,8 +7,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public abstract class ViewControllerMessage implements Serializable {
-    private int authorID;
-    private PlayerView authorView;
+    protected int authorID; //Protected: can be accessed only in this package, so only by class message. It's OK!
+    protected PlayerView authorView;
+    protected int messageID;
     private ArrayList<ViewControllerMessage> nextMessage;
 
     public ViewControllerMessage() {
