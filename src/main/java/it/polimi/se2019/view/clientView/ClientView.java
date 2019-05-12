@@ -6,14 +6,16 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.rmi.RMIClient;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import javafx.beans.InvalidationListener;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-
-public class ClientView {
+public class ClientView extends Observable implements View{
 
     private Player playerCopy;
     private Map mapCopy;
@@ -71,7 +73,7 @@ public class ClientView {
 
         if(verifyTarget()) {
             TargetMessage message = new TargetMessage(target,authorID,authorView);
-            rmiClient.send(message);
+            notifyObservers(message);
 
         }
 
@@ -88,7 +90,7 @@ public class ClientView {
 
     public CellMessage createCellMessage(int x, int y, int authorID, PlayerView authorView){
         CellMessage message = new CellMessage(x,y,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -102,7 +104,7 @@ public class ClientView {
 
     public PlayerMessage createPlayerViewMessage(int playerID, int authorID, PlayerView authorView){
         PlayerMessage message = new PlayerMessage(playerID,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -117,7 +119,7 @@ public class ClientView {
     public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded,
                                                                int authorID, PlayerView authorView){
         CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -130,7 +132,7 @@ public class ClientView {
 
     public NopeMessage createNopeMessage(int authorID, PlayerView authorView){
         NopeMessage message = new NopeMessage(authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -143,7 +145,7 @@ public class ClientView {
      */
     public ActionMessage createActionMessage(int actionID, int authorID, PlayerView authorView){
         ActionMessage message = new ActionMessage(actionID,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -157,7 +159,7 @@ public class ClientView {
      */
     public NewtonMessage createNewtonMessage(NewtonCard usedCard, int authorID, PlayerView authorView){
         NewtonMessage message = new NewtonMessage(usedCard,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -171,7 +173,7 @@ public class ClientView {
 
     public ReloadMessage createReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView){
         ReloadMessage message = new ReloadMessage(weapon,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -184,7 +186,7 @@ public class ClientView {
      */
     public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard, int authorID, PlayerView authorView){
         TeleporterMessage message = new TeleporterMessage(usedCard,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -199,7 +201,7 @@ public class ClientView {
     public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB,
                                                              int authorID, PlayerView authorView){
         TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -215,7 +217,7 @@ public class ClientView {
     public TagbackGranateMessage createTagbackGranadeMessage(TagbackGranedCard usedCard, int authorID,
                                                              PlayerView authorView){
         TagbackGranateMessage message = new TagbackGranateMessage(usedCard,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -228,7 +230,7 @@ public class ClientView {
      */
     public FireModeMessage createFireModeMessage(int firemodeID, int authorID, PlayerView authorView){
         FireModeMessage message = new FireModeMessage(firemodeID,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -242,7 +244,7 @@ public class ClientView {
 
     public EndMessage createEndMessage (int messageID, int authorID, PlayerView authorView){
         EndMessage message = new EndMessage(authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -255,7 +257,7 @@ public class ClientView {
      */
     public UndoMessage createUndoMessage(int messageID, int authorID, PlayerView authorView){
         UndoMessage message = new UndoMessage(authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -271,7 +273,7 @@ public class ClientView {
     public LoginMessage createLoginMessage(int messageID, String nickname, Character choosenCharacter, int authorID,
                                            PlayerView authorView){
         LoginMessage message = new LoginMessage(nickname,choosenCharacter,authorID,authorView);
-        rmiClient.send(message);
+        notifyObservers(message);
         return message;
     }
 
@@ -343,12 +345,20 @@ public class ClientView {
 
 
 
+    public void notifyObservers(ViewControllerMessage message){
+
+    }
 
 
+    @Override
+    public void addListener(InvalidationListener listener) {
 
+    }
 
+    @Override
+    public void removeListener(InvalidationListener listener) {
 
-
+    }
 }
 
 

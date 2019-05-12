@@ -13,7 +13,10 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class RMIClient implements ClientInterface{
+import java.util.Observable;
+import java.util.Observer;
+
+public class RMIClient implements ClientInterface, Observer {
 
     private ServerInterface stub;
 
@@ -31,7 +34,8 @@ public class RMIClient implements ClientInterface{
     /**
      * is used to create the connection between Client and Server
      */
-    public static void startClient() {
+    public void startClient() {
+
 
         /*
         RMIClient is registered in a registry so it can be use as a server by the RMIServer class to send model's
@@ -72,6 +76,8 @@ public class RMIClient implements ClientInterface{
      * is used to send messages to the RMIServer.
      * @param message
      */
+
+
     public void send (ViewControllerMessage message){
         try {
             stub.send(message);
@@ -80,6 +86,19 @@ public class RMIClient implements ClientInterface{
         }
 
     }
+    //TODO sistemare update con invio messaggio al server
+    @Override
+    public void update(Observable o, Object arg) {
+        try {
+
+
+        } catch (Exception e) {
+
+        }
+
+    }
+
+
 
 
     /**
@@ -130,7 +149,6 @@ public class RMIClient implements ClientInterface{
 
         clientView.setPossibleCharacter(possibleCharacter);
     }
-
 
 
 
