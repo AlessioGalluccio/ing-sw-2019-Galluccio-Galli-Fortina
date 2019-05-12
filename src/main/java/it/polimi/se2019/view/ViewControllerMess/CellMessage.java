@@ -2,16 +2,29 @@ package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class CellMessage extends ViewControllerMessage {
     private int messageID;
     private int x;
     private int y;
+    private int authorID;
+    private PlayerView authorView;
 
-    public CellMessage(int x, int y) {
+    /**
+     * CellMessage class's constructor
+     * @param x
+     * @param y
+     * @param authorID
+     * @param authorView
+     */
+
+    public CellMessage(int x, int y, int authorID, PlayerView authorView) {
         this.x = x;
         this.y = y;
         this.messageID = Identificator.CELL_MESSAGE;
+        this.authorID = authorID;
+        this.authorView = authorView;
     }
 
     public int getX() {

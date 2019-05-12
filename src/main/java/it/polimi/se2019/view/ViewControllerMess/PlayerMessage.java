@@ -2,14 +2,27 @@ package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class PlayerMessage extends ViewControllerMessage {
+
     private int messageID;
     private int playerID;
+    private int authorID;
+    private PlayerView authorView;
 
-    public PlayerMessage(int playerID) {
+    /**
+     * PlayerMessage class constructor
+     * @param playerID
+     * @param authorID
+     * @param authorView
+     */
+    public PlayerMessage(int playerID, int authorID, PlayerView authorView) {
+
         this.playerID = playerID;
         this.messageID = Identificator.PLAYER_VIEW_MESSAGE;
+        this.authorID = authorID;
+        this.authorView = authorView;
     }
 
     public int getPlayerID() {

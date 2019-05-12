@@ -5,16 +5,31 @@ import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TargetingScopeMessage extends ViewControllerMessage {
+
     private int messageID;
     private TargetingScopeCard usedCard;
     private ColorRYB colorAmmo;
+    private int authorID;
+    private PlayerView authorView;
 
-    public TargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
+    /**
+     * TargetingScopeMessage class's constructor
+     * @param usedCard
+     * @param colorAmmo
+     * @param authorID
+     * @param authorView
+     */
+
+    public TargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorAmmo, int authorID, PlayerView authorView) {
+
         this.usedCard = usedCard;
         this.messageID = Identificator.TARGETING_SCOPE_MESSAGE;
         this.colorAmmo = colorAmmo;
+        this.authorID = authorID;
+        this.authorView = authorView;
     }
 
     /**
