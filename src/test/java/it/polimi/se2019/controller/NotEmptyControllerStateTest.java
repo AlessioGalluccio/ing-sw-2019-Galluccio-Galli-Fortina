@@ -4,11 +4,14 @@ import it.polimi.se2019.model.deck.firemodes.CyberBlade_1;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class NotEmptyControllerStateTest {
+    private int authorID = 1;
+    private PlayerView playerView;
 
     @Test
     public void handleAction() {
@@ -65,7 +68,7 @@ public class NotEmptyControllerStateTest {
 
     @Test
     public void isFireModePositive() {
-        ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1);
+        ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1, authorID, playerView);
         //boolean value = isFireModePositive(); E' stato commentato perché non compilava
     }
 }
