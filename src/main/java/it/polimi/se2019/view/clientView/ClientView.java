@@ -7,6 +7,7 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.rmi.RMIClient;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
@@ -59,112 +60,226 @@ public class ClientView {
         return possibleTarget;
     }
 
-    public void createTargetMessage(Target target){
-        /* TODO
-                la verifica dei target non può avvenire allo stesso modo ( esempio selezionare un movimento comporta la
-                selezione di una sola cella e non multiple.
-         */
+    /**
+     * create a TargetMessage that the client send to the server
+     * @param target
+     * @param authorID
+     * @param authorView
+     */
+
+    public void createTargetMessage(Target target, int authorID, PlayerView authorView){
+
         if(verifyTarget()) {
-            TargetMessage message = new TargetMessage(target);
+            TargetMessage message = new TargetMessage(target,authorID,authorView);
             rmiClient.send(message);
 
         }
 
     }
 
-    public CellMessage createCellMessage(int x, int y){
-        CellMessage message = new CellMessage(x,y);
+    /**
+     * create a CellMessage that the client send to the server
+     * @param x
+     * @param y
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+
+    public CellMessage createCellMessage(int x, int y, int authorID, PlayerView authorView){
+        CellMessage message = new CellMessage(x,y,authorID,authorView);
         rmiClient.send(message);
         return message;
     }
 
-    public PlayerMessage createPlayerViewMessage(int playerID){
-        PlayerMessage message = new PlayerMessage(playerID);
+    /**
+     * create a PlayerMessage that the client send to the server
+     * @param playerID
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+
+    public PlayerMessage createPlayerViewMessage(int playerID, int authorID, PlayerView authorView){
+        PlayerMessage message = new PlayerMessage(playerID,authorID,authorView);
         rmiClient.send(message);
         return message;
     }
 
-    public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded){
-        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded);
+    /**
+     * create a CardSpawnChooseMessage that the client send to the server
+     * @param cardChoosen
+     * @param cardDiscarded
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded,
+                                                               int authorID, PlayerView authorView){
+        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,authorID,authorView);
         rmiClient.send(message);
         return message;
     }
 
-    public NopeMessage createNopeMessage(){
-        NopeMessage message = new NopeMessage();
+    /**
+     * create a NopeMessage that the client send to the server
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+
+    public NopeMessage createNopeMessage(int authorID, PlayerView authorView){
+        NopeMessage message = new NopeMessage(authorID,authorView);
         rmiClient.send(message);
         return message;
     }
 
-    public ActionMessage createActionMessage(int actionID){
-        ActionMessage message = new ActionMessage(actionID);
-        rmiClient.send(message);
-        return message;
-    }
-
-
-    public NewtonMessage createNewtonMessage(NewtonCard usedCard){
-        NewtonMessage message = new NewtonMessage(usedCard);
-        rmiClient.send(message);
-        return message;
-    }
-
-    public ReloadMessage createReloadMessage(WeaponCard weapon){
-        ReloadMessage message = new ReloadMessage(weapon);
-        rmiClient.send(message);
-        return message;
-    }
-
-    public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard){
-        TeleporterMessage message = new TeleporterMessage(usedCard);
-        rmiClient.send(message);
-        return message;
-    }
-
-    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
-        TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB);
-        rmiClient.send(message);
-        return message;
-    }
-
-    public TagbackGranateMessage createTagbackGranadeMessage(TagbackGranedCard usedCard){
-        TagbackGranateMessage message = new TagbackGranateMessage(usedCard);
-        rmiClient.send(message);
-        return message;
-    }
-
-    public FireModeMessage createFireModeMessage(int firemodeID){
-        FireModeMessage message = new FireModeMessage(firemodeID);
-        rmiClient.send(message);
-        return message;
-    }
-
-
-    public EndMessage createEndMessage (int messageID){
-        EndMessage message = new EndMessage();
-        rmiClient.send(message);
-        return message;
-    }
-
-    public UndoMessage createUndoMessage(int messageID){
-        UndoMessage message = new UndoMessage();
-        rmiClient.send(message);
-        return message;
-    }
-
-    public LoginMessage createLoginMessage(int messageID, String nickname, Character choosenCharacter){
-        LoginMessage message = new LoginMessage(nickname,choosenCharacter);
+    /**
+     * create a ActionMessage that the client send to the server
+     * @param actionID
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public ActionMessage createActionMessage(int actionID, int authorID, PlayerView authorView){
+        ActionMessage message = new ActionMessage(actionID,authorID,authorView);
         rmiClient.send(message);
         return message;
     }
 
 
+    /**
+     * create a NewtonMessage that the client send to the server
+     * @param usedCard
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public NewtonMessage createNewtonMessage(NewtonCard usedCard, int authorID, PlayerView authorView){
+        NewtonMessage message = new NewtonMessage(usedCard,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a ReloadMessage that the client send to the server
+     * @param weapon
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+
+    public ReloadMessage createReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView){
+        ReloadMessage message = new ReloadMessage(weapon,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a TeleporterMessage that the client send to the server
+     * @param usedCard
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard, int authorID, PlayerView authorView){
+        TeleporterMessage message = new TeleporterMessage(usedCard,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a TargetingScopeMessage that the client send to the server
+     * @param usedCard
+     * @param colorRYB
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB,
+                                                             int authorID, PlayerView authorView){
+        TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a TagbackGranateMessage that the client send to the server
+     * @param usedCard
+     * @param authorID
+     * @param authorView
+     * @return
+     */
 
 
+    public TagbackGranateMessage createTagbackGranadeMessage(TagbackGranedCard usedCard, int authorID,
+                                                             PlayerView authorView){
+        TagbackGranateMessage message = new TagbackGranateMessage(usedCard,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a FireModeMessage that the client send to the server
+     * @param firemodeID
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public FireModeMessage createFireModeMessage(int firemodeID, int authorID, PlayerView authorView){
+        FireModeMessage message = new FireModeMessage(firemodeID,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a EndMessage that the client send to the server
+     * @param messageID
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+
+    public EndMessage createEndMessage (int messageID, int authorID, PlayerView authorView){
+        EndMessage message = new EndMessage(authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a UndoMessage that the client send to the server
+     * @param messageID
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public UndoMessage createUndoMessage(int messageID, int authorID, PlayerView authorView){
+        UndoMessage message = new UndoMessage(authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
+
+    /**
+     * create a LoginMessage that the client send to the server
+     * @param messageID
+     * @param nickname
+     * @param choosenCharacter
+     * @param authorID
+     * @param authorView
+     * @return
+     */
+    public LoginMessage createLoginMessage(int messageID, String nickname, Character choosenCharacter, int authorID,
+                                           PlayerView authorView){
+        LoginMessage message = new LoginMessage(nickname,choosenCharacter,authorID,authorView);
+        rmiClient.send(message);
+        return message;
+    }
 
 
- //TODO se i target sono anche i soli movimento allora può essere selezionata una sola cella
-
+    /**
+     * verify that the target choosen by the player is contained in the ArrayList of available targets
+     * @return
+     */
 
     private boolean verifyTarget(){
 
@@ -177,6 +292,10 @@ public class ClientView {
         return false;
     }
 
+    /**
+     * verify that the character choosen by the player is cotained in the ArrayList of available characters
+     * @return
+     */
     private boolean verifyCharacter(){
         if (this.possibleCharacter.contains(this.choosenCharacter))
             return true;
@@ -185,8 +304,9 @@ public class ClientView {
     }
 
 
-    /*
-    printFromController() is used by the RMIClient to print string arrived from the server
+    /**
+     * is used by the RMIClient to print string arrived from the server
+     * @param string
      */
 
     public void printFromController(String string) {
@@ -195,9 +315,9 @@ public class ClientView {
     }
 
 
-    /*
-    setPossibleTarget() is used by RMIClient
-
+    /**
+     * is used by RMIClient
+     * @param possibleTarget
      */
      /* TODO create the targetmessage after receiving the Arraylist
 
