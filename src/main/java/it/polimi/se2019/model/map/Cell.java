@@ -1,13 +1,16 @@
 package it.polimi.se2019.model.map;
 
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Cell implements Target {
+public abstract class Cell extends Observable implements Target, Serializable {
 
     private Border northBorder;
     private Border eastBorder;
@@ -45,22 +48,6 @@ public abstract class Cell implements Target {
 
     public Border getWestBorder() {
         return westBorder;
-    }
-
-    public Cell getNorthCell(){
-        return GameHandler.getCellByCoordinate(coordinate.getX() , coordinate.getY() + 1);
-    }
-
-    public Cell getEastCell(){
-        return GameHandler.getCellByCoordinate(coordinate.getX() + 1 , coordinate.getY());
-    }
-
-    public Cell getSouthCell(){
-        return GameHandler.getCellByCoordinate(coordinate.getX(), coordinate.getY() - 1);
-    }
-
-    public Cell getWestCell(){
-        return GameHandler.getCellByCoordinate(coordinate.getX() - 1, coordinate.getY());
     }
 
     public Room getRoom() {

@@ -9,15 +9,17 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
-public abstract class Map extends java.util.Observable implements Serializable {
+public abstract class Map implements Serializable {
+    private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private final ArrayList<Room> room;
     private final String description;
 
-    Map(InitializeMap init, String description) {
+    Map(InitializeMap init, String description, int ID) {
         this.cell = init.cell;
         this.room = init.room;
         this.description = description;
+        this.ID = ID;
     }
 
     /**
@@ -51,6 +53,9 @@ public abstract class Map extends java.util.Observable implements Serializable {
         return description;
     }
 
+    public int getID() {
+        return ID;
+    }
 
     /**
      * Compute distance from start to end

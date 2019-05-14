@@ -1,18 +1,18 @@
 package it.polimi.se2019.view.clientView;
 
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.rmi.RMIClient;
+import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import javafx.beans.InvalidationListener;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 
 public class ClientView extends Observable implements View{
@@ -23,10 +23,7 @@ public class ClientView extends Observable implements View{
     private ArrayList<Target> selectedTarget;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
-    private RMIClient rmiClient;
-
-
-
+    private Client client;
 
 
 

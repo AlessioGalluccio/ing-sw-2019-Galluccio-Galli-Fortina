@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Player extends java.util.Observable implements Target, Serializable {
+public class Player extends Observable implements Target, Serializable {
     private String nickname;
     private ArrayList<Player> damage;
     private int skull;
@@ -447,7 +448,7 @@ public class Player extends java.util.Observable implements Target, Serializable
             return true;
         }
         //
-        else if(enemyCell.getNorthBorder().isCrossable() && roomOfThis.equals(enemyCell.getNorthCell().getRoom())){
+        /*else if(enemyCell.getNorthBorder().isCrossable() && roomOfThis.equals(enemyCell.getNorthCell().getRoom())){
             return true;
         }
         else if(enemyCell.getEastBorder().isCrossable() && roomOfThis.equals(enemyCell.getEastCell().getRoom())){
@@ -458,7 +459,7 @@ public class Player extends java.util.Observable implements Target, Serializable
         }
         else if(enemyCell.getWestBorder().isCrossable() && roomOfThis.equals(enemyCell.getWestCell().getRoom())){
             return true;
-        }
+        }*/
         else{
             return false;
         }

@@ -13,7 +13,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
 
 
@@ -114,7 +113,7 @@ public class Controller implements Observer {
     //methods
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
             state.handle((ViewControllerMessage) arg);
         }catch (Exception e) {

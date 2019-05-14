@@ -1,17 +1,15 @@
 package it.polimi.se2019.view.remoteView;
 
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-
-import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import javafx.beans.InvalidationListener;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
 
 
@@ -40,8 +38,10 @@ public class PlayerView extends Observable implements Observer, View {
         return selectedTarget;
     }
 
+
+
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
 
     }
 
