@@ -6,6 +6,7 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
@@ -17,9 +18,10 @@ public class GameHandler extends java.util.Observable {
     private WeaponDeck weaponDeck;
     private static Map map;
     private ArrayList<Player> orderPlayerList;
+    private ArrayList<PlayerView> playerViews;
     private int turn;
-    private Death death;
-    private Modality mode;
+    private ArrayList<Death> arrayDeath;
+    private Modality modality;
 
     //Implementato SOLO PER TESTARE getPlayerByID()
     //Usato in TestPlayer -> testReceiveMark() per getMarkReveived e getMarkDone della classe Mark
@@ -44,6 +46,7 @@ public class GameHandler extends java.util.Observable {
      * Called when a player has finished his turn
      */
     public void nextTurn(){
+        //TODO gestione delle morti
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
         if(turn == orderPlayerList.size()){
@@ -112,10 +115,9 @@ public class GameHandler extends java.util.Observable {
      * @param actionID the int ID of the action
      * @return
      */
-    public Action getActionByID(int actionID) {
-        //return action = Grab(this)
+    public Action getActionByID(int actionID, Player author) {
+        return modality.getActionByID(actionID, author, this);
 
-        return null; //TODO implementare
     }
 
     /**

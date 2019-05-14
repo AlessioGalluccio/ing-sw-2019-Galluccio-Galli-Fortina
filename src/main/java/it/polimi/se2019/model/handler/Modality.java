@@ -1,14 +1,12 @@
 package it.polimi.se2019.model.handler;
 
-public abstract class Modality {
+import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.model.player.Player;
 
+public interface Modality {
 
-    private int numSkulls;
-
-    public Modality() {}
-
-    public int getNumSkulls(){
-        return numSkulls;
-    }
+    int getNumSkulls();
+    Action getActionByID(int actionID, Player author, GameHandler gameHandler);
+    boolean isFrenzyEnabled();
 
 }
