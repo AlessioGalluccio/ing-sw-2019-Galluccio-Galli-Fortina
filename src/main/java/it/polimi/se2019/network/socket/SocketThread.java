@@ -1,5 +1,6 @@
 package it.polimi.se2019.network.socket;
 
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
@@ -68,6 +69,11 @@ public class SocketThread implements Server {
 
     @Override
     public void send(Map map) {
+
+    }
+
+    @Override
+    public void send(Cell cell) {
 
     }
 

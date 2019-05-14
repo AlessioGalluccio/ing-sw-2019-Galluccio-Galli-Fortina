@@ -1,19 +1,16 @@
 package it.polimi.se2019.view.remoteView;
 
-import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
-import javafx.beans.InvalidationListener;
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 
-public class PlayerView extends Observable implements Observer, View {
+public class PlayerView extends View /*View implement observer/observable*/{
     private Player playerCopy;
     private ArrayList<Target> possibleTarget;
     private ArrayList<Target> selectedTarget;
@@ -65,25 +62,10 @@ public class PlayerView extends Observable implements Observer, View {
     }
 
 
-
+    @Override
     public void printFromController(String string) {
 
-
     }
 
 
-    @Override
-    public void notifyObservers(ViewControllerMessage message) {
-
-    }
-
-    @Override
-    public void addListener(InvalidationListener listener) {
-
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-
-    }
 }

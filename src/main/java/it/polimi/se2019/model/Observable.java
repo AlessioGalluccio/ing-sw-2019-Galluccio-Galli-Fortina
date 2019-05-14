@@ -21,7 +21,7 @@ public class Observable implements Serializable {
         observers.clear();
     }
 
-    public void notifyObserver(Object arg){
+    public void notifyObservers(Object arg){
         for(Observer o : observers) {
             //update want java.util.Observer, we don't have it
             //DON'T CALL IT!!

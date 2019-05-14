@@ -1,10 +1,14 @@
 package it.polimi.se2019.view;
 
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import javafx.beans.Observable;
+import it.polimi.se2019.model.Observable;
+import java.util.Observer;
 
-public interface View extends Observable {
+/**
+ * Common class between Client View and Remote View
+ * Observer of network handler and model
+ * Observable by network handler and controller
+ */
+public abstract class View extends Observable implements Observer {
 
-    public void notifyObservers(ViewControllerMessage message);
-
+    public abstract void printFromController(String string);
 }

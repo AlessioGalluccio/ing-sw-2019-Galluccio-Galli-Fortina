@@ -1,6 +1,6 @@
 package it.polimi.se2019.view.clientView;
 
-import it.polimi.se2019.model.Observable;
+
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
@@ -10,12 +10,12 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
-import javafx.beans.InvalidationListener;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class ClientView extends Observable implements View{
+public class ClientView extends View /*View implement observer/observable*/{
 
     private Player playerCopy;
     private Map mapCopy;
@@ -307,7 +307,7 @@ public class ClientView extends Observable implements View{
      * is used by the RMIClient to print string arrived from the server
      * @param string
      */
-
+    @Override
     public void printFromController(String string) {
 
         System.out.println(string);
@@ -341,19 +341,8 @@ public class ClientView extends Observable implements View{
 
 
 
-
-    public void notifyObservers(ViewControllerMessage message){
-
-    }
-
-
     @Override
-    public void addListener(InvalidationListener listener) {
-
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
+    public void update(Observable o /*Will be always NULL*/, Object arg) {
 
     }
 }
