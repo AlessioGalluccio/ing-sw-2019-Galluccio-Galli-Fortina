@@ -7,17 +7,21 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
 
 public class EmptyControllerState implements  StateController {
 
+    private Player player;
+    private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
     private final String SELECT_ACTION_REQUEST = "Please, select an action";
 
     EmptyControllerState(Controller controller, GameHandler gameHandler) {
+        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
     }
@@ -26,7 +30,7 @@ public class EmptyControllerState implements  StateController {
     public void handleAction(int actionID) {
 
         //messageListExpected
-        Action action = gameHandler.getActionByID(actionID);
+        Action action = gameHandler.getActionByID(actionID, player);
         ArrayList<StringAndMessage> stringAndMessage = action.getStringAndMessageExpected();
         controller.setMessageListExpected(stringAndMessage);
 

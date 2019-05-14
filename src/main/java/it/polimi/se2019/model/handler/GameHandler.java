@@ -16,7 +16,7 @@ public class GameHandler extends java.util.Observable {
     private PowerupDeck powerupDeck;
     private PointDeck pointDeck;
     private WeaponDeck weaponDeck;
-    private static Map map;
+    private Map map;
     private ArrayList<Player> orderPlayerList;
     private ArrayList<PlayerView> playerViews;
     private int turn;
@@ -95,7 +95,7 @@ public class GameHandler extends java.util.Observable {
      * @param y coordinate x of the Cell
      * @return the Cell which has x and y coordinates
      */
-    public static Cell getCellByCoordinate(int x, int y) {
+    public Cell getCellByCoordinate(int x, int y) {
 
         return map.getCellByCoo(x, y);
     }

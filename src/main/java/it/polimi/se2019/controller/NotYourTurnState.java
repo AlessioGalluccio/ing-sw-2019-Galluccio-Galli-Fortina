@@ -4,15 +4,20 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class NotYourTurnState implements StateController {
 
+    private Player player;
+    private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
     private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
 
     NotYourTurnState(Controller controller, GameHandler gameHandler) {
+        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
         controller.setNumOfActionTaken(0);

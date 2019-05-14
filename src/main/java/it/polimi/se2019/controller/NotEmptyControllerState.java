@@ -9,6 +9,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.List;
 
@@ -16,12 +17,15 @@ import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
 
 public class NotEmptyControllerState implements StateController {
 
+    private Player player;
+    private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
     private Action action;
     private static final int FIRST_MESSAGE = 0;
 
     NotEmptyControllerState(Controller controller, GameHandler gameHandler) {
+        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
     }

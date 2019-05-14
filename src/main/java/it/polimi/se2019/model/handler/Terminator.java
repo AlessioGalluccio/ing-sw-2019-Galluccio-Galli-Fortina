@@ -1,6 +1,9 @@
 package it.polimi.se2019.model.handler;
 
-public class Terminator extends Modality {
+import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.model.player.Player;
+
+public class Terminator implements Modality {
 
     private Modality otherMode;
 
@@ -16,4 +19,18 @@ public class Terminator extends Modality {
         return null; //TODO implementare
     }
 
+    @Override
+    public int getNumSkulls() {
+        return 0;
+    }
+
+    @Override
+    public Action getActionByID(int actionID, Player author, GameHandler gameHandler) {
+        return null;
+    }
+
+    @Override
+    public boolean isFrenzyEnabled() {
+        return false;
+    }
 }

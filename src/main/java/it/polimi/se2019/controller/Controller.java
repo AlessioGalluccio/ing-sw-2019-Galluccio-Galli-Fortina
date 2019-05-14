@@ -10,6 +10,7 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.Observer;
 
 public class Controller implements Observer {
 
+    private Player player; //TODO aggiungere al costruttore (anche a tutti gli stati!)
+    private PlayerView playerView; //TODO aggiungere al costruttore
     private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
@@ -27,6 +30,7 @@ public class Controller implements Observer {
     public final int MAX_NUM_OF_ACTION = 2;
 
     public Controller(GameHandler gameHandler) {
+        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.gameHandler = gameHandler;
         this.messageListReceived = new ArrayList<>();
         this.messageListExpected = new ArrayList<>();
@@ -174,7 +178,8 @@ public class Controller implements Observer {
      */
     public synchronized void modifyModel(ActionMessage actionMessage) {
         //TODO verify()
-        gameHandler.getActionByID(actionMessage.getActionID()).executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
+        gameHandler.getActionByID(actionMessage.getActionID(), gameHandler.getPlayerByID(actionMessage.getAuthorID()))
+                .executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
 
     }
 
