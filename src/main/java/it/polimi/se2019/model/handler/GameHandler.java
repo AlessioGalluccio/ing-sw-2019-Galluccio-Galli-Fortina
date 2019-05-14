@@ -132,4 +132,6 @@ public class GameHandler extends java.util.Observable {
     public static FireMode getFireModeByID(int fireModeID){
         return null; //TODO implementare
     }
+
+    public Map getMap() {return map;}
 }
