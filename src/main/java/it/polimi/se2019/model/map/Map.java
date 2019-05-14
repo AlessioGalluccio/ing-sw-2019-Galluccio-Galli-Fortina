@@ -1,9 +1,15 @@
 package it.polimi.se2019.model.map;
 
-import it.polimi.se2019.model.deck.AmmoDeck;
-import it.polimi.se2019.model.deck.WeaponDeck;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.Player;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
@@ -12,7 +18,7 @@ import java.util.Set;
 public abstract class Map implements Serializable {
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
-    private final ArrayList<Room> room;
+    private transient final ArrayList<Room> room;
     private final String description;
 
     Map(InitializeMap init, String description, int ID) {
@@ -168,6 +174,23 @@ public abstract class Map implements Serializable {
                 if(c != null) c.reloadCard();
             }
         }
+    }
+
+    public Map clone() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(Border.class, new JsonAdapter<Border>())
+                .registerTypeAdapter(Map.class, new JsonAdapter<Map>())
+                .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>())
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
+                .create();
+
+        Type TYPE = new TypeToken<Map>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(this, TYPE), TYPE);
     }
 }
 

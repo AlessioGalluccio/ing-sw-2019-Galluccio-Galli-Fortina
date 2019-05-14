@@ -93,9 +93,31 @@ public class TestMap {
         assertEquals(3, map1.getDistance(cell[1][1], cell[3][0]));
     }
 
+    @Test
+    public void testClone() {
+        Map clone1 = map1.clone();
+
+        assertNotSame(map1, clone1);
+        assertEquals(map1.getDescription(), clone1.getDescription());
+        assertEquals(map1.getID(), clone1.getID());
+
+        Cell[][] cellClone = clone1.getCell();
+
+        for(int i = 0; i< cell.length; i++) {
+            for(int j = 0; j< cell[i].length; j++) {
+                if(cell[i][j]!=null) {
+                    assertEquals(cell[i][j], cellClone[i][j]);
+                    assertNotSame(cell[i][j], cellClone[i][j]);
+                }
+            }
+        }
+    }
+
     @Test //TODO test dopo aver fatto i getter opportuni
     public void testReloadAllCell() {
         map1.reloadAllCell();
     }
+
+
 
 }
