@@ -6,8 +6,8 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.se2019.cloneable.NotForMarkDamage;
-import it.polimi.se2019.cloneable.NotForMarkDamageExclusionStrategy;
+import it.polimi.se2019.cloneable.SkinnyObject;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.cloneable.NotForPlayer;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.Observable;
@@ -24,22 +24,22 @@ import java.util.Objects;
 
 public class Player extends Observable implements Target, Serializable {
     private String nickname;
-    @NotForMarkDamage
+    @SkinnyObject
     @NotForPlayer
     private ArrayList<Player> damage;
     private int skull;
-    @NotForMarkDamage
+    @SkinnyObject
     private Points points;
-    @NotForMarkDamage
+    @SkinnyObject
     @NotForPlayer
     private Mark mark;
     private Character character;
-    @NotForMarkDamage
+    @SkinnyObject
     private AmmoBag ammoBag;
     private transient AmmoBag tempAmmo;   //used for discarded cards
-    @NotForMarkDamage
+    @SkinnyObject
     private ArrayList<PowerupCard> powerupCardList;
-    @NotForMarkDamage
+    @SkinnyObject
     private ArrayList<WeaponCard> weaponCardList;
     private transient Cell cellPosition;
     private int ID;
@@ -567,7 +567,7 @@ public class Player extends Observable implements Target, Serializable {
         clone.addMark(mark.clone());
 
         gson = new GsonBuilder()
-                .setExclusionStrategies(new NotForMarkDamageExclusionStrategy())
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
                 .create();
 
         Type TYPE = new TypeToken<List<Player>>() {

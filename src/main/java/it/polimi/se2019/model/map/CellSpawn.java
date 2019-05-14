@@ -3,6 +3,10 @@ package it.polimi.se2019.model.map;
 import java.util.List;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.TooManyException;
@@ -92,6 +96,19 @@ public class CellSpawn extends Cell {
             default:
                 throw new IllegalArgumentException("Color room is not one of ColorRYB");
         }
+    }
+
+    @Override
+    public Cell clone() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(Border.class, new JsonAdapter<Border>())
+                .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
+                .create();
+
+        return gson.fromJson(gson.toJson(this), CellSpawn.class);
     }
 
 }

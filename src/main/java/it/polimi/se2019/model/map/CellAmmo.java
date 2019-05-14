@@ -1,8 +1,11 @@
 package it.polimi.se2019.model.map;
 
-import it.polimi.se2019.model.deck.AmmoConvertibleCard;
-import it.polimi.se2019.model.deck.AmmoDeck;
-import it.polimi.se2019.model.deck.Card;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -38,5 +41,16 @@ public class CellAmmo extends Cell {
     @Override
     protected void reloadCard() {
         if(ammo==null) ammo = deck.pick();
+    }
+
+    public Cell clone() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(Border.class, new JsonAdapter<Border>())
+                .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>())
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
+                .create();
+
+        return gson.fromJson(gson.toJson(this), CellAmmo.class);
     }
 }

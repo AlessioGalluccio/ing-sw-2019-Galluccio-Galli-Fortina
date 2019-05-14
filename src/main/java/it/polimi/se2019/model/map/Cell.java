@@ -16,7 +16,7 @@ public abstract class Cell extends Observable implements Target, Serializable {
     private Border eastBorder;
     private Border southBorder;
     private Border westBorder;
-    private Room room;
+    private transient Room room;
     private Coordinate coordinate;
     private ArrayList<Player> playerHere = new ArrayList<>();
 
@@ -136,7 +136,7 @@ public abstract class Cell extends Observable implements Target, Serializable {
                 eastBorder.getClass() == cell.eastBorder.getClass()&&
                 southBorder.getClass() == cell.southBorder.getClass() &&
                 westBorder.getClass()== cell.westBorder.getClass()&&
-                Objects.equals(room, cell.room) &&
+                //Objects.equals(room, cell.room) &&
                 coordinate.equals(cell.coordinate);
     }
 
@@ -144,4 +144,6 @@ public abstract class Cell extends Observable implements Target, Serializable {
     public int hashCode() {
         return Objects.hash(northBorder, eastBorder, southBorder, westBorder, coordinate);
     }
+
+    public abstract Cell clone();
 }

@@ -2,7 +2,7 @@ package it.polimi.se2019.model.player;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import it.polimi.se2019.cloneable.NotForMarkDamageExclusionStrategy;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,12 +59,12 @@ public class Mark implements Serializable {
     /**
      * Deep copy of mark
      * Not all the attributes are copied, only the NOT transient!
-     * The player who make damage are not all copy, only not transient attributes and not NotForMarkDamage
+     * The player who make damage are not all copy, only not transient attributes and not SkinnyObject
      * @return deep copy of mark
      */
     protected Mark clone() {
         Gson gson = new GsonBuilder()
-                .setExclusionStrategies(new NotForMarkDamageExclusionStrategy())
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
                 .create();
 
         return gson.fromJson(gson.toJson(this), Mark.class);

@@ -4,6 +4,8 @@ import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.PowerupDeck;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.deck.WeaponDeck;
+import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,4 +69,21 @@ public class TestCell {
         }
     }
 
+    @Test
+    public void testClone() {
+        Player pp = new Player("PeterParker", new Character("SpiderMan", "RED"), 2016);
+        pp.setPosition(cellAmmo);
+
+        Player mj = new Player("MJ", new Character("Girl", "BLUE"), 2001);
+        mj.setPosition(cellSpawn);
+
+        Cell clone = cellAmmo.clone();
+        assertEquals(cellAmmo, clone);
+        assertNotSame(cellAmmo, clone);
+
+        CellSpawn cloneSpawn = (CellSpawn) cellSpawn.clone();
+        assertEquals(cellSpawn, cloneSpawn);
+        assertNotSame(cellSpawn, cloneSpawn);
+
+    }
 }
