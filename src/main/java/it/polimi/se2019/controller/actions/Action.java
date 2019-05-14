@@ -23,7 +23,7 @@ public abstract class Action {
         this.gameHandler = gameHandler;
     }
 
-    public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
+    public void executeAction() {
 
     }
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {

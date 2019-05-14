@@ -17,8 +17,8 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void executeAction(Player author, ArrayList<ViewControllerMessage> msg) {
-        super.executeAction(author, msg);
+    public void executeAction() {
+        super.executeAction();
     }
 
     @Override
