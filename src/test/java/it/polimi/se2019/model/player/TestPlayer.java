@@ -211,4 +211,25 @@ public class TestPlayer {
         }
     }
 
+    @Test
+    public void testClone() throws TooManyException, YouOverkilledException, NotPresentException, YouDeadException {
+        player.setAmmoBag(1,0,3);
+        player.addPoints(18);
+        player.receiveMarkBy(enemy);
+        player.receiveDamageBy(enemy);
+        player.receiveDamageBy(enemy_2);
+        enemy_2.receiveDamageBy(player);
+        enemy.receiveMarkBy(player);
+
+        Player clone = player.clone();
+        assertNotSame(player, clone);
+        assertEquals(player, clone);
+        assertNotSame(player.getAmmo(), clone.getAmmo());
+        assertEquals(player.getAmmo().getBlueAmmo(), clone.getAmmo().getBlueAmmo());
+        assertEquals(player.getAmmo().getRedAmmo(), clone.getAmmo().getRedAmmo());
+        assertEquals(player.getAmmo().getYellowAmmo(), clone.getAmmo().getYellowAmmo());
+        assertEquals(player.getMark().getMarkReceived().get(0), (clone.getMark().getMarkReceived().get(0)));
+        assertEquals(player.getNumPoints(), clone.getNumPoints());
+    }
+
 }

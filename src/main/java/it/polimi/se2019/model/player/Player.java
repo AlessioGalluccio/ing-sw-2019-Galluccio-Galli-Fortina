@@ -1,9 +1,14 @@
 package it.polimi.se2019.model.player;
 
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.cloneable.NotForMarkDamage;
+import it.polimi.se2019.cloneable.NotForMarkDamageExclusionStrategy;
+import it.polimi.se2019.cloneable.NotForPlayer;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
@@ -19,16 +24,24 @@ import java.util.Objects;
 
 public class Player extends Observable implements Target, Serializable {
     private String nickname;
+    @NotForMarkDamage
+    @NotForPlayer
     private ArrayList<Player> damage;
     private int skull;
+    @NotForMarkDamage
     private Points points;
+    @NotForMarkDamage
+    @NotForPlayer
     private Mark mark;
     private Character character;
+    @NotForMarkDamage
     private AmmoBag ammoBag;
-    private AmmoBag tempAmmo;   //used for discarded cards
+    private transient AmmoBag tempAmmo;   //used for discarded cards
+    @NotForMarkDamage
     private ArrayList<PowerupCard> powerupCardList;
+    @NotForMarkDamage
     private ArrayList<WeaponCard> weaponCardList;
-    private Cell cellPosition;
+    private transient Cell cellPosition;
     private int ID;
 
     //constants
@@ -481,6 +494,11 @@ public class Player extends Observable implements Target, Serializable {
         this.mark.removeMarkDoneTo(enemyMarked);
     }
 
+    /**
+     * Move player to a new cell
+     * It change also the player list on the cell!
+     * @param position the new cell of the player
+     */
     public void setPosition(Cell position) {
         //if cellPosition==null is the first spawn, can't be removed anywhere
         if(this.cellPosition != null) this.cellPosition.removePlayer(this);
@@ -511,4 +529,63 @@ public class Player extends Observable implements Target, Serializable {
     public int hashCode() {
         return Objects.hash(nickname, character, ID);
     }
+
+
+    /**
+     * HELPER
+     * Used by clone to set the copy of mark
+     * @param markClone
+     */
+    private void addMark(Mark markClone) {
+        this.mark = markClone;
+    }
+
+    /**
+     * HELPER
+     * Used by clone to set the copy damage
+     * @param damageCopy
+     */
+    private void addDamage(ArrayList<Player> damageCopy) {
+        this.damage = damageCopy;
+    }
+
+    /**
+     * Deep clone of player for the view
+     * Not all the attributes are copied, only the NOT transient!
+     * @return Deep copy of player
+     */
+    public Player clone() {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
+                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .setExclusionStrategies(new NotForPlayerExclusionStrategy())
+                .create();
+
+        Player clone = gson.fromJson(gson.toJson(this), Player.class);
+
+        clone.addMark(mark.clone());
+
+        gson = new GsonBuilder()
+                .setExclusionStrategies(new NotForMarkDamageExclusionStrategy())
+                .create();
+
+        Type TYPE = new TypeToken<List<Player>>() {
+        }.getType();
+
+        clone.addDamage(gson.fromJson(gson.toJson(damage, TYPE), TYPE));
+
+        return clone;
+    }
+
+    private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {
+        public boolean shouldSkipClass(Class<?> clazz) {
+            return clazz.getAnnotation(NotForPlayer.class) != null;
+        }
+
+        public boolean shouldSkipField(FieldAttributes f) {
+            return f.getAnnotation(NotForPlayer.class) != null;
+        }
+    }
+
 }

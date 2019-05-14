@@ -1,12 +1,17 @@
 package it.polimi.se2019.model.player;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import it.polimi.se2019.cloneable.NotForMarkDamageExclusionStrategy;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Mark {
+public class Mark implements Serializable {
     private static final int MAX_MARK = 3;
-    private ArrayList<Player> markDone = new ArrayList<>();
+    private transient ArrayList<Player> markDone = new ArrayList<>();
     private ArrayList<Player> markReceived = new ArrayList<>();
 
     //Default constructor
@@ -41,7 +46,6 @@ public class Mark {
     }
 
     /**
-     *
      * @param enemy opponent player whose mark you want to remove from yourself
      */
     protected void removeMarkReceivedBy(Player enemy) {
@@ -52,6 +56,19 @@ public class Mark {
         while(markDone.remove(enemyMarked));
     }
 
+    /**
+     * Deep copy of mark
+     * Not all the attributes are copied, only the NOT transient!
+     * The player who make damage are not all copy, only not transient attributes and not NotForMarkDamage
+     * @return deep copy of mark
+     */
+    protected Mark clone() {
+        Gson gson = new GsonBuilder()
+                .setExclusionStrategies(new NotForMarkDamageExclusionStrategy())
+                .create();
+
+        return gson.fromJson(gson.toJson(this), Mark.class);
+    }
 
 
 }

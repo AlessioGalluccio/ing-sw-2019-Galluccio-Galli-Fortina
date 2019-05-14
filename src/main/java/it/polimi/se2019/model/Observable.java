@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Observer;
 
 public class Observable implements Serializable {
-    List<Observer> observers = new LinkedList<>();
+    private transient List<Observer> observers = new LinkedList<>();
 
     public void attach(Observer obv) {
         if(obv == null) throw new NullPointerException();
