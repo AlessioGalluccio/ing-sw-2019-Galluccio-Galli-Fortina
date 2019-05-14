@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -17,6 +18,7 @@ public class NotEmptyControllerState implements StateController {
 
     private Controller controller;
     private GameHandler gameHandler;
+    private Action action;
     private static final int FIRST_MESSAGE = 0;
 
     NotEmptyControllerState(Controller controller, GameHandler gameHandler) {

@@ -116,8 +116,7 @@ public class Controller implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         try {
-            //TODO sistema tutto l'update
-            //state.handle(arg);
+            state.handle((ViewControllerMessage) arg);
         }catch (Exception e) {
             System.err.println("Controller exception: " + e.toString());
             e.printStackTrace();
