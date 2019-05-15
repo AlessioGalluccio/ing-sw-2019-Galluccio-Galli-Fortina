@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class TestDeck {
@@ -67,6 +69,29 @@ public class TestDeck {
                 ammoDeck.getUsedCard().size());
 
         assertTrue(acc.getAmmo().equals(ammoDeck.getUsedCard().get(0).getAmmo()));
+    }
 
+    @Test
+    public void testUnicID() {
+        ArrayList<Card> cards = new ArrayList<>(ammoDeck.getUnusedCard());
+        for(int i=0; i< cards.size(); i++) {
+            for(int j=i+1; j<cards.size(); j++) {
+                assertNotEquals(cards.get(i).getID(), cards.get(j).getID());
+            }
+        }
+
+        cards = new ArrayList<>(powerupDeck.getUnusedCard());
+        for(int i=0; i< cards.size(); i++) {
+            for(int j=i+1; j<cards.size(); j++) {
+                assertNotEquals(cards.get(i).getID(), cards.get(j).getID());
+            }
+        }
+
+        cards = new ArrayList<>(weaponDeck.getUnusedCard());
+        for(int i=0; i< cards.size(); i++) {
+            for(int j=i+1; j<cards.size(); j++) {
+                assertNotEquals(cards.get(i).getID(), cards.get(j).getID());
+            }
+        }
     }
 }

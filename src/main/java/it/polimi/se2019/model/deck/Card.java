@@ -23,4 +23,6 @@ public interface Card {
     * @throws TooManyException if the effect of this card allow author to pick a new card, this exception is thrown whenever author has already three cards
     */
    void useCard(Player author) throws TooManyException;
+
+   int getID();
 }

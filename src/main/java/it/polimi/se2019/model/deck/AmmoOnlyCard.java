@@ -8,13 +8,15 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 
 public class AmmoOnlyCard implements AmmoConvertibleCard {
+    private final int ID;
     private transient AmmoDeck deck;
     private final ColorRYB colorSingle;
     private final ColorRYB colorDouble;
 
-    public AmmoOnlyCard(ColorRYB colorSingle, ColorRYB colorDouble) {
+    public AmmoOnlyCard(ColorRYB colorSingle, ColorRYB colorDouble, int ID) {
         this.colorSingle = colorSingle;
         this.colorDouble = colorDouble;
+        this.ID = ID;
     }
 
     /**
@@ -29,6 +31,12 @@ public class AmmoOnlyCard implements AmmoConvertibleCard {
         ammo.add(colorDouble);
         return ammo;
     }
+
+    @Override
+    public int getID() {
+        return ID;
+    }
+
 
     /**
      * Reload a player's ammo using this card

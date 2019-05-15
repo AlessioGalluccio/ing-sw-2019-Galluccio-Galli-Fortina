@@ -13,7 +13,6 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.List;
 
-import static it.polimi.se2019.model.handler.GameHandler.getFireModeByID;
 
 public class NotEmptyControllerState implements StateController {
 
@@ -50,7 +49,7 @@ public class NotEmptyControllerState implements StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
-        FireMode fireMode = getFireModeByID(firemodeID);
+        FireMode fireMode = gameHandler.getFireModeByID(firemodeID);
         AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
 
         if(!player.canPayAmmo(cost)){
@@ -232,7 +231,7 @@ public class NotEmptyControllerState implements StateController {
 
     private boolean isFiremode(FireModeMessage arg) throws FiremodeOfOnlyMarksException{
         //TODO sistema controllo per il lancio dell'eccezione
-        if(getFireModeByID(arg.getFiremodeID()).giveOnlyMarks()){
+        if(gameHandler.getFireModeByID(arg.getFiremodeID()).giveOnlyMarks()){
             throw new FiremodeOfOnlyMarksException();
         }
         return true;

@@ -28,6 +28,7 @@ public abstract class WeaponCard implements Card {
      *
      * @return WeaponCard's ID
      */
+    @Override
     public int getID(){
         return ID;
     }

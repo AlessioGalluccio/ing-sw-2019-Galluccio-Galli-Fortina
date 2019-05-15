@@ -6,12 +6,13 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 public abstract class PowerupCard implements Card {
+    private final int ID;
     private transient PowerupDeck deck;
     private final ColorRYB color;
-    //Due to his immutable nature, ID is not necessary
 
-    public PowerupCard(ColorRYB color) {
+    public PowerupCard(ColorRYB color, int ID) {
         this.color = color;
+        this.ID = ID;
     }
 
     /**
@@ -30,13 +31,18 @@ public abstract class PowerupCard implements Card {
         return color;
     }
 
+    @Override
+    public int getID() {
+        return ID;
+    }
+
     /**
      * Set his deck for the card
      * @param deck Deck of relatives cards to set
      * @throws AlreadyDeckException If you try to reset the deck, it can change during game
      */
     @Override
-    public void setDeck(Deck deck) throws AlreadyDeckException {
+    public void setDeck(Deck deck) {
         if(this.deck==null) this.deck = (PowerupDeck) deck;
         else throw new AlreadyDeckException("This card " + this +" has already a deck!");
     }

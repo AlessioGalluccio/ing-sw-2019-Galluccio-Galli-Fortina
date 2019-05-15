@@ -36,7 +36,7 @@ public class TestPlayer {
     @Test
     public void testAddPowerup(){
         try {
-            player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
+            player.addPowerupCard(new TeleporterCard(ColorRYB.RED, 1));
         } catch (TooManyException e) {
             e.printStackTrace();
         }
@@ -46,10 +46,10 @@ public class TestPlayer {
 
     @Test(expected = TooManyException.class)
     public void testAddPowerupException() throws TooManyException {
-        player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
-        player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
-        player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
-        player.addPowerupCard(new TeleporterCard(ColorRYB.RED));
+        player.addPowerupCard(new TeleporterCard(ColorRYB.RED, 1));
+        player.addPowerupCard(new TeleporterCard(ColorRYB.RED, 2));
+        player.addPowerupCard(new TeleporterCard(ColorRYB.RED, 3));
+        player.addPowerupCard(new TeleporterCard(ColorRYB.RED, 4));
     }
 
     @Test

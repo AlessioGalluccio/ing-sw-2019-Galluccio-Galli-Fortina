@@ -129,4 +129,20 @@ public abstract class Deck<T> {
         inUseCard.remove(card);
         usedCard.add(card);
     }
+
+    public T getCardById(int id) throws NoSuchCardException {
+        for(int i=0; i<inUseCard.size(); i++) {
+            Card c = (Card) inUseCard.get(i);
+            if(c.getID() == id) return inUseCard.get(i);
+        }
+        for(int i=0; i<unusedCard.size(); i++) {
+            Card c = (Card) unusedCard.get(i);
+            if(c.getID() == id) return unusedCard.get(i);
+        }
+        for(int i=0; i<usedCard.size(); i++) {
+            Card c = (Card) usedCard.get(i);
+            if(c.getID() == id) return usedCard.get(i);
+        }
+        throw new NoSuchCardException();
+    }
 }

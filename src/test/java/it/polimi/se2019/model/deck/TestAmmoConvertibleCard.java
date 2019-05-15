@@ -4,6 +4,8 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static it.polimi.se2019.model.player.ColorRYB.*;
 import static org.junit.Assert.*;
@@ -52,9 +54,9 @@ public class TestAmmoConvertibleCard {
 
     @Test(expected = TooManyException.class)
     public void testUseCardException() throws TooManyException {
-        player.addPowerupCard(new TargetingScopeCard(BLUE));
-        player.addPowerupCard(new TargetingScopeCard(RED));
-        player.addPowerupCard(new TargetingScopeCard(RED));
+        player.addPowerupCard(new TargetingScopeCard(BLUE, 1));
+        player.addPowerupCard(new TargetingScopeCard(RED, 2));
+        player.addPowerupCard(new TargetingScopeCard(RED, 3));
 
         //Reset ammoBag to 0 in order to don't thrown TooManyException due to ammo
         player.setAmmoBag(0,0,0);

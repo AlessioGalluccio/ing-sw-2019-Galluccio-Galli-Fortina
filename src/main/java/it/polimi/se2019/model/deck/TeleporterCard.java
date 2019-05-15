@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class TeleporterCard extends PowerupCard{
 
 
-    public TeleporterCard(ColorRYB color) {
-        super(color);
+    public TeleporterCard(ColorRYB color, int id) {
+        super(color, id);
     }
 
     @Override

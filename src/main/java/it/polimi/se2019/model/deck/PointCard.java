@@ -34,6 +34,11 @@ public class PointCard implements Card{
 
     }
 
+    @Override
+    public int getID() {
+        return 0;
+    }
+
     /**
      *
      * @return value of point available in this card

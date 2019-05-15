@@ -10,15 +10,17 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 
 public class AmmoPowerupCard implements AmmoConvertibleCard {
+    private final int ID;
     private transient AmmoDeck deck;
     private final transient PowerupDeck powerupDeck;
     private final ColorRYB color1;
     private final ColorRYB color2;
 
-    public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck) {
+    public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID) {
         this.color1 = color1;
         this.color2 = color2;
         this.powerupDeck = powerupDeck;
+        this.ID = ID;
     }
 
     /**
@@ -42,6 +44,11 @@ public class AmmoPowerupCard implements AmmoConvertibleCard {
         ammo.add(color1);
         ammo.add(color2);
         return ammo;
+    }
+
+    @Override
+    public int getID() {
+        return ID;
     }
 
     /**

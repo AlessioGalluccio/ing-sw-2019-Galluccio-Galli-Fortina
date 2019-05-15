@@ -129,8 +129,20 @@ public class GameHandler extends java.util.Observable {
         return orderPlayerList;
     }
 
-    public static FireMode getFireModeByID(int fireModeID){
+    public FireMode getFireModeByID(int fireModeID){
         return null; //TODO implementare
+    }
+
+    public AmmoConvertibleCard getAmmoCardByID(int cardId) throws NoSuchCardException {
+        return ammoDeck.getCardById(cardId);
+    }
+
+    public PowerupCard getPowrupCardByID(int cardId) throws NoSuchCardException {
+        return powerupDeck.getCardById(cardId);
+    }
+
+    public WeaponCard getWeaponCardByID(int cardId) throws NoSuchCardException {
+        return weaponDeck.getCardById(cardId);
     }
 
     public Map getMap() {return map;}

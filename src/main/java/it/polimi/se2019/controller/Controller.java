@@ -173,14 +173,14 @@ public class Controller implements Observer {
 
 
     /**
-     * It verififies the list of messages and, if it is correct, it modifies the model accordingly
+     * It verifies the list of messages and, if it is correct, it modifies the model accordingly
      * @param actionMessage the first message in the list. It defines what type of action
      */
     public synchronized void modifyModel(ActionMessage actionMessage) {
         //TODO verify()
-        gameHandler.getActionByID(actionMessage.getActionID(), gameHandler.getPlayerByID(actionMessage.getAuthorID()))
-                .executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
-
+        //gameHandler.getActionByID(actionMessage.getActionID(), gameHandler.getPlayerByID(actionMessage.getAuthorID()))
+        //       .executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
+        //Commentato perchè non compilava
     }
 
     public synchronized void modifyModel(PowerupCard powerupCard) {

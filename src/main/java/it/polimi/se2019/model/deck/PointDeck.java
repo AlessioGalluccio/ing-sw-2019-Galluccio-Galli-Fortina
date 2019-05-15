@@ -3,9 +3,7 @@ package it.polimi.se2019.model.deck;
 import java.lang.reflect.Type;
 import java.util.Stack;
 
-/**
- * Deprecated
- */
+@Deprecated
 public class PointDeck extends Deck<PointCard> {
 
     public PointDeck(Stack<PointCard> unusedCard) {

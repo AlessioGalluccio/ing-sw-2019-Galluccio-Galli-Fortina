@@ -22,12 +22,13 @@ public class PowerupDeck extends Deck<PowerupCard> {
      */
     private static Stack<PowerupCard> initializeCard(){
         Stack<PowerupCard> deck = new Stack<>();
+        int id=0;
         for(int i=0; i<2; i++) {
             for(ColorRYB c : ColorRYB.values()) {
-                deck.add(new TargetingScopeCard(c));
-                deck.add(new NewtonCard(c));
-                deck.add(new TeleporterCard(c));
-                deck.add(new TagbackGranedCard(c));
+                deck.add(new TargetingScopeCard(c, id++));
+                deck.add(new NewtonCard(c, id++));
+                deck.add(new TeleporterCard(c, id++));
+                deck.add(new TagbackGranedCard(c, id++));
             }
         }
         Collections.shuffle(deck);

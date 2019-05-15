@@ -18,16 +18,17 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
      */
     private static Stack<AmmoConvertibleCard> initializeCard(PowerupDeck powerupDeck){
         Stack<AmmoConvertibleCard> deck = new Stack<>();
+        int id=0;
         for(int i=0; i<2; i++) {
             for(ColorRYB c: ColorRYB.values()) {
-                deck.add(new AmmoPowerupCard(c,c, powerupDeck));
+                deck.add(new AmmoPowerupCard(c,c, powerupDeck, id++));
             }
         }
 
         for(int i=0; i<4; i++) {
             for(ColorRYB c1: ColorRYB.values()) {
                 for (ColorRYB c2 : ColorRYB.values()) {
-                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2, powerupDeck));
+                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2, powerupDeck, id++));
                 }
             }
         }
@@ -35,7 +36,7 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
         for(int i=0; i<3; i++) {
             for(ColorRYB c1: ColorRYB.values()) {
                 for (ColorRYB c2 : ColorRYB.values()) {
-                    if(c1 != c2) deck.add(new AmmoOnlyCard(c1, c2));
+                    if(c1 != c2) deck.add(new AmmoOnlyCard(c1, c2, id++));
                 }
             }
         }
@@ -44,8 +45,8 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
     }
 
     @Override
-    protected Type getType(boolean ArrayListORStack) {
-        return ArrayListORStack ?
+    protected Type getType(boolean arrayListORStack) {
+        return arrayListORStack ?
                 new TypeToken<ArrayList<AmmoConvertibleCard>>() {}.getType() :
                 new TypeToken<Stack<AmmoConvertibleCard>>() {}.getType();
     }
