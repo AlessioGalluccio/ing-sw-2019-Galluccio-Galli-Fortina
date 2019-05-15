@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.handler;
 
+import it.polimi.se2019.model.deck.firemodes.ElectroScythe_1;
+import it.polimi.se2019.model.deck.firemodes.ShockWave_2;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import org.junit.Before;
@@ -48,7 +50,7 @@ public class GameHandlerTest {
     }
 
     @Test
-    public void getPlayerByID() {
+    public void getPlayerByID() throws NoSuchPlayerException {
         Player playerObtained = gameHandler.getPlayerByID(FIRST_ID);
         assertEquals("TonyStark", playerObtained.getNickname());
         playerObtained = gameHandler.getPlayerByID(SECOND_ID);
@@ -76,5 +78,10 @@ public class GameHandlerTest {
 
     @Test
     public void getFireModeByID() {
+        assertEquals(ElectroScythe_1.class, gameHandler.getFireModeByID(11).getClass());
+        assertEquals(ShockWave_2.class, gameHandler.getFireModeByID(122).getClass());
+        assertEquals(null, gameHandler.getFireModeByID(7));
     }
+
+
 }

@@ -31,6 +31,9 @@ public class GameHandler extends java.util.Observable {
     public GameHandler(ArrayList<Player> list) {
         this.orderPlayerList = list;
         this.turn = 0;
+        this.weaponDeck = new WeaponDeck();
+        this.powerupDeck = new PowerupDeck();
+        this.ammoDeck = new AmmoDeck(powerupDeck);
     }
 
     /**
@@ -81,11 +84,12 @@ public class GameHandler extends java.util.Observable {
      * @return the Player object who has this ID
      * @throws NoSuchPlayerException if there is no player with such id
      */
-    public Player getPlayerByID(int id) throws NoSuchPlayerException {
+    public Player getPlayerByID(int id) {
         for(Player p : orderPlayerList) {
             if (p.getID() == id) return p;
         }
-        throw new NoSuchPlayerException();
+        //throw new NoSuchPlayerException();
+        return null;
     }
 
     /**
@@ -94,8 +98,13 @@ public class GameHandler extends java.util.Observable {
      * @param y coordinate x of the Cell
      * @return the Cell which has x and y coordinates
      */
-    public Cell getCellByCoordinate(int x, int y) throws NoSuchCellException {
-        return map.getCellByCoo(x, y);
+    public Cell getCellByCoordinate(int x, int y){
+        try {
+            return map.getCellByCoo(x, y);
+        } catch (NoSuchCellException e) {
+            //TODO
+        }
+        return null;
     }
 
     /**
@@ -127,18 +136,54 @@ public class GameHandler extends java.util.Observable {
         return orderPlayerList;
     }
 
-    public FireMode getFireModeByID(int fireModeID){
-        return null; //TODO implementare
+    /**
+     * Return the firemode corresponding to the id
+     * @param fireModeID FireMode's id
+     * @return the firemode with that id
+     * @throws NoSuchFireModeException if there's not a fireMode with that id
+     */
+    public FireMode getFireModeByID(int fireModeID) {
+        try {
+            //FireMode id are written as WeaponID + id
+            //So if weaponID is 17, his fireModeID is 171 or 172
+            //172 / 10 = 17, the weaponID
+            WeaponCard weapon = weaponDeck.getCardById(fireModeID/10);
+            for(FireMode fm : weapon.getFireMode())
+                if(fm.getID()==fireModeID) return fm;
+        } catch (NoSuchCardException e) {
+            //TODO
+        } finally {
+            //throw new NoSuchFireModeException();
+        }
+        return null;
     }
 
+    /**
+     * Return the card with that id
+     * @param cardId card's id
+     * @return the card with that id
+     * @throws NoSuchCardException if there's not a card with that id
+     */
     public AmmoConvertibleCard getAmmoCardByID(int cardId) throws NoSuchCardException {
         return ammoDeck.getCardById(cardId);
     }
 
+    /**
+     * Return the card with that id
+     * @param cardId card's id
+     * @return the card with that id
+     * @throws NoSuchCardException if there's not a card with that id
+     */
     public PowerupCard getPowrupCardByID(int cardId) throws NoSuchCardException {
         return powerupDeck.getCardById(cardId);
     }
 
+    /**
+     * Return the card with that id
+     * @param cardId card's id
+     * @return the card with that id
+     * @throws NoSuchCardException if there's not a card with that id
+     */
     public WeaponCard getWeaponCardByID(int cardId) throws NoSuchCardException {
         return weaponDeck.getCardById(cardId);
     }

@@ -17,7 +17,7 @@ public class TestCell {
     private CellSpawn cellSpawn;
 
     @Before
-    public void setUp() {
+    public void setUp() throws NoSuchCellException {
         Map map = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
         map.reloadAllCell();
         cellAmmo = map.getCellByCoo(1,1);
