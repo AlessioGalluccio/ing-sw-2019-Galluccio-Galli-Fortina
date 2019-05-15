@@ -3,6 +3,7 @@ package it.polimi.se2019.model.handler;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.model.map.NoSuchCellException;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
@@ -78,15 +79,13 @@ public class GameHandler extends java.util.Observable {
      *
      * @param id ID of a Player
      * @return the Player object who has this ID
+     * @throws NoSuchPlayerException if there is no player with such id
      */
-    public Player getPlayerByID(int id) {
+    public Player getPlayerByID(int id) throws NoSuchPlayerException {
         for(Player p : orderPlayerList) {
             if (p.getID() == id) return p;
         }
-
-        //If there's not a player whit that id: return null
-        //TODO lanciare eccezione se non c'è il player!
-        return null;
+        throw new NoSuchPlayerException();
     }
 
     /**
@@ -95,8 +94,7 @@ public class GameHandler extends java.util.Observable {
      * @param y coordinate x of the Cell
      * @return the Cell which has x and y coordinates
      */
-    public Cell getCellByCoordinate(int x, int y) {
-
+    public Cell getCellByCoordinate(int x, int y) throws NoSuchCellException {
         return map.getCellByCoo(x, y);
     }
 

@@ -93,9 +93,9 @@ public abstract class Map implements Serializable {
      * @param y Coordinate y of the cell
      * @return The cell with coordinate x,y
      */
-    public Cell getCellByCoo(int x, int y){
-        //TODO fai copia
-        return cell[x][y];
+    public Cell getCellByCoo(int x, int y) throws NoSuchCellException {
+        if(x<cell.length&&y<cell[x].length&&cell[x][y]!=null) return cell[x][y];
+        throw new NoSuchCellException();
     }
 
     /**
