@@ -130,7 +130,12 @@ public abstract class Deck<T> {
         usedCard.add(card);
     }
 
-    public T getCardById(int id) throws NoSuchCardException {
+    /**
+     * Return the card corresponding to the id
+     * @param id FireMode's id
+     * @return the card with that id, null if there's not
+     */
+    public T getCardById(int id) {
         for(int i=0; i<inUseCard.size(); i++) {
             Card c = (Card) inUseCard.get(i);
             if(c.getID() == id) return inUseCard.get(i);
@@ -143,6 +148,6 @@ public abstract class Deck<T> {
             Card c = (Card) usedCard.get(i);
             if(c.getID() == id) return usedCard.get(i);
         }
-        throw new NoSuchCardException();
+        return null;
     }
 }

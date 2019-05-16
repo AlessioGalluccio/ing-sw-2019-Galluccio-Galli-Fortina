@@ -3,7 +3,6 @@ package it.polimi.se2019.model.handler;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.map.NoSuchCellException;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
@@ -82,29 +81,22 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * @param id ID of a Player
-     * @return the Player object who has this ID
-     * @throws NoSuchPlayerException if there is no player with such id
+     * @return the Player object who has this ID, null if there's not
      */
     public Player getPlayerByID(int id) {
         for (Player p : orderPlayerList) {
             if (p.getID() == id) return p;
         }
-        //throw new NoSuchPlayerException();
         return null;
     }
 
     /**
      * @param x coordinate x of the Cell
      * @param y coordinate x of the Cell
-     * @return the Cell which has x and y coordinates
+     * @return the Cell which has x and y coordinates, null if there's not
      */
     public Cell getCellByCoordinate(int x, int y) {
-        try {
-            return map.getCellByCoo(x, y);
-        } catch (NoSuchCellException e) {
-            //TODO
-        }
-        return null;
+        return map.getCellByCoo(x, y);
     }
 
     /**
@@ -139,24 +131,18 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * Return the firemode corresponding to the id
-     *
      * @param fireModeID FireMode's id
-     * @return the firemode with that id
-     * @throws NoSuchFireModeException if there's not a fireMode with that id
+     * @return the firemode with that id, null if there's not
      */
     public FireMode getFireModeByID(int fireModeID) {
-        try {
             //FireMode id are written as WeaponID + id
             //So if weaponID is 17, his fireModeID is 171 or 172
             //172 / 10 = 17, the weaponID
             WeaponCard weapon = weaponDeck.getCardById(fireModeID / 10);
-            for (FireMode fm : weapon.getFireMode())
-                if (fm.getID() == fireModeID) return fm;
-        } catch (NoSuchCardException e) {
-            //TODO
-        } finally {
-            //throw new NoSuchFireModeException();
-        }
+            if(weapon!=null) {
+                for (FireMode fm : weapon.getFireMode())
+                    if (fm.getID() == fireModeID) return fm;
+            }
         return null;
     }
 
@@ -165,9 +151,8 @@ public class GameHandler extends java.util.Observable {
      *
      * @param cardId card's id
      * @return the card with that id
-     * @throws NoSuchCardException if there's not a card with that id
      */
-    public AmmoConvertibleCard getAmmoCardByID(int cardId) throws NoSuchCardException {
+    public AmmoConvertibleCard getAmmoCardByID(int cardId) {
         return ammoDeck.getCardById(cardId);
     }
 
@@ -176,9 +161,8 @@ public class GameHandler extends java.util.Observable {
      *
      * @param cardId card's id
      * @return the card with that id
-     * @throws NoSuchCardException if there's not a card with that id
      */
-    public PowerupCard getPowrupCardByID(int cardId) throws NoSuchCardException {
+    public PowerupCard getPowrupCardByID(int cardId) {
         return powerupDeck.getCardById(cardId);
     }
 
@@ -187,9 +171,8 @@ public class GameHandler extends java.util.Observable {
      *
      * @param cardId card's id
      * @return the card with that id
-     * @throws NoSuchCardException if there's not a card with that id
      */
-    public WeaponCard getWeaponCardByID(int cardId) throws NoSuchCardException {
+    public WeaponCard getWeaponCardByID(int cardId) {
         return weaponDeck.getCardById(cardId);
     }
 

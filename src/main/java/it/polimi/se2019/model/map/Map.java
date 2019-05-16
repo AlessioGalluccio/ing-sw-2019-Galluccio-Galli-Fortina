@@ -91,11 +91,11 @@ public abstract class Map implements Serializable {
      * Return the cell with coordinate x,y
      * @param x Coordinate x of the cell
      * @param y Coordinate y of the cell
-     * @return The cell with coordinate x,y
+     * @return The cell with coordinate x,y , null if there's not
      */
-    public Cell getCellByCoo(int x, int y) throws NoSuchCellException {
+    public Cell getCellByCoo(int x, int y) {
         if(x<cell.length&&y<cell[x].length&&cell[x][y]!=null) return cell[x][y];
-        throw new NoSuchCellException();
+        return null;
     }
 
     /**

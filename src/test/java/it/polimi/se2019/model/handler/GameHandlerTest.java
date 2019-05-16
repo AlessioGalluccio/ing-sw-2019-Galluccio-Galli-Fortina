@@ -56,7 +56,7 @@ public class GameHandlerTest {
     }
 
     @Test
-    public void getPlayerByID() throws NoSuchPlayerException {
+    public void getPlayerByID() {
         Player playerObtained = gameHandler.getPlayerByID(FIRST_ID);
         assertEquals("TonyStark", playerObtained.getNickname());
         playerObtained = gameHandler.getPlayerByID(SECOND_ID);
