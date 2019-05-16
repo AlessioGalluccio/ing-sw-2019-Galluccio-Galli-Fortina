@@ -42,6 +42,7 @@ public class Player extends Observable implements Target, Serializable {
     @SkinnyObject
     private ArrayList<WeaponCard> weaponCardList;
     private transient Cell cellPosition;
+    private boolean isFrenzyDeath = false;
     private int ID;
 
     //constants
@@ -77,6 +78,10 @@ public class Player extends Observable implements Target, Serializable {
         return ID;
     }
 
+    public boolean isFrenzyDeath() {
+        return isFrenzyDeath;
+    }
+
     /**
      *
      * @return nickname of user
@@ -90,7 +95,7 @@ public class Player extends Observable implements Target, Serializable {
      * @return list of players who damaged this player in correct order
      */
     public List<Player> getDamage() {
-        return null; //TODO implementare la clone di damage
+        return new ArrayList<>(damage);
     }
 
     /**
@@ -197,15 +202,10 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      *
-     * @return 1 if the player is dead, 0 if not
+     * @return True if the player is dead, false if not
      */
     public boolean isDead() {
-        if (damage.size() >= NUM_DAMAGE_DEATH) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return damage.size() >= NUM_DAMAGE_DEATH;
     }
 
     /**
@@ -213,12 +213,7 @@ public class Player extends Observable implements Target, Serializable {
      * @return 1 if the player has been over killed, 0 if not
      */
     public boolean isOverKilled() {
-        if(damage.size() == NUM_DAMAGE_OVERKILL) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return damage.size() == NUM_DAMAGE_OVERKILL;
     }
 
     /**
@@ -276,7 +271,11 @@ public class Player extends Observable implements Target, Serializable {
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
         if(isDead()) throw new YouDeadException(toString() + " has been killed by " + enemy.toString());
 
-     }
+    }
+
+    public void resetDamage() {
+        damage.clear();
+    }
 
     /**
      * Mark this player with a enemy's mark
@@ -543,10 +542,19 @@ public class Player extends Observable implements Target, Serializable {
     /**
      * HELPER
      * Used by clone to set the copy damage
+     * To add a damage by a enemy use receiveDamageBy()
      * @param damageCopy
      */
     private void addDamage(ArrayList<Player> damageCopy) {
         this.damage = damageCopy;
+    }
+
+    /**
+     * If player die during the last turn or in frenzy mode set isFrenzyDeath as true
+     * In this case the player can be cash only for 2-1-1-1 points and not for 8-6-4-2-1-1
+     */
+    public void setFrenzyDeath() {
+        isFrenzyDeath = true;
     }
 
     /**
