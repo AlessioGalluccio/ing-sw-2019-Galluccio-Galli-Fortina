@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static it.polimi.se2019.model.player.ColorRYB.*;
 
 
-public class AmmoPowerupCard implements AmmoConvertibleCard {
+public class AmmoPowerupCard implements AmmoCard {
     private final int ID;
     private transient AmmoDeck deck;
     private final transient PowerupDeck powerupDeck;

@@ -152,7 +152,7 @@ public class GameHandler extends java.util.Observable {
      * @param cardId card's id
      * @return the card with that id
      */
-    public AmmoConvertibleCard getAmmoCardByID(int cardId) {
+    public AmmoCard getAmmoCardByID(int cardId) {
         return ammoDeck.getCardById(cardId);
     }
 

@@ -6,7 +6,7 @@ import it.polimi.se2019.model.player.ColorRYB;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public class AmmoDeck extends Deck<AmmoConvertibleCard> {
+public class AmmoDeck extends Deck<AmmoCard> {
 
     public AmmoDeck(PowerupDeck powerupDeck) {
         super(initializeCard(powerupDeck));
@@ -16,8 +16,8 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
      * Generate 36 cards according to the game rule
      * @return deck of Ammo Cards
      */
-    private static Stack<AmmoConvertibleCard> initializeCard(PowerupDeck powerupDeck){
-        Stack<AmmoConvertibleCard> deck = new Stack<>();
+    private static Stack<AmmoCard> initializeCard(PowerupDeck powerupDeck){
+        Stack<AmmoCard> deck = new Stack<>();
         int id=0;
         for(int i=0; i<2; i++) {
             for(ColorRYB c: ColorRYB.values()) {
@@ -47,7 +47,7 @@ public class AmmoDeck extends Deck<AmmoConvertibleCard> {
     @Override
     protected Type getType(boolean arrayListORStack) {
         return arrayListORStack ?
-                new TypeToken<ArrayList<AmmoConvertibleCard>>() {}.getType() :
-                new TypeToken<Stack<AmmoConvertibleCard>>() {}.getType();
+                new TypeToken<ArrayList<AmmoCard>>() {}.getType() :
+                new TypeToken<Stack<AmmoCard>>() {}.getType();
     }
 }

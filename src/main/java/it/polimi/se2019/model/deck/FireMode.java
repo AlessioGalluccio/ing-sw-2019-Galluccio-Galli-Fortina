@@ -8,9 +8,10 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class FireMode {
+public abstract class FireMode implements Serializable {
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
     private String description;

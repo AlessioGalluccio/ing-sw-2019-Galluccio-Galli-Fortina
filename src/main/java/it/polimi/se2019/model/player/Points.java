@@ -2,10 +2,11 @@ package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.model.deck.PointCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Points {
+public class Points implements Serializable {
     private ArrayList<PointCard> pointCard = new ArrayList<>();
     private int sum = 0;
 

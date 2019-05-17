@@ -78,7 +78,7 @@ public abstract class Deck<T> {
     /**
      * HELPER METHOD
      * @param ArrayListORStack true if you want an ArrayList, false for a Stack
-     * @return Type parametrized of the deck (WeaponCard, PowerupCard, AmmoConvertibleCard)
+     * @return Type parametrized of the deck (WeaponCard, PowerupCard, AmmoCard)
      */
     protected abstract Type getType(boolean ArrayListORStack);
 
@@ -90,7 +90,7 @@ public abstract class Deck<T> {
     private Gson createGson() {
         GsonBuilder g = new GsonBuilder()
                 .registerTypeAdapter(Card.class, new JsonAdapter<Card>())
-                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
                 .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
                 .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())

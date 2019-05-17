@@ -4,11 +4,12 @@ import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class EnemyView implements Observer {
+public class EnemyView implements Observer, Serializable {
 
     @Override
     public void update(Observable o, Object arg) {

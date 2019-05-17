@@ -3,7 +3,9 @@ package it.polimi.se2019.model.deck;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 
-public interface Card {
+import java.io.Serializable;
+
+public interface Card extends Serializable {
 
    /**
     * Set his deck for the card

@@ -6,7 +6,6 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class ActionMessage extends ViewControllerMessage {
-    private int messageID;
     private int actionID;
 
     /**

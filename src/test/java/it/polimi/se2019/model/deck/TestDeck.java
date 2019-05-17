@@ -60,7 +60,7 @@ public class TestDeck {
 
     @Test
     public void testDiscard() {
-        AmmoConvertibleCard acc = ammoDeck.pick();
+        AmmoCard acc = ammoDeck.pick();
         acc.discard();
         assertEquals(1, ammoDeck.getUsedCard().size());
 

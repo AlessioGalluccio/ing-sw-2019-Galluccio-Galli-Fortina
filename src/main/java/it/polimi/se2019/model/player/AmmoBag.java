@@ -1,8 +1,9 @@
 package it.polimi.se2019.model.player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AmmoBag {
+public class AmmoBag implements Serializable {
     private final int redAmmo;
     private final int yellowAmmo;
     private final int blueAmmo;

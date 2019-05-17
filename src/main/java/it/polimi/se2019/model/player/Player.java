@@ -565,7 +565,7 @@ public class Player extends Observable implements Target, Serializable {
     public Player clone() {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
-                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
                 .setExclusionStrategies(new NotForPlayerExclusionStrategy())
                 .create();
