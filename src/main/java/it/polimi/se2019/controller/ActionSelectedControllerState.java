@@ -14,7 +14,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.List;
 
 
-public class NotEmptyControllerState implements StateController {
+public class ActionSelectedControllerState implements StateController {
 
     private Player player;
     private PlayerView playerView;
@@ -23,7 +23,7 @@ public class NotEmptyControllerState implements StateController {
     private Action action;
     private static final int FIRST_MESSAGE = 0;
 
-    NotEmptyControllerState(Controller controller, GameHandler gameHandler) {
+    ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;

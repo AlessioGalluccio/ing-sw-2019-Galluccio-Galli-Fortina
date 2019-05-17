@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller.actions;
 
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
@@ -15,15 +16,18 @@ import java.util.ArrayList;
 public abstract class Action {
     protected GameHandler gameHandler;
     protected ArrayList<StringAndMessage> correctMessages;
-
     protected Player playerAuthor;
     protected PlayerView playerView;
+    protected Controller controller;
 
-    public Action(GameHandler gameHandler) {
+    public Action(GameHandler gameHandler, Controller controller) {
         this.gameHandler = gameHandler;
+        this.controller = controller;
+        this.playerAuthor = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
+        this.playerView = controller.getLastReceivedMessage().getAuthorView();
     }
 
-    public void executeAction() {
+    public void executeAction() throws WrongInputException{
 
     }
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
@@ -35,17 +39,17 @@ public abstract class Action {
         return false; //TODO implementare
     }
 
-    public abstract void addCell(int x, int y) throws IllegalArgumentException;
+    public abstract void addCell(int x, int y) throws WrongInputException;
 
-    public abstract void addPlayerTarget(int playerID) throws IllegalArgumentException;
+    public abstract void addPlayerTarget(int playerID) throws WrongInputException;
 
-    public abstract void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
+    public abstract void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
 
-    public abstract void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
+    public abstract void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
 
-    public abstract void addWeapon(int weaponID) throws IllegalArgumentException;
+    public abstract void addWeapon(int weaponID) throws WrongInputException;
 
-    public abstract void addFiremode(int firemodeID) throws IllegalArgumentException;
+    public abstract void addFiremode(int firemodeID) throws WrongInputException;
 
 
 

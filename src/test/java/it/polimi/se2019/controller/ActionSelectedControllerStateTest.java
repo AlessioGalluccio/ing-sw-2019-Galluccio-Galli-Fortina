@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class NotEmptyControllerStateTest {
+public class ActionSelectedControllerStateTest {
     private int authorID = 1;
     private PlayerView playerView;
 

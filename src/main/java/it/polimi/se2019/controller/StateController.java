@@ -13,7 +13,6 @@ public interface StateController {
      */
     public void handle(ViewControllerMessage arg);
 
-
     public void handleAction(int actionID);
 
     public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded);
