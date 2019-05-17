@@ -1,24 +1,34 @@
 package it.polimi.se2019.controller.actions;
 
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Grab extends Action{
-    public Grab(GameHandler gameHandler) {
-        super(gameHandler);
+    private Cell cellObjective;
+    private final static int DISTANCE_MAX = 3;
+
+
+
+    public Grab(GameHandler gameHandler, Controller controller) {
+        super(gameHandler, controller);
     }
 
     @Override
     public void executeAction() {
-        super.executeAction();
+        playerAuthor.setPosition(cellObjective);
+        //TODO gestire prendere carte e munizioni
     }
 
     @Override
@@ -33,6 +43,16 @@ public class Grab extends Action{
 
     @Override
     public void addCell(int x, int y) throws IllegalArgumentException {
+        //TODO discutere sull'executeAction()
+        List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
+
+        if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
+            cellObjective = gameHandler.getCellByCoordinate(x,y);
+            executeAction();
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
 
     }
 

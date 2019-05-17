@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller.actions;
 
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
@@ -15,12 +16,13 @@ import java.util.ArrayList;
 public abstract class Action {
     protected GameHandler gameHandler;
     protected ArrayList<StringAndMessage> correctMessages;
-
     protected Player playerAuthor;
     protected PlayerView playerView;
 
-    public Action(GameHandler gameHandler) {
+    public Action(GameHandler gameHandler, Controller controller) {
         this.gameHandler = gameHandler;
+        this.playerAuthor = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
+        this.playerView = controller.getLastReceivedMessage().getAuthorView();
     }
 
     public void executeAction() {

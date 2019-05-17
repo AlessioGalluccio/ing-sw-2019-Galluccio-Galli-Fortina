@@ -1,19 +1,25 @@
 package it.polimi.se2019.controller.actions;
 
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
 public class Shoot extends Action{
-    public Shoot(GameHandler gameHandler) {
-        super(gameHandler);
+    //TODO manca WeaponCardMess per StringAndMessage !!!!!
+    private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode", false);
+
+    public Shoot(GameHandler gameHandler, Controller controller) {
+        super(gameHandler, controller);
     }
 
     @Override
