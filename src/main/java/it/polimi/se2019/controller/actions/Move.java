@@ -30,7 +30,7 @@ public class Move extends Action {
     }
 
     @Override
-    public void executeAction() throws IllegalArgumentException{
+    public void executeAction() throws WrongInputException{
         playerAuthor.setPosition(cellObjective);
     }
 
@@ -48,7 +48,7 @@ public class Move extends Action {
 
 
     @Override
-    public void addCell(int x, int y) throws IllegalArgumentException {
+    public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
 
@@ -57,32 +57,32 @@ public class Move extends Action {
             executeAction();
         }
         else{
-            throw new IllegalArgumentException();
+            throw new WrongInputException();
         }
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws IllegalArgumentException {
-        throw new IllegalArgumentException();
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        throw new IllegalArgumentException();
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        throw new IllegalArgumentException();
+    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addWeapon(int weaponID) throws IllegalArgumentException {
-        throw new IllegalArgumentException();
+    public void addWeapon(int weaponID) throws WrongInputException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws IllegalArgumentException {
-        throw new IllegalArgumentException();
+    public void addFiremode(int firemodeID) throws WrongInputException {
+        throw new WrongInputException();
     }
 }

@@ -13,6 +13,10 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 public class GrabAdrenaline extends Grab {
+
+    //the only change between GrabAdrenaline and Adrenaline
+    private final int DISTANCE_MAX = 2;
+
     public GrabAdrenaline(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }
@@ -33,32 +37,32 @@ public class GrabAdrenaline extends Grab {
     }
 
     @Override
-    public void addCell(int x, int y) throws IllegalArgumentException {
+    public void addCell(int x, int y) throws WrongInputException {
         super.addCell(x, y);
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws IllegalArgumentException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
         super.addPlayerTarget(playerID);
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         super.addTargetingScope(targetingCardID);
     }
 
     @Override
-    public void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
         super.addReload(weaponID);
     }
 
     @Override
-    public void addWeapon(int weaponID) throws IllegalArgumentException {
+    public void addWeapon(int weaponID) throws WrongInputException {
         super.addWeapon(weaponID);
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws IllegalArgumentException {
+    public void addFiremode(int firemodeID) throws WrongInputException {
         super.addFiremode(firemodeID);
     }
 }

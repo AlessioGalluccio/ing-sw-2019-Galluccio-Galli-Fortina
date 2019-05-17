@@ -23,7 +23,7 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void executeAction() {
+    public void executeAction() throws WrongInputException {
         super.executeAction();
     }
 
@@ -38,27 +38,27 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void addCell(int x, int y) throws IllegalArgumentException {
+    public void addCell(int x, int y) throws WrongInputException {
 
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws IllegalArgumentException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
 
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
 
     }
 
     @Override
-    public void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
 
     }
 
     @Override
-    public void addWeapon(int weaponID) throws IllegalArgumentException {
+    public void addWeapon(int weaponID) throws WrongInputException {
 
     }
 

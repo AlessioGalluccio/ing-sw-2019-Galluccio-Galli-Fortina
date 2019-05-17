@@ -2,8 +2,11 @@ package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.deck.Card;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.NotCardException;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
@@ -17,7 +20,8 @@ import java.util.List;
 
 public class Grab extends Action{
     private Cell cellObjective;
-    private final static int DISTANCE_MAX = 3;
+    private Card cardObjective;
+    private final int DISTANCE_MAX = 1;
 
 
 
@@ -29,6 +33,13 @@ public class Grab extends Action{
     public void executeAction() {
         playerAuthor.setPosition(cellObjective);
         //TODO gestire prendere carte e munizioni
+        try{
+            cellObjective.grabCard(cardObjective.getID());
+        }catch(NotCardException e){
+            //it should be never launched here, because we already have cardObjective
+            playerView.printFromController("Error in execution of Grab action");
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -42,42 +53,60 @@ public class Grab extends Action{
     }
 
     @Override
-    public void addCell(int x, int y) throws IllegalArgumentException {
+    public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
 
         if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
             cellObjective = gameHandler.getCellByCoordinate(x,y);
-            executeAction();
+            //there's only one card to grab
+            if(cellObjective.getCardID().size() == 1){
+                //TODO cardObjective = gameHandler.getCardByID(cellObjective.getCardID().get(0));
+                executeAction();
+            }
+            else{
+                //TODO getsione WeaponCard
+                /*
+                controller.addMessageListExpected(Identificator.WEAPON_CARD, "Choose a Weapon", false);
+                controller.sendTargetsToView();
+                */
+            }
+
         }
         else{
-            throw new IllegalArgumentException();
+            throw new WrongInputException();
         }
 
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws IllegalArgumentException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+        throw new WrongInputException();
 
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-
+    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addWeapon(int weaponID) throws IllegalArgumentException {
-
+    public void addWeapon(int weaponID) throws WrongInputException {
+        if(cellObjective == null || cellObjective.getCardID().size() == 1){
+            throw new WrongInputException();
+        }
+        else{
+            //TODO prendi carta arma
+        }
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws IllegalArgumentException {
-
+    public void addFiremode(int firemodeID) throws WrongInputException {
+        throw new WrongInputException();
     }
 }

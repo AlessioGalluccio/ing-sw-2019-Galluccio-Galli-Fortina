@@ -19,7 +19,7 @@ public class ShootAdrenaline extends Shoot {
     }
 
     @Override
-    public void executeAction() {
+    public void executeAction() throws WrongInputException {
         super.executeAction();
     }
 
@@ -34,27 +34,27 @@ public class ShootAdrenaline extends Shoot {
     }
 
     @Override
-    public void addCell(int x, int y) throws IllegalArgumentException {
+    public void addCell(int x, int y) throws WrongInputException {
         super.addCell(x, y);
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws IllegalArgumentException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
         super.addPlayerTarget(playerID);
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         super.addTargetingScope(targetingCardID);
     }
 
     @Override
-    public void addReload(int weaponID) throws IllegalArgumentException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
         super.addReload(weaponID);
     }
 
     @Override
-    public void addWeapon(int weaponID) throws IllegalArgumentException {
+    public void addWeapon(int weaponID) throws WrongInputException {
         super.addWeapon(weaponID);
     }
 
