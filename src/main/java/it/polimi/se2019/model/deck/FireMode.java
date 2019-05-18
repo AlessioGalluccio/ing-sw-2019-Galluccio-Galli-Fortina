@@ -4,7 +4,7 @@ import it.polimi.se2019.controller.actions.AddActionMethods;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
-import it.polimi.se2019.model.deck.firemodes.AddFiremodeMethods;
+import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -13,7 +13,7 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.*;
 
-public abstract class FireMode implements AddFiremodeMethods {
+public abstract class FireMode implements AddFireModeMethods {
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
     private String description;
@@ -112,6 +112,4 @@ public abstract class FireMode implements AddFiremodeMethods {
     @Override
     public abstract void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
 
-    @Override
-    public abstract void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException;
 }

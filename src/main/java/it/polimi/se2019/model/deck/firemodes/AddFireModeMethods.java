@@ -7,7 +7,7 @@ import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 
-public interface AddFiremodeMethods {
+public interface AddFireModeMethods {
 
     void addCell(Shoot shoot, int x, int y) throws WrongInputException;
 
@@ -18,6 +18,4 @@ public interface AddFiremodeMethods {
     void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
 
     void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
-
-    void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException;
 }

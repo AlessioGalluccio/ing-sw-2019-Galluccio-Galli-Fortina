@@ -68,9 +68,4 @@ public class CyberBlade_2 extends FireMode {
     public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
 
     }
-
-    @Override
-    public void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException {
-
-    }
 }

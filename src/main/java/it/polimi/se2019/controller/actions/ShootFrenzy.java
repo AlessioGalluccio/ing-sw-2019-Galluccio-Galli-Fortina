@@ -59,7 +59,7 @@ public class ShootFrenzy extends Shoot {
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws IllegalArgumentException {
+    public void addFiremode(int firemodeID) throws WrongInputException {
         super.addFiremode(firemodeID);
     }
 }
