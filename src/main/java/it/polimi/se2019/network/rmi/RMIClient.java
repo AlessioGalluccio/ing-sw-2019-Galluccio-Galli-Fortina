@@ -90,7 +90,7 @@ public class RMIClient implements ClientInterface, Observer {
     @Override
     public void update(Observable o, Object arg) {
         try {
-
+            //stub.send(arg);
 
         } catch (Exception e) {
 
