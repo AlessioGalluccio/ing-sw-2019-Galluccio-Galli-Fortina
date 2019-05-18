@@ -1,9 +1,12 @@
 package it.polimi.se2019.model.map;
 
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-//Immutable
-public class Coordinate {
+@Immutable
+public class Coordinate implements Serializable {
     private  final int x;
     private final int y;
 

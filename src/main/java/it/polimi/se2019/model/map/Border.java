@@ -1,6 +1,8 @@
 package it.polimi.se2019.model.map;
 
-public interface Border {
+import java.io.Serializable;
+
+public interface Border extends Serializable {
 
     /**
      *

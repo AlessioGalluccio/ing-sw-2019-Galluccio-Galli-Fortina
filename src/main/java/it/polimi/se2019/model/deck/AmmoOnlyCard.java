@@ -7,7 +7,7 @@ import java.util.*;
 import static it.polimi.se2019.model.player.ColorRYB.*;
 
 
-public class AmmoOnlyCard implements AmmoConvertibleCard {
+public class AmmoOnlyCard implements AmmoCard {
     private final int ID;
     private transient AmmoDeck deck;
     private final ColorRYB colorSingle;

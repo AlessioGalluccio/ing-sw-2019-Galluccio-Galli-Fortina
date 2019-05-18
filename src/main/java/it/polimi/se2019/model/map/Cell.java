@@ -2,7 +2,6 @@ package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 
 import java.io.Serializable;

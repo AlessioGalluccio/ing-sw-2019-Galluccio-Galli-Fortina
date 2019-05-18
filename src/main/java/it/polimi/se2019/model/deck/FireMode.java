@@ -5,15 +5,16 @@ import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
+import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class FireMode implements AddFireModeMethods {
+public abstract class FireMode implements AddFireModeMethods, Serializable {
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
     private String description;

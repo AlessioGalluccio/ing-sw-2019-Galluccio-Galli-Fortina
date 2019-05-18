@@ -7,7 +7,6 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 
 public class CardSpawnChooseMessage extends ViewControllerMessage {
-    private int messageID;
     private PowerupCard cardChoosen;
     private PowerupCard cardDiscarded;
 

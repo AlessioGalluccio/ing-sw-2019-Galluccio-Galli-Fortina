@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.player.Player;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -178,7 +177,7 @@ public abstract class Map implements Serializable {
 
     public Map clone() {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
                 .registerTypeAdapter(Border.class, new JsonAdapter<Border>())
                 .registerTypeAdapter(Map.class, new JsonAdapter<Map>())
                 .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>())

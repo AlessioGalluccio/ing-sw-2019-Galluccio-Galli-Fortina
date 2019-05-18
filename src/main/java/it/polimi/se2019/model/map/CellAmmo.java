@@ -5,13 +5,12 @@ import com.google.gson.GsonBuilder;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class CellAmmo extends Cell {
-    private AmmoConvertibleCard ammo;
+    private AmmoCard ammo;
     private transient AmmoDeck deck;
 
     public CellAmmo(Border north, Border east, Border south, Border west, int x, int y, AmmoDeck deck) {
@@ -45,7 +44,7 @@ public class CellAmmo extends Cell {
 
     public Cell clone() {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(AmmoConvertibleCard.class, new JsonAdapter<AmmoConvertibleCard>())
+                .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
                 .registerTypeAdapter(Border.class, new JsonAdapter<Border>())
                 .registerTypeAdapter(Cell.class, new JsonAdapter<Cell>())
                 .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
