@@ -13,7 +13,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
-public abstract class Action {
+public abstract class Action implements AddActionMethods {
     protected GameHandler gameHandler;
     protected ArrayList<StringAndMessage> correctMessages;
     protected Player playerAuthor;

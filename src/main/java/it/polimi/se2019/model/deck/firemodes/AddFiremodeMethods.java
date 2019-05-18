@@ -1,0 +1,23 @@
+package it.polimi.se2019.model.deck.firemodes;
+
+import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
+import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
+import it.polimi.se2019.model.player.NotEnoughAmmoException;
+import it.polimi.se2019.model.player.NotPresentException;
+import it.polimi.se2019.model.player.WeaponIsLoadedException;
+
+public interface AddFiremodeMethods {
+
+    void addCell(Shoot shoot, int x, int y) throws WrongInputException;
+
+    void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException;
+
+    void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
+
+    void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
+
+    void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
+
+    void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException;
+}

@@ -1,10 +1,15 @@
 package it.polimi.se2019.model.deck.firemodes;
 
+import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
+import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.WeaponIsLoadedException;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
@@ -37,6 +42,36 @@ public class SledgeHammer_1 extends FireMode {
     public boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException {
         //TODO
         return false;
+
+    }
+
+    @Override
+    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+
+    }
+
+    @Override
+    public void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
+
+    }
+
+    @Override
+    public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException {
 
     }
 }

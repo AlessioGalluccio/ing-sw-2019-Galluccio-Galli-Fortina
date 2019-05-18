@@ -2,6 +2,7 @@ package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
@@ -15,6 +16,10 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 public class Shoot extends Action{
+    protected FireMode fireMode;
+
+
+
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode", false);
 
@@ -39,6 +44,13 @@ public class Shoot extends Action{
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
+        if(fireMode == null){
+            throw new WrongInputException();
+        }
+        else{
+            //TODO
+            //fireMode.addCell();
+        }
 
     }
 

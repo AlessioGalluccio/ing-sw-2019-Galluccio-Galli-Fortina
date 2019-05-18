@@ -1,16 +1,19 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.controller.actions.AddActionMethods;
+import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
+import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
+import it.polimi.se2019.model.deck.firemodes.AddFiremodeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.*;
 
-public abstract class FireMode {
+public abstract class FireMode implements AddFiremodeMethods {
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
     private String description;
@@ -94,4 +97,21 @@ public abstract class FireMode {
 
     public abstract boolean giveOnlyMarks();
 
+    @Override
+    public abstract void addCell(Shoot shoot, int x, int y) throws WrongInputException;
+
+    @Override
+    public abstract void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException;
+
+    @Override
+    public abstract void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
+
+    @Override
+    public abstract void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
+
+    @Override
+    public abstract void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
+
+    @Override
+    public abstract void addFiremode(Shoot shoot, int firemodeID) throws WrongInputException;
 }
