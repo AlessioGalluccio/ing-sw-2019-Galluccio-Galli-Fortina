@@ -27,7 +27,7 @@ public class TestController {
         Player temp = new Player("Bob", character1, 0);
         ArrayList<Player> players = new ArrayList<>();
         players.add(temp);
-        GameHandler gameHandler = new GameHandler(players);
+        GameHandler gameHandler = new GameHandler(players, 8);
         this.controller = new Controller(gameHandler);
         this.playerView = new PlayerView(temp, null, null, null,null);
     }

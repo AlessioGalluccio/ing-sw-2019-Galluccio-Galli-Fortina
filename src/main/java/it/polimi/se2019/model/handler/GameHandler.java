@@ -25,14 +25,15 @@ public class GameHandler extends java.util.Observable {
     private int turn;
     private ArrayList<Death> arrayDeath = new ArrayList<>();
     private Modality modality;
+    private int skull;
 
-    //Implementato SOLO PER TESTARE getPlayerByID()
-    //Usato in TestPlayer -> testReceiveMark() per getMarkReveived e getMarkDone della classe Mark
+    //Implementato SOLO PER TESTING
     //TODO Da fare decenetemente
     //TODO sistemare gestione degli ID
-    public GameHandler(ArrayList<Player> list) {
-        this.orderPlayerList = list;
+    public GameHandler(List<Player> list, int skull) {
+        this.orderPlayerList = (ArrayList) list;
         this.turn = 0;
+        this.skull = skull;
         this.weaponDeck = new WeaponDeck();
         this.powerupDeck = new PowerupDeck();
         this.ammoDeck = new AmmoDeck(powerupDeck);
@@ -121,12 +122,10 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * return all the players of the game
-     *
      * @return all the players in order
      */
-    public ArrayList<Player> getOrderPlayerList() {
-        //TODO fai copia
-        return orderPlayerList;
+    public List<Player> getOrderPlayerList() {
+        return new ArrayList<>(orderPlayerList);
     }
 
     /**
@@ -192,10 +191,12 @@ public class GameHandler extends java.util.Observable {
             if (p.isDead()) {
                 //If someone has died, create a death object
                 //The player of this turn is the killer
-                arrayDeath.add(new Death(orderPlayerList.get(turn), p));
-                cashPoint(p, doubleKill);
+                skull--;
+                if(skull>=0) arrayDeath.add(new Death(orderPlayerList.get(turn), p));
+                cashPoint(p, doubleKill, false);
                 death++;
                 p.resetDamage();
+                if(skull<=0) p.setFrenzyDeath(); //if skull <= is going to start frenzy mode, so who is dead now has to be flipped
                 doubleKill=true;
             }
         }
@@ -238,10 +239,11 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * If some players have died this method calculate the point and give it to each player
-     *
      * @param whoDied the player who has died and has to be cash
+     * @param doubleKill true if a player has killed more then one enemy in this turn
+     * @param lastCash true if we are at the end of frenzy mode
      */
-    protected void cashPoint(Player whoDied, boolean doubleKill) {
+    protected void cashPoint(Player whoDied, boolean doubleKill, boolean lastCash) {
         HashMap<Integer, List<Player>> hm = createHashMap(whoDied);
 
         List<Integer> key = new ArrayList<>(hm.keySet());
@@ -258,7 +260,7 @@ public class GameHandler extends java.util.Observable {
             int howManyOne = 0;
             for (Player p : playerByDamage) {
                 if(howManyOne > 3) break;
-                p.addPoints(point + bonusPoint(p, whoDied.getDamage(), doubleKill));
+                p.addPoints(point + bonusPoint(p, whoDied, doubleKill, lastCash));
                 point = 1;
                 howManyOne++;
             }
@@ -271,7 +273,7 @@ public class GameHandler extends java.util.Observable {
                     point = 1;
                     howManyOne++;
                 }
-                p.addPoints(point + bonusPoint(p, whoDied.getDamage(), doubleKill));
+                p.addPoints(point + bonusPoint(p, whoDied, doubleKill, lastCash));
                 point -= 2;
             }
         }
@@ -280,24 +282,36 @@ public class GameHandler extends java.util.Observable {
     /**
      * Calculate haw many point go the player if he made some special damage
      * @param p who has to receive the point
-     * @param damage players in order to time of damage
+     * @param whoDied who has died
+     * @param doubleKill true if p has killed more then one enemy in this turn
+     * @param lastCash true if we are at the end of frenzy mode
      * @return 3 if p is the first who shoot and overkill, 2 is p overkill or is the first who shoot and the killer, 1 if p is the first who shoot or the killer, 0 other way
-     *
      */
-    private int bonusPoint(Player p, List<Player> damage, boolean doubleKill) {
-        int secondKill = 0;
-        if(doubleKill)  secondKill = 1;
+    private int bonusPoint(Player p, Player whoDied, boolean doubleKill, boolean lastCash) {
+        List<Player> damage = whoDied.getDamage();
         Death lastDeath = arrayDeath.get(arrayDeath.size() - 1);
-        //if p is the killer and the first
-        if (damage.get(0).equals(p) && lastDeath.getWhoKilled().equals(p))
-            return 1 + lastDeath.getPoints() + secondKill;
-        //if p is the killer
-        if (lastDeath.getWhoKilled().equals(p)) return lastDeath.getPoints() + secondKill;
-        //if p is the first
-        if (damage.get(0).equals(p)) return 1;
-        return 0;
 
-        //TODO gestire se è l'ultimo incasso (in questo caso non è morto nessuno!)
+        //If is the second kill there is one extra point
+        int secondKill = doubleKill ? 1 : 0;
+
+        //If is frenzy death there's no point for the first blood
+        int isFrenzyDeath = whoDied.isFrenzyDeath() ? -1 : 0;
+
+        Player killer = lastCash ? null : lastDeath.getWhoKilled();
+
+        int deadPoint = 0;
+        if(skull>=0) deadPoint = lastDeath.getPoints(); //If is not after at the end of frenzy
+        else if(whoDied.isDead()) deadPoint =  whoDied.isOverKilled() ? 2 : 1; //If is at the end of frenzy, is this case some one can be not dead
+
+        //if p is the killer and the first
+        if (damage.get(0).equals(p) && p.equals(killer)) return 1 + deadPoint + secondKill + isFrenzyDeath;
+        //if p is the killer
+        if (p.equals(killer)) return deadPoint + secondKill;
+        //if p is the first
+        if (damage.get(0).equals(p)) return 1 + isFrenzyDeath;
+        return 0;
     }
+
 }
+
 
