@@ -175,7 +175,7 @@ public class GameHandlerTest {
             } catch (YouDeadException | YouOverkilledException ex) {
                 gameHandler.checkDeath();
                 assertEquals(0, p.getNumPoints());
-                assertEquals(2, e2.getNumPoints());
+                assertEquals(1, e2.getNumPoints());
                 assertEquals(4, e1.getNumPoints());
                 assertEquals(1, e3.getNumPoints());
                 assertEquals(0, p.getDamage().size());

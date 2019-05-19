@@ -25,6 +25,7 @@ public class GameHandler extends java.util.Observable {
     private int turn;
     private ArrayList<Death> arrayDeath = new ArrayList<>();
     private Modality modality;
+    private int skull;
 
     //Implementato SOLO PER TESTARE getPlayerByID()
     //Usato in TestPlayer -> testReceiveMark() per getMarkReveived e getMarkDone della classe Mark
@@ -190,6 +191,7 @@ public class GameHandler extends java.util.Observable {
             if (p.isDead()) {
                 //If someone has died, create a death object
                 //The player of this turn is the killer
+                skull--;
                 arrayDeath.add(new Death(orderPlayerList.get(turn), p));
                 cashPoint(p, doubleKill);
                 death++;
@@ -256,7 +258,7 @@ public class GameHandler extends java.util.Observable {
             int howManyOne = 0;
             for (Player p : playerByDamage) {
                 if(howManyOne > 3) break;
-                p.addPoints(point + bonusPoint(p, whoDied.getDamage(), doubleKill));
+                p.addPoints(point + bonusPoint(p, whoDied, doubleKill));
                 point = 1;
                 howManyOne++;
             }
@@ -269,7 +271,7 @@ public class GameHandler extends java.util.Observable {
                     point = 1;
                     howManyOne++;
                 }
-                p.addPoints(point + bonusPoint(p, whoDied.getDamage(), doubleKill));
+                p.addPoints(point + bonusPoint(p, whoDied, doubleKill));
                 point -= 2;
             }
         }
@@ -278,21 +280,28 @@ public class GameHandler extends java.util.Observable {
     /**
      * Calculate haw many point go the player if he made some special damage
      * @param p who has to receive the point
-     * @param damage players in order to time of damage
+     * @param whoDied who has died
      * @return 3 if p is the first who shoot and overkill, 2 is p overkill or is the first who shoot and the killer, 1 if p is the first who shoot or the killer, 0 other way
      *
      */
-    private int bonusPoint(Player p, List<Player> damage, boolean doubleKill) {
+    private int bonusPoint(Player p, Player whoDied, boolean doubleKill) {
+        //If is the second kill there is one extra point
         int secondKill = 0;
         if(doubleKill)  secondKill = 1;
+
+        //If is frenzy death there's no point for the first blood
+        int isFrenzyDeath = 0;
+        if(whoDied.isFrenzyDeath()) isFrenzyDeath = 1;
+        List<Player> damage = whoDied.getDamage();
         Death lastDeath = arrayDeath.get(arrayDeath.size() - 1);
+
         //if p is the killer and the first
         if (damage.get(0).equals(p) && lastDeath.getWhoKilled().equals(p))
-            return 1 + lastDeath.getPoints() + secondKill;
+            return 1 + lastDeath.getPoints() + secondKill - isFrenzyDeath;
         //if p is the killer
         if (lastDeath.getWhoKilled().equals(p)) return lastDeath.getPoints() + secondKill;
         //if p is the first
-        if (damage.get(0).equals(p)) return 1;
+        if (damage.get(0).equals(p)) return 1 - isFrenzyDeath;
         return 0;
 
         //TODO gestire se è l'ultimo incasso (in questo caso non è morto nessuno!)
