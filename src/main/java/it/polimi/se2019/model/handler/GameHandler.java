@@ -206,24 +206,23 @@ public class GameHandler extends java.util.Observable {
     /**
      * HELPER
      * Create a HashMap to help cashPoint
-     * @param whoDied the player who has died
+     * @param listToOrdinate list of player which you want to ordinate by damage
      * @return HashMap with number of damage as key, list of player who made that damage as value
      */
-    private HashMap<Integer, List<Player>> createHashMap(Player whoDied) {
-        List<Player> damage = whoDied.getDamage();
+    private List<Player> sortPlayerByDamage(List<Player> listToOrdinate) {
         HashMap<Integer, List<Player>> hm = new HashMap<>();
 
         //List of player who made damage to whoDied SORTED BY TIME OF DAMAGE!
         //(the first one is the first who made damage)
         List<Player> playerInDamage = new ArrayList<>();
-        for (Player p : damage) {
+        for (Player p : listToOrdinate) {
             if (!playerInDamage.contains(p)) {
                 playerInDamage.add(p);
             }
         }
 
         for (Player p : playerInDamage) {
-            int key = Collections.frequency(damage, p);
+            int key = Collections.frequency(listToOrdinate, p);
             if (hm.containsKey(key)) {
                 List<Player> newValue = hm.get(key);
                 newValue.add(p);
@@ -234,7 +233,16 @@ public class GameHandler extends java.util.Observable {
                 hm.put(key, newValue);
             }
         }
-        return hm;
+        List<Integer> key = new ArrayList<>(hm.keySet());
+        key.sort((a, b) -> b - a);
+
+        //List of player who made damage SORTED BY NUMBER OF DAMAGE
+        List<Player> playerByDamage = new ArrayList<>();
+        for (Integer k : key) {
+            playerByDamage.addAll(hm.get(k));
+        }
+
+        return playerByDamage;
     }
 
     /**
@@ -244,16 +252,7 @@ public class GameHandler extends java.util.Observable {
      * @param lastCash true if we are at the end of frenzy mode
      */
     protected void cashPoint(Player whoDied, boolean doubleKill, boolean lastCash) {
-        HashMap<Integer, List<Player>> hm = createHashMap(whoDied);
-
-        List<Integer> key = new ArrayList<>(hm.keySet());
-        key.sort((a, b) -> b - a);
-
-        //List of player who made damage SORTED BY NUMBER OF DAMAGE
-        List<Player> playerByDamage = new ArrayList<>();
-        for (Integer k : key) {
-            playerByDamage.addAll(hm.get(k));
-        }
+        List<Player> playerByDamage  = sortPlayerByDamage(whoDied.getDamage());
 
         if (whoDied.isFrenzyDeath()) {
             int point = 2;
@@ -310,6 +309,30 @@ public class GameHandler extends java.util.Observable {
         //if p is the first
         if (damage.get(0).equals(p)) return 1 + isFrenzyDeath;
         return 0;
+    }
+
+    /**
+     * At the end of the game each player receive points according to the killing he has done
+     * This method calculate the points
+     */
+    public void cashSkullBoardPoint() {
+        List<Player> skullBoardPlayer = new ArrayList<>();
+
+        for(Death d : arrayDeath) {
+            skullBoardPlayer.add(d.getWhoKilled());
+            if(d.getPoints()==2) {
+                skullBoardPlayer.add(d.getWhoKilled());
+            }
+        }
+
+        List<Player> playerSkullBoard = sortPlayerByDamage(skullBoardPlayer);
+
+        int point = 8;
+        for (Player p : playerSkullBoard) {
+            if (point < 1) point = 1;
+            p.addPoints(point);
+            point -= 2;
+        }
     }
 
 }
