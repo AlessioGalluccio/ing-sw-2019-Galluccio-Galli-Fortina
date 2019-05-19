@@ -68,7 +68,7 @@ public class ActionSelectedControllerStateTest {
 
     @Test
     public void isFireModePositive() {
-        ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1, authorID, playerView);
+        //ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1, authorID, playerView);
         //boolean value = isFireModePositive(); E' stato commentato perché non compilava
     }
 }

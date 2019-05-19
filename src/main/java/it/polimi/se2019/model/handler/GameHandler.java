@@ -121,12 +121,10 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * return all the players of the game
-     *
      * @return all the players in order
      */
-    public ArrayList<Player> getOrderPlayerList() {
-        //TODO fai copia
-        return orderPlayerList;
+    public List<Player> getOrderPlayerList() {
+        return new ArrayList<>(orderPlayerList);
     }
 
     /**

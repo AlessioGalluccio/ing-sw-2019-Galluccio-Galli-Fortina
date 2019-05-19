@@ -28,22 +28,24 @@ public class Identificator {
     public static final int SHOOT = 3;
 
     //list of ID of Firemodes
-    public static final int CYBERBLADE_1 = 1;
+   /* public static final int CYBERBLADE_1 = 1;
     public static final int CYBERBLADE_2 = 2;
     public static final int CYBERBLADE_3 = 3;
     public static final int ELECTROSCYTHE_1 = 4;
     public static final int ELECTROSCYTHE_2 = 5;
     public static final int FLAMETHROWER_1 = 6;
-    public static final int FLAMETHROWER_2 = 7;
-    //TODO finisci
+    public static final int FLAMETHROWER_2 = 7;*/
+
+    //Sono salvati nel Json delle armi, non servono qui. Eliminiamo?
 
 
 
 
 
 
+    //Stesso methodo in GameHandler, usare quello che pesca gli ID dal json della armi
 
-    public static FireMode getFiremodeByID(int id){
+ /*   public static FireMode getFiremodeByID(int id){
         switch(id){
             case CYBERBLADE_1 : return new CyberBlade_1();
             case CYBERBLADE_2 : return new CyberBlade_2();
@@ -52,11 +54,10 @@ public class Identificator {
             case ELECTROSCYTHE_2: return new ElectroScythe_2();
             case FLAMETHROWER_1 : return new FlameThrower_1();
             case FLAMETHROWER_2: return new FlameThrower_2();
-            //TODO finisci
 
             default: throw new WrongIdRuntimeException(); //should not happen. Runtime Exception
         }
 
-    }
+    }*/
 
 }
