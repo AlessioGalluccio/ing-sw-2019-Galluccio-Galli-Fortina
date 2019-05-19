@@ -63,14 +63,4 @@ public class RocketLauncher_2 extends FireMode {
 
     }
 
-    @Override
-    public void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-
-    }
-
-    @Override
-    public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
-
-    }
-
 }

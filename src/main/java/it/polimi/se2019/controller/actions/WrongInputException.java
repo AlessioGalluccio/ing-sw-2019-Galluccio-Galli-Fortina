@@ -1,10 +1,10 @@
 package it.polimi.se2019.controller.actions;
 
 public class WrongInputException extends Exception{
-    WrongInputException(){
+    public WrongInputException(){
         super();
     }
-    WrongInputException(String s){
+    public WrongInputException(String s){
         super(s);
     }
 }

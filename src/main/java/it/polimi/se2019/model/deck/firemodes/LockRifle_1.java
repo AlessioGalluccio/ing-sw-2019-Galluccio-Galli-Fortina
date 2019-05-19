@@ -1,10 +1,12 @@
 package it.polimi.se2019.model.deck.firemodes;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
+import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
@@ -17,12 +19,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LockRifle_1 extends FireMode {
+    GameHandler gameHandler;
+    Controller controller;
 
     private static final int NUM_DAMAGE = 2;
     private static final int NUM_MARK = 1;
 
     private static final String firstMsgStr = "Select a player from possible targets";
     private static final boolean firstMsgBool = false;
+
+    public LockRifle_1(Shoot shoot) {
+        gameHandler = shoot.getGameHandler();
+        controller = shoot.getController();
+        for(StringAndMessage stringAndMessage: getMessageListExpected()){
+            shoot.getController().addMessageListExpected(stringAndMessage);
+        }
+    }
 
     @Override
     public List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler) {
@@ -118,27 +130,19 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
-
+        throw new WrongInputException();
     }
 
     @Override
     public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
-
+        Player target = gameHandler.getPlayerByID(playerID);
+        shoot.addPlayerTargetFromFireMode(target);
     }
 
     @Override
     public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
-    }
-
-    @Override
-    public void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-
-    }
-
-    @Override
-    public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
-
+        Player author = shoot.getPlayerAuthor();
+        //TODO manca metodo per ottenere TargetingCard da ID
     }
 
 }

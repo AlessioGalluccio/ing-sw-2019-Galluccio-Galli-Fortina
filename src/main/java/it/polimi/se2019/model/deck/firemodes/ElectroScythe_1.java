@@ -6,6 +6,7 @@ import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
@@ -60,14 +61,5 @@ public class ElectroScythe_1 extends FireMode {
 
     }
 
-    @Override
-    public void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-
-    }
-
-    @Override
-    public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
-
-    }
 
 }
