@@ -189,6 +189,7 @@ public class ActionSelectedControllerState implements StateController {
      * it handles the end of this entire State. If the sequence of message is ended, it sends them to the model and it changes the State of the controller
      */
     private void endingHandler(ViewControllerMessage arg) {
+        /*TODO
         int index = controller.getIndexExpected();
         controller.addMessageListReceived(arg);
         controller.setIndexExpected(index + 1);
@@ -215,6 +216,7 @@ public class ActionSelectedControllerState implements StateController {
             //print the next request
             arg.getAuthorView().printFromController(controller.getCopyMessageListExpected().get(index).getString());
         }
+        */
     }
 
     private boolean isPlayerTargetMessage(ViewControllerMessage arg){
