@@ -24,7 +24,7 @@ public class TestLockRifle_1 {
         ArrayList<Player> players = new ArrayList<>();
         players.add(authorPlayer);
         players.add(targetPlayer);
-        gameHandler = new GameHandler(players);
+        gameHandler = new GameHandler(players, 8);
 
         //TODO bisogna impostare tutto gamehandler prima
 

@@ -31,7 +31,7 @@ public class GameHandlerTest {
         players.add(secondPlayer);
         players.add(thirdPlayer);
         players.add(fourthPlayer);
-        gameHandler = new GameHandler(players);
+        gameHandler = new GameHandler(players, 5);
     }
 
     @Test
@@ -99,19 +99,19 @@ public class GameHandlerTest {
 
         //test double kill and draw
         try {
-            for(int i=0; i<3; i++) {
+            for (int i = 0; i < 3; i++) {
                 p.receiveDamageBy(e2);
                 e3.receiveDamageBy(e2);
             }
-            for(int i=0; i<3; i++) {
+            for (int i = 0; i < 3; i++) {
                 p.receiveDamageBy(e1);
                 e3.receiveDamageBy(e1);
             }
-            for(int i=0; i<3; i++) {
+            for (int i = 0; i < 3; i++) {
                 p.receiveDamageBy(e3);
                 e3.receiveDamageBy(p);
             }
-            for(int i=0; i<6; i++) {
+            for (int i = 0; i < 6; i++) {
                 p.receiveDamageBy(e1);
                 e3.receiveDamageBy(e1);
             }
@@ -133,53 +133,98 @@ public class GameHandlerTest {
             }
         }
 
+        //test player's skull != 1
         setUp();
         e1 = gameHandler.getPlayerByID(1);
         p = gameHandler.getPlayerByID(2);
         e2 = gameHandler.getPlayerByID(3);
         e3 = gameHandler.getPlayerByID(4);
-        //test skull != 1
-        try {
-            p.resurrection(null);
-            for(int i=0; i<3; i++) p.receiveDamageBy(e2);
-            for(int i=0; i<3; i++) p.receiveDamageBy(e1);
-            for(int i=0; i<3; i++) p.receiveDamageBy(e3);
-            for(int i=0; i<6; i++) p.receiveDamageBy(e1);
-        } catch (YouDeadException | YouOverkilledException e) {
-            try {
-                p.receiveDamageBy(e1); //the kill shot
-            } catch (YouDeadException | YouOverkilledException ex) {
-                gameHandler.checkDeath();
-                assertEquals(0, p.getNumPoints());
-                assertEquals(5, e2.getNumPoints());
-                assertEquals(8, e1.getNumPoints());
-                assertEquals(2, e3.getNumPoints());
-            }
-        }
+
+        p.resurrection(null);
+        kill(p, e1, e2, e3);
+        gameHandler.checkDeath();
+        assertEquals(0, p.getNumPoints());
+        assertEquals(5, e2.getNumPoints());
+        assertEquals(8, e1.getNumPoints());
+        assertEquals(2, e3.getNumPoints());
+
+        //test isFrenzyDeath
+        setUp();
+        e1 = gameHandler.getPlayerByID(1);
+        p = gameHandler.getPlayerByID(2);
+        e2 = gameHandler.getPlayerByID(3);
+        e3 = gameHandler.getPlayerByID(4);
+
+        p.setFrenzyDeath();
+        kill(p, e1, e2, e3);
+        assertEquals(0, p.getNumPoints());
+        assertEquals(1, e2.getNumPoints());
+        assertEquals(4, e1.getNumPoints());
+        assertEquals(1, e3.getNumPoints());
+        assertEquals(0, p.getDamage().size());
+
+        //test skull=0
+        setUp();
+        gameHandler = new GameHandler(gameHandler.getOrderPlayerList(), 1);
+        setZeroSkull();
+        e1 = gameHandler.getPlayerByID(1);
+        p = gameHandler.getPlayerByID(2);
+        e2 = gameHandler.getPlayerByID(3);
+        e3 = gameHandler.getPlayerByID(4);
+
+        kill(p, e1, e2, e3);
+        assertEquals(0, p.getNumPoints());
+        assertEquals(7+1, e2.getNumPoints());
+        assertEquals(10+2+2, e1.getNumPoints());
+        assertEquals(4+1, e3.getNumPoints());
+        assertEquals(0, p.getDamage().size());
 
         setUp();
+        gameHandler = new GameHandler(gameHandler.getOrderPlayerList(), 1);
+        setZeroSkull();
         e1 = gameHandler.getPlayerByID(1);
         p = gameHandler.getPlayerByID(2);
         e2 = gameHandler.getPlayerByID(3);
         e3 = gameHandler.getPlayerByID(4);
-        //test isFrenzyDeath
+        //test skull=0
         try {
-            p.setFrenzyDeath();
-            for(int i=0; i<3; i++) p.receiveDamageBy(e2);
-            for(int i=0; i<3; i++) p.receiveDamageBy(e1);
-            for(int i=0; i<3; i++) p.receiveDamageBy(e3);
-            for(int i=0; i<6; i++) p.receiveDamageBy(e1);
+            for (int i = 0; i < 1; i++) p.receiveDamageBy(e2);
+            for (int i = 0; i < 2; i++) p.receiveDamageBy(e3);
+            for (int i = 0; i < 3; i++) p.receiveDamageBy(e1);
+        } catch (YouDeadException | YouOverkilledException e) {
+        } finally {
+            for(Player p1 : gameHandler.getOrderPlayerList()) {
+                gameHandler.cashPoint(p1, false, true);
+            }
+            assertEquals(0, p.getNumPoints());
+            assertEquals(7+1, e2.getNumPoints());
+            assertEquals(10+2, e1.getNumPoints());
+            assertEquals(4+1, e3.getNumPoints());
+        }
+    }
+
+    private void kill(Player p, Player e1, Player e2, Player e3) throws NotPresentException {
+        try {
+            for (int i = 0; i < 3; i++) p.receiveDamageBy(e2);
+            for (int i = 0; i < 3; i++) p.receiveDamageBy(e1);
+            for (int i = 0; i < 3; i++) p.receiveDamageBy(e3);
+            for (int i = 0; i < 6; i++) p.receiveDamageBy(e1);
         } catch (YouDeadException | YouOverkilledException e) {
             try {
                 p.receiveDamageBy(e1); //the kill shot
             } catch (YouDeadException | YouOverkilledException ex) {
                 gameHandler.checkDeath();
-                assertEquals(0, p.getNumPoints());
-                assertEquals(1, e2.getNumPoints());
-                assertEquals(4, e1.getNumPoints());
-                assertEquals(1, e3.getNumPoints());
-                assertEquals(0, p.getDamage().size());
             }
         }
     }
+
+    private void setZeroSkull() throws NotPresentException{
+        Player e1 = gameHandler.getPlayerByID(1);
+        Player p = gameHandler.getPlayerByID(2);
+        Player e2 = gameHandler.getPlayerByID(3);
+        Player e3 = gameHandler.getPlayerByID(4);
+        kill(p, e1, e2, e3);
+    }
+
+
 }

@@ -29,7 +29,7 @@ public class TestPlayer {
         players.add(player);
         players.add(enemy);
         players.add(enemy_2);
-        gameHandler = new GameHandler(players);
+        gameHandler = new GameHandler(players, 8);
 
     }
 
