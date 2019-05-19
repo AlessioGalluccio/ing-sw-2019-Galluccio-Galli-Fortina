@@ -21,6 +21,7 @@ import java.util.List;
 public class LockRifle_1 extends FireMode {
     GameHandler gameHandler;
     Controller controller;
+    Player author;
 
     private static final int NUM_DAMAGE = 2;
     private static final int NUM_MARK = 1;
@@ -31,6 +32,7 @@ public class LockRifle_1 extends FireMode {
     public LockRifle_1(Shoot shoot) {
         gameHandler = shoot.getGameHandler();
         controller = shoot.getController();
+        author = shoot.getPlayerAuthor();
         for(StringAndMessage stringAndMessage: getMessageListExpected()){
             shoot.getController().addMessageListExpected(stringAndMessage);
         }

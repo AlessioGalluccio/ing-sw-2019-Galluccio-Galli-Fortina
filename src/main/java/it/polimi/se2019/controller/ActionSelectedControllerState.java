@@ -2,8 +2,10 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
@@ -43,11 +45,21 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        //TODO
+        try{
+            action.addCell(coordinateX, coordinateY);
+        }catch(WrongInputException e){
+            controller.removeLastReceivedMessage();
+        }
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
+        try{
+            action.addFiremode(firemodeID);
+        }catch (WrongInputException e){
+            controller.removeLastReceivedMessage();
+        }
+        /*
         Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
         FireMode fireMode = gameHandler.getFireModeByID(firemodeID);
         AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
@@ -60,6 +72,7 @@ public class ActionSelectedControllerState implements StateController {
             //TODO sistema
             //controller.sendTargetsToView(controller.getLastReceivedMessage());
         }
+        */
     }
 
     @Override
@@ -175,7 +188,8 @@ public class ActionSelectedControllerState implements StateController {
         //TODO sistemare starting a ending handler
         int index = controller.getIndexExpected();
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
-        if(arg.getMessageID() == expectedID) {
+        int messageID = arg.getMessageID();
+        if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE) {
             return true;
         }
         else {
