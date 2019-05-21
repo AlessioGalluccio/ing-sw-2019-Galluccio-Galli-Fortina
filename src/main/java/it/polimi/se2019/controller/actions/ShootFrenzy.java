@@ -2,6 +2,7 @@ package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
@@ -9,7 +10,6 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,12 @@ public class ShootFrenzy extends Shoot {
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws WrongInputException {
-        super.addFiremode(firemodeID);
+    public void addFireMode(int fireModeID) throws WrongInputException {
+        super.addFireMode(fireModeID);
+    }
+
+    @Override
+    public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
+        super.addWeapon(weaponCard);
     }
 }
