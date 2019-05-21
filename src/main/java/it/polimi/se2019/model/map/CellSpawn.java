@@ -2,6 +2,7 @@ package it.polimi.se2019.model.map;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,6 +11,7 @@ import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 public class CellSpawn extends Cell {
     private final int MAX_WEAPONCARD = 3;
@@ -24,11 +26,14 @@ public class CellSpawn extends Cell {
 
     /**
      *
-     * @return list of WeaponCard that can be pick here
+     * @return list of WeaponCard that can be picked here
      */
     public List<WeaponCard> getWeapon() {
-
-        return null; //TODO implementare
+        List<WeaponCard> weaponList = new LinkedList<>();
+        for(WeaponCard w : weapon) {
+            weaponList.add(w);
+        }
+        return weaponList;
     }
 
     public ColorRYB getColor() {
@@ -44,7 +49,10 @@ public class CellSpawn extends Cell {
                 weapon[i] = null;
             }
         }
-        if(cardToReturn!=null) return cardToReturn;
+        if(cardToReturn!=null) {
+            notifyObservers(new CellModelMessage(this.clone()));
+            return cardToReturn;
+        }
         throw new NotCardException("This card is not here! (Already taken or doesn't exist)");
     }
 
@@ -65,6 +73,7 @@ public class CellSpawn extends Cell {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
             if(weapon[i]==null && deck.sizeUnususedCard()!=0) weapon[i]=deck.pick();
         }
+        notifyObservers(new CellModelMessage(this.clone()));
     }
 
     /**
@@ -77,6 +86,7 @@ public class CellSpawn extends Cell {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
             if(weapon[i]==null) {
                 weapon[i] = card;
+                notifyObservers(new CellModelMessage(this.clone()));
                 return;
             }
         }

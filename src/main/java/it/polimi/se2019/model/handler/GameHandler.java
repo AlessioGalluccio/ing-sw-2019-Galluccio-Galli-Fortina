@@ -1,13 +1,19 @@
 package it.polimi.se2019.model.handler;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -195,7 +201,10 @@ public class GameHandler extends java.util.Observable {
                 //If someone has died, create a death object
                 //The player of this turn is the killer
                 skull--;
-                if(skull>=0) arrayDeath.add(new Death(orderPlayerList.get(turn), p));
+                if(skull>=0) {
+                    arrayDeath.add(new Death(orderPlayerList.get(turn), p));
+                    notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
+                }
                 cashPoint(p, doubleKill, false);
                 death++;
                 p.resetDamage();
@@ -361,6 +370,17 @@ public class GameHandler extends java.util.Observable {
         }
 
         return ranking;
+    }
+
+    private List<Death> cloneDeath() {
+        Gson gson = new GsonBuilder()
+                .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
+                .create();
+
+        Type TYPE = new TypeToken<List<Death>>() {
+        }.getType();
+
+        return gson.fromJson(gson.toJson(this, TYPE), TYPE);
     }
 }
 

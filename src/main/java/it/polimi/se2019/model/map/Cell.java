@@ -3,6 +3,7 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -101,6 +102,7 @@ public abstract class Cell extends Observable implements Target, Serializable {
                 playerToAdd.getCell().getCoordinateY() == coordinate.getY()) {
             playerHere.add(playerToAdd);
             room.addPlayer(playerToAdd);
+            notifyObservers(new CellModelMessage(this.clone()));
         } else throw new NotHereException(playerToAdd.toString() + " is not here " +toString());
     }
 
@@ -114,6 +116,7 @@ public abstract class Cell extends Observable implements Target, Serializable {
                 playerToRemove.getCell().getCoordinateY() == coordinate.getY()) {
             playerHere.remove(playerToRemove);
             room.removePlayer(playerToRemove);
+            notifyObservers(new CellModelMessage(this.clone()));
         }
         else throw new NotHereException(playerToRemove.toString() + " was not here " +toString());
     }

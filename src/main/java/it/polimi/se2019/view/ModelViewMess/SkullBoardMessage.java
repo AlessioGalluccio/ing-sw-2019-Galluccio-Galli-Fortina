@@ -1,16 +1,15 @@
 package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.model.handler.Death;
-import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SkullBoardMessage implements ModelViewMessage {
 
     private int numSkullCopy;
-    private ArrayList<Death> deathCopy;
+    private List<Death> deathCopy;
 
-    public SkullBoardMessage(int numSkullCopy, ArrayList<Death> deathCopy) {
+    public SkullBoardMessage(int numSkullCopy, List<Death> deathCopy) {
         this.numSkullCopy = numSkullCopy;
         this.deathCopy = deathCopy;
     }
@@ -19,7 +18,7 @@ public class SkullBoardMessage implements ModelViewMessage {
         return numSkullCopy;
     }
 
-    public ArrayList<Death> getDeathCopy() {
+    public List<Death> getDeathCopy() {
         return deathCopy;
     }
 }

@@ -15,6 +15,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
+import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -162,7 +163,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     public Mark getMark() {
-        return mark; //TODO fare una copia
+        return mark.clone();
     }
 
     /**
@@ -197,6 +198,7 @@ public class Player extends Observable implements Target, Serializable {
         }
 
         ammoBag = new AmmoBag(numRed, numYellow, numBlue);
+        notifyObservers(this.clone());
         if(exception) throw new TooManyException("You have too many ammo of some color, they have been set to the maximum (3)");
     }
 
@@ -222,6 +224,8 @@ public class Player extends Observable implements Target, Serializable {
      */
     public void addPoints(int num) {
         points.addNewPoints(num);
+
+        //TODO notify() ??
     }
 
     /**
@@ -230,7 +234,8 @@ public class Player extends Observable implements Target, Serializable {
     public void resurrection(CellSpawn cellSpawn) {
         //TODO exception if cell is not CellSpawn
         skull += 1;
-        cellPosition = cellSpawn;
+        setPosition(cellSpawn);
+        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -242,7 +247,7 @@ public class Player extends Observable implements Target, Serializable {
         //if is dead the player can has 4 powerup in order to respawn
         if (powerupCardList.size() < MAX_CARD || isDead()) powerupCardList.add(powerupToAdd);
         else throw new TooManyException("You, " + getNickname() + ", have already three powerups");
-        //TODO add notify()
+        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -253,7 +258,7 @@ public class Player extends Observable implements Target, Serializable {
     public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyException {
         if (weaponCardList.size() < MAX_CARD) weaponCardList.add(weaponToAdd);
         else throw new TooManyException("You, " + getNickname() + ", have already three weapons");
-        //TODO add notify()
+        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -269,11 +274,12 @@ public class Player extends Observable implements Target, Serializable {
         damage.add(enemy);
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
         if(isDead()) throw new YouDeadException(toString() + " has been killed by " + enemy.toString());
-
+        //notify done by FireMode when finish to fire
     }
 
     public void resetDamage() {
         damage.clear();
+        //notify done by resurrection
     }
 
     /**
@@ -285,6 +291,7 @@ public class Player extends Observable implements Target, Serializable {
         //Add a mark to the enemy's list of done marks
         enemy.addMarkDoneTo(this); //Throws TooManyException
         this.mark.addMarkReceivedBy(enemy);
+        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -299,6 +306,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
+     * When someone shoot me, all my mark made by the shooter has to be eliminated and converted in damage
      * Remove all marks made by enemy
      * @param enemy who made marks I want to remove
      */
@@ -308,11 +316,11 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * load the weapon selected, using ordinary ammo and ammo gained from diascarded Powerups
+     * Load the weapon selected, using ordinary ammo and ammo gained from discarded Powerups
      * @param weaponID the ID of the weapon
-     * @throws NotPresentException  if the Player doesn't have this weapon
-     * @throws WeaponIsLoadedException  if the weapon is already loaded
-     * @throws NotEnoughAmmoException   if there's not enough ammo from ordinary ammo and discarded Powerups
+     * @throws NotPresentException if the Player doesn't have this weapon
+     * @throws WeaponIsLoadedException if the weapon is already loaded
+     * @throws NotEnoughAmmoException if there's not enough ammo from ordinary ammo and discarded Powerups
      */
     public void loadWeapon(int weaponID) throws NotPresentException, WeaponIsLoadedException, NotEnoughAmmoException {
         for(WeaponCard weaponCard : weaponCardList) {
@@ -322,9 +330,9 @@ public class Player extends Observable implements Target, Serializable {
                 } else {
                     AmmoBag cost = AmmoBag.createAmmoFromList(weaponCard.getReloadCost());
                     if( canPayAmmo(cost)) {
-
                         weaponCard.reload();
                         this.payAmmoCost(cost);
+                        notifyObservers(new PlayerModelMessage(this.clone()));
                     }
                     else{
                         throw new NotEnoughAmmoException();
@@ -363,7 +371,7 @@ public class Player extends Observable implements Target, Serializable {
                 tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
                 card.discard();
                 powerupCardList.remove(card);
-                //TODO notify
+                notifyObservers(new PlayerModelMessage(this.clone()));
                 return;
             }
         }
@@ -380,7 +388,7 @@ public class Player extends Observable implements Target, Serializable {
             if(weapon.getID() == weaponToDiscard.getID()){
                 //weapon.discard()  WeaponCard can't be discarded! They have to be replace on the map
                 weaponCardList.remove(weapon);
-                //TODO notify
+                notifyObservers(new PlayerModelMessage(this.clone()));
                 return;
             }
         }
@@ -441,7 +449,7 @@ public class Player extends Observable implements Target, Serializable {
 
             ammoBag = new AmmoBag(newRed, newYellow, newBlue);
             tempAmmo = new AmmoBag(newTempRed, newTempYellow, newTempBlue);
-
+            notifyObservers(new PlayerModelMessage(this.clone()));
         }
     }
 
@@ -554,6 +562,7 @@ public class Player extends Observable implements Target, Serializable {
      */
     public void setFrenzyDeath() {
         isFrenzyDeath = true;
+        //notify done by resurrection
     }
 
     /**

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class CellAmmo extends Cell {
         if(ammo == null) throw new NotCardException("Card already taken");
         Card cardToReturn = ammo;
         ammo = null;
+        notifyObservers(new CellModelMessage(this.clone()));
         return cardToReturn;
     }
 
@@ -40,6 +42,7 @@ public class CellAmmo extends Cell {
     @Override
     protected void reloadCard() {
         if(ammo==null) ammo = deck.pick();
+        notifyObservers(new CellModelMessage(this.clone()));
     }
 
     public Cell clone() {
