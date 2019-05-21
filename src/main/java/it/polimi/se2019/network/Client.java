@@ -9,4 +9,9 @@ public interface Client {
      * @param message message to send
      */
     void send(ViewControllerMessage message);
+
+    /**
+     * Connect client to server
+     */
+    void connect();
 }

@@ -36,4 +36,19 @@ public interface Server {
      * @param player player to send
      */
     void send(Player player);
+
+    /**
+     * Set a timer long as specified in the config file
+     */
+    void setTimer();
+
+    /**
+     * If there's a timer set, it will be deleted
+     */
+    void cancelTimer();
+
+    /**
+     * Start the server
+     */
+    void start();
 }

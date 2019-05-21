@@ -22,6 +22,7 @@ public class SocketThread implements Server {
         this.socket = socket;
     }
 
+    @Override
     public void start() {
         try {
             printSocket = new ObjectOutputStream(socket.getOutputStream());
@@ -84,6 +85,16 @@ public class SocketThread implements Server {
 
     @Override
     public void send(Player player) {
+
+    }
+
+    @Override
+    public void setTimer() {
+
+    }
+
+    @Override
+    public void cancelTimer() {
 
     }
 }

@@ -24,7 +24,8 @@ public class SocketClient implements Client {
         this.open = true;
     }
 
-    public void start() {
+    @Override
+    public void connect() {
         try {
             socket = new Socket(IP, port); /*Connection established*/
             printSocket = new ObjectOutputStream(socket.getOutputStream());
