@@ -55,7 +55,7 @@ public class ActionSelectedControllerState implements StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         try{
-            action.addFiremode(firemodeID);
+            action.addFireMode(firemodeID);
         }catch (WrongInputException e){
             controller.removeLastReceivedMessage();
         }
@@ -168,6 +168,10 @@ public class ActionSelectedControllerState implements StateController {
 
     }
 
+    @Override
+    public void handleWeaponCard(WeaponCard usedCard) {
+        //TODO
+    }
 
     @Override
     public void handle(ViewControllerMessage arg) {

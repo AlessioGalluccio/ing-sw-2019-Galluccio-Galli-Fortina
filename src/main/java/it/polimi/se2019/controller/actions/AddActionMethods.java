@@ -1,5 +1,6 @@
 package it.polimi.se2019.controller.actions;
 
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
@@ -15,5 +16,7 @@ public interface AddActionMethods {
 
     void addWeapon(int weaponID) throws WrongInputException;
 
-    void addFiremode(int firemodeID) throws WrongInputException;
+    void addFireMode(int fireModeID) throws WrongInputException;
+
+    void addWeapon(WeaponCard weaponCard) throws WrongInputException;
 }

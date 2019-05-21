@@ -37,7 +37,7 @@ public interface StateController {
 
     public void handleTeleporter(TeleporterCard usedCard);
 
-
+    public void handleWeaponCard(WeaponCard usedCard);
 
 
 }

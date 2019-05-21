@@ -119,6 +119,12 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
+    public void handleWeaponCard(WeaponCard usedCard) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         controller.addMessageListReceived(arg);
         arg.handle(this);
