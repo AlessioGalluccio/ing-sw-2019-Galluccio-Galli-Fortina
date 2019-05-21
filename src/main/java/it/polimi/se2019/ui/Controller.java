@@ -27,11 +27,12 @@ public class Controller {
             status.setText("Login Success");
 
             //apriamo così una seconda casella dopo il login
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
             Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("Map1.fxml"));
             primaryStage.setTitle("Mappa1");
-            primaryStage.setScene(new Scene(root, 700, 400));
+            primaryStage.setScene(new Scene(root, 1100, 800));
             primaryStage.show();
+
         }
         else
             status.setText("Login Fail");
