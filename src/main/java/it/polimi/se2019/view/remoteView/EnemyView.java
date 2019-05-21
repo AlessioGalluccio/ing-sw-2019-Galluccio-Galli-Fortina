@@ -11,11 +11,6 @@ import java.util.Observer;
 
 public class EnemyView implements Observer, Serializable {
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
     private String nickname;
     private Character character;
     private AmmoBag ammo;
@@ -67,5 +62,10 @@ public class EnemyView implements Observer, Serializable {
 
     public int getPowerup() {
         return powerup;
+    }
+
+    @Override
+    public void update(Observable o/*Will be always null*/, Object arg) {
+
     }
 }

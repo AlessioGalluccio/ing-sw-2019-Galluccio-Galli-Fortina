@@ -6,11 +6,6 @@ import java.util.Observer;
 
 public class MapView implements Observer {
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
     private Map mapCopy;
 
     public MapView(Map mapCopy) {
@@ -19,5 +14,10 @@ public class MapView implements Observer {
 
     public Map getMapCopy() {
         return mapCopy;
+    }
+
+    @Override
+    public void update(Observable o /*Will be always null*/, Object arg) {
+
     }
 }

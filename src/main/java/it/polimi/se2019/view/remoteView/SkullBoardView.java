@@ -8,11 +8,6 @@ import java.util.Observer;
 
 public class SkullBoardView implements Observer {
 
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
     private int numSkullCopy;
     private ArrayList<Death> deathCopy;
 
@@ -27,5 +22,10 @@ public class SkullBoardView implements Observer {
 
     public int getNumSkullCopy() {
         return numSkullCopy;
+    }
+
+    @Override
+    public void update(Observable o /*Will be always null*/, Object arg) {
+
     }
 }

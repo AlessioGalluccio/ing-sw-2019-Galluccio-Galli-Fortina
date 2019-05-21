@@ -251,7 +251,6 @@ public class Player extends Observable implements Target, Serializable {
      * @throws TooManyException if the player has already three weapon
      */
     public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyException {
-        //if is dead the player can has 4 powerup in order to respawn
         if (weaponCardList.size() < MAX_CARD) weaponCardList.add(weaponToAdd);
         else throw new TooManyException("You, " + getNickname() + ", have already three weapons");
         //TODO add notify()
@@ -379,7 +378,7 @@ public class Player extends Observable implements Target, Serializable {
     public void discardCard(WeaponCard weaponToDiscard) throws NotPresentException {
         for(WeaponCard weapon : weaponCardList){
             if(weapon.getID() == weaponToDiscard.getID()){
-                weapon.discard();
+                //weapon.discard()  WeaponCard can't be discarded! They have to be replace on the map
                 weaponCardList.remove(weapon);
                 //TODO notify
                 return;

@@ -72,6 +72,7 @@ public class CellSpawn extends Cell {
      * @param card card discarded
      * @throws TooManyException if there are already 3 cards on this cell
      */
+    //In order to use this method you have to cast Cell in SpawnCell!!
     public void replaceCard(WeaponCard card) throws TooManyException {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
             if(weapon[i]==null) {

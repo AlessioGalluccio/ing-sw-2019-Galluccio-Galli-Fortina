@@ -51,21 +51,15 @@ public class PlayerView extends View /*View implement observer/observable*/{
     }
 
     public ArrayList<Target> getPossibleTarget() {
-
         return possibleTarget;
     }
 
     public void send (ViewControllerMessage message){
-
         notifyObservers(message);
-
     }
-
 
     @Override
     public void printFromController(String string) {
 
     }
-
-
 }
