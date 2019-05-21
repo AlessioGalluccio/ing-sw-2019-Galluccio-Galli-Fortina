@@ -270,8 +270,32 @@ public class GameHandlerTest {
         assertEquals(pointE2, e2.getNumPoints());
         assertEquals(pointE1+8, e1.getNumPoints());
         assertEquals(pointE3, e3.getNumPoints());
-
-
     }
 
+    @Test
+    public void getRanking() throws NotPresentException {
+        Player e1 = gameHandler.getPlayerByID(1);
+        Player p = gameHandler.getPlayerByID(2);
+        Player e2 = gameHandler.getPlayerByID(3);
+        Player e3 = gameHandler.getPlayerByID(4);
+
+        e1.addPoints(20);
+        p.addPoints(21);
+        e2.addPoints(30);
+        e3.addPoints(21);
+
+        assertEquals(e2, gameHandler.getRanking().get(0));
+        assertEquals(p, gameHandler.getRanking().get(1));
+        assertEquals(e1, gameHandler.getRanking().get(3));
+        gameHandler.nextTurn();
+        gameHandler.nextTurn();
+        gameHandler.nextTurn();
+
+        kill(e1, e3, e2, p);
+        p.addPoints(4);  //p and e3 have the same points
+
+        assertEquals(e2, gameHandler.getRanking().get(0));
+        assertEquals(e1, gameHandler.getRanking().get(3));
+        assertEquals(e3, gameHandler.getRanking().get(1));
+    }
 }

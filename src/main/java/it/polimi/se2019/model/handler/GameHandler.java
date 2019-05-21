@@ -57,12 +57,15 @@ public class GameHandler extends java.util.Observable {
         //TODO gestione delle morti(checkDeath + check respawn ??)
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
-        if (turn == orderPlayerList.size()) {
-            turn = 0;
-        } else {
-            turn++;
-        }
+        incrementTurn();  //I had to separate this method in order to improve efficiency test
         //TODO notify();
+    }
+
+    /**
+     * Increment the turn parameter
+     */
+    protected void incrementTurn() { //I had to separate this method in order to improve efficiency test
+        turn =  (turn == orderPlayerList.size()) ? 0 : turn+1;
     }
 
     /**
@@ -205,11 +208,11 @@ public class GameHandler extends java.util.Observable {
 
     /**
      * HELPER
-     * Create a HashMap to help cashPoint
+     * Sort list of layer according to their frequency in that list
      * @param listToOrdinate list of player which you want to ordinate by damage
-     * @return HashMap with number of damage as key, list of player who made that damage as value
+     * @return A list with the same element of the @param but sorted
      */
-    private List<Player> sortPlayerByDamage(List<Player> listToOrdinate) {
+    private List<Player> sortListByFrequency(List<Player> listToOrdinate) {
         HashMap<Integer, List<Player>> hm = new HashMap<>();
 
         //List of player who made damage to whoDied SORTED BY TIME OF DAMAGE!
@@ -252,7 +255,7 @@ public class GameHandler extends java.util.Observable {
      * @param lastCash true if we are at the end of frenzy mode
      */
     protected void cashPoint(Player whoDied, boolean doubleKill, boolean lastCash) {
-        List<Player> playerByDamage  = sortPlayerByDamage(whoDied.getDamage());
+        List<Player> playerByDamage  = sortListByFrequency(whoDied.getDamage());
 
         if (whoDied.isFrenzyDeath()) {
             int point = 2;
@@ -325,7 +328,7 @@ public class GameHandler extends java.util.Observable {
             }
         }
 
-        List<Player> playerSkullBoard = sortPlayerByDamage(skullBoardPlayer);
+        List<Player> playerSkullBoard = sortListByFrequency(skullBoardPlayer);
 
         int point = 8;
         for (Player p : playerSkullBoard) {
@@ -335,6 +338,30 @@ public class GameHandler extends java.util.Observable {
         }
     }
 
+    /**
+     * Return the list of player in order by point, the first one is the winner
+     * If two player have the same point, win who had killed an enemy first
+     * @return list of player in order by points
+     */
+    public List<Player> getRanking() {
+        List<Player> ranking = new ArrayList<>(orderPlayerList);
+        List<Player> killer = new ArrayList<>();
+
+        if(!arrayDeath.isEmpty()) {
+            for (Death d : arrayDeath) {
+                killer.add(d.getWhoKilled());
+            }
+            ranking.sort((a,b) -> {
+                if(a.getNumPoints() == b.getNumPoints()) {
+                    return killer.indexOf(a) - killer.indexOf(b);
+                } else return b.getNumPoints() - a.getNumPoints();
+            }); //sort player by point
+        } else {
+            ranking.sort((a,b) -> b.getNumPoints()-a.getNumPoints());
+        }
+
+        return ranking;
+    }
 }
 
 
