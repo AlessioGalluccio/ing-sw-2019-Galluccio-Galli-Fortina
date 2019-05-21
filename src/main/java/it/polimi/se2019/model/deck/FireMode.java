@@ -98,19 +98,5 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     public abstract boolean giveOnlyMarks();
 
-    @Override
-    public abstract void addCell(Shoot shoot, int x, int y) throws WrongInputException;
-
-    @Override
-    public abstract void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException;
-
-    @Override
-    public abstract void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
-
-    @Override
-    public abstract void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
-
-    @Override
-    public abstract void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
 
 }

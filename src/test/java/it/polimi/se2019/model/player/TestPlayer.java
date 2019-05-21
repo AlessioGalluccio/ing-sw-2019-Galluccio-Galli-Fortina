@@ -6,6 +6,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.*;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -230,6 +231,12 @@ public class TestPlayer {
         assertEquals(player.getAmmo().getYellowAmmo(), clone.getAmmo().getYellowAmmo());
         assertEquals(player.getMark().getMarkReceived().get(0), (clone.getMark().getMarkReceived().get(0)));
         assertEquals(player.getNumPoints(), clone.getNumPoints());
+    }
+
+    @Test
+    public void testPointCardList() {
+        player.addPoints(5);
+        assertEquals(player.getNumPoints(), 5);
     }
 
 }

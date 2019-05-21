@@ -15,7 +15,4 @@ public interface AddFireModeMethods {
 
     void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
 
-    void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
-
-    void addWeapon(Shoot shoot, int weaponID) throws WrongInputException;
 }

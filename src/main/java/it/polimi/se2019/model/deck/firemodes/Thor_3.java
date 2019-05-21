@@ -59,15 +59,4 @@ public class Thor_3 extends FireMode {
     public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
 
     }
-
-    @Override
-    public void addReload(Shoot shoot, int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-
-    }
-
-    @Override
-    public void addWeapon(Shoot shoot, int weaponID) throws WrongInputException {
-
-    }
-
 }

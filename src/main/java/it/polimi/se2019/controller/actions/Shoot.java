@@ -80,16 +80,12 @@ public class Shoot extends Action{
 
     @Override
     public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        if(fireMode != null){
-            fireMode.addReload(this, weaponID);
-        }
+        //TODO
     }
 
     @Override
     public void addWeapon(int weaponID) throws WrongInputException {
-        if(fireMode != null){
-            fireMode.addWeapon(this, weaponID);
-        }
+        //TODO
     }
 
     @Override
@@ -97,5 +93,29 @@ public class Shoot extends Action{
         if(fireMode != null){
             //TODO aggiungi firemode
         }
+    }
+
+    public List<Player> getTargets() {
+        return targets;
+    }
+
+    public List<Cell> getCells() {
+        return cells;
+    }
+
+    public List<TargetingScopeCard> getTargetingScopeCards() {
+        return targetingScopeCards;
+    }
+
+    public void addPlayerTargetFromFireMode(Player player){
+        targets.add(player);
+    }
+
+    public void addCellFromFireMode(Cell cell){
+        cells.add(cell);
+    }
+
+    public void addTargetingScopeFromFireMode(TargetingScopeCard card){
+        targetingScopeCards.add(card);
     }
 }

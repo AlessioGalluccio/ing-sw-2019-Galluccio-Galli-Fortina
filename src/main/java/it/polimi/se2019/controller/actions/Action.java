@@ -39,19 +39,19 @@ public abstract class Action implements AddActionMethods {
         return false; //TODO implementare
     }
 
-    public abstract void addCell(int x, int y) throws WrongInputException;
+    public GameHandler getGameHandler() {
+        return gameHandler;
+    }
 
-    public abstract void addPlayerTarget(int playerID) throws WrongInputException;
+    public Player getPlayerAuthor() {
+        return playerAuthor;
+    }
 
-    public abstract void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
+    public PlayerView getPlayerView() {
+        return playerView;
+    }
 
-    public abstract void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException;
-
-    public abstract void addWeapon(int weaponID) throws WrongInputException;
-
-    public abstract void addFiremode(int firemodeID) throws WrongInputException;
-
-
-
-
+    public Controller getController() {
+        return controller;
+    }
 }

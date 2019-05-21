@@ -203,15 +203,15 @@ public class GameHandlerTest {
         }
     }
 
-    private void kill(Player p, Player e1, Player e2, Player e3) throws NotPresentException {
+    private void kill(Player dead, Player killer, Player e2, Player e3) throws NotPresentException {
         try {
-            for (int i = 0; i < 3; i++) p.receiveDamageBy(e2);
-            for (int i = 0; i < 3; i++) p.receiveDamageBy(e1);
-            for (int i = 0; i < 3; i++) p.receiveDamageBy(e3);
-            for (int i = 0; i < 6; i++) p.receiveDamageBy(e1);
+            for (int i = 0; i < 3; i++) dead.receiveDamageBy(e2);
+            for (int i = 0; i < 3; i++) dead.receiveDamageBy(killer);
+            for (int i = 0; i < 3; i++) dead.receiveDamageBy(e3);
+            for (int i = 0; i < 6; i++) dead.receiveDamageBy(killer);
         } catch (YouDeadException | YouOverkilledException e) {
             try {
-                p.receiveDamageBy(e1); //the kill shot
+                dead.receiveDamageBy(killer); //the kill shot
             } catch (YouDeadException | YouOverkilledException ex) {
                 gameHandler.checkDeath();
             }
@@ -226,5 +226,52 @@ public class GameHandlerTest {
         kill(p, e1, e2, e3);
     }
 
+    @Test
+    public void cashSkullBoardPoint() throws NotPresentException{
+        Player e1 = gameHandler.getPlayerByID(1);
+        Player p = gameHandler.getPlayerByID(2);
+        Player e2 = gameHandler.getPlayerByID(3);
+        Player e3 = gameHandler.getPlayerByID(4);
+
+        kill(p, e1, e2, e3);
+        kill(e2, e1, e2, e3);
+        gameHandler.nextTurn();
+        kill(e1, p, e2, e3);
+
+        int pointP = p.getNumPoints();
+        int pointE1 = e1.getNumPoints();
+        int pointE2 = e2.getNumPoints();
+        int pointE3 = e3.getNumPoints();
+
+        gameHandler.cashSkullBoardPoint();
+        assertEquals(pointP + 6, p.getNumPoints());
+        assertEquals(pointE2, e2.getNumPoints());
+        assertEquals(pointE1+8, e1.getNumPoints());
+        assertEquals(pointE3, e3.getNumPoints());
+
+        //test draw
+        setUp();
+        e1 = gameHandler.getPlayerByID(1);
+        p = gameHandler.getPlayerByID(2);
+        e2 = gameHandler.getPlayerByID(3);
+        e3 = gameHandler.getPlayerByID(4);
+
+        kill(p, e1, e2, e3);
+        gameHandler.nextTurn();
+        kill(e1, p, e2, e3);
+
+        pointP = p.getNumPoints();
+        pointE1 = e1.getNumPoints();
+        pointE2 = e2.getNumPoints();
+        pointE3 = e3.getNumPoints();
+
+        gameHandler.cashSkullBoardPoint();
+        assertEquals(pointP + 6, p.getNumPoints());
+        assertEquals(pointE2, e2.getNumPoints());
+        assertEquals(pointE1+8, e1.getNumPoints());
+        assertEquals(pointE3, e3.getNumPoints());
+
+
+    }
 
 }
