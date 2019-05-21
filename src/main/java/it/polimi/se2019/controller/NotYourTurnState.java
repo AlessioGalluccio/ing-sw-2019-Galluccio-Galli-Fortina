@@ -105,6 +105,12 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
+    public void handleWeaponCard(WeaponCard usedCard) {
+        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
+        controller.removeLastReceivedMessage();
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
 
         //controlls if it's the turn of the player. If it is, it changes the state and it passes the message to the new state

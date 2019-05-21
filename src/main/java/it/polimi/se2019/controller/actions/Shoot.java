@@ -4,13 +4,11 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.TargetingScopeCard;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.NotPresentException;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.WeaponIsLoadedException;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -19,10 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shoot extends Action{
+    protected WeaponCard weapon;
     protected FireMode fireMode;
+    protected List<FireMode> fireModesUsed;
     protected List<Player> targets;
     protected List<Cell> cells;
     protected List<TargetingScopeCard> targetingScopeCards;
+    protected AmmoBag cost;
 
 
 
@@ -89,9 +90,30 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void addFiremode(int firemodeID) throws WrongInputException {
-        if(fireMode != null){
-            //TODO aggiungi firemode
+    public void addFireMode(int fireModeID) throws WrongInputException {
+        FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
+        if(this.fireMode == null && weapon != null &&!fireModesUsed.contains(fireModeSelected)){
+            if(weapon.getFireMode().contains(fireModeSelected)){
+                this.fireMode = fireModeSelected;
+            }
+            else{
+                throw new WrongInputException();
+            }
+        }
+        else{
+            throw new WrongInputException();
+        }
+
+    }
+
+    @Override
+    public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
+        //TODO
+        if(this.weapon == null){
+            this.weapon = weaponCard;
+        }
+        else{
+            throw new WrongInputException();
         }
     }
 
@@ -107,6 +129,10 @@ public class Shoot extends Action{
         return targetingScopeCards;
     }
 
+    public List<FireMode> getFireModesUsed() {
+        return fireModesUsed;
+    }
+
     public void addPlayerTargetFromFireMode(Player player){
         targets.add(player);
     }
@@ -117,5 +143,9 @@ public class Shoot extends Action{
 
     public void addTargetingScopeFromFireMode(TargetingScopeCard card){
         targetingScopeCards.add(card);
+    }
+
+    public void addFireModeUsed(FireMode fireMode){
+        fireModesUsed.add(fireMode);
     }
 }
