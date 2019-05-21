@@ -30,7 +30,7 @@ public class Controller {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Mappa1");
-            primaryStage.setScene(new Scene(root, 1100, 800));
+            primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.show();
 
         }
