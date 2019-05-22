@@ -81,8 +81,7 @@ public class NotYourTurnState implements StateController {
     @Override
     public void handleReload(int weaponID) {
         controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();;
-
+        controller.removeLastReceivedMessage();
     }
 
     @Override
