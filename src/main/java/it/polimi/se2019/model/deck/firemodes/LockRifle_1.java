@@ -29,28 +29,22 @@ public class LockRifle_1 extends FireMode {
     private static final String firstMsgStr = "Select a player from possible targets";
     private static final boolean firstMsgBool = false;
 
-    public LockRifle_1(Shoot shoot) {
+    public void  LockRifle_1(Shoot shoot) {
+        //TOD vedere se è compatibile con json
         gameHandler = shoot.getGameHandler();
         controller = shoot.getController();
         author = shoot.getPlayerAuthor();
-        for(StringAndMessage stringAndMessage: getMessageListExpected()){
-            shoot.getController().addMessageListExpected(stringAndMessage);
-        }
     }
 
     @Override
     public List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler) {
         List<Target> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() == player.getID()){
-                break;
-            }
-            else{
-                if(playerOfGame.isVisibleBy(player)){
-                    listTarget.add(playerOfGame);
-                }
+            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
+                listTarget.add(playerOfGame);
             }
         }
+        //TODO invio dei target
         return listTarget;
     }
 

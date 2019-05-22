@@ -108,10 +108,15 @@ public class Shoot extends Action{
 
     @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
+        //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         if(this.fireMode == null && weapon != null &&!fireModesUsed.contains(fireModeSelected)){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
+                //adding expected messeages of firemode
+                for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
+                    controller.addMessageListExpected(stringAndMessage);
+                }
             }
             else{
                 throw new WrongInputException();
