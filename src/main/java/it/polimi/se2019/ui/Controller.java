@@ -9,9 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class Controller {
+    public ImageView mappa;
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
     //con lo stesso come dato in fx:id e in onAction metto il metodo
