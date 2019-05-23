@@ -19,25 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LockRifle_1 extends FireMode {
-    GameHandler gameHandler;
-    Controller controller;
-    Player author;
-
     private static final int NUM_DAMAGE = 2;
     private static final int NUM_MARK = 1;
 
-    private static final String firstMsgStr = "Select a player from possible targets";
-    private static final boolean firstMsgBool = false;
-
-    public void  LockRifle_1(Shoot shoot) {
-        //TOD vedere se è compatibile con json
-        gameHandler = shoot.getGameHandler();
-        controller = shoot.getController();
-        author = shoot.getPlayerAuthor();
-    }
+    private static final String FIRST_MSG_STR = "Select a player from possible targets";
+    private static final boolean FIRST_MSG_BOOL = false;
 
     @Override
-    public List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler) {
+    public List<Target> sendPossibleTarget() {
         List<Target> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
             if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
@@ -49,80 +38,24 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void fire(List<ViewControllerMessage> stack, GameHandler gameHandler) {
-        //utilizza metodi con polimorfismo. uno con il parametro del tipo corretto, un con quello generale. se non è quello corretto, non fai niente
-        firstTarget(stack.get(0), gameHandler);
-    }
-
-    @Override
-    public boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException {
-        //TODO provvisorio, controllalo e scrivilo meglio
-        if(stack.get(0).getMessageID() == Identificator.PLAYER_VIEW_MESSAGE){
-            for(int i = 1; i < stack.size(); i++){
-                if(stack.get(i).getMessageID() != Identificator.TARGETING_SCOPE_MESSAGE){
-                    return false;
-                }
-            }
-            return true;
+    public void fire() throws WrongInputException {
+        addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1);
+        if(shoot.getTargetsPlayer().size() == 2){
+            addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1);
         }
-        return false;
-
+        //TODO pagamento costo ed eccezione
     }
+
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         List<StringAndMessage> messageListExpected = new ArrayList<>();
 
-        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_VIEW_MESSAGE, firstMsgStr, firstMsgBool );
+        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_VIEW_MESSAGE, FIRST_MSG_STR, FIRST_MSG_BOOL);
         messageListExpected.add(firstTarget);
 
         return messageListExpected;
     }
-
-    @Override
-    public boolean giveOnlyMarks() {
-        return false;
-    }
-
-    /**
-     * handle the effect of the first target
-     * @param msg the target
-     * @param gameHandler the handler of the game
-     */
-    private void firstTarget(PlayerMessage msg, GameHandler gameHandler){
-        Player authorPlayer = gameHandler.getPlayerByID(msg.getAuthorID());
-        Player targetPlayer = gameHandler.getPlayerByID(msg.getPlayerID());
-        for(int i = 0; i < NUM_DAMAGE; i++){
-            try{
-                targetPlayer.receiveDamageBy(authorPlayer);
-            }catch (NotPresentException e){
-                msg.getAuthorView().printFromController("Can't do more damage to this player");
-            }catch (YouOverkilledException e) {
-                //TODO
-            }catch (YouDeadException e) {
-                //TODO
-            }
-        }
-        for(int i = 0; i < NUM_MARK; i++){
-            try{
-                targetPlayer.receiveMarkBy(authorPlayer);
-            }catch(TooManyException e){
-                msg.getAuthorView().printFromController("You have already three marks on this Player, you will not add more marks");
-            }
-        }
-
-    }
-
-    /**
-     * this method should be not used if program works correctly, but needed for Polymorphism
-     * @param target the target
-     * @param gameHandler the handler of the game
-     */
-    private void firstTarget(ViewControllerMessage target, GameHandler gameHandler) {
-        //TODO non deve far nulla, decidi se aggiungere una eccezione
-    }
-
-
 
     @Override
     public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
@@ -132,7 +65,28 @@ public class LockRifle_1 extends FireMode {
     @Override
     public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
-        shoot.addPlayerTargetFromFireMode(target);
+        int targetID = target.getID();
+        if(targetID == author.getID()){
+            shoot.getPlayerView().printFromController("Error,you have selected yourself");
+            throw new WrongInputException();
+        }
+        if(target.isVisibleBy(author)){
+            if(shoot.getTargetsPlayer().isEmpty()){
+                shoot.addPlayerTargetFromFireMode(target);
+            }
+            else if(shoot.getTargetsPlayer().size() == 1 && shoot.getTargetsPlayer().get(0).getID() != targetID
+                    && shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
+                shoot.addPlayerTargetFromFireMode(target);
+            }
+            else{
+                throw new WrongInputException();
+            }
+
+        }
+        else{
+            throw new WrongInputException();
+        }
+
     }
 
     @Override
@@ -142,13 +96,19 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void addOptional(int numOptional) throws WrongInputException {
-
+    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
+        if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()){
+            //TODO controlla costo
+            shoot.addOptional(numOptional);
+        }
+        else{
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void addNope() throws WrongInputException {
-
+        throw new WrongInputException();
     }
 
 }

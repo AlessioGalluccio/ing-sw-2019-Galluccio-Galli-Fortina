@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.AddActionMethods;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
@@ -21,6 +22,12 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     private int ID;
     private boolean used;
     private boolean primary;
+    //added from addShoot
+    protected transient Shoot shoot;
+    protected transient GameHandler gameHandler;
+    protected transient Controller controller;
+    protected transient Player author;
+    protected transient PlayerView playerView;
 
     /**
      * Create a deep copy of cost
@@ -64,27 +71,15 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     /**
      * Create and send message containing the possible targets to the view of player
-     * @param player the player who wants to use this fire mode
-     * @param playerView receiver of the message
      * @return the possible target that player can hit, return null if there is no target
      */
-    public abstract List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler);
+    public abstract List<Target> sendPossibleTarget();
 
     /**
-     * Fires to the target set by setTarget(
-     * @param stack the correct messages sent by the Player
-     * @param gameHandler the handler of the match
+     * Fires to the target
      */
-    public abstract void fire(List<ViewControllerMessage> stack, GameHandler gameHandler);
+    public abstract void fire() throws WrongInputException;
 
-    /**
-     *
-     * @param stack the messages sent by the Player. On ly the last one can be incorrect
-     * @param gameHandler the handler of the match
-     * @return true if the last message is correct, false if not
-     * @throws NotEnoughAmmoException if the Player doesn't have enough ammo for the firemode
-     */
-    public abstract boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException;
 
     /**
      * Set targets in order to fire it
@@ -96,7 +91,44 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     public abstract List<StringAndMessage> getMessageListExpected();
 
-    public abstract boolean giveOnlyMarks();
+    /**
+     * MANDATORY after the firemode is created in action
+     * @param shoot the action shoot
+     */
+    public void addShoot(Shoot shoot){
+        this.shoot = shoot;
+        this.controller = shoot.getController();
+        this.gameHandler = shoot.getGameHandler();
+        this.author = shoot.getPlayerAuthor();
+        this.playerView = shoot.getPlayerView();
+    }
+
+    /**
+     * add damage and marks to a player
+     * @param targetPlayer the player shooted
+     * @param numDamage number of Damage to apply
+     * @param numMarks number of Marks to apply
+     */
+    protected void addDamageAndMarks(Player targetPlayer, int numDamage, int numMarks){
+        for(int i = 0; i < numDamage; i++){
+            try{
+                targetPlayer.receiveDamageBy(author);
+            }catch (NotPresentException e){
+                playerView.printFromController("Can't do more damage to this player");
+            }catch (YouOverkilledException e) {
+                //TODO
+            }catch (YouDeadException e) {
+                //TODO
+            }
+        }
+        for(int i = 0; i < numMarks; i++){
+            try{
+                targetPlayer.receiveMarkBy(author);
+            }catch(TooManyException e){
+                playerView.printFromController("You have already three marks on this Player, you will not add more marks");
+            }
+        }
+    }
 
 
 }

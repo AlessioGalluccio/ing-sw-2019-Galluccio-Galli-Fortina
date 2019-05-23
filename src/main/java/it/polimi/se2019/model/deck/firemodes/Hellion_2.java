@@ -19,29 +19,17 @@ import java.util.List;
 public class Hellion_2 extends FireMode {
 
     @Override
-    public List<Target> sendPossibleTarget(Player player, PlayerView playerView, GameHandler gameHandler) {
-        return null;
-    }
-
-    @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;
     }
 
     @Override
-    public boolean giveOnlyMarks() {
-        return false;
+    public List<Target> sendPossibleTarget() {
+        return null;
     }
 
     @Override
-    public void fire(List<ViewControllerMessage> stack, GameHandler gameHandler) {
-
-    }
-
-    @Override
-    public boolean controlMessage(List<ViewControllerMessage> stack, GameHandler gameHandler) throws NotEnoughAmmoException {
-        //TODO
-        return false;
+    public void fire() {
 
     }
 
@@ -61,7 +49,7 @@ public class Hellion_2 extends FireMode {
     }
 
     @Override
-    public void addOptional(int numOptional) throws WrongInputException {
+    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
 
     }
 
@@ -69,5 +57,4 @@ public class Hellion_2 extends FireMode {
     public void addNope() throws WrongInputException {
 
     }
-
 }

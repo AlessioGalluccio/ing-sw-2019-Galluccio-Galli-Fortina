@@ -20,6 +20,7 @@ public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;
     protected List<Player> targets;
+    protected List<Integer> optionalSelected;
     protected List<Cell> cells;
     protected List<TargetingScopeCard> targetingScopeCards;
     protected AmmoBag cost;
@@ -109,6 +110,7 @@ public class Shoot extends Action{
     public void addFireMode(int fireModeID) throws WrongInputException {
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
+        fireModeSelected.addShoot(this);
         if(this.fireMode == null && weapon != null){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
@@ -148,14 +150,18 @@ public class Shoot extends Action{
         //TODO
     }
 
-    //METHODS FOR FIREMODES
+    //METHODS ONLY FOR FIREMODES
 
-    public List<Player> getTargets() {
+    public List<Player> getTargetsPlayer() {
         return targets;
     }
 
     public List<Cell> getCells() {
         return cells;
+    }
+
+    public List<Integer> getOptionalSelected() {
+        return optionalSelected;
     }
 
     public List<TargetingScopeCard> getTargetingScopeCards() {
@@ -172,5 +178,9 @@ public class Shoot extends Action{
 
     public void addTargetingScopeFromFireMode(TargetingScopeCard card){
         targetingScopeCards.add(card);
+    }
+
+    public void addOptionalSelected(int numOptional){
+        this.optionalSelected.add(numOptional);
     }
 }

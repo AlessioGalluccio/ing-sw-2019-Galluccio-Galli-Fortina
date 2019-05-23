@@ -261,47 +261,6 @@ public class ActionSelectedControllerState implements StateController {
         */
     }
 
-    private boolean isPlayerTargetMessage(ViewControllerMessage arg){
-        return false;
-    }
-
-    private boolean isPlayerTargetMessage(PlayerMessage arg){
-        return true;
-    }
-
-    private boolean isFiremode(ViewControllerMessage arg) throws FiremodeOfOnlyMarksException {
-        return false;
-    }
-
-    private boolean isFiremode(FireModeMessage arg) throws FiremodeOfOnlyMarksException{
-        //TODO sistema controllo per il lancio dell'eccezione
-        if(gameHandler.getFireModeByID(arg.getFiremodeID()).giveOnlyMarks()){
-            throw new FiremodeOfOnlyMarksException();
-        }
-        return true;
-    }
-
-    private boolean isTargetingScopeUsed(ViewControllerMessage arg, TargetingScopeCard targetingScopeCard){
-        return false;
-    }
-
-    private boolean isTargetingScopeUsed(TargetingScopeMessage arg, TargetingScopeCard targetingScopeCard){
-        //TODO sistema
-        return arg.getUsedCard().equals(targetingScopeCard);
-
-    }
-
-
-/*
-    private boolean isThisTargetingAlreadyPresent(List<ViewControllerMessage> stack, TargetingScopeCard targetingScopeCard){
-        for(ViewControllerMessage msg : stack){
-            if(isTargetingScopeUsed(msg, targetingScopeCard)){
-                return true;
-            }
-        }
-        return false;
-    }
-    */
 
     /**
      * does nothing, because it doesn't have cost like Firemode or TargetingScope
