@@ -25,6 +25,10 @@ public class ActionSelectedControllerState implements StateController {
     private Action action;
     private static final int FIRST_MESSAGE = 0;
 
+    private final String PLAYER_WRONG = "You can't select this target";
+    private final String CELL_WRONG = "You can't select this cell";
+    private final String OPTIONAL_WRONG = "You can't select this optional effect";
+
     ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
@@ -48,6 +52,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addCell(coordinateX, coordinateY);
         }catch(WrongInputException e){
+            playerView.printFromController(CELL_WRONG);
             controller.removeLastReceivedMessage();
         }
     }
@@ -94,6 +99,7 @@ public class ActionSelectedControllerState implements StateController {
     @Override
     public void handleNope() {
         int index = controller.getIndexExpected();
+
         if(!controller.getCopyMessageListExpected().get(index).isOptional()){
             String response = controller.getCopyMessageListExpected().get(index).getString();
             controller.getLastReceivedMessage().getAuthorView().printFromController(response);
@@ -107,8 +113,23 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handlePlayer(int playerID) {
-        //TODO
+        try{
+            action.addPlayerTarget(playerID);
+        }catch (WrongInputException e){
+            playerView.printFromController(PLAYER_WRONG);
+            controller.removeLastReceivedMessage();
+        }
 
+    }
+
+    @Override
+    public void handleOptional(int numOptional) {
+        try{
+            action.addOptional(numOptional);
+        }catch (WrongInputException e){
+            playerView.printFromController(OPTIONAL_WRONG);
+            controller.removeLastReceivedMessage();
+        }
     }
 
     @Override
@@ -207,6 +228,9 @@ public class ActionSelectedControllerState implements StateController {
      * it handles the end of this entire State. If the sequence of message is ended, it sends them to the model and it changes the State of the controller
      */
     private void endingHandler(ViewControllerMessage arg) {
+        //print next request
+        String response = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+        playerView.printFromController(response);
         /*TODO
         int index = controller.getIndexExpected();
         controller.addMessageListReceived(arg);

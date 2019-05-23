@@ -63,4 +63,14 @@ public class RocketLauncher_2 extends FireMode {
 
     }
 
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+
+    }
+
 }

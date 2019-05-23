@@ -63,20 +63,17 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         //TODO ??? cosa è?
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
@@ -92,14 +89,17 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public void handleNope() {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
+    }
+
+    @Override
+    public void handleOptional(int numOptional) {
+
     }
 
     @Override
     public void handlePlayer(int playerID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
@@ -109,16 +109,13 @@ public class EmptyControllerState implements  StateController {
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
             controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_PRESENT_WEAPON_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-            controller.removeLastReceivedMessage();
+            youCantDoThis();
         }catch(WeaponIsLoadedException e){
             controller.getLastReceivedMessage().getAuthorView().printFromController(WEAPON_LOADED_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-            controller.removeLastReceivedMessage();
+            youCantDoThis();
         }catch(NotEnoughAmmoException e){
             controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_ENOUGH_AMMO_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-            controller.removeLastReceivedMessage();
+            youCantDoThis();
         }
 
         //after reloading, you pass your turn
@@ -127,14 +124,12 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public void handleTagback(TagbackGranedCard usedCard) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
 
     }
 
@@ -145,13 +140,17 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        youCantDoThis();
     }
 
     @Override
     public void handle(ViewControllerMessage arg) {
         controller.addMessageListReceived(arg);
         arg.handle(this);
+    }
+
+    private void youCantDoThis(){
+        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        controller.removeLastReceivedMessage();
     }
 }

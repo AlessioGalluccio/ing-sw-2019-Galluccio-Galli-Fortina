@@ -19,4 +19,8 @@ public interface AddActionMethods {
     void addFireMode(int fireModeID) throws WrongInputException;
 
     void addWeapon(WeaponCard weaponCard) throws WrongInputException;
+
+    void addOptional(int numOptional) throws WrongInputException;
+
+    void addNope() throws WrongInputException;
 }

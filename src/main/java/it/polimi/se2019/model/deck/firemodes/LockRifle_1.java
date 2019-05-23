@@ -141,6 +141,16 @@ public class LockRifle_1 extends FireMode {
         //TODO manca metodo per ottenere TargetingCard da ID
     }
 
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+
+    }
+
 }
 
 

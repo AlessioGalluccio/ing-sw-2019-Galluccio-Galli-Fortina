@@ -115,4 +115,14 @@ public class Grab extends Action{
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         throw new WrongInputException();
     }
+
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+        throw new WrongInputException();
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+        throw new WrongInputException();
+    }
 }

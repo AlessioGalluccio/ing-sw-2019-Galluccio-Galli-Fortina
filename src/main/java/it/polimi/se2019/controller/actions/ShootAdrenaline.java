@@ -67,4 +67,14 @@ public class ShootAdrenaline extends Shoot {
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         super.addWeapon(weaponCard);
     }
+
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+        super.addOptional(numOptional);
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+        super.addNope();
+    }
 }

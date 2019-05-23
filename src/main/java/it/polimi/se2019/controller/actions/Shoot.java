@@ -19,7 +19,6 @@ import java.util.List;
 public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;
-    protected List<FireMode> fireModesUsed;
     protected List<Player> targets;
     protected List<Cell> cells;
     protected List<TargetingScopeCard> targetingScopeCards;
@@ -110,7 +109,7 @@ public class Shoot extends Action{
     public void addFireMode(int fireModeID) throws WrongInputException {
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
-        if(this.fireMode == null && weapon != null &&!fireModesUsed.contains(fireModeSelected)){
+        if(this.fireMode == null && weapon != null){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
                 //adding expected messeages of firemode
@@ -139,6 +138,18 @@ public class Shoot extends Action{
         }
     }
 
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+        //TODO
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+        //TODO
+    }
+
+    //METHODS FOR FIREMODES
+
     public List<Player> getTargets() {
         return targets;
     }
@@ -151,10 +162,6 @@ public class Shoot extends Action{
         return targetingScopeCards;
     }
 
-    public List<FireMode> getFireModesUsed() {
-        return fireModesUsed;
-    }
-
     public void addPlayerTargetFromFireMode(Player player){
         targets.add(player);
     }
@@ -165,9 +172,5 @@ public class Shoot extends Action{
 
     public void addTargetingScopeFromFireMode(TargetingScopeCard card){
         targetingScopeCards.add(card);
-    }
-
-    public void addFireModeUsed(FireMode fireMode){
-        fireModesUsed.add(fireMode);
     }
 }
