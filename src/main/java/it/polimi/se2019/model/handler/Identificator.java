@@ -12,7 +12,7 @@ public class Identificator {
     public static final int CELL_MESSAGE = 3;
     public static final int FIRE_MODE_MESSAGE = 4;
     public static final int NEWTON_MESSAGE = 5;
-    public static final int PLAYER_VIEW_MESSAGE = 6;
+    public static final int PLAYER_MESSAGE = 6;
     public static final int RELOAD_MESSAGE = 7;
     public static final int TAGBACK_GRANADE_MESSAGE = 8;
     public static final int TARGETING_SCOPE_MESSAGE = 9;

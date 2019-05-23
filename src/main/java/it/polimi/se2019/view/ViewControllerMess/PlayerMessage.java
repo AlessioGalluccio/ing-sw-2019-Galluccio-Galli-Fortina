@@ -17,7 +17,7 @@ public class PlayerMessage extends ViewControllerMessage {
     public PlayerMessage(int playerID, int authorID, PlayerView authorView) {
 
         this.playerID = playerID;
-        this.messageID = Identificator.PLAYER_VIEW_MESSAGE;
+        this.messageID = Identificator.PLAYER_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;
     }

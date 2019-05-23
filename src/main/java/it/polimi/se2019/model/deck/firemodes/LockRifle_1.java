@@ -1,19 +1,13 @@
 package it.polimi.se2019.model.deck.firemodes;
 
-import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.deck.TargetingScopeCard;
-import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +33,7 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException {
+        //TODO fare targetingScope
         addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1);
         if(shoot.getTargetsPlayer().size() == 2){
             addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1);
@@ -51,7 +46,7 @@ public class LockRifle_1 extends FireMode {
     public List<StringAndMessage> getMessageListExpected() {
         List<StringAndMessage> messageListExpected = new ArrayList<>();
 
-        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_VIEW_MESSAGE, FIRST_MSG_STR, FIRST_MSG_BOOL);
+        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_MESSAGE, FIRST_MSG_STR, FIRST_MSG_BOOL);
         messageListExpected.add(firstTarget);
 
         return messageListExpected;
