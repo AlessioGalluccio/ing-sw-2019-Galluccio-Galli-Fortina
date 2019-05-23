@@ -25,9 +25,8 @@ public class Shoot extends Action{
     protected List<TargetingScopeCard> targetingScopeCards;
     protected AmmoBag cost;
 
-
-
-
+    private String FIRST_MESSAGE = "Please, select a Weapon";
+    private String SECOND_MESSAGE = "Please, select a Firemode";
 
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode", false);
@@ -44,7 +43,13 @@ public class Shoot extends Action{
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        return super.getStringAndMessageExpected();
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, FIRST_MESSAGE, false);
+        StringAndMessage secondMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, SECOND_MESSAGE, false);
+
+        ArrayList<StringAndMessage> list = new ArrayList<>();
+        list.add(firstMessage);
+        list.add(secondMessage);
+        return list;
     }
 
     @Override
@@ -76,25 +81,42 @@ public class Shoot extends Action{
     public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         if(fireMode != null){
             fireMode.addTargetingScope(this,targetingCardID);
+            //TODO
         }
     }
 
     @Override
     public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        //TODO
+        throw new WrongInputException();
     }
 
     @Override
     public void addWeapon(int weaponID) throws WrongInputException {
-        //TODO
+        if(this.weapon == null){
+            WeaponCard weaponCard = gameHandler.getWeaponCardByID(weaponID);
+            if(playerAuthor.getWeaponCardList().contains(weaponCard) && weaponCard.isReloaded()){
+                this.weapon = weaponCard;
+            }
+            else{
+                throw new WrongInputException();
+            }
+        }
+        else{
+            throw new WrongInputException();
+        }
     }
 
     @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
+        //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         if(this.fireMode == null && weapon != null &&!fireModesUsed.contains(fireModeSelected)){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
+                //adding expected messeages of firemode
+                for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
+                    controller.addMessageListExpected(stringAndMessage);
+                }
             }
             else{
                 throw new WrongInputException();
