@@ -4,12 +4,14 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +24,6 @@ public class SocketThread implements Server {
         this.socket = socket;
     }
 
-    @Override
     public void start() {
         try {
             printSocket = new ObjectOutputStream(socket.getOutputStream());
@@ -69,24 +70,11 @@ public class SocketThread implements Server {
     }
 
     @Override
-    public void send(Map map) {
+    public void send(ModelViewMessage message) {
 
     }
 
-    @Override
-    public void send(Cell cell) {
 
-    }
-
-    @Override
-    public void send(EnemyView enemy) {
-
-    }
-
-    @Override
-    public void send(Player player) {
-
-    }
 
     @Override
     public void setTimer() {
@@ -95,6 +83,11 @@ public class SocketThread implements Server {
 
     @Override
     public void cancelTimer() {
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
 
     }
 }

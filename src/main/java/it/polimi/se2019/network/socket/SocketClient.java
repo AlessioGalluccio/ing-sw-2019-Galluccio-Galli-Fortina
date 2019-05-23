@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +51,6 @@ public class SocketClient implements Client {
         }
     }
 
-    @Override
     public void send(ViewControllerMessage message) {
         try {
             printSocket.writeObject(message);
@@ -68,5 +68,10 @@ public class SocketClient implements Client {
         } catch (IOException e) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't close client socket", e);
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

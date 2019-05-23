@@ -2,13 +2,9 @@ package it.polimi.se2019.network;
 
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
-public interface Client {
+import java.util.Observer;
 
-    /**
-     * Send user's message to the Server
-     * @param message message to send
-     */
-    void send(ViewControllerMessage message);
+public interface Client extends Observer {
 
     /**
      * Connect client to server

@@ -1,11 +1,9 @@
 package it.polimi.se2019.network;
 
-import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
+import java.util.Observer;
 
-public interface Server {
+public interface Server extends Observer {
 
     /**
      * Send any kind of text to the user
@@ -14,28 +12,9 @@ public interface Server {
     void send(String string);  // used by controller
 
     /**
-     * Forward a map from virtual view to the client
-     * @param map map copy to forward
-     */
-    void send(Map map);
-
-    /**
-     * Forward a cell from virtual view to the client
-     * @param cell cell copy to forward
-     */
-    void send(Cell cell);
-
-    /**
-     * Forward a enemy copy from virtual view to the client
-     * @param enemy enemy to send
-     */
-    void send(EnemyView enemy);
-
-    /**
      * Forward a player copy from virtual view to the client
-     * @param player player to send
      */
-    void send(Player player);
+    void send(ModelViewMessage message); //used in Update()
 
     /**
      * Set a timer long as specified in the config file
@@ -46,9 +25,4 @@ public interface Server {
      * If there's a timer set, it will be deleted
      */
     void cancelTimer();
-
-    /**
-     * Start the server
-     */
-    void start();
 }
