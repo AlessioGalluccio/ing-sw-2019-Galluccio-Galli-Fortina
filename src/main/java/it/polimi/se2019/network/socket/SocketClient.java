@@ -25,6 +25,9 @@ public class SocketClient implements Client {
         this.open = true;
     }
 
+    /**
+     * Connect the client to the server
+     */
     @Override
     public void connect() {
         try {
@@ -43,6 +46,7 @@ public class SocketClient implements Client {
                 }
                 finally {
                     closeAll();
+                    open = false;
                 }
             }).start();
 
@@ -51,6 +55,10 @@ public class SocketClient implements Client {
         }
     }
 
+    /**
+     * Forward a message from the client to the sever
+     * @param message message to send
+     */
     public void send(ViewControllerMessage message) {
         try {
             printSocket.writeObject(message);
@@ -60,6 +68,9 @@ public class SocketClient implements Client {
         }
     }
 
+    /**
+     * Close all stream and disconnect this from the Server
+     */
     private void closeAll() {
         try {
             printSocket.close();
@@ -67,11 +78,18 @@ public class SocketClient implements Client {
             socket.close();
         } catch (IOException e) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't close client socket", e);
+        } finally {
+            open = false;
         }
     }
 
+    /**
+     * Receive a message from the view and forward it to the server
+     * @param o Will be always null
+     * @param arg the message to send to the sever
+     */
     @Override
     public void update(Observable o, Object arg) {
-
+        send((ViewControllerMessage) arg);
     }
 }
