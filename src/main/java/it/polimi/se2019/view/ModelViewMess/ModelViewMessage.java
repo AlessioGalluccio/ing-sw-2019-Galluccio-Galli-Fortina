@@ -1,5 +1,7 @@
 package it.polimi.se2019.view.ModelViewMess;
 
-public interface ModelViewMessage {
+import java.io.Serializable;
+
+public interface ModelViewMessage extends Serializable {
 
 }
