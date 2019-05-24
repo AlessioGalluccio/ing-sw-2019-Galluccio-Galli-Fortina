@@ -66,6 +66,11 @@ public class HasReloadedControllerState implements StateController {
     }
 
     @Override
+    public void handleOptional(int numOptional) {
+        youCantDoThis();
+    }
+
+    @Override
     public void handlePlayer(int playerID) {
         youCantDoThis();
     }

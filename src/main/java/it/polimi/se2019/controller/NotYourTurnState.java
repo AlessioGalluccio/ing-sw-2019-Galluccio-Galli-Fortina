@@ -25,63 +25,59 @@ public class NotYourTurnState implements StateController {
 
     @Override
     public void handleAction(int actionID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
     @Override
     public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
     public void handleLogin(String playerNickname, Character chosenCharacter) {
         //TODO controlla
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
     public void handleNope() {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
+    public void handleOptional(int numOptional) {
+        cantDoThisHandler();
+    }
+
+    @Override
     public void handlePlayer(int playerID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
     public void handleReload(int weaponID) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
     @Override
@@ -92,21 +88,18 @@ public class NotYourTurnState implements StateController {
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
 
     }
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        cantDoThisHandler();
     }
 
     @Override
@@ -125,6 +118,11 @@ public class NotYourTurnState implements StateController {
             arg.handle(this);
         }
 
+    }
+
+    private void cantDoThisHandler(){
+        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
+        controller.removeLastReceivedMessage();
     }
 
 }

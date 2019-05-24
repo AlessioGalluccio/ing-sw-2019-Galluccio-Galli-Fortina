@@ -19,8 +19,8 @@ import java.util.List;
 public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;
-    protected List<FireMode> fireModesUsed;
     protected List<Player> targets;
+    protected List<Integer> optionalSelected;
     protected List<Cell> cells;
     protected List<TargetingScopeCard> targetingScopeCards;
     protected AmmoBag cost;
@@ -110,7 +110,8 @@ public class Shoot extends Action{
     public void addFireMode(int fireModeID) throws WrongInputException {
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
-        if(this.fireMode == null && weapon != null &&!fireModesUsed.contains(fireModeSelected)){
+        fireModeSelected.addShoot(this);
+        if(this.fireMode == null && weapon != null){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
                 //adding expected messeages of firemode
@@ -139,7 +140,19 @@ public class Shoot extends Action{
         }
     }
 
-    public List<Player> getTargets() {
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException {
+        //TODO
+    }
+
+    @Override
+    public void addNope() throws WrongInputException {
+        //TODO
+    }
+
+    //METHODS ONLY FOR FIREMODES
+
+    public List<Player> getTargetsPlayer() {
         return targets;
     }
 
@@ -147,12 +160,12 @@ public class Shoot extends Action{
         return cells;
     }
 
-    public List<TargetingScopeCard> getTargetingScopeCards() {
-        return targetingScopeCards;
+    public List<Integer> getOptionalSelected() {
+        return optionalSelected;
     }
 
-    public List<FireMode> getFireModesUsed() {
-        return fireModesUsed;
+    public List<TargetingScopeCard> getTargetingScopeCards() {
+        return targetingScopeCards;
     }
 
     public void addPlayerTargetFromFireMode(Player player){
@@ -167,7 +180,7 @@ public class Shoot extends Action{
         targetingScopeCards.add(card);
     }
 
-    public void addFireModeUsed(FireMode fireMode){
-        fireModesUsed.add(fireMode);
+    public void addOptionalSelected(int numOptional){
+        this.optionalSelected.add(numOptional);
     }
 }

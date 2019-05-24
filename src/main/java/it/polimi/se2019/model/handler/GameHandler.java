@@ -10,12 +10,14 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.HashMap;
 import java.util.Collections;
 
@@ -23,15 +25,16 @@ public class GameHandler extends java.util.Observable {
 
     private AmmoDeck ammoDeck;
     private PowerupDeck powerupDeck;
-    private PointDeck pointDeck;
     private WeaponDeck weaponDeck;
     private Map map;
     private ArrayList<Player> orderPlayerList;
     private ArrayList<PlayerView> playerViews;
     private int turn;
     private ArrayList<Death> arrayDeath = new ArrayList<>();
+    private Stack<Player> justDied = new Stack<>();
     private Modality modality;
     private int skull;
+    private boolean isSuddenDeath;
 
     //Implementato SOLO PER TESTING
     //TODO Da fare decenetemente
@@ -43,6 +46,7 @@ public class GameHandler extends java.util.Observable {
         this.weaponDeck = new WeaponDeck();
         this.powerupDeck = new PowerupDeck();
         this.ammoDeck = new AmmoDeck(powerupDeck);
+        //TODO Set modality to normal
     }
 
     /**
@@ -60,10 +64,15 @@ public class GameHandler extends java.util.Observable {
      * Called when a player has finished his turn
      */
     public void nextTurn() {
-        //TODO gestione delle morti(checkDeath + check respawn ??)
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
-        incrementTurn();  //I had to separate this method in order to improve efficiency test
+        checkDeath(); //If someone is dead cash his point, add revenge mark and add him to the stack of just dead
+        if(justDied.isEmpty()) incrementTurn();  //I had to separate this method in order to improve efficiency test
+        else {
+            //TODO chiedere di respawnare
+            //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
+        }
+        if(skull==0) modality = new Frenzy();
         //TODO notify();
     }
 
@@ -193,8 +202,7 @@ public class GameHandler extends java.util.Observable {
      * If his the case create a Death object, cash point, reset damage of the death and ask player to re-spawn
      * @return the number of death
      */
-    protected int checkDeath() {
-        int death = 0;
+    protected void checkDeath() {
         boolean doubleKill = false;
         for (Player p : orderPlayerList) {
             if (p.isDead()) {
@@ -205,14 +213,22 @@ public class GameHandler extends java.util.Observable {
                     arrayDeath.add(new Death(orderPlayerList.get(turn), p));
                     notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
                 }
+                if(p.isOverKilled()) {
+                    try {
+                        orderPlayerList.get(turn).receiveMarkBy(p); //revenge mark
+                    } catch (TooManyException e) {
+                        getViewByPlayer(p).printFromController("It's not possible to set the revenge mark" +
+                                " you have already marked him three times");
+                    }
+                }
                 cashPoint(p, doubleKill, false);
-                death++;
+                justDied.add(p);
                 p.resetDamage();
-                if(skull<=0) p.setFrenzyDeath(); //if skull <= is going to start frenzy mode, so who is dead now has to be flipped
+                if(skull<=0) p.setFrenzyDeath();    //if skull <= 0 is going to start frenzy mode
+                                                    // so who is dead now has to be flipped
                 doubleKill=true;
             }
         }
-        return death;
     }
 
     /**
@@ -296,7 +312,10 @@ public class GameHandler extends java.util.Observable {
      * @param whoDied who has died
      * @param doubleKill true if p has killed more then one enemy in this turn
      * @param lastCash true if we are at the end of frenzy mode
-     * @return 3 if p is the first who shoot and overkill, 2 is p overkill or is the first who shoot and the killer, 1 if p is the first who shoot or the killer, 0 other way
+     * @return 3 if p is the first who shoot and overkill
+     *         2 is p overkill or is the first who shoot and the killer
+     *         1 if p is the first who shoot or the killer
+     *         0 other way
      */
     private int bonusPoint(Player p, Player whoDied, boolean doubleKill, boolean lastCash) {
         List<Player> damage = whoDied.getDamage();
@@ -312,7 +331,8 @@ public class GameHandler extends java.util.Observable {
 
         int deadPoint = 0;
         if(skull>=0) deadPoint = lastDeath.getPoints(); //If is not after at the end of frenzy
-        else if(whoDied.isDead()) deadPoint =  whoDied.isOverKilled() ? 2 : 1; //If is at the end of frenzy, is this case some one can be not dead
+        else if(whoDied.isDead()) deadPoint =  whoDied.isOverKilled() ? 2 : 1;  //If is at the end of frenzy
+                                                                                // is this case some one can be not dead
 
         //if p is the killer and the first
         if (damage.get(0).equals(p) && p.equals(killer)) return 1 + deadPoint + secondKill + isFrenzyDeath;
@@ -380,7 +400,19 @@ public class GameHandler extends java.util.Observable {
         Type TYPE = new TypeToken<List<Death>>() {
         }.getType();
 
-        return gson.fromJson(gson.toJson(this, TYPE), TYPE);
+        return gson.fromJson(gson.toJson(arrayDeath, TYPE), TYPE);
+    }
+
+    /**
+     * Return the player view of the player
+     * @param p player whose you want the player view
+     * @return player view of the player
+     */
+    private PlayerView getViewByPlayer(Player p) {
+        for(PlayerView pw : playerViews) {
+            if(p.equals(pw.getPlayerCopy())) return pw;
+        }
+        throw new IllegalArgumentException("There is no player view linked to " + p.toString());
     }
 }
 

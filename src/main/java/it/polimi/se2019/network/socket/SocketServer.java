@@ -8,19 +8,21 @@ import java.util.logging.*;
 
 public class SocketServer {
     private int port;
-    private boolean open;
-    private ArrayList<SocketThread> threads = new ArrayList<>();
+    private boolean open = true;
+    private ArrayList<SocketHandler> threads = new ArrayList<>();
 
     public SocketServer(int port) {
         this.port = port;
-        this.open = true;
     }
 
+    /**
+     * Start the server
+     */
     public void start() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            while(open) { // Fake condition: it's always true
+            while(open) {
                 Socket socket = serverSocket.accept();
-                SocketThread handleClient = new SocketThread(socket);
+                SocketHandler handleClient = new SocketHandler(socket, this);
                 threads.add(handleClient);
                 handleClient.start();
                 //Server ready on port this.port
@@ -28,11 +30,20 @@ public class SocketServer {
         } catch (IOException e) { //Go here if serverSocket is closed
             Logger.getLogger(SocketServer.class.getName()).log(Level.WARNING, "ServerSocket close", e);
         } finally {
-            for (SocketThread s : threads) {
+            open = false;
+            for (SocketHandler s : threads) {
                 s.closeAll();
             }
             threads.clear();
         }
     }
+
+    /**
+     * Disconnect a dead handler of a client from the Server
+     * @param socket the handler who has died
+     */
+     void disconnect(SocketHandler socket) {
+        threads.remove(socket);
+     }
 }
 

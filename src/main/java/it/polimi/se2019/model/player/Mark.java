@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class Mark implements Serializable {
     private static final int MAX_MARK = 3;
-    private transient ArrayList<Player> markDone = new ArrayList<>();
+    private ArrayList<Player> markDone = new ArrayList<>();
     private ArrayList<Player> markReceived = new ArrayList<>();
 
     //Default constructor

@@ -12,7 +12,8 @@ public interface Server extends Observer {
     void send(String string);  // used by controller
 
     /**
-     * Forward a player copy from virtual view to the client
+     * Forward a message from the model to the client
+     * @param message message to send
      */
     void send(ModelViewMessage message); //used in Update()
 

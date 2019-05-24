@@ -2,7 +2,9 @@ package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.model.player.Player;
 
-public class Death {
+import java.io.Serializable;
+
+public class Death implements Serializable {
 
     private final Player whoKilled;
     private final Player whoDied;

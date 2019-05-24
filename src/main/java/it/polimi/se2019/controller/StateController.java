@@ -27,6 +27,8 @@ public interface StateController {
 
     public void handleNope();
 
+    public void handleOptional(int numOptional);
+
     public void handlePlayer(int playerID);
 
     public void handleReload(int weaponID);
@@ -38,6 +40,5 @@ public interface StateController {
     public void handleTeleporter(TeleporterCard usedCard);
 
     public void handleWeaponCard(WeaponCard usedCard);
-
 
 }
