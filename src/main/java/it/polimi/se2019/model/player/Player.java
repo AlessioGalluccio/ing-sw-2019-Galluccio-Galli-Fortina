@@ -44,7 +44,9 @@ public class Player extends Observable implements Target, Serializable {
     private ArrayList<WeaponCard> weaponCardList;
     private transient Cell cellPosition;
     private boolean isFrenzyDeath = false;
+    private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
+
 
     //constants
     private static final int NUM_START_RED = 2;
@@ -234,6 +236,7 @@ public class Player extends Observable implements Target, Serializable {
     public void resurrection(CellSpawn cellSpawn) {
         //TODO exception if cell is not CellSpawn
         skull += 1;
+        bonusPowerup = false;
         setPosition(cellSpawn);
         notifyObservers(new PlayerModelMessage(this.clone()));
     }
@@ -245,20 +248,26 @@ public class Player extends Observable implements Target, Serializable {
      */
     public void addPowerupCard(PowerupCard powerupToAdd) throws TooManyException {
         //if is dead the player can has 4 powerup in order to respawn
-        if (powerupCardList.size() < MAX_CARD || isDead()) powerupCardList.add(powerupToAdd);
+        if (powerupCardList.size() < MAX_CARD || bonusPowerup) {
+            powerupCardList.add(powerupToAdd);
+            notifyObservers(new PlayerModelMessage(this.clone()));
+        }
         else throw new TooManyException("You, " + getNickname() + ", have already three powerups");
-        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
      * Add a weapon to the player list
      * @param weaponToAdd weapon to add
-     * @throws TooManyException if the player has already three weapon
+     * @throws TooManyException if the player has already three + 1 weapon
+     * the one in exception is due to the fact the player can discard any weapon instead of the one just picked
      */
     public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyException {
-        if (weaponCardList.size() < MAX_CARD) weaponCardList.add(weaponToAdd);
+        //the +1 is due to the fact he can discard any weapon instead of the one just picked
+        if (weaponCardList.size() < MAX_CARD + 1) {
+            weaponCardList.add(weaponToAdd);
+            notifyObservers(new PlayerModelMessage(this.clone()));
+        }
         else throw new TooManyException("You, " + getNickname() + ", have already three weapons");
-        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -273,7 +282,10 @@ public class Player extends Observable implements Target, Serializable {
         if(isOverKilled()) throw new NotPresentException(toString() + " has been already over killed");
         damage.add(enemy);
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
-        if(isDead()) throw new YouDeadException(toString() + " has been killed by " + enemy.toString());
+        if(isDead()) {
+            bonusPowerup=true;
+            throw new YouDeadException(toString() + " has been killed by " + enemy.toString());
+        }
         //notify done by FireMode when finish to fire
     }
 
