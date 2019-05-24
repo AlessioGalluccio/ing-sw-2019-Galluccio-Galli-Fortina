@@ -34,6 +34,7 @@ public class GameHandler extends java.util.Observable {
     private Stack<Player> justDied = new Stack<>();
     private Modality modality;
     private int skull;
+    private boolean isSuddenDeath;
 
     //Implementato SOLO PER TESTING
     //TODO Da fare decenetemente
@@ -69,8 +70,9 @@ public class GameHandler extends java.util.Observable {
         if(justDied.isEmpty()) incrementTurn();  //I had to separate this method in order to improve efficiency test
         else {
             //TODO chiedere di respawnare
-            //esiste il metodo getViewByPlayer che ritrona la player view del giocatore passato per parametro
+            //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
         }
+        if(skull==0) modality = new Frenzy();
         //TODO notify();
     }
 
@@ -398,7 +400,7 @@ public class GameHandler extends java.util.Observable {
         Type TYPE = new TypeToken<List<Death>>() {
         }.getType();
 
-        return gson.fromJson(gson.toJson(this, TYPE), TYPE);
+        return gson.fromJson(gson.toJson(arrayDeath, TYPE), TYPE);
     }
 
     /**

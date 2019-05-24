@@ -2,6 +2,9 @@ package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.model.deck.firemodes.ElectroScythe_1;
 import it.polimi.se2019.model.deck.firemodes.ShockWave_2;
+import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
@@ -25,12 +28,12 @@ public class GameHandlerTest {
         Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
         Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
         Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
-
         ArrayList<Player> players = new ArrayList<>();
         players.add(firstPlayer);
         players.add(secondPlayer);
         players.add(thirdPlayer);
         players.add(fourthPlayer);
+
         gameHandler = new GameHandler(players, 5);
     }
 
@@ -140,7 +143,11 @@ public class GameHandlerTest {
         e2 = gameHandler.getPlayerByID(3);
         e3 = gameHandler.getPlayerByID(4);
 
-        p.resurrection(null);
+        CellSpawn c = new CellSpawn(null, null,null, null, 1,1,null);
+        ArrayList<Cell> a = new ArrayList();
+        a.add(c);
+        Room r = new Room(c, "blue", a);
+        p.resurrection(c);
         kill(p, e1, e2, e3);
         gameHandler.checkDeath();
         assertEquals(0, p.getNumPoints());
@@ -235,7 +242,7 @@ public class GameHandlerTest {
 
         kill(p, e1, e2, e3);
         kill(e2, e1, e2, e3);
-        gameHandler.nextTurn();
+        gameHandler.incrementTurn();
         kill(e1, p, e2, e3);
 
         int pointP = p.getNumPoints();
@@ -257,7 +264,7 @@ public class GameHandlerTest {
         e3 = gameHandler.getPlayerByID(4);
 
         kill(p, e1, e2, e3);
-        gameHandler.nextTurn();
+        gameHandler.incrementTurn();
         kill(e1, p, e2, e3);
 
         pointP = p.getNumPoints();

@@ -98,8 +98,8 @@ public class TestPlayer {
         } catch (TooManyException e) {
             e.printStackTrace();
         }
-        assertEquals(enemy.getID(), player.getMark().getMarkReceived().get(0).getID());
-        assertEquals(player.getID(), enemy.getMark().getMarkDone().get(0).getID());
+        assertEquals(enemy, player.getMark().getMarkReceived().get(0));
+        assertEquals(player, enemy.getMark().getMarkDone().get(0));
     }
 
     @Test
@@ -119,7 +119,7 @@ public class TestPlayer {
         list = enemy.getMark().getMarkDone();
         cont = 0;
         for(Player p  : list) {
-            if(p.getID() == player.getID()) cont++;
+            if(p.equals(player)) cont++;
         }
         assertEquals(3, cont);
 

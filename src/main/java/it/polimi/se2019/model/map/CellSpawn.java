@@ -19,7 +19,7 @@ public class CellSpawn extends Cell {
     private ColorRYB color;
     private transient WeaponDeck deck;
 
-    protected CellSpawn(Border north, Border east, Border south, Border west, int x, int y, WeaponDeck deck) {
+    public CellSpawn(Border north, Border east, Border south, Border west, int x, int y, WeaponDeck deck) {
         super(north, east, south, west, x, y);
         this.deck = deck;
     }
