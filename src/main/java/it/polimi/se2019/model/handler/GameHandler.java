@@ -10,6 +10,7 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -205,6 +206,13 @@ public class GameHandler extends java.util.Observable {
                     arrayDeath.add(new Death(orderPlayerList.get(turn), p));
                     notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
                 }
+                if(p.isOverKilled()) {
+                    try {
+                        orderPlayerList.get(turn).receiveMarkBy(p); //revenge mark
+                    } catch (TooManyException e) {
+                        getViewByPlayer(p).printFromController("It's not possible to set the revenge mark, you have already marked him three times");
+                    }
+                }
                 cashPoint(p, doubleKill, false);
                 death++;
                 p.resetDamage();
@@ -381,6 +389,18 @@ public class GameHandler extends java.util.Observable {
         }.getType();
 
         return gson.fromJson(gson.toJson(this, TYPE), TYPE);
+    }
+
+    /**
+     * Return the player view of the player
+     * @param p player whose you want the player view
+     * @return player view of the player
+     */
+    private PlayerView getViewByPlayer(Player p) {
+        for(PlayerView pw : playerViews) {
+            if(p.equals(pw.getPlayerCopy())) return pw;
+        }
+        throw new IllegalArgumentException("There is no player view linked to " + p.toString());
     }
 }
 
