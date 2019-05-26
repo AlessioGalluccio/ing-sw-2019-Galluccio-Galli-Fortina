@@ -53,12 +53,7 @@ public class ActionSelectedControllerStateTest {
 
     @Test
     public void handleAction() {
-        StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE, "ok", true);
-        controller.addMessageListExpected(stringAndMessage);
-        TeleporterMessage teleporterMock = mock(TeleporterMessage.class);
-        when(teleporterMock.getMessageID()).thenReturn(Identificator.TELEPORTER_MESSAGE);
-        state.handle(teleporterMock);
-        verify(teleporterMock, times(1)).handle(state);
+
     }
 
     @Test

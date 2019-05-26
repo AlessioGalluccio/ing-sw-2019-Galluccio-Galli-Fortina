@@ -26,8 +26,6 @@ public class HasReloadedControllerState implements StateController {
 
     @Override
     public void handle(ViewControllerMessage arg) {
-        this.controller = controller;
-        this.gameHandler = gameHandler;
     }
 
     @Override
