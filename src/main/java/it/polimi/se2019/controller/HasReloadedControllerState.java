@@ -22,10 +22,13 @@ public class HasReloadedControllerState implements StateController {
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         this.controller = controller;
         this.gameHandler = gameHandler;
+        this.player = controller.getPlayer();
+        this.playerView = controller.getPlayerView();
     }
 
     @Override
     public void handle(ViewControllerMessage arg) {
+        arg.handle(this);
     }
 
     @Override

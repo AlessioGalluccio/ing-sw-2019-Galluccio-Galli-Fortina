@@ -22,7 +22,7 @@ public class ActionSelectedControllerStateTest {
     private PlayerView playerView;
     private GameHandler gameHandler;
     private Controller controller;
-    private ActionSelectedControllerState state;
+    private StateController state;
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +38,8 @@ public class ActionSelectedControllerStateTest {
         GameHandler gameHandler = mock(GameHandler.class);
         Controller controller = new Controller(gameHandler);
         controller.setState(stateMock);
-        StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE, "ok", true);
+        StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE,
+                                                                        "ok", true);
         controller.addMessageListExpected(stringAndMessage);
 
         TeleporterCard teleporterCard = mock(TeleporterCard.class);
