@@ -39,6 +39,12 @@ public class Controller {
     public Button powerupDeck;
     public ImageView imweaponDeck;
     public ImageView impowerupDeck;
+    public ImageView imPowerupCard1;
+    public ImageView imPowerupCard2;
+    public ImageView imPowerupCard3;
+    public ImageView imWeaponCard1;
+    public ImageView imWeaponCard2;
+    public ImageView imWeaponCard3;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
