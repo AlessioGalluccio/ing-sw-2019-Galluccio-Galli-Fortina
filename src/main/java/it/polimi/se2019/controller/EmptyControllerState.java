@@ -27,10 +27,12 @@ public class EmptyControllerState implements  StateController {
     private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again";
 
 
-    EmptyControllerState(Controller controller, GameHandler gameHandler) {
+    public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
+        this.player = controller.getPlayer();
+        this.playerView = controller.getPlayerView();
     }
 
     @Override

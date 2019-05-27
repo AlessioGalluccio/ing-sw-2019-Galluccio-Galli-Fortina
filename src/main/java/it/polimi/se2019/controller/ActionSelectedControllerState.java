@@ -29,10 +29,12 @@ public class ActionSelectedControllerState implements StateController {
     private final String CELL_WRONG = "You can't select this cell";
     private final String OPTIONAL_WRONG = "You can't select this optional effect";
 
-    ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
+    public ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
+        this.player = controller.getPlayer();
+        this.playerView = controller.getPlayerView();
     }
 
     @Override

@@ -195,6 +195,14 @@ public class Controller implements Observer {
         //TODO scrivi eccezione!
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public PlayerView getPlayerView() {
+        return playerView;
+    }
+
     /**
      * it empties the messages after Model is modified
      */
