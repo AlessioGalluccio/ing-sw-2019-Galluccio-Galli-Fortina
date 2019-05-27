@@ -8,10 +8,9 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="821.0" prefWidth="1426.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+<AnchorPane prefHeight="705.0" prefWidth="1378.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
       <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
@@ -44,41 +43,37 @@
       <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="695.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="716.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <VBox layoutX="871.0" layoutY="596.0" prefHeight="225.0" prefWidth="555.0">
-         <children>
-            <TabPane prefHeight="229.0" prefWidth="555.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Powerup Cards">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Button layoutY="2.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="151.0" text="Button" />
-                              <Button layoutX="163.0" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="151.0" text="Button" />
-                              <Button layoutX="327.0" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="151.0" text="Button" />
-                              <ImageView fx:id="imPowerupCard1" fitHeight="192.0" fitWidth="150.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="imPowerupCard2" fitHeight="192.0" fitWidth="150.0" layoutX="164.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="imPowerupCard3" fitHeight="192.0" fitWidth="150.0" layoutX="328.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Weapon Cards">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Button layoutY="3.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="149.0" text="Button" />
-                              <Button layoutX="164.0" layoutY="3.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="149.0" text="Button" />
-                              <Button layoutX="328.0" layoutY="4.0" mnemonicParsing="false" prefHeight="193.0" prefWidth="151.0" text="Button" />
-                              <ImageView fx:id="imWeaponCard1" fitHeight="192.0" fitWidth="150.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="imWeaponCard2" fitHeight="192.0" fitWidth="150.0" layoutX="164.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                              <ImageView fx:id="imWeaponCard3" fitHeight="192.0" fitWidth="150.0" layoutX="329.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-                           </children>
-                        </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
-         </children>
-      </VBox>
+      <TabPane layoutX="864.0" layoutY="474.0" prefHeight="229.0" prefWidth="511.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Powerup Cards">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="131.0" prefWidth="500.0">
+                     <children>
+                        <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="142.0" />
+                        <Button fx:id="bPowerupCard2" disable="true" layoutX="163.0" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="142.0" />
+                        <Button fx:id="bPowerupCard3" disable="true" layoutX="327.0" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="135.0" />
+                        <ImageView fx:id="imPowerupCard1" disable="true" fitHeight="192.0" fitWidth="150.0" layoutX="-1.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imPowerupCard2" disable="true" fitHeight="192.0" fitWidth="150.0" layoutX="164.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imPowerupCard3" disable="true" fitHeight="192.0" fitWidth="150.0" layoutX="328.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Weapon Cards">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="bWeaponCard1" disable="true" layoutY="3.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="132.0" />
+                        <Button fx:id="bWeaponCard2" disable="true" layoutX="164.0" layoutY="3.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="131.0" />
+                        <Button fx:id="bWeaponCard3" disable="true" layoutX="328.0" layoutY="4.0" mnemonicParsing="false" prefHeight="193.0" prefWidth="129.0" />
+                        <ImageView fx:id="imWeaponCard1" disable="true" fitHeight="192.0" fitWidth="150.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard2" disable="true" fitHeight="192.0" fitWidth="150.0" layoutX="164.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard3" disable="true" fitHeight="192.0" fitWidth="150.0" layoutX="329.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

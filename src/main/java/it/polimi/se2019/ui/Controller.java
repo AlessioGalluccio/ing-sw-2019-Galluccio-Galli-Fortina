@@ -45,6 +45,12 @@ public class Controller {
     public ImageView imWeaponCard1;
     public ImageView imWeaponCard2;
     public ImageView imWeaponCard3;
+    public Button bPowerupCard1;
+    public Button bPowerupCard2;
+    public Button bPowerupCard3;
+    public Button bWeaponCard1;
+    public Button bWeaponCard2;
+    public Button bWeaponCard3;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -125,10 +131,15 @@ public class Controller {
         showMap.setDisable(true);
         showMap.setVisible(false);
         impowerupDeck.setDisable(false);
-        impowerupDeck.setImage(new Image("AD_powerups_IT_02.png"));
+        impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
         imweaponDeck.setDisable(false);
-        imweaponDeck.setImage(new Image("AD_weapons_IT_02.png"));
+        imweaponDeck.setImage(new Image("AD_weapons_IT_02.jpg"));
         weaponDeck.setDisable(false);
         powerupDeck.setDisable(false);
+        imPowerupCard3.setImage(new Image("emptyPowerup.jpg"));
+        imWeaponCard1.setImage(new Image("emptyWeapon.jpg"));
+        imWeaponCard2.setImage(new Image("emptyWeapon.jpg"));
+        imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
+
     }
 }
