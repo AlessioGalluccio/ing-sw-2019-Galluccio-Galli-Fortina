@@ -6,11 +6,14 @@
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
       <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-         </ImageView>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor></ImageView>
       <Button fx:id="RedWeapon" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="112.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -27,8 +30,12 @@
       <Button layoutX="423.0" layoutY="2.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" text="Button" />
       <Button layoutX="510.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" text="Button" />
       <Button layoutX="599.0" layoutY="3.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="75.0" text="Button" />
-      <Button layoutX="695.0" layoutY="157.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="75.0" text="MazzoArmi" />
-      <Button layoutX="719.0" layoutY="29.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="51.0" text="PU" />
+      <Button fx:id="weaponDeck" disable="true" layoutX="695.0" layoutY="157.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="75.0" />
+      <Button fx:id="powerupDeck" disable="true" layoutX="719.0" layoutY="29.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="51.0" />
       <Label fx:id="mylabel" layoutX="120.0" layoutY="156.0" prefHeight="29.0" prefWidth="51.0" />
+      <Button fx:id="showMap" layoutX="370.0" layoutY="292.0" mnemonicParsing="false" onAction="#showMap" prefHeight="50.0" prefWidth="133.0" text="READY??">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
    </children>
 </AnchorPane>
