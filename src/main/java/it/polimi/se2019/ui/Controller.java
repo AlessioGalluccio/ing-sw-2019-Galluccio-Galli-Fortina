@@ -37,6 +37,8 @@ public class Controller {
     public static int choosenMap;
     public Button weaponDeck;
     public Button powerupDeck;
+    public ImageView imweaponDeck;
+    public ImageView impowerupDeck;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -116,5 +118,11 @@ public class Controller {
         }
         showMap.setDisable(true);
         showMap.setVisible(false);
+        impowerupDeck.setDisable(false);
+        impowerupDeck.setImage(new Image("AD_powerups_IT_02.png"));
+        imweaponDeck.setDisable(false);
+        imweaponDeck.setImage(new Image("AD_weapons_IT_02.png"));
+        weaponDeck.setDisable(false);
+        powerupDeck.setDisable(false);
     }
 }

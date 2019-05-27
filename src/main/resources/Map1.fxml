@@ -30,12 +30,16 @@
       <Button layoutX="423.0" layoutY="2.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" text="Button" />
       <Button layoutX="510.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" text="Button" />
       <Button layoutX="599.0" layoutY="3.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="75.0" text="Button" />
-      <Button fx:id="weaponDeck" disable="true" layoutX="695.0" layoutY="157.0" mnemonicParsing="false" prefHeight="129.0" prefWidth="75.0" />
-      <Button fx:id="powerupDeck" disable="true" layoutX="719.0" layoutY="29.0" mnemonicParsing="false" prefHeight="82.0" prefWidth="51.0" />
+      <Button fx:id="weaponDeck" disable="true" layoutX="695.0" layoutY="157.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="75.0">
+         </Button>
+      <Button fx:id="powerupDeck" disable="true" layoutX="719.0" layoutY="29.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="51.0" />
       <Label fx:id="mylabel" layoutX="120.0" layoutY="156.0" prefHeight="29.0" prefWidth="51.0" />
-      <Button fx:id="showMap" layoutX="370.0" layoutY="292.0" mnemonicParsing="false" onAction="#showMap" prefHeight="50.0" prefWidth="133.0" text="READY??">
+      <Button fx:id="showMap" layoutX="340.0" layoutY="286.0" mnemonicParsing="false" onAction="#showMap" prefHeight="57.0" prefWidth="142.0" text="READY??">
          <font>
             <Font size="24.0" />
          </font></Button>
+      <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="695.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="716.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      </ImageView>
    </children>
 </AnchorPane>
