@@ -46,9 +46,9 @@ public class TestAmmoCard {
 
     @Test(expected = TooManyException.class)
     public void testUseCardException() throws TooManyException {
-        player.addPowerupCard(new TargetingScopeCard(BLUE, 1));
-        player.addPowerupCard(new TargetingScopeCard(RED, 2));
-        player.addPowerupCard(new TargetingScopeCard(RED, 3));
+        player.addPowerupCard(new TargetingScopeCard(BLUE, 1, 0));
+        player.addPowerupCard(new TargetingScopeCard(RED, 2, 0));
+        player.addPowerupCard(new TargetingScopeCard(RED, 3, 0));
 
         //Reset ammoBag to 0 in order to don't thrown TooManyException due to ammo
         player.setAmmoBag(0,0,0);

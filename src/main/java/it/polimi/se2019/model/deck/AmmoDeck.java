@@ -19,25 +19,29 @@ public class AmmoDeck extends Deck<AmmoCard> {
     private static Stack<AmmoCard> initializeCard(PowerupDeck powerupDeck){
         Stack<AmmoCard> deck = new Stack<>();
         int id=0;
-        for(int i=0; i<2; i++) {
-            for(ColorRYB c: ColorRYB.values()) {
-                deck.add(new AmmoPowerupCard(c,c, powerupDeck, id++));
+        int IDtype =0;
+        for(ColorRYB c: ColorRYB.values()) {
+            for(int i=0; i<2; i++) {
+                deck.add(new AmmoPowerupCard(c,c, powerupDeck, id++, IDtype));
+            }
+            IDtype++;
+        }
+
+        for(ColorRYB c1 : ColorRYB.values()) {
+            for(ColorRYB c2 : ColorRYB.values()) {
+                for(int i=0; i<4; i++) {
+                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2, powerupDeck, id++, IDtype));
+                }
+                IDtype++;
             }
         }
 
-        for(int i=0; i<4; i++) {
-            for(ColorRYB c1: ColorRYB.values()) {
-                for (ColorRYB c2 : ColorRYB.values()) {
-                    if(c1.compareTo(c2) < 0) deck.add(new AmmoPowerupCard(c1, c2, powerupDeck, id++));
+        for(ColorRYB c1 : ColorRYB.values()){
+            for(ColorRYB c2: ColorRYB.values()) {
+                 for(int i=0; i<3; i++){
+                    if(c1 != c2) deck.add(new AmmoOnlyCard(c1, c2, id++, IDtype));
                 }
-            }
-        }
-
-        for(int i=0; i<3; i++) {
-            for(ColorRYB c1: ColorRYB.values()) {
-                for (ColorRYB c2 : ColorRYB.values()) {
-                    if(c1 != c2) deck.add(new AmmoOnlyCard(c1, c2, id++));
-                }
+                IDtype++;
             }
         }
         Collections.shuffle(deck);

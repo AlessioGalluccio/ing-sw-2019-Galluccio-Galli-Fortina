@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 public abstract class PowerupCard implements Card {
     private final int ID;
+    private final int IDtype;
     private transient PowerupDeck deck;
     private final ColorRYB color;
 
-    public PowerupCard(ColorRYB color, int ID) {
+    public PowerupCard(ColorRYB color, int ID, int IDtype) {
         this.color = color;
         this.ID = ID;
+        this.IDtype = IDtype;
     }
 
     /**
@@ -34,6 +36,11 @@ public abstract class PowerupCard implements Card {
     @Override
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public int getIDtype() {
+        return IDtype;
     }
 
     /**
@@ -62,6 +69,7 @@ public abstract class PowerupCard implements Card {
     public String toString() {
         return "PowerupCard{" +
                 "color=" + color +
+                ", IDtype=" + IDtype +
                 '}';
     }
 }
