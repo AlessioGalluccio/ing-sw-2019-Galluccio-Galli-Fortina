@@ -46,12 +46,12 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
+    public void addCell(int x, int y) throws WrongInputException {
         throw new WrongInputException();
     }
 
     @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
         int targetID = target.getID();
         if(targetID == author.getID()){
@@ -78,7 +78,7 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         Player author = shoot.getPlayerAuthor();
         //TODO manca metodo per ottenere TargetingCard da ID
     }

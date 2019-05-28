@@ -158,19 +158,8 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
             if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
-                if(alreadySelected == null){
+                if(alreadySelected == null || !alreadySelected.contains(playerOfGame)){
                     listTarget.add(playerOfGame);
-                }
-                else{
-                    boolean isAlreadySelected = false;
-                    for(Player selected : alreadySelected){
-                        if(playerOfGame.getID() == selected.getID()){
-                            isAlreadySelected = true;
-                        }
-                    }
-                    if(!isAlreadySelected){
-                        listTarget.add(playerOfGame);
-                    }
                 }
             }
         }

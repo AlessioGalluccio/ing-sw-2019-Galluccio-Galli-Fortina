@@ -24,8 +24,8 @@ public class ShotGun_2 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTargetsAtStart() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+        //TODO
     }
 
     @Override
@@ -34,17 +34,17 @@ public class ShotGun_2 extends FireMode {
     }
 
     @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
+    public void addCell(int x, int y) throws WrongInputException {
 
     }
 
     @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
 
     }
 
     @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
 
     }
 

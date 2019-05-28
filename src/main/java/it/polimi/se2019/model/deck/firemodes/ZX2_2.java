@@ -24,38 +24,56 @@ public class ZX2_2 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTargetsAtStart() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+
+        sendAllVisiblePlayers(null);
     }
 
     @Override
     public void fire() throws WrongInputException{
+        if(!shoot.getTargetsPlayer().isEmpty()){
+            for(Player target : shoot.getTargetsPlayer()){
+                addDamageAndMarks(target,0,1);
+            }
+        }
+        //TODO pagamento costo ed eccezione
+    }
+
+    @Override
+    public void addCell(int x, int y) throws WrongInputException {
+        throw new WrongInputException();
+    }
+
+    @Override
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+        Player target = gameHandler.getPlayerByID(playerID);
+        if(!target.isVisibleBy(author) || target.getID() == author.getID()){
+            throw new WrongInputException();
+        }
+
+        if(shoot.getTargetsPlayer().size() < 3){
+            shoot.addPlayerTargetFromFireMode(target);
+            sendAllVisiblePlayers(shoot.getTargetsPlayer());
+        }
+        else {
+            throw new WrongInputException();
+        }
 
     }
 
     @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
-
-    }
-
-    @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
-
-    }
-
-    @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        //TODO
     }
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-
+        throw new WrongInputException();
     }
 
     @Override
     public void addNope() throws WrongInputException {
-
+        //TODO è possibile in questa modalità per il 2 e il 3 targetPlayer
     }
 
 }
