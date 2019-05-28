@@ -43,7 +43,7 @@
       <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="695.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="716.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <TabPane layoutX="864.0" layoutY="474.0" prefHeight="229.0" prefWidth="511.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="882.0" layoutY="474.0" prefHeight="229.0" prefWidth="511.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <tabs>
           <Tab text="Powerup Cards">
             <content>
@@ -75,10 +75,8 @@
           </Tab>
         </tabs>
       </TabPane>
-      <AnchorPane layoutX="3.0" layoutY="537.0" prefHeight="163.0" prefWidth="670.0">
-         <children>
-            <ImageView fx:id="possibleActions" fitHeight="150.0" fitWidth="66.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="yourCharacter" fitHeight="150.0" fitWidth="549.0" layoutX="101.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-         </children></AnchorPane>
+      <ImageView fx:id="yourCharacter" fitHeight="177.0" fitWidth="504.0" layoutX="173.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="1094.0" AnchorPane.topAnchor="556.0" />
+      <ImageView fx:id="imFirstPlayer" fitHeight="146.0" fitWidth="66.0" layoutX="3.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="1207.0" AnchorPane.topAnchor="562.0" />
+      <ImageView fx:id="possibleActions" fitHeight="177.0" fitWidth="86.0" layoutX="85.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="1600.0" AnchorPane.topAnchor="554.0" />
    </children>
 </AnchorPane>

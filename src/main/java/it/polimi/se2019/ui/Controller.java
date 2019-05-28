@@ -51,6 +51,9 @@ public class Controller {
     public Button bWeaponCard1;
     public Button bWeaponCard2;
     public Button bWeaponCard3;
+    public ImageView possibleActions;
+    public ImageView yourCharacter;
+    public ImageView imFirstPlayer;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -141,5 +144,10 @@ public class Controller {
         imWeaponCard2.setImage(new Image("emptyWeapon.jpg"));
         imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
 
+        //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
+        possibleActions.setVisible(true);
+        yourCharacter.setVisible(true);
+        possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
+        yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
     }
 }
