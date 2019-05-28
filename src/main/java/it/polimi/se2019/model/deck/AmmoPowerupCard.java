@@ -11,16 +11,18 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 public class AmmoPowerupCard implements AmmoCard {
     private final int ID;
+    private final int IDtype;
     private transient AmmoDeck deck;
     private final transient PowerupDeck powerupDeck;
     private final ColorRYB color1;
     private final ColorRYB color2;
 
-    public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID) {
+    public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID, int IDtype) {
         this.color1 = color1;
         this.color2 = color2;
         this.powerupDeck = powerupDeck;
         this.ID = ID;
+        this.IDtype = IDtype;
     }
 
     /**
@@ -88,6 +90,7 @@ public class AmmoPowerupCard implements AmmoCard {
         return "AmmoPowerupCard{" +
                 "color1=" + color1 +
                 ", color2=" + color2 +
+                " IDimg= " +IDtype +
                 '}';
     }
 }
