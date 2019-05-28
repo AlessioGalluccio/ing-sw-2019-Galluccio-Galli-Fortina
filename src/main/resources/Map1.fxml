@@ -75,5 +75,10 @@
           </Tab>
         </tabs>
       </TabPane>
+      <AnchorPane layoutX="3.0" layoutY="537.0" prefHeight="163.0" prefWidth="670.0">
+         <children>
+            <ImageView fx:id="possibleActions" fitHeight="150.0" fitWidth="66.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="yourCharacter" fitHeight="150.0" fitWidth="549.0" layoutX="101.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>
