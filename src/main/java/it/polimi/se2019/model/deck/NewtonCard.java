@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class NewtonCard extends PowerupCard{
 
 
-    public NewtonCard(ColorRYB color, int id) {
-        super(color, id);
+    public NewtonCard(ColorRYB color, int id, int IDtype) {
+        super(color, id, IDtype);
     }
 
     @Override

@@ -33,6 +33,12 @@ public abstract class WeaponCard implements Card {
         return ID;
     }
 
+    @Override
+    public int getIDtype(){
+        return ID;
+    }
+
+
     /**
      *
      * @return WeaponCard's buy cost

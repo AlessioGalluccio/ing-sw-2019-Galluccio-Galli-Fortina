@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class TargetingScopeCard extends PowerupCard{
 
-    public TargetingScopeCard(ColorRYB color, int id) {
-        super(color, id);
+    public TargetingScopeCard(ColorRYB color, int id, int IDtype) {
+        super(color, id, IDtype);
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class TagbackGranedCard extends PowerupCard{
 
 
-    public TagbackGranedCard(ColorRYB color, int id) {
-        super(color, id);
+    public TagbackGranedCard(ColorRYB color, int id, int IDtype) {
+        super(color, id, IDtype);
     }
 
     @Override

@@ -53,6 +53,11 @@ public class AmmoPowerupCard implements AmmoCard {
         return ID;
     }
 
+    @Override
+    public int getIDtype() {
+        return IDtype;
+    }
+
     /**
      * Reload a player's ammo using this card
      * @param p player to relaod
