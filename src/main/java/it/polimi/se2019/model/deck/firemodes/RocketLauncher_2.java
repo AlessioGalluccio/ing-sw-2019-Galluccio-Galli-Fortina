@@ -27,7 +27,7 @@ public class RocketLauncher_2 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
+    public List<Target> sendPossibleTargetsAtStart() {
         return null;
     }
 

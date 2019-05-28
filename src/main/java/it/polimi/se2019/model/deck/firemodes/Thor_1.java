@@ -24,7 +24,7 @@ public class Thor_1 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
+    public List<Target> sendPossibleTargetsAtStart() {
         return null;
     }
 

@@ -8,6 +8,7 @@ import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
@@ -70,10 +71,30 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     }
 
     /**
-     * Create and send message containing the possible targets to the view of player
-     * @return the possible target that player can hit, return null if there is no target
+     * Call it after adding shoot. It sends the first targets. The other will be send automatically
+     * @reurns the targets
      */
-    public abstract List<Target> sendPossibleTarget();
+    public abstract void sendPossibleTargetsAtStart();
+
+    /**
+     * Create and send message containing the possible targets (Players) to the view of player
+     */
+    protected void sendPossibleTargetsPlayers(ArrayList<Player> players){
+        if(players != null){
+            playerView.setPossibleTargets(players);
+        }
+    }
+
+    /**
+     * Create and send message containing the possible targets (Cells) to the view of player
+     */
+    protected void sendPossibleTargetsCells(ArrayList<Cell> cells){
+        if(cells != null){
+            playerView.setPossibleTargets(cells);
+        }
+    }
+
+
 
     /**
      * Fires to the target
@@ -128,6 +149,32 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
                 playerView.printFromController("You have already three marks on this Player, you will not add more marks");
             }
         }
+    }
+
+
+    //COMMON METHODS
+
+    protected void sendAllVisiblePlayers(ArrayList<Player> alreadySelected){
+        ArrayList<Player> listTarget = new ArrayList<>();
+        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
+            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
+                if(alreadySelected == null){
+                    listTarget.add(playerOfGame);
+                }
+                else{
+                    boolean isAlreadySelected = false;
+                    for(Player selected : alreadySelected){
+                        if(playerOfGame.getID() == selected.getID()){
+                            isAlreadySelected = true;
+                        }
+                    }
+                    if(!isAlreadySelected){
+                        listTarget.add(playerOfGame);
+                    }
+                }
+            }
+        }
+        sendPossibleTargetsPlayers(listTarget);
     }
 
 

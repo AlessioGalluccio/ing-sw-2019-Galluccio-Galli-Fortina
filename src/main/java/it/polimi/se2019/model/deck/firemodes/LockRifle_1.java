@@ -20,15 +20,8 @@ public class LockRifle_1 extends FireMode {
     private static final boolean FIRST_MSG_BOOL = false;
 
     @Override
-    public List<Target> sendPossibleTarget() {
-        List<Target> listTarget = new ArrayList<>();
-        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
-                listTarget.add(playerOfGame);
-            }
-        }
-        //TODO invio dei target
-        return listTarget;
+    public void sendPossibleTargetsAtStart() {
+        sendAllVisiblePlayers(null);
     }
 
     @Override

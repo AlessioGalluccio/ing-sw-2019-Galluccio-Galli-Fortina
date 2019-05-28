@@ -24,8 +24,8 @@ public class ZX2_1 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+        sendAllVisiblePlayers(null);
     }
 
     @Override

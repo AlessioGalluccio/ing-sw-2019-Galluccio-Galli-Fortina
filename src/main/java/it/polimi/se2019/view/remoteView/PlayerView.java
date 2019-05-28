@@ -12,17 +12,17 @@ import java.util.ArrayList;
 
 public class PlayerView extends View /*View implement observer/observable*/{
     private Player playerCopy;
-    private ArrayList<Target> possibleTarget;
-    private ArrayList<Target> selectedTarget;
+    private ArrayList<? extends Target> possibleTargets;
+    private ArrayList<? extends Target> selectedTargets;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
 
-    public PlayerView(Player playerCopy, ArrayList<Target> possibleTarget, ArrayList<Target> selectedTarget,
+    public PlayerView(Player playerCopy, ArrayList<Target> possibleTargets, ArrayList<Target> selectedTargets,
                       ArrayList<Character> possibleCharacter, Character choosenCharacter ) {
 
         this.playerCopy = playerCopy;
-        this.possibleTarget = possibleTarget;
-        this.selectedTarget = selectedTarget;
+        this.possibleTargets = possibleTargets;
+        this.selectedTargets = selectedTargets;
         this.possibleCharacter = possibleCharacter;
         this.choosenCharacter = choosenCharacter;
     }
@@ -31,8 +31,8 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return playerCopy;
     }
 
-    public ArrayList<Target> getSelectedTarget() {
-        return selectedTarget;
+    public ArrayList<? extends Target> getSelectedTargets() {
+        return selectedTargets;
     }
 
 
@@ -50,8 +50,12 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return possibleCharacter;
     }
 
-    public ArrayList<Target> getPossibleTarget() {
-        return possibleTarget;
+    public ArrayList<? extends Target> getPossibleTargets() {
+        return possibleTargets;
+    }
+
+    public void setPossibleTargets(ArrayList<? extends Target> targets){
+        this.possibleTargets = targets;
     }
 
     public void send (ViewControllerMessage message){

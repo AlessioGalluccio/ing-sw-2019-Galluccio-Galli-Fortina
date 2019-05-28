@@ -118,6 +118,8 @@ public class Shoot extends Action{
                 for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
                     controller.addMessageListExpected(stringAndMessage);
                 }
+                //since firemode doesn't have a constructor
+                this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
                 throw new WrongInputException();
