@@ -19,10 +19,10 @@ import java.util.List;
 public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;
-    protected List<Player> targets;
-    protected List<Integer> optionalSelected;
-    protected List<Cell> cells;
-    protected List<TargetingScopeCard> targetingScopeCards;
+    protected ArrayList<Player> targets;
+    protected ArrayList<Integer> optionalSelected;
+    protected ArrayList<Cell> cells;
+    protected ArrayList<TargetingScopeCard> targetingScopeCards;
     protected AmmoBag cost;
 
     private String FIRST_MESSAGE = "Please, select a Weapon";
@@ -72,7 +72,7 @@ public class Shoot extends Action{
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         if(fireMode != null){
-            fireMode.addPlayerTarget(this, playerID);
+            fireMode.addPlayerTarget( playerID);
         }
 
     }
@@ -80,7 +80,7 @@ public class Shoot extends Action{
     @Override
     public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         if(fireMode != null){
-            fireMode.addTargetingScope(this,targetingCardID);
+            fireMode.addTargetingScope(targetingCardID);
             //TODO
         }
     }
@@ -118,6 +118,8 @@ public class Shoot extends Action{
                 for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
                     controller.addMessageListExpected(stringAndMessage);
                 }
+                //since firemode doesn't have a constructor
+                this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
                 throw new WrongInputException();
@@ -152,19 +154,19 @@ public class Shoot extends Action{
 
     //METHODS ONLY FOR FIREMODES
 
-    public List<Player> getTargetsPlayer() {
+    public ArrayList<Player> getTargetsPlayer() {
         return targets;
     }
 
-    public List<Cell> getCells() {
+    public ArrayList<Cell> getCells() {
         return cells;
     }
 
-    public List<Integer> getOptionalSelected() {
+    public ArrayList<Integer> getOptionalSelected() {
         return optionalSelected;
     }
 
-    public List<TargetingScopeCard> getTargetingScopeCards() {
+    public ArrayList<TargetingScopeCard> getTargetingScopeCards() {
         return targetingScopeCards;
     }
 

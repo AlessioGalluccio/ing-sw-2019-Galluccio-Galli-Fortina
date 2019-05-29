@@ -9,11 +9,11 @@ import it.polimi.se2019.model.player.WeaponIsLoadedException;
 
 public interface AddFireModeMethods {
 
-    void addCell(Shoot shoot, int x, int y) throws WrongInputException;
+    void addCell(int x, int y) throws WrongInputException;
 
-    void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException;
+    void addPlayerTarget(int playerID) throws WrongInputException;
 
-    void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
+    void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
 
     void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
 

@@ -24,38 +24,47 @@ public class ZX2_1 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+        sendAllVisiblePlayers(null);
     }
 
     @Override
     public void fire() throws WrongInputException{
-
+        if(shoot.getTargetsPlayer().size() == 1){
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 1,2);
+        }
+        //TODO pagamento costo ed eccezione
     }
 
     @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
-
+    public void addCell(int x, int y) throws WrongInputException {
+        throw new WrongInputException();
     }
 
     @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
-
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+        Player target = gameHandler.getPlayerByID(playerID);
+        if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty() && target.getID() != author.getID()){
+            shoot.addPlayerTargetFromFireMode(target);
+        }
+        else{
+            throw new WrongInputException();
+        }
     }
 
     @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        //TODO
     }
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-
+        throw new WrongInputException();
     }
 
     @Override
     public void addNope() throws WrongInputException {
-
+        throw new WrongInputException();
     }
 
 }

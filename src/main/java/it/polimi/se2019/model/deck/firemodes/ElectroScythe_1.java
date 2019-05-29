@@ -25,27 +25,27 @@ public class ElectroScythe_1 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+        //TODO
     }
 
     @Override
-    public void fire() {
-
-    }
-
-    @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
+    public void fire() throws WrongInputException{
 
     }
 
     @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
+    public void addCell(int x, int y) throws WrongInputException {
 
     }
 
     @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+
+    }
+
+    @Override
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
 
     }
 

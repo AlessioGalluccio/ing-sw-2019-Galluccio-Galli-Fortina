@@ -27,4 +27,6 @@ public interface Card extends Serializable {
    void useCard(Player author) throws TooManyException;
 
    int getID();
+
+   int getIDtype();
 }

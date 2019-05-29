@@ -128,48 +128,6 @@ public class Controller implements Observer {
 
     }
 
-    /**
-     * command the model to send to the view the possible targets of this firemode
-     * @param arg the message of this firemode
-     */
-    public synchronized void sendTargetsToView(FireModeMessage arg) {
-        Player playerTemp = gameHandler.getPlayerByID(arg.getAuthorID());
-        AmmoBag ammoTemp = playerTemp.getAmmo();
-        FireMode fireModeTemp = gameHandler.getFireModeByID(arg.getAuthorID());
-        //TODO metodo che compara fireModeTemp.getCost() con ammoTemp. Se non bastano, chiedono a giocatore di scartare un potenziamento se ce l'ha
-
-        //TODO fireModeTemp.sendPossibleTargetsToView(arg.getAuthorView);
-    }
-
-    /**
-     * command the model to send to the view the possible targets of this tagbackGranate card
-     * @param arg the message of this tagbackGranade card
-     */
-    public synchronized void sendTargetsToView(TagbackGranateMessage arg) {
-        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
-        TagbackGranedCard card = arg.getUsedCard();
-        card.sendPossibleTarget(author, arg.getAuthorView());
-        //TODO
-    }
-
-    /**
-     * command the model to send to the view the possible targets of this Newton card
-     * @param arg the message of this Newton card
-     */
-    public synchronized void sendTargetsToView(NewtonMessage arg) {
-        Player author = gameHandler.getPlayerByID(arg.getAuthorID());
-        NewtonCard card = arg.getUsedCard();
-        card.sendPossibleTarget(author, arg.getAuthorView());
-        //TODO
-    }
-
-    /**
-     * overloading has failed, send message error
-     * @param arg the wrong type of message
-     */
-    public synchronized void sendTargetsToView(PlayerMessage arg) {
-        //TODO eccezione messaggio inaspettato
-    }
 
 
     /**

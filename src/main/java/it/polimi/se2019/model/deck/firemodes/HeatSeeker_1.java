@@ -28,13 +28,20 @@ public class HeatSeeker_1 extends FireMode {
     }
 
     @Override
-    public List<Target> sendPossibleTarget() {
-        return null;
+    public void sendPossibleTargetsAtStart() {
+        //opposto di sendAllVisible
+        ArrayList<Player> listTarget = new ArrayList<>();
+        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
+            if(playerOfGame.getID() != this.author.getID() && !playerOfGame.isVisibleBy(this.author)){
+                listTarget.add(playerOfGame);
+            }
+        }
+        sendPossibleTargetsPlayers(listTarget);
     }
 
     @Override
     public void fire() throws WrongInputException{
-        //TODO fare targetingScope
+        //TODO fare targetingScope e costo
         if(shoot.getTargetsPlayer().size() != 1){
             throw new WrongInputException();
         }
@@ -44,12 +51,12 @@ public class HeatSeeker_1 extends FireMode {
     }
 
     @Override
-    public void addCell(Shoot shoot, int x, int y) throws WrongInputException {
+    public void addCell(int x, int y) throws WrongInputException {
         throw new WrongInputException();
     }
 
     @Override
-    public void addPlayerTarget(Shoot shoot, int playerID) throws WrongInputException {
+    public void addPlayerTarget(int playerID) throws WrongInputException {
         Player targetPlayer = gameHandler.getPlayerByID(playerID);
         if(shoot.getTargetsPlayer().isEmpty() && !targetPlayer.isVisibleBy(author)){
             shoot.addPlayerTargetFromFireMode(targetPlayer);
@@ -61,7 +68,7 @@ public class HeatSeeker_1 extends FireMode {
     }
 
     @Override
-    public void addTargetingScope(Shoot shoot, int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         //TODO
     }
 
