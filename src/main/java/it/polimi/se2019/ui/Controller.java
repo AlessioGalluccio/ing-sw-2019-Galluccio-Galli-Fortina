@@ -102,6 +102,7 @@ public class Controller {
     public Button bDiscardWeapon2;
     @FXML
     public Button bDiscardWeapon3;
+    public Button login;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -116,6 +117,11 @@ public class Controller {
     public void login(ActionEvent event) throws Exception{
         if(username.getText().equals("user")){
             status.setText("Login Success");
+
+            // get a handle to the stage
+            Stage stage = (Stage) login.getScene().getWindow();
+            // do what you have to do
+            stage.close();
 
             //apriamo così una seconda casella dopo il login
             /*
@@ -147,6 +153,10 @@ public class Controller {
 
             choosenMap = 1;
             System.out.println(choosenMap);
+            // get a handle to the stage
+            Stage stage = (Stage) rbmap1.getScene().getWindow();
+            // do what you have to do
+            stage.close();
         }
 
 
@@ -154,9 +164,15 @@ public class Controller {
 
             choosenMap = 2;
             System.out.println(choosenMap);
+            // get a handle to the stage
+            Stage stage = (Stage) rbmap2.getScene().getWindow();
+            // do what you have to do
+            stage.close();
 
 
         }
+
+
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
         Stage primaryStage = new Stage();

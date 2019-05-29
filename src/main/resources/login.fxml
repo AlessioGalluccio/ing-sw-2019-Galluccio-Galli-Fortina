@@ -25,7 +25,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="7" />
+      <Button fx:id="login" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="7" />
       <TextField fx:id="username" promptText="UserName" GridPane.rowIndex="2" />
       <Label fx:id="status" prefHeight="54.0" prefWidth="74.0" />
    </children>
