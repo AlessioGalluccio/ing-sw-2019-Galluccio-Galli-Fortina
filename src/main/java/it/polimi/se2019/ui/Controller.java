@@ -133,16 +133,36 @@ public class Controller {
         }
         showMap.setDisable(true);
         showMap.setVisible(false);
+
+        //set the buttons stile and images for powerup deck and weapon deck
         impowerupDeck.setDisable(false);
         impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
         imweaponDeck.setDisable(false);
         imweaponDeck.setImage(new Image("AD_weapons_IT_02.jpg"));
         weaponDeck.setDisable(false);
+        weaponDeck.setGraphic(imweaponDeck);
+        weaponDeck.setStyle("-fx-background-color: transparent;");
+        powerupDeck.setGraphic(impowerupDeck);
         powerupDeck.setDisable(false);
+        powerupDeck.setStyle("-fx-background-color: transparent;");
+
+        //set the buttons stile and images for player's cards
+        bPowerupCard1.setGraphic(imPowerupCard1);
+        bPowerupCard1.setStyle("-fx-background-color: transparent;");
+        bPowerupCard2.setGraphic(imWeaponCard2);
+        bPowerupCard2.setStyle("-fx-background-color: transparent;");
         imPowerupCard3.setImage(new Image("emptyPowerup.jpg"));
+        bPowerupCard3.setGraphic(imPowerupCard3);
+        bPowerupCard3.setStyle("-fx-background-color: transparent;");
         imWeaponCard1.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard1.setGraphic(imWeaponCard1);
+        bWeaponCard1.setStyle("-fx-background-color: transparent;");
         imWeaponCard2.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard2.setGraphic(imWeaponCard2);
+        bWeaponCard2.setStyle("-fx-background-color: transparent;");
         imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard3.setGraphic(imWeaponCard3);
+        bWeaponCard3.setStyle("-fx-background-color: transparent;");
 
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
         possibleActions.setVisible(true);
