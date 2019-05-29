@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
 
@@ -18,7 +20,7 @@ import javafx.stage.Stage;
 public class Controller {
     @FXML
     public Label mylabel;
-
+    @FXML
     public ImageView mappa;
     @FXML
     public Button RedWeapon;
@@ -32,28 +34,80 @@ public class Controller {
     public RadioButton rbmap3;
     @FXML
     public RadioButton rbmap4;
+    @FXML
     public Button showMap;
 
-    public static int choosenMap;
+    private static int choosenMap;
+    @FXML
     public Button weaponDeck;
+    @FXML
     public Button powerupDeck;
+    @FXML
     public ImageView imweaponDeck;
+    @FXML
     public ImageView impowerupDeck;
+    @FXML
     public ImageView imPowerupCard1;
+    @FXML
     public ImageView imPowerupCard2;
+    @FXML
     public ImageView imPowerupCard3;
+    @FXML
     public ImageView imWeaponCard1;
+    @FXML
     public ImageView imWeaponCard2;
+    @FXML
     public ImageView imWeaponCard3;
+    @FXML
     public Button bPowerupCard1;
+    @FXML
     public Button bPowerupCard2;
+    @FXML
     public Button bPowerupCard3;
+    @FXML
     public Button bWeaponCard1;
+    @FXML
     public Button bWeaponCard2;
+    @FXML
     public Button bWeaponCard3;
+    @FXML
     public ImageView possibleActions;
+    @FXML
     public ImageView yourCharacter;
+    @FXML
     public ImageView imFirstPlayer;
+    @FXML
+    public Button enemyCharacter4;
+    @FXML
+    public Button enemyCharacter3;
+    @FXML
+    public Button enemyCharacter2;
+    @FXML
+    public Button enemyCharacter1;
+    @FXML
+    public Button bRealoadPowerup1;
+    @FXML
+    public Button bRealoadPowerup2;
+    @FXML
+    public Button bDiscardPowerup1;
+    @FXML
+    public Button bDiscardPowerup2;
+    @FXML
+    public Button bReloadPowerup3;
+    @FXML
+    public Button bDiscardPowerup3;
+    @FXML
+    public Button bReloadWeapon1;
+    @FXML
+    public Button bReloadWeapon2;
+    @FXML
+    public Button bReloadWeapon3;
+    @FXML
+    public Button bDiscardWeapon1;
+    @FXML
+    public Button bDiscardWeapon2;
+    @FXML
+    public Button bDiscardWeapon3;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -119,6 +173,8 @@ public class Controller {
 
 
 
+
+
     }
 
 
@@ -164,10 +220,29 @@ public class Controller {
         bWeaponCard3.setGraphic(imWeaponCard3);
         bWeaponCard3.setStyle("-fx-background-color: transparent;");
 
+        //add background
+
+
+        /*
+        // new Image(url)
+        Image image = new Image("background.png");
+        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
+        BackgroundSize backgroundSize = new BackgroundSize(800, 800, true, true, true, false);
+        // new BackgroundImage(image, repeatX, repeatY, position, size)
+        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        // new Background(images...)
+        Background background = new Background(backgroundImage);
+        */
+
+
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
         possibleActions.setVisible(true);
         yourCharacter.setVisible(true);
         possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
         yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
+
+
+
+
     }
 }
