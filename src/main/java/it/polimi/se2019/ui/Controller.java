@@ -85,15 +85,9 @@ public class Controller {
     @FXML
     public Button enemyCharacter1;
     @FXML
-    public Button bRealoadPowerup1;
-    @FXML
-    public Button bRealoadPowerup2;
-    @FXML
     public Button bDiscardPowerup1;
     @FXML
     public Button bDiscardPowerup2;
-    @FXML
-    public Button bReloadPowerup3;
     @FXML
     public Button bDiscardPowerup3;
     @FXML
