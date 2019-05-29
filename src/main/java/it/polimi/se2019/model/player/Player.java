@@ -125,6 +125,10 @@ public class Player extends Observable implements Target, Serializable {
         return points.getSum();
     }
 
+    public Character getCharacter() {
+        return character;
+    }
+
     /**
      *
      * @return Deep copy of player's weapon card list

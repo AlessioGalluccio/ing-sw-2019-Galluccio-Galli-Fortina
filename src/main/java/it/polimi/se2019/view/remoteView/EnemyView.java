@@ -3,13 +3,15 @@ package it.polimi.se2019.view.remoteView;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Observable;
+import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
-public class EnemyView implements Observer, Serializable {
+public class EnemyView extends Observable implements Observer, Serializable {
 
     private String nickname;
     private Character character;
@@ -17,11 +19,12 @@ public class EnemyView implements Observer, Serializable {
     private ArrayList<WeaponCard> unloadedWeapon;
     private int loadedWeapon;
     private int skull;
-    private ArrayList<Character> damage;
+    private ArrayList<Player> damage;
     private int powerup;
+    private boolean first = true;
 
     public EnemyView(String nickname, Character character, AmmoBag ammo, ArrayList<WeaponCard> unloadedWeapon,
-                     int loadedWeapon, int skull, ArrayList<Character> damage, int powerup) {
+                     int loadedWeapon, int skull, ArrayList<Player> damage, int powerup) {
         this.nickname = nickname;
         this.character = character;
         this.ammo = ammo;
@@ -36,7 +39,7 @@ public class EnemyView implements Observer, Serializable {
         return ammo;
     }
 
-    public ArrayList<Character> getDamage() {
+    public ArrayList<Player> getDamage() {
         return damage;
     }
 
@@ -65,7 +68,25 @@ public class EnemyView implements Observer, Serializable {
     }
 
     @Override
-    public void update(Observable o/*Will be always null*/, Object arg) {
+    public void update(java.util.Observable o/*Will be always null*/, Object arg) {
+        HandlerEnemyViewMessage message = (HandlerEnemyViewMessage) arg;
+        message.handleMessage(this);
+        notifyObservers(message); //Forward message to client
+    }
 
+    public void handlePlayerMessage(Player enemy) {
+        if(first) {
+            this.nickname = enemy.getNickname();
+            this.character = enemy.getCharacter();
+            first=false;
+        }
+        this.ammo = enemy.getAmmo();
+        this.damage = (ArrayList<Player>) enemy.getDamage();
+        this.skull = enemy.getSkull();
+        this.powerup =  enemy.getPowerupCardList().size();
+        for(WeaponCard w : enemy.getWeaponCardList()) {
+            if(!w.isReloaded()) this.unloadedWeapon.add(w);
+        }
+        this.loadedWeapon = enemy.getWeaponCardList().size() - unloadedWeapon.size();
     }
 }
