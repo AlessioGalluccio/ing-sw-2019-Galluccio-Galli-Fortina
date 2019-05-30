@@ -32,7 +32,7 @@ public class MustRespawnControllerState implements StateController {
 
     @Override
     public void handleAction(int actionID) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
@@ -46,65 +46,65 @@ public class MustRespawnControllerState implements StateController {
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleLogin(String playerNickname, Character chosenCharacter) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleNope() {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleOptional(int numOptional) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handlePlayer(int playerID) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleReload(int weaponID) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleTagback(TagbackGranedCard usedCard) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        youCantDoThis();
+        youMustRespawn();
     }
 
-    private void youCantDoThis(){
+    private void youMustRespawn(){
         playerView.printFromController(MUST_RESPAWN);
         controller.removeLastReceivedMessage();
     }

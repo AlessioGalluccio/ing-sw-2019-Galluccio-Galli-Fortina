@@ -11,10 +11,8 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Shoot extends Action{
     protected WeaponCard weapon;
@@ -23,6 +21,7 @@ public class Shoot extends Action{
     protected ArrayList<Integer> optionalSelected;
     protected ArrayList<Cell> cells;
     protected ArrayList<TargetingScopeCard> targetingScopeCards;
+    protected ArrayList<Player> targetsOfTargetings;
     protected AmmoBag cost;
 
     private String FIRST_MESSAGE = "Please, select a Weapon";
@@ -170,6 +169,18 @@ public class Shoot extends Action{
         return targetingScopeCards;
     }
 
+    /**
+     * get the ordered list of players targeted by targeting scopes
+     * @return ArrayList of Player
+     */
+    public ArrayList<Player> getTargetsOfTargetings() {
+        return targetsOfTargetings;
+    }
+
+    public AmmoBag getCost() {
+        return cost;
+    }
+
     public void addPlayerTargetFromFireMode(Player player){
         targets.add(player);
     }
@@ -178,11 +189,42 @@ public class Shoot extends Action{
         cells.add(cell);
     }
 
-    public void addTargetingScopeFromFireMode(TargetingScopeCard card){
+    /**
+     * Add a new targeting scope card and its Player target
+     * @param card the TargetingScopeCard used
+     * @param target the Playeyer target of this effect
+     */
+    public void addTargetingScopeFromFireMode(TargetingScopeCard card, Player target){
         targetingScopeCards.add(card);
+        targetsOfTargetings.add(target);
+        //TODO aggiungere colore quadrato o no?
     }
 
     public void addOptionalSelected(int numOptional){
         this.optionalSelected.add(numOptional);
+    }
+
+    /**
+     * unique method for adding new cost of the action
+     * @param ammoAdded amount added
+     * @throws NotEnoughAmmoException if author can't pay the new cost
+     */
+    public void addCost(AmmoBag ammoAdded) throws NotEnoughAmmoException{
+        AmmoBag oldCost = getCost();
+        AmmoBag newCost = AmmoBag.sumAmmoBag(oldCost, ammoAdded);
+        if(playerAuthor.canPayAmmo(newCost)){
+            this.cost = newCost;
+        }
+        else{
+            throw new NotEnoughAmmoException();
+        }
+    }
+
+    /**
+     * unique method for paying the AmmoBag cost
+     * @throws NotEnoughAmmoException shouldn't be launched, cost is always controlled before beeing added
+     */
+    public void payActionCost() throws NotEnoughAmmoException{
+        playerAuthor.payAmmoCost(this.cost);
     }
 }

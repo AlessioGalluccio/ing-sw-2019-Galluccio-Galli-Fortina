@@ -1,10 +1,10 @@
 package it.polimi.se2019.model.player;
 
 public class NotEnoughAmmoException extends Exception {
-    NotEnoughAmmoException() {
+    public NotEnoughAmmoException() {
         super();
     }
-    NotEnoughAmmoException(String s) {
+    public NotEnoughAmmoException(String s) {
         super(s);
     }
 
