@@ -59,6 +59,6 @@ public class TargetingScopeMessage extends ViewControllerMessage {
 
     @Override
     public void handle(StateController stateController) {
-        stateController.handleTargeting(usedCard, colorAmmo);
+        stateController.handleTargeting(usedCard, getCost(colorAmmo));
     }
 }

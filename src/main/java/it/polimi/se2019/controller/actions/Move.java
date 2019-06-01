@@ -6,10 +6,7 @@ import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.NotPresentException;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.WeaponIsLoadedException;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.CellMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
@@ -68,7 +65,7 @@ public class Move extends Action {
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         throw new WrongInputException();
     }
 

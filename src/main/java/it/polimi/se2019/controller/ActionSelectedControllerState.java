@@ -6,10 +6,8 @@ import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
-import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -28,6 +26,7 @@ public class ActionSelectedControllerState implements StateController {
     private final String PLAYER_WRONG = "You can't select this target";
     private final String CELL_WRONG = "You can't select this cell";
     private final String OPTIONAL_WRONG = "You can't select this optional effect";
+    private final String NOT_ENOUGH = "You don't have enough Ammo for this. Try discard some Powerups";
 
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
@@ -131,6 +130,9 @@ public class ActionSelectedControllerState implements StateController {
         }catch (WrongInputException e){
             playerView.printFromController(OPTIONAL_WRONG);
             controller.removeLastReceivedMessage();
+        }catch (NotEnoughAmmoException e){
+            playerView.printFromController(NOT_ENOUGH);
+            controller.removeLastReceivedMessage();
         }
     }
 
@@ -146,42 +148,12 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     @Override
-    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
-        AmmoBag cost = TargetingScopeMessage.getCost(colorAmmo);
-        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
-        int indexOfPrevious = (controller.getIndexExpected() - 1);
-        List<ViewControllerMessage> stack = controller.getCopyMessageListReceived();
-        //TODO
-        /*
-        if(isPlayerTargetMessage(stack.get(indexOfPrevious))){
-            for(int i = 0; i < indexOfPrevious; i++){
-                cost = addCost(stack.get(i), cost);
-                //cost is controlled (other targeting scopes and the last firemode)
-                if(!player.canPayAmmo(cost)){
-                    controller.getLastReceivedMessage().getAuthorView().printFromController("You don't have enough Ammo for this Targeting Scope");
-                    return;
-                }
-                try{
-                    if(isFiremode(stack.get(i))){
-                        //you can add targeting massage
-                        if(isThisTargetingAlreadyPresent(stack, arg.getUsedCard())){
-                            controller.addMessageListReceived(arg);
-                            return;
-                        }
-                    }
-                }catch(FiremodeOfOnlyMarksException e){
-                    //this firemode adds only marks, you can't use this card
-                    controller.getLastReceivedMessage().getAuthorView().printFromController("You can't use targeting scope with this firemode");
-                    return;
-                }
-
-            }
+    public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
+        try{
+            action.addTargetingScope(usedCard.getID(), cost);
+        }catch(Exception e){
+            //TODO
         }
-        else{
-            return;
-        }
-
-        */
 
     }
 

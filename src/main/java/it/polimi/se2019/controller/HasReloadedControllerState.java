@@ -101,7 +101,7 @@ public class HasReloadedControllerState implements StateController {
     }
 
     @Override
-    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
+    public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
         youCantDoThis();
     }
 

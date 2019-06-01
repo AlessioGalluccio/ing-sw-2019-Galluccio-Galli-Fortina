@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -35,7 +36,7 @@ public interface StateController {
 
     public void handleTagback(TagbackGranedCard usedCard);
 
-    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo);
+    public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost);
 
     public void handleTeleporter(TeleporterCard usedCard);
 

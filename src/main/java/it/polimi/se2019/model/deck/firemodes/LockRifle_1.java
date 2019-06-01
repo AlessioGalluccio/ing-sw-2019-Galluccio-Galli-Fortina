@@ -78,7 +78,7 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         Player author = shoot.getPlayerAuthor();
         //TODO manca metodo per ottenere TargetingCard da ID
     }

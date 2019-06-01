@@ -124,6 +124,27 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         this.playerView = shoot.getPlayerView();
     }
 
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException,
+            NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        //Use Override if the firemode can't use Targeting scopes because it only adds marks
+        PowerupCard card = gameHandler.getPowrupCardByID(targetingCardID);
+        if(shoot.getTargetingScopeCards().contains(card)){
+            throw new WrongInputException();
+        }
+        else if(!author.getPowerupCardList().contains(card)){
+            throw new NotPresentException();
+        }
+        else if(author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
+            throw new NotEnoughAmmoException();
+        }
+        else{
+            //I consider the target as the last selected Player
+            int size = shoot.getTargetsPlayer().size();
+            shoot.addTargetingScopeFromFireMode((PowerupCard)card, shoot.getTargetsPlayer().get(size));
+            shoot.addCost(cost);
+        }
+    }
+
     /**
      * add damage and marks to a player
      * @param targetPlayer the player shooted
@@ -150,6 +171,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             }
         }
     }
+
 
 
     //COMMON METHODS

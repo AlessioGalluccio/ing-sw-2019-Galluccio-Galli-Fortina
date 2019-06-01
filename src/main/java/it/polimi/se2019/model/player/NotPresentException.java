@@ -2,11 +2,11 @@ package it.polimi.se2019.model.player;
 
 public class NotPresentException extends Exception {
 
-    NotPresentException() {
+    public NotPresentException() {
         super();
     }
 
-    NotPresentException(String s) {
+    public NotPresentException(String s) {
         super(s);
     }
 }

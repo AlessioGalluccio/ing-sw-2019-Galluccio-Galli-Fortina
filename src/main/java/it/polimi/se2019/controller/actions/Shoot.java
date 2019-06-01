@@ -3,6 +3,7 @@ package it.polimi.se2019.controller.actions;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -20,7 +21,7 @@ public class Shoot extends Action{
     protected ArrayList<Player> targets;
     protected ArrayList<Integer> optionalSelected;
     protected ArrayList<Cell> cells;
-    protected ArrayList<TargetingScopeCard> targetingScopeCards;
+    protected ArrayList<PowerupCard> targetingScopeCards;
     protected ArrayList<Player> targetsOfTargetings;
     protected AmmoBag cost;
 
@@ -77,9 +78,9 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         if(fireMode != null){
-            fireMode.addTargetingScope(targetingCardID);
+            fireMode.addTargetingScope(targetingCardID, cost);
             //TODO
         }
     }
@@ -110,14 +111,16 @@ public class Shoot extends Action{
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
-        if(this.fireMode == null && weapon != null){
+        AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
+        if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
             if(weapon.getFireMode().contains(fireModeSelected)){
                 this.fireMode = fireModeSelected;
+                this.cost = newCost;
                 //adding expected messeages of firemode
                 for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
                     controller.addMessageListExpected(stringAndMessage);
                 }
-                //since firemode doesn't have a constructor
+                //since firemode doesn't have a constructor, we need to send them here
                 this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
@@ -133,7 +136,7 @@ public class Shoot extends Action{
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         //TODO
-        if(this.weapon == null){
+        if(this.weapon == null && playerAuthor.getWeaponCardList().contains(weaponCard) && weaponCard.isReloaded()){
             this.weapon = weaponCard;
         }
         else{
@@ -142,8 +145,9 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void addOptional(int numOptional) throws WrongInputException {
+    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         //TODO
+        fireMode.addOptional(numOptional);
     }
 
     @Override
@@ -165,7 +169,7 @@ public class Shoot extends Action{
         return optionalSelected;
     }
 
-    public ArrayList<TargetingScopeCard> getTargetingScopeCards() {
+    public ArrayList<PowerupCard> getTargetingScopeCards() {
         return targetingScopeCards;
     }
 
@@ -194,7 +198,7 @@ public class Shoot extends Action{
      * @param card the TargetingScopeCard used
      * @param target the Playeyer target of this effect
      */
-    public void addTargetingScopeFromFireMode(TargetingScopeCard card, Player target){
+    public void addTargetingScopeFromFireMode(PowerupCard card, Player target){
         targetingScopeCards.add(card);
         targetsOfTargetings.add(target);
         //TODO aggiungere colore quadrato o no?

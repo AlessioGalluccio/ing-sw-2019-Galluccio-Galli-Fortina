@@ -2,6 +2,7 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
@@ -87,7 +88,7 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
-    public void handleTargeting(TargetingScopeCard usedCard, ColorRYB colorAmmo) {
+    public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
         cantDoThisHandler();
 
     }
