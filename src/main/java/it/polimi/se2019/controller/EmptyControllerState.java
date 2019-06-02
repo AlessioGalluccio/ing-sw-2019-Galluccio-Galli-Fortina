@@ -58,7 +58,7 @@ public class EmptyControllerState implements  StateController {
         controller.setMessageListExpected(stringAndMessages);
 
         //Change State
-        controller.setState(new ActionSelectedControllerState(controller, gameHandler));
+        controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
 
     }
 

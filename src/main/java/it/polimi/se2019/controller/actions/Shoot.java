@@ -81,7 +81,6 @@ public class Shoot extends Action{
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         if(fireMode != null){
             fireMode.addTargetingScope(targetingCardID, cost);
-            //TODO
         }
     }
 

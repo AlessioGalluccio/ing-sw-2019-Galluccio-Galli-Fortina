@@ -27,14 +27,19 @@ public class ActionSelectedControllerState implements StateController {
     private final String CELL_WRONG = "You can't select this cell";
     private final String OPTIONAL_WRONG = "You can't select this optional effect";
     private final String NOT_ENOUGH = "You don't have enough Ammo for this. Try discard some Powerups";
+    private final String ONLY_MARKS = "The firemode selected gives only marks, you can't use targeting";
+    private final String CARD_NOT_PRESENT = "The player doesn't have this card";
+    private final String ALREADY_SELECTED = "You have already selected this, you can't use again";
 
-    public ActionSelectedControllerState(Controller controller, GameHandler gameHandler) {
+    public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
         this.player = controller.getPlayer();
         this.playerView = controller.getPlayerView();
+        this.action = action;
     }
+
 
     @Override
     public void handleAction(int actionID) {
@@ -151,8 +156,22 @@ public class ActionSelectedControllerState implements StateController {
     public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
         try{
             action.addTargetingScope(usedCard.getID(), cost);
-        }catch(Exception e){
-            //TODO
+
+        }catch(WrongInputException e){
+            playerView.printFromController(ALREADY_SELECTED);
+            controller.removeLastReceivedMessage();
+
+        }catch(NotEnoughAmmoException e){
+            playerView.printFromController(NOT_ENOUGH);
+            controller.removeLastReceivedMessage();
+
+        }catch(NotPresentException e){
+            playerView.printFromController(CARD_NOT_PRESENT);
+            controller.removeLastReceivedMessage();
+
+        }catch (FiremodeOfOnlyMarksException e){
+            playerView.printFromController(ONLY_MARKS);
+            controller.removeLastReceivedMessage();
         }
 
     }

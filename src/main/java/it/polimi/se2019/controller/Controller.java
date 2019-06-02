@@ -38,6 +38,14 @@ public class Controller implements Observer {
         this.state = new NotYourTurnState(this, gameHandler);
     }
 
+    public void addPlayerView(PlayerView playerView){
+        this.playerView = playerView;
+    }
+
+    public void addPlayer(Player player){
+        this.player = player;
+    }
+
     //getter and Setters
 
     public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {

@@ -60,7 +60,7 @@ public class ZX2_2 extends FireMode {
 
     @Override
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        //TODO
+        throw new FiremodeOfOnlyMarksException();
     }
 
     @Override
