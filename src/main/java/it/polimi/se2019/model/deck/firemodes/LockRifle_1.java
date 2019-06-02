@@ -16,8 +16,12 @@ public class LockRifle_1 extends FireMode {
     private static final int NUM_DAMAGE = 2;
     private static final int NUM_MARK = 1;
 
+    private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
+
     private static final String FIRST_MSG_STR = "Select a player from possible targets";
     private static final boolean FIRST_MSG_BOOL = false;
+
+    private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firmode before";
 
     @Override
     public void sendPossibleTargetsAtStart() {
@@ -26,12 +30,16 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException {
-        //TODO fare targetingScope
-        addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1);
-        if(shoot.getTargetsPlayer().size() == 2){
-            addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1);
+        if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException();
         }
-        //TODO pagamento costo ed eccezione
+        else{
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1);
+            if(shoot.getTargetsPlayer().size() == 2){
+                addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1);
+            }
+            super.fire();
+        }
     }
 
 
@@ -58,7 +66,7 @@ public class LockRifle_1 extends FireMode {
             shoot.getPlayerView().printFromController("Error,you have selected yourself");
             throw new WrongInputException();
         }
-        if(target.isVisibleBy(author)){
+        else if(target.isVisibleBy(author)){
             if(shoot.getTargetsPlayer().isEmpty()){
                 shoot.addPlayerTargetFromFireMode(target);
             }
@@ -76,18 +84,19 @@ public class LockRifle_1 extends FireMode {
         }
 
     }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        Player author = shoot.getPlayerAuthor();
-        //TODO manca metodo per ottenere TargetingCard da ID
-    }
-
+    
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()){
-            //TODO controlla costo
-            shoot.addOptional(numOptional);
+        if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()
+                && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL))){
+            if(shoot.getTargetsPlayer().isEmpty()){
+                playerView.printFromController(SELECT_FIRST_TARGET_BEFORE);
+                throw new WrongInputException();
+            }
+            else{
+                shoot.addOptional(numOptional);
+            }
+
         }
         else{
             throw new WrongInputException();

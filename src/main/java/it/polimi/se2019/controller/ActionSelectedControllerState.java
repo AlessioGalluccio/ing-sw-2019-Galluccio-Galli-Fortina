@@ -254,34 +254,4 @@ public class ActionSelectedControllerState implements StateController {
         */
     }
 
-
-    /**
-     * does nothing, because it doesn't have cost like Firemode or TargetingScope
-     * @param msg
-     * @param cost
-     */
-    private AmmoBag addCost(ViewControllerMessage msg, AmmoBag cost){
-        //it does nothing
-        return cost;
-    }
-
-    /**
-     * add the cost of the card in cost
-     * @param msg the message
-     * @param cost the AmmoBag that will be updated
-     */
-    //private AmmoBag addCost(TargetingScopeMessage msg, AmmoBag cost){
-        //it returns the sum
-        //return AmmoBag.sumAmmoBag(cost, msg.getCost());
-     // }
-
-
-    /**
-     * add the cost of the card in cost
-     * @param msg the message
-     * @param cost the AmmoBag that will be updated
-     */
-    private void addCost(FireMode msg, AmmoBag cost){
-        cost = AmmoBag.sumAmmoBag(AmmoBag.createAmmoFromList(msg.getCost()), cost);
-    }
 }

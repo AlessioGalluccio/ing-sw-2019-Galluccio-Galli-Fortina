@@ -30,6 +30,12 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected transient Player author;
     protected transient PlayerView playerView;
 
+    private String NOT_PRESENT = "Can't do more damage to this player";
+    private String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
+    private String OVERKILLED = "You have overkilled this player, you can't do more damage";
+    private String KILLED = "You killed ths Player";
+
+
     /**
      * Create a deep copy of cost
      * @return If the FireMode is free an empty list, else a deep copy of cost
@@ -97,9 +103,26 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
 
     /**
-     * Fires to the target
+     * Fires to the target. Here we have the implementation for Targeting and pay Ammo cost, so use super.fire() in
+     * subclasses!
+     *
      */
-    public abstract void fire() throws WrongInputException;
+    public void fire() throws WrongInputException{
+        //damage of targetings
+        if(!shoot.getTargetsOfTargetings().isEmpty()){
+            for(Player targetTargeting: shoot.getTargetsOfTargetings()){
+                addDamageAndMarks(targetTargeting, 1,0);
+            }
+        }
+
+        //payment of the total cost of this action
+        try{
+            author.payAmmoCost(shoot.getCost());
+        }catch (NotEnoughAmmoException e){
+            //it should never happen, because cost must always be controlled before
+            throw new WrongInputException();
+        }
+    }
 
 
     /**
@@ -156,18 +179,22 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             try{
                 targetPlayer.receiveDamageBy(author);
             }catch (NotPresentException e){
-                playerView.printFromController("Can't do more damage to this player");
+                playerView.printFromController(NOT_PRESENT);
+                break;
             }catch (YouOverkilledException e) {
-                //TODO
+                playerView.printFromController(OVERKILLED);
+                break;
             }catch (YouDeadException e) {
-                //TODO
+                playerView.printFromController(KILLED);
+                //We don't use break here. We can do one more damage to overkill the target
             }
         }
         for(int i = 0; i < numMarks; i++){
             try{
                 targetPlayer.receiveMarkBy(author);
             }catch(TooManyException e){
-                playerView.printFromController("You have already three marks on this Player, you will not add more marks");
+                playerView.printFromController(TOO_MANY);
+                break;
             }
         }
     }
