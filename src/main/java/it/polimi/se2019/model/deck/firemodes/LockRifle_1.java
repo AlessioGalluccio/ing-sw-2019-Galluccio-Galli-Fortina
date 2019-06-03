@@ -21,11 +21,19 @@ public class LockRifle_1 extends FireMode {
     private static final String FIRST_MSG_STR = "Select a player from possible targets";
     private static final boolean FIRST_MSG_BOOL = false;
 
+    private static final String SECOND_MSG_STR = "Select another player from possible targets";
+    private static final boolean SECOND_MSG_BOOL = true;
+
     private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firmode before";
+
+
 
     @Override
     public void sendPossibleTargetsAtStart() {
-        sendAllVisiblePlayers(null);
+        //TODO se niente target?
+        if(!sendAllVisiblePlayers(null)){
+            //TODO
+        }
     }
 
     @Override
@@ -84,7 +92,7 @@ public class LockRifle_1 extends FireMode {
         }
 
     }
-    
+
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()
@@ -94,7 +102,17 @@ public class LockRifle_1 extends FireMode {
                 throw new WrongInputException();
             }
             else{
-                shoot.addOptional(numOptional);
+                //TODO controlla
+                if(sendAllVisiblePlayers(shoot.getTargetsPlayer())) {
+                    shoot.addOptional(numOptional);
+                    StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
+                            SECOND_MSG_STR, SECOND_MSG_BOOL);
+                    controller.addMessageListExpected(stringAndMessage);
+                }
+                else{
+                    playerView.printFromController(NO_TARGET);
+                    throw new WrongInputException();
+                }
             }
 
         }

@@ -42,12 +42,12 @@ public class HeatSeeker_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        //TODO fare targetingScope e costo
         if(shoot.getTargetsPlayer().size() != 1){
             throw new WrongInputException();
         }
         else{
             addDamageAndMarks(shoot.getTargetsPlayer().get(0), 3,0);
+            super.fire();
         }
     }
 
@@ -66,11 +66,6 @@ public class HeatSeeker_1 extends FireMode {
             throw new WrongInputException();
         }
 
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        //TODO
     }
 
     @Override

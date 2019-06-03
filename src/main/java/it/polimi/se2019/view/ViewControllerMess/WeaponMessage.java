@@ -22,6 +22,6 @@ public class WeaponMessage extends ViewControllerMessage {
 
     @Override
     public void handle(StateController stateController) {
-        stateController.handleFiremode(weaponCard.getID());
+        stateController.handleWeaponCard(weaponCard);
     }
 }

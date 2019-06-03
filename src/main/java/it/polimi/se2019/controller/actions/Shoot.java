@@ -90,22 +90,6 @@ public class Shoot extends Action{
     }
 
     @Override
-    public void addWeapon(int weaponID) throws WrongInputException {
-        if(this.weapon == null){
-            WeaponCard weaponCard = gameHandler.getWeaponCardByID(weaponID);
-            if(playerAuthor.getWeaponCardList().contains(weaponCard) && weaponCard.isReloaded()){
-                this.weapon = weaponCard;
-            }
-            else{
-                throw new WrongInputException();
-            }
-        }
-        else{
-            throw new WrongInputException();
-        }
-    }
-
-    @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
@@ -134,9 +118,15 @@ public class Shoot extends Action{
 
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
-        //TODO
-        if(this.weapon == null && playerAuthor.getWeaponCardList().contains(weaponCard) && weaponCard.isReloaded()){
-            this.weapon = weaponCard;
+        int weaponID = weaponCard.getID();
+        if(this.weapon == null){
+            WeaponCard weaponCardOfGame = gameHandler.getWeaponCardByID(weaponID);
+            if(playerAuthor.getWeaponCardList().contains(weaponCardOfGame) && weaponCardOfGame.isReloaded()){
+                this.weapon = weaponCardOfGame;
+            }
+            else{
+                throw new WrongInputException();
+            }
         }
         else{
             throw new WrongInputException();
