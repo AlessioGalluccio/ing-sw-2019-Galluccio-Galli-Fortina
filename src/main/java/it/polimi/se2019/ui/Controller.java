@@ -186,10 +186,22 @@ public class Controller {
     public ImageView ammoCell31;
     @FXML
     public ImageView ammoCell32;
+    @FXML
     public ImageView imEnemyCharacter1;
+    @FXML
     public ImageView imEnemyCharacter2;
+    @FXML
     public ImageView imEnemyCharacter3;
+    @FXML
     public ImageView imEnemyCharacter4;
+    @FXML
+    public ImageView mappa1prev;
+    @FXML
+    public ImageView mappa2prev;
+    @FXML
+    public ImageView mappa3prev;
+    @FXML
+    public ImageView mappa4prev;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -221,7 +233,7 @@ public class Controller {
             Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("chooseMap.fxml"));
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Choose Map");
-            primaryStage.setScene(new Scene(root, 300, 300));
+            primaryStage.setScene(new Scene(root, 470, 400));
             primaryStage.show();
 
 
@@ -238,7 +250,7 @@ public class Controller {
 
         if(rbmap1.isSelected()){
 
-            choosenMap = 1;
+            choosenMap = 4;
             System.out.println(choosenMap);
             // get a handle to the stage
             Stage stage = (Stage) rbmap1.getScene().getWindow();
@@ -259,6 +271,22 @@ public class Controller {
 
         }
 
+        if(rbmap3.isSelected()){
+            choosenMap = 3;
+            // get a handle to the stage
+            Stage stage = (Stage) rbmap2.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+
+        if(rbmap4.isSelected()){
+            choosenMap = 4;
+            // get a handle to the stage
+            Stage stage = (Stage) rbmap2.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
+
 
 
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
@@ -276,21 +304,43 @@ public class Controller {
 
 
     public void showMap(ActionEvent event) {
+
         System.out.println(choosenMap);
+
         if (choosenMap == 2) {
             mappa.setImage(new Image("mappa2.jpg"));
             cell32.setDisable(true);
             cell00.setDisable(false);
             ammoCell32.setDisable(true);
+            ammoCell32.setVisible(false);
 
         }
+
         if (choosenMap == 1) {
             mappa.setImage(new Image("mappa.jpg"));
             cell00.setDisable(true);
             cell32.setDisable(false);
             ammoCell00.setDisable(true);
+            ammoCell00.setVisible(false);
 
         }
+
+        if(choosenMap == 3){
+            mappa.setImage(new Image("mappa3.jpg"));
+
+        }
+
+        if(choosenMap == 4){
+            mappa.setImage(new Image("mappa4.jpg"));
+            cell32.setDisable(true);
+            ammoCell32.setDisable(true);
+            ammoCell32.setVisible(false);
+            cell00.setDisable(true);
+            ammoCell00.setDisable(true);
+            ammoCell00.setVisible(false);
+
+        }
+
         showMap.setDisable(true);
         showMap.setVisible(false);
 

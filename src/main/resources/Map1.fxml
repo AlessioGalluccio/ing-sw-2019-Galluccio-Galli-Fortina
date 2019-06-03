@@ -220,17 +220,44 @@
       <Button fx:id="cell22" layoutX="412.0" layoutY="142.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="112.0" />
       <Button fx:id="cell21" layoutX="412.0" layoutY="271.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" />
       <Button fx:id="cell20" layoutX="408.0" layoutY="411.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="120.0" />
-      <Button fx:id="cell30" layoutX="539.0" layoutY="402.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="112.0" />
+      <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
       <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
       <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="99.0" />
-      <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="148.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell00" fitHeight="49.0" fitWidth="51.0" layoutX="139.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell10" fitHeight="49.0" fitWidth="51.0" layoutX="262.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell11" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell12" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell21" fitHeight="49.0" fitWidth="51.0" layoutX="412.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell20" fitHeight="49.0" fitWidth="51.0" layoutX="423.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell31" fitHeight="49.0" fitWidth="51.0" layoutX="547.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="ammoCell32" fitHeight="49.0" fitWidth="51.0" layoutX="609.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="148.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_042.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell00" fitHeight="49.0" fitWidth="51.0" layoutX="139.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_045.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell10" fitHeight="49.0" fitWidth="51.0" layoutX="262.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_0433.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell11" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_0419.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell12" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_043.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell21" fitHeight="49.0" fitWidth="51.0" layoutX="412.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_0437.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell20" fitHeight="49.0" fitWidth="51.0" layoutX="423.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_0416.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell31" fitHeight="49.0" fitWidth="51.0" layoutX="547.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_0423.png" />
+         </image></ImageView>
+      <ImageView fx:id="ammoCell32" fitHeight="49.0" fitWidth="51.0" layoutX="609.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ammo/AD_ammo_044.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>
