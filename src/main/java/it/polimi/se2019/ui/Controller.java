@@ -102,7 +102,94 @@ public class Controller {
     public Button bDiscardWeapon2;
     @FXML
     public Button bDiscardWeapon3;
+    @FXML
     public Button login;
+    @FXML
+    public ImageView enemy1card1;
+    @FXML
+    public ImageView enemy1card2;
+    @FXML
+    public ImageView enemy1card3;
+    @FXML
+    public ImageView enemy1First;
+    @FXML
+    public ImageView enemy1Actions;
+    @FXML
+    public ImageView enemy2card1;
+    @FXML
+    public ImageView enemy2card2;
+    @FXML
+    public ImageView enemy2card3;
+    @FXML
+    public ImageView enemy2First;
+    @FXML
+    public ImageView enemy2Actions;
+    @FXML
+    public ImageView enemy3card1;
+    @FXML
+    public ImageView enemy3card2;
+    @FXML
+    public ImageView enemy3card3;
+    @FXML
+    public ImageView enemy3First;
+    @FXML
+    public ImageView enemy3Actions;
+    @FXML
+    public ImageView enemy4card1;
+    @FXML
+    public ImageView enemy4card2;
+    @FXML
+    public ImageView enemy4card3;
+    @FXML
+    public ImageView enemy4First;
+    @FXML
+    public ImageView enemy4Actions;
+    @FXML
+    public Button cell02;
+    @FXML
+    public Button cell01;
+    @FXML
+    public Button cell00;
+    @FXML
+    public Button cell10;
+    @FXML
+    public Button cell11;
+    @FXML
+    public Button cell12;
+    @FXML
+    public Button cell22;
+    @FXML
+    public Button cell21;
+    @FXML
+    public Button cell20;
+    @FXML
+    public Button cell30;
+    @FXML
+    public Button cell31;
+    @FXML
+    public Button cell32;
+    @FXML
+    public ImageView ammoCell02;
+    @FXML
+    public ImageView ammoCell00;
+    @FXML
+    public ImageView ammoCell10;
+    @FXML
+    public ImageView ammoCell11;
+    @FXML
+    public ImageView ammoCell12;
+    @FXML
+    public ImageView ammoCell21;
+    @FXML
+    public ImageView ammoCell20;
+    @FXML
+    public ImageView ammoCell31;
+    @FXML
+    public ImageView ammoCell32;
+    public ImageView imEnemyCharacter1;
+    public ImageView imEnemyCharacter2;
+    public ImageView imEnemyCharacter3;
+    public ImageView imEnemyCharacter4;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -192,9 +279,16 @@ public class Controller {
         System.out.println(choosenMap);
         if (choosenMap == 2) {
             mappa.setImage(new Image("mappa2.jpg"));
+            cell32.setDisable(true);
+            cell00.setDisable(false);
+            ammoCell32.setDisable(true);
+
         }
         if (choosenMap == 1) {
             mappa.setImage(new Image("mappa.jpg"));
+            cell00.setDisable(true);
+            cell32.setDisable(false);
+            ammoCell00.setDisable(true);
 
         }
         showMap.setDisable(true);
@@ -243,6 +337,58 @@ public class Controller {
         // new Background(images...)
         Background background = new Background(backgroundImage);
         */
+
+        //set map's cells
+        cell00.setStyle("-fx-background-color: transparent;");
+        cell00.setGraphic(ammoCell00);
+        cell01.setStyle("-fx-background-color: transparent;");
+        cell01.setDisable(false);
+        cell02.setStyle("-fx-background-color: transparent;");
+        cell02.setGraphic(ammoCell02);
+        cell02.setDisable(false);
+        cell10.setStyle("-fx-background-color: transparent;");
+        cell10.setGraphic(ammoCell10);
+        cell10.setDisable(false);
+        cell11.setStyle("-fx-background-color: transparent;");
+        cell11.setGraphic(ammoCell11);
+        cell11.setDisable(false);
+        cell12.setStyle("-fx-background-color: transparent;");
+        cell12.setGraphic(ammoCell12);
+        cell12.setDisable(false);
+        cell20.setStyle("-fx-background-color: transparent;");
+        cell20.setGraphic(ammoCell20);
+        cell20.setDisable(false);
+        cell21.setStyle("-fx-background-color: transparent;");
+        cell21.setGraphic(ammoCell21);
+        cell21.setDisable(false);
+        cell22.setStyle("-fx-background-color: transparent;");
+        cell22.setDisable(false);
+        cell30.setStyle("-fx-background-color: transparent;");
+        cell30.setDisable(false);
+        cell31.setStyle("-fx-background-color: transparent;");
+        cell31.setGraphic(ammoCell31);
+        cell31.setDisable(false);
+        cell32.setStyle("-fx-background-color: transparent;");
+        cell32.setGraphic(ammoCell32);
+
+
+        //set enemycharacter
+        //TODO cambiare dinamicamnete i personaggi
+        enemyCharacter1.setGraphic(imEnemyCharacter1);
+        enemyCharacter1.setStyle("-fx-background-color: transparent;");
+
+        enemyCharacter2.setGraphic(imEnemyCharacter2);
+        enemyCharacter2.setStyle("-fx-background-color: transparent;");
+
+        enemyCharacter3.setGraphic(imEnemyCharacter3);
+        enemyCharacter3.setStyle("-fx-background-color: transparent;");
+
+        enemyCharacter4.setGraphic(imEnemyCharacter4);
+        enemyCharacter4.setStyle("-fx-background-color: transparent;");
+
+
+
+
 
 
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
