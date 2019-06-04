@@ -591,6 +591,7 @@ public class Player extends Observable implements Target, Serializable {
                 .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>())
                 .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
+                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
                 .setExclusionStrategies(new NotForPlayerExclusionStrategy())
                 .create();
 
