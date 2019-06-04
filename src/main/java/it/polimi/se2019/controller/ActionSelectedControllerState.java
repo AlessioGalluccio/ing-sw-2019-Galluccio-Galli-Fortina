@@ -184,7 +184,11 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        //TODO
+        try{
+            action.addWeapon(usedCard);
+        }catch(WrongInputException e){
+            //TODO
+        }
     }
 
     @Override

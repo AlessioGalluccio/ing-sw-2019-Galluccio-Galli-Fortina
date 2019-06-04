@@ -30,10 +30,12 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected transient Player author;
     protected transient PlayerView playerView;
 
-    private String NOT_PRESENT = "Can't do more damage to this player";
-    private String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
-    private String OVERKILLED = "You have overkilled this player, you can't do more damage";
-    private String KILLED = "You killed ths Player";
+    private static final String NOT_PRESENT = "Can't do more damage to this player";
+    private static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
+    private static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
+    private static final String KILLED = "You killed ths Player";
+
+    protected static final String NO_TARGET = "No target available";
 
 
     /**
@@ -203,16 +205,29 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     //COMMON METHODS
 
-    protected void sendAllVisiblePlayers(ArrayList<Player> alreadySelected){
+    /**
+     * send all visible players to the PlayerView only if there is at least one
+     * @param alreadySelected ArrayList of all targets already selected
+     * @return false if there is no target (and it doesn't send them), otherwise true and it sends them
+     */
+    protected boolean sendAllVisiblePlayers(ArrayList<Player> alreadySelected){
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)){
-                if(alreadySelected == null || !alreadySelected.contains(playerOfGame)){
-                    listTarget.add(playerOfGame);
-                }
+            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)
+                    && (!alreadySelected.contains(playerOfGame))){
+
+                listTarget.add(playerOfGame);
+
             }
         }
-        sendPossibleTargetsPlayers(listTarget);
+        if(listTarget.isEmpty()){
+            return false;
+        }
+        else{
+            sendPossibleTargetsPlayers(listTarget);
+            return true;
+        }
+
     }
 
 

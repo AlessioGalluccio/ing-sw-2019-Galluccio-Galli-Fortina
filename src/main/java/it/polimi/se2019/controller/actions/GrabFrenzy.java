@@ -50,11 +50,6 @@ public class GrabFrenzy extends Grab {
     }
 
     @Override
-    public void addWeapon(int weaponID) throws WrongInputException {
-        super.addWeapon(weaponID);
-    }
-
-    @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
         super.addFireMode(fireModeID);
     }

@@ -94,16 +94,6 @@ public class Grab extends Action{
     }
 
     @Override
-    public void addWeapon(int weaponID) throws WrongInputException {
-        if(cellObjective == null || cellObjective.getCardID().size() == 1){
-            throw new WrongInputException();
-        }
-        else{
-            //TODO prendi carta arma
-        }
-    }
-
-    @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
         throw new WrongInputException();
     }
@@ -111,6 +101,7 @@ public class Grab extends Action{
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         throw new WrongInputException();
+        //TODO
     }
 
     @Override

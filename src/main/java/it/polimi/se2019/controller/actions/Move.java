@@ -75,11 +75,6 @@ public class Move extends Action {
     }
 
     @Override
-    public void addWeapon(int weaponID) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
         throw new WrongInputException();
     }
