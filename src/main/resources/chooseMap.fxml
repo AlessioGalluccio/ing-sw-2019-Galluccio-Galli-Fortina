@@ -6,7 +6,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="396.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+<AnchorPane prefHeight="396.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
       <RadioButton fx:id="rbmap1" layoutX="79.0" layoutY="165.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="28.0" prefWidth="77.0" text="mappa 1">
          <toggleGroup>

@@ -23,8 +23,6 @@ public class Controller {
     @FXML
     public ImageView mappa;
     @FXML
-    public Button RedWeapon;
-    @FXML
     public ToggleGroup mappaGroup;
     @FXML
     public RadioButton rbmap1;
@@ -202,6 +200,42 @@ public class Controller {
     public ImageView mappa3prev;
     @FXML
     public ImageView mappa4prev;
+    @FXML
+    public ImageView imRedWeapon1;
+    @FXML
+    public ImageView imRedWeapon2;
+    @FXML
+    public ImageView imRedWeapon3;
+    @FXML
+    public ImageView imBlueWeapon1;
+    @FXML
+    public ImageView imBlueWeapon2;
+    @FXML
+    public ImageView imBlueWeapon3;
+    @FXML
+    public ImageView imYellowWeapon1;
+    @FXML
+    public ImageView imYellowWeapon2;
+    @FXML
+    public ImageView imYellowWeapon3;
+    @FXML
+    public Button redweapon2;
+    @FXML
+    public Button redWeapon3;
+    @FXML
+    public Button yellowWeapon1;
+    @FXML
+    public Button yellowWeapon2;
+    @FXML
+    public Button yellowWeapon3;
+    @FXML
+    public Button blueWeapon1;
+    @FXML
+    public Button blueWeapon2;
+    @FXML
+    public Button blueWeapon3;
+    @FXML
+    public Button redWeapon1;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -435,6 +469,37 @@ public class Controller {
 
         enemyCharacter4.setGraphic(imEnemyCharacter4);
         enemyCharacter4.setStyle("-fx-background-color: transparent;");
+
+
+        //set Weapons
+
+        redWeapon1.setGraphic(imRedWeapon1);
+        redWeapon1.setStyle("-fx-background-color: transparent;");
+
+        redweapon2.setGraphic(imRedWeapon2);
+        redweapon2.setStyle("-fx-background-color: transparent;");
+
+        redWeapon3.setGraphic(imRedWeapon3);
+        redWeapon3.setStyle("-fx-background-color: transparent;");
+
+        blueWeapon1.setGraphic(imBlueWeapon1);
+        blueWeapon1.setStyle("-fx-background-color: transparent;");
+
+        blueWeapon2.setGraphic(imBlueWeapon2);
+        blueWeapon2.setStyle("-fx-background-color: transparent;");
+
+        blueWeapon3.setGraphic(imBlueWeapon3);
+        blueWeapon3.setStyle("-fx-background-color: transparent;");
+
+        yellowWeapon1.setGraphic(yellowWeapon1);
+        yellowWeapon1.setStyle("-fx-background-color: transparent;");
+
+        yellowWeapon2.setGraphic(imYellowWeapon2);
+        yellowWeapon2.setStyle("-fx-background-color: transparent;");
+
+        yellowWeapon3.setGraphic(imYellowWeapon3);
+        yellowWeapon3.setStyle("-fx-background-color: transparent;");
+
 
 
 
