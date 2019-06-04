@@ -35,6 +35,11 @@ public class Shoot extends Action{
         super(gameHandler, controller);
         fireMode = null;
         this.cost = new AmmoBag(0,0,0);
+        this.targetsOfTargetings = new ArrayList<>();
+        this.targets = new ArrayList<>();
+        this.cells = new ArrayList<>();
+        this.optionalSelected = new ArrayList<>();
+        this.targetingScopeCards = new ArrayList<>();
     }
 
     @Override
@@ -95,10 +100,18 @@ public class Shoot extends Action{
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
+
+        //TODO TESTING
+        System.out.println("In shoot " + fireModeSelected.getGameHandler());
+
         AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
         if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
-            if(weapon.getFireMode().contains(fireModeSelected)){
+            if(Identificator.containsFiremode(weapon, fireModeSelected)){
                 this.fireMode = fireModeSelected;
+
+                //TODO TESTING
+                System.out.println("In shoot 2 " + fireMode.getGameHandler());
+
                 this.cost = newCost;
                 //adding expected messeages of firemode
                 for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
@@ -108,9 +121,6 @@ public class Shoot extends Action{
                 this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
-                if(!(weapon.getFireMode().contains(fireModeSelected))){
-                    throw new WrongInputException("no");
-                }
                 throw new WrongInputException();
             }
         }
@@ -146,6 +156,15 @@ public class Shoot extends Action{
     @Override
     public void addNope() throws WrongInputException {
         //TODO
+    }
+
+    public void fire() throws WrongInputException{
+        if(fireMode != null){
+            fireMode.fire();
+        }
+        else {
+            throw new WrongInputException();
+        }
     }
 
     //METHODS ONLY FOR FIREMODES
