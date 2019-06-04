@@ -101,17 +101,11 @@ public class Shoot extends Action{
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
 
-        //TODO TESTING
-        System.out.println("In shoot " + fireModeSelected.getGameHandler());
 
         AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
         if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
             if(Identificator.containsFiremode(weapon, fireModeSelected)){
                 this.fireMode = fireModeSelected;
-
-                //TODO TESTING
-                System.out.println("In shoot 2 " + fireMode.getGameHandler());
-
                 this.cost = newCost;
                 //adding expected messeages of firemode
                 for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){

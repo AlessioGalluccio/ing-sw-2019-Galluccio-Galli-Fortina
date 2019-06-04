@@ -68,10 +68,6 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
-
-        //TODO Elimina, è per TESTING
-        System.out.println("è nullo in add? " + gameHandler);
-
         Player target = gameHandler.getPlayerByID(playerID);
         int targetID = target.getID();
         if(targetID == author.getID()){
@@ -79,10 +75,6 @@ public class LockRifle_1 extends FireMode {
             throw new WrongInputException();
         }
         else if(target.isVisibleBy(author)){
-
-            //TODO eliminala, è SOLO PER TESTING
-            System.out.println(shoot.getTargetsPlayer());
-
             if(shoot.getTargetsPlayer().isEmpty()){
                 shoot.addPlayerTargetFromFireMode(target);
             }
