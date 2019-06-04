@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+   <children>
+      <Label layoutX="92.0" layoutY="31.0" prefHeight="51.0" prefWidth="185.0" text="OH NO!">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="93.0" prefHeight="54.0" prefWidth="301.0" text="It looks like you died " textAlignment="CENTER">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="119.0" layoutY="147.0" prefHeight="80.0" prefWidth="98.0" text="ಥ_ಥ">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="227.0" prefHeight="74.0" prefWidth="301.0" text="Don't worry, just wait for resurrection">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="109.0" layoutY="310.0" prefHeight="50.0" prefWidth="118.0" text="୧☉□☉୨">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
