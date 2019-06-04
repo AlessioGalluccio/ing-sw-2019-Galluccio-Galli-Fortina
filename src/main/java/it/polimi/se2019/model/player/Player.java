@@ -134,6 +134,7 @@ public class Player extends Observable implements Target, Serializable {
      * @return Deep copy of player's weapon card list
      */
     public List<WeaponCard> getWeaponCardList() {
+        /*
         GsonBuilder g = new GsonBuilder()
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
                 .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
@@ -143,6 +144,8 @@ public class Player extends Observable implements Target, Serializable {
         }.getType();
 
         return gson.fromJson(gson.toJson(weaponCardList, TYPE), TYPE);
+        */
+        return weaponCardList;
     }
 
     /**

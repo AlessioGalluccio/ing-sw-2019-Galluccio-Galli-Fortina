@@ -23,7 +23,7 @@ public class TestLockRifle_1 {
     Controller controller;
     Shoot shoot;
     Cell commonCell;
-    LockRifle_1 lockRifle_1;
+    FireMode lockRifle_1;
 
 
     @Before
@@ -41,15 +41,17 @@ public class TestLockRifle_1 {
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
+
+
         Border wall = new Wall();
         AmmoDeck deckMock = mock(AmmoDeck.class);
-
-
         commonCell = new CellAmmo(wall,wall,wall,wall,0,0, deckMock);
         CellSpawn cellSpawnMock = mock(CellSpawn.class);
         ArrayList cellList = new ArrayList();
         cellList.add(commonCell);
         Room room = new Room(cellSpawnMock,"RED", cellList);
+
+
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
 
@@ -59,11 +61,18 @@ public class TestLockRifle_1 {
 
         WeaponCard weapon = gameHandler.getWeaponCardByID(14);
 
+        weapon.reload();
+
         authorPlayer.addWeaponCard(weapon);
+
+        System.out.println(authorPlayer.getWeaponCardList().get(0).getID());
+        System.out.println(authorPlayer.getID());
+        System.out.println(shoot.getPlayerAuthor().getID());
+        System.out.println(shoot.getPlayerAuthor().getWeaponCardList().contains(weapon));
 
         shoot.addWeapon(weapon);
 
-        lockRifle_1 = new LockRifle_1();
+        lockRifle_1 = gameHandler.getFireModeByID(141);
         shoot.addFireMode(lockRifle_1.getID());
 
         //TODO bisogna impostare tutto gamehandler prima
@@ -75,7 +84,10 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void firePositive() {
+    public void firePositive() throws Exception {
+        lockRifle_1.addPlayerTarget(targetPlayer1.getID());
+        lockRifle_1.fire();
+
 
 
     }

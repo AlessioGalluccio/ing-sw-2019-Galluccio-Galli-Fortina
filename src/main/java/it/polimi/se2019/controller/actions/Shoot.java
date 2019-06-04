@@ -34,6 +34,7 @@ public class Shoot extends Action{
     public Shoot(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
         fireMode = null;
+        this.cost = new AmmoBag(0,0,0);
     }
 
     @Override
@@ -107,6 +108,9 @@ public class Shoot extends Action{
                 this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
+                if(!(weapon.getFireMode().contains(fireModeSelected))){
+                    throw new WrongInputException("no");
+                }
                 throw new WrongInputException();
             }
         }
