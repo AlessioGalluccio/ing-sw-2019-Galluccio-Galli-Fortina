@@ -4,6 +4,7 @@ import it.polimi.se2019.model.deck.*;
 
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -17,15 +18,14 @@ public class PlayerView extends View /*View implement observer/observable*/{
     private ArrayList<? extends Target> selectedTargets;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
+    private Server networkHandler;
 
-    public PlayerView(Player playerCopy, ArrayList<Target> possibleTargets, ArrayList<Target> selectedTargets,
-                      ArrayList<Character> possibleCharacter, Character choosenCharacter ) {
+    public PlayerView(Server networkHandler) {
+        this.networkHandler = networkHandler;
+    }
 
-        this.playerCopy = playerCopy;
-        this.possibleTargets = possibleTargets;
-        this.selectedTargets = selectedTargets;
-        this.possibleCharacter = possibleCharacter;
-        this.choosenCharacter = choosenCharacter;
+    public PlayerView(Player player) {
+        this.playerCopy = player;
     }
 
     public Player getPlayerCopy() {
@@ -40,7 +40,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
     public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
         message.handleMessage(this);
-        //TODO Forward message to client -Call server.update(message)
+        networkHandler.update(null, message);
     }
 
     public Character getChoosenCharacter() {
@@ -70,5 +70,10 @@ public class PlayerView extends View /*View implement observer/observable*/{
 
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
+    }
+
+    //To use for riconnection
+    public void setNetworkHandler(Server networkHandler) {
+        this.networkHandler = networkHandler;
     }
 }

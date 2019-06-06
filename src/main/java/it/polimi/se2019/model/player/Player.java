@@ -73,6 +73,19 @@ public class Player extends Observable implements Target, Serializable {
         this.ID = ID;
     }
 
+    public Player(String nickname, int ID) {
+        this.nickname = nickname;
+        this.ID = ID;
+        this.damage = new ArrayList<Player>();  //empty
+        this.skull = STARTING_SKULLS;
+        this.points = new Points(STARTING_POINTS);
+        this.mark = new Mark();
+        this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
+        this.tempAmmo = new AmmoBag(0,0,0);
+        this.powerupCardList = new ArrayList<>();
+        this.weaponCardList = new ArrayList<>();
+    }
+
     /**
      *
      * @return ID of player

@@ -23,6 +23,7 @@ import java.util.Collections;
 
 public class GameHandler extends java.util.Observable {
 
+    private int matchID;
     private AmmoDeck ammoDeck;
     private PowerupDeck powerupDeck;
     private WeaponDeck weaponDeck;
@@ -49,11 +50,16 @@ public class GameHandler extends java.util.Observable {
         //TODO Set modality to normal
     }
 
+    public GameHandler(int matchID) {
+        this.weaponDeck = new WeaponDeck();
+        this.powerupDeck = new PowerupDeck();
+        this.ammoDeck = new AmmoDeck(powerupDeck);
+        this.matchID = matchID;
+    }
+
     /**
-     * controlls if the game is finished
-     *
-     * @return 1 if the game is finished
-     * 0 if not
+     * Controls if the game is finished
+     * @return True if the game is finished, false if not
      */
     public boolean isFinished() {
 
@@ -413,6 +419,15 @@ public class GameHandler extends java.util.Observable {
             if(p.equals(pw.getPlayerCopy())) return pw;
         }
         throw new IllegalArgumentException("There is no player view linked to " + p.toString());
+    }
+
+    /**
+     * Check if the match id of this game handler is equals to the param
+     * @param matchID id to check
+     * @return true if they are equals, false other way
+     */
+    public boolean checkMatchID(int matchID) {
+        return matchID == this.matchID;
     }
 }
 

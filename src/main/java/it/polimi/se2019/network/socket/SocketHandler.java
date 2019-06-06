@@ -1,8 +1,12 @@
 package it.polimi.se2019.network.socket;
 
+import it.polimi.se2019.network.AlreadyNicknameException;
+import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
+import it.polimi.se2019.view.configureMessage.InvalidLoginMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.io.IOException;
@@ -15,7 +19,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketHandler implements Server {
+public class SocketHandler implements Server, SwitchServerMessage {
     private Socket socket;
     private SocketServer server;
     private ObjectOutputStream printSocket;
@@ -43,8 +47,9 @@ public class SocketHandler implements Server {
                 try {
                     while(open) {
                         //Receive message
-                        Object message = scannerSocket.readObject();
-                        view.notifyObservers(/*ViewControllerMessage*/ message);
+                        HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
+                        message.handleMessage(this);
+                        //TODO view.notifyObservers(/*ViewControllerMessage*/ message);
                     }
                 } catch (IOException | ClassNotFoundException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
@@ -93,8 +98,14 @@ public class SocketHandler implements Server {
      * Forward a message from model to the client thought socket connection
      * @param message message to send
      */
+
+    //CANCELLIAMO????
     @Override
     public void send(ModelViewMessage message) {
+       send((Object) message);
+    }
+
+    private void send(Object message) {
         try {
             printSocket.writeObject(message);
             printSocket.flush();
@@ -136,6 +147,16 @@ public class SocketHandler implements Server {
      */
     @Override
     public void update(Observable o, Object arg) {
-        send((ModelViewMessage) arg);
+        send(arg);
+    }
+
+    @Override
+    public void forwardConfigMessage(HandlerServerMessage message) {
+        server.waitingRoom.receiveMessage((HandlerConfigMessage) message, this);
+    }
+
+    @Override
+    public void forwardViewMessage(HandlerServerMessage message) {
+
     }
 }
