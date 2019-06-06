@@ -37,6 +37,10 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     protected static final String NO_TARGET = "No target available";
 
+    public GameHandler getGameHandler() {
+        //TODO Eliminala, serve SOLO PER TESTING
+        return gameHandler;
+    }
 
     /**
      * Create a deep copy of cost
@@ -214,7 +218,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
             if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)
-                    && (!alreadySelected.contains(playerOfGame))){
+                    && (alreadySelected == null || !alreadySelected.contains(playerOfGame))){
 
                 listTarget.add(playerOfGame);
 

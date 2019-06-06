@@ -63,4 +63,9 @@ public class AmmoBag implements Serializable {
 
         return new AmmoBag(newRed, newYellow, newBlue);
     }
+
+    @Override
+    public String toString() {
+        return "red: "+ this.redAmmo +" yellow: "+ this.yellowAmmo + " blue: " + this.blueAmmo;
+    }
 }

@@ -23,8 +23,8 @@ public abstract class Action implements AddActionMethods {
     public Action(GameHandler gameHandler, Controller controller) {
         this.gameHandler = gameHandler;
         this.controller = controller;
-        this.playerAuthor = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
-        this.playerView = controller.getLastReceivedMessage().getAuthorView();
+        this.playerAuthor = controller.getAuthor();
+        this.playerView = controller.getPlayerView();
     }
 
     public void executeAction() throws WrongInputException{

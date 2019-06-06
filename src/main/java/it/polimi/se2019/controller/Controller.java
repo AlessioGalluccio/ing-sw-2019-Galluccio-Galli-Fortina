@@ -23,6 +23,7 @@ public class Controller implements Observer {
     private PlayerView playerView; //TODO aggiungere al costruttore
     private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<StringAndMessage> messageListExpected;
+    private Player playerAuthor;
     private int indexExpected = 0;
     private final GameHandler gameHandler;
     private StateController state;
@@ -36,6 +37,27 @@ public class Controller implements Observer {
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
         this.state = new NotYourTurnState(this, gameHandler);
+    }
+
+    /**
+     * set the author of the messages received
+     * @param author the Player author
+     */
+    public void setAuthor(Player author){
+        //TODO fai in modo che Controller lo setti davvero!
+        this.playerAuthor = author;
+    }
+
+    /**
+     * returns the author of the messages
+     * @return the Player author
+     */
+    public Player getAuthor(){
+        return this.playerAuthor;
+    }
+
+    public void setPlayerView(PlayerView playerView) {
+        this.playerView = playerView;
     }
 
     public void addPlayerView(PlayerView playerView){

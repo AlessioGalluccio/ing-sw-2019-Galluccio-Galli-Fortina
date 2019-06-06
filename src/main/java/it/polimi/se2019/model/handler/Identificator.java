@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.deck.firemodes.*;
 
 public class Identificator {
@@ -32,6 +33,16 @@ public class Identificator {
     public static final int FIRST_OPTIONAL = 1;
     public static final int SECOND_OPTIONAL = 2;
     public static final int THIRD_OPTIONAL = 3;
+
+    /**
+     * use this method to controll if a weapon has a firemode. contains() gives errors
+     * @param weaponCard the weapon
+     * @param fireMode the firemode
+     * @return true if it contsins, false if not
+     */
+    public static boolean containsFiremode(WeaponCard weaponCard, FireMode fireMode){
+        return (fireMode.getID())/10 == weaponCard.getID();
+    }
 
     //list of ID of Firemodes
    /* public static final int CYBERBLADE_1 = 1;

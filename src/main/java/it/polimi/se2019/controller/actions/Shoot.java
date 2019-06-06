@@ -34,6 +34,12 @@ public class Shoot extends Action{
     public Shoot(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
         fireMode = null;
+        this.cost = new AmmoBag(0,0,0);
+        this.targetsOfTargetings = new ArrayList<>();
+        this.targets = new ArrayList<>();
+        this.cells = new ArrayList<>();
+        this.optionalSelected = new ArrayList<>();
+        this.targetingScopeCards = new ArrayList<>();
     }
 
     @Override
@@ -94,9 +100,11 @@ public class Shoot extends Action{
         //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
+
+
         AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
         if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
-            if(weapon.getFireMode().contains(fireModeSelected)){
+            if(Identificator.containsFiremode(weapon, fireModeSelected)){
                 this.fireMode = fireModeSelected;
                 this.cost = newCost;
                 //adding expected messeages of firemode
@@ -142,6 +150,15 @@ public class Shoot extends Action{
     @Override
     public void addNope() throws WrongInputException {
         //TODO
+    }
+
+    public void fire() throws WrongInputException{
+        if(fireMode != null){
+            fireMode.fire();
+        }
+        else {
+            throw new WrongInputException();
+        }
     }
 
     //METHODS ONLY FOR FIREMODES
