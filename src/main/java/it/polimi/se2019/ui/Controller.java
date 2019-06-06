@@ -284,7 +284,7 @@ public class Controller {
 
         if(rbmap1.isSelected()){
 
-            choosenMap = 4;
+            choosenMap = 1;
             System.out.println(choosenMap);
             // get a handle to the stage
             Stage stage = (Stage) rbmap1.getScene().getWindow();
@@ -491,7 +491,7 @@ public class Controller {
         blueWeapon3.setGraphic(imBlueWeapon3);
         blueWeapon3.setStyle("-fx-background-color: transparent;");
 
-        yellowWeapon1.setGraphic(yellowWeapon1);
+        yellowWeapon1.setGraphic(imYellowWeapon1);
         yellowWeapon1.setStyle("-fx-background-color: transparent;");
 
         yellowWeapon2.setGraphic(imYellowWeapon2);

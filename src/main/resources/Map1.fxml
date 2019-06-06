@@ -100,7 +100,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="543.0">
                      <children>
-                        <Button fx:id="enemyCharacter1" layoutX="92.0" layoutY="27.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="439.0" />
+                        <Button fx:id="enemyCharacter1" layoutX="84.0" layoutY="32.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="439.0" />
                         <ImageView fx:id="enemy1card1" fitHeight="150.0" fitWidth="112.0" layoutX="61.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@emptyWeapon.jpg" />
@@ -149,7 +149,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="enemyCharacter2" layoutX="92.0" layoutY="27.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
+                        <Button fx:id="enemyCharacter2" layoutX="82.0" layoutY="30.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
                         <ImageView fx:id="enemy2card1" fitHeight="150.0" fitWidth="112.0" layoutX="61.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@emptyWeapon.jpg" />
@@ -167,7 +167,7 @@
                            <image>
                               <Image url="@characters/actionsGreen.jpg" />
                            </image></ImageView>
-                        <ImageView fx:id="imEnemyCharacter2" fitHeight="120.0" fitWidth="442.0" layoutX="90.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imEnemyCharacter2" fitHeight="120.0" fitWidth="442.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@characters/characterGreen.jpg" />
                            </image></ImageView>
@@ -198,7 +198,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="enemyCharacter3" layoutX="92.0" layoutY="27.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
+                        <Button fx:id="enemyCharacter3" layoutX="82.0" layoutY="30.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
                         <ImageView fx:id="enemy3card1" fitHeight="150.0" fitWidth="112.0" layoutX="61.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@emptyWeapon.jpg" />
@@ -279,7 +279,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="enemyCharacter4" layoutX="92.0" layoutY="27.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
+                        <Button fx:id="enemyCharacter4" layoutX="82.0" layoutY="30.0" mnemonicParsing="false" prefHeight="138.0" prefWidth="437.0" />
                         <ImageView fx:id="enemy4card1" fitHeight="150.0" fitWidth="112.0" layoutX="61.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@emptyWeapon.jpg" />
@@ -297,7 +297,7 @@
                            <image>
                               <Image url="@characters/actionsViolet.jpg" />
                            </image></ImageView>
-                        <ImageView fx:id="imEnemyCharacter4" fitHeight="120.0" fitWidth="437.0" layoutX="91.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imEnemyCharacter4" fitHeight="120.0" fitWidth="437.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@characters/characterViolet.jpg" />
                            </image></ImageView>
