@@ -2,6 +2,11 @@ package it.polimi.se2019.ui;
 
 
 
+
+import it.polimi.se2019.MyThread;
+import javafx.application.Platform;
+import javafx.beans.property.StringProperty;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +17,21 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.ImagePattern;
+
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 
 
 
 public class Controller {
+
+
+    MyThread myThread;
+
     @FXML
     public Label mylabel;
     @FXML
@@ -236,6 +250,24 @@ public class Controller {
     public Button blueWeapon3;
     @FXML
     public Button redWeapon1;
+    public ImageView enemy1Damage0;
+    public ImageView enemy1Damage1;
+    public ImageView enemy1Damage2;
+    public ImageView enemy1Damage3;
+    public ImageView enemy1Damage4;
+    public ImageView enemy1Damage5;
+    public ImageView enemy1Damage6;
+    public ImageView enemy1Damage7;
+    public ImageView enemy1Damage8;
+    public ImageView enemy1Damage9;
+    public ImageView enemy1Damage10;
+    public ImageView enemy1Damage11;
+    public ImageView enemy2Damage0;
+    public ImageView enemy2Damage1;
+    public ImageView enemy2Damage2;
+    public ImageView enemy2Damage3;
+    @FXML
+    public Label labelProva;
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -247,7 +279,7 @@ public class Controller {
     @FXML
     private TextField username;
 
-    public void login(ActionEvent event) throws Exception{
+    public void login(ActionEvent event) throws Exception, InterruptedException{
         if(username.getText().equals("user")){
             status.setText("Login Success");
 
@@ -334,10 +366,14 @@ public class Controller {
 
 
 
+
+
+
+
     }
 
 
-    public void showMap(ActionEvent event) {
+    public void showMap(ActionEvent event) throws InterruptedException{
 
         System.out.println(choosenMap);
 
@@ -471,6 +507,7 @@ public class Controller {
         enemyCharacter4.setStyle("-fx-background-color: transparent;");
 
 
+
         //set Weapons
 
         redWeapon1.setGraphic(imRedWeapon1);
@@ -512,8 +549,31 @@ public class Controller {
         possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
         yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
 
+        labelProva.setText("ciao");
+
+
+
+        myThread = new MyThread(this);
+        myThread.start();
 
 
 
     }
+
+
+    public void printf(String string){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                labelProva.setText(string);
+            }
+        });
+
+    }
+
+
+
+
+
+
 }
