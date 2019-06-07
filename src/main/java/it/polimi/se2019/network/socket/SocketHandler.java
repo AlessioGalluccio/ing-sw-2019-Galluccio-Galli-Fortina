@@ -1,12 +1,10 @@
 package it.polimi.se2019.network.socket;
 
-import it.polimi.se2019.network.AlreadyNicknameException;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
 import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
-import it.polimi.se2019.view.configureMessage.InvalidLoginMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.io.IOException;

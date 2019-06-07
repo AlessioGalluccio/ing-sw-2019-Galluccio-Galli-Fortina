@@ -4,8 +4,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
-import it.polimi.se2019.view.configureMessage.InvalidLoginMessage;
-import it.polimi.se2019.view.configureMessage.SuccessfulLogin;
+import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.configureMessage.isFirstMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -34,7 +33,7 @@ public class WaitingRoom {
      */
     public static WaitingRoom create(int duration) {
         if(duration <= 0) throw new IllegalArgumentException();
-        if(instance==null) new WaitingRoom(duration);
+        if(instance==null) instance = new WaitingRoom(duration);
         return instance;
     }
 
@@ -45,7 +44,7 @@ public class WaitingRoom {
     public void handleLoginMessage(String nickname, int matchID, Server networkHandler){
         try {
             if(checkNickname(nickname, matchID)) initializePlayer(nickname, networkHandler);
-            else networkHandler.update(null, new InvalidLoginMessage());
+            else if(networkHandler!=null) networkHandler.update(null, new StatusLoginMessage(false));
         } catch (DisconnectedException e) {
             reconnectPlayer(e.gameHandler, e.nickname);
         }
@@ -57,9 +56,13 @@ public class WaitingRoom {
      * @return true if is unique, false other way
      */
     private synchronized boolean checkNickname(String nickname, int matchID) throws DisconnectedException {
+        for(WaintingPlayer wp : playerWaiting) {
+            if(wp.getPlayer().getNickname().equals(nickname)) return false;
+        }
         for(GameHandler gm : macthes) {
             for(Player p : gm.getOrderPlayerList()) {
                 if(p.getNickname().equals(nickname)) {
+                    //TODO handle disconnection
                     if(gm.checkMatchID(matchID)/*&&gm.isDisconnected()*/) throw new DisconnectedException();
                     return false;
                 }
@@ -80,8 +83,10 @@ public class WaitingRoom {
             if(playerWaiting.size() == 5) startMatch();
         }
 
-        if(isFirst) networkHandler.update(null, new isFirstMessage());
-        else networkHandler.update(null, new SuccessfulLogin());
+        if(networkHandler!=null) {
+            if(isFirst) networkHandler.update(null, new isFirstMessage());
+            else networkHandler.update(null, new StatusLoginMessage(true));
+        }
     }
 
     /**
@@ -98,7 +103,15 @@ public class WaitingRoom {
     }
 
     private void startMatch() {
+
+
+        for(WaintingPlayer wp : playerWaiting) {
+            macthes.get(macthes.size() - 1).setUp(wp.getPlayer());
+        }
+
+        playerWaiting.clear();
         isFirst = true;
+        macthes.add(new GameHandler(matchID++));
 
         //Do lock on playerWaiting
     }
@@ -112,7 +125,11 @@ public class WaitingRoom {
 
         //Last row
         isFirst = false;
-        //networkHandler.update(null, new SuccessfulLogin());
+        //networkHandler.update(null, new StatusLogin(true));
+    }
+
+    public List<WaintingPlayer> getPlayerWaiting() {
+        return new LinkedList<>(playerWaiting);
     }
 
 

@@ -28,8 +28,8 @@ public class GameHandler extends java.util.Observable {
     private PowerupDeck powerupDeck;
     private WeaponDeck weaponDeck;
     private Map map;
-    private ArrayList<Player> orderPlayerList;
-    private ArrayList<PlayerView> playerViews;
+    private ArrayList<Player> orderPlayerList = new ArrayList<>();
+    private ArrayList<PlayerView> playerViews = new ArrayList<>();
     private int turn;
     private ArrayList<Death> arrayDeath = new ArrayList<>();
     private Stack<Player> justDied = new Stack<>();
@@ -428,6 +428,12 @@ public class GameHandler extends java.util.Observable {
      */
     public boolean checkMatchID(int matchID) {
         return matchID == this.matchID;
+    }
+
+    public void setUp(Player p) {
+        if(orderPlayerList.size()<=5) {
+            orderPlayerList.add(p);
+        }
     }
 }
 
