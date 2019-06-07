@@ -18,7 +18,7 @@ public class TestCell {
 
     @Before
     public void setUp() {
-        Map map = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        Map map = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
         map.reloadAllCell();
         cellAmmo = map.getCellByCoo(1,1);
         cellSpawn = (CellSpawn) map.getCellByCoo(0,1);

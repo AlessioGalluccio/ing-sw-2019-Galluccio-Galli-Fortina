@@ -120,17 +120,16 @@ public class WaitingRoom {
 
     }
 
-    public void handleChooseParamMessage() {
+    public List<WaintingPlayer> getPlayerWaiting() {
+        return new LinkedList<>(playerWaiting);
+    }
+
+
+    public void handleSettingMessage(int map, int skulls, boolean suddendDeacth, Server sender) {
 
 
         //Last row
         isFirst = false;
         //networkHandler.update(null, new StatusLogin(true));
     }
-
-    public List<WaintingPlayer> getPlayerWaiting() {
-        return new LinkedList<>(playerWaiting);
-    }
-
-
 }

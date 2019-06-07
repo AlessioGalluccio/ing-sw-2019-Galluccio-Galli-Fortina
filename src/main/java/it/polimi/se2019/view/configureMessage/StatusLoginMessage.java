@@ -1,6 +1,6 @@
 package it.polimi.se2019.view.configureMessage;
 
-public class StatusLoginMessage {
+public class StatusLoginMessage  {
     private boolean status;
 
     public StatusLoginMessage(boolean status) {

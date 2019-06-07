@@ -290,7 +290,7 @@ public class Controller {
 
             //apriamo così una seconda casella dopo il login
             /*
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map4.fxml"));
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Mappa1");
             primaryStage.setScene(new Scene(root, 800, 600));
@@ -355,9 +355,9 @@ public class Controller {
 
 
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map1.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map4.fxml"));
         Stage primaryStage = new Stage();
-        primaryStage.setTitle("Map1");
+        primaryStage.setTitle("Map4");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
 
