@@ -6,9 +6,8 @@ import it.polimi.se2019.model.deck.WeaponDeck;
 import java.util.ArrayList;
 
 public class Map2 extends Map {
-//Map 2
 
-    Map2(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
+    public Map2(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
         /*
         The first instruction of this constructor MUST be super()
         So we can't generate the cell[][] matrix and pass it to super() but we have to recall a static method inside super()

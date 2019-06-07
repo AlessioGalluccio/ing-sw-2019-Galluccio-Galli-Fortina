@@ -4,7 +4,7 @@ import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
 
 import java.util.ArrayList;
-//Map3
+
 public class Map4 extends Map {
 
     public Map4(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {

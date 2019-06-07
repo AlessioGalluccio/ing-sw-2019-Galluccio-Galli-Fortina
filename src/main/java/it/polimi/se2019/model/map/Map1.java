@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Map1 extends Map {
 
-    Map1(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
+    public Map1(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
         /*
         The first instruction of this constructor MUST be super()
         So we can't generate the cell[][] matrix and pass it to super() but we have to recall a static method inside super()

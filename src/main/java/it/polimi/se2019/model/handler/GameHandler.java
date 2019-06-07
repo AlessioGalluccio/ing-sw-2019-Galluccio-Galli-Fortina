@@ -5,9 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.map.Room;
+import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
@@ -434,6 +432,32 @@ public class GameHandler extends java.util.Observable {
         if(orderPlayerList.size()<=5) {
             orderPlayerList.add(p);
         }
+    }
+
+    public void setMap(int map) {
+        switch (map) {
+            case 1:
+                this.map = new Map1(weaponDeck, ammoDeck);
+                break;
+            case 2:
+                this.map = new Map2(weaponDeck, ammoDeck);
+                break;
+            case 3:
+                this.map = new Map3(weaponDeck, ammoDeck);
+                break;
+            case 4:
+                this.map = new Map4(weaponDeck, ammoDeck);
+                break;
+            default: throw new IllegalArgumentException();
+        }
+    }
+
+    public void setSkull(int skulls) {
+        this.skull = skulls;
+    }
+
+    public void setSuddenDeath(boolean suddendDeath) {
+        this.isSuddenDeath = suddendDeath;
     }
 }
 

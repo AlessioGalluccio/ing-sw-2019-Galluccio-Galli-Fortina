@@ -8,8 +8,10 @@ import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.configureMessage.isFirstMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+import java.util.Timer;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.TimerTask;
 
 public class WaitingRoom {
     private static int matchID = 100;
@@ -19,9 +21,10 @@ public class WaitingRoom {
     private List<WaintingPlayer> playerWaiting = new LinkedList<>();
     private int playerID = 0;
     private boolean isFirst = true;
+    private Timer timer;
 
     private WaitingRoom(int duration) {
-        this.duration = duration;
+        this.duration = duration*1000;
         macthes.add(new GameHandler(matchID++));
     }
 
@@ -37,10 +40,25 @@ public class WaitingRoom {
         return instance;
     }
 
+    List<WaintingPlayer> getPlayerWaiting() {
+        return new LinkedList<>(playerWaiting);
+    }
+
+    /**
+     * Receive a message from the player's server
+     * @param message the message
+     * @param sender the sender
+     */
     public void receiveMessage(HandlerConfigMessage message, Server sender) {
         message.handleMessage(this, sender);
     }
 
+    /**
+     * Register a new user to the match
+     * @param nickname the nickname chosen
+     * @param matchID the match's id the user want to join
+     * @param networkHandler the sender of the request
+     */
     public void handleLoginMessage(String nickname, int matchID, Server networkHandler){
         try {
             if(checkNickname(nickname, matchID)) initializePlayer(nickname, networkHandler);
@@ -99,11 +117,18 @@ public class WaitingRoom {
     }
 
     private void setTimer() {
-
+        if(timer==null) timer = new Timer();
+        else timer.cancel();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(playerWaiting.size()>=3) startMatch();
+                timer=null;
+            }
+        }, duration);
     }
 
     private void startMatch() {
-
 
         for(WaintingPlayer wp : playerWaiting) {
             macthes.get(macthes.size() - 1).setUp(wp.getPlayer());
@@ -120,16 +145,24 @@ public class WaitingRoom {
 
     }
 
-    public List<WaintingPlayer> getPlayerWaiting() {
-        return new LinkedList<>(playerWaiting);
-    }
 
+    /**
+     * Set the parameter of the player
+     * If two player have access to this method, only the first one is served
+     * @param map the number of the map chosen
+     * @param skulls the number of skull of the game
+     * @param suddenDeath if the player want play with the sudden death modality
+     * @param sender who has send the setting
+     */
+    public synchronized void handleSettingMessage(int map, int skulls, boolean suddenDeath, Server sender) {
+        if(isFirst) {
+            GameHandler gm = macthes.get(macthes.size() - 1);
+            gm.setMap(map);
+            gm.setSkull(skulls);
+            gm.setSuddenDeath(suddenDeath);
 
-    public void handleSettingMessage(int map, int skulls, boolean suddendDeacth, Server sender) {
-
-
-        //Last row
-        isFirst = false;
-        //networkHandler.update(null, new StatusLogin(true));
+            isFirst = false;
+        }
+        if(sender!=null) sender.update(null, new StatusLoginMessage(true));
     }
 }

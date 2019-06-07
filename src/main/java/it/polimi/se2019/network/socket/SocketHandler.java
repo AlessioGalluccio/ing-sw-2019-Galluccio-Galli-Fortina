@@ -22,7 +22,7 @@ public class SocketHandler implements Server, SwitchServerMessage {
     private SocketServer server;
     private ObjectOutputStream printSocket;
     private ObjectInputStream scannerSocket;
-    private Timer timer = new Timer();;
+    private Timer timer = new Timer();
     private int duration;
     private boolean open = true;
     private PlayerView view;
@@ -30,7 +30,7 @@ public class SocketHandler implements Server, SwitchServerMessage {
     SocketHandler(Socket socket, SocketServer server) {
         this.socket = socket;
         this.server = server;
-        //TODO read duration from config file
+        //TODO read duration from config file MOLTIPLICARE PER 1000!
     }
 
     /**
@@ -118,6 +118,8 @@ public class SocketHandler implements Server, SwitchServerMessage {
      */
     @Override
     public void setTimer() {
+        if(timer==null) timer = new Timer();
+        else timer.cancel();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -136,6 +138,7 @@ public class SocketHandler implements Server, SwitchServerMessage {
     @Override
     public void cancelTimer() {
         timer.cancel();
+        timer = null;
     }
 
     /**
