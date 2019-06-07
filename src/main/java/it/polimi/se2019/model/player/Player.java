@@ -39,9 +39,9 @@ public class Player extends Observable implements Target, Serializable {
     private AmmoBag ammoBag;
     private transient AmmoBag tempAmmo;   //used for discarded cards
     @SkinnyObject
-    private ArrayList<PowerupCard> powerupCardList;
+    private List<PowerupCard> powerupCardList = new ArrayList<>();
     @SkinnyObject
-    private ArrayList<WeaponCard> weaponCardList;
+    private List<WeaponCard> weaponCardList = new ArrayList<>();
     private transient Cell cellPosition;
     private boolean isFrenzyDeath = false;
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
@@ -61,15 +61,13 @@ public class Player extends Observable implements Target, Serializable {
 
     public Player(String nickname, Character character, int ID) {
         this.nickname = nickname;
-        this.damage = new ArrayList<Player>();  //empty
+        this.damage = new ArrayList<>();  //empty
         this.skull = STARTING_SKULLS;
         this.points = new Points(STARTING_POINTS);
         this.mark = new Mark();
         this.character = character;
         this.ammoBag = new AmmoBag(NUM_START_RED, NUM_START_YELLOW, NUM_START_BLUE);
         this.tempAmmo = new AmmoBag(0,0,0);
-        this.powerupCardList = new ArrayList<>();
-        this.weaponCardList = new ArrayList<>();
         this.ID = ID;
     }
 

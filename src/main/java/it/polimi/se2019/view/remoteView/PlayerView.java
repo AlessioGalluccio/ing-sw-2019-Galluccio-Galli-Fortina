@@ -6,6 +6,8 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
+import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
+import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -20,8 +22,9 @@ public class PlayerView extends View /*View implement observer/observable*/{
     private Character choosenCharacter;
     private Server networkHandler;
 
-    public PlayerView(Server networkHandler) {
+    public PlayerView(Server networkHandler, Player clone) {
         this.networkHandler = networkHandler;
+        this.playerCopy = clone;
     }
 
     public PlayerView(Player player) {
@@ -57,6 +60,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
 
     public void setPossibleTargets(ArrayList<? extends Target> targets){
         this.possibleTargets = targets;
+        networkHandler.update(null, new PossibleTargetMessage(targets));
     }
 
     public void send (ViewControllerMessage message){
@@ -65,15 +69,19 @@ public class PlayerView extends View /*View implement observer/observable*/{
 
     @Override
     public void printFromController(String string) {
-
+        networkHandler.send(string);
     }
 
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
     }
 
-    //To use for riconnection
+    //To use for reconnection
     public void setNetworkHandler(Server networkHandler) {
         this.networkHandler = networkHandler;
+    }
+
+    public void handleStartGameMessage(StartGameMessage startGameMessage) {
+        networkHandler.update(null, startGameMessage);
     }
 }

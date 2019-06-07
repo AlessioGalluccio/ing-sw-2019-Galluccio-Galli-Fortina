@@ -16,10 +16,10 @@ public class EnemyView extends Observable implements Observer, Serializable {
     private String nickname;
     private Character character;
     private AmmoBag ammo;
-    private ArrayList<WeaponCard> unloadedWeapon;
+    private ArrayList<WeaponCard> unloadedWeapon = new ArrayList<>();
     private int loadedWeapon;
     private int skull;
-    private ArrayList<Player> damage;
+    private ArrayList<Player> damage = new ArrayList<>();
     private int powerup;
     private boolean first = true;
 

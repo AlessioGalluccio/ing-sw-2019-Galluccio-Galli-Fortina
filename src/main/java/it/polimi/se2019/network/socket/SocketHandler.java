@@ -84,6 +84,7 @@ public class SocketHandler implements Server, SwitchServerMessage {
      */
     @Override
     public void send(String string) {
+        //TODO rifare con un messaggio opportuno
         try {
             printSocket.writeObject(string);
             printSocket.flush();

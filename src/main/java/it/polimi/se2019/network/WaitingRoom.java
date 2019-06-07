@@ -93,20 +93,27 @@ public class WaitingRoom {
     }
 
     private void initializePlayer(String nickname, Server networkHandler) {
-        PlayerView playerView = new PlayerView(networkHandler);
         Player player = new Player(nickname, playerID++);
+        PlayerView playerView = new PlayerView(networkHandler, player.clone());
         player.attach(playerView);
         Controller controller = new Controller(macthes.get(macthes.size()-1));
         playerView.attach(controller);
 
-        synchronized(playerWaiting) {
+        synchronized(this) {
+            while(playerWaiting.size()==5) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();  //Does it work??
+                }
+            }
             playerWaiting.add(new WaitingPlayer(player, playerView, controller, networkHandler, new EnemyView(nickname)));
             if(playerWaiting.size() == 3) setTimer();
             if(playerWaiting.size() == 5) startMatch();
-        }
 
-        if(isFirst) networkHandler.update(null, new isFirstMessage());
-        else networkHandler.update(null, new StatusLoginMessage(true));
+            if(isFirst) networkHandler.update(null, new isFirstMessage());
+            else networkHandler.update(null, new StatusLoginMessage(true));
+        }
     }
 
     /**
@@ -130,31 +137,38 @@ public class WaitingRoom {
         }, duration);
     }
 
-    private void startMatch() {
+    /**
+     * Create the remote view components and attach them to the server
+     * Set up the game handler
+     * In the end attach every observer to his observable
+     */
+    private synchronized void startMatch() {
+        GameHandler gm = macthes.get(macthes.size() - 1);
         //Create all views and attach networkHandler
         MapView mapView = new MapView();
         SkullBoardView skullBoardView = new SkullBoardView();
         List<EnemyView> enemyViews = new LinkedList<>();
-        for(WaitingPlayer wp : playerWaiting) {
+        for (WaitingPlayer wp : playerWaiting) {
             mapView.attach(wp.getNetworkHandler());
             skullBoardView.attach(wp.getNetworkHandler());
             enemyViews.add(wp.getEnemyView());
-            for(WaitingPlayer wp2 : playerWaiting) {
+            for (WaitingPlayer wp2 : playerWaiting) {
                 //Attach each enemy view at the network handler of the ENEMY (not at himself)
-                if(!wp.getEnemyView().getNickname().equals(wp2.getPlayer().getNickname())) {
+                if (!wp.getEnemyView().getNickname().equals(wp2.getPlayer().getNickname())) {
                     wp.getEnemyView().attach(wp2.getNetworkHandler());
                 }
             }
-            macthes.get(macthes.size() - 1).setUp(wp.getPlayer(), wp.getPlayerView());
-            macthes.get(macthes.size() - 1).attachAll(mapView, skullBoardView, enemyViews);
+            gm.setUp(wp.getPlayer(), wp.getPlayerView());
+            gm.attachAll(mapView, skullBoardView, enemyViews);
         }
 
-        //TODO NOTIFY PLAYERS MATCH IS STARTED!
+        gm.start();
         playerWaiting.clear();
+        notifyAll(); //Wake threads that are waiting the playerWaiting list is <5
         isFirst = true;
+        timer.cancel();
+        timer = null;
         macthes.add(new GameHandler(matchID++));
-
-        //Do lock on playerWaiting
     }
 
     public void handleDisconnectMessage() {
