@@ -65,7 +65,7 @@ public class WaitingRoom {
     public void handleLoginMessage(String nickname, int matchID, Server networkHandler){
         try {
             if(checkNickname(nickname, matchID)) initializePlayer(nickname, networkHandler);
-            else if(networkHandler!=null) networkHandler.update(null, new StatusLoginMessage(false));
+            else networkHandler.update(null, new StatusLoginMessage(false));
         } catch (DisconnectedException e) {
             reconnectPlayer(e.gameHandler, e.nickname);
         }
@@ -105,10 +105,8 @@ public class WaitingRoom {
             if(playerWaiting.size() == 5) startMatch();
         }
 
-        if(networkHandler!=null) {
-            if(isFirst) networkHandler.update(null, new isFirstMessage());
-            else networkHandler.update(null, new StatusLoginMessage(true));
-        }
+        if(isFirst) networkHandler.update(null, new isFirstMessage());
+        else networkHandler.update(null, new StatusLoginMessage(true));
     }
 
     /**
@@ -181,6 +179,6 @@ public class WaitingRoom {
 
             isFirst = false;
         }
-        if(sender!=null) sender.update(null, new StatusLoginMessage(true));
+        sender.update(null, new StatusLoginMessage(true));
     }
 }

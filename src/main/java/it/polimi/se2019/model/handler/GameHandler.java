@@ -420,7 +420,7 @@ public class GameHandler extends Observable {
         for(PlayerView pw : playerViews) {
             if(p.equals(pw.getPlayerCopy())) return pw;
         }
-        throw new IllegalArgumentException("There is no player view linked to " + p.toString());
+        throw new IllegalArgumentException("There is no PlayerView linked to " + p.toString());
     }
 
     /**
@@ -472,7 +472,9 @@ public class GameHandler extends Observable {
         attach(skullBoardView);
         //Player -> enemyView
         for(Player p : orderPlayerList) {
-            p.attach(getViewByPlayer(p));
+            for(PlayerView pv : playerViews) {
+                if (pv.getPlayerCopy().getNickname().equals(p.getNickname())) p.attach(pv);
+            }
             for(EnemyView ev : enemyViews) {
                 if(ev.getNickname().equals(p.getNickname())) p.attach(ev);
             }
