@@ -10,7 +10,10 @@ import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -428,9 +431,10 @@ public class GameHandler extends java.util.Observable {
         return matchID == this.matchID;
     }
 
-    public void setUp(Player p) {
+    public void setUp(Player p, PlayerView playerView) {
         if(orderPlayerList.size()<=5) {
             orderPlayerList.add(p);
+            playerViews.add(playerView);
         }
     }
 
@@ -458,6 +462,10 @@ public class GameHandler extends java.util.Observable {
 
     public void setSuddenDeath(boolean suddendDeath) {
         this.isSuddenDeath = suddendDeath;
+    }
+
+    public void attachAll(MapView mapView, SkullBoardView skullBoardView, List<EnemyView> enemyViews) {
+
     }
 }
 

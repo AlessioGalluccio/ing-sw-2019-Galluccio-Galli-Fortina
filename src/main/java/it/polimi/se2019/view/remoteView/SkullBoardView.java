@@ -13,11 +13,6 @@ public class SkullBoardView extends Observable implements Observer {
     private int numSkullCopy;
     private ArrayList<Death> deathCopy;
 
-    public SkullBoardView(int numSkullCopy, ArrayList<Death> deathCopy) {
-        this.numSkullCopy = numSkullCopy;
-        this.deathCopy = deathCopy;
-    }
-
     public ArrayList<Death> getDeathCopy() {
         return deathCopy;
     }

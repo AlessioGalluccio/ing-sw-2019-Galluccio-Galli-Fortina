@@ -6,7 +6,10 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
 import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.configureMessage.isFirstMessage;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.util.Timer;
 import java.util.List;
@@ -18,7 +21,7 @@ public class WaitingRoom {
     private static WaitingRoom instance = null;
     private static List<GameHandler> macthes = new LinkedList<>();
     private final int duration;
-    private List<WaintingPlayer> playerWaiting = new LinkedList<>();
+    private List<WaitingPlayer> playerWaiting = new LinkedList<>();
     private int playerID = 0;
     private boolean isFirst = true;
     private Timer timer;
@@ -40,7 +43,7 @@ public class WaitingRoom {
         return instance;
     }
 
-    List<WaintingPlayer> getPlayerWaiting() {
+    List<WaitingPlayer> getPlayerWaiting() {
         return new LinkedList<>(playerWaiting);
     }
 
@@ -74,7 +77,7 @@ public class WaitingRoom {
      * @return true if is unique, false other way
      */
     private synchronized boolean checkNickname(String nickname, int matchID) throws DisconnectedException {
-        for(WaintingPlayer wp : playerWaiting) {
+        for(WaitingPlayer wp : playerWaiting) {
             if(wp.getPlayer().getNickname().equals(nickname)) return false;
         }
         for(GameHandler gm : macthes) {
@@ -96,7 +99,7 @@ public class WaitingRoom {
         playerView.attach(controller);
 
         synchronized(playerWaiting) {
-            playerWaiting.add(new WaintingPlayer(player, playerView, controller));
+            playerWaiting.add(new WaitingPlayer(player, playerView, controller, networkHandler, new EnemyView(nickname)));
             if(playerWaiting.size() == 3) setTimer();
             if(playerWaiting.size() == 5) startMatch();
         }
@@ -129,11 +132,25 @@ public class WaitingRoom {
     }
 
     private void startMatch() {
-
-        for(WaintingPlayer wp : playerWaiting) {
-            macthes.get(macthes.size() - 1).setUp(wp.getPlayer());
+        //Create all views and attach networkHandler
+        MapView mapView = new MapView();
+        SkullBoardView skullBoardView = new SkullBoardView();
+        List<EnemyView> enemyViews = new LinkedList<>();
+        for(WaitingPlayer wp : playerWaiting) {
+            mapView.attach(wp.getNetworkHandler());
+            skullBoardView.attach(wp.getNetworkHandler());
+            enemyViews.add(wp.getEnemyView());
+            for(WaitingPlayer wp2 : playerWaiting) {
+                //Attach each enemy view at the network handler of the ENEMY (not at himself)
+                if(!wp.getEnemyView().getNickname().equals(wp2.getPlayer().getNickname())) {
+                    wp.getEnemyView().attach(wp2.getNetworkHandler());
+                }
+            }
+            macthes.get(macthes.size() - 1).setUp(wp.getPlayer(), wp.getPlayerView());
+            macthes.get(macthes.size() - 1).attachAll(mapView, skullBoardView, enemyViews);
         }
 
+        //TODO NOTIFY PLAYERS MATCH IS STARTED!
         playerWaiting.clear();
         isFirst = true;
         macthes.add(new GameHandler(matchID++));
