@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.view.remoteView.MapView;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -190,6 +191,14 @@ public abstract class Map implements Serializable {
         }.getType();
 
         return gson.fromJson(gson.toJson(this, TYPE), TYPE);
+    }
+
+    public void attach(MapView mapView) {
+        for(Cell[] c1 : cell) {
+            for(Cell c : c1) {
+                if(c!=null) c.attach(mapView);
+            }
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
@@ -22,7 +23,7 @@ import java.util.Stack;
 import java.util.HashMap;
 import java.util.Collections;
 
-public class GameHandler extends java.util.Observable {
+public class GameHandler extends Observable {
 
     private int matchID;
     private AmmoDeck ammoDeck;
@@ -36,7 +37,7 @@ public class GameHandler extends java.util.Observable {
     private Stack<Player> justDied = new Stack<>();
     private Modality modality;
     private int skull;
-    private boolean isSuddenDeath;
+    private boolean suddenDeath;
 
     //Implementato SOLO PER TESTING
     //TODO Da fare decenetemente
@@ -460,12 +461,22 @@ public class GameHandler extends java.util.Observable {
         this.skull = skulls;
     }
 
-    public void setSuddenDeath(boolean suddendDeath) {
-        this.isSuddenDeath = suddendDeath;
+    public void setSuddenDeath(boolean suddenDeath) {
+        this.suddenDeath = suddenDeath;
     }
 
     public void attachAll(MapView mapView, SkullBoardView skullBoardView, List<EnemyView> enemyViews) {
-
+        //Cell -> mapView
+        map.attach(mapView);
+        //GM -> skullBardView
+        attach(skullBoardView);
+        //Player -> enemyView
+        for(Player p : orderPlayerList) {
+            p.attach(getViewByPlayer(p));
+            for(EnemyView ev : enemyViews) {
+                if(ev.getNickname().equals(p.getNickname())) p.attach(ev);
+            }
+        }
     }
 }
 

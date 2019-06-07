@@ -95,6 +95,7 @@ public class WaitingRoom {
     private void initializePlayer(String nickname, Server networkHandler) {
         PlayerView playerView = new PlayerView(networkHandler);
         Player player = new Player(nickname, playerID++);
+        player.attach(playerView);
         Controller controller = new Controller(macthes.get(macthes.size()-1));
         playerView.attach(controller);
 
