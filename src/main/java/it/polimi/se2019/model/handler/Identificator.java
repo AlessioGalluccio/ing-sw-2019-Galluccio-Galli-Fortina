@@ -64,13 +64,6 @@ public class Identificator {
 
  /*   public static FireMode getFiremodeByID(int id){
         switch(id){
-            case CYBERBLADE_1 : return new CyberBlade_1();
-            case CYBERBLADE_2 : return new CyberBlade_2();
-            case CYBERBLADE_3 : return new CyberBlade_3();
-            case ELECTROSCYTHE_1 : return new ElectroScythe_1();
-            case ELECTROSCYTHE_2: return new ElectroScythe_2();
-            case FLAMETHROWER_1 : return new FlameThrower_1();
-            case FLAMETHROWER_2: return new FlameThrower_2();
 
             default: throw new WrongIdRuntimeException(); //should not happen. Runtime Exception
         }
