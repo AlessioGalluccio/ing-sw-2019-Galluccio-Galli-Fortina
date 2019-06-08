@@ -69,4 +69,9 @@ public class ShootFrenzy extends Shoot {
     public void addNope() throws WrongInputException {
         super.addNope();
     }
+
+    @Override
+    public void fire() throws WrongInputException {
+        super.fire();
+    }
 }

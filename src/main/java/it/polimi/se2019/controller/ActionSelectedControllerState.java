@@ -198,7 +198,11 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleFire() {
-        //TODO
+        try {
+            action.fire();
+        }catch(WrongInputException e){
+            //TODO
+        }
     }
 
     @Override

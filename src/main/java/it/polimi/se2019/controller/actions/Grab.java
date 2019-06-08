@@ -113,4 +113,9 @@ public class Grab extends Action{
     public void addNope() throws WrongInputException {
         throw new WrongInputException();
     }
+
+    @Override
+    public void fire() throws WrongInputException {
+        throw new WrongInputException();
+    }
 }

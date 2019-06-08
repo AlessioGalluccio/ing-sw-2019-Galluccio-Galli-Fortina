@@ -237,4 +237,6 @@ public class Shoot extends Action{
     public void payActionCost() throws NotEnoughAmmoException{
         playerAuthor.payAmmoCost(this.cost);
     }
+
+
 }
