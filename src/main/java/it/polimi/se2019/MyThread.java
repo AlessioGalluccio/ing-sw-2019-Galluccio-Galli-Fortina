@@ -20,6 +20,7 @@ public class MyThread extends Thread {
 
                 //System.out.println("qualcosa");
                 controller.printf(scanner.nextLine());
+
             } catch(Exception e) {
             }
         }

@@ -5,7 +5,7 @@ package it.polimi.se2019.ui;
 
 import it.polimi.se2019.MyThread;
 import javafx.application.Platform;
-import javafx.beans.property.StringProperty;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,16 +20,30 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 
 
 
 public class Controller {
 
+    @FXML
+    public Button moveButton;
+    @FXML
+    public Button grabButton;
+    @FXML
+    public Button shootButton;
+    public Button addFire1;
+    public Button addFire2;
+    public Button addFire3;
+    public RadioButton firemode1;
+    public RadioButton firemode2;
+    public RadioButton firemodeOp1;
+    public RadioButton firemodeOp2;
+    public RadioButton firemodeOp3;
+    public ToggleGroup AddFiremode;
 
+
+    @FXML
     MyThread myThread;
 
     @FXML
@@ -266,8 +280,13 @@ public class Controller {
     public ImageView enemy2Damage1;
     public ImageView enemy2Damage2;
     public ImageView enemy2Damage3;
+    public ImageView enemy2Damage4;
+    public ImageView enemy2Damage5;
+
     @FXML
     public Label labelProva;
+
+    String transparent = "-fx-background-color: transparent;";
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -375,6 +394,7 @@ public class Controller {
 
     public void showMap(ActionEvent event) throws InterruptedException{
 
+
         System.out.println(choosenMap);
 
         if (choosenMap == 2) {
@@ -415,34 +435,10 @@ public class Controller {
         showMap.setVisible(false);
 
         //set the buttons stile and images for powerup deck and weapon deck
-        impowerupDeck.setDisable(false);
-        impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
-        imweaponDeck.setDisable(false);
-        imweaponDeck.setImage(new Image("AD_weapons_IT_02.jpg"));
-        weaponDeck.setDisable(false);
-        weaponDeck.setGraphic(imweaponDeck);
-        weaponDeck.setStyle("-fx-background-color: transparent;");
-        powerupDeck.setGraphic(impowerupDeck);
-        powerupDeck.setDisable(false);
-        powerupDeck.setStyle("-fx-background-color: transparent;");
+        setDeck();
 
         //set the buttons stile and images for player's cards
-        bPowerupCard1.setGraphic(imPowerupCard1);
-        bPowerupCard1.setStyle("-fx-background-color: transparent;");
-        bPowerupCard2.setGraphic(imWeaponCard2);
-        bPowerupCard2.setStyle("-fx-background-color: transparent;");
-        imPowerupCard3.setImage(new Image("emptyPowerup.jpg"));
-        bPowerupCard3.setGraphic(imPowerupCard3);
-        bPowerupCard3.setStyle("-fx-background-color: transparent;");
-        imWeaponCard1.setImage(new Image("emptyWeapon.jpg"));
-        bWeaponCard1.setGraphic(imWeaponCard1);
-        bWeaponCard1.setStyle("-fx-background-color: transparent;");
-        imWeaponCard2.setImage(new Image("emptyWeapon.jpg"));
-        bWeaponCard2.setGraphic(imWeaponCard2);
-        bWeaponCard2.setStyle("-fx-background-color: transparent;");
-        imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
-        bWeaponCard3.setGraphic(imWeaponCard3);
-        bWeaponCard3.setStyle("-fx-background-color: transparent;");
+        setPlayerCards();
 
         //add background
 
@@ -459,87 +455,19 @@ public class Controller {
         */
 
         //set map's cells
-        cell00.setStyle("-fx-background-color: transparent;");
-        cell00.setGraphic(ammoCell00);
-        cell01.setStyle("-fx-background-color: transparent;");
-        cell01.setDisable(false);
-        cell02.setStyle("-fx-background-color: transparent;");
-        cell02.setGraphic(ammoCell02);
-        cell02.setDisable(false);
-        cell10.setStyle("-fx-background-color: transparent;");
-        cell10.setGraphic(ammoCell10);
-        cell10.setDisable(false);
-        cell11.setStyle("-fx-background-color: transparent;");
-        cell11.setGraphic(ammoCell11);
-        cell11.setDisable(false);
-        cell12.setStyle("-fx-background-color: transparent;");
-        cell12.setGraphic(ammoCell12);
-        cell12.setDisable(false);
-        cell20.setStyle("-fx-background-color: transparent;");
-        cell20.setGraphic(ammoCell20);
-        cell20.setDisable(false);
-        cell21.setStyle("-fx-background-color: transparent;");
-        cell21.setGraphic(ammoCell21);
-        cell21.setDisable(false);
-        cell22.setStyle("-fx-background-color: transparent;");
-        cell22.setDisable(false);
-        cell30.setStyle("-fx-background-color: transparent;");
-        cell30.setDisable(false);
-        cell31.setStyle("-fx-background-color: transparent;");
-        cell31.setGraphic(ammoCell31);
-        cell31.setDisable(false);
-        cell32.setStyle("-fx-background-color: transparent;");
-        cell32.setGraphic(ammoCell32);
-
+        setCellsMap();
 
         //set enemycharacter
-        //TODO cambiare dinamicamnete i personaggi
-        enemyCharacter1.setGraphic(imEnemyCharacter1);
-        enemyCharacter1.setStyle("-fx-background-color: transparent;");
 
-        enemyCharacter2.setGraphic(imEnemyCharacter2);
-        enemyCharacter2.setStyle("-fx-background-color: transparent;");
-
-        enemyCharacter3.setGraphic(imEnemyCharacter3);
-        enemyCharacter3.setStyle("-fx-background-color: transparent;");
-
-        enemyCharacter4.setGraphic(imEnemyCharacter4);
-        enemyCharacter4.setStyle("-fx-background-color: transparent;");
-
-
+        setEnemyCharacter();
 
         //set Weapons
 
-        redWeapon1.setGraphic(imRedWeapon1);
-        redWeapon1.setStyle("-fx-background-color: transparent;");
+        setWeaponMap();
 
-        redweapon2.setGraphic(imRedWeapon2);
-        redweapon2.setStyle("-fx-background-color: transparent;");
+        //set palyer's actions buttons
 
-        redWeapon3.setGraphic(imRedWeapon3);
-        redWeapon3.setStyle("-fx-background-color: transparent;");
-
-        blueWeapon1.setGraphic(imBlueWeapon1);
-        blueWeapon1.setStyle("-fx-background-color: transparent;");
-
-        blueWeapon2.setGraphic(imBlueWeapon2);
-        blueWeapon2.setStyle("-fx-background-color: transparent;");
-
-        blueWeapon3.setGraphic(imBlueWeapon3);
-        blueWeapon3.setStyle("-fx-background-color: transparent;");
-
-        yellowWeapon1.setGraphic(imYellowWeapon1);
-        yellowWeapon1.setStyle("-fx-background-color: transparent;");
-
-        yellowWeapon2.setGraphic(imYellowWeapon2);
-        yellowWeapon2.setStyle("-fx-background-color: transparent;");
-
-        yellowWeapon3.setGraphic(imYellowWeapon3);
-        yellowWeapon3.setStyle("-fx-background-color: transparent;");
-
-
-
-
+        setAction();
 
 
 
@@ -549,8 +477,7 @@ public class Controller {
         possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
         yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
 
-        labelProva.setText("ciao");
-
+        labelProva.setText("BENVENUTO");
 
 
         myThread = new MyThread(this);
@@ -572,8 +499,170 @@ public class Controller {
     }
 
 
+    /**
+     * set actions' buttons for the player
+     */
+    public void setAction(){
+
+        moveButton.setStyle(transparent);
+        grabButton.setStyle(transparent);
+        shootButton.setStyle(transparent);
 
 
+    }
 
 
+    /**
+     * set weapon cards buttons on the map
+     */
+    public void setWeaponMap(){
+
+        redWeapon1.setGraphic(imRedWeapon1);
+        redWeapon1.setStyle(transparent);
+
+        redweapon2.setGraphic(imRedWeapon2);
+        redweapon2.setStyle(transparent);
+
+        redWeapon3.setGraphic(imRedWeapon3);
+        redWeapon3.setStyle(transparent);
+
+        blueWeapon1.setGraphic(imBlueWeapon1);
+        blueWeapon1.setStyle(transparent);
+
+        blueWeapon2.setGraphic(imBlueWeapon2);
+        blueWeapon2.setStyle(transparent);
+
+        blueWeapon3.setGraphic(imBlueWeapon3);
+        blueWeapon3.setStyle(transparent);
+
+        yellowWeapon1.setGraphic(imYellowWeapon1);
+        yellowWeapon1.setStyle(transparent);
+
+        yellowWeapon2.setGraphic(imYellowWeapon2);
+        yellowWeapon2.setStyle(transparent);
+
+        yellowWeapon3.setGraphic(imYellowWeapon3);
+        yellowWeapon3.setStyle(transparent);
+
+
+    }
+
+    /**
+     * set map's cells
+     */
+    public void setCellsMap(){
+
+        cell00.setStyle(transparent);
+        cell00.setGraphic(ammoCell00);
+        cell01.setStyle(transparent);
+        cell01.setDisable(false);
+        cell02.setStyle(transparent);
+        cell02.setGraphic(ammoCell02);
+        cell02.setDisable(false);
+        cell10.setStyle(transparent);
+        cell10.setGraphic(ammoCell10);
+        cell10.setDisable(false);
+        cell11.setStyle(transparent);
+        cell11.setGraphic(ammoCell11);
+        cell11.setDisable(false);
+        cell12.setStyle(transparent);
+        cell12.setGraphic(ammoCell12);
+        cell12.setDisable(false);
+        cell20.setStyle(transparent);
+        cell20.setGraphic(ammoCell20);
+        cell20.setDisable(false);
+        cell21.setStyle(transparent);
+        cell21.setGraphic(ammoCell21);
+        cell21.setDisable(false);
+        cell22.setStyle(transparent);
+        cell22.setDisable(false);
+        cell30.setStyle(transparent);
+        cell30.setDisable(false);
+        cell31.setStyle(transparent);
+        cell31.setGraphic(ammoCell31);
+        cell31.setDisable(false);
+        cell32.setStyle(transparent);
+        cell32.setGraphic(ammoCell32);
+
+    }
+
+    /**
+     * set enemys' characters buttons
+     */
+    public void setEnemyCharacter(){
+
+        enemyCharacter1.setGraphic(imEnemyCharacter1);
+        enemyCharacter1.setStyle(transparent);
+
+        enemyCharacter2.setGraphic(imEnemyCharacter2);
+        enemyCharacter2.setStyle(transparent);
+
+        enemyCharacter3.setGraphic(imEnemyCharacter3);
+        enemyCharacter3.setStyle(transparent);
+
+        enemyCharacter4.setGraphic(imEnemyCharacter4);
+        enemyCharacter4.setStyle(transparent);
+    }
+
+    /**
+     * set the buttons stile and images for powerup deck and weapon deck
+     */
+    public void setDeck(){
+
+        impowerupDeck.setDisable(false);
+        impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
+        imweaponDeck.setDisable(false);
+        imweaponDeck.setImage(new Image("AD_weapons_IT_02.jpg"));
+        weaponDeck.setDisable(false);
+        weaponDeck.setGraphic(imweaponDeck);
+        weaponDeck.setStyle(transparent);
+        powerupDeck.setGraphic(impowerupDeck);
+        powerupDeck.setDisable(false);
+        powerupDeck.setStyle(transparent);
+    }
+
+    /**
+     * set the buttons stile and images for player's cards
+     */
+    public void setPlayerCards(){
+        bPowerupCard1.setGraphic(imPowerupCard1);
+        bPowerupCard1.setStyle(transparent);
+        bPowerupCard2.setGraphic(imWeaponCard2);
+        bPowerupCard2.setStyle(transparent);
+        imPowerupCard3.setImage(new Image("emptyPowerup.jpg"));
+        bPowerupCard3.setGraphic(imPowerupCard3);
+        bPowerupCard3.setStyle(transparent);
+        imWeaponCard1.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard1.setGraphic(imWeaponCard1);
+        bWeaponCard1.setStyle(transparent);
+        imWeaponCard2.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard2.setGraphic(imWeaponCard2);
+        bWeaponCard2.setStyle(transparent);
+        imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard3.setGraphic(imWeaponCard3);
+        bWeaponCard3.setStyle(transparent);
+    }
+
+    public void addFiremode(ActionEvent event) throws Exception {
+
+
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("addFiremode.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("ADD FIREMODE");
+        primaryStage.setScene(new Scene(root, 350, 400));
+        primaryStage.show();
+
+    }
+
+    public void sendFiremode(ActionEvent event) {
+
+        Stage stage = (Stage) firemode1.getScene().getWindow();
+        stage.close();
+    }
+
+    public void sendOptional(ActionEvent event) {
+        Stage stage = (Stage) firemodeOp1.getScene().getWindow();
+        stage.close();
+
+    }
 }
