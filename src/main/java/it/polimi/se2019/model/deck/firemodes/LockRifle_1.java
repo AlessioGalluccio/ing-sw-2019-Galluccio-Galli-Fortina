@@ -104,15 +104,17 @@ public class LockRifle_1 extends FireMode {
             else{
                 //TODO controlla
                 if(sendAllVisiblePlayers(shoot.getTargetsPlayer())) {
-                    shoot.addOptional(numOptional);
+                    shoot.addOptionalSelected(numOptional);
                     StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                             SECOND_MSG_STR, SECOND_MSG_BOOL);
                     controller.addMessageListExpected(stringAndMessage);
                 }
+
                 else{
                     playerView.printFromController(NO_TARGET);
                     throw new WrongInputException();
                 }
+
             }
 
         }
@@ -126,6 +128,15 @@ public class LockRifle_1 extends FireMode {
         throw new WrongInputException();
     }
 
+    @Override
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        if(shoot.getTargetsPlayer().size() == 1) {
+            super.addTargetingScope(targetingCardID, cost);
+        }
+        else{
+            throw new WrongInputException();
+        }
+    }
 }
 
 
