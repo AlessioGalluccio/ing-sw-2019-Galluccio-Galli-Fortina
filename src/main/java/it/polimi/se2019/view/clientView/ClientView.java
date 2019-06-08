@@ -7,13 +7,15 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Client;
+import it.polimi.se2019.ui.UiInterface;
+import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
+import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.network.configureMessage.LoginMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 
 public class ClientView extends View /*View implement observer/observable*/{
@@ -25,18 +27,9 @@ public class ClientView extends View /*View implement observer/observable*/{
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
     private Client client;
+    private UiInterface ui;
 
-
-
-    public ClientView(Player playerCopy, Map mapCopy, ArrayList<Target> possibleTarget,
-                      ArrayList<Target> selectedTarget, ArrayList<Character> possibleCharacter,
-                      Character choosenCharacter) {
-        this.playerCopy = playerCopy;
-        this.mapCopy = mapCopy;
-        this.possibleTarget = possibleTarget;
-        this.selectedTarget = selectedTarget;
-        this.possibleCharacter = possibleCharacter;
-        this.choosenCharacter = choosenCharacter;
+    public ClientView() {
     }
 
     public Player getPlayerCopy() {
@@ -63,18 +56,13 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * create a TargetMessage that the client send to the server
      * @param target
-     * @param authorID
-     * @param authorView
      */
-
-    public void createTargetMessage(Target target, int authorID, PlayerView authorView){
+    public void createTargetMessage(Target target){
 
         if(verifyTarget()) {
-            TargetMessage message = new TargetMessage(target,authorID,authorView);
+            TargetMessage message = new TargetMessage(target,playerCopy.getID(),this);
             notifyObservers(message);
-
         }
-
     }
 
     /**
@@ -238,7 +226,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
 
     /**
-     * is used by the RMIClient to print string arrived from the server
+     * is used by the controller to print string for the user
      * @param string
      */
     @Override
@@ -246,15 +234,22 @@ public class ClientView extends View /*View implement observer/observable*/{
         //Call method from UiInterface
     }
 
+    @Override
+    public void handleStartGameMessage(StartGameMessage startGameMessage) {
+        //TODO
+    }
+
+    @Override
+    public void handlePlayerMessage(Player p) {
+        playerCopy = p;
+    }
+
 
     /**
      * is used by RMIClient
      * @param possibleTarget
      */
-     /* TODO create the targetmessage after receiving the Arraylist
-
-      */
-
+     //TODO create the targetmessage after receiving the Arraylist
     public void setPossibleTarget( ArrayList<Target> possibleTarget){
         this.possibleTarget = possibleTarget;
     }
@@ -267,15 +262,31 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     public void setPossibleCharacter(ArrayList<Character> possibleCharacter){
-
         this.possibleCharacter = possibleCharacter;
     }
 
-
-
     @Override
-    public void update(Observable o /*Will be always NULL*/, Object arg) {
+    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
+        HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
+        message.handleMessage(this);
+        //ui.printPlayer()
+    }
 
+    public void handleLogin(boolean success, boolean isFirst) {
+        ui.login(success, isFirst);
+    }
+
+    /**
+     * Set up all views and attach the networkHandler
+     * @param networkHandler the client
+     */
+    public void setUp(Client networkHandler) {
+        networkHandler.setUpUi(ui);
+        attach(networkHandler);
+    }
+
+    public void setUi(UiInterface ui) {
+        this.ui = ui;
     }
 }
 

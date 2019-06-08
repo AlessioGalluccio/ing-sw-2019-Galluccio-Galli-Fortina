@@ -1,7 +1,7 @@
 package it.polimi.se2019.ui;
 
 import it.polimi.se2019.network.configureMessage.LoginMessage;
-import it.polimi.se2019.view.UiInterface;
+import it.polimi.se2019.ui.UiInterface;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +50,7 @@ public class ControllerLogin implements UiInterface {
 
 
     @Override
-    public void login(boolean success, boolean isFirst) throws Exception{
+    public void login(boolean success, boolean isFirst) {
 
         Platform.runLater(new Runnable() {
             @Override

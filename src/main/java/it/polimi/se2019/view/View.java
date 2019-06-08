@@ -1,6 +1,9 @@
 package it.polimi.se2019.view;
 
 import it.polimi.se2019.model.Observable;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
+
 import java.util.Observer;
 
 /**
@@ -11,4 +14,8 @@ import java.util.Observer;
 public abstract class View extends Observable implements Observer {
 
     public abstract void printFromController(String string);
+
+    public abstract void handleStartGameMessage(StartGameMessage startGameMessage);
+
+    public abstract void handlePlayerMessage(Player p);
 }

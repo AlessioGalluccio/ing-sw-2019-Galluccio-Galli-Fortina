@@ -12,6 +12,7 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PlayerView extends View /*View implement observer/observable*/{
@@ -58,8 +59,8 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return possibleTargets;
     }
 
-    public void setPossibleTargets(ArrayList<? extends Target> targets){
-        this.possibleTargets = targets;
+    public void setPossibleTargets(List<? extends Target> targets){
+        this.possibleTargets = (ArrayList<? extends Target>) targets;
         networkHandler.update(null, new PossibleTargetMessage(targets));
     }
 

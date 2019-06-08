@@ -3,7 +3,9 @@ package it.polimi.se2019.network.configureMessage;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.network.*;
 
-public class LoginMessage implements HandlerServerMessage, HandlerConfigMessage {
+import java.io.Serializable;
+
+public class LoginMessage implements HandlerServerMessage, HandlerConfigMessage, Serializable {
     private int messageID;
     private int matchID;
     private String playerNickname;

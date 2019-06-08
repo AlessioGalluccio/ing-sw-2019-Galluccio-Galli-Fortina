@@ -1,7 +1,9 @@
 package it.polimi.se2019.network.socket;
 
 import it.polimi.se2019.network.Client;
+import it.polimi.se2019.network.HandlerNetworkMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.clientView.ClientView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +13,7 @@ import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketClient implements Client {
+public class SocketClient extends Client {
     private int port;
     private String IP;
     private boolean open;
@@ -19,10 +21,11 @@ public class SocketClient implements Client {
     private ObjectInputStream scannerSocket;
     private Socket socket;
 
-    public SocketClient(int port, String IP) {
+    public SocketClient(int port, String IP, ClientView view) {
         this.port = port;
         this.IP = IP;
         this.open = true;
+        this.clientView = view;
     }
 
     /**
@@ -38,8 +41,8 @@ public class SocketClient implements Client {
             new Thread(() -> {
                 try {
                     while(open) { // Fake condition: it's always true
-                        Object messageSocket = scannerSocket.readObject();
-                        //TODO parse the messagge
+                        HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
+                        messageSocket.handleMessage(this);
                     }
                 }catch (IOException | ClassNotFoundException e) {
                     Logger.getLogger(SocketClient.class.getName()).log(Level.INFO, "Problem reading from socket", e);
@@ -59,7 +62,7 @@ public class SocketClient implements Client {
      * Forward a message from the client to the sever
      * @param message message to send
      */
-    public void send(ViewControllerMessage message) {
+    public void send(Object message) {
         try {
             printSocket.writeObject(message);
             printSocket.flush();
@@ -90,6 +93,6 @@ public class SocketClient implements Client {
      */
     @Override
     public void update(Observable o, Object arg) {
-        send((ViewControllerMessage) arg);
+        send(arg);
     }
 }

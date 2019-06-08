@@ -3,15 +3,17 @@ package it.polimi.se2019.network.configureMessage;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.network.WaitingRoom;
 
-public class SettingMessage implements HandlerServerMessage, HandlerConfigMessage {
+import java.io.Serializable;
+
+public class SettingMessage implements HandlerServerMessage, HandlerConfigMessage, Serializable {
     private int map;
     private int skulls;
-    private boolean suddendDeacth;
+    private boolean suddendDeath;
 
-    public SettingMessage(int map, int skulls, boolean suddendDeacth) {
+    public SettingMessage(int map, int skulls, boolean suddendDeath) {
         this.map = map;
         this.skulls = skulls;
-        this.suddendDeacth = suddendDeacth;
+        this.suddendDeath = suddendDeath;
     }
 
     public int getMap() {
@@ -23,12 +25,12 @@ public class SettingMessage implements HandlerServerMessage, HandlerConfigMessag
     }
 
     public boolean isSuddendDeacth() {
-        return suddendDeacth;
+        return suddendDeath;
     }
 
     @Override
     public void handleMessage(WaitingRoom w, Server sender) {
-        w.handleSettingMessage(map, skulls, suddendDeacth, sender)   ;
+        w.handleSettingMessage(map, skulls, suddendDeath, sender)   ;
     }
 
     @Override

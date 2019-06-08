@@ -1,6 +1,7 @@
 package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.remoteView.MapView;
 
 /**
@@ -23,5 +24,10 @@ public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
     @Override
     public void handleMessage(MapView view) {
         view.handleMapMessage(mapCopy);
+    }
+
+    @Override
+    public void handleMessage(Client client) {
+
     }
 }

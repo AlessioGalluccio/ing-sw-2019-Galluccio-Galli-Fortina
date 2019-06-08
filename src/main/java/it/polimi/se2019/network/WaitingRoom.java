@@ -4,8 +4,8 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.view.configureMessage.EnemyMessage;
 import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
-import it.polimi.se2019.view.configureMessage.isFirstMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -65,7 +65,7 @@ public class WaitingRoom {
     public void handleLoginMessage(String nickname, int matchID, Server networkHandler){
         try {
             if(checkNickname(nickname, matchID)) initializePlayer(nickname, networkHandler);
-            else networkHandler.update(null, new StatusLoginMessage(false));
+            else networkHandler.update(null, new StatusLoginMessage(false, false));
         } catch (DisconnectedException e) {
             reconnectPlayer(e.gameHandler, e.nickname);
         }
@@ -111,8 +111,8 @@ public class WaitingRoom {
             if(playerWaiting.size() == 3) setTimer();
             if(playerWaiting.size() == 5) startMatch();
 
-            if(isFirst) networkHandler.update(null, new isFirstMessage());
-            else networkHandler.update(null, new StatusLoginMessage(true));
+            if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true));
+            else networkHandler.update(null, new StatusLoginMessage(true, false));
         }
     }
 
@@ -155,7 +155,7 @@ public class WaitingRoom {
             for (WaitingPlayer wp2 : playerWaiting) {
                 //Attach each enemy view at the network handler of the ENEMY (not at himself)
                 if (!wp.getEnemyView().getNickname().equals(wp2.getPlayer().getNickname())) {
-                    wp.getEnemyView().attach(wp2.getNetworkHandler());
+                    wp2.getNetworkHandler().update(null, new EnemyMessage(wp2.getEnemyView().getNickname()));
                 }
             }
             gm.setUp(wp.getPlayer(), wp.getPlayerView());
@@ -193,6 +193,5 @@ public class WaitingRoom {
 
             isFirst = false;
         }
-        sender.update(null, new StatusLoginMessage(true));
     }
 }

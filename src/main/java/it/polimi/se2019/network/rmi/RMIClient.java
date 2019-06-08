@@ -4,7 +4,7 @@ import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.clientView.ClientViewMap;
+import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
 
@@ -22,7 +22,7 @@ public class RMIClient implements ClientInterface, Observer {
 
     private ClientView clientView;
 
-    private ClientViewMap clientViewMap;
+    private ClientMapView clientViewMap;
 
 
 
@@ -121,7 +121,6 @@ public class RMIClient implements ClientInterface, Observer {
 
     public void sendMap(Map map) {
 
-        clientViewMap.setMapCopy(map);
     }
 
 

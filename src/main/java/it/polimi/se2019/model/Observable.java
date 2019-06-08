@@ -29,4 +29,8 @@ public class Observable implements Serializable {
         }
     }
 
+    public List<Observer> getObservers() {
+        return new LinkedList<>(observers);
+    }
+
 }

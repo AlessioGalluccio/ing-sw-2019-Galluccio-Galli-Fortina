@@ -15,15 +15,16 @@ public class SocketServer {
     private ArrayList<SocketHandler> threads = new ArrayList<>();
     protected WaitingRoom waitingRoom;
 
-    public SocketServer(int port, WaitingRoom waitingRoom) {
+    public SocketServer(int port, int timerWaiting, int timerTurn) {
         this.port = port;
-        this.waitingRoom = waitingRoom;
+        this.waitingRoom = WaitingRoom.create(timerWaiting);
     }
 
     /**
      * Start the server
      */
     public void start() {
+        System.out.println("Server ready");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while(open) {
                 Socket socket = serverSocket.accept();
