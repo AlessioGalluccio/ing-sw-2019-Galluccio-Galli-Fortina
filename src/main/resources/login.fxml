@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" prefHeight="300.0" prefWidth="300.0" vgap="10"
-          fx:controller="it.polimi.se2019.ui.Controller"
-          xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="center" hgap="10" prefHeight="300.0" prefWidth="300.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.ControllerLogin">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints />
+      <RowConstraints maxHeight="48.0" minHeight="34.0" prefHeight="36.0" />
+      <RowConstraints maxHeight="48.0" minHeight="34.0" prefHeight="36.0" />
+      <RowConstraints maxHeight="20.0" minHeight="6.0" prefHeight="18.0" />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
@@ -25,8 +25,9 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Button fx:id="login" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" text="Login" GridPane.rowIndex="7" />
-      <TextField fx:id="username" promptText="UserName" GridPane.rowIndex="2" />
-      <Label fx:id="status" prefHeight="54.0" prefWidth="74.0" />
+      <Button fx:id="login" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButton" text="Login" GridPane.rowIndex="9" />
+      <TextField fx:id="username" promptText="UserName" />
+      <Label fx:id="status" prefHeight="36.0" prefWidth="149.0" GridPane.rowIndex="1" />
+      <TextField fx:id="matchID" prefHeight="58.0" prefWidth="149.0" promptText="Match ID (optional)" GridPane.rowIndex="2" />
    </children>
 </GridPane>

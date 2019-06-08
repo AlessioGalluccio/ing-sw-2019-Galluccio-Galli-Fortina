@@ -43,6 +43,7 @@ public class Controller {
     public ToggleGroup AddFiremode;
 
 
+
     @FXML
     MyThread myThread;
 
@@ -128,8 +129,7 @@ public class Controller {
     public Button bDiscardWeapon2;
     @FXML
     public Button bDiscardWeapon3;
-    @FXML
-    public Button login;
+
     @FXML
     public ImageView enemy1card1;
     @FXML
@@ -292,41 +292,9 @@ public class Controller {
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
     //con lo stesso come dato in fx:id e in onAction metto il metodo
 
-    @FXML
-    private Label status;
-
-    @FXML
-    private TextField username;
-
-    public void login(ActionEvent event) throws Exception, InterruptedException{
-        if(username.getText().equals("user")){
-            status.setText("Login Success");
-
-            // get a handle to the stage
-            Stage stage = (Stage) login.getScene().getWindow();
-            // do what you have to do
-            stage.close();
-
-            //apriamo così una seconda casella dopo il login
-            /*
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map4.fxml"));
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("Mappa1");
-            primaryStage.setScene(new Scene(root, 800, 600));
-            primaryStage.show();
-            */
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("chooseMap.fxml"));
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("Choose Map");
-            primaryStage.setScene(new Scene(root, 470, 400));
-            primaryStage.show();
 
 
 
-        }
-        else
-            status.setText("Login Fail");
-    }
 
     public void chooseMap(ActionEvent event) throws Exception{
 
