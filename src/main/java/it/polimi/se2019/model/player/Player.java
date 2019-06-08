@@ -274,6 +274,21 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
+     * return true if player has the card, otherwise false
+     * @param powerupCard the card you want to control
+     * @return true if player has the card, otherwise false
+     */
+    public boolean containsPowerup(PowerupCard powerupCard){
+       boolean flag = false;
+        for(PowerupCard card : powerupCardList){
+            if(card.getID() == powerupCard.getID()){
+                flag = true;
+            }
+        }
+        return(flag);
+    }
+
+    /**
      * Add a weapon to the player list
      * @param weaponToAdd weapon to add
      * @throws TooManyException if the player has already three + 1 weapon

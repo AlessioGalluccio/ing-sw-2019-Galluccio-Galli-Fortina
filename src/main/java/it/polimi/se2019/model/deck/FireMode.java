@@ -156,16 +156,16 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         if(shoot.getTargetingScopeCards().contains(card)){
             throw new WrongInputException();
         }
-        else if(!author.getPowerupCardList().contains(card)){
+        else if(!author.containsPowerup(card)){
             throw new NotPresentException();
         }
-        else if(author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
+        else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
             throw new NotEnoughAmmoException();
         }
         else{
             //I consider the target as the last selected Player
             int size = shoot.getTargetsPlayer().size();
-            shoot.addTargetingScopeFromFireMode((PowerupCard)card, shoot.getTargetsPlayer().get(size));
+            shoot.addTargetingScopeFromFireMode((PowerupCard)card, shoot.getTargetsPlayer().get(size-1));
             shoot.addCost(cost);
         }
     }

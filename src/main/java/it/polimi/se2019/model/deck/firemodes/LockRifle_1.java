@@ -109,6 +109,7 @@ public class LockRifle_1 extends FireMode {
                     StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                             SECOND_MSG_STR, SECOND_MSG_BOOL);
                     controller.addMessageListExpected(stringAndMessage);
+                    shoot.addCost(COST_FIRST_OPTIONAL);
                 }
 
                 else{
