@@ -80,7 +80,7 @@
           }
         },
         {
-          "type": "it.polimi.se2019.model.deck.firemodes.TractorBeam_2",
+          "type": "it.polimi.se2019.model.deck.firemodes.Furnace_2",
           "data": {
             "cost": null,
             "target": null,

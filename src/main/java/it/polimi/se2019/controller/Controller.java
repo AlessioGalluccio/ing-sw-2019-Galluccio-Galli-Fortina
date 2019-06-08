@@ -9,6 +9,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -73,7 +74,8 @@ public class Controller implements Observer {
     public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {
         GsonBuilder g = new GsonBuilder()
                 .registerTypeAdapter(ViewControllerMessage.class, new JsonAdapter<ViewControllerMessage>())
-                .registerTypeAdapter(Target.class, new JsonAdapter<Target>());
+                .registerTypeAdapter(Target.class, new JsonAdapter<Target>())
+                .registerTypeAdapter(View.class, new JsonAdapter<View>());
         Gson gson = g.create();
 
         Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
