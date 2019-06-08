@@ -8,7 +8,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Deal 1 damage to every other player on your square.",
             "ID": 11
           }
         },
@@ -20,7 +19,6 @@
               "RED"
             ],
             "target": null,
-            "description": "Reaper mode: Deal 2 damage to every other player  on your square.",
             "ID": 12
           }
         }
@@ -44,7 +42,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Move a target 0, 1, or 2 squares to a square you can see, and give it 1 damage.\nNotes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.",
             "ID": 21
           }
         },
@@ -55,8 +52,7 @@
               "RED",
               "YELLOW"
             ],
-            "target": null,
-            "description": "Punisher mode: Choose a target 0, 1, or 2 moves away from you. Move the target to your square and deal 3 damage to it.\nNotes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.",
+            "target": null, "description": "Punisher mode: Choose a target 0, 1, or 2 moves away from you. Move the target to your square and deal 3 damage to it.\nNotes: You can move a target even if you can't see it. The target ends up in a place where you can see and damage it. The moves do not have to be in the same direction.",
             "ID": 22
           }
         }
@@ -80,7 +76,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Choose a room you can see, but not the room you are in. Deal 1 damage to everyone in that room.",
             "ID": 31
           }
         },
@@ -89,7 +84,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Cozy fire mode: Choose a square exactly one move away. Deal 1 damage and 1 mark to everyone on that square.",
             "ID": 32
           }
         }
@@ -115,7 +109,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Effect: Choose 1 target you cannot see and deal 3 damage to it.\nNotes: Yes, this can only hit targets you cannot see.",
             "ID": 41
           }
         }
@@ -142,7 +135,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Effect: Deal 3 damage and 1 mark to 1 target you can see. Your target must be at least 2 moves away from you.\nNotes: For example, in the 2-by-2 room, you cannot shoot a target on an adjacent square, but you can shoot a target on the diagonal. If you are beside a door, you can't shoot a target on the other side of the door, but you can shoot a target on a different square of that room.",
             "ID": 51
           }
         }
@@ -169,7 +161,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Deal 1 damage to 1 target you can see at least 1 move away. Then give 1 mark to that target and everyone else on that square.",
             "ID": 61
           }
         },
@@ -180,7 +171,6 @@
               "RED"
             ],
             "target": null,
-            "description": "Nano-tracer mode: Deal 1 damage to 1 target you can see at least 1 move away. Then give 2 marks to that target and everyone else on that square.",
             "ID": 62
           }
         }
@@ -206,7 +196,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Choose a square 1 move away and possibly a second square 1 more move away in the same direction. On each square, you may choose 1 target and give it 1 damage.",
             "ID": 71
           }
         },
@@ -218,7 +207,6 @@
               "YELLOW"
             ],
             "target": null,
-            "description": "Barbecue mode: Choose 2 squares as above. Deal 2 damage to everyone on the first square and 1 damage to everyone on the second square.",
             "ID": 72
           }
         }
@@ -242,7 +230,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Deal 1 damage and 2 marks to 1 target you can see.",
             "ID": 81
           }
         },
@@ -251,7 +238,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Scanner mode: Choose up to 3 targets you can see and deal 1 mark to each.\nNotes: Remember that the 3 targets can be in 3 different rooms.",
             "ID": 82
           }
         }
@@ -277,7 +263,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Deal 3 damage to 1 target on your square. If you want, you may then move the target 1 square. ",
             "ID": 91
           }
         },
@@ -286,7 +271,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Long barrel mode: Deal 2 damage to 1 target on any square exactly one move away.",
             "ID": 92
           }
         }
@@ -312,7 +296,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Choose 1 target on any square exactly 1 move away. Move onto that square and give the target 1 damage and 2 marks.",
             "ID": 101
           }
         },
@@ -323,7 +306,6 @@
               "BLUE"
             ],
             "target": null,
-            "description": "Rocket fist mode: Choose a square exactly 1 move away. Move onto that square. You may deal 2 damage to 1 target there. If you want, you may move 1 more square in that same direction (but only if it is a legal move). You may deal 2 damage to 1 target there, as well.\nNotes: In rocket fist mode, you're flying 2 squares in a straight line, punching 1 person per square.",
             "ID": 102
           }
         }
@@ -349,7 +331,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Choose a cardinal direction and 1 target in that direction. Deal 3 damage to it.",
             "ID": 111
           }
         },
@@ -358,7 +339,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Piercing mode: Choose a cardinal direction and 1 or 2 targets in that direction. Deal 2 damage to each.",
             "ID": 112
           }
         }
@@ -385,7 +365,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Choose up to 3 targets on different squares, each exactly 1 move away. Deal 1 damage to each target.",
             "ID": 121
           }
         },
@@ -396,7 +375,6 @@
               "YELLOW"
             ],
             "target": null,
-            "description": "Tsunami mode: Deal 1 damage to all targets that are exactly 1 move away.",
             "ID": 122
           }
         }
@@ -420,7 +398,6 @@
           "data": {
             "cost": null,
             "target": null,
-            "description": "Basic mode: Deal 2 damage to 1 target on your square.",
             "ID": 131
           }
         },
@@ -431,7 +408,6 @@
               "RED"
             ],
             "target": null,
-            "description": "Pulverize mode: Deal 3 damage to 1 target on your square, then move that target 0, 1, or 2 squares in one direction.\nNotes: Remember that moves go through doors, but not walls.",
             "ID": 132
           }
         }
@@ -449,25 +425,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.LockRifle_2",
-          "data": {
-            "cost": [
-              "RED"
-            ],
-            "target": null,
-            "description": "Second lock: Deal 1 mark to a different target you can see.",
-            "ID": 142
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.LockRifle_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 2 damage and 1 mark to 1 target you can see.",
           "ID": 141,
           "primary": true
         }
@@ -477,7 +439,7 @@
         "BLUE"
       ],
       "name": "Lock Rifle",
-      "description": "basic effect: Deal 2 damage and 1 mark to 1 target  you can see.\nwith second lock: Deal 1 mark to a different target  you can see.",
+      "description": "basic effect: Deal 2 damage and 1 mark to 1 target  you can see.\n[Optional] with second lock: Deal 1 mark to a different target  you can see.",
       "color":"BLUE" ,
       "reload": true,
       "correctMessages": null,
@@ -487,37 +449,12 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.MachineGun_2",
-          "data": {
-            "cost": [
-              "YELLOW"
-            ],
-            "target": null,
-            "description": "Focus shot: Deal 1 additional damage to one of those targets.",
-            "ID": 152
-          }
-        },
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.MachineGun_3",
-          "data": {
-            "cost": [
-              "BLUE"
-            ],
-            "target": null,
-            "description": "Turret tripod: Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see.\nNotes: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.",
-            "ID": 153
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.MachineGun_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Choose 1 or 2 targets you can see and deal 1 damage to each.",
-          "ID": 1,
+          "ID": 151,
           "primary": true
         }
       },
@@ -526,7 +463,7 @@
         "RED"
       ],
       "name": "Machine Gun",
-      "description": "basic effect: Choose 1 or 2 targets you can see and deal 1 damage to each.\nwith focus shot: Deal 1 additional damage to one of those targets.\nwith turret tripod: Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see.\nNotes: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.",
+      "description": "basic effect: Choose 1 or 2 targets you can see and deal 1 damage to each.\n[Optional] with focus shot: Deal 1 additional damage to one of those targets.\nwith turret tripod: Deal 1 additional damage to the other of those targets and/or deal 1 damage to a different target you can see.\n[Optional] Notes: If you deal both additional points of damage, they must be dealt to 2 different targets. If you see only 2 targets, you deal 2 to each if you use both optional effects. If you use the basic effect on only 1 target, you can still use the the turret tripod to give it 1 additional damage.",
       "color":"BLUE" ,
       "reload": true,
       "correctMessages": null,
@@ -536,36 +473,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.Thor_2",
-          "data": {
-            "cost": [
-              "BLUE"
-            ],
-            "target": null,
-            "description": "Chain reaction: Deal 1 damage to a second target that your first target can see.",
-            "ID": 162
-          }
-        },
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.Thor_3",
-          "data": {
-            "cost":[
-              "BLUE"
-            ],
-            "target": null,
-            "description": "High voltage: Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction.",
-            "ID": 163
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.Thor_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 2 damage to 1 target you can see.",
           "ID": 161,
           "primary": true
         }
@@ -575,7 +487,7 @@
         "RED"
       ],
       "name": "T.H.O.R.",
-      "description": "basic effect: Deal 2 damage to 1 target you can see. with chain reaction: Deal 1 damage to a second target that your first target can see.\nwith high voltage: Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction.\nNotes: This card constrains the order in which you can use its effects. (Most cards don't.) Also note that each target must be a different player.",
+      "description": "basic effect: Deal 2 damage to 1 target you can see.\n[Optional] with chain reaction: Deal 1 damage to a second target that your first target can see.\n[Optional] with high voltage: Deal 2 damage to a third target that your second target can see. You cannot use this effect unless you first use the chain reaction.\nNotes: This card constrains the order in which you can use its effects. (Most cards don't.) Also note that each target must be a different player.",
       "color":"BLUE" ,
       "reload": true,
       "correctMessages": null,
@@ -585,34 +497,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.PlasmaGun_2",
-          "data": {
-            "cost": null,
-            "target": null,
-            "description": "Phase glide: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\nNotes: The two moves have no ammo cost. You don't have to be able to see your target when you play the card. For example, you can move 2 squares and shoot a target you now see. You cannot use 1 move before shooting and 1 move after.",
-            "ID": 172
-          }
-        },
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.PlasmaGun_3",
-          "data": {
-            "cost": [
-              "BLUE"
-            ],
-            "target": null,
-            "description": "Charged shot: Deal 1 additional damage to your target.",
-            "ID": 173
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.PlasmaGun_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 2 damage to 1 target you can see.",
           "ID": 171,
           "primary": true
         }
@@ -622,7 +511,7 @@
         "YELLOW"
       ],
       "name": "Plasma Gun",
-      "description": "basic effect: Deal 2 damage to 1 target you can see.\nwith phase glide: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\nwith charged shot: Deal 1 additional damage to your target.\nNotes: The two moves have no ammo cost. You don't have to be able to see your target when you play the card. For example, you can move 2 squares and shoot a target you now see. You cannot use 1 move before shooting and 1 move after.",
+      "description": "basic effect: Deal 2 damage to 1 target you can see.\n[Optional] with phase glide: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\n[Optional] with charged shot: Deal 1 additional damage to your target.\nNotes: The two moves have no ammo cost. You don't have to be able to see your target when you play the card. For example, you can move 2 squares and shoot a target you now see. You cannot use 1 move before shooting and 1 move after.",
       "color":"BLUE" ,
       "reload": true,
       "correctMessages": null,
@@ -632,25 +521,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.VortexCannon_2",
-          "data": {
-            "cost": [
-              "RED"
-            ],
-            "target": null,
-            "description": "Black hole:  Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.",
-            "ID": 182
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.VortexCannon_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Choose a square you can see, but not your square. Call it 'the vortex'. Choose a target on the vortex or 1 move away from it. Move it onto the vortex and give it 2 damage.",
           "ID": 181,
           "primary": true
         }
@@ -660,7 +535,7 @@
         "BLUE"
       ],
       "name": "Vortex Cannon",
-      "description": "basic effect: Choose a square you can see, but not your square. Call it 'the vortex'. Choose a target on the vortex or 1 move away from it. Move it onto the vortex and give it 2 damage.\nwith black hole:  Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.\nNotes: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.",
+      "description": "basic effect: Choose a square you can see, but not your square. Call it 'the vortex'. Choose a target on the vortex or 1 move away from it. Move it onto the vortex and give it 2 damage.\n[Optional] with black hole:  Choose up to 2 other targets on the vortex or 1 move away from it. Move them onto the vortex and give them each 1 damage.\nNotes: The 3 targets must be different, but some might start on the same square. It is legal to choose targets on your square, on the vortex, or even on squares you can't see. They all end up on the vortex.",
       "color":"RED" ,
       "reload": true,
       "correctMessages": null,
@@ -670,25 +545,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.GrenadeLauncher_2",
-          "data": {
-            "cost": [
-              "RED"
-            ],
-            "target": null,
-            "description": "Extra grenade: Deal 1 damage to every player on a square you can see. You can use this before or after the basic effect's move. ",
-            "ID": 192
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.GrenadeLauncher_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 1 damage to 1 target you can see. Then you may move the target 1 square.",
           "ID": 191,
           "primary": true
         }
@@ -696,7 +557,7 @@
       "ammoGranted": "RED",
       "ammoNotGranted": null,
       "name": "Grenade Launcher",
-      "description": "basic effect: Deal 1 damage to 1 target you can see. Then you may move the target 1 square.\nwith extra grenade: Deal 1 damage to every player on a square you can see. You can use this before or after the basic effect's move.\nNotes: For example, you can shoot a target, move it onto a square with other targets, then damage everyone including the first target. Or you can deal 2 to a main target, 1 to everyone else on that square, then move the main target. Or you can deal 1 to an isolated target and 1 to everyone on a different square. If you target your own square, you will not be moved or damaged.",
+      "description": "basic effect: Deal 1 damage to 1 target you can see. Then you may move the target 1 square.\n[Optional] with extra grenade: Deal 1 damage to every player on a square you can see. You can use this before or after the basic effect's move.\nNotes: For example, you can shoot a target, move it onto a square with other targets, then damage everyone including the first target. Or you can deal 2 to a main target, 1 to everyone else on that square, then move the main target. Or you can deal 1 to an isolated target and 1 to everyone on a different square. If you target your own square, you will not be moved or damaged.",
       "color":"RED" ,
       "reload": true,
       "correctMessages": null,
@@ -706,36 +567,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.RocketLauncher_2",
-          "data": {
-            "cost": [
-              "BLUE"
-            ],
-            "target": null,
-            "description": "Rocket jump: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\nNotes: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it.",
-            "ID": 202
-          }
-        },
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.RocketLauncher_3",
-          "data": {
-            "cost": [
-              "YELLOW"
-            ],
-            "target": null,
-            "description": "Fragmenting warhead: During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it.\nNotes: If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.",
-            "ID": 203
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.RocketLauncher_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square.",
           "ID": 201,
           "primary": true
         }
@@ -745,7 +581,7 @@
         "RED"
       ],
       "name": "Rocket Launcher",
-      "description": "basic effect: Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square.\nwith rocket jump: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\nwith fragmenting warhead: During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it.\nNotes: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it. If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.",
+      "description": "basic effect: Deal 2 damage to 1 target you can see that is not on your square. Then you may move the target 1 square.\n[Optional] with rocket jump: Move 1 or 2 squares. This effect can be used either before or after the basic effect.\n[Optional] with fragmenting warhead: During the basic effect, deal 1 damage to every player on your target's original square – including the target, even if you move it.\nNotes: If you use the rocket jump before the basic effect, you consider only your new square when determining if a target is legal. You can even move off a square so you can shoot someone on it. If you use the fragmenting warhead, you deal damage to everyone on the target's square before you move the target – your target will take 3 damage total.",
       "color": "RED" ,
       "reload": true,
       "correctMessages": null,
@@ -755,34 +591,11 @@
   {
     "type": "it.polimi.se2019.model.deck.OptionWeapon",
     "data": {
-      "optionalFireModeList": [
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.CyberBlade_2",
-          "data": {
-            "cost": null,
-            "target": null,
-            "description": "Shadowstep: Move 1 square before or after the basic effect.",
-            "ID": 212
-          }
-        },
-        {
-          "type": "it.polimi.se2019.model.deck.firemodes.CyberBlade_3",
-          "data": {
-            "cost": [
-              "YELLOW"
-            ],
-            "target": null,
-            "description": "Slice and dice: Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect.",
-            "ID": 213
-          }
-        }
-      ],
       "primaryFireMode": {
         "type": "it.polimi.se2019.model.deck.firemodes.CyberBlade_1",
         "data": {
           "cost": null,
           "target": null,
-          "description": "Basic effect: Deal 2 damage to 1 target on your square.",
           "ID": 211,
           "primary": true
         }
@@ -792,7 +605,7 @@
         "RED"
       ],
       "name": "Cyberblade",
-      "description": "basic effect: Deal 2 damage to 1 target on your square.\nwith shadowstep: Move 1 square before or after the basic effect.\nwith slice and dice: Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect.\nNotes: Combining all effects allows you to move onto a square and whack 2 people; or whack somebody, move, and whack somebody else; or whack 2 people and then move.",
+      "description": "basic effect: Deal 2 damage to 1 target on your square.\n[Optional] with shadowstep: Move 1 square before or after the basic effect.\n[Optional] with slice and dice: Deal 2 damage to a different target on your square. The shadowstep may be used before or after this effect.\nNotes: Combining all effects allows you to move onto a square and whack 2 people; or whack somebody, move, and whack somebody else; or whack 2 people and then move.",
       "color":   "YELLOW",
       "reload": true,
       "correctMessages": null,

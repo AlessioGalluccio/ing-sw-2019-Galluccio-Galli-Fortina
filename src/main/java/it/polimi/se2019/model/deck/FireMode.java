@@ -19,7 +19,6 @@ import java.util.*;
 public abstract class FireMode implements AddFireModeMethods, Serializable {
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
-    private String description;
     private int ID;
     private boolean used;
     private boolean primary;
@@ -56,14 +55,6 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      */
     public int getID() {
         return ID;
-    }
-
-    /**
-     *
-     * @return Fire mode's description
-     */
-    public String getDescription() {
-        return description;
     }
 
     /**

@@ -5,7 +5,7 @@ import java.util.*;
 
 public class OptionWeapon extends WeaponCard {
 
-    private ArrayList<? extends FireMode> optionalFireModeList;
+    private ArrayList<? extends FireMode> optionalFireModeList = new ArrayList<>();
     private FireMode primaryFireMode;
 
     public void setFireMode(ArrayList<FireMode> fire) {
