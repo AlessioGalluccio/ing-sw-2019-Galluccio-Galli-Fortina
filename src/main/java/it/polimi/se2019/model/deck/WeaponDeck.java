@@ -5,10 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.logging.Level;
@@ -35,15 +32,15 @@ public class WeaponDeck extends Deck<WeaponCard> {
                 .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
                 .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>());
         Gson gson = g.create();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("WeaponCard"))) {
+        try (BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(
+                WeaponDeck.class.getClassLoader().getResourceAsStream("WeaponCard")))) {
             //Create a reader for the file
-
             Type DECK_TYPE = new TypeToken<Stack<WeaponCard>>() {
             }.getType();
 
             deck  = gson.fromJson(bufferedReader, DECK_TYPE);
             Collections.shuffle(deck);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NullPointerException e) {
             Logger.getLogger("it.polimi.se2019.model.deck").log(Level.WARNING, "WeaponCard.json don't found!", e);
         } catch (IOException e) {
             Logger.getLogger("it.polimi.se2019.model.deck").log(Level.WARNING, "Reader file close", e);
