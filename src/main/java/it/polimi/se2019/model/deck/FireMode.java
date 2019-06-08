@@ -34,7 +34,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     private static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
     private static final String KILLED = "You killed ths Player";
 
-    protected static final String NO_TARGET = "No target available";
+    protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted";
 
     public GameHandler getGameHandler() {
         //TODO Eliminala, serve SOLO PER TESTING
@@ -115,12 +115,17 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         //payment of the total cost of this action
         try{
             author.payAmmoCost(shoot.getCost());
+            endFiremode();
         }catch (NotEnoughAmmoException e){
             //it should never happen, because cost must always be controlled before
             throw new WrongInputException();
         }
     }
 
+    @Override
+    public void addNope() throws WrongInputException {
+        shoot.endAction();
+    }
 
     /**
      * Set targets in order to fire it
@@ -198,6 +203,9 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
 
 
+
+
+
     //COMMON METHODS
 
     /**
@@ -224,6 +232,40 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         }
 
     }
+
+    /**
+     * send all players who are in the same cell of the author to the PlayerView only if there is at least one
+     * @param alreadySelected ArrayList of all targets already selected
+     * @return false if there is no target (and it doesn't send them), otherwise true and it sends them
+     */
+    protected boolean sendPlayersInYourCell(ArrayList<Player> alreadySelected){
+        Cell commonCell = author.getCell();
+        ArrayList<Player> listTarget = new ArrayList<>();
+        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
+            if(playerOfGame.getID() != this.author.getID() && playerOfGame.getCell().equals(commonCell)
+                    && (alreadySelected == null || !alreadySelected.contains(playerOfGame))){
+
+                listTarget.add(playerOfGame);
+
+            }
+        }
+        if(listTarget.isEmpty()){
+            return false;
+        }
+        else{
+            sendPossibleTargetsPlayers(listTarget);
+            return true;
+        }
+    }
+
+    /**
+     * call it when you abort the firemode
+     */
+    public void endFiremode(){
+        shoot.endAction();
+    }
+
+
 
 
 }

@@ -1,10 +1,8 @@
 package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
@@ -28,11 +26,14 @@ public class LockRifle_1 extends FireMode {
 
 
 
+
+
     @Override
     public void sendPossibleTargetsAtStart() {
         //TODO se niente target?
         if(!sendAllVisiblePlayers(null)){
-            //TODO
+            playerView.printFromController(NO_TARGET_NO_ACTION);
+            endFiremode();
         }
     }
 
@@ -111,7 +112,7 @@ public class LockRifle_1 extends FireMode {
                 }
 
                 else{
-                    playerView.printFromController(NO_TARGET);
+                    playerView.printFromController(NO_TARGET_NO_ACTION);
                     throw new WrongInputException();
                 }
 
@@ -121,11 +122,6 @@ public class LockRifle_1 extends FireMode {
         else{
             throw new WrongInputException();
         }
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-        throw new WrongInputException();
     }
 
     @Override

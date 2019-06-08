@@ -23,36 +23,35 @@ public class ElectroScythe_1 extends FireMode {
 
     @Override
     public void sendPossibleTargetsAtStart() {
-        //TODO
+        //TODO controlla, non dovrebbe mandare nessun target
+        //do nothing
     }
 
     @Override
     public void fire() throws WrongInputException{
-
+        Cell commonCell = author.getCell();
+        for(Player target : gameHandler.getOrderPlayerList()){
+            if(target.getCell().equals(commonCell)){
+                addDamageAndMarks(target, 1,0);
+            }
+        }
+        super.fire();
     }
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
-
+        throw new WrongInputException();
     }
 
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
-
+        throw new WrongInputException();
     }
 
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
-    }
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-
+        throw new WrongInputException();
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-
-    }
 }

@@ -192,6 +192,16 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     @Override
+    public void handlePassTurn() {
+        //TODO
+    }
+
+    @Override
+    public void handleFire() {
+        //TODO
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         if(startingHandler(arg)){
             arg.handle(this);

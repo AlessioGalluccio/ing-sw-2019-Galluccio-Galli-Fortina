@@ -233,15 +233,15 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * create a EndMessage that the client send to the server
+     * create a PassTurnMessage that the client send to the server
      * @param messageID
      * @param authorID
      * @param authorView
      * @return
      */
 
-    public EndMessage createEndMessage (int messageID, int authorID, PlayerView authorView){
-        EndMessage message = new EndMessage(authorID,authorView);
+    public PassTurnMessage createEndMessage (int messageID, int authorID, PlayerView authorView){
+        PassTurnMessage message = new PassTurnMessage(authorID,authorView);
         notifyObservers(message);
         return message;
     }

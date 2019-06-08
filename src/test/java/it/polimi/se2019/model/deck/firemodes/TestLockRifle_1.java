@@ -24,10 +24,10 @@ public class TestLockRifle_1 {
     private Player targetPlayer1;
     private Player targetPlayer2;
     private Player targetPlayer3;
-    GameHandler gameHandler;
-    Controller controller;
-    Shoot shoot;
-    Cell commonCell;
+    private GameHandler gameHandler;
+    private Controller controller;
+    private Shoot shoot;
+    private Cell commonCell;
 
     private final static int LOCK_RIFLE_WEAPON_ID = 14;
 
@@ -56,11 +56,6 @@ public class TestLockRifle_1 {
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
 
-
-
-
-
-
         //author, target 1 and target 2 in the same cell
         commonCell = gameHandler.getCellByCoordinate(1,1);
         authorPlayer.setPosition(commonCell);
@@ -76,30 +71,14 @@ public class TestLockRifle_1 {
 
         //Lock_Rifle weapon
         WeaponCard weapon = gameHandler.getWeaponCardByID(LOCK_RIFLE_WEAPON_ID);
-
         weapon.reload();
-
         authorPlayer.addWeaponCard(weapon);
-
-        //System.out.println(authorPlayer.getWeaponCardList().get(0).getID());
-        //System.out.println(authorPlayer.getID());
-        //System.out.println(shoot.getPlayerAuthor().getID());
-        //System.out.println(shoot.getPlayerAuthor().getWeaponCardList().contains(weapon));
-        //System.out.println(gameHandler.getOrderPlayerList().get(0));
-
-
         shoot.addWeapon(weapon);
 
+        //add firemode
         FireMode lockRifle_1 = gameHandler.getFireModeByID(141);
         shoot.addFireMode(lockRifle_1.getID());
 
-        //System.out.println("La firemode ha null in costo? -> " + lockRifle_1.getCost().isEmpty());
-        //System.out.println("costo dopo creazione ammo firemode -> " + AmmoBag.createAmmoFromList(lockRifle_1.getCost()));
-        //System.out.println("costo dell'azione ora -> " + shoot.getCost());
-
-
-
-        //TODO bisogna impostare tutto gamehandler prima
 
     }
 
