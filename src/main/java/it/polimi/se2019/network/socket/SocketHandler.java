@@ -1,8 +1,10 @@
 package it.polimi.se2019.network.socket;
 
+import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.io.IOException;
@@ -15,12 +17,12 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketHandler implements Server {
+public class SocketHandler implements Server, SwitchServerMessage {
     private Socket socket;
     private SocketServer server;
     private ObjectOutputStream printSocket;
     private ObjectInputStream scannerSocket;
-    private Timer timer = new Timer();;
+    private Timer timer = new Timer();
     private int duration;
     private boolean open = true;
     private PlayerView view;
@@ -28,7 +30,7 @@ public class SocketHandler implements Server {
     SocketHandler(Socket socket, SocketServer server) {
         this.socket = socket;
         this.server = server;
-        //TODO read duration from config file
+        //TODO read duration from config file MOLTIPLICARE PER 1000!
     }
 
     /**
@@ -43,8 +45,9 @@ public class SocketHandler implements Server {
                 try {
                     while(open) {
                         //Receive message
-                        Object message = scannerSocket.readObject();
-                        view.notifyObservers(/*ViewControllerMessage*/ message);
+                        HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
+                        message.handleMessage(this);
+                        //TODO view.notifyObservers(/*ViewControllerMessage*/ message);
                     }
                 } catch (IOException | ClassNotFoundException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
@@ -81,6 +84,7 @@ public class SocketHandler implements Server {
      */
     @Override
     public void send(String string) {
+        //TODO rifare con un messaggio opportuno
         try {
             printSocket.writeObject(string);
             printSocket.flush();
@@ -93,8 +97,14 @@ public class SocketHandler implements Server {
      * Forward a message from model to the client thought socket connection
      * @param message message to send
      */
+
+    //CANCELLIAMO????
     @Override
     public void send(ModelViewMessage message) {
+       send((Object) message);
+    }
+
+    private void send(Object message) {
         try {
             printSocket.writeObject(message);
             printSocket.flush();
@@ -109,6 +119,8 @@ public class SocketHandler implements Server {
      */
     @Override
     public void setTimer() {
+        if(timer==null) timer = new Timer();
+        else timer.cancel();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -127,6 +139,7 @@ public class SocketHandler implements Server {
     @Override
     public void cancelTimer() {
         timer.cancel();
+        timer = null;
     }
 
     /**
@@ -136,6 +149,16 @@ public class SocketHandler implements Server {
      */
     @Override
     public void update(Observable o, Object arg) {
-        send((ModelViewMessage) arg);
+        send(arg);
+    }
+
+    @Override
+    public void forwardConfigMessage(HandlerServerMessage message) {
+        server.waitingRoom.receiveMessage((HandlerConfigMessage) message, this);
+    }
+
+    @Override
+    public void forwardViewMessage(HandlerServerMessage message) {
+
     }
 }

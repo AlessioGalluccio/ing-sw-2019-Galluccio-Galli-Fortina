@@ -1,5 +1,8 @@
 package it.polimi.se2019.network.socket;
 
+import it.polimi.se2019.network.WaitingRoom;
+import org.mockito.exceptions.verification.WantedButNotInvoked;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -10,9 +13,11 @@ public class SocketServer {
     private int port;
     private boolean open = true;
     private ArrayList<SocketHandler> threads = new ArrayList<>();
+    protected WaitingRoom waitingRoom;
 
-    public SocketServer(int port) {
+    public SocketServer(int port, WaitingRoom waitingRoom) {
         this.port = port;
+        this.waitingRoom = waitingRoom;
     }
 
     /**

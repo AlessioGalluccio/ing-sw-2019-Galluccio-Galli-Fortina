@@ -4,41 +4,43 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.map.Room;
+import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.view.ModelViewMess.MapMessage;
+import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
+import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-import java.util.HashMap;
-import java.util.Collections;
+import java.util.*;
 
-public class GameHandler extends java.util.Observable {
+public class GameHandler extends Observable {
 
+    private int matchID;
     private AmmoDeck ammoDeck;
     private PowerupDeck powerupDeck;
     private WeaponDeck weaponDeck;
     private Map map;
-    private ArrayList<Player> orderPlayerList;
-    private ArrayList<PlayerView> playerViews;
+    private ArrayList<Player> orderPlayerList = new ArrayList<>();
+    private ArrayList<PlayerView> playerViews = new ArrayList<>();
     private int turn;
     private ArrayList<Death> arrayDeath = new ArrayList<>();
     private Stack<Player> justDied = new Stack<>();
     private Modality modality;
     private int skull;
-    private boolean isSuddenDeath;
+    private boolean suddenDeath;
+    //TODO aggiungere lista di controller
 
-    //Implementato SOLO PER TESTING
-    //TODO Da fare decenetemente
-    //TODO sistemare gestione degli ID
+    //Used only for testing
     public GameHandler(List<Player> list, int skull) {
         this.orderPlayerList = (ArrayList) list;
         this.turn = 0;
@@ -46,14 +48,19 @@ public class GameHandler extends java.util.Observable {
         this.weaponDeck = new WeaponDeck();
         this.powerupDeck = new PowerupDeck();
         this.ammoDeck = new AmmoDeck(powerupDeck);
-        //TODO Set modality to normal
+    }
+
+    public GameHandler(int matchID) {
+        this.weaponDeck = new WeaponDeck();
+        this.powerupDeck = new PowerupDeck();
+        this.ammoDeck = new AmmoDeck(powerupDeck);
+        this.matchID = matchID;
+        this.modality = new Normal();
     }
 
     /**
-     * controlls if the game is finished
-     *
-     * @return 1 if the game is finished
-     * 0 if not
+     * Controls if the game is finished
+     * @return True if the game is finished, false if not
      */
     public boolean isFinished() {
 
@@ -412,7 +419,89 @@ public class GameHandler extends java.util.Observable {
         for(PlayerView pw : playerViews) {
             if(p.equals(pw.getPlayerCopy())) return pw;
         }
-        throw new IllegalArgumentException("There is no player view linked to " + p.toString());
+        throw new IllegalArgumentException("There is no PlayerView linked to " + p.toString());
+    }
+
+    /**
+     * Check if the match id of this game handler is equals to the param
+     * @param matchID id to check
+     * @return true if they are equals, false other way
+     */
+    public boolean checkMatchID(int matchID) {
+        return matchID == this.matchID;
+    }
+
+    public void setUp(Player p, PlayerView playerView) {
+        if(orderPlayerList.size()<=5) {
+            orderPlayerList.add(p);
+            playerViews.add(playerView);
+        }
+    }
+
+    public void setMap(int map) {
+        switch (map) {
+            case 1:
+                this.map = new Map1(weaponDeck, ammoDeck);
+                break;
+            case 2:
+                this.map = new Map2(weaponDeck, ammoDeck);
+                break;
+            case 3:
+                this.map = new Map3(weaponDeck, ammoDeck);
+                break;
+            case 4:
+                this.map = new Map4(weaponDeck, ammoDeck);
+                break;
+            default: throw new IllegalArgumentException();
+        }
+    }
+
+    public void setSkull(int skulls) {
+        this.skull = skulls;
+    }
+
+    public void setSuddenDeath(boolean suddenDeath) {
+        this.suddenDeath = suddenDeath;
+    }
+
+    /**
+     * Attach every observer to his observable
+     * Cell -> mapView, GameHandler -> skullBardView, Player -> enemyView
+     * @param mapView the mapview of this match
+     * @param skullBoardView  the skullBoardView of this match
+     * @param enemyViews the enemyViews of this match
+     */
+    public void attachAll(MapView mapView, SkullBoardView skullBoardView, List<EnemyView> enemyViews) {
+        //Cell -> mapView
+        map.attach(mapView);
+        //GM -> skullBardView
+        attach(skullBoardView);
+        //Player -> enemyView
+        for(Player p : orderPlayerList) {
+            for(PlayerView pv : playerViews) {
+                if (pv.getPlayerCopy().getNickname().equals(p.getNickname())) p.attach(pv);
+            }
+            for(EnemyView ev : enemyViews) {
+                if(ev.getNickname().equals(p.getNickname())) p.attach(ev);
+            }
+        }
+    }
+
+    /**
+     * Send to the view the initial setting of each element
+     * Notify the player the game is started
+     */
+    public void start() {
+        map.notifyObservers(new MapMessage(map.clone()));
+        for(Player p : orderPlayerList) {
+            p.notifyObservers(new PlayerModelMessage(p.clone()));
+        }
+        notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
+
+        for(PlayerView pw : playerViews) {
+            pw.update(null, new StartGameMessage());
+        }
+        //TODO set state controller for first player
     }
 }
 

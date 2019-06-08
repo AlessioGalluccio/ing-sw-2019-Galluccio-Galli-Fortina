@@ -29,7 +29,7 @@ public class TestController {
         players.add(temp);
         GameHandler gameHandler = new GameHandler(players, 8);
         this.controller = new Controller(gameHandler);
-        this.playerView = new PlayerView(temp, null, null, null,null);
+        this.playerView = new PlayerView(temp);
     }
 
     @Test

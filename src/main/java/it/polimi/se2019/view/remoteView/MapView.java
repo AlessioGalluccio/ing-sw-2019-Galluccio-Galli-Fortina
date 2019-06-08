@@ -12,10 +12,6 @@ public class MapView extends Observable implements Observer {
     private Map mapCopy;
     private Cell[][] cells;
 
-    public MapView(Map mapCopy) {
-        this.mapCopy = mapCopy;
-    }
-
     public Map getMapCopy() {
         return mapCopy;
     }

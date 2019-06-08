@@ -1,6 +1,7 @@
 package it.polimi.se2019.network;
 
 import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
+
 import java.util.Observer;
 
 public interface Server extends Observer {

@@ -5,16 +5,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.view.remoteView.MapView;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-public abstract class Map implements Serializable {
+public abstract class Map extends Observable implements Serializable {
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private transient final ArrayList<Room> room;
@@ -175,6 +174,10 @@ public abstract class Map implements Serializable {
         }
     }
 
+    /**
+     * Deep clone of map, player on cells are skinny
+     * @return Deep clone of map
+     */
     public Map clone() {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
@@ -190,6 +193,19 @@ public abstract class Map implements Serializable {
         }.getType();
 
         return gson.fromJson(gson.toJson(this, TYPE), TYPE);
+    }
+
+    /**
+     * Attach itself and all cells at the mapView
+     * @param mapView
+     */
+    public void attach(MapView mapView) {
+        attach((Observer) mapView);
+        for(Cell[] c1 : cell) {
+            for(Cell c : c1) {
+                if(c!=null) c.attach(mapView);
+            }
+        }
     }
 }
 

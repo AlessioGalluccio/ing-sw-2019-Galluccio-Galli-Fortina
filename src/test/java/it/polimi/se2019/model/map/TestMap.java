@@ -19,12 +19,12 @@ public class TestMap {
 
     @Before
     public void initTest() {
-        map1 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map1 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
         cell = map1.getCell();
 
-        map2 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map3 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map4 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map2 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map3 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map4 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
     }
 
     @Test

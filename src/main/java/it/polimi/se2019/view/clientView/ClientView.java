@@ -9,6 +9,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.network.configureMessage.LoginMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
@@ -260,18 +261,13 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a LoginMessage that the client send to the server
-     * @param messageID
      * @param nickname
-     * @param choosenCharacter
-     * @param authorID
-     * @param authorView
      * @return
      */
-    public LoginMessage createLoginMessage(int messageID, String nickname, Character choosenCharacter, int authorID,
-                                           PlayerView authorView){
-        LoginMessage message = new LoginMessage(nickname,choosenCharacter,authorID,authorView);
+    public void createLoginMessage(String nickname, int matchID){
+        LoginMessage message = new LoginMessage(nickname, matchID);
         notifyObservers(message);
-        return message;
+        //return message;
     }
 
 
@@ -324,7 +320,6 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     public void setPossibleTarget( ArrayList<Target> possibleTarget){
         this.possibleTarget = possibleTarget;
-
     }
 
 

@@ -28,6 +28,8 @@ public class TestFireMode {
         color1.add(RED);
         List<ColorRYB> color2 = fireMode.get(0).getCost();
 
+        System.out.println(fireMode);
+        System.out.println(color2);
         assertNotEquals(color1.size(), color2.size());
         assertEquals(true, color2.equals(fireMode.get(0).getCost()));
     }
