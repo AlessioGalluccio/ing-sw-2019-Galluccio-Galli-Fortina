@@ -36,9 +36,6 @@ public class ControllerLogin implements UiInterface {
             loginMessage = new LoginMessage(username.getText());
 
 
-
-
-
         } else {
             int matchId = Integer.parseInt(matchID.getText());
             loginMessage = new LoginMessage(username.getText(), matchId);
@@ -101,6 +98,11 @@ public class ControllerLogin implements UiInterface {
         primaryStage.setTitle("windowName");
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
+
+    }
+
+    @Override
+    public void selectedMap(int choosenMap){
 
     }
 }
