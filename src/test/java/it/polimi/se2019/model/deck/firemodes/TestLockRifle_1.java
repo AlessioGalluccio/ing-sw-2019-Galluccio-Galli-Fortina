@@ -22,10 +22,14 @@ import java.util.List;
 public class TestLockRifle_1 {
     private Player authorPlayer;
     private Player targetPlayer1;
+    private Player targetPlayer2;
+    private Player targetPlayer3;
     GameHandler gameHandler;
     Controller controller;
     Shoot shoot;
     Cell commonCell;
+
+    private final static int LOCK_RIFLE_WEAPON_ID = 14;
 
 
     @Before
@@ -33,36 +37,45 @@ public class TestLockRifle_1 {
         //TODO playerview non testata
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
+        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
+        //targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
 
+        //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
         players.add(authorPlayer);
         players.add(targetPlayer1);
+        players.add(targetPlayer2);
+        //players.add(targetPlayer3);
 
+        //settings of mock connection
         PlayerView playerView = mock(PlayerView.class);
         gameHandler = new GameHandler(players, 8);
+        gameHandler.setMap(1);
         controller = new Controller(gameHandler);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
 
 
-        Border wall = new Wall();
-        AmmoDeck deckMock = mock(AmmoDeck.class);
-        commonCell = new CellAmmo(wall,wall,wall,wall,0,0, deckMock);
-        CellSpawn cellSpawnMock = mock(CellSpawn.class);
-        ArrayList cellList = new ArrayList();
-        cellList.add(commonCell);
-        Room room = new Room(cellSpawnMock,"RED", cellList);
 
 
+
+
+        //author, target 1 and target 2 in the same cell
+        commonCell = gameHandler.getCellByCoordinate(1,1);
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
+        targetPlayer2.setPosition(commonCell);
+
+        //target 3 is in another room
+        //TODO controlla che sia un'altra statnza!!
+        //targetPlayer3.setPosition(gameHandler.getCellByCoordinate(1,2));
 
         authorPlayer.setAmmoBag(3,3,3);
 
-        //WeaponDeck weaponDeck = new WeaponDeck();
 
-        WeaponCard weapon = gameHandler.getWeaponCardByID(14);
+        //Lock_Rifle weapon
+        WeaponCard weapon = gameHandler.getWeaponCardByID(LOCK_RIFLE_WEAPON_ID);
 
         weapon.reload();
 
@@ -105,6 +118,30 @@ public class TestLockRifle_1 {
         assertEquals(2,targetPlayer1.getDamage().size());
         assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(1, authorPlayer.getMark().getMarkDone().size());
+
+    }
+
+    @Test
+    public void firePositiveOneTargetWithOptional() throws Exception {
+
+        //System.out.println("chiamo gamehandler da firemode " + shoot.fireMode.getGameHandler());
+
+        shoot.addPlayerTarget(targetPlayer1.getID());
+        shoot.addOptional(1);
+        shoot.addPlayerTarget(targetPlayer2.getID());
+        shoot.fire();
+
+        //target 1
+        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
+        assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
+
+        //target 2
+        assertEquals(0,targetPlayer2.getDamage().size());
+        assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
+
+        //author
+        assertEquals(2, authorPlayer.getMark().getMarkDone().size());
 
     }
 

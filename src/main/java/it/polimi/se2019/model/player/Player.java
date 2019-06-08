@@ -493,7 +493,7 @@ public class Player extends Observable implements Target, Serializable {
             return false;
         }
         //in the same room
-        else if(enemyRoom.equals(cellPosition.getRoom())){
+        else if(enemyRoom.equals(roomOfThis)){
             return true;
         }
         //
