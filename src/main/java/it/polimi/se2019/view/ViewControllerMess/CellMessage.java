@@ -2,6 +2,7 @@ package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class CellMessage extends ViewControllerMessage {
@@ -16,7 +17,7 @@ public class CellMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-    public CellMessage(int x, int y, int authorID, PlayerView authorView) {
+    public CellMessage(int x, int y, int authorID, View authorView) {
         this.x = x;
         this.y = y;
         this.messageID = Identificator.CELL_MESSAGE;

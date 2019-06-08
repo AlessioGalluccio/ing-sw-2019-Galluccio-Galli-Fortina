@@ -3,6 +3,7 @@ package it.polimi.se2019.view.ViewControllerMess;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ReloadMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-    public ReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView) {
+    public ReloadMessage(WeaponCard weapon, int authorID, View authorView) {
 
         this.weaponID = weapon.getID();
         this.messageID = Identificator.RELOAD_MESSAGE;

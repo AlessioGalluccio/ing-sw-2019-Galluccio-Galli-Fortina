@@ -81,13 +81,9 @@ public class ClientView extends View /*View implement observer/observable*/{
      * create a CellMessage that the client send to the server
      * @param x
      * @param y
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public CellMessage createCellMessage(int x, int y, int authorID, PlayerView authorView){
-        CellMessage message = new CellMessage(x,y,authorID,authorView);
+    public CellMessage createCellMessage(int x, int y){
+        CellMessage message = new CellMessage(x,y,playerCopy.getID(),this);
         notifyObservers(message);
         return message;
     }
@@ -95,13 +91,9 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * create a PlayerMessage that the client send to the server
      * @param playerID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public PlayerMessage createPlayerViewMessage(int playerID, int authorID, PlayerView authorView){
-        PlayerMessage message = new PlayerMessage(playerID,authorID,authorView);
+    public PlayerMessage createPlayerViewMessage(int playerID){
+        PlayerMessage message = new PlayerMessage(playerID,playerCopy.getID(),this);
         notifyObservers(message);
         return message;
     }
@@ -110,26 +102,18 @@ public class ClientView extends View /*View implement observer/observable*/{
      * create a CardSpawnChooseMessage that the client send to the server
      * @param cardChoosen
      * @param cardDiscarded
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded,
-                                                               int authorID, PlayerView authorView){
-        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,authorID,authorView);
+    public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded){
+        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,playerCopy.getID(),this);
         notifyObservers(message);
         return message;
     }
 
     /**
      * create a NopeMessage that the client send to the server
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public NopeMessage createNopeMessage(int authorID, PlayerView authorView){
-        NopeMessage message = new NopeMessage(authorID,authorView);
+    public NopeMessage createNopeMessage(){
+        NopeMessage message = new NopeMessage(playerCopy.getID(),this);
         notifyObservers(message);
         return message;
     }
@@ -137,68 +121,47 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * create a ActionMessage that the client send to the server
      * @param actionID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public ActionMessage createActionMessage(int actionID, int authorID, PlayerView authorView){
+    public void createActionMessage(int actionID, int authorID, PlayerView authorView){
         ActionMessage message = new ActionMessage(actionID,authorID,authorView);
         notifyObservers(message);
-        return message;
     }
 
 
     /**
      * create a NewtonMessage that the client send to the server
      * @param usedCard
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public NewtonMessage createNewtonMessage(NewtonCard usedCard, int authorID, PlayerView authorView){
-        NewtonMessage message = new NewtonMessage(usedCard,authorID,authorView);
+    public void createNewtonMessage(NewtonCard usedCard){
+        NewtonMessage message = new NewtonMessage(usedCard,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a ReloadMessage that the client send to the server
      * @param weapon
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public ReloadMessage createReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView){
-        ReloadMessage message = new ReloadMessage(weapon,authorID,authorView);
+    public void createReloadMessage(WeaponCard weapon){
+        ReloadMessage message = new ReloadMessage(weapon,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a TeleporterMessage that the client send to the server
      * @param usedCard
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard, int authorID, PlayerView authorView){
-        TeleporterMessage message = new TeleporterMessage(usedCard,authorID,authorView);
+    public void createTeleporterMessage(TeleporterCard usedCard){
+        TeleporterMessage message = new TeleporterMessage(usedCard,playerCopy.getID(), this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a TargetingScopeMessage that the client send to the server
      * @param usedCard
      * @param colorRYB
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB,
-                                                             int authorID, PlayerView authorView){
-        TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB,authorID,authorView);
+    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
+        TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB, playerCopy.getID(),this);
         notifyObservers(message);
         return message;
     }
@@ -206,68 +169,44 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * create a TagbackGranateMessage that the client send to the server
      * @param usedCard
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-
-    public TagbackGranateMessage createTagbackGranadeMessage(TagbackGranedCard usedCard, int authorID,
-                                                             PlayerView authorView){
-        TagbackGranateMessage message = new TagbackGranateMessage(usedCard,authorID,authorView);
+    public void createTagbackGranadeMessage(TagbackGranedCard usedCard){
+        TagbackGranateMessage message = new TagbackGranateMessage(usedCard,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a FireModeMessage that the client send to the server
      * @param firemodeID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public FireModeMessage createFireModeMessage(int firemodeID, int authorID, PlayerView authorView){
-        FireModeMessage message = new FireModeMessage(firemodeID,authorID,authorView);
+    public void createFireModeMessage(int firemodeID) {
+        FireModeMessage message = new FireModeMessage(firemodeID,playerCopy.getID(), this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a EndMessage that the client send to the server
-     * @param messageID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public EndMessage createEndMessage (int messageID, int authorID, PlayerView authorView){
-        EndMessage message = new EndMessage(authorID,authorView);
+    public void createEndMessage(){
+        EndMessage message = new EndMessage(playerCopy.getID(), this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a UndoMessage that the client send to the server
-     * @param messageID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public UndoMessage createUndoMessage(int messageID, int authorID, PlayerView authorView){
-        UndoMessage message = new UndoMessage(authorID,authorView);
+    public void createUndoMessage() {
+        UndoMessage message = new UndoMessage(playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a LoginMessage that the client send to the server
      * @param nickname
-     * @return
      */
     public void createLoginMessage(String nickname, int matchID){
         LoginMessage message = new LoginMessage(nickname, matchID);
         notifyObservers(message);
-        //return message;
     }
 
 
@@ -275,7 +214,6 @@ public class ClientView extends View /*View implement observer/observable*/{
      * verify that the target choosen by the player is contained in the ArrayList of available targets
      * @return
      */
-
     private boolean verifyTarget(){
 
         for (int counter = 0; counter < possibleTarget.size(); counter++) {
@@ -305,8 +243,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      */
     @Override
     public void printFromController(String string) {
-
-        System.out.println(string);
+        //Call method from UiInterface
     }
 
 

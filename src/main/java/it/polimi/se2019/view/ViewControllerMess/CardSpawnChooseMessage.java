@@ -3,6 +3,7 @@ package it.polimi.se2019.view.ViewControllerMess;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 
@@ -18,7 +19,7 @@ public class CardSpawnChooseMessage extends ViewControllerMessage {
      * @param authorView
      */
     public CardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded, int authorID,
-            PlayerView authorView) {
+                                  View authorView) {
         this.cardChoosen = cardChoosen;
         this.cardDiscarded = cardDiscarded;
         this.messageID = Identificator.CARD_SPAWN_CHOOSE_MESSAGE;
