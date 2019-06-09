@@ -3,6 +3,8 @@ package it.polimi.se2019.network.rmi;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,21 +25,18 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     private RmiClientInterface client;
     private int duration;
     private PlayerView view;
+    private ExecutorService executor;
 
     public RmiHandler(RmiClientInterface client, int duration, RMIServer server) throws RemoteException  {
         this.client = client;
         this.duration = duration*1000;
         this.server = server;
+        executor = Executors.newCachedThreadPool();
     }
 
     @Override
     public void update(java.util.Observable o, Object arg) {
-        try {
-            client.receiveMessage((HandlerNetworkMessage) arg);
-        } catch (RemoteException e) {
-            Logger.getLogger(RmiHandler.class.getName()).log(Level.SEVERE, "Problem sending message to client", e);
-        }
-
+        executor.submit(new Sender((HandlerNetworkMessage) arg));
     }
 
     @Override
@@ -91,5 +90,22 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     @Override
     public void forwardViewMessage(HandlerServerMessage message) {
 
+    }
+
+    private class Sender implements Runnable {
+        HandlerNetworkMessage message;
+
+        Sender(HandlerNetworkMessage message) {
+            this.message = message;
+        }
+
+        @Override
+        public void run() {
+            try {
+                client.receiveMessage(message);
+            } catch (RemoteException e) {
+                Logger.getLogger(RmiHandler.class.getName()).log(Level.SEVERE, "Can't send message to RMI client", e);
+            }
+        }
     }
 }

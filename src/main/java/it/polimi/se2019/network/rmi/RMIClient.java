@@ -68,8 +68,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
                 server.send(message);
             } catch (RemoteException e) {
                 Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
-            }finally {
-                System.out.println("EXIT SENDER");
             }
         }
     }
