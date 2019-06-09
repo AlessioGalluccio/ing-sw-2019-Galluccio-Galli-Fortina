@@ -24,6 +24,16 @@ public class Mark implements Serializable {
         return new ArrayList<>(markDone);
     }
 
+    public int getNumMarkDoneTo(Player target){
+        int numMarks = 0;
+        for(Player temp : markDone){
+            if(temp.getID() == target.getID()){
+                numMarks++;
+            }
+        }
+        return numMarks;
+    }
+
     /**
      *
      * @return list of marks received by other players

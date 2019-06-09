@@ -177,6 +177,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      * @param numMarks number of Marks to apply
      */
     protected void addDamageAndMarks(Player targetPlayer, int numDamage, int numMarks){
+        //TODO I must add also the damege of the previous marks!
         for(int i = 0; i < numDamage; i++){
             try{
                 targetPlayer.receiveDamageBy(author);
