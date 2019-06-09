@@ -4,6 +4,7 @@ package it.polimi.se2019.ui;
 
 
 import it.polimi.se2019.MyThread;
+import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
 
@@ -26,6 +27,8 @@ import javafx.stage.Stage;
 
 public class Controller {
 
+    ClientView clientView;
+
     @FXML
     public Button moveButton;
     @FXML
@@ -43,8 +46,9 @@ public class Controller {
     public ToggleGroup AddFiremode;
     public TextField skulls;
     public Label errorSkulls;
-    public Button suddenDeathYes;
-    public Button suddenDeathNo;
+    public RadioButton suddenDeathYes;
+    public RadioButton suddenDeathNo;
+    public Button sendButton;
 
 
     @FXML
@@ -287,6 +291,7 @@ public class Controller {
     public ImageView enemy2Damage5;
 
     private int suddenDeath = 2;
+    private int skull = 0;
 
     @FXML
     public Label labelProva;
@@ -298,54 +303,79 @@ public class Controller {
     //con lo stesso come dato in fx:id e in onAction metto il metodo
 
 
+    public void skullCheck(ActionEvent event){
 
+        skull = Integer.parseInt(skulls.getText());
+        if(skull<1 ||skull >8){
+            errorSkulls.setVisible(true);
+        }
+        else
+            errorSkulls.setVisible(false);
+
+
+        System.out.println(skull);
+
+
+    }
+
+
+    public void chooseMap(ActionEvent event){
+
+        if(rbmap1.isSelected()){
+            choosenMap = 1;
+            System.out.println(choosenMap);
+        }
+
+        if(rbmap2.isSelected()){
+            choosenMap = 2;
+            System.out.println(choosenMap);
+        }
+
+        if(rbmap3.isSelected()){
+            choosenMap = 3;
+            System.out.println(choosenMap);
+        }
+
+        if(rbmap4.isSelected()){
+            choosenMap = 4;
+            System.out.println(choosenMap);
+        }
+
+    }
 
 
     public void sendSetting(ActionEvent event) throws Exception{
 
 
         //mappa.setImage(new Image("mappa.jpg"));
-
-        if(rbmap1.isSelected()){
-
-            choosenMap = 1;
-
+        //TODO creo sempre clientView??
+        clientView = new ClientView();
+        if(suddenDeathYes.isSelected()){
+            suddenDeath=1;
+            System.out.println(suddenDeath);
+        }
+        if(suddenDeathNo.isSelected()){
+            suddenDeath=0;
+            System.out.println(suddenDeath);
         }
 
+        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((skull>=1)&&(skull<=8))&&((suddenDeath==0) || (suddenDeath==1))){
+            boolean sd;
+            if(suddenDeath==0) {
+                sd=false;
+            }
+            else {
+                sd = true;
+            }
+            System.out.println("recap");
+            System.out.println(choosenMap);
+            System.out.println(skull);
+            System.out.println(suddenDeath);
+            clientView.createSettingMessage(choosenMap,skull,sd);
 
-        if(rbmap2.isSelected()){
-
-            choosenMap = 2;
-
+            Stage stage = (Stage) rbmap2.getScene().getWindow();
+            stage.close();
         }
-
-        if(rbmap3.isSelected()){
-            choosenMap = 3;
-
-        }
-
-        if(rbmap4.isSelected()){
-            choosenMap = 4;
-
-        }
-
-        int skull = Integer.parseInt(skulls.getText());
-        while(skull<1 ||skull >8){
-            errorSkulls.setVisible(true);
-            skull = Integer.parseInt(skulls.getText());
-        }
-
-        errorSkulls.setVisible(false);
-
-        if(su)
-
-
-
-        Stage stage = (Stage) rbmap2.getScene().getWindow();
-
-        stage.close();
-
-
 
 
 
