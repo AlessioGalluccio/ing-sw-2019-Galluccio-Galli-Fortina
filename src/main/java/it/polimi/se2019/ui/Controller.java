@@ -41,7 +41,10 @@ public class Controller {
     public RadioButton firemodeOp2;
     public RadioButton firemodeOp3;
     public ToggleGroup AddFiremode;
-
+    public TextField skulls;
+    public Label errorSkulls;
+    public Button suddenDeathYes;
+    public Button suddenDeathNo;
 
 
     @FXML
@@ -64,7 +67,7 @@ public class Controller {
     @FXML
     public Button showMap;
 
-    private static int choosenMap;
+    private int choosenMap =0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -283,6 +286,8 @@ public class Controller {
     public ImageView enemy2Damage4;
     public ImageView enemy2Damage5;
 
+    private int suddenDeath = 2;
+
     @FXML
     public Label labelProva;
 
@@ -296,7 +301,7 @@ public class Controller {
 
 
 
-    public void chooseMap(ActionEvent event) throws Exception{
+    public void sendSetting(ActionEvent event) throws Exception{
 
 
         //mappa.setImage(new Image("mappa.jpg"));
@@ -304,55 +309,53 @@ public class Controller {
         if(rbmap1.isSelected()){
 
             choosenMap = 1;
-            System.out.println(choosenMap);
-            // get a handle to the stage
-            Stage stage = (Stage) rbmap1.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+
         }
 
 
         if(rbmap2.isSelected()){
 
             choosenMap = 2;
-            System.out.println(choosenMap);
-            // get a handle to the stage
-            Stage stage = (Stage) rbmap2.getScene().getWindow();
-            // do what you have to do
-            stage.close();
-
 
         }
 
         if(rbmap3.isSelected()){
             choosenMap = 3;
-            // get a handle to the stage
-            Stage stage = (Stage) rbmap2.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+
         }
 
         if(rbmap4.isSelected()){
             choosenMap = 4;
-            // get a handle to the stage
-            Stage stage = (Stage) rbmap2.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+
         }
 
+        int skull = Integer.parseInt(skulls.getText());
+        while(skull<1 ||skull >8){
+            errorSkulls.setVisible(true);
+            skull = Integer.parseInt(skulls.getText());
+        }
+
+        errorSkulls.setVisible(false);
+
+        if(su)
 
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Map4.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("Map4");
-        primaryStage.setScene(new Scene(root, 800, 600));
-        primaryStage.show();
+
+        Stage stage = (Stage) rbmap2.getScene().getWindow();
+
+        stage.close();
 
 
 
 
 
     }
+
+
+
+
+
+
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
@@ -628,4 +631,6 @@ public class Controller {
         stage.close();
 
     }
+
+
 }

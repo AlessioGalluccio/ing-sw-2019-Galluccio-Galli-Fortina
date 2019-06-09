@@ -95,7 +95,7 @@ public class ControllerLogin implements UiInterface {
     public void open(String fileName, String windowName, int width, int height) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(fileName));
         Stage primaryStage = new Stage();
-        primaryStage.setTitle("windowName");
+        primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
 
