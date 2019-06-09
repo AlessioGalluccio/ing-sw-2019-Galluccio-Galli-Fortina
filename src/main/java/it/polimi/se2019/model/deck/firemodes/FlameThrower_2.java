@@ -26,21 +26,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
     @Override
     public void fire() throws WrongInputException{
         if(!shoot.getTargetsCells().isEmpty()){
-            switch(getDirection(shoot.getTargetsCells().get(0))){
-                //TODO
-                case NORTH:
-                    //Cell northCell = author.getCell().getCoordinateX()
-                    break;
-                case EAST:
-
-                    break;
-                case SOUTH:
-
-                    break;
-                case WEST:
-
-                    break;
-            }
+           //TODO
         }
 
 
