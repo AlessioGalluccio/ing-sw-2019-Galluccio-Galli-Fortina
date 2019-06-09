@@ -26,10 +26,7 @@ public class HasReloadedControllerState implements StateController {
         this.playerView = controller.getPlayerView();
     }
 
-    @Override
-    public void handle(ViewControllerMessage arg) {
-        arg.handle(this);
-    }
+
 
     @Override
     public void handleAction(int actionID) {
@@ -113,6 +110,21 @@ public class HasReloadedControllerState implements StateController {
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
         youCantDoThis();
+    }
+
+    @Override
+    public void handlePassTurn() {
+        //TODO
+    }
+
+    @Override
+    public void handleFire() {
+        //TODO
+    }
+
+    @Override
+    public void handle(ViewControllerMessage arg) {
+        arg.handle(this);
     }
 
     private void youCantDoThis(){

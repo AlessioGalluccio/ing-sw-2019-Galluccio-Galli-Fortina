@@ -146,6 +146,16 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
+    public void handlePassTurn() {
+        //TODO
+    }
+
+    @Override
+    public void handleFire() {
+        //TODO
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         controller.addMessageListReceived(arg);
         arg.handle(this);

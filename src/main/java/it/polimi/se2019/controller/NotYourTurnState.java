@@ -104,6 +104,17 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
+    public void handlePassTurn() {
+        //TODO
+    }
+
+    @Override
+    public void handleFire() {
+        //TODO
+    }
+
+
+    @Override
     public void handle(ViewControllerMessage arg) {
 
         //controlls if it's the turn of the player. If it is, it changes the state and it passes the message to the new state

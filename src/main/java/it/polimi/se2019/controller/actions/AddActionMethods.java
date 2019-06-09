@@ -25,4 +25,6 @@ public interface AddActionMethods extends AddFireModeMethods{
     //void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
 
     //void addNope() throws WrongInputException;
+
+    //void fire() throws WrongInputException;
 }

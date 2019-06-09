@@ -20,4 +20,6 @@ public interface AddFireModeMethods {
 
     void addNope() throws WrongInputException;
 
+    void fire() throws WrongInputException;
+
 }

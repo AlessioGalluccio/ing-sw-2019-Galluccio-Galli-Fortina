@@ -9,6 +9,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
@@ -121,8 +122,15 @@ public class GameHandler extends Observable {
      * @param y coordinate x of the Cell
      * @return the Cell which has x and y coordinates, null if there's not
      */
-    public Cell getCellByCoordinate(int x, int y) {
-        return map.getCellByCoo(x, y);
+    public Cell getCellByCoordinate(int x, int y) throws NotPresentException {
+        //TODO serve eccezione se esci dalla mappa!!!
+        if(map.getCellByCoo(x, y) == null){
+            throw new NotPresentException();
+        }
+        else{
+            return map.getCellByCoo(x, y);
+        }
+
     }
 
     /**

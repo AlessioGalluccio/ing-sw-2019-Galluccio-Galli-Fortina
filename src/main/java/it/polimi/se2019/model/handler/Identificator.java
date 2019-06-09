@@ -20,9 +20,10 @@ public class Identificator {
     public static final int TARGET_MESSAGE = 10;
     public static final int TELEPORTER_MESSAGE = 11;
     public static final int LOGIN_MESSAGE = 12;
-    public static final int END_MESSAGE = 13;
+    public static final int PASS_MESSAGE = 13;
     public static final int UNDO_MESSAGE = 14;
     public static final int WEAPON_MESSAGE = 15;
+    public static final int FIRE_MESSAGE = 16;
 
     //list of ID of actions
     public static final int MOVE = 1;

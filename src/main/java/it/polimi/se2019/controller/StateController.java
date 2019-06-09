@@ -42,4 +42,8 @@ public interface StateController {
 
     public void handleWeaponCard(WeaponCard usedCard);
 
+    public void handlePassTurn();
+
+    public void handleFire();
+
 }

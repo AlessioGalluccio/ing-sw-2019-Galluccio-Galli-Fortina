@@ -97,10 +97,8 @@ public class Shoot extends Action{
 
     @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
-        //TODO fai in modo che firemode abbia riferimento a shoot!!
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
-
 
         AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
         if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
@@ -167,7 +165,7 @@ public class Shoot extends Action{
         return targets;
     }
 
-    public ArrayList<Cell> getCells() {
+    public ArrayList<Cell> getTargetsCells() {
         return cells;
     }
 
@@ -237,4 +235,6 @@ public class Shoot extends Action{
     public void payActionCost() throws NotEnoughAmmoException{
         playerAuthor.payAmmoCost(this.cost);
     }
+
+
 }

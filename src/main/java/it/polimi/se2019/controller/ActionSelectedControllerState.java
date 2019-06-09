@@ -192,6 +192,20 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     @Override
+    public void handlePassTurn() {
+        //TODO
+    }
+
+    @Override
+    public void handleFire() {
+        try {
+            action.fire();
+        }catch(WrongInputException e){
+            //TODO
+        }
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         if(startingHandler(arg)){
             arg.handle(this);

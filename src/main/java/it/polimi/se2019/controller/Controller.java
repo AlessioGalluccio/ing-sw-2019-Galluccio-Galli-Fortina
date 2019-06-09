@@ -29,7 +29,7 @@ public class Controller implements Observer {
     private final GameHandler gameHandler;
     private StateController state;
     private int numOfActionTaken;
-    public final int MAX_NUM_OF_ACTION = 2;
+    public int numOfMaxActions = 2;
 
     public Controller(GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
@@ -39,6 +39,8 @@ public class Controller implements Observer {
         this.numOfActionTaken = 0;
         this.state = new NotYourTurnState(this, gameHandler);
     }
+
+    /////////////////GETTERS
 
     /**
      * set the author of the messages received
@@ -57,19 +59,13 @@ public class Controller implements Observer {
         return this.playerAuthor;
     }
 
-    public void setPlayerView(PlayerView playerView) {
-        this.playerView = playerView;
+    /**
+     * get the number of max action per turn. It can change in come modalities
+     * @return int number of max action per turn
+     */
+    public int getNumOfMaxActions() {
+        return numOfMaxActions;
     }
-
-    public void addPlayerView(PlayerView playerView){
-        this.playerView = playerView;
-    }
-
-    public void addPlayer(Player player){
-        this.player = player;
-    }
-
-    //getter and Setters
 
     public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {
         GsonBuilder g = new GsonBuilder()
@@ -105,6 +101,8 @@ public class Controller implements Observer {
         messageListExpected.remove(last);
     }
 
+    /////////////////////SETTERS
+
     public int getIndexExpected() {
         return indexExpected;
     }
@@ -115,6 +113,18 @@ public class Controller implements Observer {
 
     public int getNumOfActionTaken() {
         return numOfActionTaken;
+    }
+
+    public void setPlayerView(PlayerView playerView) {
+        this.playerView = playerView;
+    }
+
+    public void addPlayerView(PlayerView playerView){
+        this.playerView = playerView;
+    }
+
+    public void addPlayer(Player player){
+        this.player = player;
     }
 
     public void setMessageListReceived(ArrayList<ViewControllerMessage> messageListReceived) {
@@ -145,6 +155,13 @@ public class Controller implements Observer {
         this.numOfActionTaken = numOfActionTaken;
     }
 
+    /**
+     * change the number of max actions per turn. The default is 2
+     * @param numOfMaxActions
+     */
+    public void setNumOfMaxActions(int numOfMaxActions) {
+        this.numOfMaxActions = numOfMaxActions;
+    }
 
     //methods
 
