@@ -60,11 +60,6 @@ public class MachineGun_1 extends FireMode {
     }
 
     @Override
-    public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
         int targetID = target.getID();
@@ -120,11 +115,5 @@ public class MachineGun_1 extends FireMode {
             throw new WrongInputException();
         }
 
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-        //TODO
-        throw new WrongInputException();
     }
 }

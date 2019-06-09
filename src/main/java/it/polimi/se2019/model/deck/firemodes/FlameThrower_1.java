@@ -13,14 +13,6 @@ public class FlameThrower_1 extends FireMode {
 
     //firstly, we choose a direction of fire with CellMessage, then we select the targets inside
 
-    protected static final int NORTH = 0;
-    protected static final int EAST = 1;
-    protected static final int SOUTH = 2;
-    protected static final int WEST = 3;
-
-
-
-
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         //TODO da fare!
@@ -65,13 +57,13 @@ public class FlameThrower_1 extends FireMode {
         Player target = gameHandler.getPlayerByID(playerID);
         //it's the first target and direction is the same of the cell choosen
         if(!shoot.getTargetsCells().isEmpty() && (shoot.getTargetsPlayer().isEmpty()) &&
-                getDirection(target.getCell()) == getDirection(shoot.getTargetsCells().get(0))){
+                getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0))){
             shoot.addPlayerTargetFromFireMode(target);
         }
         //it's the second target. He is not in the same cell of the precedent
         else if(!shoot.getTargetsCells().isEmpty() && (!shoot.getTargetsCells().isEmpty()) &&
                 shoot.getTargetsCells().size() == 1 &&
-                getDirection(target.getCell()) == getDirection(shoot.getTargetsCells().get(0)) &&
+                getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0)) &&
                 !(target.getCell().equals(shoot.getTargetsPlayer().get(0).getCell()))){
             shoot.addPlayerTargetFromFireMode(target);
         }
@@ -92,100 +84,45 @@ public class FlameThrower_1 extends FireMode {
         Cell authorCell = author.getCell();
         ArrayList<Cell> cellTargets = new ArrayList<>();
 
-        //NORTH
-        try{
-            Cell northCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX(),
-                    authorCell.getCoordinateY() + 1);
-            if(authorCell.getNorthBorder().isCrossable() && !northCell.getPlayerHere().isEmpty()){
-                cellTargets.add(northCell);
-            }
-            //if I get an exception after this, I can fire anyway to the north target
-            Cell moreNorthCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX(),
-                    authorCell.getCoordinateY() + 2);
-            if(northCell.getNorthBorder().isCrossable() && !moreNorthCell.getPlayerHere().isEmpty()){
-                cellTargets.add(moreNorthCell);
-            }
+        List<Cell> cellsAtDistance1And2 = gameHandler.getMap().getCellAtDistance(authorCell,1);
+        cellsAtDistance1And2.addAll(gameHandler.getMap().getCellAtDistance(authorCell,2));
 
-        }catch (NotPresentException e){
-            //do nothing
-        }
+        List<Cell> cellsInDirection = gameHandler.getMap().getCellInDirection(authorCell,'N');
+        cellsInDirection.addAll(gameHandler.getMap().getCellInDirection(authorCell,'E'));
+        cellsInDirection.addAll(gameHandler.getMap().getCellInDirection(authorCell,'S'));
+        cellsInDirection.addAll(gameHandler.getMap().getCellInDirection(authorCell,'W'));
 
-        //EAST
-        try{
-            Cell eastCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX() + 1,
-                    authorCell.getCoordinateY());
-            if(authorCell.getEastBorder().isCrossable() && !eastCell.getPlayerHere().isEmpty()){
-                cellTargets.add(eastCell);
+        //intersection between cells at distance 1 and 2 and cells in directions
+        for(Cell firstCell : cellsAtDistance1And2){
+            for(Cell secondCell : cellsInDirection){
+                if(firstCell.equals(secondCell)){
+                    cellTargets.add(firstCell);
+                }
             }
-            //if I get an exception after this, I can fire anyway to the east target
-            Cell moreEastCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX() + 2,
-                    authorCell.getCoordinateY());
-            if(eastCell.getEastBorder().isCrossable() && !moreEastCell.getPlayerHere().isEmpty()){
-                cellTargets.add(moreEastCell);
-            }
-
-        }catch (NotPresentException e){
-            //do nothing
-        }
-
-        //SOUTH
-        try{
-            Cell southCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX(),
-                    authorCell.getCoordinateY() - 1);
-            if(authorCell.getSouthBorder().isCrossable() && !southCell.getPlayerHere().isEmpty()){
-                cellTargets.add(southCell);
-            }
-            //if I get an exception after this, I can fire anyway to the east target
-            Cell moreSouthCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX(),
-                    authorCell.getCoordinateY() -2);
-            if(southCell.getSouthBorder().isCrossable() && !moreSouthCell.getPlayerHere().isEmpty()){
-                cellTargets.add(moreSouthCell);
-            }
-
-        }catch (NotPresentException e){
-            //do nothing
-        }
-
-        //WEST
-        try{
-            Cell westCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX() - 1,
-                    authorCell.getCoordinateY());
-            if(authorCell.getWestBorder().isCrossable() && !westCell.getPlayerHere().isEmpty()){
-                cellTargets.add(westCell);
-            }
-            //if I get an exception after this, I can fire anyway to the east target
-            Cell moreWestCell = gameHandler.getCellByCoordinate(authorCell.getCoordinateX(),
-                    authorCell.getCoordinateY() -2);
-            if(westCell.getWestBorder().isCrossable() && !moreWestCell.getPlayerHere().isEmpty()){
-                cellTargets.add(moreWestCell);
-            }
-
-        }catch (NotPresentException e){
-            //do nothing
         }
 
         return cellTargets;
     }
 
-    protected int getDirection(Cell cellTarget) throws WrongInputException{
+    protected char getDirectionMax2(Cell cellTarget) throws WrongInputException{
         int x = cellTarget.getCoordinateX();
         int y = cellTarget.getCoordinateY();
 
         if(x == author.getCell().getCoordinateX() && (y == author.getCell().getCoordinateY() + 1) ||
                 (y == author.getCell().getCoordinateY() + 2)){
-            return NORTH;
+            return 'N';
         }
         else if((x == author.getCell().getCoordinateX() + 1)||(x == author.getCell().getCoordinateX() + 2) &&
                 (y == author.getCell().getCoordinateY())){
-            return EAST;
+            return 'E';
         }
         else if(x == author.getCell().getCoordinateX() && (y == author.getCell().getCoordinateY() - 1) ||
                 (y == author.getCell().getCoordinateY() - 2)){
-            return SOUTH;
+            return 'S';
         }
         else if((x == author.getCell().getCoordinateX() - 1)||(x == author.getCell().getCoordinateX() - 2) &&
                 (y == author.getCell().getCoordinateY())){
-            return WEST;
+            return 'W';
         }
         else{
             throw new WrongInputException();

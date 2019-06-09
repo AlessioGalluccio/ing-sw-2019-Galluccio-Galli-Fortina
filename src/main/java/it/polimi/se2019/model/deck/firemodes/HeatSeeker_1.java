@@ -52,11 +52,6 @@ public class HeatSeeker_1 extends FireMode {
     }
 
     @Override
-    public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player targetPlayer = gameHandler.getPlayerByID(playerID);
         if(shoot.getTargetsPlayer().isEmpty() && !targetPlayer.isVisibleBy(author)){
@@ -66,15 +61,5 @@ public class HeatSeeker_1 extends FireMode {
             throw new WrongInputException();
         }
 
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-        throw new WrongInputException();
     }
 }
