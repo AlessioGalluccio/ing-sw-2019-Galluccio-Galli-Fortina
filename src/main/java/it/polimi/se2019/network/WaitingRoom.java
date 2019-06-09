@@ -81,7 +81,7 @@ public class WaitingRoom {
      */
     private synchronized boolean checkNickname(String nickname, int matchID) throws DisconnectedException {
         for(WaitingPlayer wp : playerWaiting) {
-            if(wp.getPlayer().getNickname().equals(nickname)) return false;
+            if(wp.player.getNickname().equals(nickname)) return false;
         }
         for(GameHandler gm : macthes) {
             for(Player p : gm.getOrderPlayerList()) {
@@ -131,11 +131,12 @@ public class WaitingRoom {
     }
 
     private void setTimer() {
-        if(timer==null) timer = new Timer();
-        else timer.cancel();
+        if(timer!=null) timer.cancel();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Timeout, a new game is going to start");
                 if(playerWaiting.size()>=3) startMatch();
                 timer=null;
             }
@@ -148,26 +149,26 @@ public class WaitingRoom {
      * In the end attach every observer to his observable
      */
     private synchronized void startMatch() {
-        GameHandler gm = macthes.get(macthes.size() - 1);
+        GameHandler gameHandler = macthes.get(macthes.size() - 1);
         //Create all views and attach networkHandler
         MapView mapView = new MapView();
         SkullBoardView skullBoardView = new SkullBoardView();
         List<EnemyView> enemyViews = new LinkedList<>();
         for (WaitingPlayer wp : playerWaiting) {
-            mapView.attach(wp.getNetworkHandler());
-            skullBoardView.attach(wp.getNetworkHandler());
-            enemyViews.add(wp.getEnemyView());
+            mapView.attach(wp.networkHandler);
+            skullBoardView.attach(wp.networkHandler);
+            enemyViews.add(wp.enemyView);
             for (WaitingPlayer wp2 : playerWaiting) {
                 //Attach each enemy view at the network handler of the ENEMY (not at himself)
-                if (!wp.getEnemyView().getNickname().equals(wp2.getPlayer().getNickname())) {
-                    wp2.getNetworkHandler().update(null, new EnemyMessage(wp2.getEnemyView().getNickname()));
+                if (!wp.enemyView.getNickname().equals(wp2.player.getNickname())) {
+                    wp2.networkHandler.update(null, new EnemyMessage(wp2.enemyView.getNickname()));
                 }
             }
-            gm.setUp(wp.getPlayer(), wp.getPlayerView());
-            gm.attachAll(mapView, skullBoardView, enemyViews);
+            gameHandler.setUp(wp.player, wp.playerView);
+            gameHandler.attachAll(mapView, skullBoardView, enemyViews);
         }
 
-        gm.start();
+        gameHandler.start();
         playerWaiting.clear();
         notifyAll(); //Wake threads that are waiting the playerWaiting list is <5
         isFirst = true;
@@ -203,4 +204,21 @@ public class WaitingRoom {
 
         Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Map&Co. set");
     }
+
+    private class WaitingPlayer {
+        Player player;
+        PlayerView playerView;
+        Controller controller;
+        Server networkHandler;
+        EnemyView enemyView;
+
+        WaitingPlayer(Player player, PlayerView playerView, Controller controller, Server networkHandler, EnemyView enemyView) {
+            this.player = player;
+            this.playerView = playerView;
+            this.controller = controller;
+            this.networkHandler = networkHandler;
+            this.enemyView = enemyView;
+        }
+    }
+
 }

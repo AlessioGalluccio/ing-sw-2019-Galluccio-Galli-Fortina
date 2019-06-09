@@ -73,6 +73,11 @@ public class PlayerView extends View /*View implement observer/observable*/{
         networkHandler.send(string);
     }
 
+    @Override
+    public void handleStartGameMessage(StartGameMessage startGameMessage) {
+        //Is only to forward, already done by update()
+    }
+
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
     }
@@ -82,7 +87,4 @@ public class PlayerView extends View /*View implement observer/observable*/{
         this.networkHandler = networkHandler;
     }
 
-    public void handleStartGameMessage(StartGameMessage startGameMessage) {
-        networkHandler.update(null, startGameMessage);
-    }
 }
