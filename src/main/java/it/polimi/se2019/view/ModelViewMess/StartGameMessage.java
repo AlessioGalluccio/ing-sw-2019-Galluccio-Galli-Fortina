@@ -14,7 +14,7 @@ public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMess
 
     @Override
     public void handleMessage(Client client) {
-
+        client.forwardToClientView(this);
     }
 
 }

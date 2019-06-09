@@ -12,6 +12,7 @@ public class ClientMain {
 
         CLI cli = new CLI(clientView);
         clientView.setUi(cli);
+
         SocketClient socket = new SocketClient(9001, "localhost", clientView);
         socket.connect();
         clientView.setUp(socket);

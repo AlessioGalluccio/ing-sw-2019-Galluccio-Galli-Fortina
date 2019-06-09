@@ -105,4 +105,9 @@ public class ControllerLogin implements UiInterface {
     public void selectedMap(int choosenMap){
 
     }
+
+    @Override
+    public void startGame() {
+
+    }
 }

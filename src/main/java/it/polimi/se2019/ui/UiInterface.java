@@ -6,7 +6,8 @@ public interface UiInterface {
 
     void selectedMap(int choosenMap);
 
-    //TODO aggiungere metodo start() che avvii il gioco!!!
+
+    void startGame();
 
     //TODO aggiungere metodo per gestire printFromController
 

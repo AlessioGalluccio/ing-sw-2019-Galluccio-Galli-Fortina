@@ -1,6 +1,7 @@
 package it.polimi.se2019.network;
 
 import it.polimi.se2019.ui.UiInterface;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
@@ -26,23 +27,23 @@ public abstract class Client implements Observer {
         clientView.handleLogin(success, isFirst);
     }
 
-    public void forwardToClientView() {
-
+    public void forwardToClientView(ModelViewMessage message) {
+        clientView.update(null, message);
     }
 
     public void handleEnemyMessage(String nickname) {
         enemyViews.add(new ClientEnemyView(nickname));
     }
 
-    public void forwardToEnemyView() {
+    public void forwardToEnemyView(ModelViewMessage message) {
 
     }
 
-    public void forwardToMapView() {
+    public void forwardToMapView(ModelViewMessage message) {
 
     }
 
-    public void forwardToSkullBoardView() {
+    public void forwardToSkullBoardView(ModelViewMessage message) {
 
     }
 

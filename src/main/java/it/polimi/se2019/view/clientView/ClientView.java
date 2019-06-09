@@ -237,7 +237,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     @Override
     public void handleStartGameMessage(StartGameMessage startGameMessage) {
-        //TODO
+        ui.startGame();
     }
 
     @Override
