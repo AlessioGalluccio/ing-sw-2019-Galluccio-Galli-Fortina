@@ -2,6 +2,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.*;
@@ -127,12 +128,24 @@ public class TestLockRifle_1 {
     }
 
     @Test
+    public void firePositiveNoTargetForOptional()  throws Exception{
+        //even if optional has no target, you can fire
+        shoot.addPlayerTarget(targetPlayer1.getID());
+        shoot.addOptional(1);
+        shoot.fire();
+
+        assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
+
+        assertEquals(0, targetPlayer2.getDamage().size());
+    }
+
+
+    @Test
     public void firePositiveWithTargeting() throws Exception {
         int targetingID = 1;
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
         authorPlayer.addPowerupCard(card);
-
-        System.out.println(authorPlayer.getPowerupCardList());
 
         AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
 
@@ -155,6 +168,46 @@ public class TestLockRifle_1 {
 
 
     }
+
+    @Test
+    public void firePositiveWithTargetingAndOptional() throws Exception {
+        int targetingID = 1;
+        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
+        authorPlayer.addPowerupCard(card);
+
+        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
+
+        shoot.addPlayerTarget(targetPlayer1.getID());
+        shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addOptional(1);
+        shoot.addPlayerTarget(targetPlayer2.getID());
+        shoot.fire();
+
+        //target 1
+        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
+        assertEquals(3,targetPlayer1.getDamage().size());
+        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
+
+        //target 2
+        assertEquals(0,targetPlayer2.getDamage().size());
+        assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
+
+        //author
+        assertEquals(2, authorPlayer.getMark().getMarkDone().size());
+
+        //cost after targetin with blue ammo and optional with red ammo
+        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
+
+
+    }
+
+    @Test(expected = WrongInputException.class)
+    public void fireNegativeNoTargets()  throws Exception{
+        shoot.fire();
+    }
+
 
 
 

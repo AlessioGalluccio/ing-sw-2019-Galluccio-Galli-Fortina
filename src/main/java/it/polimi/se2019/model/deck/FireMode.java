@@ -202,10 +202,22 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         }
     }
 
+    //DEFAULT METHODS THROW EXCEPTIONS TO LIMIT CODE DUPLICATION. USE OVERRIDE
 
+    @Override
+    public void addCell(int x, int y) throws WrongInputException {
+        throw new WrongInputException();
+    }
 
+    @Override
+    public void addPlayerTarget(int playerID) throws WrongInputException {
+        throw new WrongInputException();
+    }
 
-
+    @Override
+    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
+        throw new WrongInputException();
+    }
 
     //COMMON METHODS
 

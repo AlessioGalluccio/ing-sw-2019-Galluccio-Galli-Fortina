@@ -120,10 +120,11 @@ public class GameHandler extends Observable {
     /**
      * @param x coordinate x of the Cell
      * @param y coordinate x of the Cell
-     * @return the Cell which has x and y coordinates, null if there's not
+     * @return the Cell which has x and y coordinates
+     * @throws NotPresentException if there is no cell with those coordinates
      */
     public Cell getCellByCoordinate(int x, int y) throws NotPresentException {
-        //TODO serve eccezione se esci dalla mappa!!!
+
         if(map.getCellByCoo(x, y) == null){
             throw new NotPresentException();
         }

@@ -71,111 +71,73 @@ public class ClientView extends View /*View implement observer/observable*/{
      * create a CellMessage that the client send to the server
      * @param x
      * @param y
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public CellMessage createCellMessage(int x, int y, int authorID, PlayerView authorView){
-        CellMessage message = new CellMessage(x,y,authorID,authorView);
+    public void createCellMessage(int x, int y){
+        CellMessage message = new CellMessage(x,y,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a PlayerMessage that the client send to the server
      * @param playerID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public PlayerMessage createPlayerViewMessage(int playerID, int authorID, PlayerView authorView){
-        PlayerMessage message = new PlayerMessage(playerID,authorID,authorView);
+    public void createPlayerViewMessage(int playerID, int authorID){
+        PlayerMessage message = new PlayerMessage(playerID, playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a CardSpawnChooseMessage that the client send to the server
      * @param cardChoosen
      * @param cardDiscarded
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public CardSpawnChooseMessage createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded,
-                                                               int authorID, PlayerView authorView){
-        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,authorID,authorView);
+    public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
+        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a NopeMessage that the client send to the server
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public NopeMessage createNopeMessage(int authorID, PlayerView authorView){
-        NopeMessage message = new NopeMessage(authorID,authorView);
+    public void createNopeMessage(){
+        NopeMessage message = new NopeMessage(playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a ActionMessage that the client send to the server
      * @param actionID
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public ActionMessage createActionMessage(int actionID, int authorID, PlayerView authorView){
-        ActionMessage message = new ActionMessage(actionID,authorID,authorView);
+    public void createActionMessage(int actionID){
+        ActionMessage message = new ActionMessage(actionID,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
 
     /**
      * create a NewtonMessage that the client send to the server
      * @param usedCard
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public NewtonMessage createNewtonMessage(NewtonCard usedCard, int authorID, PlayerView authorView){
-        NewtonMessage message = new NewtonMessage(usedCard,authorID,authorView);
+    public void createNewtonMessage(NewtonCard usedCard){
+        NewtonMessage message = new NewtonMessage(usedCard,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
      * create a ReloadMessage that the client send to the server
      * @param weapon
-     * @param authorID
-     * @param authorView
-     * @return
      */
-
-    public ReloadMessage createReloadMessage(WeaponCard weapon, int authorID, PlayerView authorView){
-        ReloadMessage message = new ReloadMessage(weapon,authorID,authorView);
-        notifyObservers(message);
-        return message;
+    public void createReloadMessage(WeaponCard weapon){
+        ReloadMessage message = new ReloadMessage(weapon, playerCopy.getID(),this);
     }
 
     /**
      * create a TeleporterMessage that the client send to the server
      * @param usedCard
-     * @param authorID
-     * @param authorView
-     * @return
      */
-    public TeleporterMessage createTeleporterMessage(TeleporterCard usedCard, int authorID, PlayerView authorView){
-        TeleporterMessage message = new TeleporterMessage(usedCard,authorID,authorView);
+    public void createTeleporterMessage(TeleporterCard usedCard){
+        TeleporterMessage message = new TeleporterMessage(usedCard,playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
@@ -183,10 +145,9 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param usedCard
      * @param colorRYB
      */
-    public TargetingScopeMessage createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
+    public void createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
         TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB, playerCopy.getID(),this);
         notifyObservers(message);
-        return message;
     }
 
     /**
