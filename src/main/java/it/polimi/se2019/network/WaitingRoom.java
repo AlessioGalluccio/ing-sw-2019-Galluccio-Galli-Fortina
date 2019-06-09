@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.network.socket.SocketHandler;
 import it.polimi.se2019.view.configureMessage.EnemyMessage;
 import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
@@ -15,6 +16,8 @@ import java.util.Timer;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WaitingRoom {
     private static int matchID = 100;
@@ -113,6 +116,8 @@ public class WaitingRoom {
 
             if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true));
             else networkHandler.update(null, new StatusLoginMessage(true, false));
+
+            Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, nickname + " has join");
         }
     }
 
@@ -169,6 +174,8 @@ public class WaitingRoom {
         timer.cancel();
         timer = null;
         macthes.add(new GameHandler(matchID++));
+
+        Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Match #" + matchID + "has started" );
     }
 
     public void handleDisconnectMessage() {
@@ -193,5 +200,7 @@ public class WaitingRoom {
 
             isFirst = false;
         }
+
+        Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Map&Co. set");
     }
 }

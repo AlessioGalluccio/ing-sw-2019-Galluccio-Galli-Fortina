@@ -98,7 +98,6 @@ public class TestMap {
         Map clone1 = map1.clone();
 
         assertNotSame(map1, clone1);
-        assertEquals(map1.getDescription(), clone1.getDescription());
         assertEquals(map1.getID(), clone1.getID());
 
         Cell[][] cellClone = clone1.getCell();

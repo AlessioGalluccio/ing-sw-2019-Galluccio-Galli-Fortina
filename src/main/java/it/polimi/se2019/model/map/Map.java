@@ -17,12 +17,11 @@ public abstract class Map extends Observable implements Serializable {
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private transient final ArrayList<Room> room;
-    private final String description;
+
 
     Map(InitializeMap init, String description, int ID) {
         this.cell = init.cell;
         this.room = init.room;
-        this.description = description;
         this.ID = ID;
     }
 
@@ -47,14 +46,6 @@ public abstract class Map extends Observable implements Serializable {
      */
     public List<Room> getRooms() {
         return new ArrayList<Room>(room);
-    }
-
-    /**
-     * Return the description of this map
-     * @return description fo this map
-     */
-    public String getDescription() {
-        return description;
     }
 
     public int getID() {

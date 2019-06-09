@@ -47,7 +47,6 @@ public class SocketHandler implements Server, SwitchServerMessage {
                         //Receive message
                         HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
                         message.handleMessage(this);
-                        //TODO view.notifyObservers(/*ViewControllerMessage*/ message);
                     }
                 } catch (IOException | ClassNotFoundException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);

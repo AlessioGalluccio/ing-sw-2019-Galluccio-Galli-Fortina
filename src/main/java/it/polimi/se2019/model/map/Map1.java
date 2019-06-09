@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Map1 extends Map {
 
+    private static final String description = "This map is excellent for any number of players!";
+
     public Map1(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
         /*
         The first instruction of this constructor MUST be super()
@@ -47,5 +49,9 @@ public class Map1 extends Map {
         init.addCommonBlueRoom();
 
         return init;
+    }
+
+    public static String getDescription() {
+        return description;
     }
 }

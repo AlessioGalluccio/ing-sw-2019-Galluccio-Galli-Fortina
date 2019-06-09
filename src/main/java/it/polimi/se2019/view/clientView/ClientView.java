@@ -7,6 +7,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Client;
+import it.polimi.se2019.network.configureMessage.SettingMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
@@ -197,6 +198,9 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
+    public void createSettingMessage(int map, int skulls, boolean suddenDeath) {
+        notifyObservers(new SettingMessage(map, skulls, suddenDeath));
+    }
 
     /**
      * verify that the target choosen by the player is contained in the ArrayList of available targets
