@@ -1,155 +1,76 @@
 package it.polimi.se2019.network.rmi;
 
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.clientView.ClientMapView;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.network.Client;
+import it.polimi.se2019.network.HandlerNetworkMessage;
+import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 
 import java.util.Observable;
+import java.util.concurrent.*;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class RMIClient implements ClientInterface, Observer {
+public class RMIClient extends Client implements RmiClientInterface, Observer {
+    private RmiHandlerInterface server;
+    private ExecutorService executor;
 
-    private ServerInterface stub;
+    public RMIClient(ClientView view) throws RemoteException {
+        super();
+        this.clientView = view;
+    }
 
-    private ClientView clientView;
-
-    private ClientMapView clientViewMap;
-
-
-
-    public RMIClient() {
+    @Override
+    public void connect() {
+        executor = Executors.newCachedThreadPool();
+        Registry registry = null;
+        try {
+            registry = LocateRegistry.getRegistry("localhost", Registry.REGISTRY_PORT);
+            RmiServerInterface stub = (RmiServerInterface) registry.lookup("RMIServer");
+            stub.connect(this);
+        } catch (RemoteException |  NotBoundException e) {
+            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Problem connecting to RMI server", e);
+        }
     }
 
 
-
-    /**
-     * is used to create the connection between Client and Server
-     */
-    public void startClient() {
-
-
-        /*
-        RMIClient is registered in a registry so it can be use as a server by the RMIServer class to send model's
-        changes or strings.
-         */
-        try {
-            RMIClient obj = new RMIClient();
-            ClientInterface skeleton = (ClientInterface) UnicastRemoteObject.exportObject(obj, 1);
-
-            // Bind the remote object's skeleton in the registry
-            Registry registry = LocateRegistry.getRegistry();
-            registry.bind("client", skeleton);
-
-            System.err.println("Client ready");
-        } catch (Exception e) {
-            System.err.println("Client exception: " + e.toString());
-            e.printStackTrace();
-        }
-
-
-        /*
-        client is connected with the server and can send messages to the RMIServer class
-         */
-
-
-        try {
-            Registry registry = LocateRegistry.getRegistry("server");
-            ServerInterface stub = (ServerInterface) registry.lookup("server");
-
-        } catch (Exception e) {
-
-        }
-
-    }
-
-
-    /**
-     * is used to send messages to the RMIServer.
-     * @param message
-     */
-
-
-    public void send (ViewControllerMessage message){
-        try {
-            stub.send(message);
-        } catch (Exception e) {
-
-        }
-
-    }
-    //TODO sistemare update con invio messaggio al server
     @Override
     public void update(Observable o, Object arg) {
-        try {
-            //stub.send(arg);
+       executor.submit(new Sender((HandlerServerMessage) arg));
+    }
 
-        } catch (Exception e) {
+    @Override
+    public void receiveMessage(HandlerNetworkMessage message) throws RemoteException {
+        message.handleMessage(this);
+    }
 
+    @Override
+    public void connect(RmiHandlerInterface server) throws RemoteException {
+        this.server = server;
+
+    }
+
+    private class Sender implements Runnable {
+        HandlerServerMessage message;
+
+        Sender(HandlerServerMessage message) {
+            this.message = message;
         }
 
+        @Override
+        public void run() {
+            try {
+                server.send(message);
+            } catch (RemoteException e) {
+                Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
+            }finally {
+                System.out.println("EXIT SENDER");
+            }
+        }
     }
-
-
-
-
-    /**
-     * is used by the server to send string to the client with the rmi connection
-     * @param string
-     */
-
-    public void printFromController(String string) {
-
-        clientView.printFromController(string);
-
-    }
-
-
-    /**
-     * is used by the serve with rmi connection to send the map copy
-     * @param map
-     */
-
-
-    public void sendMap(Map map) {
-
-    }
-
-
-
-    /**
-     * is used by RMIServer to send an Arraylist of possible target
-     * @param possibleTarget
-     */
-
-
-    public void getPossibleTarget( ArrayList <Target> possibleTarget){
-
-        clientView.setPossibleTarget(possibleTarget);
-    }
-
-
-    public void sendPlayerCopy (Player playerCopy){
-
-        clientView.updatePlayerCopy(playerCopy);
-
-    }
-
-
-    public void getPossibleCharacter (ArrayList<Character> possibleCharacter){
-
-        clientView.setPossibleCharacter(possibleCharacter);
-    }
-
-
-
 }
-

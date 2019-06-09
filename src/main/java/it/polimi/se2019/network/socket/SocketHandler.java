@@ -17,7 +17,7 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SocketHandler implements Server, SwitchServerMessage {
+public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     private Socket socket;
     private SocketServer server;
     private ObjectOutputStream printSocket;
@@ -27,37 +27,33 @@ public class SocketHandler implements Server, SwitchServerMessage {
     private boolean open = true;
     private PlayerView view;
 
-    SocketHandler(Socket socket, SocketServer server) {
+    SocketHandler(Socket socket, SocketServer server, int duration) {
         this.socket = socket;
         this.server = server;
-        //TODO read duration from config file MOLTIPLICARE PER 1000!
+        this.duration = duration*1000;
     }
 
     /**
      * When a socket thread in created to handle a client, this handler listen to the socket
      */
-    void start() {
+    @Override
+    public void run() {
         try {
             printSocket = new ObjectOutputStream(socket.getOutputStream());
             scannerSocket =  new ObjectInputStream(socket.getInputStream());
-
-            new Thread(() -> {
-                try {
-                    while(open) {
-                        //Receive message
-                        HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
-                        message.handleMessage(this);
-                    }
-                } catch (IOException | ClassNotFoundException e) {
-                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-                } finally {
-                    //TODO send disconnect message
-                    closeAll(); // Closing socket
-                    open = false;
-                }
-            }).start();
+            while(open) {
+                //Receive message
+                HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
+                message.handleMessage(this);
+            }
         } catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
+        } catch (ClassNotFoundException e) {
+        Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
+        } finally {
+            //TODO send disconnect message
+            closeAll(); // Closing socket
+            open = false;
         }
     }
 
@@ -73,8 +69,12 @@ public class SocketHandler implements Server, SwitchServerMessage {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
         } finally {
            open = false;
-           server.disconnect(this);
        }
+    }
+
+    @Override
+    public void setPlayerView(PlayerView pw) {
+        view = pw;
     }
 
     /**
@@ -96,13 +96,6 @@ public class SocketHandler implements Server, SwitchServerMessage {
      * Forward a message from model to the client thought socket connection
      * @param message message to send
      */
-
-    //CANCELLIAMO????
-    @Override
-    public void send(ModelViewMessage message) {
-       send((Object) message);
-    }
-
     private void send(Object message) {
         try {
             printSocket.writeObject(message);

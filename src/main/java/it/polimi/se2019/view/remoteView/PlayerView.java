@@ -26,6 +26,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
     public PlayerView(Server networkHandler, Player clone) {
         this.networkHandler = networkHandler;
         this.playerCopy = clone;
+        networkHandler.setPlayerView(this);
     }
 
     public PlayerView(Player player) {

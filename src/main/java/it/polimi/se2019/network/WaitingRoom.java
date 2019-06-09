@@ -4,7 +4,6 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
-import it.polimi.se2019.network.socket.SocketHandler;
 import it.polimi.se2019.view.configureMessage.EnemyMessage;
 import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
@@ -117,7 +116,7 @@ public class WaitingRoom {
             if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true));
             else networkHandler.update(null, new StatusLoginMessage(true, false));
 
-            Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, nickname + " has join");
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, nickname + " has join");
         }
     }
 
@@ -136,7 +135,7 @@ public class WaitingRoom {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Timeout, a new game is going to start");
+                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Timeout, a new game is going to start");
                 if(playerWaiting.size()>=3) startMatch();
                 timer=null;
             }
@@ -176,7 +175,7 @@ public class WaitingRoom {
         timer = null;
         macthes.add(new GameHandler(matchID++));
 
-        Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Match #" + matchID + "has started" );
+        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Match #" + matchID + "has started" );
     }
 
     public void handleDisconnectMessage() {
@@ -198,11 +197,9 @@ public class WaitingRoom {
             gm.setMap(map);
             gm.setSkull(skulls);
             gm.setSuddenDeath(suddenDeath);
-
             isFirst = false;
         }
-
-        Logger.getLogger(SocketHandler.class.getName()).log(Level.INFO, "Map&Co. set");
+        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Map&Co. set");
     }
 
     private class WaitingPlayer {
