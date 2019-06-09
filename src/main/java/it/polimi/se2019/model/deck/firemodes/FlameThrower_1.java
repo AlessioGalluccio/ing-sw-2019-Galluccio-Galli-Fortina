@@ -13,14 +13,6 @@ public class FlameThrower_1 extends FireMode {
 
     //firstly, we choose a direction of fire with CellMessage, then we select the targets inside
 
-    protected static final int NORTH = 0;
-    protected static final int EAST = 1;
-    protected static final int SOUTH = 2;
-    protected static final int WEST = 3;
-
-
-
-
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         //TODO da fare!
@@ -65,13 +57,13 @@ public class FlameThrower_1 extends FireMode {
         Player target = gameHandler.getPlayerByID(playerID);
         //it's the first target and direction is the same of the cell choosen
         if(!shoot.getTargetsCells().isEmpty() && (shoot.getTargetsPlayer().isEmpty()) &&
-                getDirection(target.getCell()) == getDirection(shoot.getTargetsCells().get(0))){
+                getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0))){
             shoot.addPlayerTargetFromFireMode(target);
         }
         //it's the second target. He is not in the same cell of the precedent
         else if(!shoot.getTargetsCells().isEmpty() && (!shoot.getTargetsCells().isEmpty()) &&
                 shoot.getTargetsCells().size() == 1 &&
-                getDirection(target.getCell()) == getDirection(shoot.getTargetsCells().get(0)) &&
+                getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0)) &&
                 !(target.getCell().equals(shoot.getTargetsPlayer().get(0).getCell()))){
             shoot.addPlayerTargetFromFireMode(target);
         }
@@ -112,25 +104,25 @@ public class FlameThrower_1 extends FireMode {
         return cellTargets;
     }
 
-    protected int getDirection(Cell cellTarget) throws WrongInputException{
+    protected char getDirectionMax2(Cell cellTarget) throws WrongInputException{
         int x = cellTarget.getCoordinateX();
         int y = cellTarget.getCoordinateY();
 
         if(x == author.getCell().getCoordinateX() && (y == author.getCell().getCoordinateY() + 1) ||
                 (y == author.getCell().getCoordinateY() + 2)){
-            return NORTH;
+            return 'N';
         }
         else if((x == author.getCell().getCoordinateX() + 1)||(x == author.getCell().getCoordinateX() + 2) &&
                 (y == author.getCell().getCoordinateY())){
-            return EAST;
+            return 'E';
         }
         else if(x == author.getCell().getCoordinateX() && (y == author.getCell().getCoordinateY() - 1) ||
                 (y == author.getCell().getCoordinateY() - 2)){
-            return SOUTH;
+            return 'S';
         }
         else if((x == author.getCell().getCoordinateX() - 1)||(x == author.getCell().getCoordinateX() - 2) &&
                 (y == author.getCell().getCoordinateY())){
-            return WEST;
+            return 'W';
         }
         else{
             throw new WrongInputException();
