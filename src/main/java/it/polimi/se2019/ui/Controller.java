@@ -29,6 +29,8 @@ public class Controller {
 
     ClientView clientView;
 
+    ControllerLogin controllerLogin;
+
     @FXML
     public Button moveButton;
     @FXML
@@ -71,7 +73,7 @@ public class Controller {
     @FXML
     public Button showMap;
 
-    private int choosenMap =0;
+    public static int choosenMap =0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -375,16 +377,13 @@ public class Controller {
 
             Stage stage = (Stage) rbmap2.getScene().getWindow();
             stage.close();
+            controllerLogin.open("WaitingRoom","LEAN BACK AND CHILL", 520, 400);
+
         }
 
 
 
     }
-
-
-
-
-
 
 
 

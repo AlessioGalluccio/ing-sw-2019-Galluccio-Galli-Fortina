@@ -4,7 +4,7 @@ public interface UiInterface {
 
     void login(boolean success, boolean isFirst);
 
-    void selectedMap(int choosenMap);
+    void selectedMap(int choosMap);
 
 
     void startGame();
