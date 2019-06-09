@@ -258,6 +258,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         }
     }
 
+
     /**
      * call it when you abort the firemode
      */

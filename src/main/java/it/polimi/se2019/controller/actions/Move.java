@@ -50,11 +50,16 @@ public class Move extends Action {
         //TODO discutere sull'executeAction()
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
 
-        if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
-            cellObjective = gameHandler.getCellByCoordinate(x,y);
-            executeAction();
-        }
-        else{
+        try {
+            if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
+                cellObjective = gameHandler.getCellByCoordinate(x,y);
+                executeAction();
+            }
+            else{
+                throw new WrongInputException();
+            }
+        } catch (NotPresentException e) {
+            //should not happen
             throw new WrongInputException();
         }
     }

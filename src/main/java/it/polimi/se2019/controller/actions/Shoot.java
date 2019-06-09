@@ -165,7 +165,7 @@ public class Shoot extends Action{
         return targets;
     }
 
-    public ArrayList<Cell> getCells() {
+    public ArrayList<Cell> getTargetsCells() {
         return cells;
     }
 

@@ -54,26 +54,32 @@ public class Grab extends Action{
     public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
-
-        if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
-            cellObjective = gameHandler.getCellByCoordinate(x,y);
-            //there's only one card to grab
-            if(cellObjective.getCardID().size() == 1){
-                //TODO cardObjective = gameHandler.getCardByID(cellObjective.getCardID().get(0));
-                executeAction();
-            }
-            else{
-                //TODO getsione WeaponCard
+        try{
+            if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
+                cellObjective = gameHandler.getCellByCoordinate(x,y);
+                //there's only one card to grab
+                if(cellObjective.getCardID().size() == 1){
+                    //TODO cardObjective = gameHandler.getCardByID(cellObjective.getCardID().get(0));
+                    executeAction();
+                }
+                else{
+                    //TODO getsione WeaponCard
                 /*
                 controller.addMessageListExpected(Identificator.WEAPON_CARD, "Choose a Weapon", false);
                 controller.sendTargetsToView();
                 */
-            }
+                }
 
-        }
-        else{
+            }
+            else{
+                throw new WrongInputException();
+            }
+        }catch (NotPresentException e){
+            //should not happen
             throw new WrongInputException();
         }
+
+
 
     }
 
