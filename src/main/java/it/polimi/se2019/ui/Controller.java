@@ -29,6 +29,8 @@ import java.util.List;
 public class Controller {
 
 
+    public Button fireButton;
+    public Button endTurnButton;
     ClientView clientView;
 
     ControllerLogin controllerLogin;
@@ -719,6 +721,15 @@ public class Controller {
 
         }
 
+
+    }
+
+    public void fire(ActionEvent event) {
+        clientView.createFireMessage();
+    }
+
+    public void endTurn(ActionEvent event) {
+        clientView.createPassTurnMessage();
 
     }
 }

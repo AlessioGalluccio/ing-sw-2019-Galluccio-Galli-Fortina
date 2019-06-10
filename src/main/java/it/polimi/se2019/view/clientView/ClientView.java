@@ -189,10 +189,9 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a PassTurnMessage that the client send to the server
-     * @param messageID
      */
 
-    public void createPassTurnMessage (int messageID){
+    public void createPassTurnMessage (){
         PassTurnMessage message = new PassTurnMessage(playerCopy.getID(),this);
         notifyObservers(message);
     }

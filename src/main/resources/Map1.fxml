@@ -437,12 +437,12 @@
       <Button fx:id="grabButton" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
       <Button fx:id="shootButton" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
       <Label fx:id="labelProva" layoutX="817.0" layoutY="483.0" prefHeight="36.0" prefWidth="551.0" textFill="RED" />
-      <Button layoutX="666.0" layoutY="604.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="SHOOT">
+      <Button fx:id="fireButton" layoutX="666.0" layoutY="604.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!!">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button layoutX="666.0" layoutY="646.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="162.0" text="END TURN">
+      <Button fx:id="endTurnButton" layoutX="666.0" layoutY="646.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="49.0" prefWidth="162.0" text="END TURN">
          <font>
             <Font size="25.0" />
          </font>
