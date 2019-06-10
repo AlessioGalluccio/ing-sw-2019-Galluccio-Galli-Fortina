@@ -2,6 +2,7 @@ package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class FireMessage extends ViewControllerMessage {
@@ -11,7 +12,7 @@ public class FireMessage extends ViewControllerMessage {
      * @param authorID
      * @param authorView
      */
-    public FireMessage(int authorID, PlayerView authorView) {
+    public FireMessage(int authorID, View authorView) {
 
         this.messageID = Identificator.FIRE_MESSAGE;
         this.authorID = authorID;

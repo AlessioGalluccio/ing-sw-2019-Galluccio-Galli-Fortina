@@ -169,6 +169,25 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
+     * create a FireMessage that the client send to the server
+
+     */
+    public void createFireMessage() {
+        FireMessage message = new FireMessage(playerCopy.getID(), this);
+        notifyObservers(message);
+    }
+
+    /**
+     * create a FireModeMessage that the client send to the server
+     * @param optionalID
+     */
+    public void createOptionalMessage(int optionalID) {
+        OptionalMessage message = new OptionalMessage(optionalID,playerCopy.getID(), this);
+        notifyObservers(message);
+    }
+
+
+    /**
      * create a PassTurnMessage that the client send to the server
      * @param messageID
      */
