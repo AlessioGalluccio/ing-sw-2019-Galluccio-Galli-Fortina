@@ -42,12 +42,12 @@ public class HeatSeeker_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsPlayer().size() != 1){
-            throw new WrongInputException();
+        if(shoot.getTargetsPlayer().size() == 1){
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 3,0, true);
+            super.fire();
         }
         else{
-            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 3,0);
-            super.fire();
+            throw new WrongInputException();
         }
     }
 

@@ -21,7 +21,7 @@ public class ElectroScythe_2 extends ElectroScythe_1 {
         Cell commonCell = author.getCell();
         for(Player target : gameHandler.getOrderPlayerList()){
             if(target.getCell().equals(commonCell)){
-                addDamageAndMarks(target, 2,0);
+                addDamageAndMarks(target, 2,0, true);
             }
         }
         super.fire();

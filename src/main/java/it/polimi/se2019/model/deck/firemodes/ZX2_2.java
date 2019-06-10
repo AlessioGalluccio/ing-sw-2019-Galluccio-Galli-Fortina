@@ -30,10 +30,14 @@ public class ZX2_2 extends FireMode {
     public void fire() throws WrongInputException{
         if(!shoot.getTargetsPlayer().isEmpty()){
             for(Player target : shoot.getTargetsPlayer()){
-                addDamageAndMarks(target,0,1);
+                addDamageAndMarks(target,0,1, true);
             }
+            super.fire();
         }
-        //TODO pagamento costo ed eccezione
+        else{
+            throw new WrongInputException();
+        }
+
     }
 
     @Override

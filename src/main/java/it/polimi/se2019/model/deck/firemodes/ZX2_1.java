@@ -27,10 +27,14 @@ public class ZX2_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        super.fire();
         if(shoot.getTargetsPlayer().size() == 1){
-            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 1,2);
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 1,2, true);
+            super.fire();
         }
+        else{
+            throw new WrongInputException();
+        }
+
     }
 
     @Override
