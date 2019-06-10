@@ -7,16 +7,22 @@ import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Observer;
 import java.util.List;
 import java.util.LinkedList;
 
-public abstract class Client implements Observer {
+public abstract class Client extends UnicastRemoteObject implements Observer {
 
     protected ClientView clientView;
     private ClientSkullBoardView skullBoardView;
     private List<ClientEnemyView> enemyViews = new LinkedList<>();
     private ClientMapView mapView;
+
+    protected Client() throws RemoteException {
+        super();
+    }
 
     /**
      * Connect client to server
@@ -53,6 +59,14 @@ public abstract class Client implements Observer {
             ew.setUi(ui);
         }
         mapView = new ClientMapView(ui);
+    }
+
+    /**
+     * is used by the server to send string to the client with the rmi connection
+     * @param string
+     */
+    public void printFromController(String string) {
+        clientView.printFromController(string);
     }
 
 }

@@ -7,14 +7,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.io.*;
 
 /**
  * Hello world!
  */
 public class App {
     private static SocketServer socketServer;
-    //private static RMIserver rmi;
+    private static RMIServer rmi;
 
     public static void main(String[] args) {
         try {
@@ -26,10 +25,10 @@ public class App {
                 int timerWait = Integer.parseInt(p.getProperty("timerWait"));
                 int timerTurn = Integer.parseInt(p.getProperty("timerTurn"));
 
-                System.out.println("timerTurn: " + timerTurn);
-                System.out.println("timerWait: " + timerWait);
-                socketServer = new SocketServer(9001, timerWait, timerTurn);
-                socketServer.start();
+                // socketServer = new SocketServer(9001, timerWait, timerTurn);
+                // socketServer.start();
+
+                RMIServer.start(9002, timerWait, timerTurn);
             }
         } catch (IOException e) {
             System.out.println("Error while reading config file");

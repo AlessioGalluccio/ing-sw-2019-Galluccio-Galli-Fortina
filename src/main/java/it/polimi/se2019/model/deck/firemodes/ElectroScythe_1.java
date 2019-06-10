@@ -6,19 +6,25 @@ import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElectroScythe_1 extends FireMode {
+    private static final String SEND_FIRE = "Press fire to complete the action";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        return null;
+        StringAndMessage fireMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, SEND_FIRE,false);
+        List<StringAndMessage> list = new ArrayList<>();
+        list.add(fireMessage);
+        return list;
     }
 
     @Override

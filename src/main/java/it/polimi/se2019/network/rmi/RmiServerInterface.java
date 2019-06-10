@@ -9,14 +9,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-public interface ServerInterface extends Remote {
-
-
-
-    public void send (ViewControllerMessage message);
-
-
-
-
-
+public interface RmiServerInterface extends Remote {
+    void connect(RmiClientInterface client) throws RemoteException;
 }

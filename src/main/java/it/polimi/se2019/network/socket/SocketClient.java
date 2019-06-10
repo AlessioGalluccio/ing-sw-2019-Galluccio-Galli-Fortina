@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ public class SocketClient extends Client {
     private ObjectInputStream scannerSocket;
     private Socket socket;
 
-    public SocketClient(int port, String IP, ClientView view) {
+    public SocketClient(int port, String IP, ClientView view) throws RemoteException {
         this.port = port;
         this.IP = IP;
         this.open = true;
@@ -42,6 +43,7 @@ public class SocketClient extends Client {
                 try {
                     while(open) { // Fake condition: it's always true
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
+                        System.out.println("MESSAGE IN");
                         messageSocket.handleMessage(this);
                     }
                 }catch (IOException | ClassNotFoundException e) {

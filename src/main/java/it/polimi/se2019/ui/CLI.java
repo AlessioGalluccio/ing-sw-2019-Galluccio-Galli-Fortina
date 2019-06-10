@@ -154,7 +154,7 @@ public class CLI implements UiInterface {
 
         view.createSettingMessage(map, skulls, sd);
 
-        clearScreen();
+        //clearScreen();
         out.println("\nWaiting for other players...");
     }
 
