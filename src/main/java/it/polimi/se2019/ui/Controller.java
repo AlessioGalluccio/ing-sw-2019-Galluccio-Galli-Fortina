@@ -4,6 +4,8 @@ package it.polimi.se2019.ui;
 
 
 import it.polimi.se2019.MyThread;
+import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
@@ -21,11 +23,11 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
-
-
+import java.util.List;
 
 
 public class Controller {
+
 
     ClientView clientView;
 
@@ -291,6 +293,13 @@ public class Controller {
     public ImageView enemy2Damage3;
     public ImageView enemy2Damage4;
     public ImageView enemy2Damage5;
+
+    @FXML
+    public Button selectWeaponButton1;
+    @FXML
+    public Button selectWeaponButton2;
+    @FXML
+    public Button selectWeaponButton3;
 
     private int suddenDeath = 2;
     private int skull = 0;
@@ -662,4 +671,35 @@ public class Controller {
     }
 
 
+    public void selectWeapon(ActionEvent event) {
+        Player player = clientView.getPlayerCopy();
+        try {
+            List<WeaponCard> weapons = player.getWeaponCardList();
+
+            Object source = event.getSource();
+
+            if(selectWeaponButton1 == source){
+                    clientView.createWeaponMessage(weapons.get(0));
+
+            }
+
+            if(selectWeaponButton2 == source){
+
+                    clientView.createWeaponMessage(weapons.get(1));
+
+            }
+
+            if(selectWeaponButton3 == source){
+                  clientView.createWeaponMessage(weapons.get(2));
+
+
+            }
+        }
+        catch (NullPointerException e){
+            //TODO
+            
+        }
+
+
+    }
 }
