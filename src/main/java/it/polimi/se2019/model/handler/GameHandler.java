@@ -512,6 +512,15 @@ public class GameHandler extends Observable {
         }
         //TODO set state controller for first player
     }
+
+    /**
+     * set the ConnectionState of the player
+     * @param player the player
+     * @param isConnected true if it's connected, false if not
+     */
+    public void setPlayerConnectionStatus(Player player, boolean isConnected){
+        player.setConnected(isConnected);
+    }
 }
 
 

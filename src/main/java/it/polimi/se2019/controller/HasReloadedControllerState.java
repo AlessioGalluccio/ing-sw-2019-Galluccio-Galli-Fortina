@@ -124,7 +124,12 @@ public class HasReloadedControllerState implements StateController {
 
     @Override
     public void handleReconnection(boolean isConnected) {
-        //TODO
+        //TODO controlla
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
     }
 
     @Override

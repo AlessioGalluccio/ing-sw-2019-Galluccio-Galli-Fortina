@@ -207,7 +207,12 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleReconnection(boolean isConnected) {
-        //TODO
+        //TODO controlla da sistemare sicuramente
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
     }
 
     @Override
