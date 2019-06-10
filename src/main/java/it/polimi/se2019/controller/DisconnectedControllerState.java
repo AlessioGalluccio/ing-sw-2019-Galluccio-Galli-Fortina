@@ -1,6 +1,5 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
@@ -18,7 +17,7 @@ public class DisconnectedControllerState implements StateController {
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 

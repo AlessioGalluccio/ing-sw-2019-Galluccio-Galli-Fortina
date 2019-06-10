@@ -4,7 +4,6 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -22,6 +21,8 @@ public class NotYourTurnState implements StateController {
         this.controller = controller;
         this.gameHandler = gameHandler;
         controller.setNumOfActionTaken(0);
+        this.player = controller.getAuthor();
+        this.playerView = controller.getPlayerView();
     }
 
     @Override

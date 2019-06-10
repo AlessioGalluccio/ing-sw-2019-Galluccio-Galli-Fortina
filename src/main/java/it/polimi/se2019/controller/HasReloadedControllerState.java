@@ -22,7 +22,7 @@ public class HasReloadedControllerState implements StateController {
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 

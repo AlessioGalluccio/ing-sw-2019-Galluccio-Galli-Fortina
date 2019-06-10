@@ -11,7 +11,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EmptyControllerState implements  StateController {
@@ -30,7 +29,7 @@ public class EmptyControllerState implements  StateController {
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 

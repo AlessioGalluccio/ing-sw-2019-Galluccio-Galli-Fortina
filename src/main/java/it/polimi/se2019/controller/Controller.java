@@ -19,12 +19,10 @@ import java.util.Observer;
 
 
 public class Controller implements Observer {
-
-    private Player player; //TODO aggiungere al costruttore (anche a tutti gli stati!)
+    private Player playerAuthor;
     private PlayerView playerView; //TODO aggiungere al costruttore
     private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<StringAndMessage> messageListExpected;
-    private Player playerAuthor;
     private int indexExpected = 0;
     private final GameHandler gameHandler;
     private StateController state;
@@ -123,9 +121,6 @@ public class Controller implements Observer {
         this.playerView = playerView;
     }
 
-    public void addPlayer(Player player){
-        this.player = player;
-    }
 
     public void setMessageListReceived(ArrayList<ViewControllerMessage> messageListReceived) {
         this.messageListReceived = messageListReceived;
@@ -202,9 +197,6 @@ public class Controller implements Observer {
         //TODO scrivi eccezione!
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public PlayerView getPlayerView() {
         return playerView;

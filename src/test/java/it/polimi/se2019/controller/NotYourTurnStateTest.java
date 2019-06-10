@@ -20,12 +20,14 @@ public class NotYourTurnStateTest {
     @Before
     public void setUp() throws Exception {
         Character character1 = new Character("Character1", "Yellow");
-        Player temp = new Player("Bob", character1, 0);
+        Player player = new Player("Bob", character1, 0);
         ArrayList<Player> players = new ArrayList<>();
-        players.add(temp);
+        players.add(player);
         GameHandler gameHandler = new GameHandler(players, 8);
         this.controller = new Controller(gameHandler);
+        controller.setAuthor(player);
         this.controller.setState(new NotYourTurnState(controller, gameHandler));
+        this.stateController = controller.getState();
     }
 
     @Test
@@ -74,6 +76,19 @@ public class NotYourTurnStateTest {
 
     @Test
     public void handleTeleporter() {
+    }
+
+    @Test
+    public void handleReconnectionDisconnected(){
+        stateController.handleReconnection(false);
+        assertEquals( true, controller.getState() instanceof DisconnectedControllerState);
+    }
+
+    @Test
+    public void handleReconnectionNoEffect(){
+        stateController.handleReconnection(true);
+        assertEquals(false, controller.getState() instanceof DisconnectedControllerState );
+        assertEquals(true, controller.getState() instanceof NotYourTurnState);
     }
 
     @Test
