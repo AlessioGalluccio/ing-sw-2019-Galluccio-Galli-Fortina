@@ -214,14 +214,25 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
+    /**
+     * create a SettingMessage that the client send to the server
+     * @param map
+     * @param skulls
+     * @param suddenDeath
+     */
     public void createSettingMessage(int map, int skulls, boolean suddenDeath) {
         notifyObservers(new SettingMessage(map, skulls, suddenDeath));
     }
 
-
+    /**
+     * create a WeaponMessage that the client send to the server
+     * @param weaponCard
+     */
     public void createWeaponMessage(WeaponCard weaponCard){
         WeaponMessage message = new WeaponMessage(weaponCard,playerCopy.getID(),this);
+        notifyObservers(message);
     }
+
 
 
 

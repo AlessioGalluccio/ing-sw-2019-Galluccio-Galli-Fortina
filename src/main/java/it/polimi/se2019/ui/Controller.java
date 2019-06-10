@@ -649,24 +649,43 @@ public class Controller {
 
     public void addFiremode(ActionEvent event) throws Exception {
 
-
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("addFiremode.fxml"));
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("ADD FIREMODE");
-        primaryStage.setScene(new Scene(root, 350, 400));
-        primaryStage.show();
+        controllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
 
     }
 
     public void sendFiremode(ActionEvent event) {
+        if(firemode1.isSelected()) {
+            clientView.createFireModeMessage(1);
+            Stage stage = (Stage) firemode1.getScene().getWindow();
+            stage.close();
+        }
+        if(firemode2.isSelected()){
+            clientView.createFireModeMessage(2);
+            Stage stage = (Stage) firemode1.getScene().getWindow();
+            stage.close();
+        }
 
-        Stage stage = (Stage) firemode1.getScene().getWindow();
-        stage.close();
     }
 
+
+
     public void sendOptional(ActionEvent event) {
-        Stage stage = (Stage) firemodeOp1.getScene().getWindow();
-        stage.close();
+
+        if(firemodeOp1.isSelected()){
+            clientView.createOptionalMessage(1);
+            Stage stage = (Stage) firemodeOp1.getScene().getWindow();
+            stage.close();
+        }
+        if(firemodeOp2.isSelected()){
+            clientView.createOptionalMessage(2);
+            Stage stage = (Stage) firemodeOp1.getScene().getWindow();
+            stage.close();
+        }
+        if(firemodeOp2.isSelected()){
+            clientView.createOptionalMessage(3);
+            Stage stage = (Stage) firemodeOp1.getScene().getWindow();
+            stage.close();
+        }
 
     }
 
