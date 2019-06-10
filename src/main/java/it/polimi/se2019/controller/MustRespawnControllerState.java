@@ -112,6 +112,11 @@ public class MustRespawnControllerState implements StateController {
     }
 
     @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         arg.handle(this);
     }

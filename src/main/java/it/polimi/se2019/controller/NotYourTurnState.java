@@ -113,6 +113,10 @@ public class NotYourTurnState implements StateController {
         //TODO
     }
 
+    @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO
+    }
 
     @Override
     public void handle(ViewControllerMessage arg) {

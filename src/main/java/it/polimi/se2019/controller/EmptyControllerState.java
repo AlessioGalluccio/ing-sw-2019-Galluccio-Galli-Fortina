@@ -156,6 +156,11 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         controller.addMessageListReceived(arg);
         arg.handle(this);

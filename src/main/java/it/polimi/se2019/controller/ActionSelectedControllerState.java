@@ -206,6 +206,11 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO
+    }
+
+    @Override
     public void handle(ViewControllerMessage arg) {
         if(startingHandler(arg)){
             arg.handle(this);

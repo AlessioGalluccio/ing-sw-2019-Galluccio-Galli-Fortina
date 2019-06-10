@@ -8,7 +8,7 @@ public class OptionalMessage extends ViewControllerMessage{
     private int optionalID;
 
     /**
-     * FireModeMessage class's constructor
+     * OptionalMessage class's constructor
      * @param optionalID
      * @param authorID
      * @param authorView
