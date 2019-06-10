@@ -199,6 +199,13 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(new SettingMessage(map, skulls, suddenDeath));
     }
 
+
+    public void createWeaponMessage(WeaponCard weaponCard){
+        WeaponMessage message = new WeaponMessage(weaponCard,playerCopy.getID(),this);
+    }
+
+
+
     /**
      * verify that the target choosen by the player is contained in the ArrayList of available targets
      * @return

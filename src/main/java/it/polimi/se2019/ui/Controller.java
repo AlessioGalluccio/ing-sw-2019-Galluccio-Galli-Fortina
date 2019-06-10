@@ -697,7 +697,7 @@ public class Controller {
         }
         catch (NullPointerException e){
             //TODO
-            
+
         }
 
 
