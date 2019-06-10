@@ -94,17 +94,19 @@ public class MachineGun_1 extends FireMode {
         //TODO controlla
         if(numOptional == Identificator.FIRST_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
-            shoot.addOptional(Identificator.FIRST_OPTIONAL);
+            shoot.addOptionalSelected(Identificator.FIRST_OPTIONAL);
+            shoot.addCost(new AmmoBag(0,1,0));
         }
         else if(numOptional == Identificator.SECOND_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL)
                 && shoot.getTargetsPlayer().size() == 2){
 
             if(sendAllVisiblePlayers(shoot.getTargetsPlayer())){
-                shoot.addOptional(Identificator.SECOND_OPTIONAL);
+                shoot.addOptionalSelected(Identificator.SECOND_OPTIONAL);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                         OPTIONAL_SECOND_MSG, OPTIONAL_SECOND_BOOL);
                 controller.addMessageListExpected(stringAndMessage);
+                shoot.addCost(new AmmoBag(0,0,1));
             }
             else{
                 playerView.printFromController(NO_TARGET_NO_ACTION);

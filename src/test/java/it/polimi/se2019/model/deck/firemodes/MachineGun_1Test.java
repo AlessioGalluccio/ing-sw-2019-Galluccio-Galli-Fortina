@@ -2,10 +2,11 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.controller.actions.WrongInputException;
-import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.TargetingScopeCard;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.map.*;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
@@ -14,14 +15,12 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
-public class TestLockRifle_1 {
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+
+public class MachineGun_1Test {
     private Player authorPlayer;
     private Player targetPlayer1;
     private Player targetPlayer2;
@@ -31,10 +30,8 @@ public class TestLockRifle_1 {
     private Shoot shoot;
     private Cell commonCell;
 
-    private final static int LOCK_RIFLE_WEAPON_ID = 14;
-    private final static int LOCK_RIFLE_FIREMODE_ID = 141;
-
-
+    private final static int MACHINE_WEAPON_ID = 15;
+    private final static int MACHINE_FIREMODE_ID = 151;
 
     @Before
     public void setUp() throws Exception {
@@ -42,14 +39,14 @@ public class TestLockRifle_1 {
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        //targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
         players.add(authorPlayer);
         players.add(targetPlayer1);
         players.add(targetPlayer2);
-        //players.add(targetPlayer3);
+        players.add(targetPlayer3);
 
         //settings of mock connection
         PlayerView playerView = mock(PlayerView.class);
@@ -65,41 +62,32 @@ public class TestLockRifle_1 {
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
         targetPlayer2.setPosition(commonCell);
-
-        //target 3 is in another room
-        //TODO controlla che sia un'altra statnza!!
-        //targetPlayer3.setPosition(gameHandler.getCellByCoordinate(1,2));
+        targetPlayer3.setPosition(commonCell);
 
         authorPlayer.setAmmoBag(3,3,3);
 
 
-        //Lock_Rifle weapon
-        WeaponCard weapon = gameHandler.getWeaponCardByID(LOCK_RIFLE_WEAPON_ID);
+        //Machine_Gun  weapon
+        WeaponCard weapon = gameHandler.getWeaponCardByID(MACHINE_WEAPON_ID);
         weapon.reload();
         authorPlayer.addWeaponCard(weapon);
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode lockRifle_1 = gameHandler.getFireModeByID(LOCK_RIFLE_FIREMODE_ID);
-        shoot.addFireMode(lockRifle_1.getID());
+        FireMode machineGun_1 = gameHandler.getFireModeByID(MACHINE_FIREMODE_ID);
+        shoot.addFireMode(machineGun_1.getID());
 
 
     }
 
     @Test
-    public void sendPossibleTarget() {
-    }
-
-    @Test
-    public void firePositiveOneTargetNoOptional() throws Exception {
-
+    public void firePositiveOneTargetNoOptional()  throws Exception {
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.fire();
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(2,targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
-        assertEquals(1, authorPlayer.getMark().getMarkDone().size());
-
+        assertEquals(1,targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
+        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
     }
 
     @Test
@@ -113,116 +101,92 @@ public class TestLockRifle_1 {
         //target 1
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
         assertEquals(2,targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
         //target 2
-        assertEquals(0,targetPlayer2.getDamage().size());
-        assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(1,targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
 
         //author
-        assertEquals(2, authorPlayer.getMark().getMarkDone().size());
+        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
 
         //cost after optional
-        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
         assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
 
     }
 
     @Test
-    public void firePositiveNoTargetForOptional()  throws Exception{
-        //even if optional has no target, you can fire
-        shoot.addPlayerTarget(targetPlayer1.getID());
-        shoot.addOptional(1);
-        shoot.fire();
-
-        assertEquals(2,targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
-
-        assertEquals(0, targetPlayer2.getDamage().size());
-    }
-
-
-    @Test
-    public void firePositiveWithTargeting() throws Exception {
-        int targetingID = 1;
-        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
-        authorPlayer.addPowerupCard(card);
-
-        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
+    public void firePositiveWithBothOptional() throws Exception {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
-        shoot.addTargetingScope(targetingID,ammoCostTargeting);
-        shoot.fire();
-
-        //target 1
-        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(3,targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
-
-        //author
-        assertEquals(1, authorPlayer.getMark().getMarkDone().size());
-
-        //cost after targetin with blue ammo
-        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
-        assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
-
-
-    }
-
-    @Test
-    public void firePositiveWithTargetingAndOptional() throws Exception {
-        int targetingID = 1;
-        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
-        authorPlayer.addPowerupCard(card);
-
-        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
-
-        shoot.addPlayerTarget(targetPlayer1.getID());
-        shoot.addTargetingScope(targetingID,ammoCostTargeting);
-        shoot.addOptional(1);
         shoot.addPlayerTarget(targetPlayer2.getID());
+        shoot.addOptional(1);
+        shoot.addOptional(2);
+        shoot.addPlayerTarget(targetPlayer3.getID());
         shoot.fire();
 
         //target 1
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(3,targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
+        assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
         //target 2
-        assertEquals(0,targetPlayer2.getDamage().size());
-        assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(2,targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+
+        //target3
+        assertEquals(1,targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
 
         //author
-        assertEquals(2, authorPlayer.getMark().getMarkDone().size());
+        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
 
-        //cost after targetin with blue ammo and optional with red ammo
-        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
+        //cost after optional
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
         assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
 
-
     }
 
-    @Test(expected = WrongInputException.class)
-    public void fireNegativeNoTargets()  throws Exception{
+    @Test
+    public void firePositiveWithTargetingAndBothOptional() throws Exception {
+        int targetingID = 1;
+        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
+        authorPlayer.addPowerupCard(card);
+
+        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
+
+        shoot.addPlayerTarget(targetPlayer1.getID());
+        shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer2.getID());
+        shoot.addOptional(1);
+        shoot.addOptional(2);
+        shoot.addPlayerTarget(targetPlayer3.getID());
         shoot.fire();
-    }
+
+        //target 1
+        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
+        assertEquals(3,targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
+
+        //target 2
+        assertEquals(2,targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+
+        //target3
+        assertEquals(1,targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+
+        //author
+        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
+
+        //cost after optional
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(1, authorPlayer.getAmmo().getBlueAmmo());
 
 
-
-
-    @Test
-    public void controlMessage() {
-
-    }
-
-    @Test
-    public void getMessageListExpected() {
-    }
-
-    @Test
-    public void giveOnlyMarks() {
     }
 }
