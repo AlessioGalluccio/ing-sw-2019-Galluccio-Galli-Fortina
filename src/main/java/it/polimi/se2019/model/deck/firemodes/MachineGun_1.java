@@ -11,25 +11,22 @@ import java.util.List;
 
 public class MachineGun_1 extends FireMode {
 
+    //STRING AND MESSAGE
     private static final String FIRST_MSG_STR = "Select a player from possible targets";
-    private static final boolean FIRST_MSG_BOOL = false;
-
     private static final String SECOND_MSG_STR = "Select a second player from possible targets";
-    private static final boolean SECOND_MSG_BOOL = true;
-
     private static final String OPTIONAL_SECOND_MSG = "Select a third Player";
-    private static final boolean OPTIONAL_SECOND_BOOL = true;
+
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         List<StringAndMessage> messageListExpected = new ArrayList<>();
 
         StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_MESSAGE,
-                FIRST_MSG_STR, FIRST_MSG_BOOL);
+                FIRST_MSG_STR);
         messageListExpected.add(firstTarget);
 
         StringAndMessage secondTarget = new StringAndMessage(Identificator.PLAYER_MESSAGE,
-                SECOND_MSG_STR, SECOND_MSG_BOOL);
+                SECOND_MSG_STR);
         messageListExpected.add(secondTarget);
 
         return messageListExpected;
@@ -104,7 +101,7 @@ public class MachineGun_1 extends FireMode {
             if(sendAllVisiblePlayers(shoot.getTargetsPlayer())){
                 shoot.addOptionalSelected(Identificator.SECOND_OPTIONAL);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
-                        OPTIONAL_SECOND_MSG, OPTIONAL_SECOND_BOOL);
+                        OPTIONAL_SECOND_MSG);
                 controller.addMessageListExpected(stringAndMessage);
                 shoot.addCost(new AmmoBag(0,0,1));
             }

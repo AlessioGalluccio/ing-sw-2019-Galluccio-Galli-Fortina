@@ -80,15 +80,15 @@ public class HasReloadedControllerState implements StateController {
         }catch(NotPresentException e){
             playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
             playerView.printFromController(RELOAD_OR_PASS);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }catch(WeaponIsLoadedException e){
             playerView.printFromController(WEAPON_LOADED_RELOAD);
             playerView.printFromController(RELOAD_OR_PASS);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }catch(NotEnoughAmmoException e){
             playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
             playerView.printFromController(RELOAD_OR_PASS);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
     }
 
@@ -139,6 +139,6 @@ public class HasReloadedControllerState implements StateController {
 
     private void youCantDoThis(){
         playerView.printFromController(CANT_DO);
-        controller.removeLastReceivedMessage();
+        controller.removeReceived();
     }
 }

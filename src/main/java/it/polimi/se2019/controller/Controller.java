@@ -74,20 +74,16 @@ public class Controller implements Observer {
         return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
     }
 
-
-    public void removeLastReceivedMessage(){
-        if(indexExpected > 0){
-            this.indexExpected--;
-        }
-
-
-    }
-
-    /////////////////////SETTERS
-
     public int getIndexExpected() {
         return indexExpected;
     }
+
+
+
+
+    /////////////////////SETTERS
+
+
 
     public StateController getState() {
         return state;
@@ -104,13 +100,12 @@ public class Controller implements Observer {
 
 
 
-    public void addMessageListReceived(ViewControllerMessage arg) {
-        this.indexExpected++;
-    }
+
 
     public void setMessageListExpected(ArrayList<StringAndMessage> messageListExpected) {
         this.messageListExpected = messageListExpected;
     }
+
 
     public void addMessageListExpected(StringAndMessage arg) {
         this.messageListExpected.add(arg);
@@ -122,6 +117,16 @@ public class Controller implements Observer {
 
     public void addMessageListBeforeLastOne(ArrayList<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(messageListExpected.size()- 2, messageListExpected);
+    }
+
+    public void addReceived() {
+        this.indexExpected++;
+    }
+
+    public void removeReceived(){
+        if(indexExpected > 0){
+            this.indexExpected--;
+        }
     }
 
     public void setIndexExpected(int indexExpected) {

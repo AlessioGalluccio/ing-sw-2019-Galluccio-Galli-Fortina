@@ -127,6 +127,6 @@ public class MustRespawnControllerState implements StateController {
 
     private void youMustRespawn(){
         playerView.printFromController(MUST_RESPAWN);
-        controller.removeLastReceivedMessage();
+        controller.removeReceived();
     }
 }

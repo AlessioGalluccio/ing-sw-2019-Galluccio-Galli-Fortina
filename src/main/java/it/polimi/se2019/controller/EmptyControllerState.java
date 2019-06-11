@@ -46,7 +46,7 @@ public class EmptyControllerState implements  StateController {
             if(!canShoot){
                 playerView.printFromController(CANT_SHOOT);
                 playerView.printFromController(SELECT_ACTION_REQUEST);
-                controller.removeLastReceivedMessage();
+                controller.removeReceived();
             }
         }
 
@@ -165,12 +165,12 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public void handle(ViewControllerMessage arg) {
-        controller.addMessageListReceived(arg);
+        controller.addReceived();
         arg.handle(this);
     }
 
     private void youCantDoThis(){
         playerView.printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        controller.removeReceived();
     }
 }

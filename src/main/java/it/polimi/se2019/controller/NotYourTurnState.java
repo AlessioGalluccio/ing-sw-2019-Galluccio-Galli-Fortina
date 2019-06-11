@@ -135,7 +135,7 @@ public class NotYourTurnState implements StateController {
         }
 
         else {
-            controller.addMessageListReceived(arg);
+            controller.addReceived();
             arg.handle(this);
         }
 
@@ -143,7 +143,7 @@ public class NotYourTurnState implements StateController {
 
     private void cantDoThisHandler(){
         playerView.printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        controller.removeReceived();
     }
 
 }

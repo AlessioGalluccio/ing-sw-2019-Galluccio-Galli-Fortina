@@ -52,7 +52,7 @@ public class ActionSelectedControllerStateTest {
         Controller controller = new Controller(gameHandler,  null);
         controller.setState(stateMock);
         StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE,
-                                                                        "ok", true);
+                                                                        "ok");
         controller.addMessageListExpected(stringAndMessage);
 
         TeleporterCard teleporterCard = mock(TeleporterCard.class);

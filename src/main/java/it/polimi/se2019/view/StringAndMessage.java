@@ -5,12 +5,10 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 public class StringAndMessage {
     private int messageId;
     private String string;
-    private boolean optional;
 
-    public StringAndMessage(int messageId, String string, boolean optional) {
+    public StringAndMessage(int messageId, String string) {
         this.messageId = messageId;
         this.string = string;
-        this.optional = optional;
     }
 
     public String getString() {
@@ -19,9 +17,5 @@ public class StringAndMessage {
 
     public int getMessageID() {
         return messageId;
-    }
-
-    public boolean isOptional() {
-        return optional;
     }
 }

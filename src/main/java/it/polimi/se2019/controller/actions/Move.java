@@ -19,7 +19,7 @@ public class Move extends Action {
 
     private Cell cellObjective;
     private final static int DISTANCE_MAX = 3;
-    private final static StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell", false);
+    private final static StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell");
 
     public Move(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);

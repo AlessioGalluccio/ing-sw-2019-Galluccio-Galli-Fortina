@@ -57,7 +57,7 @@ public class ActionSelectedControllerState implements StateController {
             action.addCell(coordinateX, coordinateY);
         }catch(WrongInputException e){
             playerView.printFromController(CELL_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
     }
 
@@ -66,7 +66,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addFireMode(firemodeID);
         }catch (WrongInputException e){
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
         /*
         Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
@@ -75,7 +75,7 @@ public class ActionSelectedControllerState implements StateController {
 
         if(!player.canPayAmmo(cost)){
             controller.getLastReceivedMessage().getAuthorView().printFromController("Not enough ammo for this firemode");
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
         else{
             //TODO sistema
@@ -102,16 +102,19 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleNope() {
+        //TODO
+        /*
         int index = controller.getIndexExpected();
 
         if(!controller.getCopyMessageListExpected().get(index).isOptional()){
             String response = controller.getCopyMessageListExpected().get(index).getString();
             playerView.printFromController(response);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
         else{
             //do nothing
         }
+        */
 
     }
 
@@ -121,7 +124,7 @@ public class ActionSelectedControllerState implements StateController {
             action.addPlayerTarget(playerID);
         }catch (WrongInputException e){
             playerView.printFromController(PLAYER_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
 
     }
@@ -132,10 +135,10 @@ public class ActionSelectedControllerState implements StateController {
             action.addOptional(numOptional);
         }catch (WrongInputException e){
             playerView.printFromController(OPTIONAL_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }catch (NotEnoughAmmoException e){
             playerView.printFromController(NOT_ENOUGH);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
     }
 
@@ -157,19 +160,19 @@ public class ActionSelectedControllerState implements StateController {
 
         }catch(WrongInputException e){
             playerView.printFromController(ALREADY_SELECTED);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch(NotEnoughAmmoException e){
             playerView.printFromController(NOT_ENOUGH);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch(NotPresentException e){
             playerView.printFromController(CARD_NOT_PRESENT);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch (FiremodeOfOnlyMarksException e){
             playerView.printFromController(ONLY_MARKS);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
 
     }
@@ -252,7 +255,7 @@ public class ActionSelectedControllerState implements StateController {
         playerView.printFromController(response);
         /*TODO
         int index = controller.getIndexExpected();
-        controller.addMessageListReceived(arg);
+        controller.addReceived(arg);
         controller.setIndexExpected(index + 1);
         if(controller.getCopyMessageListExpected().size() == controller.getIndexExpected()) {
             //Model is modified
