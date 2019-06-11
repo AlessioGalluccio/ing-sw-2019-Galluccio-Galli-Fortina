@@ -26,7 +26,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     private int duration;
     private boolean open = true;
     private PlayerView view;
-    private int matchID;
+    private int matchID = 0;
 
     SocketHandler(Socket socket, SocketServer server, int duration) {
         this.socket = socket;
@@ -125,7 +125,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                send(new DisconnectMessage(matchID));
+                send(new DisconnectMessage());
                 disconnect();
             }
         }, duration);
@@ -167,7 +167,8 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     private void disconnect() {
         open = false;
         closeAll();
-        view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        //If match is started disconnect form controller
+        if(matchID!=0)view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
         server.waitingRoom.disconnect(this, view, matchID);
     }
 

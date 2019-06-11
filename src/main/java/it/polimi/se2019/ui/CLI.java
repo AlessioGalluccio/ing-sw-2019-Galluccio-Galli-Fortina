@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 public class CLI implements UiInterface {
     private final static int MIN_SKULL = 1;
     private ClientView view;
+    private boolean online = true;
     private ParserCLI parser; //TODO crearlo dopo il login
 
     @SuppressWarnings("squid:S106")
@@ -30,7 +31,7 @@ public class CLI implements UiInterface {
             out.println(ConsoleColor.GREEN + "You're in!\n" +ConsoleColor.RESET);if(isFirst) chooseSetting();
             else {
                 clearScreen();
-                out.println("Waiting for other players...");
+                if(online) out.println("Waiting for other players...");
             }
         }
 
@@ -50,12 +51,17 @@ public class CLI implements UiInterface {
     }
 
     @Override
-    public void disconnect(int matchID) {
+    public void disconnect() {
+        //TODO chiudere tutti i thread (parser) e terminare applicazione
+        online=false;
+        printLine();
         out.println(ConsoleColor.RED +
-                "You have been disconnected due to inactivity" +
+                "OH NO!  ಥ_ಥ \nYou have been disconnected" +
                 ConsoleColor.RESET);
-        out.println("In order to reconnect to the same match remember this ID: "
-                + ConsoleColor.BLACK_BOLD + matchID + ConsoleColor.RESET );
+        out.println("If the game has started and you want to reconnect to the same match remember this ID: "
+                + ConsoleColor.BLACK_BOLD + view.getMatchId() + ConsoleColor.RESET );
+        out.println("\nThank you for playing at:");
+        printLogo();
     }
 
     public synchronized void start() {
@@ -72,7 +78,7 @@ public class CLI implements UiInterface {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        out.println("\n\n_____________________________________________________________________________________________");
+        printLine();
         login();
     }
 
@@ -88,8 +94,7 @@ public class CLI implements UiInterface {
     }
 
     private void login() {
-        out.println("\n" +
-                "Please, enter your name:");
+        out.println("Please, enter your name:");
         String username = in.nextLine();
 
         int decision=0;
@@ -117,7 +122,7 @@ public class CLI implements UiInterface {
     }
 
     private void chooseSetting() {
-        int map =1;
+        int map = 0;
         do {
             try{
                 out.println("Which map do you want?");
@@ -126,21 +131,24 @@ public class CLI implements UiInterface {
                 out.println("\t3. " + Map3.getDescription());
                 out.println("\t4. " + Map4.getDescription());
                 map = in.nextInt();
+                in.skip("\n");
             }catch (InputMismatchException e) {
                 out.println("You can't insert only a digit");
                 in.nextLine();
             }
         }while(map<1||map>4);
 
-        out.println("How many skulls?");
-        int skulls = in.nextInt();
-        in.skip("\n");
-
-        while(skulls<MIN_SKULL|| skulls >8) {
-            out.println("Choose a number between " + MIN_SKULL + " and 8");
-            skulls = in.nextInt();
-            in.skip("\n");
-        }
+        int skulls=0;
+        do{
+            try {
+                out.println("How many skulls?");
+                skulls = in.nextInt();
+                in.skip("\n");
+            }catch (InputMismatchException e) {
+                out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
+                in.nextLine();
+            }
+        }while(skulls<MIN_SKULL|| skulls >8);
 
         int decision = 0;
         boolean sd = false;
@@ -150,6 +158,7 @@ public class CLI implements UiInterface {
                 out.println("\t1. Yes");
                 out.println("\t2. No");
                 decision = in.nextInt();
+                in.skip("\n");
                 if (decision == 1) {
                     sd = true;
                 } else if (decision == 2) {
@@ -164,11 +173,15 @@ public class CLI implements UiInterface {
         view.createSettingMessage(map, skulls, sd);
 
         //clearScreen();
-        out.println("\nWaiting for other players...");
+        if(online) out.println("\nWaiting for other players...");
     }
 
-    public static void clearScreen() {
+    static void clearScreen() {
         System.out.print("\u001b[2J");
         System.out.flush();
+    }
+
+    void printLine() {
+        out.println("\n\n______________________________________________________________________________________________\n");
     }
 }

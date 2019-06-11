@@ -2,12 +2,10 @@ package it.polimi.se2019.network.socket;
 
 import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.HandlerNetworkMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.rmi.RemoteException;
 import java.util.Observable;
@@ -41,16 +39,19 @@ public class SocketClient extends Client {
 
             new Thread(() -> {
                 try {
-                    while(open) { // Fake condition: it's always true
+                    while (open) { // Fake condition: it's always true
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
                         messageSocket.handleMessage(this);
                     }
-                }catch (IOException | ClassNotFoundException e) {
-                    Logger.getLogger(SocketClient.class.getName()).log(Level.INFO, "Problem reading from socket", e);
-                }
-                finally {
+                } catch (java.net.SocketException e) {
+                    //Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Connection closed", e);
+                    open=false;
                     closeAll();
-                    open = false;
+                    new DisconnectMessage().handleMessage(this);
+                } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
+                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
+                }  catch (IOException e) {
+                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem reading obj through socket", e);
                 }
             }).start();
 
@@ -65,10 +66,15 @@ public class SocketClient extends Client {
      */
     public void send(Object message) {
         try {
-            printSocket.writeObject(message);
-            printSocket.flush();
+            if(open) {
+                printSocket.writeObject(message);
+                printSocket.flush();
+            }
         } catch (IOException e) {
-            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Problem writing on socket", e);
+           // Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Problem writing on socket", e);
+            open=false;
+            closeAll();
+            new DisconnectMessage().handleMessage(this);
         }
     }
 

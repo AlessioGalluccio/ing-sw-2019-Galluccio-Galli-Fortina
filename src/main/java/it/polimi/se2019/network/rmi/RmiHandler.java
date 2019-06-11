@@ -30,7 +30,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     private PlayerView view;
     private ExecutorService executor;
     static int nThreads =0;
-    private int matchID;
+    private int matchID =0;
     private Timer pingTimer;
 
     public RmiHandler(RmiClientInterface client, int duration, RMIServer server) throws RemoteException  {
@@ -48,7 +48,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
                     disconnect();
                 }
             }
-        }, 5, 700);
+        }, 5000, 700);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                new Sender(new DisconnectMessage(matchID));
+                new Sender(new DisconnectMessage());
                 disconnect();
             }
         }, duration);
@@ -119,7 +119,8 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     private void disconnect() {
         pingTimer.cancel();
         server.getWaitingRoom().disconnect(this, view, matchID);
-        view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        //If match is started disconnect form controller
+        if(matchID!=0) view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
         server.disconnect(this);
     }
 

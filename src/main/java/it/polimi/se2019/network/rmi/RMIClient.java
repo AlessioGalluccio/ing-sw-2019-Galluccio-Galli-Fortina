@@ -4,6 +4,7 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.HandlerNetworkMessage;
 import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -45,21 +46,20 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
         try {
             server.send((HandlerServerMessage) arg);
         } catch (RemoteException e) {
-            Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
+           // Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
+            new DisconnectMessage().handleMessage(this);
+            executor.shutdown();
         }
-       ;
     }
 
     @Override
     public void receiveMessage(HandlerNetworkMessage message) throws RemoteException {
         executor.submit(new Receiver(message, this));
-
     }
 
     @Override
     public void connect(RmiHandlerInterface server) throws RemoteException {
         this.server = server;
-
     }
 
     @Override

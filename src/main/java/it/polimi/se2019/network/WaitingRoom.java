@@ -106,7 +106,6 @@ public class WaitingRoom {
         Controller controller = new Controller(matches.get(matches.size()-1).gameHandler, player);
         playerView.attach(controller);
 
-        networkHandler.setMatchID(matches.get(matches.size()-1).matchID);
 
         synchronized(this) {
             while(playerWaiting.size()==5) {
@@ -189,6 +188,8 @@ public class WaitingRoom {
             mapView.attach(wp.networkHandler);
             skullBoardView.attach(wp.networkHandler);
             enemyViews.add(wp.enemyView);
+            wp.networkHandler.setMatchID(currentMatch.matchID);
+
 
             for (WaitingPlayer wp2 : playerWaiting) {
                 //Attach each enemy view at the network handler of the ENEMY (not at himself)

@@ -30,6 +30,7 @@ public class ClientView extends View /*View implement observer/observable*/{
     private Character choosenCharacter;
     private Client client;
     private UiInterface ui;
+    private int matchId = 100;
 
     public ClientView() {
     }
@@ -303,8 +304,8 @@ public class ClientView extends View /*View implement observer/observable*/{
         ui.login(success, isFirst);
     }
 
-    public void handleDisconnection(int matchID) {
-        ui.disconnect(matchID);
+    public void handleDisconnection() {
+        ui.disconnect();
     }
 
     /**
@@ -318,6 +319,10 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     public void setUi(UiInterface ui) {
         this.ui = ui;
+    }
+
+    public int getMatchId() {
+        return matchId;
     }
 }
 

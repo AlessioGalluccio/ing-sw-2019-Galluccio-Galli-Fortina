@@ -119,7 +119,7 @@ public class ControllerLogin implements UiInterface {
     }
 
     @Override
-    public void disconnect(int matchID) {
+    public void disconnect() {
 
     }
 }

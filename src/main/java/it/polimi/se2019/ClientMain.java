@@ -19,7 +19,7 @@ public class ClientMain {
        // rmi.connect();
 
         SocketClient socket = new SocketClient(9001, "localhost", clientView);
-        socket.connect();
+       socket.connect();
         clientView.setUp(socket);
         cli.start();
 
