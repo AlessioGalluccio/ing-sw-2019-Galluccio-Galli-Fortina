@@ -20,13 +20,17 @@ public class Map1 extends Map {
 
     private static InitializeMap initialize(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
         InitializeMap init = new InitializeMap(3, 4);
+        ArrayList<Cell> cellForRoom = new ArrayList<>();
 
         //cell[X][Y]
-        init.cell[0][0] = null;
+        init.cell[0][0] = new CellAmmo(0,0);
+
+        cellForRoom.add(init.cell[0][0]);
+        init.room.add(new Room(null, "BLACK", new ArrayList<>(cellForRoom)));
 
         init.cell[1][0] = new CellAmmo(new Door(), new Door(), new Wall(), new Wall(), 1, 0, ammoDeck);
 
-        ArrayList<Cell> cellForRoom = new ArrayList<>();
+        cellForRoom.clear();
         cellForRoom.add(init.cell[1][0]);
 
         init.room.add(new Room(null, "WHITE", new ArrayList<>(cellForRoom)));

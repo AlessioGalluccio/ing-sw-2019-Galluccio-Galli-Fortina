@@ -3,6 +3,7 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Cell extends Observable implements Target, Serializable {
+public abstract class Cell extends Observable implements Printable, Target, Serializable {
 
     private Border northBorder;
     private Border eastBorder;

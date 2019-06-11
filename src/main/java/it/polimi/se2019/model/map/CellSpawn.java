@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.map;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 public class CellSpawn extends Cell {
@@ -122,4 +124,78 @@ public class CellSpawn extends Cell {
         return gson.fromJson(gson.toJson(this), CellSpawn.class);
     }
 
+    /**
+     * Print this cell on System.out line by line
+     * @param row the line to print
+     */
+    @Override
+    @SuppressWarnings("squid:S106")
+    public void printRow(int row) {
+        ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
+        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
+        switch (row) {
+            case 0:
+                getNorthBorder().printByDirection(0, true, color);
+                break;
+            case 1:
+                getWestBorder().printByDirection(1, false, color);
+                System.out.print(space + space);
+                if(getPlayerHere().size()==1) {
+                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(0).getCharacter().getColor()));
+                    System.out.print("◉");
+                }else System.out.print(space);
+                System.out.print(space);
+                if(getPlayerHere().size()==2) {
+                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(1).getCharacter().getColor()));
+                    System.out.print("◉");
+                }else System.out.print(space);
+                System.out.print(space + space);
+                getEastBorder().printByDirection(1, false, color);
+                break;
+            case 2:
+                getWestBorder().printByDirection(2, false, color);
+                System.out.print(space + space);
+                System.out.print(space);
+                if(getPlayerHere().size()==5) {
+                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(4).getCharacter().getColor()));
+                    System.out.print("◉");
+                }else System.out.print(space);
+                System.out.print(space);
+                System.out.print(space + space);
+                getEastBorder().printByDirection(2, false, color);
+                break;
+            case 3:
+                getWestBorder().printByDirection(3, false, color);
+                System.out.print(space + space +
+                "↺↺↺" +
+                space + space);
+                getEastBorder().printByDirection(3, false, color);
+                break;
+            case 4:
+                getWestBorder().printByDirection(4, false, color);
+                System.out.print(ConsoleColor.WHITE_BOLD_BRIGHT + "▦▦▦▦▦▦▦" + color);
+                getEastBorder().printByDirection(4, false, color);
+                break;
+            case 5:
+                getWestBorder().printByDirection(5, false, color);
+                System.out.print(space + space);
+                if(getPlayerHere().size()==3) {
+                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(2).getCharacter().getColor()));
+                    System.out.print("◉");
+                }else System.out.print(space);
+                System.out.print(space);
+                if(getPlayerHere().size()==4) {
+                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(3).getCharacter().getColor()));
+                    System.out.print("◉");
+                }else System.out.print(space);
+                System.out.print(space + space);
+                getEastBorder().printByDirection(5, false,color);
+                break;
+            case 6:
+                getSouthBorder().printByDirection(6, true, color);
+                break;
+            default:
+        }
+        System.out.print(ConsoleColor.RESET);
+    }
 }

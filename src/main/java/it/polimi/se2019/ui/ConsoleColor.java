@@ -1,5 +1,7 @@
 package it.polimi.se2019.ui;
 
+import it.polimi.se2019.model.player.ColorRYB;
+
 public enum ConsoleColor {
     RESET("\033[0m"),
 
@@ -82,5 +84,21 @@ public enum ConsoleColor {
     @Override
     public String toString() {
         return code;
+    }
+
+    public static ConsoleColor colorByColor(String color) {
+        switch (color.toUpperCase()) {
+            case "RED": return RED_BOLD;
+            case "YELLOW": return YELLOW_BOLD;
+            case "BLUE": return BLUE_BOLD;
+            case "GREEN": return GREEN_BOLD;
+            case "CYAN": return CYAN_BOLD;
+            case "VIOLET":
+            case "PURPLE": return MAGENTA_BOLD;
+            case "BLACK": return WHITE_BOLD_BRIGHT;
+            case "GREY":
+            case "WHITE":
+            default: return BLACK_BOLD;
+        }
     }
 }
