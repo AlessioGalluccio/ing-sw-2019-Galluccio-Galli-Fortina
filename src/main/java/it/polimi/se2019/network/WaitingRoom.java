@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
 import it.polimi.se2019.view.configureMessage.EnemyMessage;
 import it.polimi.se2019.view.configureMessage.StatusLoginMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
@@ -13,6 +14,7 @@ import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.util.Timer;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -21,7 +23,7 @@ import java.util.logging.Logger;
 public class WaitingRoom {
     private static int matchID = 100;
     private static WaitingRoom instance = null;
-    private static List<GameHandler> macthes = new LinkedList<>();
+    private static List<Match> matches = new ArrayList<>();
     private final int duration;
     private List<WaitingPlayer> playerWaiting = new LinkedList<>();
     private int playerID = 0;
@@ -30,7 +32,8 @@ public class WaitingRoom {
 
     private WaitingRoom(int duration) {
         this.duration = duration*1000;
-        macthes.add(new GameHandler(matchID++));
+        matches.add(new Match(matchID, new GameHandler(matchID)));
+        matchID++;
     }
 
     /**
@@ -69,7 +72,7 @@ public class WaitingRoom {
             if(checkNickname(nickname, matchID)) initializePlayer(nickname, networkHandler);
             else networkHandler.update(null, new StatusLoginMessage(false, false));
         } catch (DisconnectedException e) {
-            reconnectPlayer(e.gameHandler, e.nickname);
+            reconnectPlayer(e.gameHandler, e.nickname, matchID, networkHandler);
         }
     }
 
@@ -82,11 +85,13 @@ public class WaitingRoom {
         for(WaitingPlayer wp : playerWaiting) {
             if(wp.player.getNickname().equals(nickname)) return false;
         }
-        for(GameHandler gm : macthes) {
-            for(Player p : gm.getOrderPlayerList()) {
+        for(Match m : matches) {
+            for(Player p : m.gameHandler.getOrderPlayerList()) {
                 if(p.getNickname().equals(nickname)) {
-                    //TODO handle disconnection
-                    if(gm.checkMatchID(matchID)/*&&gm.isDisconnected()*/) throw new DisconnectedException();
+                    if(m.matchID==matchID &&
+                    m.gameHandler.isDisconnected(nickname))  {
+                        throw new DisconnectedException(m.gameHandler, nickname);
+                    }
                     return false;
                 }
             }
@@ -98,8 +103,10 @@ public class WaitingRoom {
         Player player = new Player(nickname, playerID++);
         PlayerView playerView = new PlayerView(networkHandler, player.clone());
         player.attach(playerView);
-        Controller controller = new Controller(macthes.get(macthes.size()-1));
+        Controller controller = new Controller(matches.get(matches.size()-1).gameHandler, player);
         playerView.attach(controller);
+
+        networkHandler.setMatchID(matches.get(matches.size()-1).matchID);
 
         synchronized(this) {
             while(playerWaiting.size()==5) {
@@ -122,11 +129,30 @@ public class WaitingRoom {
 
     /**
      * Reconnect a player to his match
-     * @param gm Match where to be reconnected
+     * @param gameHandler Match where to be reconnected
      * @param nickname Nickname of the player
+     * @param matchID The match where to be reconnected
      */
-    private void reconnectPlayer(GameHandler gm, String nickname) {
+    private void reconnectPlayer(GameHandler gameHandler, String nickname, int matchID, Server networkHandler) {
 
+        for(Match m : matches) {
+            if(m.matchID==matchID) {
+                m.skullBoardView.attach(networkHandler);
+                m.mapView.attach(networkHandler);
+
+                for(EnemyView ew : m.enemyViews) {
+                    if(!ew.getNickname().equals(nickname)) {
+                        ew.attach(networkHandler);
+                    }
+                }
+                for(PlayerView pw : m.playerViews) {
+                    if(pw.getPlayerCopy().getNickname().equals(nickname)) {
+                        pw.setNetworkHandler(networkHandler);
+                        pw.notifyObservers(new ReconnectionMessage(true,pw.getPlayerCopy().getID(),pw));
+                    }
+                }
+            }
+        }
     }
 
     private void setTimer() {
@@ -136,7 +162,8 @@ public class WaitingRoom {
             @Override
             public void run() {
                 Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Timeout, a new game is going to start");
-                if(playerWaiting.size()>=3) startMatch();
+                if(playerWaiting.size()>=3 &&
+                        matches.get(matches.size()-1).gameHandler.getMap()!=null) startMatch();
                 timer=null;
             }
         }, duration);
@@ -148,38 +175,47 @@ public class WaitingRoom {
      * In the end attach every observer to his observable
      */
     private synchronized void startMatch() {
-        GameHandler gameHandler = macthes.get(macthes.size() - 1);
+        GameHandler gameHandler = matches.get(matches.size() - 1).gameHandler;
+        Match currentMatch = matches.get(matches.size() - 1);
         //Create all views and attach networkHandler
         MapView mapView = new MapView();
+        currentMatch.mapView = mapView;
         SkullBoardView skullBoardView = new SkullBoardView();
+        currentMatch.skullBoardView = skullBoardView;
         List<EnemyView> enemyViews = new LinkedList<>();
+        List<PlayerView> playerViews = new LinkedList<>();
+
         for (WaitingPlayer wp : playerWaiting) {
             mapView.attach(wp.networkHandler);
             skullBoardView.attach(wp.networkHandler);
             enemyViews.add(wp.enemyView);
+
             for (WaitingPlayer wp2 : playerWaiting) {
                 //Attach each enemy view at the network handler of the ENEMY (not at himself)
                 if (!wp.enemyView.getNickname().equals(wp2.player.getNickname())) {
-                    wp2.networkHandler.update(null, new EnemyMessage(wp2.enemyView.getNickname()));
+                    wp.enemyView.attach(wp2.networkHandler);
+                    wp.networkHandler.update(null, new EnemyMessage(wp2.enemyView.getNickname()));
                 }
             }
+            playerViews.add(wp.playerView);
             gameHandler.setUp(wp.player, wp.playerView);
             gameHandler.attachAll(mapView, skullBoardView, enemyViews);
         }
 
+        currentMatch.playerViews = playerViews;
+        currentMatch.enemyViews = enemyViews;
+
+
         gameHandler.start();
         playerWaiting.clear();
-        notifyAll(); //Wake threads that are waiting the playerWaiting list is <5
+        notifyAll(); //Wake threads that are waiting the playerWaiting list is < 5
         isFirst = true;
         timer.cancel();
         timer = null;
-        macthes.add(new GameHandler(matchID++));
+        matches.add(new Match(matchID, new GameHandler(matchID)));
+        matchID++;
 
-        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Match #" + matchID + "has started" );
-    }
-
-    public void handleDisconnectMessage() {
-
+        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Match #" + currentMatch.matchID + " has started" );
     }
 
 
@@ -193,13 +229,34 @@ public class WaitingRoom {
      */
     public synchronized void handleSettingMessage(int map, int skulls, boolean suddenDeath, Server sender) {
         if(isFirst) {
-            GameHandler gm = macthes.get(macthes.size() - 1);
+            GameHandler gm = matches.get(matches.size() - 1).gameHandler;
             gm.setMap(map);
             gm.setSkull(skulls);
             gm.setSuddenDeath(suddenDeath);
             isFirst = false;
+            setTimer();
         }
         Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Map&Co. set");
+    }
+
+    public void disconnect(Server server, PlayerView view, int matchID) {
+        for(WaitingPlayer wp : playerWaiting) {
+            if(wp.player.getNickname().equals(view.getPlayerCopy().getNickname())) {
+                playerWaiting.remove(wp);
+            }
+        }
+        for(Match m : matches) {
+            if(m.matchID==matchID && matchID!=this.matchID) {
+                m.mapView.detach(server);
+                m.skullBoardView.detach(server);
+                view.setNetworkHandler(null);
+                for(EnemyView ev : m.enemyViews) {
+                    ev.detach(server);
+                }
+            }
+        }
+        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Disconnect " +
+                view.getPlayerCopy().getNickname());
     }
 
     private class WaitingPlayer {
@@ -215,6 +272,20 @@ public class WaitingRoom {
             this.controller = controller;
             this.networkHandler = networkHandler;
             this.enemyView = enemyView;
+        }
+    }
+
+    private class Match {
+        GameHandler gameHandler;
+        int matchID;
+        List<PlayerView> playerViews;
+        List<EnemyView> enemyViews;
+        MapView mapView;
+        SkullBoardView skullBoardView;
+
+        Match(int matchID, GameHandler gameHandler) {
+            this.matchID = matchID;
+            this.gameHandler = gameHandler;
         }
     }
 

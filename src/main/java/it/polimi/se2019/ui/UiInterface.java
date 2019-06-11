@@ -6,9 +6,9 @@ public interface UiInterface {
 
     void selectedMap(int choosMap);
 
-
     void startGame();
 
+    void disconnect(int matchID);
     //TODO aggiungere metodo per gestire printFromController
 
     //TODO aggiungere metodi per stampare mappa, player, enemy etc...

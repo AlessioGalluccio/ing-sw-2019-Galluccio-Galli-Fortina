@@ -10,18 +10,17 @@ import java.rmi.RemoteException;
 public class ClientMain {
 
     public static void main( String[] args ) throws RemoteException {
+
         ClientView clientView = new ClientView();
-
-
         CLI cli = new CLI(clientView);
         clientView.setUi(cli);
 
-        RMIClient rmi = new RMIClient(clientView);
-        rmi.connect();
+       // RMIClient rmi = new RMIClient(clientView);
+       // rmi.connect();
 
-       // SocketClient socket = new SocketClient(9001, "localhost", clientView);
-        // socket.connect();
-        clientView.setUp(rmi);
+        SocketClient socket = new SocketClient(9001, "localhost", clientView);
+        socket.connect();
+        clientView.setUp(socket);
         cli.start();
 
     }

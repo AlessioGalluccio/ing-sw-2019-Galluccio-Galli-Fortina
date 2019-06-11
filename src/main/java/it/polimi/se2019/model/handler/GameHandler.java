@@ -12,6 +12,7 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
@@ -520,6 +521,19 @@ public class GameHandler extends Observable {
      */
     public void setPlayerConnectionStatus(Player player, boolean isConnected){
         player.setConnected(isConnected);
+        if(isConnected) {
+            PlayerView playerView = getViewByPlayer(player);
+            playerView.update(null, new StartGameMessage());
+        } else {
+            //TODO printformcontroller che qualcuno si è disconneso
+        }
+    }
+
+    public boolean isDisconnected(String nickname) {
+        for(Player p : orderPlayerList) {
+            if(p.getNickname().equals(nickname)) return !p.isConnected();
+        }
+        return false;
     }
 }
 

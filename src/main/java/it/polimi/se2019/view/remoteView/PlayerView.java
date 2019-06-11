@@ -9,7 +9,6 @@ import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
 import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
-import it.polimi.se2019.view.ViewControllerMess.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +40,16 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return selectedTargets;
     }
 
+    /**
+     * Receive message from the model and forward it to the networkHandler
+     * @param o null
+     * @param arg the message receive to forward
+     */
     @Override
     public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
         message.handleMessage(this);
-        networkHandler.update(null, message);
+        if(networkHandler!=null) networkHandler.update(null, message);
     }
 
     public Character getChoosenCharacter() {
@@ -60,28 +64,43 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return possibleTargets;
     }
 
+
+    /**
+     * Set possible target to be aim by th weapon
+     * Receive them from the controller and forward them to the networkHandler
+     * @param targets possible target
+     */
     public void setPossibleTargets(List<? extends Target> targets){
         this.possibleTargets = (ArrayList<? extends Target>) targets;
         networkHandler.update(null, new PossibleTargetMessage(targets));
     }
 
-    public void send (ViewControllerMessage message){
-        notifyObservers(message);
-    }
-
+    /**
+     * Receive a string message from the controller and forward it to the networkHandler
+     * @param string the message
+     */
     @Override
     public void printFromController(String string) {
         networkHandler.send(string);
     }
 
+    /**
+     * Do nothing
+     * @param startGameMessage
+     */
     @Override
     public void handleStartGameMessage(StartGameMessage startGameMessage) {
         //Is only to forward, already done by update()
     }
 
+    /**
+     * Set the attribute playerCopy to the new playerCopy
+     * @param p the new playerCopy
+     */
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
     }
+
 
     //To use for reconnection
     public void setNetworkHandler(Server networkHandler) {

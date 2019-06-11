@@ -49,6 +49,15 @@ public class CLI implements UiInterface {
         out.println(ConsoleColor.BLACK + "START" + ConsoleColor.RESET);
     }
 
+    @Override
+    public void disconnect(int matchID) {
+        out.println(ConsoleColor.RED +
+                "You have been disconnected due to inactivity" +
+                ConsoleColor.RESET);
+        out.println("In order to reconnect to the same match remember this ID: "
+                + ConsoleColor.BLACK_BOLD + matchID + ConsoleColor.RESET );
+    }
+
     public synchronized void start() {
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +

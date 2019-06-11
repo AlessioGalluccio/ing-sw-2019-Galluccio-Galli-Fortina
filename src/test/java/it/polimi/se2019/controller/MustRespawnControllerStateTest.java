@@ -20,7 +20,7 @@ public class MustRespawnControllerStateTest {
     @Before
     public void setUp() throws Exception {
         gameHandler = mock(GameHandler.class);
-        controller = new Controller(gameHandler);
+        controller = new Controller(gameHandler, null);
         state = new MustRespawnControllerState(controller, gameHandler);
         controller.setState(state);
     }

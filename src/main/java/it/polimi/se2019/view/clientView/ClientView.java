@@ -303,6 +303,10 @@ public class ClientView extends View /*View implement observer/observable*/{
         ui.login(success, isFirst);
     }
 
+    public void handleDisconnection(int matchID) {
+        ui.disconnect(matchID);
+    }
+
     /**
      * Set up all views and attach the networkHandler
      * @param networkHandler the client

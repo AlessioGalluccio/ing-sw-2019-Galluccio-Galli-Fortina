@@ -43,7 +43,6 @@ public class SocketClient extends Client {
                 try {
                     while(open) { // Fake condition: it's always true
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
-                        System.out.println("MESSAGE IN");
                         messageSocket.handleMessage(this);
                     }
                 }catch (IOException | ClassNotFoundException e) {

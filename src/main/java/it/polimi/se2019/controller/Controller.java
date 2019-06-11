@@ -29,12 +29,13 @@ public class Controller implements Observer {
     private int numOfActionTaken;
     public int numOfMaxActions = 2;
 
-    public Controller(GameHandler gameHandler) {
+    public Controller(GameHandler gameHandler, Player playerAuthor) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.gameHandler = gameHandler;
         this.messageListReceived = new ArrayList<>();
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
+        this.playerAuthor = playerAuthor;
         this.state = new NotYourTurnState(this, gameHandler);
     }
 

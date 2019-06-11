@@ -41,6 +41,10 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         enemyViews.add(new ClientEnemyView(nickname));
     }
 
+    public void handleDisconnection(int matchID) {
+        clientView.handleDisconnection(matchID);
+    }
+
     public void forwardToEnemyView(ModelViewMessage message) {
 
     }

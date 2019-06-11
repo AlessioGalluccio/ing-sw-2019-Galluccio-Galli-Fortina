@@ -38,7 +38,7 @@ public class ActionSelectedControllerStateTest {
     public void setUp() throws Exception {
         gameHandler = mock(GameHandler.class);
         playerViewMock = mock(PlayerView.class);
-        controller = new Controller(gameHandler);
+        controller = new Controller(gameHandler, null);
         controller.addPlayerView(playerViewMock);
         this.actionMock = mock(Shoot.class);
         state = new ActionSelectedControllerState(controller, gameHandler, actionMock);
@@ -49,7 +49,7 @@ public class ActionSelectedControllerStateTest {
     public void correctCallOfHandleFromController(){
         ActionSelectedControllerState stateMock = mock(ActionSelectedControllerState.class);
         GameHandler gameHandler = mock(GameHandler.class);
-        Controller controller = new Controller(gameHandler);
+        Controller controller = new Controller(gameHandler,  null);
         controller.setState(stateMock);
         StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE,
                                                                         "ok", true);

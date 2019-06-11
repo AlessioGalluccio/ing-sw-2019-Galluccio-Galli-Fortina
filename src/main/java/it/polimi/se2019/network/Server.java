@@ -28,4 +28,6 @@ public interface Server extends Observer {
      * If there's a timer set, it will be deleted
      */
     void cancelTimer();
+
+    void setMatchID(int matchID);
 }

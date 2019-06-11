@@ -24,7 +24,7 @@ public class NotYourTurnStateTest {
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);
         GameHandler gameHandler = new GameHandler(players, 8);
-        this.controller = new Controller(gameHandler);
+        this.controller = new Controller(gameHandler, null);
         controller.setAuthor(player);
         this.controller.setState(new NotYourTurnState(controller, gameHandler));
         this.stateController = controller.getState();

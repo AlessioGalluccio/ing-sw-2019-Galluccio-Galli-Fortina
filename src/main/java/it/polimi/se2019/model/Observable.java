@@ -13,7 +13,7 @@ public class Observable implements Serializable {
         if(!observers.contains(obv)) observers.add(obv);
     }
 
-    public void dettach(Observer obv) {
+    public void detach(Observer obv) {
         observers.remove(obv);
     }
 

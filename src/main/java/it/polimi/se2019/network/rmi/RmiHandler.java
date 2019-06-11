@@ -14,6 +14,9 @@ import it.polimi.se2019.network.Server;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
 import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.rmi.RemoteException;
@@ -26,12 +29,26 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     private int duration;
     private PlayerView view;
     private ExecutorService executor;
+    static int nThreads =0;
+    private int matchID;
+    private Timer pingTimer;
 
     public RmiHandler(RmiClientInterface client, int duration, RMIServer server) throws RemoteException  {
         this.client = client;
         this.duration = duration*1000;
         this.server = server;
         executor = Executors.newCachedThreadPool();
+        pingTimer = new Timer();
+        pingTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    client.ping();
+                } catch (RemoteException e) {
+                    disconnect();
+                }
+            }
+        }, 5, 700);
     }
 
     @Override
@@ -60,7 +77,8 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TODO send disconnect message
+                new Sender(new DisconnectMessage(matchID));
+                disconnect();
             }
         }, duration);
     }
@@ -78,6 +96,11 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     }
 
     @Override
+    public void setMatchID(int matchID) {
+        this.matchID = matchID;
+    }
+
+    @Override
     public void send(HandlerServerMessage message) throws RemoteException {
         message.handleMessage(this);
     }
@@ -88,8 +111,16 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     }
 
     @Override
-    public void forwardViewMessage(HandlerServerMessage message) {
+    public void forwardViewMessage(ViewControllerMessage message) {
+        message.setView(view);
+        view.notifyObservers(message);
+    }
 
+    private void disconnect() {
+        pingTimer.cancel();
+        server.getWaitingRoom().disconnect(this, view, matchID);
+        view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        server.disconnect(this);
     }
 
     private class Sender implements Runnable {
@@ -102,9 +133,13 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         @Override
         public void run() {
             try {
+                RmiHandler.nThreads++;
                 client.receiveMessage(message);
+                RmiHandler.nThreads--;
+                Logger.getLogger(RmiHandler.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
             } catch (RemoteException e) {
                 Logger.getLogger(RmiHandler.class.getName()).log(Level.SEVERE, "Can't send message to RMI client", e);
+                disconnect();
             }
         }
     }
