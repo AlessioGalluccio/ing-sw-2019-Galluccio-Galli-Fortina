@@ -39,7 +39,7 @@ public class ActionSelectedControllerStateTest {
         gameHandler = mock(GameHandler.class);
         playerViewMock = mock(PlayerView.class);
         controller = new Controller(gameHandler, null);
-        controller.addPlayerView(playerViewMock);
+        controller.setPlayerView(playerViewMock);
         this.actionMock = mock(Shoot.class);
         state = new ActionSelectedControllerState(controller, gameHandler, actionMock);
         controller.setState(state);

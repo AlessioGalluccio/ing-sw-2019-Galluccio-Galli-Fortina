@@ -32,6 +32,8 @@ public class TestController {
         this.playerView = new PlayerView(temp);
     }
 
+    /*
+
     @Test
     public void testMessageListReceivedEqual() {
 
@@ -55,6 +57,8 @@ public class TestController {
         assertNotEquals(nopeMessage.getMessageID(), received.get(0).getMessageID());
         
     }
+
+    */
 
 
 }

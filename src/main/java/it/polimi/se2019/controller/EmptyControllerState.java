@@ -45,7 +45,7 @@ public class EmptyControllerState implements  StateController {
             }
             if(!canShoot){
                 playerView.printFromController(CANT_SHOOT);
-                controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+                playerView.printFromController(SELECT_ACTION_REQUEST);
                 controller.removeLastReceivedMessage();
             }
         }
@@ -108,13 +108,13 @@ public class EmptyControllerState implements  StateController {
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_PRESENT_WEAPON_RELOAD);
+            playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
             youCantDoThis();
         }catch(WeaponIsLoadedException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(WEAPON_LOADED_RELOAD);
+            playerView.printFromController(WEAPON_LOADED_RELOAD);
             youCantDoThis();
         }catch(NotEnoughAmmoException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_ENOUGH_AMMO_RELOAD);
+            playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
             youCantDoThis();
         }
 
@@ -170,7 +170,7 @@ public class EmptyControllerState implements  StateController {
     }
 
     private void youCantDoThis(){
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
+        playerView.printFromController(SELECT_ACTION_REQUEST);
         controller.removeLastReceivedMessage();
     }
 }

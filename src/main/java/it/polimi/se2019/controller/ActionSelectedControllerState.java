@@ -106,7 +106,7 @@ public class ActionSelectedControllerState implements StateController {
 
         if(!controller.getCopyMessageListExpected().get(index).isOptional()){
             String response = controller.getCopyMessageListExpected().get(index).getString();
-            controller.getLastReceivedMessage().getAuthorView().printFromController(response);
+            playerView.printFromController(response);
             controller.removeLastReceivedMessage();
         }
         else{

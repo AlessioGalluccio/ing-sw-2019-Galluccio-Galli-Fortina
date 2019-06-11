@@ -196,7 +196,7 @@ public class GameHandler extends Observable {
      * @param cardId card's id
      * @return the card with that id
      */
-    public PowerupCard getPowrupCardByID(int cardId) {
+    public PowerupCard getPowerupCardByID(int cardId) {
         return powerupDeck.getCardById(cardId);
     }
 

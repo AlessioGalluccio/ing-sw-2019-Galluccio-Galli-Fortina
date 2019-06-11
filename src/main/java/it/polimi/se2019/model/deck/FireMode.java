@@ -1,18 +1,16 @@
 package it.polimi.se2019.model.deck;
 
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.controller.actions.AddActionMethods;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
-import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -152,7 +150,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException,
             NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         //Use Override if the firemode can't use Targeting scopes because it only adds marks
-        PowerupCard card = gameHandler.getPowrupCardByID(targetingCardID);
+        PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
         if(shoot.getTargetingScopeCards().contains(card)){
             throw new WrongInputException();
         }

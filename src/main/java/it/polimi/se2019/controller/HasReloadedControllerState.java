@@ -78,16 +78,16 @@ public class HasReloadedControllerState implements StateController {
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_PRESENT_WEAPON_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(RELOAD_OR_PASS);
+            playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
+            playerView.printFromController(RELOAD_OR_PASS);
             controller.removeLastReceivedMessage();
         }catch(WeaponIsLoadedException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(WEAPON_LOADED_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(RELOAD_OR_PASS);
+            playerView.printFromController(WEAPON_LOADED_RELOAD);
+            playerView.printFromController(RELOAD_OR_PASS);
             controller.removeLastReceivedMessage();
         }catch(NotEnoughAmmoException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_ENOUGH_AMMO_RELOAD);
-            controller.getLastReceivedMessage().getAuthorView().printFromController(RELOAD_OR_PASS);
+            playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
+            playerView.printFromController(RELOAD_OR_PASS);
             controller.removeLastReceivedMessage();
         }
     }

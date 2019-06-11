@@ -142,7 +142,7 @@ public class NotYourTurnState implements StateController {
     }
 
     private void cantDoThisHandler(){
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
+        playerView.printFromController(NOT_YOUR_TURN_RESPONSE);
         controller.removeLastReceivedMessage();
     }
 
