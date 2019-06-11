@@ -38,11 +38,6 @@ public class ZX2_1 extends FireMode {
     }
 
     @Override
-    public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
         if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty() && target.getID() != author.getID()){
@@ -53,14 +48,11 @@ public class ZX2_1 extends FireMode {
         }
     }
 
+    //THIS MUST REMAIN, IT LAUNCHES ANOTHER EXCEPTION
     @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        throw new WrongInputException();
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        throw new FiremodeOfOnlyMarksException();
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-        throw new WrongInputException();
-    }
 
 }

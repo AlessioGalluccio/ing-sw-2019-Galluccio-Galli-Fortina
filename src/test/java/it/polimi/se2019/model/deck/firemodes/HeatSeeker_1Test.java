@@ -93,4 +93,14 @@ public class HeatSeeker_1Test {
         shoot.fire();
         assertEquals(3,targetPlayer3.getDamage().size());
     }
+
+    @Test
+    public void firePositiveWithOneOldMark() throws Exception{
+        //we add a not visible target, and this makes it throw and exception
+        targetPlayer3.receiveMarkBy(authorPlayer);
+        shoot.addPlayerTarget(targetPlayer3.getID());
+        shoot.fire();
+        assertEquals(4,targetPlayer3.getDamage().size());
+        assertEquals(0,targetPlayer3.getMark().getMarkReceived().size());
+    }
 }

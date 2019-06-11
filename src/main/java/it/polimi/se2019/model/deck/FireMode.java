@@ -182,6 +182,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         int numMakrsToConvert = 0;
         if(useMarks){
             numMakrsToConvert = author.getMark().getNumMarkDoneTo(targetPlayer);
+            targetPlayer.removeMarkReceivedBy(author);
         }
         for(int i = 0; i < numDamage + numMakrsToConvert; i++){
             try{
