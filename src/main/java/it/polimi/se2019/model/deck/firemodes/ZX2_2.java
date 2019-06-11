@@ -30,15 +30,14 @@ public class ZX2_2 extends FireMode {
     public void fire() throws WrongInputException{
         if(!shoot.getTargetsPlayer().isEmpty()){
             for(Player target : shoot.getTargetsPlayer()){
-                addDamageAndMarks(target,0,1);
+                addDamageAndMarks(target,0,1, true);
             }
+            super.fire();
         }
-        //TODO pagamento costo ed eccezione
-    }
+        else{
+            throw new WrongInputException();
+        }
 
-    @Override
-    public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
     }
 
     @Override
@@ -58,19 +57,10 @@ public class ZX2_2 extends FireMode {
 
     }
 
+    //THIS MUST REMAIN, IT LAUNCHES ANOTHER EXCEPTION
     @Override
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         throw new FiremodeOfOnlyMarksException();
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-        //TODO è possibile in questa modalità per il 2 e il 3 targetPlayer
     }
 
 }
