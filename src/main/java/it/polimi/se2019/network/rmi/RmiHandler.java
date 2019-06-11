@@ -24,12 +24,12 @@ import java.util.Observer;
 
 public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHandlerInterface, Server, SwitchServerMessage {
     private RMIServer server;
-    private Timer timer = new Timer();
+    private transient Timer timer = new Timer();
     private RmiClientInterface client;
     private int duration;
     private PlayerView view;
     private ExecutorService executor;
-    static int nThreads =0;
+    private static int nThreads =0;
     private int matchID =0;
     private Timer pingTimer;
 
@@ -121,6 +121,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         server.getWaitingRoom().disconnect(this, view, matchID);
         //If match is started disconnect form controller
         if(matchID!=0) view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        executor.shutdown();
         server.disconnect(this);
     }
 
