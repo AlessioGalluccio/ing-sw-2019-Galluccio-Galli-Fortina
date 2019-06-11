@@ -16,7 +16,10 @@
       <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
-         </cursor></ImageView>
+         </cursor>
+         <image>
+            <Image url="@mappa.jpg" />
+         </image></ImageView>
       <Button fx:id="redWeapon1" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -356,39 +359,39 @@
       <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
       <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
       <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="99.0" />
-      <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="148.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="182.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_042.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell00" fitHeight="49.0" fitWidth="51.0" layoutX="139.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell00" fitHeight="49.0" fitWidth="51.0" layoutX="164.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_045.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell10" fitHeight="49.0" fitWidth="51.0" layoutX="262.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell10" fitHeight="49.0" fitWidth="51.0" layoutX="296.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_0433.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell11" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell11" fitHeight="49.0" fitWidth="51.0" layoutX="307.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_0419.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell12" fitHeight="49.0" fitWidth="51.0" layoutX="274.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell12" fitHeight="49.0" fitWidth="51.0" layoutX="309.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_043.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell21" fitHeight="49.0" fitWidth="51.0" layoutX="412.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell21" fitHeight="49.0" fitWidth="51.0" layoutX="448.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_0437.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell20" fitHeight="49.0" fitWidth="51.0" layoutX="423.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell20" fitHeight="49.0" fitWidth="51.0" layoutX="444.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_0416.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell31" fitHeight="49.0" fitWidth="51.0" layoutX="547.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell31" fitHeight="49.0" fitWidth="51.0" layoutX="572.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_0423.png" />
          </image></ImageView>
-      <ImageView fx:id="ammoCell32" fitHeight="49.0" fitWidth="51.0" layoutX="609.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ammoCell32" fitHeight="49.0" fitWidth="51.0" layoutX="584.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_044.png" />
          </image></ImageView>
@@ -447,5 +450,280 @@
             <Font size="25.0" />
          </font>
       </Button>
+      <ImageView fx:id="imPlayer1Cell02" fitHeight="22.0" fitWidth="22.0" layoutX="160.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell02" fitHeight="22.0" fitWidth="22.0" layoutX="234.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell02" fitHeight="22.0" fitWidth="22.0" layoutX="160.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell02" fitHeight="22.0" fitWidth="22.0" layoutX="234.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell02" fitHeight="22.0" fitWidth="22.0" layoutX="234.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell01" fitHeight="22.0" fitWidth="22.0" layoutX="156.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell01" fitHeight="22.0" fitWidth="22.0" layoutX="230.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell01" fitHeight="22.0" fitWidth="22.0" layoutX="156.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell01" fitHeight="22.0" fitWidth="22.0" layoutX="230.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell01" fitHeight="22.0" fitWidth="22.0" layoutX="230.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell00" fitHeight="22.0" fitWidth="22.0" layoutX="141.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell00" fitHeight="22.0" fitWidth="22.0" layoutX="215.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell00" fitHeight="22.0" fitWidth="22.0" layoutX="141.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell00" fitHeight="22.0" fitWidth="22.0" layoutX="215.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell00" fitHeight="22.0" fitWidth="22.0" layoutX="215.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell12" fitHeight="22.0" fitWidth="22.0" layoutX="286.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell12" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell12" fitHeight="22.0" fitWidth="22.0" layoutX="286.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell12" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell12" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell11" fitHeight="22.0" fitWidth="22.0" layoutX="286.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell11" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell11" fitHeight="22.0" fitWidth="22.0" layoutX="286.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell11" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell11" fitHeight="22.0" fitWidth="22.0" layoutX="360.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell10" fitHeight="22.0" fitWidth="22.0" layoutX="278.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell10" fitHeight="22.0" fitWidth="22.0" layoutX="352.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell10" fitHeight="22.0" fitWidth="22.0" layoutX="278.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell10" fitHeight="22.0" fitWidth="22.0" layoutX="352.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell10" fitHeight="22.0" fitWidth="22.0" layoutX="352.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell22" fitHeight="22.0" fitWidth="22.0" layoutX="420.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell22" fitHeight="22.0" fitWidth="22.0" layoutX="494.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell22" fitHeight="22.0" fitWidth="22.0" layoutX="420.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell22" fitHeight="22.0" fitWidth="22.0" layoutX="494.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell22" fitHeight="22.0" fitWidth="22.0" layoutX="494.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell21" fitHeight="22.0" fitWidth="22.0" layoutX="425.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell21" fitHeight="22.0" fitWidth="22.0" layoutX="499.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell21" fitHeight="22.0" fitWidth="22.0" layoutX="425.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell21" fitHeight="22.0" fitWidth="22.0" layoutX="499.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell21" fitHeight="22.0" fitWidth="22.0" layoutX="499.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell32" fitHeight="22.0" fitWidth="22.0" layoutX="561.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell32" fitHeight="22.0" fitWidth="22.0" layoutX="635.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell32" fitHeight="22.0" fitWidth="22.0" layoutX="561.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell32" fitHeight="22.0" fitWidth="22.0" layoutX="635.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell32" fitHeight="22.0" fitWidth="22.0" layoutX="635.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell31" fitHeight="22.0" fitWidth="22.0" layoutX="549.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell31" fitHeight="22.0" fitWidth="22.0" layoutX="623.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell31" fitHeight="22.0" fitWidth="22.0" layoutX="549.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell31" fitHeight="22.0" fitWidth="22.0" layoutX="623.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell31" fitHeight="22.0" fitWidth="22.0" layoutX="623.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer1Cell30" fitHeight="22.0" fitWidth="22.0" layoutX="551.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer2Cell30" fitHeight="22.0" fitWidth="22.0" layoutX="625.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer3Cell30" fitHeight="22.0" fitWidth="22.0" layoutX="551.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer4Cell30" fitHeight="22.0" fitWidth="22.0" layoutX="625.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imPlayer5Cell30" fitHeight="22.0" fitWidth="22.0" layoutX="625.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Blu.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
