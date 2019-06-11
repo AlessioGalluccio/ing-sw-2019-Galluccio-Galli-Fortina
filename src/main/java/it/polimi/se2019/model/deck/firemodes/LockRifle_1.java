@@ -11,18 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LockRifle_1 extends FireMode {
-    private static final int NUM_DAMAGE = 2;
-    private static final int NUM_MARK = 1;
 
+    //STRING AND MESSAGE
+    private static final String FIRST_MSG_STR = "Select a player from possible targets";
+    private static final String SECOND_MSG_STR = "Select another player from possible targets.";
+
+    //COST OPTIONALS
     private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
 
-    private static final String FIRST_MSG_STR = "Select a player from possible targets";
-    private static final boolean FIRST_MSG_BOOL = false;
-
-    private static final String SECOND_MSG_STR = "Select another player from possible targets";
-    private static final boolean SECOND_MSG_BOOL = true;
-
-    private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firmode before";
+    //ERROR MESSAGES
+    private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
 
 
 
@@ -56,7 +54,7 @@ public class LockRifle_1 extends FireMode {
     public List<StringAndMessage> getMessageListExpected() {
         List<StringAndMessage> messageListExpected = new ArrayList<>();
 
-        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_MESSAGE, FIRST_MSG_STR, FIRST_MSG_BOOL);
+        StringAndMessage firstTarget = new StringAndMessage(Identificator.PLAYER_MESSAGE, FIRST_MSG_STR);
         messageListExpected.add(firstTarget);
 
         return messageListExpected;
@@ -102,7 +100,7 @@ public class LockRifle_1 extends FireMode {
                 if(sendAllVisiblePlayers(shoot.getTargetsPlayer())) {
                     shoot.addOptionalSelected(numOptional);
                     StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
-                            SECOND_MSG_STR, SECOND_MSG_BOOL);
+                            SECOND_MSG_STR);
                     controller.addMessageListExpected(stringAndMessage);
                     shoot.addCost(COST_FIRST_OPTIONAL);
                 }
@@ -121,7 +119,8 @@ public class LockRifle_1 extends FireMode {
     }
 
     @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException,
+            NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         if(shoot.getTargetsPlayer().size() == 1) {
             super.addTargetingScope(targetingCardID, cost);
         }

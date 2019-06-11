@@ -20,6 +20,8 @@ public class ActionSelectedControllerState implements StateController {
     private GameHandler gameHandler;
     private Action action;
     private static final int FIRST_MESSAGE = 0;
+    private String errorString;
+    private String stringToPlayerView;
 
     private final String PLAYER_WRONG = "You can't select this target";
     private final String CELL_WRONG = "You can't select this cell";
@@ -57,7 +59,7 @@ public class ActionSelectedControllerState implements StateController {
             action.addCell(coordinateX, coordinateY);
         }catch(WrongInputException e){
             playerView.printFromController(CELL_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
     }
 
@@ -66,7 +68,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addFireMode(firemodeID);
         }catch (WrongInputException e){
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
         /*
         Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
@@ -75,7 +77,7 @@ public class ActionSelectedControllerState implements StateController {
 
         if(!player.canPayAmmo(cost)){
             controller.getLastReceivedMessage().getAuthorView().printFromController("Not enough ammo for this firemode");
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
         else{
             //TODO sistema
@@ -102,16 +104,19 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleNope() {
+        //TODO
+        /*
         int index = controller.getIndexExpected();
 
         if(!controller.getCopyMessageListExpected().get(index).isOptional()){
             String response = controller.getCopyMessageListExpected().get(index).getString();
-            controller.getLastReceivedMessage().getAuthorView().printFromController(response);
-            controller.removeLastReceivedMessage();
+            playerView.printFromController(response);
+            controller.removeReceived();
         }
         else{
             //do nothing
         }
+        */
 
     }
 
@@ -121,7 +126,7 @@ public class ActionSelectedControllerState implements StateController {
             action.addPlayerTarget(playerID);
         }catch (WrongInputException e){
             playerView.printFromController(PLAYER_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
 
     }
@@ -132,10 +137,10 @@ public class ActionSelectedControllerState implements StateController {
             action.addOptional(numOptional);
         }catch (WrongInputException e){
             playerView.printFromController(OPTIONAL_WRONG);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }catch (NotEnoughAmmoException e){
             playerView.printFromController(NOT_ENOUGH);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
     }
 
@@ -157,19 +162,19 @@ public class ActionSelectedControllerState implements StateController {
 
         }catch(WrongInputException e){
             playerView.printFromController(ALREADY_SELECTED);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch(NotEnoughAmmoException e){
             playerView.printFromController(NOT_ENOUGH);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch(NotPresentException e){
             playerView.printFromController(CARD_NOT_PRESENT);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
 
         }catch (FiremodeOfOnlyMarksException e){
             playerView.printFromController(ONLY_MARKS);
-            controller.removeLastReceivedMessage();
+            controller.removeReceived();
         }
 
     }
@@ -198,8 +203,12 @@ public class ActionSelectedControllerState implements StateController {
     public void handleFire() {
         try {
             action.fire();
+            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
         }catch(WrongInputException e){
-            //TODO
+            controller.removeReceived();
+            errorString =
+                    e.getMessage() +
+                    controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
         }
     }
 
@@ -214,11 +223,12 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
         if(startingHandler(arg)){
             arg.handle(this);
-            endingHandler(arg);
+            endingHandler();
         }
+        return stringToPlayerView;
     }
 
     /**
@@ -244,15 +254,34 @@ public class ActionSelectedControllerState implements StateController {
     }
 
     /**
-     * it handles the end of this entire State. If the sequence of message is ended, it sends them to the model and it changes the State of the controller
+     * It creates the message to the view after the message. If the sequence of message is ended,
+     * it sends them to the model and it changes the State of the controller
      */
-    private void endingHandler(ViewControllerMessage arg) {
-        //print next request
-        String response = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
-        playerView.printFromController(response);
+    private void endingHandler() {
+        //controlls if the sequence of action is completed
+        if(controller.getIndexExpected() < controller.getCopyMessageListExpected().size()){
+            //The sequence is not completed. It prints the next request
+            if(errorString != null){
+                stringToPlayerView = errorString + controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            }
+            else{
+                stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            }
+            //error string is resetted
+            errorString = null;
+        }
+        else{
+            //the sequence is completed. It goes to the EmptyState because it could use powerus or recharge weapons
+
+            controller.setState(new EmptyControllerState(controller, gameHandler));
+        }
+
+
+
+
         /*TODO
         int index = controller.getIndexExpected();
-        controller.addMessageListReceived(arg);
+        controller.addReceived(arg);
         controller.setIndexExpected(index + 1);
         if(controller.getCopyMessageListExpected().size() == controller.getIndexExpected()) {
             //Model is modified

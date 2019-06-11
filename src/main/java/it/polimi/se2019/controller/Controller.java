@@ -21,7 +21,6 @@ import java.util.Observer;
 public class Controller implements Observer {
     private Player playerAuthor;
     private PlayerView playerView; //TODO aggiungere al costruttore
-    private ArrayList<ViewControllerMessage> messageListReceived;
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
     private final GameHandler gameHandler;
@@ -29,10 +28,11 @@ public class Controller implements Observer {
     private int numOfActionTaken;
     public int numOfMaxActions = 2;
 
+    private String stringToPlayerView;
+
     public Controller(GameHandler gameHandler, Player playerAuthor) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.gameHandler = gameHandler;
-        this.messageListReceived = new ArrayList<>();
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
         this.playerAuthor = playerAuthor;
@@ -66,18 +66,6 @@ public class Controller implements Observer {
         return numOfMaxActions;
     }
 
-    public ArrayList<ViewControllerMessage> getCopyMessageListReceived() {
-        GsonBuilder g = new GsonBuilder()
-                .registerTypeAdapter(ViewControllerMessage.class, new JsonAdapter<ViewControllerMessage>())
-                .registerTypeAdapter(Target.class, new JsonAdapter<Target>())
-                .registerTypeAdapter(View.class, new JsonAdapter<View>());
-        Gson gson = g.create();
-
-        Type TYPE = new TypeToken<ArrayList<ViewControllerMessage>>() {
-        }.getType();
-
-        return gson.fromJson(gson.toJson(messageListReceived, TYPE), TYPE);
-    }
 
     public ArrayList<StringAndMessage> getCopyMessageListExpected() {
         Gson gson = new Gson();
@@ -88,23 +76,16 @@ public class Controller implements Observer {
         return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
     }
 
-
-    public ViewControllerMessage getLastReceivedMessage(){
-        //TODO da controllare in casi particolari
-        int last = messageListReceived.size();
-        return messageListReceived.get(last);
-    }
-
-    public void removeLastReceivedMessage(){
-        int last = messageListExpected.size();
-        messageListExpected.remove(last);
-    }
-
-    /////////////////////SETTERS
-
     public int getIndexExpected() {
         return indexExpected;
     }
+
+
+
+
+    /////////////////////SETTERS
+
+
 
     public StateController getState() {
         return state;
@@ -118,25 +99,36 @@ public class Controller implements Observer {
         this.playerView = playerView;
     }
 
-    public void addPlayerView(PlayerView playerView){
-        this.playerView = playerView;
-    }
 
 
-    public void setMessageListReceived(ArrayList<ViewControllerMessage> messageListReceived) {
-        this.messageListReceived = messageListReceived;
-    }
 
-    public void addMessageListReceived(ViewControllerMessage arg) {
-        this.messageListReceived.add(arg);
-    }
+
 
     public void setMessageListExpected(ArrayList<StringAndMessage> messageListExpected) {
         this.messageListExpected = messageListExpected;
     }
 
+
     public void addMessageListExpected(StringAndMessage arg) {
         this.messageListExpected.add(arg);
+    }
+
+    public void addMessageListImmediateNext(ArrayList<StringAndMessage> messageListExpected){
+        this.messageListExpected.addAll(indexExpected, messageListExpected);
+    }
+
+    public void addMessageListBeforeLastOne(ArrayList<StringAndMessage> messageListExpected){
+        this.messageListExpected.addAll(messageListExpected.size()- 2, messageListExpected);
+    }
+
+    public void addReceived() {
+        this.indexExpected++;
+    }
+
+    public void removeReceived(){
+        if(indexExpected > 0){
+            this.indexExpected--;
+        }
     }
 
     public void setIndexExpected(int indexExpected) {
@@ -164,7 +156,8 @@ public class Controller implements Observer {
     @Override
     public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
-            state.handle((ViewControllerMessage) arg);
+            stringToPlayerView = state.handle((ViewControllerMessage) arg);
+            playerView.printFromController(stringToPlayerView);
         }catch (Exception e) {
             System.err.println("Controller exception: " + e.toString());
             e.printStackTrace();
@@ -206,18 +199,11 @@ public class Controller implements Observer {
     /**
      * it empties the messages after Model is modified
      */
-    public void flushMessages() {
-        messageListReceived = new ArrayList<>();
+    public void resetMessages() {
         this.messageListExpected = new ArrayList<>();
         indexExpected = 0;
     }
 
-    /**
-     * it empties only the messages of the optional firemode
-     */
-    public void flushOptionalMessages() {
-        //TODO
-    }
 
 
 }

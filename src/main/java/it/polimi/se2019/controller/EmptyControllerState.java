@@ -19,6 +19,9 @@ public class EmptyControllerState implements  StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
     private final String SELECT_ACTION_REQUEST = "Please, select an action";
     private final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action";
     private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon";
@@ -45,8 +48,8 @@ public class EmptyControllerState implements  StateController {
             }
             if(!canShoot){
                 playerView.printFromController(CANT_SHOOT);
-                controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-                controller.removeLastReceivedMessage();
+                playerView.printFromController(SELECT_ACTION_REQUEST);
+                controller.removeReceived();
             }
         }
 
@@ -108,13 +111,13 @@ public class EmptyControllerState implements  StateController {
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_PRESENT_WEAPON_RELOAD);
+            playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
             youCantDoThis();
         }catch(WeaponIsLoadedException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(WEAPON_LOADED_RELOAD);
+            playerView.printFromController(WEAPON_LOADED_RELOAD);
             youCantDoThis();
         }catch(NotEnoughAmmoException e){
-            controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_ENOUGH_AMMO_RELOAD);
+            playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
             youCantDoThis();
         }
 
@@ -164,13 +167,15 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
-        controller.addMessageListReceived(arg);
+    public String handle(ViewControllerMessage arg) {
+        //TODO devi inizializzare la stringToPlayerView!
+        controller.addReceived();
         arg.handle(this);
+        return stringToPlayerView;
     }
 
     private void youCantDoThis(){
-        controller.getLastReceivedMessage().getAuthorView().printFromController(SELECT_ACTION_REQUEST);
-        controller.removeLastReceivedMessage();
+        playerView.printFromController(SELECT_ACTION_REQUEST);
+        controller.removeReceived();
     }
 }

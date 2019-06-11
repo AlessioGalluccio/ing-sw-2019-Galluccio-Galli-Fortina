@@ -14,6 +14,9 @@ public class NotYourTurnState implements StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
     private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
 
     public NotYourTurnState(Controller controller, GameHandler gameHandler) {
@@ -124,7 +127,7 @@ public class NotYourTurnState implements StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
 
         //controlls if it's the turn of the player. If it is, it changes the state and it passes the message to the new state
         int IDPlayer = arg.getAuthorID();
@@ -135,15 +138,16 @@ public class NotYourTurnState implements StateController {
         }
 
         else {
-            controller.addMessageListReceived(arg);
+            controller.addReceived();
             arg.handle(this);
         }
+        return stringToPlayerView;
 
     }
 
     private void cantDoThisHandler(){
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
+        playerView.printFromController(NOT_YOUR_TURN_RESPONSE);
+        controller.removeReceived();
     }
 
 }

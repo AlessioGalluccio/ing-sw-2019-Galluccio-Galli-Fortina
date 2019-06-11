@@ -21,7 +21,7 @@ public class ElectroScythe_1 extends FireMode {
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        StringAndMessage fireMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, SEND_FIRE,false);
+        StringAndMessage fireMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, SEND_FIRE);
         List<StringAndMessage> list = new ArrayList<>();
         list.add(fireMessage);
         return list;

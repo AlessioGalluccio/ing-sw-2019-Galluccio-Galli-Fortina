@@ -12,7 +12,7 @@ public interface StateController {
      * used by the controller to pass the new message, the other methods are used by messages themselves
      * @param arg
      */
-    public void handle(ViewControllerMessage arg);
+    public String handle(ViewControllerMessage arg);
 
     public void handleAction(int actionID);
 
