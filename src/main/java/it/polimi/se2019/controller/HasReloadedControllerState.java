@@ -22,7 +22,7 @@ public class HasReloadedControllerState implements StateController {
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 
@@ -120,6 +120,16 @@ public class HasReloadedControllerState implements StateController {
     @Override
     public void handleFire() {
         //TODO
+    }
+
+    @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO controlla
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
     }
 
     @Override

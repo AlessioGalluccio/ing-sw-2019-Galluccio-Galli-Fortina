@@ -48,13 +48,13 @@ public class MachineGun_1 extends FireMode {
         }
 
         for(Player target: shoot.getTargetsPlayer()){
-            addDamageAndMarks(target,1,0);
+            addDamageAndMarks(target,1,0, true);
         }
         if(shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
-            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 1,0);
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 1,0, false);
         }
         if(shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL)){
-            addDamageAndMarks(shoot.getTargetsPlayer().get(1), 1,0);
+            addDamageAndMarks(shoot.getTargetsPlayer().get(1), 1,0, false);
         }
         super.fire();
     }

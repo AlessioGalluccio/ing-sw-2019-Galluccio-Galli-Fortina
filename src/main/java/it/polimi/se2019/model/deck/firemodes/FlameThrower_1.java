@@ -30,7 +30,7 @@ public class FlameThrower_1 extends FireMode {
     public void fire() throws WrongInputException{
         if(!shoot.getTargetsPlayer().isEmpty()){
             for(Player target : shoot.getTargetsPlayer()){
-                addDamageAndMarks(target,1,0);
+                addDamageAndMarks(target,1,0, true);
             }
         }
         super.fire();

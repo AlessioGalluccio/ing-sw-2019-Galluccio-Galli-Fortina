@@ -108,7 +108,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         //damage of targetings
         if(!shoot.getTargetsOfTargetings().isEmpty()){
             for(Player targetTargeting: shoot.getTargetsOfTargetings()){
-                addDamageAndMarks(targetTargeting, 1,0);
+                addDamageAndMarks(targetTargeting, 1,0, false);
             }
         }
 
@@ -175,10 +175,16 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      * @param targetPlayer the player shooted
      * @param numDamage number of Damage to apply
      * @param numMarks number of Marks to apply
+     * @param useMarks true if you want to apply to damage the old marks, false if not (a targeting scope)
      */
-    protected void addDamageAndMarks(Player targetPlayer, int numDamage, int numMarks){
+    protected void addDamageAndMarks(Player targetPlayer, int numDamage, int numMarks, boolean useMarks){
         //TODO I must add also the damege of the previous marks!
-        for(int i = 0; i < numDamage; i++){
+        int numMakrsToConvert = 0;
+        if(useMarks){
+            numMakrsToConvert = author.getMark().getNumMarkDoneTo(targetPlayer);
+            targetPlayer.removeMarkReceivedBy(author);
+        }
+        for(int i = 0; i < numDamage + numMakrsToConvert; i++){
             try{
                 targetPlayer.receiveDamageBy(author);
             }catch (NotPresentException e){

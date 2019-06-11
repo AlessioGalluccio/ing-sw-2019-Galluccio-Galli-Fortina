@@ -11,7 +11,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class EmptyControllerState implements  StateController {
@@ -28,10 +27,9 @@ public class EmptyControllerState implements  StateController {
 
 
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 
@@ -153,6 +151,16 @@ public class EmptyControllerState implements  StateController {
     @Override
     public void handleFire() {
         //TODO
+    }
+
+    @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO controlla
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
     }
 
     @Override

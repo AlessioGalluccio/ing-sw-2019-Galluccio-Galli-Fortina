@@ -31,7 +31,7 @@ public class Whisper_1 extends FireMode {
     public void fire() throws WrongInputException{
         if(!shoot.getTargetsPlayer().isEmpty()){
             Player target = shoot.getTargetsPlayer().get(0);
-            addDamageAndMarks(target, 3,1);
+            addDamageAndMarks(target, 3,1, true);
             super.fire();
         }
         else{

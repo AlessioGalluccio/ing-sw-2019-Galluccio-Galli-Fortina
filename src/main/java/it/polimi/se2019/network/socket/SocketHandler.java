@@ -3,13 +3,13 @@ package it.polimi.se2019.network.socket;
 import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
 import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
+import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Timer;
@@ -26,6 +26,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     private int duration;
     private boolean open = true;
     private PlayerView view;
+    private int matchID = 0;
 
     SocketHandler(Socket socket, SocketServer server, int duration) {
         this.socket = socket;
@@ -41,19 +42,23 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
         try {
             printSocket = new ObjectOutputStream(socket.getOutputStream());
             scannerSocket =  new ObjectInputStream(socket.getInputStream());
+
             while(open) {
-                //Receive message
-                HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
-                message.handleMessage(this);
+                try {
+                    //Receive message
+                    HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
+                    message.handleMessage(this);
+                } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
+                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
+                } catch (java.net.SocketException e) {
+                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Connection closed", e);
+                    disconnect();
+                }
             }
+
         } catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
-        } catch (ClassNotFoundException e) {
-        Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-        } finally {
-            //TODO send disconnect message
-            closeAll(); // Closing socket
-            open = false;
+            closeAll();
         }
     }
 
@@ -89,6 +94,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
             printSocket.flush();
         }catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem sending obj through socket", e);
+            disconnect();
         }
     }
 
@@ -98,10 +104,13 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
      */
     private void send(Object message) {
         try {
-            printSocket.writeObject(message);
-            printSocket.flush();
+            if(open) {
+                printSocket.writeObject(message);
+                printSocket.flush();
+            }
         }catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem sending obj through socket", e);
+            disconnect();
         }
     }
 
@@ -116,8 +125,8 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //TODO send disconnect message
-                closeAll();
+                send(new DisconnectMessage());
+                disconnect();
             }
         }, duration);
     }
@@ -150,7 +159,22 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     }
 
     @Override
-    public void forwardViewMessage(HandlerServerMessage message) {
-
+    public void forwardViewMessage(ViewControllerMessage message) {
+        message.setView(view);
+        view.notifyObservers(message);
     }
+
+    private void disconnect() {
+        open = false;
+        closeAll();
+        //If match is started disconnect form controller
+        if(matchID!=0)view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        server.waitingRoom.disconnect(this, view, matchID);
+    }
+
+    public void setMatchID(int matchID) {
+        this.matchID = matchID;
+    }
+
+
 }

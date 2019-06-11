@@ -2,6 +2,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -17,7 +18,8 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class ElectroScythe_1Test {
+public class HeatSeeker_1Test {
+
     private Player authorPlayer;
     private Player targetPlayer1;
     private Player targetPlayer2;
@@ -25,10 +27,14 @@ public class ElectroScythe_1Test {
     private GameHandler gameHandler;
     private Controller controller;
     private Shoot shoot;
+    private FireMode heatSeeker_1;
     private Cell commonCell;
+    private Cell notVisibleCell;
 
-    private final static int ELECTROSCYTHE_WEAPON_ID = 1;
-    private final static int ELECTROSCYTHE_FIREMODE_ID = 11;
+    private final static int HEAT_SEEKER_WEAPON_ID = 4;
+    private final static int HEAT_SEEKER_FIREMODE_ID = 41;
+
+
 
     @Before
     public void setUp() throws Exception {
@@ -59,50 +65,42 @@ public class ElectroScythe_1Test {
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
         targetPlayer2.setPosition(commonCell);
-        targetPlayer3.setPosition(commonCell);
+
+        //target 3 is in another room
+        //TODO controlla che sia un'altra statnza!!
+        notVisibleCell = gameHandler.getCellByCoordinate(1,2);
+        targetPlayer3.setPosition(notVisibleCell);
 
         authorPlayer.setAmmoBag(3,3,3);
 
-        //ElectroScythe weapon
-        WeaponCard weapon = gameHandler.getWeaponCardByID(ELECTROSCYTHE_WEAPON_ID);
+
+        //HeatSeeker weapon
+        WeaponCard weapon = gameHandler.getWeaponCardByID(HEAT_SEEKER_WEAPON_ID);
         weapon.reload();
         authorPlayer.addWeaponCard(weapon);
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode electroScythe_1 = gameHandler.getFireModeByID(ELECTROSCYTHE_FIREMODE_ID);
-        shoot.addFireMode(electroScythe_1.getID());
+        heatSeeker_1 = gameHandler.getFireModeByID(HEAT_SEEKER_FIREMODE_ID);
+        shoot.addFireMode(heatSeeker_1.getID());
+
     }
 
     @Test
-    public void firePositive() throws Exception {
-
+    public void firePositive() throws Exception{
+        //we add a not visible target, and this makes it throw and exception
+        shoot.addPlayerTarget(targetPlayer3.getID());
         shoot.fire();
-
-        //target 1
-        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(1,targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
-
-        //target 2
-        assertEquals(1,targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
-
-        //target 3
-        assertEquals(1,targetPlayer3.getDamage().size());
-        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
-
-        //author
-        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
-
-        //cost after optional
-        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
+        assertEquals(3,targetPlayer3.getDamage().size());
     }
 
     @Test
-    public void firePositiveWithTargeting() throws Exception {
-        //TODO
+    public void firePositiveWithOneOldMark() throws Exception{
+        //we add a not visible target, and this makes it throw and exception
+        targetPlayer3.receiveMarkBy(authorPlayer);
+        shoot.addPlayerTarget(targetPlayer3.getID());
+        shoot.fire();
+        assertEquals(4,targetPlayer3.getDamage().size());
+        assertEquals(0,targetPlayer3.getMark().getMarkReceived().size());
     }
 }

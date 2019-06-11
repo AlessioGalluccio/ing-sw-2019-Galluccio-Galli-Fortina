@@ -11,8 +11,6 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
-import java.util.List;
-
 
 public class ActionSelectedControllerState implements StateController {
 
@@ -35,7 +33,7 @@ public class ActionSelectedControllerState implements StateController {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getPlayer();
+        this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;
     }
@@ -202,6 +200,16 @@ public class ActionSelectedControllerState implements StateController {
             action.fire();
         }catch(WrongInputException e){
             //TODO
+        }
+    }
+
+    @Override
+    public void handleReconnection(boolean isConnected) {
+        //TODO controlla da sistemare sicuramente
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
     }
 

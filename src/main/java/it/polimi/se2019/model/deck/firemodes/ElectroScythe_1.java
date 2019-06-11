@@ -38,7 +38,7 @@ public class ElectroScythe_1 extends FireMode {
         Cell commonCell = author.getCell();
         for(Player target : gameHandler.getOrderPlayerList()){
             if(target.getCell().equals(commonCell)){
-                addDamageAndMarks(target, 1,0);
+                addDamageAndMarks(target, 1,0, true);
             }
         }
         super.fire();

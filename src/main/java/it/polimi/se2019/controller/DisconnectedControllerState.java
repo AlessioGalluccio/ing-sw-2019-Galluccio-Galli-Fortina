@@ -5,145 +5,112 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
-public class NotYourTurnState implements StateController {
-
+public class DisconnectedControllerState implements StateController {
     private Player player;
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
-    private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
 
-    public NotYourTurnState(Controller controller, GameHandler gameHandler) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
+    public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
         this.gameHandler = gameHandler;
-        controller.setNumOfActionTaken(0);
         this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }
 
     @Override
     public void handleAction(int actionID) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleLogin(String playerNickname, Character chosenCharacter) {
         //TODO controlla
-        cantDoThisHandler();
     }
-
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleNope() {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleOptional(int numOptional) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handlePlayer(int playerID) {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleReload(int weaponID) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handleTagback(TagbackGranedCard usedCard) {
-        //TODO implementami! Sono diverso!
-
+        //do nothing
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
-        cantDoThisHandler();
-
+        //do nothing
     }
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        cantDoThisHandler();
+        //do nothing
     }
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        //do nothing
     }
 
     @Override
     public void handleFire() {
-        //TODO
+        //do nothing
     }
 
     @Override
     public void handleReconnection(boolean isConnected) {
-        //TODO controlla
-        if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(player, false);
-            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        if(isConnected){
+            gameHandler.setPlayerConnectionStatus(player, true);
+            controller.setState(new NotYourTurnState(controller, gameHandler));
         }
     }
 
     @Override
     public void handle(ViewControllerMessage arg) {
-
-        //controlls if it's the turn of the player. If it is, it changes the state and it passes the message to the new state
-        int IDPlayer = arg.getAuthorID();
-        if(IDPlayer == gameHandler.getTurnPlayerID()) {
-            StateController nextState = new EmptyControllerState(controller, gameHandler);
-            nextState.handle(arg);
-            controller.setState(nextState);
-        }
-
-        else {
-            controller.addMessageListReceived(arg);
-            arg.handle(this);
-        }
-
+        arg.handle(this);
     }
-
-    private void cantDoThisHandler(){
-        controller.getLastReceivedMessage().getAuthorView().printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeLastReceivedMessage();
-    }
-
 }

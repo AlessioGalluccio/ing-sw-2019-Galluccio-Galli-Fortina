@@ -46,4 +46,6 @@ public interface StateController {
 
     public void handleFire();
 
+    public void handleReconnection(boolean isConnected);
+
 }

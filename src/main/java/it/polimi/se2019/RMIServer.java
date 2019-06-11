@@ -19,7 +19,7 @@ public class RMIServer extends UnicastRemoteObject implements RmiServerInterface
     private static final long serialVersionUID = 1L;
     private LinkedList<RmiHandlerInterface> handlers;
     private int timerTurn;
-    private WaitingRoom waitingRoom;
+    private transient WaitingRoom waitingRoom;
 
     private RMIServer(int timerWaiting, int timerTurn) throws RemoteException {
         handlers = new LinkedList<>();
@@ -58,7 +58,7 @@ public class RMIServer extends UnicastRemoteObject implements RmiServerInterface
      * Disconnect a dead handler of a client from the Server
      * @param handler the handler who has died
      */
-    void disconnect(RmiHandlerInterface handler) {
+    public void disconnect(RmiHandlerInterface handler) {
         handlers.remove(handler);
     }
 

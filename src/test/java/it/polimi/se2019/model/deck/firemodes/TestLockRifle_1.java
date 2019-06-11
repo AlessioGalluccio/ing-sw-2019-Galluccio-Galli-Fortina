@@ -29,7 +29,9 @@ public class TestLockRifle_1 {
     private GameHandler gameHandler;
     private Controller controller;
     private Shoot shoot;
+    private FireMode lockRifle_1;
     private Cell commonCell;
+    private Cell notVisibleCell;
 
     private final static int LOCK_RIFLE_WEAPON_ID = 14;
     private final static int LOCK_RIFLE_FIREMODE_ID = 141;
@@ -42,20 +44,20 @@ public class TestLockRifle_1 {
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        //targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
         players.add(authorPlayer);
         players.add(targetPlayer1);
         players.add(targetPlayer2);
-        //players.add(targetPlayer3);
+        players.add(targetPlayer3);
 
         //settings of mock connection
         PlayerView playerView = mock(PlayerView.class);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        controller = new Controller(gameHandler);
+        controller = new Controller(gameHandler, null);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
@@ -68,7 +70,8 @@ public class TestLockRifle_1 {
 
         //target 3 is in another room
         //TODO controlla che sia un'altra statnza!!
-        //targetPlayer3.setPosition(gameHandler.getCellByCoordinate(1,2));
+        notVisibleCell = gameHandler.getCellByCoordinate(1,2);
+        targetPlayer3.setPosition(notVisibleCell);
 
         authorPlayer.setAmmoBag(3,3,3);
 
@@ -80,7 +83,7 @@ public class TestLockRifle_1 {
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode lockRifle_1 = gameHandler.getFireModeByID(LOCK_RIFLE_FIREMODE_ID);
+        lockRifle_1 = gameHandler.getFireModeByID(LOCK_RIFLE_FIREMODE_ID);
         shoot.addFireMode(lockRifle_1.getID());
 
 
@@ -88,6 +91,9 @@ public class TestLockRifle_1 {
 
     @Test
     public void sendPossibleTarget() {
+        //TODO trovare un metodo per testarlo
+        //lockRifle_1.sendPossibleTargetsAtStart();
+
     }
 
     @Test
@@ -100,6 +106,12 @@ public class TestLockRifle_1 {
         assertEquals(1, targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(1, authorPlayer.getMark().getMarkDone().size());
 
+    }
+
+    @Test (expected = WrongInputException.class)
+    public void fireNegativeNotVisible() throws Exception{
+        //we add a not visible target, and this makes it throw and exception
+        shoot.addPlayerTarget(targetPlayer3.getID());
     }
 
     @Test

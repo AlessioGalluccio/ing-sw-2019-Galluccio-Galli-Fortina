@@ -32,7 +32,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
                 for(Cell secondCell : cellInDirection){
                     if(firstCell.equals(secondCell)){
                         for (Player target : firstCell.getPlayerHere()){
-                            addDamageAndMarks(target, 2,0);
+                            addDamageAndMarks(target, 2,0, true);
                         }
                     }
                 }
@@ -43,7 +43,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
                 for(Cell secondCell : cellInDirection){
                     if(firstCell.equals(secondCell)){
                         for (Player target : firstCell.getPlayerHere()){
-                            addDamageAndMarks(target, 1,0);
+                            addDamageAndMarks(target, 1,0, true);
                         }
                     }
                 }

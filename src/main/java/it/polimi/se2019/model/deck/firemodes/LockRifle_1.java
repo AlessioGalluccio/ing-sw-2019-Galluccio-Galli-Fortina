@@ -39,15 +39,15 @@ public class LockRifle_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException {
-        if(shoot.getTargetsPlayer().isEmpty()){
-            throw new WrongInputException();
-        }
-        else{
-            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1);
+        if(!shoot.getTargetsPlayer().isEmpty()){
+            addDamageAndMarks(shoot.getTargetsPlayer().get(0), 2,1, true);
             if(shoot.getTargetsPlayer().size() == 2){
-                addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1);
+                addDamageAndMarks(shoot.getTargetsPlayer().get(1), 0, 1, true);
             }
             super.fire();
+        }
+        else{
+            throw new WrongInputException();
         }
     }
 

@@ -46,6 +46,7 @@ public class Player extends Observable implements Target, Serializable {
     private boolean isFrenzyDeath = false;
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
+    private boolean isConnected;
 
 
     //constants
@@ -257,6 +258,14 @@ public class Player extends Observable implements Target, Serializable {
         bonusPowerup = false;
         setPosition(cellSpawn);
         notifyObservers(new PlayerModelMessage(this.clone()));
+    }
+
+    /**
+     * returns true if the player is connected, false if not
+     * @return bolean true if connected, false if not
+     */
+    public boolean isConnected(){
+        return isConnected;
     }
 
     /**
@@ -555,6 +564,14 @@ public class Player extends Observable implements Target, Serializable {
         if(this.cellPosition != null) this.cellPosition.removePlayer(this);
         cellPosition = position;
         position.addPlayer(this);
+    }
+
+    /**
+     * set status of the connection of the player
+     * @param isConnected true if connected, false if disconnected
+     */
+    public void setConnected(boolean isConnected){
+        this.isConnected = isConnected;
     }
 
     @Override

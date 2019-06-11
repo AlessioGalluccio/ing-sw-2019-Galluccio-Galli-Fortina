@@ -11,4 +11,6 @@ public interface RmiClientInterface extends Remote {
 
     void connect(RmiHandlerInterface server) throws RemoteException;
 
+    void ping() throws RemoteException;
+
 }

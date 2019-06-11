@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
-public class EnemyView implements Observer, Serializable {
+public class EnemyView extends Observable implements Observer, Serializable {
 
     private String nickname;
     private Character character;

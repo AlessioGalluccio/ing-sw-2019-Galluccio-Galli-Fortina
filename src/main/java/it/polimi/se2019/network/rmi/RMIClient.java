@@ -4,6 +4,7 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.HandlerNetworkMessage;
 import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 public class RMIClient extends Client implements RmiClientInterface, Observer {
     private RmiHandlerInterface server;
     private ExecutorService executor;
+    static int nThreads =0;
 
     public RMIClient(ClientView view) throws RemoteException {
         super();
@@ -41,34 +43,45 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-       executor.submit(new Sender((HandlerServerMessage) arg));
+        try {
+            server.send((HandlerServerMessage) arg);
+        } catch (RemoteException e) {
+           // Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
+            new DisconnectMessage().handleMessage(this);
+            executor.shutdown();
+        }
     }
 
     @Override
     public void receiveMessage(HandlerNetworkMessage message) throws RemoteException {
-        message.handleMessage(this);
+        executor.submit(new Receiver(message, this));
     }
 
     @Override
     public void connect(RmiHandlerInterface server) throws RemoteException {
         this.server = server;
-
     }
 
-    private class Sender implements Runnable {
-        HandlerServerMessage message;
+    @Override
+    public void ping() throws RemoteException {
+        return;
+    }
 
-        Sender(HandlerServerMessage message) {
+    private class Receiver implements Runnable {
+        HandlerNetworkMessage message;
+        RMIClient client;
+
+        Receiver(HandlerNetworkMessage message, RMIClient client) {
             this.message = message;
+            this.client = client;
         }
 
         @Override
         public void run() {
-            try {
-                server.send(message);
-            } catch (RemoteException e) {
-                Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
-            }
+            RMIClient.nThreads++;
+            message.handleMessage(client);
+            RMIClient.nThreads--;
+            Logger.getLogger(RMIClient.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
         }
     }
 }
