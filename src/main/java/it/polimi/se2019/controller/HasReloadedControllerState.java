@@ -12,6 +12,9 @@ public class HasReloadedControllerState implements StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
 
     private final String CANT_DO = "You have already reloaded. You can only reload or pass your turn";
     private final String RELOAD_OR_PASS = "Please, select reload or pass your turn";
@@ -133,8 +136,9 @@ public class HasReloadedControllerState implements StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
         arg.handle(this);
+        return stringToPlayerView;
     }
 
     private void youCantDoThis(){

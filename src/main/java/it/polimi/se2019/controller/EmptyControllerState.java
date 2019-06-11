@@ -19,6 +19,9 @@ public class EmptyControllerState implements  StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
     private final String SELECT_ACTION_REQUEST = "Please, select an action";
     private final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action";
     private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon";
@@ -164,9 +167,11 @@ public class EmptyControllerState implements  StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
+        //TODO devi inizializzare la stringToPlayerView!
         controller.addReceived();
         arg.handle(this);
+        return stringToPlayerView;
     }
 
     private void youCantDoThis(){

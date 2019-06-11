@@ -28,6 +28,8 @@ public class Controller implements Observer {
     private int numOfActionTaken;
     public int numOfMaxActions = 2;
 
+    private String stringToPlayerView;
+
     public Controller(GameHandler gameHandler, Player playerAuthor) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.gameHandler = gameHandler;
@@ -154,7 +156,8 @@ public class Controller implements Observer {
     @Override
     public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
-            state.handle((ViewControllerMessage) arg);
+            stringToPlayerView = state.handle((ViewControllerMessage) arg);
+            playerView.printFromController(stringToPlayerView);
         }catch (Exception e) {
             System.err.println("Controller exception: " + e.toString());
             e.printStackTrace();
@@ -196,7 +199,8 @@ public class Controller implements Observer {
     /**
      * it empties the messages after Model is modified
      */
-    public void resetIndex() {
+    public void resetMessages() {
+        this.messageListExpected = new ArrayList<>();
         indexExpected = 0;
     }
 
