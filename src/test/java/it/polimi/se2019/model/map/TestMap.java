@@ -3,6 +3,8 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.PowerupDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
+
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import org.junit.Before;
@@ -19,12 +21,12 @@ public class TestMap {
 
     @Before
     public void initTest() {
-        map1 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map1 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
         cell = map1.getCell();
 
-        map2 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map3 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map4 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map2 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map3 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map4 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
     }
 
     @Test
@@ -112,9 +114,11 @@ public class TestMap {
         }
     }
 
-    @Test //TODO test dopo aver fatto i getter opportuni
-    public void testReloadAllCell() {
-        map1.reloadAllCell();
+    @Test
+    public void testPrint() {
+        map3.reloadAllCell();
+
+        map3.printRow( 0);
     }
 
 

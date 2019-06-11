@@ -21,10 +21,12 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     private RmiHandlerInterface server;
     private ExecutorService executor;
     static int nThreads =0;
+    private String IP;
 
-    public RMIClient(ClientView view) throws RemoteException {
+    public RMIClient(ClientView view, String IP) throws RemoteException {
         super();
         this.clientView = view;
+        this.IP = IP;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
         executor = Executors.newCachedThreadPool();
         Registry registry = null;
         try {
-            registry = LocateRegistry.getRegistry("localhost", Registry.REGISTRY_PORT);
+            registry = LocateRegistry.getRegistry(IP, Registry.REGISTRY_PORT);
             RmiServerInterface stub = (RmiServerInterface) registry.lookup("RMIServer");
             stub.connect(this);
         } catch (RemoteException |  NotBoundException e) {

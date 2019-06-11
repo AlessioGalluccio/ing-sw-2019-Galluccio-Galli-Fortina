@@ -60,7 +60,10 @@ public class Map2 extends Map {
 
         init.room.add(new Room((CellSpawn) init.cell[2][2], "BLUE", new ArrayList<>(cellForRoom)));
 
-        init.cell[3][2] = null;
+        cellForRoom.clear();
+        init.cell[3][2] = new CellAmmo(3,2);
+        cellForRoom.add(init.cell[3][2]);
+        init.room.add(new Room(null, "BLACK", new ArrayList<>(cellForRoom)));
 
         return init;
     }
