@@ -105,12 +105,12 @@ public class MustRespawnControllerState implements StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        youMustRespawn();
     }
 
     @Override
     public void handleFire() {
-        //TODO
+        youMustRespawn();
     }
 
     @Override
@@ -126,11 +126,11 @@ public class MustRespawnControllerState implements StateController {
     @Override
     public String handle(ViewControllerMessage arg) {
         arg.handle(this);
+        stringToPlayerView = MUST_RESPAWN;
         return stringToPlayerView;
     }
 
     private void youMustRespawn(){
-        playerView.printFromController(MUST_RESPAWN);
         controller.removeReceived();
     }
 }

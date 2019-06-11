@@ -16,11 +16,11 @@ public class HasReloadedControllerState implements StateController {
     private String stringToPlayerView;
 
 
-    private final String CANT_DO = "You have already reloaded. You can only reload or pass your turn";
-    private final String RELOAD_OR_PASS = "Please, select reload or pass your turn";
-    private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon";
-    private final String WEAPON_LOADED_RELOAD = "This weapon is already loaded";
-    private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again";
+    private final String CANT_DO = "You have already reloaded. ";
+    private final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";
+    private final String NOT_PRESENT_WEAPON_RELOAD = "Player doesn't have this Weapon. ";
+    private final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
+    private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again. ";
 
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         this.controller = controller;
@@ -81,16 +81,16 @@ public class HasReloadedControllerState implements StateController {
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
-            playerView.printFromController(RELOAD_OR_PASS);
+            errorString = NOT_PRESENT_WEAPON_RELOAD;
             controller.removeReceived();
+
         }catch(WeaponIsLoadedException e){
-            playerView.printFromController(WEAPON_LOADED_RELOAD);
-            playerView.printFromController(RELOAD_OR_PASS);
+            errorString = WEAPON_LOADED_RELOAD;
             controller.removeReceived();
+
+
         }catch(NotEnoughAmmoException e){
-            playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
-            playerView.printFromController(RELOAD_OR_PASS);
+            errorString = NOT_ENOUGH_AMMO_RELOAD;
             controller.removeReceived();
         }
     }
@@ -122,7 +122,7 @@ public class HasReloadedControllerState implements StateController {
 
     @Override
     public void handleFire() {
-        //TODO
+        youCantDoThis();
     }
 
     @Override
@@ -137,12 +137,21 @@ public class HasReloadedControllerState implements StateController {
 
     @Override
     public String handle(ViewControllerMessage arg) {
+        errorString = null;
+
         arg.handle(this);
+
+        if(errorString != null){
+            stringToPlayerView = errorString + RELOAD_OR_PASS;
+        }
+        else{
+            stringToPlayerView = RELOAD_OR_PASS;
+        }
         return stringToPlayerView;
     }
 
     private void youCantDoThis(){
-        playerView.printFromController(CANT_DO);
+        errorString = CANT_DO;
         controller.removeReceived();
     }
 }
