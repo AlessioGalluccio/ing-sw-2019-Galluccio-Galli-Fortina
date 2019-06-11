@@ -16,6 +16,7 @@ public class MustRespawnControllerStateTest {
     private GameHandler gameHandler;
     private Controller controller;
     private StateController state;
+    private static String MUST_RESPAWN = "Please, do a respawn";
 
     @Before
     public void setUp() throws Exception {
@@ -31,8 +32,9 @@ public class MustRespawnControllerStateTest {
         PowerupCard cardDiscardedMock = mock(PowerupCard.class);
         CardSpawnChooseMessage cardSpawnChooseMessage = new CardSpawnChooseMessage(cardChoosenMock, cardDiscardedMock,
                                                                                     authorID, playerView);
-        state.handle(cardSpawnChooseMessage);
+        String response = state.handle(cardSpawnChooseMessage);
         verify(gameHandler, times(1)).nextTurn();
         //TODO verify(controller, times(1)).setState(any(StateController.class));
+        assertEquals(MUST_RESPAWN, response);
     }
 }
