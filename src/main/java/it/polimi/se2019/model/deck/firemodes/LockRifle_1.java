@@ -13,8 +13,8 @@ import java.util.List;
 public class LockRifle_1 extends FireMode {
 
     //STRING AND MESSAGE
-    private static final String FIRST_MSG_STR = "Select a player from possible targets";
-    private static final String SECOND_MSG_STR = "Select another player from possible targets.";
+    public static final String FIRST_MSG_STR = "Select a player from possible targets";
+    public static final String SECOND_MSG_STR = "Select another player from possible targets.";
 
     //COST OPTIONALS
     private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
@@ -65,8 +65,8 @@ public class LockRifle_1 extends FireMode {
         Player target = gameHandler.getPlayerByID(playerID);
         int targetID = target.getID();
         if(targetID == author.getID()){
-            shoot.getPlayerView().printFromController("Error,you have selected yourself");
-            throw new WrongInputException();
+            //shoot.getPlayerView().printFromController("Error,you have selected yourself");
+            throw new WrongInputException("Error,you have selected yourself");
         }
         else if(target.isVisibleBy(author)){
             if(shoot.getTargetsPlayer().isEmpty()){

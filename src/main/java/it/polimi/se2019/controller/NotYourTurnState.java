@@ -128,7 +128,7 @@ public class NotYourTurnState implements StateController {
 
     @Override
     public String handle(ViewControllerMessage arg) {
-
+        errorString = null;
         //controlls if it's the turn of the player. If it is, it changes the state and it passes the message to the new state
         int IDPlayer = arg.getAuthorID();
         if(IDPlayer == gameHandler.getTurnPlayerID()) {
@@ -141,13 +141,24 @@ public class NotYourTurnState implements StateController {
             controller.addReceived();
             arg.handle(this);
         }
+
+        if(errorString != null){
+            stringToPlayerView = errorString;
+        }
+        else {
+            stringToPlayerView = NOT_YOUR_TURN_RESPONSE;
+        }
         return stringToPlayerView;
 
     }
 
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
+    }
+
     private void cantDoThisHandler(){
-        playerView.printFromController(NOT_YOUR_TURN_RESPONSE);
-        controller.removeReceived();
+        //controller.removeReceived();
     }
 
 }

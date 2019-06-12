@@ -150,8 +150,14 @@ public class HasReloadedControllerState implements StateController {
         return stringToPlayerView;
     }
 
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
+    }
+
     private void youCantDoThis(){
         errorString = CANT_DO;
         controller.removeReceived();
     }
+
 }

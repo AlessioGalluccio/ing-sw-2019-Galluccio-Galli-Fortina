@@ -22,11 +22,12 @@ public class EmptyControllerState implements  StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    private final String SELECT_ACTION_REQUEST = "Please, select an action";
-    private final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action";
-    private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon";
-    private final String WEAPON_LOADED_RELOAD = "This weapon is already loaded";
-    private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again";
+    private final String SELECT_ACTION_REQUEST = "Please, select an action, a card or pass. ";
+    private final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action. ";
+    private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon. ";
+    private final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
+    private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again. ";
+    private static final String TOO_MANY_ACTIONS = "You have already done the max num of actions. ";
 
 
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
@@ -38,28 +39,33 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public void handleAction(int actionID) {
-        //if there is no weapon loaded, you can't select shoot
-        if(actionID == Identificator.SHOOT){
-            boolean canShoot = false;
-            for(WeaponCard weaponCard : player.getWeaponCardList()){
-                if(weaponCard.isReloaded()){
-                    canShoot = true;
+        if(controller.getNumOfActionTaken() < controller.getNumOfMaxActions()){
+            //if there is no weapon loaded, you can't select shoot
+            if(actionID == Identificator.SHOOT){
+                boolean canShoot = false;
+                for(WeaponCard weaponCard : player.getWeaponCardList()){
+                    if(weaponCard.isReloaded()){
+                        canShoot = true;
+                    }
+                }
+                if(!canShoot){
+                    errorString = CANT_SHOOT;
+                    youCantDoThis();
                 }
             }
-            if(!canShoot){
-                playerView.printFromController(CANT_SHOOT);
-                playerView.printFromController(SELECT_ACTION_REQUEST);
-                controller.removeReceived();
-            }
+
+            //messageListExpected
+            Action action = gameHandler.getActionByID(actionID, player);
+            ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
+            controller.setMessageListExpected(stringAndMessages);
+
+            //Change State
+            controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
         }
-
-        //messageListExpected
-        Action action = gameHandler.getActionByID(actionID, player);
-        ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
-        controller.setMessageListExpected(stringAndMessages);
-
-        //Change State
-        controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
+        else{
+            errorString = TOO_MANY_ACTIONS;
+            controller.removeReceived();
+        }
 
     }
 
@@ -111,18 +117,18 @@ public class EmptyControllerState implements  StateController {
         try{
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
-            playerView.printFromController(NOT_PRESENT_WEAPON_RELOAD);
+            errorString = NOT_PRESENT_WEAPON_RELOAD;
             youCantDoThis();
         }catch(WeaponIsLoadedException e){
-            playerView.printFromController(WEAPON_LOADED_RELOAD);
+            errorString = WEAPON_LOADED_RELOAD;
             youCantDoThis();
         }catch(NotEnoughAmmoException e){
-            playerView.printFromController(NOT_ENOUGH_AMMO_RELOAD);
+            errorString = NOT_ENOUGH_AMMO_RELOAD;
             youCantDoThis();
         }
 
-        //after reloading, you pass your turn
-        controller.setState(new NotYourTurnState(controller, gameHandler));
+        //after reloading, you go to HasReloadedState
+        controller.setState(new HasReloadedControllerState(controller, gameHandler));
     }
 
     @Override
@@ -168,14 +174,24 @@ public class EmptyControllerState implements  StateController {
 
     @Override
     public String handle(ViewControllerMessage arg) {
-        //TODO devi inizializzare la stringToPlayerView!
+        errorString = null;
         controller.addReceived();
         arg.handle(this);
+        if(errorString != null){
+            stringToPlayerView = errorString + SELECT_ACTION_REQUEST;
+        }
+        else {
+            stringToPlayerView = SELECT_ACTION_REQUEST;
+        }
         return stringToPlayerView;
     }
 
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
+    }
+
     private void youCantDoThis(){
-        playerView.printFromController(SELECT_ACTION_REQUEST);
-        controller.removeReceived();
+        //controller.removeReceived();
     }
 }

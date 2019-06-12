@@ -66,15 +66,7 @@ public abstract class Action implements AddActionMethods {
      * call it at the end of the action. It will change the state of the controller
      */
     public void endAction(){
-        //TODO da controllare pesantemente
-        controller.setNumOfActionTaken(controller.getNumOfActionTaken() + 1);
-        if(controller.getNumOfActionTaken() == controller.getNumOfMaxActions()){
-            controller.setState(new NotYourTurnState(controller, gameHandler));
-            gameHandler.nextTurn();
-        }
-        else{
-            controller.setState(new EmptyControllerState(controller, gameHandler));
-        }
+        controller.getState().endAction();
 
     }
 }
