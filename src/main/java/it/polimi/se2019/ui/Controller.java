@@ -749,17 +749,21 @@ public class Controller {
     }
 
 
-
-
-
-
-
+    /**
+     * open Add Firemode's window when the player clicks on add firemode button
+     * @param event
+     * @throws Exception
+     */
     public void addFiremode(ActionEvent event) throws Exception {
 
         controllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
 
     }
 
+    /**
+     * send FireModeMessage the the player choose the weapon's firemode on gui
+     * @param event
+     */
     public void sendFiremode(ActionEvent event) {
         if(firemode1.isSelected()) {
             clientView.createFireModeMessage(1);
@@ -775,7 +779,10 @@ public class Controller {
     }
 
 
-
+    /**
+     * send OptionalMessage the the player choose the weapon's optional firemode on gui
+     * @param event
+     */
     public void sendOptional(ActionEvent event) {
 
         if(firemodeOp1.isSelected()){
@@ -797,6 +804,10 @@ public class Controller {
     }
 
 
+    /**
+     * send weapon message with ClientView's method to the server, when the player clicks on a player's weaponcard button
+     * @param event
+     */
     public void selectWeapon(ActionEvent event) {
         Player player = clientView.getPlayerCopy();
         try {
@@ -834,10 +845,18 @@ public class Controller {
 
     }
 
+    /**
+     * send Fire message with ClientView's method to the server, when the player clicks on FIRE button
+     * @param event
+     */
     public void fire(ActionEvent event) {
         clientView.createFireMessage();
     }
 
+    /**
+     * send PassTurn message with ClientView's method to the server, when the player clicks End Turn's button
+     * @param event
+     */
     public void endTurn(ActionEvent event) {
         clientView.createPassTurnMessage();
 
@@ -848,11 +867,19 @@ public class Controller {
 
     }
 
+    /**
+     * update label on gui that show player's points
+     * @param points
+     */
     public void updatePoints(int points){
         String string = Integer.toString(points);
         yourPointsLabel.setText(string);
     }
 
+    /**
+     * send ActionMessage with ClientView's method to the server when the player clicks on a action button
+     * @param event
+     */
     public void sendActionMessage (ActionEvent event){
         Object source = event.getSource();
 
@@ -869,7 +896,10 @@ public class Controller {
         }
     }
 
-
+    /**
+     * send CellMessage with ClientView's method to the server when the player clicks on a cell button
+     * @param event
+     */
     public void sendCellMessage(ActionEvent event){
 
         Object source = event.getSource();

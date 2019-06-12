@@ -111,6 +111,9 @@ public class ControllerLogin implements UiInterface {
         choosenMap = choosMap;
     }
 
+    /**
+     * open map window
+     */
     @Override
     public void startGame() {
         try {
@@ -127,7 +130,7 @@ public class ControllerLogin implements UiInterface {
     }
 
     /**
-     * update player's points on gui
+     * update player's points on gui calling method on ui controller
      */
     public void updatePlayerPoints(){
         Player player = clientView.getPlayerCopy();
