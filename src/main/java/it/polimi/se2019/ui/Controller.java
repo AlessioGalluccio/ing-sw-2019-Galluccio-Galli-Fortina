@@ -29,6 +29,71 @@ import java.util.List;
 public class Controller {
 
 
+    //imageview of players' posizion on map
+    public ImageView imPlayer1Cell00;
+    public ImageView imPlayer2Cell00;
+    public ImageView imPlayer3Cell00;
+    public ImageView imPlayer4Cell00;
+    public ImageView imPlayer5Cell00;
+    public ImageView imPlayer1Cell01;
+    public ImageView imPlayer2Cell01;
+    public ImageView imPlayer3Cell01;
+    public ImageView imPlayer4Cell01;
+    public ImageView imPlayer5Cell01;
+    public ImageView imPlayer1Cell02;
+    public ImageView imPlayer2Cell02;
+    public ImageView imPlayer3Cell02;
+    public ImageView imPlayer4Cell02;
+    public ImageView imPlayer5Cell02;
+    public ImageView imPlayer1Cell03;
+    public ImageView imPlayer2Cell03;
+    public ImageView imPlayer3Cell03;
+    public ImageView imPlayer4Cell03;
+    public ImageView imPlayer5Cell03;
+    public ImageView imPlayer1Cell10;
+    public ImageView imPlayer2Cell10;
+    public ImageView imPlayer3Cell10;
+    public ImageView imPlayer4Cell10;
+    public ImageView imPlayer5Cell10;
+    public ImageView imPlayer1Cell11;
+    public ImageView imPlayer2Cell11;
+    public ImageView imPlayer3Cell11;
+    public ImageView imPlayer4Cell11;
+    public ImageView imPlayer5Cell11;
+    public ImageView imPlayer1Cell12;
+    public ImageView imPlayer2Cell12;
+    public ImageView imPlayer3Cell12;
+    public ImageView imPlayer4Cell12;
+    public ImageView imPlayer5Cell12;
+    public ImageView imPlayer1Cell13;
+    public ImageView imPlayer2Cell13;
+    public ImageView imPlayer3Cell13;
+    public ImageView imPlayer4Cell13;
+    public ImageView imPlayer5Cell13;
+    public ImageView imPlayer1Cell20;
+    public ImageView imPlayer2Cell20;
+    public ImageView imPlayer3Cell20;
+    public ImageView imPlayer4Cell20;
+    public ImageView imPlayer5Cell20;
+    public ImageView imPlayer1Cell21;
+    public ImageView imPlayer2Cell21;
+    public ImageView imPlayer3Cell21;
+    public ImageView imPlayer4Cell21;
+    public ImageView imPlayer5Cell21;
+    public ImageView imPlayer1Cell22;
+    public ImageView imPlayer2Cell22;
+    public ImageView imPlayer3Cell22;
+    public ImageView imPlayer4Cell22;
+    public ImageView imPlayer5Cell22;
+    public ImageView imPlayer1Cell23;
+    public ImageView imPlayer2Cell23;
+    public ImageView imPlayer3Cell23;
+    public ImageView imPlayer4Cell23;
+    public ImageView imPlayer5Cell23;
+
+
+
+
     public Button fireButton;
     public Button endTurnButton;
     ClientView clientView;
@@ -93,11 +158,15 @@ public class Controller {
     @FXML
     public ImageView imPowerupCard3;
     @FXML
+    public ImageView imPowerupCard4;
+    @FXML
     public ImageView imWeaponCard1;
     @FXML
     public ImageView imWeaponCard2;
     @FXML
     public ImageView imWeaponCard3;
+    @FXML
+    public ImageView imWeaponCard4;
     @FXML
     public Button bPowerupCard1;
     @FXML
@@ -105,11 +174,15 @@ public class Controller {
     @FXML
     public Button bPowerupCard3;
     @FXML
+    public Button bPowerupCard4;
+    @FXML
     public Button bWeaponCard1;
     @FXML
     public Button bWeaponCard2;
     @FXML
     public Button bWeaponCard3;
+    @FXML
+    public Button bWeaponCard4;
     @FXML
     public ImageView possibleActions;
     @FXML
@@ -302,6 +375,9 @@ public class Controller {
     public Button selectWeaponButton2;
     @FXML
     public Button selectWeaponButton3;
+    @FXML
+    public Button selectWeaponButton4;
+
 
     private int suddenDeath = 2;
     private int skull = 0;
@@ -399,6 +475,12 @@ public class Controller {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
+
+
+
+
+        setPlayerOnMap();
+
 
 
         System.out.println(choosenMap);
@@ -647,7 +729,28 @@ public class Controller {
         imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
         bWeaponCard3.setGraphic(imWeaponCard3);
         bWeaponCard3.setStyle(transparent);
+        imPowerupCard4.setImage(new Image("emptyPowerup.jpg"));
+        bPowerupCard4.setGraphic(imPowerupCard4);
+        bPowerupCard4.setStyle(transparent);
+        imWeaponCard4.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard4.setGraphic(imWeaponCard4);
+        bWeaponCard4.setStyle(transparent);
+
+
     }
+
+
+    public void setPlayerOnMap(){
+
+
+
+    }
+
+
+
+
+
+
 
     public void addFiremode(ActionEvent event) throws Exception {
 
@@ -715,6 +818,11 @@ public class Controller {
 
 
             }
+
+            if(selectWeaponButton4 == source){
+                clientView.createWeaponMessage(weapons.get(3));
+
+            }
         }
         catch (NullPointerException e){
             //TODO
@@ -730,6 +838,11 @@ public class Controller {
 
     public void endTurn(ActionEvent event) {
         clientView.createPassTurnMessage();
+
+    }
+
+    public void printSomething(ActionEvent event) {
+        System.out.println("FUNZIONA");
 
     }
 }
