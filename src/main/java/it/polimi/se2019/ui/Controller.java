@@ -6,6 +6,7 @@ package it.polimi.se2019.ui;
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
@@ -29,8 +30,74 @@ import java.util.List;
 public class Controller {
 
 
+    //imageview of players' posizion on map
+    public ImageView imPlayer1Cell00;
+    public ImageView imPlayer2Cell00;
+    public ImageView imPlayer3Cell00;
+    public ImageView imPlayer4Cell00;
+    public ImageView imPlayer5Cell00;
+    public ImageView imPlayer1Cell01;
+    public ImageView imPlayer2Cell01;
+    public ImageView imPlayer3Cell01;
+    public ImageView imPlayer4Cell01;
+    public ImageView imPlayer5Cell01;
+    public ImageView imPlayer1Cell02;
+    public ImageView imPlayer2Cell02;
+    public ImageView imPlayer3Cell02;
+    public ImageView imPlayer4Cell02;
+    public ImageView imPlayer5Cell02;
+    public ImageView imPlayer1Cell03;
+    public ImageView imPlayer2Cell03;
+    public ImageView imPlayer3Cell03;
+    public ImageView imPlayer4Cell03;
+    public ImageView imPlayer5Cell03;
+    public ImageView imPlayer1Cell10;
+    public ImageView imPlayer2Cell10;
+    public ImageView imPlayer3Cell10;
+    public ImageView imPlayer4Cell10;
+    public ImageView imPlayer5Cell10;
+    public ImageView imPlayer1Cell11;
+    public ImageView imPlayer2Cell11;
+    public ImageView imPlayer3Cell11;
+    public ImageView imPlayer4Cell11;
+    public ImageView imPlayer5Cell11;
+    public ImageView imPlayer1Cell12;
+    public ImageView imPlayer2Cell12;
+    public ImageView imPlayer3Cell12;
+    public ImageView imPlayer4Cell12;
+    public ImageView imPlayer5Cell12;
+    public ImageView imPlayer1Cell13;
+    public ImageView imPlayer2Cell13;
+    public ImageView imPlayer3Cell13;
+    public ImageView imPlayer4Cell13;
+    public ImageView imPlayer5Cell13;
+    public ImageView imPlayer1Cell20;
+    public ImageView imPlayer2Cell20;
+    public ImageView imPlayer3Cell20;
+    public ImageView imPlayer4Cell20;
+    public ImageView imPlayer5Cell20;
+    public ImageView imPlayer1Cell21;
+    public ImageView imPlayer2Cell21;
+    public ImageView imPlayer3Cell21;
+    public ImageView imPlayer4Cell21;
+    public ImageView imPlayer5Cell21;
+    public ImageView imPlayer1Cell22;
+    public ImageView imPlayer2Cell22;
+    public ImageView imPlayer3Cell22;
+    public ImageView imPlayer4Cell22;
+    public ImageView imPlayer5Cell22;
+    public ImageView imPlayer1Cell23;
+    public ImageView imPlayer2Cell23;
+    public ImageView imPlayer3Cell23;
+    public ImageView imPlayer4Cell23;
+    public ImageView imPlayer5Cell23;
+
+
+
+
     public Button fireButton;
     public Button endTurnButton;
+    public Label yourPointsLabel;
     ClientView clientView;
 
     ControllerLogin controllerLogin;
@@ -93,11 +160,15 @@ public class Controller {
     @FXML
     public ImageView imPowerupCard3;
     @FXML
+    public ImageView imPowerupCard4;
+    @FXML
     public ImageView imWeaponCard1;
     @FXML
     public ImageView imWeaponCard2;
     @FXML
     public ImageView imWeaponCard3;
+    @FXML
+    public ImageView imWeaponCard4;
     @FXML
     public Button bPowerupCard1;
     @FXML
@@ -105,11 +176,15 @@ public class Controller {
     @FXML
     public Button bPowerupCard3;
     @FXML
+    public Button bPowerupCard4;
+    @FXML
     public Button bWeaponCard1;
     @FXML
     public Button bWeaponCard2;
     @FXML
     public Button bWeaponCard3;
+    @FXML
+    public Button bWeaponCard4;
     @FXML
     public ImageView possibleActions;
     @FXML
@@ -302,6 +377,9 @@ public class Controller {
     public Button selectWeaponButton2;
     @FXML
     public Button selectWeaponButton3;
+    @FXML
+    public Button selectWeaponButton4;
+
 
     private int suddenDeath = 2;
     private int skull = 0;
@@ -399,6 +477,12 @@ public class Controller {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
+
+
+
+
+        setPlayerOnMap();
+
 
 
         System.out.println(choosenMap);
@@ -647,14 +731,39 @@ public class Controller {
         imWeaponCard3.setImage(new Image("emptyWeapon.jpg"));
         bWeaponCard3.setGraphic(imWeaponCard3);
         bWeaponCard3.setStyle(transparent);
+        imPowerupCard4.setImage(new Image("emptyPowerup.jpg"));
+        bPowerupCard4.setGraphic(imPowerupCard4);
+        bPowerupCard4.setStyle(transparent);
+        imWeaponCard4.setImage(new Image("emptyWeapon.jpg"));
+        bWeaponCard4.setGraphic(imWeaponCard4);
+        bWeaponCard4.setStyle(transparent);
+
+
     }
 
+
+    public void setPlayerOnMap(){
+
+
+
+    }
+
+
+    /**
+     * open Add Firemode's window when the player clicks on add firemode button
+     * @param event
+     * @throws Exception
+     */
     public void addFiremode(ActionEvent event) throws Exception {
 
         controllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
 
     }
 
+    /**
+     * send FireModeMessage the the player choose the weapon's firemode on gui
+     * @param event
+     */
     public void sendFiremode(ActionEvent event) {
         if(firemode1.isSelected()) {
             clientView.createFireModeMessage(1);
@@ -670,7 +779,10 @@ public class Controller {
     }
 
 
-
+    /**
+     * send OptionalMessage the the player choose the weapon's optional firemode on gui
+     * @param event
+     */
     public void sendOptional(ActionEvent event) {
 
         if(firemodeOp1.isSelected()){
@@ -692,6 +804,10 @@ public class Controller {
     }
 
 
+    /**
+     * send weapon message with ClientView's method to the server, when the player clicks on a player's weaponcard button
+     * @param event
+     */
     public void selectWeapon(ActionEvent event) {
         Player player = clientView.getPlayerCopy();
         try {
@@ -715,6 +831,11 @@ public class Controller {
 
 
             }
+
+            if(selectWeaponButton4 == source){
+                clientView.createWeaponMessage(weapons.get(3));
+
+            }
         }
         catch (NullPointerException e){
             //TODO
@@ -724,12 +845,111 @@ public class Controller {
 
     }
 
+    /**
+     * send Fire message with ClientView's method to the server, when the player clicks on FIRE button
+     * @param event
+     */
     public void fire(ActionEvent event) {
         clientView.createFireMessage();
     }
 
+    /**
+     * send PassTurn message with ClientView's method to the server, when the player clicks End Turn's button
+     * @param event
+     */
     public void endTurn(ActionEvent event) {
         clientView.createPassTurnMessage();
 
+    }
+
+    public void printSomething(ActionEvent event) {
+        System.out.println("FUNZIONA");
+
+    }
+
+    /**
+     * update label on gui that show player's points
+     * @param points
+     */
+    public void updatePoints(int points){
+        String string = Integer.toString(points);
+        yourPointsLabel.setText(string);
+    }
+
+    /**
+     * send ActionMessage with ClientView's method to the server when the player clicks on a action button
+     * @param event
+     */
+    public void sendActionMessage (ActionEvent event){
+        Object source = event.getSource();
+
+        if(moveButton == source){
+            clientView.createActionMessage(1);
+        }
+
+        if(grabButton == source){
+            clientView.createActionMessage(2);
+        }
+
+        if(grabButton == source){
+            clientView.createActionMessage(3);
+        }
+    }
+
+    /**
+     * send CellMessage with ClientView's method to the server when the player clicks on a cell button
+     * @param event
+     */
+    public void sendCellMessage(ActionEvent event){
+
+        Object source = event.getSource();
+
+        if(cell00 == source){
+            clientView.createCellMessage(0,0);
+        }
+
+        if(cell01 == source){
+            clientView.createCellMessage(0,1);
+        }
+
+        if(cell02 == source){
+            clientView.createCellMessage(0,2);
+        }
+
+        if(cell10 == source){
+            clientView.createCellMessage(1,0);
+        }
+
+        if(cell11 == source){
+            clientView.createCellMessage(1,1);
+        }
+
+        if(cell12 == source){
+            clientView.createCellMessage(1,2);
+        }
+
+        if(cell20 == source){
+            clientView.createCellMessage(2,0);
+        }
+
+        if(cell21 == source){
+            clientView.createCellMessage(2,1);
+        }
+
+        if(cell22 == source){
+            clientView.createCellMessage(2,2);
+        }
+
+        if(cell30 == source){
+            clientView.createCellMessage(3,0);
+        }
+
+        if(cell31 == source){
+            clientView.createCellMessage(3,1);
+        }
+
+        if(cell32 == source){
+            clientView.createCellMessage(3,2);
+        }
     }
 }
