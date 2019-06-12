@@ -449,9 +449,9 @@
       <ImageView fx:id="playerDamage9" fitHeight="29.0" fitWidth="22.0" layoutX="429.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage10" fitHeight="29.0" fitWidth="22.0" layoutX="462.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage11" fitHeight="29.0" fitWidth="22.0" layoutX="491.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="moveButton" layoutX="94.0" layoutY="577.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" />
-      <Button fx:id="grabButton" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
-      <Button fx:id="shootButton" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="moveButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="577.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" />
+      <Button fx:id="grabButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="shootButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
       <Label fx:id="labelProva" layoutX="810.0" layoutY="440.0" prefHeight="36.0" prefWidth="551.0" textFill="RED" />
       <Button fx:id="fireButton" layoutX="809.0" layoutY="383.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!!">
          <font>

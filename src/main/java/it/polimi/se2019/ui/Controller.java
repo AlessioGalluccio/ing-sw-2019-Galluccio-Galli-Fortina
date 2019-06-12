@@ -853,5 +853,19 @@ public class Controller {
         yourPointsLabel.setText(string);
     }
 
+    public void sendActionMessage (ActionEvent event){
+        Object source = event.getSource();
 
+        if(moveButton == source){
+            clientView.createActionMessage(1);
+        }
+
+        if(grabButton == source){
+            clientView.createActionMessage(2);
+        }
+
+        if(grabButton == source){
+            clientView.createActionMessage(3);
+        }
+    }
 }
