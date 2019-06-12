@@ -5,8 +5,10 @@ package it.polimi.se2019.ui;
 
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
+import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
@@ -98,7 +100,12 @@ public class Controller {
     public Button fireButton;
     public Button endTurnButton;
     public Label yourPointsLabel;
+    public AnchorPane myContainer;
+    public TabPane container1;
+    public TabPane container2;
+    public AnchorPane enemy1back;
     ClientView clientView;
+    ClientMapView mapView;
 
     ControllerLogin controllerLogin;
 
@@ -335,7 +342,7 @@ public class Controller {
     @FXML
     public ImageView imYellowWeapon3;
     @FXML
-    public Button redweapon2;
+    public Button redWeapon2;
     @FXML
     public Button redWeapon3;
     @FXML
@@ -532,17 +539,14 @@ public class Controller {
 
         //add background
 
-
-        /*
-        // new Image(url)
-        Image image = new Image("background.png");
-        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
-        BackgroundSize backgroundSize = new BackgroundSize(800, 800, true, true, true, false);
-        // new BackgroundImage(image, repeatX, repeatY, position, size)
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        // new Background(images...)
-        Background background = new Background(backgroundImage);
-        */
+        BackgroundImage myBI= new BackgroundImage(new Image("background.png",32,32,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
+        myContainer.setBackground(new Background(myBI));
+        container1.setBackground(new Background(myBI));
+        container2.setBackground(new Background(myBI));
+        enemy1back.setBackground(new Background(myBI));
 
         //set map's cells
         setCellsMap();
@@ -610,8 +614,8 @@ public class Controller {
         redWeapon1.setGraphic(imRedWeapon1);
         redWeapon1.setStyle(transparent);
 
-        redweapon2.setGraphic(imRedWeapon2);
-        redweapon2.setStyle(transparent);
+        redWeapon2.setGraphic(imRedWeapon2);
+        redWeapon2.setStyle(transparent);
 
         redWeapon3.setGraphic(imRedWeapon3);
         redWeapon3.setStyle(transparent);
@@ -952,4 +956,20 @@ public class Controller {
             clientView.createCellMessage(3,2);
         }
     }
+
+    /**
+     * send a WeaponMessage to the server when the player clicks on one of the map weapons button to collect the card
+     * @param event
+     */
+    public void sendMapWeapon(ActionEvent event){
+        Object source = event.getSource();
+        //TODO Prendere array list di spawncell
+        CellSpawn cellSpawn;
+        if(redWeapon1 == source) {
+
+        }
+
+    }
 }
+
+
