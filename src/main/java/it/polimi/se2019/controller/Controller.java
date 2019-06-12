@@ -204,6 +204,4 @@ public class Controller implements Observer {
         indexExpected = 0;
     }
 
-
-
 }

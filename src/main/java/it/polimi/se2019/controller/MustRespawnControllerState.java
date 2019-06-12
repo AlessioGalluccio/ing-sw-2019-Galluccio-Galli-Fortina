@@ -130,6 +130,11 @@ public class MustRespawnControllerState implements StateController {
         return stringToPlayerView;
     }
 
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
+    }
+
     private void youMustRespawn(){
         controller.removeReceived();
     }

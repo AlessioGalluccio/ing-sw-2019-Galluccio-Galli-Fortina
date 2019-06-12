@@ -23,13 +23,17 @@ public class ActionSelectedControllerState implements StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    private final String PLAYER_WRONG = "You can't select this target";
-    private final String CELL_WRONG = "You can't select this cell";
-    private final String OPTIONAL_WRONG = "You can't select this optional effect";
-    private final String NOT_ENOUGH = "You don't have enough Ammo for this. Try discard some Powerups";
-    private final String ONLY_MARKS = "The firemode selected gives only marks, you can't use targeting";
-    private final String CARD_NOT_PRESENT = "The player doesn't have this card";
-    private final String ALREADY_SELECTED = "You have already selected this, you can't use again";
+    private static final String PLAYER_WRONG = "You can't select this target. ";
+    private static final String CELL_WRONG = "You can't select this cell. ";
+    private static final String OPTIONAL_WRONG = "You can't select this optional effect. ";
+
+    private static final String NOT_ENOUGH = "You don't have enough Ammo for this. ";
+    private static final String ONLY_MARKS = "The firemode selected gives only marks, you can't use targeting. ";
+    private static final String CARD_NOT_PRESENT = "The player doesn't have this card. ";
+    private static final String ALREADY_SELECTED = "You have already selected this, you can't use again. ";
+    private static final String WEAPON_NOT_PRESENT = "This weapon is not present. ";
+    private static final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
+    private static final String CANT_DO_THIS = "You can't do this now. ";
 
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
@@ -58,7 +62,8 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addCell(coordinateX, coordinateY);
         }catch(WrongInputException e){
-            playerView.printFromController(CELL_WRONG);
+            errorString = e.getMessage();
+            //playerView.printFromController(CELL_WRONG);
             controller.removeReceived();
         }
     }
@@ -68,6 +73,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addFireMode(firemodeID);
         }catch (WrongInputException e){
+            errorString = e.getMessage();
             controller.removeReceived();
         }
         /*
@@ -125,7 +131,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addPlayerTarget(playerID);
         }catch (WrongInputException e){
-            playerView.printFromController(PLAYER_WRONG);
+            errorString = e.getMessage();
             controller.removeReceived();
         }
 
@@ -136,10 +142,11 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addOptional(numOptional);
         }catch (WrongInputException e){
-            playerView.printFromController(OPTIONAL_WRONG);
+            //playerView.printFromController(OPTIONAL_WRONG);
+            errorString = e.getMessage();
             controller.removeReceived();
         }catch (NotEnoughAmmoException e){
-            playerView.printFromController(NOT_ENOUGH);
+            errorString = NOT_ENOUGH;;
             controller.removeReceived();
         }
     }
@@ -147,12 +154,30 @@ public class ActionSelectedControllerState implements StateController {
     @Override
     public void handleReload(int weaponID) {
         //TODO
+
+        try {
+            action.addReload(weaponID);
+        } catch (WrongInputException e) {
+            errorString = e.getMessage();
+            controller.removeReceived();
+
+        } catch (NotPresentException e) {
+            errorString = WEAPON_NOT_PRESENT;
+            controller.removeReceived();
+        } catch (NotEnoughAmmoException e) {
+            errorString = NOT_ENOUGH;
+            controller.removeReceived();
+        } catch (WeaponIsLoadedException e) {
+            errorString = WEAPON_LOADED_RELOAD;
+            controller.removeReceived();
+        }
+
     }
 
     @Override
     public void handleTagback(TagbackGranedCard usedCard) {
-        //TODO
-
+        stringToPlayerView = CANT_DO_THIS;
+        controller.removeReceived();
     }
 
     @Override
@@ -161,19 +186,19 @@ public class ActionSelectedControllerState implements StateController {
             action.addTargetingScope(usedCard.getID(), cost);
 
         }catch(WrongInputException e){
-            playerView.printFromController(ALREADY_SELECTED);
+            errorString = ALREADY_SELECTED;
             controller.removeReceived();
 
         }catch(NotEnoughAmmoException e){
-            playerView.printFromController(NOT_ENOUGH);
+            errorString = NOT_ENOUGH;
             controller.removeReceived();
 
         }catch(NotPresentException e){
-            playerView.printFromController(CARD_NOT_PRESENT);
+            errorString = CARD_NOT_PRESENT;
             controller.removeReceived();
 
         }catch (FiremodeOfOnlyMarksException e){
-            playerView.printFromController(ONLY_MARKS);
+            errorString = ONLY_MARKS;
             controller.removeReceived();
         }
 
@@ -181,8 +206,8 @@ public class ActionSelectedControllerState implements StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        //TODO
-
+        errorString = CANT_DO_THIS;
+        controller.removeReceived();
     }
 
     @Override
@@ -190,7 +215,7 @@ public class ActionSelectedControllerState implements StateController {
         try{
             action.addWeapon(usedCard);
         }catch(WrongInputException e){
-            //TODO
+            errorString = e.getMessage();
         }
     }
 
@@ -206,9 +231,7 @@ public class ActionSelectedControllerState implements StateController {
             stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
         }catch(WrongInputException e){
             controller.removeReceived();
-            errorString =
-                    e.getMessage() +
-                    controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            errorString = e.getMessage();
         }
     }
 
@@ -253,6 +276,14 @@ public class ActionSelectedControllerState implements StateController {
         }
     }
 
+
+    @Override
+    public void endAction() {
+        //TODO da controllare pesantemente
+        controller.setNumOfActionTaken(controller.getNumOfActionTaken() + 1);
+        controller.setState(new EmptyControllerState(controller, gameHandler));
+    }
+
     /**
      * It creates the message to the view after the message. If the sequence of message is ended,
      * it sends them to the model and it changes the State of the controller
@@ -272,7 +303,6 @@ public class ActionSelectedControllerState implements StateController {
         }
         else{
             //the sequence is completed. It goes to the EmptyState because it could use powerus or recharge weapons
-
             controller.setState(new EmptyControllerState(controller, gameHandler));
         }
 
@@ -308,5 +338,7 @@ public class ActionSelectedControllerState implements StateController {
         }
         */
     }
+
+
 
 }

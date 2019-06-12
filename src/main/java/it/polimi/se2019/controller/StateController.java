@@ -48,4 +48,6 @@ public interface StateController {
 
     public void handleReconnection(boolean isConnected);
 
+    public void endAction();
+
 }
