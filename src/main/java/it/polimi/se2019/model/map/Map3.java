@@ -22,11 +22,11 @@ public class Map3 extends Map {
         InitializeMap init = new InitializeMap(3, 4);
 
         init.cell[0][0] = new CellAmmo(new Door(), new Passage(), new Wall(), new Wall(), 0, 0, ammoDeck);
-        init.cell[0][1] = new CellAmmo(new Door(), new Door(), new Wall(), new Passage(), 0, 1, ammoDeck);
+        init.cell[1][0] = new CellAmmo(new Door(), new Door(), new Wall(), new Passage(), 0, 1, ammoDeck);
 
         ArrayList<Cell> cellForRoom = new ArrayList<>();
         cellForRoom.add(init.cell[0][0]);
-        cellForRoom.add(init.cell[0][1]);
+        cellForRoom.add(init.cell[1][0]);
 
         init.room.add(new Room(null, "WHITE", new ArrayList<>(cellForRoom)));
 

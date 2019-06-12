@@ -25,11 +25,12 @@ public class Shoot extends Action{
     protected ArrayList<Player> targetsOfTargetings;
     protected AmmoBag cost;
 
+    //STRING AND MESSAGE
     private String FIRST_MESSAGE = "Please, select a Weapon";
     private String SECOND_MESSAGE = "Please, select a Firemode";
 
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
-    private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode", false);
+    private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
 
     public Shoot(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
@@ -49,8 +50,8 @@ public class Shoot extends Action{
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        StringAndMessage firstMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, FIRST_MESSAGE, false);
-        StringAndMessage secondMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, SECOND_MESSAGE, false);
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, FIRST_MESSAGE);
+        StringAndMessage secondMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, SECOND_MESSAGE);
 
         ArrayList<StringAndMessage> list = new ArrayList<>();
         list.add(firstMessage);

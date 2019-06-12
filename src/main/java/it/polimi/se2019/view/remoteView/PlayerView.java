@@ -22,6 +22,9 @@ public class PlayerView extends View /*View implement observer/observable*/{
     private Character choosenCharacter;
     private Server networkHandler;
 
+    //for tests
+    private String lastStringPrinted;
+
     public PlayerView(Server networkHandler, Player clone) {
         this.networkHandler = networkHandler;
         this.playerCopy = clone;
@@ -64,6 +67,14 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return possibleTargets;
     }
 
+    /**
+     * used for tests, it prints the last string received from printFromController
+     * @return the String printed
+     */
+    public String getLastStringPrinted() {
+        return lastStringPrinted;
+    }
+
 
     /**
      * Set possible target to be aim by th weapon
@@ -81,6 +92,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     @Override
     public void printFromController(String string) {
+        this.lastStringPrinted = string;
         networkHandler.send(string);
     }
 

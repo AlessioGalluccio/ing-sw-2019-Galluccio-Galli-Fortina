@@ -13,6 +13,9 @@ public class MustRespawnControllerState implements StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
 
     //TODO sistema questa stringa scrivendo qualcosa di più sensato
     private static String MUST_RESPAWN = "Please, do a respawn";
@@ -102,12 +105,12 @@ public class MustRespawnControllerState implements StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        youMustRespawn();
     }
 
     @Override
     public void handleFire() {
-        //TODO
+        youMustRespawn();
     }
 
     @Override
@@ -121,12 +124,18 @@ public class MustRespawnControllerState implements StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
         arg.handle(this);
+        stringToPlayerView = MUST_RESPAWN;
+        return stringToPlayerView;
+    }
+
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
     }
 
     private void youMustRespawn(){
-        playerView.printFromController(MUST_RESPAWN);
-        controller.removeLastReceivedMessage();
+        controller.removeReceived();
     }
 }

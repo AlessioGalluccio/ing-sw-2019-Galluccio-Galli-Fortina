@@ -7,13 +7,16 @@ import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.remoteView.MapView;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public abstract class Map extends Observable implements Serializable {
+public abstract class Map extends Observable implements Printable, Serializable {
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private transient final ArrayList<Room> room;
@@ -160,7 +163,7 @@ public abstract class Map extends Observable implements Serializable {
     public void reloadAllCell() {
         for(Cell[] arrayCell : cell) { //Scan all the row (X)
             for(Cell c : arrayCell) { //Scan all the column (Y)
-                if(c != null) c.reloadCard();
+                c.reloadCard();
             }
         }
     }
@@ -197,6 +200,26 @@ public abstract class Map extends Observable implements Serializable {
                 if(c!=null) c.attach(mapView);
             }
         }
+    }
+
+    public void printRow(int row) {
+        for(int j=2; j>=0; j--) {
+            for (int i = 0; i < 7; i++) {
+                System.out.print(ConsoleColor.RESET);
+                if(i==3)System.out.print(j+" ");
+                else System.out.print("  ");
+                cell[0][j].printRow(i);
+                System.out.print(ConsoleColor.RESET);
+                cell[1][j].printRow(i);
+                System.out.print(ConsoleColor.RESET);
+                cell[2][j].printRow(i);
+                System.out.print(ConsoleColor.RESET);
+                cell[3][j].printRow(i);
+                System.out.print(ConsoleColor.RESET);
+                System.out.print("\n");
+            }
+        }
+        System.out.println("\t\t0\t\t\t1\t\t\t\t2\t\t\t3");
     }
 }
 

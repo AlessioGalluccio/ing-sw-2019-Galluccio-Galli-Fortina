@@ -1,15 +1,20 @@
 package it.polimi.se2019.model.deck.firemodes;
 
+import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.StringAndMessage;
+import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +37,7 @@ public class TestLockRifle_1 {
     private FireMode lockRifle_1;
     private Cell commonCell;
     private Cell notVisibleCell;
+    private PlayerView playerView;
 
     private final static int LOCK_RIFLE_WEAPON_ID = 14;
     private final static int LOCK_RIFLE_FIREMODE_ID = 141;
@@ -54,13 +60,17 @@ public class TestLockRifle_1 {
         players.add(targetPlayer3);
 
         //settings of mock connection
-        PlayerView playerView = mock(PlayerView.class);
+        Server serverMock = mock(Server.class);
+        Player playerCopyMock = mock(Player.class);
+        playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
         controller = new Controller(gameHandler, null);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
+        controller.setState(new ActionSelectedControllerState(controller,gameHandler, shoot));
+
 
         //author, target 1 and target 2 in the same cell
         commonCell = gameHandler.getCellByCoordinate(1,1);
@@ -220,6 +230,14 @@ public class TestLockRifle_1 {
     @Test(expected = WrongInputException.class)
     public void fireNegativeNoTargets()  throws Exception{
         shoot.fire();
+    }
+
+    @Test
+    public void selectedYourself() throws Exception{
+        PlayerMessage message = new PlayerMessage(authorPlayer.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, message);
+        //shoot.addPlayerTarget(authorPlayer.getID());
+        assertEquals("Error,you have selected yourself" + LockRifle_1.FIRST_MSG_STR, playerView.getLastStringPrinted());
     }
 
 

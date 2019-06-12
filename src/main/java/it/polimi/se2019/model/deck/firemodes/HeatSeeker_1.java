@@ -18,11 +18,11 @@ import java.util.List;
 public class HeatSeeker_1 extends FireMode {
 
     private static String FIRST_MSG_STR = "Select a player target";
-    private static boolean FIRST_MSH_BOOL = false;
+
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        StringAndMessage firstMsg = new StringAndMessage(Identificator.PLAYER_MESSAGE, FIRST_MSG_STR, FIRST_MSH_BOOL);
+        StringAndMessage firstMsg = new StringAndMessage(Identificator.PLAYER_MESSAGE, FIRST_MSG_STR);
         List<StringAndMessage> list = new ArrayList<>();
         list.add(firstMsg);
         return list;

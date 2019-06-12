@@ -13,6 +13,9 @@ public class DisconnectedControllerState implements StateController {
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
+    private String errorString;
+    private String stringToPlayerView;
+
 
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
@@ -110,7 +113,13 @@ public class DisconnectedControllerState implements StateController {
     }
 
     @Override
-    public void handle(ViewControllerMessage arg) {
+    public String handle(ViewControllerMessage arg) {
         arg.handle(this);
+        return stringToPlayerView;
+    }
+
+    @Override
+    public void endAction() {
+        //do nothing, shouldn't be called in this state
     }
 }

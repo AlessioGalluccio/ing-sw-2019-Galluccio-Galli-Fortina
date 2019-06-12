@@ -15,12 +15,12 @@ public class ClientMain {
         CLI cli = new CLI(clientView);
         clientView.setUi(cli);
 
-       // RMIClient rmi = new RMIClient(clientView);
-       // rmi.connect();
+        RMIClient rmi = new RMIClient(clientView, "localhost");
+        rmi.connect();
 
-        SocketClient socket = new SocketClient(9001, "localhost", clientView);
-       socket.connect();
-        clientView.setUp(socket);
+        // SocketClient socket = new SocketClient(9001, "localhost", clientView);
+        // socket.connect();
+        clientView.setUp(rmi);
         cli.start();
 
     }

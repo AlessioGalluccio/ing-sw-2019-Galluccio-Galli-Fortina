@@ -3,6 +3,8 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.PowerupDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
+
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import org.junit.Before;
@@ -19,12 +21,12 @@ public class TestMap {
 
     @Before
     public void initTest() {
-        map1 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map1 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
         cell = map1.getCell();
 
-        map2 = new Map1(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map3 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
-        map4 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map2 = new Map2(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map3 = new Map3(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
+        map4 = new Map4(new WeaponDeck(), new AmmoDeck(new PowerupDeck()));
     }
 
     @Test
@@ -64,9 +66,6 @@ public class TestMap {
         cells.add(cell[1][1]);
         assertEquals(cells, map1.getCellAtDistance(cell[1][1], 0));
 
-        cells.add(cell[2][1]);
-        cells.add(cell[3][1]);
-        cells.add(cell[2][2]);
         cells.add(cell[1][0]);
         cells.add(cell[0][1]);
         cells.add(cell[0][2]);
@@ -76,6 +75,7 @@ public class TestMap {
 
         cells.add(cell[1][2]);
         cells.add(cell[3][0]);
+        cells.add(cell[2][1]);
         assertTrue(map1.getCellAtDistance(cell[1][1], 3).containsAll(cells));
         assertTrue(cells.containsAll(map1.getCellAtDistance(cell[1][1], 3)));
     }
@@ -112,9 +112,11 @@ public class TestMap {
         }
     }
 
-    @Test //TODO test dopo aver fatto i getter opportuni
-    public void testReloadAllCell() {
+    @Test
+    public void testPrint() {
         map1.reloadAllCell();
+
+        map1.printRow( 0);
     }
 
 
