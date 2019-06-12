@@ -114,9 +114,9 @@ public class TestMap {
 
     @Test
     public void testPrint() {
-        map1.reloadAllCell();
+        map2.reloadAllCell();
 
-        map1.printRow( 0);
+        map2.printRow( 0);
     }
 
 

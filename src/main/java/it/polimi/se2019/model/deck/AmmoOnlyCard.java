@@ -35,24 +35,24 @@ public class AmmoOnlyCard implements AmmoCard {
     }
 
     @Override
-    public int getID() {
-        return ID;
+    public int getIDtype() {
+        return IDtype;
     }
 
     @Override
-    public int getIDtype() {
-        return IDtype;
+    public int getID() {
+        return ID;
     }
 
 
     /**
      * Reload a player's ammo using this card
-     * @param p player to relaod
+     * @param p player to reload
      */
     @Override
     public void reloadAmmo(Player p) throws TooManyException {
-        AmmoBag ammoPlayer = p.getAmmo();
         List<ColorRYB> ammoList = getAmmo();
+        AmmoBag ammoPlayer = p.getAmmo();
         p.setAmmoBag(ammoPlayer.getRedAmmo() + Collections.frequency(ammoList, RED),
                 ammoPlayer.getYellowAmmo() + Collections.frequency(ammoList, YELLOW),
                 ammoPlayer.getBlueAmmo() + Collections.frequency(ammoList, BLUE));

@@ -60,7 +60,7 @@ public class AmmoPowerupCard implements AmmoCard {
 
     /**
      * Reload a player's ammo using this card
-     * @param p player to relaod
+     * @param p player to reload
      */
     @Override
     public void reloadAmmo(Player p) throws TooManyException {
