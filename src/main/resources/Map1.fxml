@@ -620,5 +620,7 @@
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
+      <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Your Points : " />
+      <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" />
    </children>
 </AnchorPane>

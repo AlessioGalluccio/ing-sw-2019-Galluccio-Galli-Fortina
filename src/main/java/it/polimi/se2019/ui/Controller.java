@@ -6,6 +6,7 @@ package it.polimi.se2019.ui;
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
@@ -96,6 +97,7 @@ public class Controller {
 
     public Button fireButton;
     public Button endTurnButton;
+    public Label yourPointsLabel;
     ClientView clientView;
 
     ControllerLogin controllerLogin;
@@ -845,4 +847,11 @@ public class Controller {
         System.out.println("FUNZIONA");
 
     }
+
+    public void updatePoints(int points){
+        String string = Integer.toString(points);
+        yourPointsLabel.setText(string);
+    }
+
+
 }
