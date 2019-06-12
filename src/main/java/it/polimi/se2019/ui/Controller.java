@@ -213,6 +213,8 @@ public class Controller {
     @FXML
     public Button bDiscardPowerup3;
     @FXML
+    public Button bDiscardPowerup4;
+    @FXML
     public Button bReloadWeapon1;
     @FXML
     public Button bReloadWeapon2;
@@ -387,6 +389,15 @@ public class Controller {
     @FXML
     public Button selectWeaponButton4;
 
+    @FXML
+    public ImageView imTrashP1;
+    @FXML
+    public ImageView imTrashP2;
+    @FXML
+    public ImageView imTrashP3;
+    @FXML
+    public ImageView imTrashP4;
+
 
     private int suddenDeath = 2;
     private int skull = 0;
@@ -490,6 +501,8 @@ public class Controller {
 
         setPlayerOnMap();
 
+        setDiscard();
+
 
 
         System.out.println(choosenMap);
@@ -544,7 +557,7 @@ public class Controller {
                 BackgroundSize.DEFAULT);
         //then you set to your node
         myContainer.setBackground(new Background(myBI));
-        
+
 
         //set map's cells
         setCellsMap();
@@ -676,6 +689,11 @@ public class Controller {
         cell32.setStyle(transparent);
         cell32.setGraphic(ammoCell32);
 
+
+        moveButton.setStyle(transparent);
+        shootButton.setStyle(transparent);
+        grabButton.setStyle(transparent);
+
     }
 
     /**
@@ -743,6 +761,20 @@ public class Controller {
 
     }
 
+    /**
+     * set trash's image on power up discard button
+     */
+    public void setDiscard(){
+        bDiscardPowerup1.setGraphic(imTrashP1);
+        bDiscardPowerup1.setStyle(transparent);
+        bDiscardPowerup2.setGraphic(imTrashP2);
+        bDiscardPowerup2.setStyle(transparent);
+        bDiscardPowerup3.setGraphic(imTrashP3);
+        bDiscardPowerup3.setStyle(transparent);
+        bDiscardPowerup4.setGraphic(imTrashP4);
+        bDiscardPowerup4.setStyle(transparent);
+
+    }
 
     public void setPlayerOnMap(){
 
