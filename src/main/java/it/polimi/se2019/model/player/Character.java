@@ -3,6 +3,7 @@ package it.polimi.se2019.model.player;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Deprecated
 public class Character implements Serializable {
 
     private final String nameCharacter;

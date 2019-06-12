@@ -19,7 +19,7 @@ public class Passage implements Border {
     @Override
     public void printByDirection(int row, boolean horizontal, ConsoleColor color) {
         System.out.print(color);
-        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
+        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         if(horizontal) {
             System.out.print("▦");
             for(int i=1; i< Printable.DIMROW-1; i++){

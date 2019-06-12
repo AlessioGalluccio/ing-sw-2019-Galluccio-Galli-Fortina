@@ -170,7 +170,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     @SuppressWarnings("squid:S106")
     public void printRow(int row) {
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
+        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         if(!isDisable()) System.out.print(color);
         switch (row) {
             case 0:

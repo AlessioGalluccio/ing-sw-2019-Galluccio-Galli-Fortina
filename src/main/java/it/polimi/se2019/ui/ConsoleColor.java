@@ -97,8 +97,8 @@ public enum ConsoleColor {
             case "PURPLE": return MAGENTA_BOLD;
             case "BLACK": return WHITE_BOLD_BRIGHT;
             case "GREY":
-            case "WHITE":
-            default: return BLACK_BOLD;
+            case "WHITE": return BLACK_BOLD;
+            default: return RESET;
         }
     }
 }

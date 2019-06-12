@@ -575,15 +575,6 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Player{" +
-                "nickname='" + nickname + '\'' +
-                ", character=" + character +
-                ", ID=" + ID +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -657,7 +648,22 @@ public class Player extends Observable implements Target, Serializable {
         return clone;
     }
 
+    @Override
+    public String toString() {
+        String s = nickname + "";
 
+        return "" +
+                "nickname='" + nickname + '\'' +
+                ", damage=" + damage +
+                ", skull=" + skull +
+                ", points=" + points +
+                ", mark=" + mark +
+                ", character=" + character +
+                ", ammoBag=" + ammoBag +
+                ", powerupCardList=" + powerupCardList +
+                ", weaponCardList=" + weaponCardList +
+                '}';
+    }
 
     private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {
         public boolean shouldSkipClass(Class<?> clazz) {

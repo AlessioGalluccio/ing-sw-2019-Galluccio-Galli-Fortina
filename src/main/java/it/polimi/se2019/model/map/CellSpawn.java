@@ -131,7 +131,7 @@ public class CellSpawn extends Cell {
     @SuppressWarnings("squid:S106")
     void printMiddleRow() {
         ConsoleColor printColor = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + printColor;
+        String space = ConsoleColor.WHITE_BRIGHT + "▦" + printColor;
         getWestBorder().printByDirection(3, false, printColor);
         System.out.print(space + space +
                 "↺↺↺" +

@@ -202,11 +202,16 @@ public abstract class Map extends Observable implements Printable, Serializable 
         }
     }
 
+    /**
+     * Print the map on System.out
+     * @param row the line to print
+     */
+    @SuppressWarnings("squid:S106")
     public void printRow(int row) {
         for(int j=2; j>=0; j--) {
             for (int i = 0; i < 7; i++) {
                 System.out.print(ConsoleColor.RESET);
-                if(i==3)System.out.print(j+" ");
+                if(i==3)System.out.print(j + " "); //print coordinate
                 else System.out.print("  ");
                 cell[0][j].printRow(i);
                 System.out.print(ConsoleColor.RESET);
@@ -216,10 +221,44 @@ public abstract class Map extends Observable implements Printable, Serializable 
                 System.out.print(ConsoleColor.RESET);
                 cell[3][j].printRow(i);
                 System.out.print(ConsoleColor.RESET);
+                if(i>1) printWeapon(i, j);
+                System.out.print(ConsoleColor.RESET);
                 System.out.print("\n");
             }
         }
         System.out.println("\t\t0\t\t\t1\t\t\t\t2\t\t\t3");
+    }
+
+    @SuppressWarnings("squid:S106")
+    private void printWeapon(int row, int cell) {
+        CellSpawn cellRed = (CellSpawn ) this.cell[0][1];
+        CellSpawn cellBlue= (CellSpawn ) this.cell[2][2];
+        CellSpawn cellYellow= (CellSpawn ) this.cell[3][0];
+        List<WeaponCard> weaponBlue= new ArrayList<>(cellBlue.getWeapon());
+        List<WeaponCard> weaponRed= new ArrayList<>(cellRed.getWeapon());
+        List<WeaponCard> weaponYellow= new ArrayList<>(cellYellow.getWeapon());
+        switch (row) {
+            case 2:
+                if(cell==2) System.out.print(ConsoleColor.BLUE_BOLD+"\t Weapon on blue spawn cell:");
+                if(cell==1) System.out.print(ConsoleColor.RED_BOLD+"\t Weapon on red spawn cell:");
+                if(cell==0) System.out.print(ConsoleColor.YELLOW_BOLD+"\t Weapon on yellow spawn cell:");
+                break;
+            case 3:
+                if(cell==2&&weaponBlue.get(0)!=null) System.out.print("\033[22;37m\t\t0. " + weaponBlue.get(0).toStringShort());
+                if(cell==1&&weaponRed.get(0)!=null) System.out.print("\t\t0. " + weaponRed.get(0).toStringShort());
+                if(cell==0&&weaponYellow.get(0)!=null) System.out.print("\t\t0. " + weaponYellow.get(0).toStringShort());
+                break;
+            case 4:
+                if(cell==2&&weaponBlue.get(1)!=null) System.out.print("\033[22;37m\t\t1. " + weaponBlue.get(1).toStringShort());
+                if(cell==1&&weaponRed.get(1)!=null) System.out.print("\t\t1. " + weaponRed.get(1).toStringShort());
+                if(cell==0&&weaponYellow.get(1)!=null) System.out.print("\t\t1. " + weaponYellow.get(1).toStringShort());
+                break;
+            case 5:
+                if(cell==2&&weaponBlue.get(2)!=null) System.out.print("\033[22;37m\t\t2. " + weaponBlue.get(2).toStringShort());
+                if(cell==1&&weaponRed.get(2)!=null) System.out.print("\t\t2. " + weaponRed.get(2).toStringShort());
+                if(cell==0&&weaponYellow.get(2)!=null) System.out.print("\t\t2. " + weaponYellow.get(2).toStringShort());
+                break;
+        }
     }
 }
 

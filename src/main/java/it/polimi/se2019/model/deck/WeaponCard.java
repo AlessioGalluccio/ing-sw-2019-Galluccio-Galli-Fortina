@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.StringAndMessage;
 
 import java.lang.reflect.Type;
@@ -142,5 +143,29 @@ public abstract class WeaponCard implements Card {
     @Override
     public void useCard(Player author) {
 
+    }
+
+    @Override
+    public String toString() {
+        String string = name + ":\n" +
+                "\tCost: " + ConsoleColor.colorByColor(ammoGranted.toString()) +
+                "✚  ";
+        for(ColorRYB c : ammoNotGranted) {
+            string += ConsoleColor.colorByColor(c.toString()) + "✚";
+        }
+        string += "\n\tDescription: " + description;
+        return string;
+    }
+
+    public String toStringShort() {
+        String string = name + ": " +
+                ConsoleColor.colorByColor(ammoGranted.toString()) +
+                "✚ ";
+        if(ammoNotGranted!=null) {
+            for (ColorRYB c : ammoNotGranted) {
+                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "✚";
+            }
+        }
+        return string;
     }
 }

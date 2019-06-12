@@ -70,7 +70,7 @@ public class CellAmmo extends Cell {
     @SuppressWarnings("squid:S106")
     void printMiddleRow() {
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
+        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         getWestBorder().printByDirection(3, false, color);
         if(ammo!=null) {
             System.out.print(space + space
@@ -85,14 +85,6 @@ public class CellAmmo extends Cell {
 
     private ConsoleColor thirdAmmo(List<ColorRYB> ammo) {
         if(ammo.size()==3) return ConsoleColor.colorByColor(ammo.get(2).toString());
-        else return ConsoleColor.BLACK_BOLD;
-    }
-
-    private void printWeapon(int y, int row) {
-        switch (row) {
-            case 1:
-                if(y==2)
-                break;
-        }
+        else return ConsoleColor.WHITE;
     }
 }

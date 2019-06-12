@@ -17,10 +17,10 @@ public class Door implements Border {
     @Override
     public void printByDirection( int row, boolean horizontal, ConsoleColor color) {
         System.out.print(color);
-        String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
+        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         if(horizontal) {
             System.out.print("▦▦▦" +
-                    ConsoleColor.WHITE_BOLD_BRIGHT + "▦▦▦" + color +
+                    ConsoleColor.WHITE_BRIGHT + "▦▦▦" + color +
                     "▦▦▦");
         } else {
             if(row<3||row>Printable.DIMROW-6) System.out.print("▦");
