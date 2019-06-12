@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="myContainer" prefHeight="705.0" prefWidth="1378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
-      <ImageView fitHeight="710.0" fitWidth="1383.0" layoutX="670.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fitHeight="710.0" fitWidth="1389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
             <Image url="@back.jpg" />
          </image>
@@ -57,7 +57,7 @@
         <tabs>
           <Tab text="Powerup Cards">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="131.0" prefWidth="500.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="589.0">
                      <children>
                         <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="120.0" />
                         <Button fx:id="bPowerupCard2" disable="true" layoutX="140.0" layoutY="3.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />

@@ -544,9 +544,7 @@ public class Controller {
                 BackgroundSize.DEFAULT);
         //then you set to your node
         myContainer.setBackground(new Background(myBI));
-        container1.setBackground(new Background(myBI));
-        container2.setBackground(new Background(myBI));
-        enemy1back.setBackground(new Background(myBI));
+        
 
         //set map's cells
         setCellsMap();
