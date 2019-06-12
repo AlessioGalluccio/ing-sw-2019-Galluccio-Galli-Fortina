@@ -575,5 +575,50 @@
       </ImageView>
       <ImageView fx:id="imPlayer5Cell20" fitHeight="22.0" fitWidth="22.0" layoutX="495.0" layoutY="458.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
+      <ImageView fx:id="bammo1" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="605.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Bammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bammo2" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="605.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Bammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="bammo3" fitHeight="31.0" fitWidth="31.0" layoutX="748.0" layoutY="605.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Bammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo1" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Rammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo2" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Rammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo3" fitHeight="31.0" fitWidth="31.0" layoutX="748.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Rammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo11" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Yammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo111" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Yammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="rammo1111" fitHeight="31.0" fitWidth="31.0" layoutX="748.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Yammo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
