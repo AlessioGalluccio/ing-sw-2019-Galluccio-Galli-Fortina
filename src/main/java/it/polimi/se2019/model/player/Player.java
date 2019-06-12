@@ -657,6 +657,8 @@ public class Player extends Observable implements Target, Serializable {
         return clone;
     }
 
+
+
     private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {
         public boolean shouldSkipClass(Class<?> clazz) {
             return clazz.getAnnotation(NotForPlayer.class) != null;

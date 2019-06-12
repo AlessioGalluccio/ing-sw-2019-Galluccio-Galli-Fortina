@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
-    private final static int MIN_SKULL = 1;
+    private final static int MIN_SKULL = 5;
     private ClientView view;
     private boolean online = true;
     private ParserCLI parser; //TODO crearlo dopo il login

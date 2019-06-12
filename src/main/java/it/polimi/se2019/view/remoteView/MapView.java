@@ -16,6 +16,20 @@ public class MapView extends Observable implements Observer {
         return mapCopy;
     }
 
+    /**
+     * Return a single cell by its coordinate
+     * @param x coordinate x
+     * @param y coodinate y
+     * @return The cell with X,Y as coordinate
+     */
+    public Cell getCell(int x, int y) {
+        return cells[x][y];
+    }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
     @Override
     public void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerMapViewMessage message = (HandlerMapViewMessage) arg;
