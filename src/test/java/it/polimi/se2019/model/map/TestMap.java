@@ -66,9 +66,6 @@ public class TestMap {
         cells.add(cell[1][1]);
         assertEquals(cells, map1.getCellAtDistance(cell[1][1], 0));
 
-        cells.add(cell[2][1]);
-        cells.add(cell[3][1]);
-        cells.add(cell[2][2]);
         cells.add(cell[1][0]);
         cells.add(cell[0][1]);
         cells.add(cell[0][2]);
@@ -78,6 +75,7 @@ public class TestMap {
 
         cells.add(cell[1][2]);
         cells.add(cell[3][0]);
+        cells.add(cell[2][1]);
         assertTrue(map1.getCellAtDistance(cell[1][1], 3).containsAll(cells));
         assertTrue(cells.containsAll(map1.getCellAtDistance(cell[1][1], 3)));
     }
@@ -116,9 +114,9 @@ public class TestMap {
 
     @Test
     public void testPrint() {
-        map3.reloadAllCell();
+        map1.reloadAllCell();
 
-        map3.printRow( 0);
+        map1.printRow( 0);
     }
 
 
