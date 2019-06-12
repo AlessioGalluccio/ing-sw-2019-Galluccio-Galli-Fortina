@@ -868,4 +868,58 @@ public class Controller {
             clientView.createActionMessage(3);
         }
     }
+
+
+    public void sendCellMessage(ActionEvent event){
+
+        Object source = event.getSource();
+
+        if(cell00 == source){
+            clientView.createCellMessage(0,0);
+        }
+
+        if(cell01 == source){
+            clientView.createCellMessage(0,1);
+        }
+
+        if(cell02 == source){
+            clientView.createCellMessage(0,2);
+        }
+
+        if(cell10 == source){
+            clientView.createCellMessage(1,0);
+        }
+
+        if(cell11 == source){
+            clientView.createCellMessage(1,1);
+        }
+
+        if(cell12 == source){
+            clientView.createCellMessage(1,2);
+        }
+
+        if(cell20 == source){
+            clientView.createCellMessage(2,0);
+        }
+
+        if(cell21 == source){
+            clientView.createCellMessage(2,1);
+        }
+
+        if(cell22 == source){
+            clientView.createCellMessage(2,2);
+        }
+
+        if(cell30 == source){
+            clientView.createCellMessage(3,0);
+        }
+
+        if(cell31 == source){
+            clientView.createCellMessage(3,1);
+        }
+
+        if(cell32 == source){
+            clientView.createCellMessage(3,2);
+        }
+    }
 }

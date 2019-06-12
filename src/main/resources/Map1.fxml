@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="705.0" prefWidth="1378.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
-      <Button fx:id="cell00" layoutX="139.0" layoutY="413.0" mnemonicParsing="false" onAction="#printSomething" prefHeight="104.0" prefWidth="99.0" />
+      <Button fx:id="cell00" layoutX="139.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
       <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
@@ -361,17 +361,17 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="cell02" layoutX="153.0" layoutY="141.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="86.0" />
-      <Button fx:id="cell01" layoutX="148.0" layoutY="271.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="99.0" />
-      <Button fx:id="cell10" layoutX="269.0" layoutY="415.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="120.0" />
-      <Button fx:id="cell11" layoutX="274.0" layoutY="276.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="112.0" />
-      <Button fx:id="cell12" layoutX="270.0" layoutY="138.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="127.0" />
-      <Button fx:id="cell22" layoutX="412.0" layoutY="142.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="112.0" />
-      <Button fx:id="cell21" layoutX="412.0" layoutY="271.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="120.0" />
-      <Button fx:id="cell20" layoutX="408.0" layoutY="411.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="120.0" />
-      <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
-      <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="99.0" />
-      <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="99.0" />
+      <Button fx:id="cell02" layoutX="153.0" layoutY="141.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="86.0" />
+      <Button fx:id="cell01" layoutX="148.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
+      <Button fx:id="cell10" layoutX="269.0" layoutY="415.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
+      <Button fx:id="cell11" layoutX="274.0" layoutY="276.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
+      <Button fx:id="cell12" layoutX="270.0" layoutY="138.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="127.0" />
+      <Button fx:id="cell22" layoutX="412.0" layoutY="142.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
+      <Button fx:id="cell21" layoutX="412.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="120.0" prefWidth="120.0" />
+      <Button fx:id="cell20" layoutX="408.0" layoutY="411.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
+      <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
+      <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
+      <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="94.0" prefWidth="99.0" />
       <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="182.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ammo/AD_ammo_042.png" />
@@ -449,9 +449,9 @@
       <ImageView fx:id="playerDamage9" fitHeight="29.0" fitWidth="22.0" layoutX="429.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage10" fitHeight="29.0" fitWidth="22.0" layoutX="462.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage11" fitHeight="29.0" fitWidth="22.0" layoutX="491.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="moveButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="577.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="51.0" />
-      <Button fx:id="grabButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
-      <Button fx:id="shootButton" onAction="#sendActionMessage" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="moveButton" layoutX="94.0" layoutY="577.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="22.0" prefWidth="51.0" />
+      <Button fx:id="grabButton" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
+      <Button fx:id="shootButton" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
       <Label fx:id="labelProva" layoutX="810.0" layoutY="440.0" prefHeight="36.0" prefWidth="551.0" textFill="RED" />
       <Button fx:id="fireButton" layoutX="809.0" layoutY="383.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!!">
          <font>
