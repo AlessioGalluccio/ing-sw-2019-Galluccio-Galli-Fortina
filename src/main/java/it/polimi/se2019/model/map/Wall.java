@@ -13,21 +13,23 @@ public class Wall implements Border {
     }
 
     @Override
-    public void printRow(int row) {
+    public String printRow(int row) {
         //Can't print a row without know the direction
         //Use printByDirection
+        return "";
     }
 
     @Override
-    public void printByDirection(int row, boolean horizontal, ConsoleColor color) {
-        System.out.print(color);
+    public String printByDirection(int row, boolean horizontal, ConsoleColor color) {
+        String s = color.toString();
         if(horizontal) {
             for(int i = 0; i< Printable.DIMROW; i++){
-                System.out.print("▦");
+                s+="▦";
             }
         } else {
-            System.out.print("▦");
+            s+="▦";
         }
+        return  s;
     }
 
 }

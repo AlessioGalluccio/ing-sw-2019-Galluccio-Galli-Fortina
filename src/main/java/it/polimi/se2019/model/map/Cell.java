@@ -167,51 +167,52 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
      * @param row the line to print
      */
     @Override
-    @SuppressWarnings("squid:S106")
-    public void printRow(int row) {
+    public String printRow(int row) {
+        String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         if(!isDisable()) System.out.print(color);
         switch (row) {
             case 0:
-                getNorthBorder().printByDirection(0, true, color);
+                s+=getNorthBorder().printByDirection(0, true, color);
                 break;
             case 1:
-                getWestBorder().printByDirection(1, false, color);
-                printPlayerOnCell(1, 2);
-                getEastBorder().printByDirection(1, false, color);
+                s+=getWestBorder().printByDirection(1, false, color);
+                s+=printPlayerOnCell(1, 2);
+                s+=getEastBorder().printByDirection(1, false, color);
                 break;
             case 2:
-                getWestBorder().printByDirection(2, false, color);
-                System.out.print(space + space);
-                System.out.print(space);
+                s+=getWestBorder().printByDirection(2, false, color);
+                s+=space + space;
+                s+=space;
                 if(getPlayerHere().size()==5) {
-                    System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(4).getCharacter().getColor()));
-                    System.out.print("◉");
-                }else System.out.print(space);
-                System.out.print(space);
-                System.out.print(space + space);
-                getEastBorder().printByDirection(2, false, color);
+                    s+=ConsoleColor.colorByColor(getPlayerHere().get(4).getCharacter().getColor());
+                    s+="◉";
+                }else s+=space;
+                s+=space;
+                s+=space + space;
+               s+= getEastBorder().printByDirection(2, false, color);
                 break;
             case 3:
-                printMiddleRow();
+                s+=printMiddleRow();
                 break;
             case 4:
-                getWestBorder().printByDirection(4, false, color);
-                System.out.print(ConsoleColor.WHITE_BOLD_BRIGHT + "▦▦▦▦▦▦▦" + color);
-                getEastBorder().printByDirection(4, false, color);
+                s+=getWestBorder().printByDirection(4, false, color);
+                s+=space+space+space+space+space+space+space;
+                s+=getEastBorder().printByDirection(4, false, color);
                 break;
             case 5:
-                getWestBorder().printByDirection(5, false, color);
-                printPlayerOnCell(3, 4);
-                getEastBorder().printByDirection(5, false,color);
+                s+= getWestBorder().printByDirection(5, false, color);
+                s+=printPlayerOnCell(3, 4);
+                s+=getEastBorder().printByDirection(5, false,color);
                 break;
             case 6:
-                getSouthBorder().printByDirection(6, true, color);
+                s+=getSouthBorder().printByDirection(6, true, color);
                 break;
             default:
         }
-        System.out.print(ConsoleColor.RESET);
+       s+=ConsoleColor.RESET;
+        return s;
     }
 
 
@@ -220,27 +221,28 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
      * @param player1 the number of the first player that will be print
      * @param player2 the number of the second player that will be print
      */
-    @SuppressWarnings("squid:S106")
-    private void printPlayerOnCell(int player1, int player2) {
+    private String printPlayerOnCell(int player1, int player2) {
+        String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
-        System.out.print(space + space);
+        s+=space + space;
         if(getPlayerHere().size()==player1) {
-            System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(player1-1).getCharacter().getColor()));
-            System.out.print("◉");
-        }else System.out.print(space);
-        System.out.print(space);
+            s+=ConsoleColor.colorByColor(getPlayerHere().get(player1-1).getCharacter().getColor());
+            s+="◉";
+        }else s+=space;
+        s+=space;
         if(getPlayerHere().size()==player2) {
-            System.out.print(ConsoleColor.colorByColor(getPlayerHere().get(player2-1).getCharacter().getColor()));
-            System.out.print("◉");
-        }else System.out.print(space);
-        System.out.print(space + space);
+            s+=ConsoleColor.colorByColor(getPlayerHere().get(player2-1).getCharacter().getColor());
+            s+="◉";
+        }else s+=space;
+        s+=space + space;
+        return s;
     }
 
     /**
      * Print the row in the middle of the cell
      */
-    abstract void printMiddleRow();
+    abstract String printMiddleRow();
 
     boolean isDisable() {
         return disable;

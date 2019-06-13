@@ -128,14 +128,15 @@ public class CellSpawn extends Cell {
      * Print the row in the middle of the cell
      */
     @Override
-    @SuppressWarnings("squid:S106")
-    void printMiddleRow() {
+    String printMiddleRow() {
+        String s ="";
         ConsoleColor printColor = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + printColor;
-        getWestBorder().printByDirection(3, false, printColor);
-        System.out.print(space + space +
+        s+=getWestBorder().printByDirection(3, false, printColor);
+        s+=space + space +
                 "↺↺↺" +
-                space + space);
-        getEastBorder().printByDirection(3, false, printColor);
+                space + space;
+        s+=getEastBorder().printByDirection(3, false, printColor);
+        return s;
     }
 }

@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public abstract class Map extends Observable implements Printable, Serializable {
+public abstract class Map extends Observable implements Serializable {
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private transient final ArrayList<Room> room;
@@ -204,33 +204,32 @@ public abstract class Map extends Observable implements Printable, Serializable 
 
     /**
      * Print the map on System.out
+     * @param block the bloc of cell to print
      * @param row the line to print
      */
-    @SuppressWarnings("squid:S106")
-    public void printRow(int row) {
-        for(int j=2; j>=0; j--) {
-            for (int i = 0; i < 7; i++) {
-                System.out.print(ConsoleColor.RESET);
-                if(i==3)System.out.print(j + " "); //print coordinate
-                else System.out.print("  ");
-                cell[0][j].printRow(i);
-                System.out.print(ConsoleColor.RESET);
-                cell[1][j].printRow(i);
-                System.out.print(ConsoleColor.RESET);
-                cell[2][j].printRow(i);
-                System.out.print(ConsoleColor.RESET);
-                cell[3][j].printRow(i);
-                System.out.print(ConsoleColor.RESET);
-                if(i>1) printWeapon(i, j);
-                System.out.print(ConsoleColor.RESET);
-                System.out.print("\n");
-            }
-        }
-        System.out.println("\t\t0\t\t\t1\t\t\t\t2\t\t\t3");
+    public String printRow(int block, int row) {
+        String s="";
+        s+=ConsoleColor.RESET;
+        if(row==3)s+=block + " "; //print coordinate
+        else s+="  ";
+        s+=cell[0][block].printRow(row);
+        s+=ConsoleColor.RESET;
+        s+=cell[1][block].printRow(row);
+        s+=ConsoleColor.RESET;
+        s+=cell[2][block].printRow(row);
+        s+=ConsoleColor.RESET;
+        s+=cell[3][block].printRow(row);
+        s+=ConsoleColor.RESET;
+        if(row>1) s+=printWeapon(row, block);
+        s+=ConsoleColor.RESET;
+        s+="\n";
+        if(block==4) s+="\t\t0\t\t\t1\t\t\t\t2\t\t\t3\n";
+        return s;
     }
 
-    @SuppressWarnings("squid:S106")
-    private void printWeapon(int row, int cell) {
+
+    private String printWeapon(int row, int cell) {
+        String s="";
         CellSpawn cellRed = (CellSpawn ) this.cell[0][1];
         CellSpawn cellBlue= (CellSpawn ) this.cell[2][2];
         CellSpawn cellYellow= (CellSpawn ) this.cell[3][0];
@@ -239,26 +238,27 @@ public abstract class Map extends Observable implements Printable, Serializable 
         List<WeaponCard> weaponYellow= new ArrayList<>(cellYellow.getWeapon());
         switch (row) {
             case 2:
-                if(cell==2) System.out.print(ConsoleColor.BLUE_BOLD+"\t Weapon on blue spawn cell:");
-                if(cell==1) System.out.print(ConsoleColor.RED_BOLD+"\t Weapon on red spawn cell:");
-                if(cell==0) System.out.print(ConsoleColor.YELLOW_BOLD+"\t Weapon on yellow spawn cell:");
+                if(cell==2) s+=ConsoleColor.BLUE_BOLD+"\t Weapon on blue spawn cell:";
+                if(cell==1) s+=ConsoleColor.RED_BOLD+"\t Weapon on red spawn cell:";
+                if(cell==0) s+=ConsoleColor.YELLOW_BOLD+"\t Weapon on yellow spawn cell:";
                 break;
             case 3:
-                if(cell==2&&weaponBlue.get(0)!=null) System.out.print("\033[22;37m\t\t0. " + weaponBlue.get(0).toStringShort());
-                if(cell==1&&weaponRed.get(0)!=null) System.out.print("\t\t0. " + weaponRed.get(0).toStringShort());
-                if(cell==0&&weaponYellow.get(0)!=null) System.out.print("\t\t0. " + weaponYellow.get(0).toStringShort());
+                if(cell==2&&weaponBlue.get(0)!=null) s+="\033[22;37m\t\t0. " + weaponBlue.get(0).toStringShort();
+                if(cell==1&&weaponRed.get(0)!=null) s+="\t\t0. " + weaponRed.get(0).toStringShort();
+                if(cell==0&&weaponYellow.get(0)!=null) s+="\t\t0. " + weaponYellow.get(0).toStringShort();
                 break;
             case 4:
-                if(cell==2&&weaponBlue.get(1)!=null) System.out.print("\033[22;37m\t\t1. " + weaponBlue.get(1).toStringShort());
-                if(cell==1&&weaponRed.get(1)!=null) System.out.print("\t\t1. " + weaponRed.get(1).toStringShort());
-                if(cell==0&&weaponYellow.get(1)!=null) System.out.print("\t\t1. " + weaponYellow.get(1).toStringShort());
+                if(cell==2&&weaponBlue.get(1)!=null) s+="\033[22;37m\t\t1. " + weaponBlue.get(1).toStringShort();
+                if(cell==1&&weaponRed.get(1)!=null) s+="\t\t1. " + weaponRed.get(1).toStringShort();
+                if(cell==0&&weaponYellow.get(1)!=null) s+="\t\t1. " + weaponYellow.get(1).toStringShort();
                 break;
             case 5:
-                if(cell==2&&weaponBlue.get(2)!=null) System.out.print("\033[22;37m\t\t2. " + weaponBlue.get(2).toStringShort());
-                if(cell==1&&weaponRed.get(2)!=null) System.out.print("\t\t2. " + weaponRed.get(2).toStringShort());
-                if(cell==0&&weaponYellow.get(2)!=null) System.out.print("\t\t2. " + weaponYellow.get(2).toStringShort());
+                if(cell==2&&weaponBlue.get(2)!=null) s+="\033[22;37m\t\t2. " + weaponBlue.get(2).toStringShort();
+                if(cell==1&&weaponRed.get(2)!=null) s+="\t\t2. " + weaponRed.get(2).toStringShort();
+                if(cell==0&&weaponYellow.get(2)!=null) s+="\t\t2. " + weaponYellow.get(2).toStringShort();
                 break;
         }
+        return s;
     }
 }
 
