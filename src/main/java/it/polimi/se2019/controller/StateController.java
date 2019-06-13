@@ -26,6 +26,7 @@ public abstract class StateController {
     public static final String ALREADY_SELECTED = "You have already selected this, you can't use again. ";
     public static final String WEAPON_NOT_PRESENT = "This weapon is not present. ";
     public static final String CANT_DO_THIS = "You can't do this now. ";
+    public static final String POWERUP_NOT_PRESENT_DISCARD = "You can't discard a card you don't have. ";
 
     public static final String CANT_DO_ALREADY_RELOADED = "You have already reloaded. ";
     public static final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";

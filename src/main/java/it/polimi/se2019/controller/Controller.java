@@ -122,6 +122,10 @@ public class Controller implements Observer {
         this.messageListExpected.addAll(indexExpected, messageListExpected);
     }
 
+    public void addMessageListImmediateNext(StringAndMessage messageExpected){
+        this.messageListExpected.add(indexExpected, messageExpected);
+    }
+
     public void addMessageListBeforeLastOne(ArrayList<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(messageListExpected.size()- 2, messageListExpected);
     }

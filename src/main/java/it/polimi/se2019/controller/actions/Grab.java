@@ -19,7 +19,15 @@ import java.util.List;
 public class Grab extends Action{
     private Cell cellObjective;
     private Card cardObjective;
+    private WeaponCard weaponToDiscard;
     private final int DISTANCE_MAX = 1;
+    private boolean flagMustChooseWeapon;
+
+    public static final String CHOOSE_WEAPON = "Choose a weapon to grab. ";
+    public static final String DISCARD_WEAPON = "Discard a weapon. ";
+    public static final String WEAPON_NOT_PRESENT_IN_PLAYER_GRAB = "You don't have this weapon. ";
+    public static final String WEAPON_NOT_PRESENT_IN_CELL_GRAB = "This weapon is not present in the cell. ";
+    public static final String CARD_NOT_PRESENT_IN_CELL_GRAB = "This card is not present in the cell. ";
 
 
 
@@ -28,15 +36,14 @@ public class Grab extends Action{
     }
 
     @Override
-    public void executeAction() {
+    public void executeAction() throws WrongInputException {
         playerAuthor.setPosition(cellObjective);
         //TODO gestire prendere carte e munizioni
         try{
             cellObjective.grabCard(cardObjective.getID());
         }catch(NotCardException e){
             //it should be never launched here, because we already have cardObjective
-            playerView.printFromController("Error in execution of Grab action");
-            throw new IllegalArgumentException();
+            throw new WrongInputException(CARD_NOT_PRESENT_IN_CELL_GRAB);
         }
     }
 
@@ -53,35 +60,40 @@ public class Grab extends Action{
     @Override
     public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
-        List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
+        List<Cell> arrayCellsAtDistance = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
         try{
-            if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
-                cellObjective = gameHandler.getCellByCoordinate(x,y);
+            if(arrayCellsAtDistance.contains(gameHandler.getCellByCoordinate(x,y))) {
+                cellObjective = gameHandler.getCellByCoordinate(x, y);
                 //there's only one card to grab
-                if(cellObjective.getCardID().size() == 1){
+                if (cellObjective.getCardID().size() == 1) {
                     //TODO cardObjective = gameHandler.getCardByID(cellObjective.getCardID().get(0));
                     executeAction();
+                } else {
+                    //handling of WeaponCard
+                    if (playerAuthor.getWeaponCardList().size() < 3) {
+                        playerAuthor.setPosition(cellObjective);
+                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
+                        flagMustChooseWeapon = true;
+                    } else {
+                        //player must discard a weapon
+                        playerAuthor.setPosition(cellObjective);
+                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.DISCARD_WEAPON_MESSAGE, DISCARD_WEAPON));
+                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
+                        flagMustChooseWeapon = true;
+                    }
                 }
-                else{
-                    //TODO getsione WeaponCard
-                /*
-                controller.addMessageListExpected(Identificator.WEAPON_CARD, "Choose a Weapon", false);
-                controller.sendTargetsToView();
-                */
-                }
-
             }
             else{
                 throw new WrongInputException();
             }
-        }catch (NotPresentException e){
+        }catch(NotPresentException e){
             //should not happen
             throw new WrongInputException();
         }
 
 
-
     }
+
 
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
@@ -106,8 +118,14 @@ public class Grab extends Action{
 
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
-        throw new WrongInputException();
-        //TODO
+        if(flagMustChooseWeapon){
+            try{
+                cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
+            }
+            catch (NotCardException e){
+                throw new WrongInputException(WEAPON_NOT_PRESENT_IN_CELL_GRAB);
+            }
+        }
     }
 
     @Override
@@ -118,6 +136,16 @@ public class Grab extends Action{
     @Override
     public void addNope() throws WrongInputException {
         throw new WrongInputException();
+    }
+
+    @Override
+    public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
+        if(playerAuthor.getWeaponCardList().contains(weaponCard)){
+            this.weaponToDiscard = weaponCard;
+        }
+        else{
+            throw new WrongInputException(WEAPON_NOT_PRESENT_IN_PLAYER_GRAB);
+        }
     }
 
     @Override

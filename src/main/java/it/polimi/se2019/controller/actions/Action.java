@@ -4,6 +4,7 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.EmptyControllerState;
 import it.polimi.se2019.controller.NotYourTurnState;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
@@ -62,6 +63,11 @@ public abstract class Action implements AddActionMethods {
         endAction();
     }
 
+    @Override
+    public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
+        throw new WrongInputException();
+    }
+
     /**
      * call it at the end of the action. It will change the state of the controller
      */
@@ -69,4 +75,5 @@ public abstract class Action implements AddActionMethods {
         controller.getState().endAction();
 
     }
+
 }

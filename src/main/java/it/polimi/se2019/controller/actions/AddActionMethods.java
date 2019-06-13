@@ -22,6 +22,8 @@ public interface AddActionMethods extends AddFireModeMethods{
 
     void addWeapon(WeaponCard weaponCard) throws WrongInputException;
 
+    void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException;
+
     //void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
 
     //void addNope() throws WrongInputException;
