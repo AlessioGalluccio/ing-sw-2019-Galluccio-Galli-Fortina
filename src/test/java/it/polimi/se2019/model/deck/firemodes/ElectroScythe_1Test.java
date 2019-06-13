@@ -2,11 +2,15 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
@@ -103,6 +107,37 @@ public class ElectroScythe_1Test {
 
     @Test
     public void firePositiveWithTargeting() throws Exception {
-        //TODO
+        int targetingID = 1;
+        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
+        authorPlayer.addPowerupCard(card);
+
+        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
+
+
+        shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer1.getID());
+
+        shoot.fire();
+
+        //target 1
+        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
+        assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
+
+    }
+
+    @Test(expected = WrongInputException.class)
+    public void fireNegativeWithTargeting() throws Exception {
+        int targetingID = 1;
+        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
+        authorPlayer.addPowerupCard(card);
+
+        AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
+
+        Cell outsideCellWithNoTargets = gameHandler.getCellByCoordinate(3,2);
+        authorPlayer.setPosition(outsideCellWithNoTargets);
+        shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer1.getID());
+
     }
 }

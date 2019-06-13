@@ -235,11 +235,13 @@ public class Shoot extends Action{
     }
 
     /**
-     * add a target for a targeting scope from a firemode
+     * add a target for a targeting scope from a firemode and set to false the flag that makes the next PlayerMessage
+     * for the firemode, not the weapon
      * @param player the target
      */
     public void addTargetForTargetingFromFiremode(Player player){
         targetsOfTargetings.add(player);
+        neededTargetForTargeting = false;
     }
 
     public void addOptionalSelected(int numOptional){
