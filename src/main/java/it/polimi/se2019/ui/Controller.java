@@ -994,10 +994,55 @@ public class Controller {
     public void sendMapWeapon(ActionEvent event){
         Object source = event.getSource();
         //TODO Prendere array list di spawncell
-        CellSpawn cellSpawn;
-        if(redWeapon1 == source) {
+
+        if(redWeapon1 == source){
 
         }
+
+
+    }
+
+
+    /**
+     * send reload message when the palyer select a weapon to be reload
+     * @param event
+     */
+    public void reloadWeapon(ActionEvent event) {
+        Player player = clientView.getPlayerCopy();
+        try {
+            List<WeaponCard> weapons = player.getWeaponCardList();
+
+            Object source = event.getSource();
+
+            if(bReloadWeapon1 == source){
+                clientView.createReloadMessage(weapons.get(0));
+
+            }
+
+            if(bReloadWeapon2 == source){
+
+                clientView.createReloadMessage(weapons.get(1));
+
+            }
+
+            if(bReloadWeapon3 == source){
+                clientView.createReloadMessage(weapons.get(2));
+
+
+            }
+
+            if(selectWeaponButton4 == source){
+                clientView.createWeaponMessage(weapons.get(3));
+
+            }
+        }
+        catch (NullPointerException e){
+            //TODO
+
+        }
+
+
+
 
     }
 }

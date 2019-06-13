@@ -105,9 +105,9 @@
                         <ImageView fx:id="imWeaponCard1" disable="true" fitHeight="192.0" fitWidth="120.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imWeaponCard2" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="140.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imWeaponCard3" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="280.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="bReloadWeapon1" layoutX="95.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
-                        <Button fx:id="bReloadWeapon2" layoutX="232.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
-                        <Button fx:id="bReloadWeapon3" layoutX="376.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
+                        <Button fx:id="bReloadWeapon1" onAction="#reloadWeapon" layoutX="95.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
+                        <Button fx:id="bReloadWeapon2" onAction="#reloadWeapon" layoutX="232.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
+                        <Button fx:id="bReloadWeapon3" onAction="#reloadWeapon" layoutX="376.0" layoutY="2.0" mnemonicParsing="false" text="reload" />
                         <Button fx:id="bDiscardWeapon1" layoutX="96.0" layoutY="30.0" mnemonicParsing="false" text="discard" />
                         <Button fx:id="bDiscardWeapon2" layoutX="232.0" layoutY="30.0" mnemonicParsing="false" text="discard" />
                         <Button fx:id="bDiscardWeapon3" layoutX="374.0" layoutY="30.0" mnemonicParsing="false" text="discard" />
