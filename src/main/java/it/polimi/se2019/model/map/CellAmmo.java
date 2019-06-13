@@ -37,6 +37,11 @@ public class CellAmmo extends Cell {
     }
 
     @Override
+    public Card grabCard(int cardID, WeaponCard card) throws NotCardException {
+        return grabCard(cardID);
+    }
+
+    @Override
     public List<Integer> getCardID() {
         ArrayList<Integer> cardId = new ArrayList<>();
         cardId.add(0);
