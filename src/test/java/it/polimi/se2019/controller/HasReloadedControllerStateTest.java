@@ -68,7 +68,7 @@ public class HasReloadedControllerStateTest {
     public void handleAction() {
         ActionMessage actionMessage = new ActionMessage(5,authorPlayer.getID(), playerView);
         controller.update(null,actionMessage);
-        assertEquals(HasReloadedControllerState.CANT_DO + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
+        assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
     }
 
     @Test
@@ -77,14 +77,14 @@ public class HasReloadedControllerStateTest {
         PowerupCard powerupCard2 = mock(PowerupCard.class);
         CardSpawnChooseMessage message = new CardSpawnChooseMessage(powerupCard1, powerupCard2,authorPlayer.getID(), playerView);
         controller.update(null,message);
-        assertEquals(HasReloadedControllerState.CANT_DO + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
+        assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
     }
 
     @Test
     public void handleCell() {
         CellMessage message = new CellMessage(1,1,authorPlayer.getID(), playerView);
         controller.update(null,message);
-        assertEquals(HasReloadedControllerState.CANT_DO + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
+        assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
     }
 
     @Test

@@ -57,7 +57,7 @@ public class ActionSelectedControllerStateTest {
 
         TeleporterCard teleporterCard = mock(TeleporterCard.class);
         PlayerView playerView = mock(PlayerView.class);
-        TeleporterMessage teleporterMessage = new TeleporterMessage(teleporterCard, 1, playerView);
+        TeleporterMessage teleporterMessage = new TeleporterMessage(teleporterCard, 1, playerViewMock);
 
         controller.update(null, teleporterMessage);
 

@@ -7,7 +7,28 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 public abstract class StateController {
+    //they are public for tests
 
+    public static final String SELECT_ACTION_REQUEST = "Please, select an action, a card or pass. ";
+    public static final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action. ";
+    public static final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon. ";
+    public static final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
+    public static final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again. ";
+    public static final String TOO_MANY_ACTIONS = "You have already done the max num of actions. ";
+
+    public static final String PLAYER_WRONG = "You can't select this target. ";
+    public static final String CELL_WRONG = "You can't select this cell. ";
+    public static final String OPTIONAL_WRONG = "You can't select this optional effect. ";
+
+    public static final String NOT_ENOUGH = "You don't have enough Ammo for this. ";
+    public static final String ONLY_MARKS = "The firemode selected gives only marks, you can't use targeting. ";
+    public static final String CARD_NOT_PRESENT = "The player doesn't have this card. ";
+    public static final String ALREADY_SELECTED = "You have already selected this, you can't use again. ";
+    public static final String WEAPON_NOT_PRESENT = "This weapon is not present. ";
+    public static final String CANT_DO_THIS = "You can't do this now. ";
+
+    public static final String CANT_DO_ALREADY_RELOADED = "You have already reloaded. ";
+    public static final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";
     /**
      * used by the controller to pass the new message, the other methods are used by messages themselves
      * @param arg

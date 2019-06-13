@@ -22,12 +22,7 @@ public class EmptyControllerState extends StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    private final String SELECT_ACTION_REQUEST = "Please, select an action, a card or pass. ";
-    private final String CANT_SHOOT = "You don't have any weapon loaded, you can't choose this action. ";
-    private final String NOT_PRESENT_WEAPON_RELOAD = "Error: Player doesn't have this Weapon. ";
-    private final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
-    private final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again. ";
-    private static final String TOO_MANY_ACTIONS = "You have already done the max num of actions. ";
+
 
 
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
