@@ -12,7 +12,7 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 
-public class ActionSelectedControllerState implements StateController {
+public class ActionSelectedControllerState extends StateController {
 
     private Player player;
     private PlayerView playerView;
@@ -243,6 +243,16 @@ public class ActionSelectedControllerState implements StateController {
             gameHandler.nextTurn();
             controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
+    }
+
+    @Override
+    public void handleDiscardPowerup(int powerupID) {
+        //TODO
+    }
+
+    @Override
+    public void handleDiscardWeapon(int weaponID) {
+        //TODO
     }
 
     @Override

@@ -229,11 +229,29 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * create a WeaponMessage that the client send to the server
-     * @param weaponCard
+     * create a WeaponMessage that the client sends to the server
+     * @param weaponCard the weapon card
      */
     public void createWeaponMessage(WeaponCard weaponCard){
         WeaponMessage message = new WeaponMessage(weaponCard,playerCopy.getID(),this);
+        notifyObservers(message);
+    }
+
+    /**
+     * create a DiscardPowerupMessage that the client sends to the server
+     * @param powerupCard the powerup card to be discarded
+     */
+    public void createDiscardPowerupMessage(PowerupCard powerupCard){
+        DiscardPowerupMessage message = new DiscardPowerupMessage(powerupCard, playerCopy.getID(), this);
+        notifyObservers(message);
+    }
+
+    /**
+     * create a DiscardPowerupMessage that the client sends to the server
+     * @param weaponCard the weapon card to be discarded
+     */
+    public void createDiscardWeaponMessage(WeaponCard weaponCard){
+        DiscardWeaponMessage message = new DiscardWeaponMessage(weaponCard, playerCopy.getID(), this);
         notifyObservers(message);
     }
 
