@@ -9,6 +9,7 @@ import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
+import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
@@ -107,6 +108,11 @@ public class Controller {
     public AnchorPane enemy1back;
     ClientView clientView;
     ClientMapView mapView;
+    ClientEnemyView enemyView1;
+    ClientEnemyView enemyView2;
+    ClientEnemyView enemyView3;
+    ClientEnemyView enemyView4;
+
 
     ControllerLogin controllerLogin;
 
@@ -1045,6 +1051,19 @@ public class Controller {
      * @param event
      */
     public void selectEnemy(ActionEvent event) {
+        Object source = event.getSource();
+        if(enemyCharacter1 == source){
+            clientView.createPlayerMessage(enemyView1.getID());
+        }
+        if(enemyCharacter2 == source){
+            clientView.createPlayerMessage(enemyView2.getID());
+        }
+        if(enemyCharacter3 == source){
+            clientView.createPlayerMessage(enemyView3.getID());
+        }
+        if(enemyCharacter4 == source){
+            clientView.createPlayerMessage(enemyView4.getID());
+        }
 
     }
 
