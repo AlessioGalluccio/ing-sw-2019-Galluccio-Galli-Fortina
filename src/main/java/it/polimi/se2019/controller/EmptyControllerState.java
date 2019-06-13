@@ -13,7 +13,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 
-public class EmptyControllerState implements  StateController {
+public class EmptyControllerState extends StateController {
 
     private Player player;
     private PlayerView playerView;
@@ -171,6 +171,17 @@ public class EmptyControllerState implements  StateController {
             controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
     }
+
+    @Override
+    public void handleDiscardPowerup(int powerupID) {
+        //TODO
+    }
+
+    @Override
+    public void handleDiscardWeapon(int weaponID) {
+        //TODO
+    }
+
 
     @Override
     public String handle(ViewControllerMessage arg) {

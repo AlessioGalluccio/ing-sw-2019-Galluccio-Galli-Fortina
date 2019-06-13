@@ -26,6 +26,8 @@ public class Identificator {
     public static final int FIRE_MESSAGE = 16;
     public static final int OPTIONAL_MESSAGE = 17;
     public static final int CONNECTION_MESSAGE = 18;
+    public static final int DISCARD_POWERUP_MESSAGE = 19;
+    public static final int DISCARD_WEAPON_MESSAGE = 20;
 
     //list of ID of actions
     public static final int MOVE = 1;

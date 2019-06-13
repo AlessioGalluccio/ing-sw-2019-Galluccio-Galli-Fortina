@@ -8,7 +8,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
-public class DisconnectedControllerState implements StateController {
+public class DisconnectedControllerState extends StateController {
     private Player player;
     private PlayerView playerView;
     private Controller controller;
@@ -111,6 +111,17 @@ public class DisconnectedControllerState implements StateController {
             controller.setState(new NotYourTurnState(controller, gameHandler));
         }
     }
+
+    @Override
+    public void handleDiscardPowerup(int powerupID) {
+        //TODO
+    }
+
+    @Override
+    public void handleDiscardWeapon(int weaponID) {
+        //TODO
+    }
+
 
     @Override
     public String handle(ViewControllerMessage arg) {
