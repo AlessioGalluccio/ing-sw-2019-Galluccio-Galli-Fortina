@@ -59,7 +59,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="589.0">
                      <children>
-                        <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="120.0" />
+                        <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
                         <Button fx:id="bPowerupCard2" disable="true" layoutX="140.0" layoutY="3.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
                         <Button fx:id="bPowerupCard3" disable="true" layoutX="279.0" layoutY="1.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
                         <ImageView fx:id="imPowerupCard1" disable="true" fitHeight="192.0" fitWidth="120.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
@@ -103,8 +103,8 @@
                         <Button fx:id="bWeaponCard2" disable="true" layoutX="190.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
                         <Button fx:id="bWeaponCard3" disable="true" layoutX="380.0" layoutY="2.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
                         <ImageView fx:id="imWeaponCard1" disable="true" fitHeight="292.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="imWeaponCard2" disable="true" fitHeight="192.0" fitWidth="140.0" layoutX="190.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="imWeaponCard3" disable="true" fitHeight="192.0" fitWidth="140.0" layoutX="380.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard2" disable="true" fitHeight="292.0" fitWidth="140.0" layoutX="190.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard3" disable="true" fitHeight="292.0" fitWidth="140.0" layoutX="380.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="bReloadWeapon1" layoutX="125.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bReloadWeapon2" layoutX="315.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bReloadWeapon3" layoutX="505.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />
