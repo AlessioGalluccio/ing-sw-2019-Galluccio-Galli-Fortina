@@ -107,21 +107,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      *
      */
     public void fire() throws WrongInputException{
-        //damage of targetings
-        if(!shoot.getTargetsOfTargetings().isEmpty()){
-            for(Player targetTargeting: shoot.getTargetsOfTargetings()){
-                addDamageAndMarks(targetTargeting, 1,0, false);
-            }
-        }
-
-        //payment of the total cost of this action
-        try{
-            author.payAmmoCost(shoot.getCost());
-            endFiremode();
-        }catch (NotEnoughAmmoException e){
-            //it should never happen, because cost must always be controlled before
-            throw new WrongInputException();
-        }
+        commonEndingFire();
     }
 
     @Override
@@ -304,6 +290,27 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      */
     public void endFiremode(){
         shoot.endAction();
+    }
+
+    /**
+     * end of fire, call it if you can't use super.fire() in the firemode
+     */
+    public void commonEndingFire() throws WrongInputException{
+        //damage of targetings
+        if(!shoot.getTargetsOfTargetings().isEmpty()){
+            for(Player targetTargeting: shoot.getTargetsOfTargetings()){
+                addDamageAndMarks(targetTargeting, 1,0, false);
+            }
+        }
+
+        //payment of the total cost of this action
+        try{
+            author.payAmmoCost(shoot.getCost());
+            endFiremode();
+        }catch (NotEnoughAmmoException e){
+            //it should never happen, because cost must always be controlled before
+            throw new WrongInputException();
+        }
     }
 
 
