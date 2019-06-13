@@ -56,6 +56,10 @@ public class ClientView extends View /*View implement observer/observable*/{
         return possibleTarget;
     }
 
+    public Map getMapCopy() {
+        return mapCopy;
+    }
+
     /**
      * create a TargetMessage that the client send to the server
      * @param target

@@ -11,8 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="705.0" prefWidth="1378.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+<AnchorPane fx:id="myContainer" prefHeight="705.0" prefWidth="1378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
+      <ImageView fitHeight="710.0" fitWidth="1389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <image>
+            <Image url="@back.jpg" />
+         </image>
+      </ImageView>
       <Button fx:id="cell00" layoutX="139.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
       <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
          <cursor>
@@ -21,7 +26,7 @@
          <image>
             <Image url="@mappa3.jpg" />
          </image></ImageView>
-      <Button fx:id="redWeapon1" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0">
+      <Button fx:id="redWeapon1" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -29,14 +34,14 @@
             <Blend />
          </effect>
       </Button>
-      <Button fx:id="redweapon2" layoutX="1.0" layoutY="304.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" />
-      <Button fx:id="redWeapon3" layoutX="1.0" layoutY="390.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" />
-      <Button fx:id="yellowWeapon1" layoutX="691.0" layoutY="341.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" />
-      <Button fx:id="yellowWeapon2" layoutX="691.0" layoutY="426.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" />
-      <Button fx:id="yellowWeapon3" layoutX="691.0" layoutY="514.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" />
-      <Button fx:id="blueWeapon1" layoutX="423.0" layoutY="2.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" />
-      <Button fx:id="blueWeapon2" layoutX="510.0" layoutY="1.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" />
-      <Button fx:id="blueWeapon3" layoutX="599.0" layoutY="1.0" mnemonicParsing="false" prefHeight="110.0" prefWidth="75.0" />
+      <Button fx:id="redweapon2" layoutX="1.0" layoutY="304.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="redWeapon3" layoutX="1.0" layoutY="390.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="yellowWeapon1" layoutX="691.0" layoutY="341.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="yellowWeapon2" layoutX="691.0" layoutY="426.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="yellowWeapon3" layoutX="691.0" layoutY="514.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="blueWeapon1" layoutX="423.0" layoutY="2.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="110.0" prefWidth="75.0" />
+      <Button fx:id="blueWeapon2" layoutX="510.0" layoutY="1.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="110.0" prefWidth="75.0" />
+      <Button fx:id="blueWeapon3" layoutX="599.0" layoutY="1.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="110.0" prefWidth="75.0" />
       <Button fx:id="weaponDeck" contentDisplay="BOTTOM" disable="true" layoutX="685.0" layoutY="147.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="78.0">
          </Button>
       <Button fx:id="powerupDeck" disable="true" layoutX="709.0" layoutY="21.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="51.0" />
@@ -45,14 +50,14 @@
          <font>
             <Font size="24.0" />
          </font></Button>
-      <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="681.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="702.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="682.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="702.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <TabPane layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="container1" layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Powerup Cards">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="131.0" prefWidth="500.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="589.0">
                      <children>
                         <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="194.0" prefWidth="120.0" />
                         <Button fx:id="bPowerupCard2" disable="true" layoutX="140.0" layoutY="3.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
@@ -60,12 +65,32 @@
                         <ImageView fx:id="imPowerupCard1" disable="true" fitHeight="192.0" fitWidth="120.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imPowerupCard2" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="140.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imPowerupCard3" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="279.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="bDiscardPowerup1" layoutX="86.0" layoutY="4.0" mnemonicParsing="false" text="discard" />
-                        <Button fx:id="bDiscardPowerup2" layoutX="225.0" layoutY="4.0" mnemonicParsing="false" text="discard" />
-                        <Button fx:id="bDiscardPowerup3" layoutX="372.0" layoutY="4.0" mnemonicParsing="false" text="discard" />
+                        <Button fx:id="bDiscardPowerup1" layoutX="89.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" />
+                        <Button fx:id="bDiscardPowerup2" layoutX="229.0" layoutY="4.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" />
+                        <Button fx:id="bDiscardPowerup3" layoutX="368.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" />
                         <ImageView fx:id="imPowerupCard4" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="419.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="bPowerupCard4" disable="true" layoutX="419.0" layoutY="1.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
-                        <Button fx:id="bDiscardPowerup4" layoutX="512.0" layoutY="4.0" mnemonicParsing="false" text="discard" />
+                        <Button fx:id="bDiscardPowerup4" layoutX="512.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" />
+                        <ImageView fx:id="imTrashP1" fitHeight="25.0" fitWidth="31.0" layoutX="92.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@trash.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imTrashP2" fitHeight="25.0" fitWidth="31.0" layoutX="232.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@trash.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imTrashP3" fitHeight="25.0" fitWidth="31.0" layoutX="371.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@trash.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imTrashP4" fitHeight="25.0" fitWidth="31.0" layoutX="515.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@trash.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
             </content>
@@ -129,11 +154,11 @@
             <Image url="@characters/actionsBlue.jpg" />
          </image></ImageView>
       <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="86.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
-      <TabPane layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="enemy">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="527.0">
+              <AnchorPane fx:id="enemy1back" minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="527.0">
                      <children>
                         <Button fx:id="enemyCharacter1" layoutX="84.0" layoutY="32.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="439.0" />
                         <ImageView fx:id="enemy1card1" fitHeight="150.0" fitWidth="112.0" layoutX="61.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
@@ -620,38 +645,16 @@
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
-      <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Your Points : " />
-      <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" />
-      <ImageView fx:id="imSkull1" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imSkull2" fitHeight="38.0" fitWidth="31.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imSkull21" fitHeight="38.0" fitWidth="31.0" layoutX="124.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull11" fitHeight="38.0" fitWidth="31.0" layoutX="157.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imSkull22" fitHeight="38.0" fitWidth="31.0" layoutX="191.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imSkull211" fitHeight="38.0" fitWidth="31.0" layoutX="225.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="imSkull2111" fitHeight="38.0" fitWidth="31.0" layoutX="235.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/skull.png" />
-         </image>
-      </ImageView>
+      <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Your Points : " textFill="WHITE" />
+      <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" textFill="WHITE" />
+      <ImageView fx:id="imSkull8" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull7" fitHeight="38.0" fitWidth="31.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull6" fitHeight="38.0" fitWidth="31.0" layoutX="124.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull5" fitHeight="38.0" fitWidth="31.0" layoutX="157.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull4" fitHeight="38.0" fitWidth="31.0" layoutX="191.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull3" fitHeight="38.0" fitWidth="31.0" layoutX="225.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull2" fitHeight="38.0" fitWidth="31.0" layoutX="259.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull1" fitHeight="38.0" fitWidth="31.0" layoutX="293.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

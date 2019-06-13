@@ -5,8 +5,10 @@ package it.polimi.se2019.ui;
 
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
+import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
 
@@ -98,7 +100,12 @@ public class Controller {
     public Button fireButton;
     public Button endTurnButton;
     public Label yourPointsLabel;
+    public AnchorPane myContainer;
+    public TabPane container1;
+    public TabPane container2;
+    public AnchorPane enemy1back;
     ClientView clientView;
+    ClientMapView mapView;
 
     ControllerLogin controllerLogin;
 
@@ -205,6 +212,8 @@ public class Controller {
     public Button bDiscardPowerup2;
     @FXML
     public Button bDiscardPowerup3;
+    @FXML
+    public Button bDiscardPowerup4;
     @FXML
     public Button bReloadWeapon1;
     @FXML
@@ -335,7 +344,7 @@ public class Controller {
     @FXML
     public ImageView imYellowWeapon3;
     @FXML
-    public Button redweapon2;
+    public Button redWeapon2;
     @FXML
     public Button redWeapon3;
     @FXML
@@ -379,6 +388,15 @@ public class Controller {
     public Button selectWeaponButton3;
     @FXML
     public Button selectWeaponButton4;
+
+    @FXML
+    public ImageView imTrashP1;
+    @FXML
+    public ImageView imTrashP2;
+    @FXML
+    public ImageView imTrashP3;
+    @FXML
+    public ImageView imTrashP4;
 
 
     private int suddenDeath = 2;
@@ -483,6 +501,8 @@ public class Controller {
 
         setPlayerOnMap();
 
+        setDiscard();
+
 
 
         System.out.println(choosenMap);
@@ -532,17 +552,12 @@ public class Controller {
 
         //add background
 
+        BackgroundImage myBI= new BackgroundImage(new Image("background.png",32,32,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        //then you set to your node
+        myContainer.setBackground(new Background(myBI));
 
-        /*
-        // new Image(url)
-        Image image = new Image("background.png");
-        // new BackgroundSize(width, height, widthAsPercentage, heightAsPercentage, contain, cover)
-        BackgroundSize backgroundSize = new BackgroundSize(800, 800, true, true, true, false);
-        // new BackgroundImage(image, repeatX, repeatY, position, size)
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
-        // new Background(images...)
-        Background background = new Background(backgroundImage);
-        */
 
         //set map's cells
         setCellsMap();
@@ -610,8 +625,8 @@ public class Controller {
         redWeapon1.setGraphic(imRedWeapon1);
         redWeapon1.setStyle(transparent);
 
-        redweapon2.setGraphic(imRedWeapon2);
-        redweapon2.setStyle(transparent);
+        redWeapon2.setGraphic(imRedWeapon2);
+        redWeapon2.setStyle(transparent);
 
         redWeapon3.setGraphic(imRedWeapon3);
         redWeapon3.setStyle(transparent);
@@ -673,6 +688,11 @@ public class Controller {
         cell31.setDisable(false);
         cell32.setStyle(transparent);
         cell32.setGraphic(ammoCell32);
+
+
+        moveButton.setStyle(transparent);
+        shootButton.setStyle(transparent);
+        grabButton.setStyle(transparent);
 
     }
 
@@ -741,6 +761,20 @@ public class Controller {
 
     }
 
+    /**
+     * set trash's image on power up discard button
+     */
+    public void setDiscard(){
+        bDiscardPowerup1.setGraphic(imTrashP1);
+        bDiscardPowerup1.setStyle(transparent);
+        bDiscardPowerup2.setGraphic(imTrashP2);
+        bDiscardPowerup2.setStyle(transparent);
+        bDiscardPowerup3.setGraphic(imTrashP3);
+        bDiscardPowerup3.setStyle(transparent);
+        bDiscardPowerup4.setGraphic(imTrashP4);
+        bDiscardPowerup4.setStyle(transparent);
+
+    }
 
     public void setPlayerOnMap(){
 
@@ -952,4 +986,20 @@ public class Controller {
             clientView.createCellMessage(3,2);
         }
     }
+
+    /**
+     * send a WeaponMessage to the server when the player clicks on one of the map weapons button to collect the card
+     * @param event
+     */
+    public void sendMapWeapon(ActionEvent event){
+        Object source = event.getSource();
+        //TODO Prendere array list di spawncell
+        CellSpawn cellSpawn;
+        if(redWeapon1 == source) {
+
+        }
+
+    }
 }
+
+
