@@ -4,10 +4,13 @@ package it.polimi.se2019.ui;
 
 
 import it.polimi.se2019.MyThread;
+import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
+import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
 import javafx.application.Platform;
@@ -106,6 +109,11 @@ public class Controller {
     public AnchorPane enemy1back;
     ClientView clientView;
     ClientMapView mapView;
+    ClientEnemyView enemyView1;
+    ClientEnemyView enemyView2;
+    ClientEnemyView enemyView3;
+    ClientEnemyView enemyView4;
+
 
     ControllerLogin controllerLogin;
 
@@ -866,10 +874,6 @@ public class Controller {
 
             }
 
-            if(selectWeaponButton4 == source){
-                clientView.createWeaponMessage(weapons.get(3));
-
-            }
         }
         catch (NullPointerException e){
             //TODO
@@ -993,10 +997,38 @@ public class Controller {
      */
     public void sendMapWeapon(ActionEvent event){
         Object source = event.getSource();
-        //TODO Prendere array list di spawncell
+        List<CellSpawn> cellSpawns = mapView.getCellSpawn();
+        List<WeaponCard> redWeaponCards =  cellSpawns.get(0).getWeapon();
+        List<WeaponCard> bluWeaponCards =  cellSpawns.get(1).getWeapon();
+        List<WeaponCard> yellowWeaponCards =  cellSpawns.get(2).getWeapon();
+
 
         if(redWeapon1 == source){
-
+            clientView.createWeaponMessage(redWeaponCards.get(0));
+        }
+        if(redWeapon2 == source){
+            clientView.createWeaponMessage(redWeaponCards.get(1));
+        }
+        if(redWeapon3 == source){
+            clientView.createWeaponMessage(redWeaponCards.get(2));
+        }
+        if(blueWeapon1 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(0));
+        }
+        if(blueWeapon2 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(1));
+        }
+        if(blueWeapon3 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(2));
+        }
+        if(yellowWeapon1 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(0));
+        }
+        if(yellowWeapon2 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(1));
+        }
+        if(yellowWeapon3 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(2));
         }
 
 
@@ -1004,7 +1036,7 @@ public class Controller {
 
 
     /**
-     * send reload message when the palyer select a weapon to be reload
+     * send reload message when the player selects a weapon to be reload
      * @param event
      */
     public void reloadWeapon(ActionEvent event) {
@@ -1031,16 +1063,108 @@ public class Controller {
 
             }
 
-            if(selectWeaponButton4 == source){
-                clientView.createWeaponMessage(weapons.get(3));
-
-            }
         }
         catch (NullPointerException e){
             //TODO
 
         }
 
+
+
+
+    }
+
+
+    /**
+     * send a player message when the player selects a target to shoot
+     * @param event
+     */
+    public void selectEnemy(ActionEvent event) {
+        Object source = event.getSource();
+        if(enemyCharacter1 == source){
+            clientView.createPlayerMessage(enemyView1.getID());
+        }
+        if(enemyCharacter2 == source){
+            clientView.createPlayerMessage(enemyView2.getID());
+        }
+        if(enemyCharacter3 == source){
+            clientView.createPlayerMessage(enemyView3.getID());
+        }
+        if(enemyCharacter4 == source){
+            clientView.createPlayerMessage(enemyView4.getID());
+        }
+
+    }
+
+    /**
+     * Send a discard weapon message when the player selects a weapon discard button
+     * @param event
+     */
+    public void discardWeapon(ActionEvent event) {
+        Player player = clientView.getPlayerCopy();
+        try {
+            List<WeaponCard> weapons = player.getWeaponCardList();
+
+            Object source = event.getSource();
+
+            if (bDiscardWeapon1 == source) {
+                clientView.createDiscardWeaponMessage(weapons.get(0));
+
+            }
+
+            if (bDiscardWeapon2 == source) {
+
+                clientView.createDiscardWeaponMessage(weapons.get(1));
+
+            }
+
+            if (bDiscardWeapon3 == source) {
+                clientView.createDiscardWeaponMessage(weapons.get(2));
+
+
+            }
+
+        } catch (NullPointerException e) {
+            //TODO
+
+
+        }
+    }
+
+    public void discardPowerup(ActionEvent event) {
+            Player player = clientView.getPlayerCopy();
+        try {
+            List<PowerupCard> powerupCards = player.getPowerupCardList();
+
+            Object source = event.getSource();
+
+            if (bDiscardPowerup1 == source) {
+                clientView.createDiscardPowerupMessage(powerupCards.get(0));
+
+            }
+
+            if (bDiscardPowerup2 == source) {
+
+                clientView.createDiscardPowerupMessage(powerupCards.get(1));
+
+            }
+
+            if (bDiscardPowerup3 == source) {
+
+                clientView.createDiscardPowerupMessage(powerupCards.get(2));
+
+            }
+            if (bDiscardPowerup3 == source) {
+
+                clientView.createDiscardPowerupMessage(powerupCards.get(3));
+
+            }
+
+        } catch (NullPointerException e) {
+            //TODO
+
+
+        }
 
 
 

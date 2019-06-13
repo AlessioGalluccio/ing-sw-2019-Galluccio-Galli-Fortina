@@ -191,6 +191,10 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
+    public void createPlayerMessage(int playerID) {
+        PlayerMessage message = new PlayerMessage(playerID, playerCopy.getID(), this);
+        notifyObservers(message);
+    }
 
     /**
      * create a PassTurnMessage that the client send to the server
