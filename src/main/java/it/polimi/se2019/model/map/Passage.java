@@ -11,24 +11,26 @@ public class Passage implements Border {
     }
 
     @Override
-    public void printRow(int row) {
+    public String printRow(int row) {
         //Can't print a row without know the direction
         //Use printByDirection
+        return "";
     }
 
     @Override
-    public void printByDirection(int row, boolean horizontal, ConsoleColor color) {
-        System.out.print(color);
+    public String printByDirection(int row, boolean horizontal, ConsoleColor color) {
+        String s = color.toString();
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         if(horizontal) {
-            System.out.print("▦");
+            s+="▦";
             for(int i=1; i< Printable.DIMROW-1; i++){
-                System.out.print(space);
+                s+=space;
             }
-            System.out.print("▦");
+            s+="▦";
         } else {
-            if(row==0||row==Printable.DIMROW) System.out.print("▦");
-            else System.out.print(space);
+            if(row==0||row==Printable.DIMROW) s+="▦";
+            else s+=space;
         }
+        return s;
     }
 }

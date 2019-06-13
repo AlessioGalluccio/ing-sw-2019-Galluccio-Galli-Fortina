@@ -7,5 +7,5 @@ public interface Printable {
      * Print a specific line of the object
      * @param row the line to print
      */
-    void printRow(int row);
+    String printRow(int row);
 }

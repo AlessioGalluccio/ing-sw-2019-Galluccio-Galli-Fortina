@@ -42,6 +42,12 @@ public class CellSpawn extends Cell {
         return color;
     }
 
+    /**
+     * Grab a new card on this cell
+     * @param cardID the card's ID which will be grabbed
+     * @return The card with cardID as id
+     * @throws NotCardException If the card is not on this cell
+     */
     @Override
     public Card grabCard(int cardID) throws NotCardException {
         WeaponCard cardToReturn = null;
@@ -56,6 +62,21 @@ public class CellSpawn extends Cell {
             return cardToReturn;
         }
         throw new NotCardException("This card is not here! (Already taken or doesn't exist)");
+    }
+
+    /**
+     * Grab a new card and replace it with another
+     * @param cardID the card's ID which will be grabbed and which will be replaced
+     * @param card the card to replace with
+     * @return The card with cardID as id
+     * @throws NotCardException If the card is not on this cell
+     */
+    public Card grabCard(int cardID, WeaponCard card) throws NotCardException {
+        Card cardToReplace = grabCard(cardID);
+        for(int i=0; i<MAX_WEAPONCARD; i++) {
+            if(weapon[i]==null) weapon[i]=card;
+        }
+        return cardToReplace;
     }
 
     @Override
@@ -128,14 +149,15 @@ public class CellSpawn extends Cell {
      * Print the row in the middle of the cell
      */
     @Override
-    @SuppressWarnings("squid:S106")
-    void printMiddleRow() {
+    String printMiddleRow() {
+        String s ="";
         ConsoleColor printColor = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + printColor;
-        getWestBorder().printByDirection(3, false, printColor);
-        System.out.print(space + space +
+        s+=getWestBorder().printByDirection(3, false, printColor);
+        s+=space + space +
                 "↺↺↺" +
-                space + space);
-        getEastBorder().printByDirection(3, false, printColor);
+                space + space;
+        s+=getEastBorder().printByDirection(3, false, printColor);
+        return s;
     }
 }

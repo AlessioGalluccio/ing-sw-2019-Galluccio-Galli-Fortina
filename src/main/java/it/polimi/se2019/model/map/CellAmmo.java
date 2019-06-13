@@ -67,20 +67,21 @@ public class CellAmmo extends Cell {
      * Print the row in the middle of the cell
      */
     @Override
-    @SuppressWarnings("squid:S106")
-    void printMiddleRow() {
+    String printMiddleRow() {
+        String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
         getWestBorder().printByDirection(3, false, color);
         if(ammo!=null) {
-            System.out.print(space + space
+           s+= space + space
                     + ConsoleColor.colorByColor(ammo.getAmmo().get(0).toString()) +
                     "✚" + ConsoleColor.colorByColor(ammo.getAmmo().get(1).toString()) +
                     "✚" + thirdAmmo(ammo.getAmmo()) +
                     "✚" + ConsoleColor.colorByColor(getRoom().getColor()) +
-                    space + space);
-        } else System.out.print(space + space + space + space + space + space + space);
-        getEastBorder().printByDirection(3, false, color);
+                    space + space;
+        } else s+=space + space + space + space + space + space + space;
+        s+=getEastBorder().printByDirection(3, false, color);
+        return  s;
     }
 
     private ConsoleColor thirdAmmo(List<ColorRYB> ammo) {

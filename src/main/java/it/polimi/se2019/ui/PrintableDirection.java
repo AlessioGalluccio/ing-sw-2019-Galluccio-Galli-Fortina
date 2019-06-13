@@ -9,5 +9,5 @@ public interface PrintableDirection extends Printable{
      * @param row the line to print
      * @param horizontal true if the line is horizontal, false if is vertical
      */
-    void printByDirection(int row, boolean horizontal, ConsoleColor color);
+    String printByDirection(int row, boolean horizontal, ConsoleColor color);
 }
