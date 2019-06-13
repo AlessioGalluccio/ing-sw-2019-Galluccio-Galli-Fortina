@@ -13,6 +13,8 @@ import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
 public class EnemyView extends Observable implements Observer, Serializable {
+
+    private int ID;
     private String nickname;
     private Character character;
     private AmmoBag ammo;
@@ -70,6 +72,7 @@ public class EnemyView extends Observable implements Observer, Serializable {
     public void handlePlayerMessage(Player enemy) {
         if(first) {
             this.nickname = enemy.getNickname();
+            this.ID = enemy.getID();
             this.character = enemy.getCharacter();
             first=false;
         }
@@ -127,5 +130,9 @@ public class EnemyView extends Observable implements Observer, Serializable {
         }
         s+="\n  Power ups: " + powerup;
         return s;
+    }
+
+    public int getID() {
+        return ID;
     }
 }
