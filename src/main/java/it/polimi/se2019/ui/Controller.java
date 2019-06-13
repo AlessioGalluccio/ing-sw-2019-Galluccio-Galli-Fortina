@@ -6,6 +6,7 @@ package it.polimi.se2019.ui;
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
@@ -996,10 +997,38 @@ public class Controller {
      */
     public void sendMapWeapon(ActionEvent event){
         Object source = event.getSource();
-        //TODO Prendere array list di spawncell
+        List<CellSpawn> cellSpawns = mapView.getCellSpawn();
+        List<WeaponCard> redWeaponCards =  cellSpawns.get(0).getWeapon();
+        List<WeaponCard> bluWeaponCards =  cellSpawns.get(1).getWeapon();
+        List<WeaponCard> yellowWeaponCards =  cellSpawns.get(2).getWeapon();
+
 
         if(redWeapon1 == source){
-
+            clientView.createWeaponMessage(redWeaponCards.get(0));
+        }
+        if(redWeapon2 == source){
+            clientView.createWeaponMessage(redWeaponCards.get(1));
+        }
+        if(redWeapon3 == source){
+            clientView.createWeaponMessage(redWeaponCards.get(2));
+        }
+        if(blueWeapon1 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(0));
+        }
+        if(blueWeapon2 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(1));
+        }
+        if(blueWeapon3 == source){
+            clientView.createWeaponMessage(bluWeaponCards.get(2));
+        }
+        if(yellowWeapon1 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(0));
+        }
+        if(yellowWeapon2 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(1));
+        }
+        if(yellowWeapon3 == source){
+            clientView.createWeaponMessage(yellowWeaponCards.get(2));
         }
 
 
