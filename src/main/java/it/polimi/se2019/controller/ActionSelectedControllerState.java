@@ -42,6 +42,7 @@ public class ActionSelectedControllerState extends StateController {
         this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;
+        this.controller.addMessageListExpected(action.getStringAndMessageExpected());
     }
 
 
@@ -206,6 +207,7 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
+        //TODO niente entra qui dentro. Starting Handler blocca
         errorString = CANT_DO_THIS;
         controller.removeReceived();
     }
@@ -280,8 +282,7 @@ public class ActionSelectedControllerState extends StateController {
             return true;
         }
         else {
-            String response = controller.getCopyMessageListExpected().get(index).getString();
-            arg.getAuthorView().printFromController(response);
+            stringToPlayerView = CANT_DO_THIS + controller.getCopyMessageListExpected().get(index).getString();
             return false;
         }
     }
