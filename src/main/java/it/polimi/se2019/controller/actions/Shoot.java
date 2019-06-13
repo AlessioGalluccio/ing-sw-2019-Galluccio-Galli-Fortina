@@ -25,9 +25,13 @@ public class Shoot extends Action{
     protected ArrayList<Player> targetsOfTargetings;
     protected AmmoBag cost;
 
+    boolean neededTargetForTargeting;   //if true, next targetPlayer is for targeting, not weapon
+
     //STRING AND MESSAGE
     private String FIRST_MESSAGE = "Please, select a Weapon";
     private String SECOND_MESSAGE = "Please, select a Firemode";
+
+    private String SELECT_TARGET_FOR_TARGETING = "Select a target for the Targeting Scope";
 
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
@@ -41,6 +45,7 @@ public class Shoot extends Action{
         this.cells = new ArrayList<>();
         this.optionalSelected = new ArrayList<>();
         this.targetingScopeCards = new ArrayList<>();
+        this.neededTargetForTargeting = false;
     }
 
     @Override
@@ -78,8 +83,13 @@ public class Shoot extends Action{
 
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
-        if(fireMode != null){
+        if(fireMode != null && !neededTargetForTargeting){
             fireMode.addPlayerTarget( playerID);
+        }
+        else if(neededTargetForTargeting){
+            //for weapons who doesn't shoot to single visible targets, you ask one more message to select the target
+            //and you controll it with this method
+            fireMode.addTargetForTargetingNotVisibleWeapon(playerID);
         }
 
     }
@@ -209,6 +219,29 @@ public class Shoot extends Action{
         //TODO aggiungere colore quadrato o no?
     }
 
+    /**
+     * Overload method. Add a new targeting scope and set to true the flag that makes the next PlayerMessage
+     * for the firemode, not the weapon. Add a next MessageExpected PlayerMessage
+     * @param card  the TargetingScopeCard used
+     */
+    public void addTargetingScopeFromFireMode(PowerupCard card){
+        targetingScopeCards.add(card);
+        StringAndMessage stringAndMessage =
+                new StringAndMessage(Identificator.PLAYER_MESSAGE, "Select a target for the Targeting Scope");
+        ArrayList<StringAndMessage> list = new ArrayList<>();
+        list.add(stringAndMessage);
+        controller.addMessageListImmediateNext(list);
+        neededTargetForTargeting = true;
+    }
+
+    /**
+     * add a target for a targeting scope from a firemode
+     * @param player the target
+     */
+    public void addTargetForTargetingFromFiremode(Player player){
+        targetsOfTargetings.add(player);
+    }
+
     public void addOptionalSelected(int numOptional){
         this.optionalSelected.add(numOptional);
     }
@@ -237,5 +270,11 @@ public class Shoot extends Action{
         playerAuthor.payAmmoCost(this.cost);
     }
 
-
+    /**
+     * set this flag, if true, next PlayerMessage is for the Targeting, not the weapon
+     * @param neededTargetForTargeting
+     */
+    public void setNeededTargetForTargeting(boolean neededTargetForTargeting) {
+        this.neededTargetForTargeting = neededTargetForTargeting;
+    }
 }
