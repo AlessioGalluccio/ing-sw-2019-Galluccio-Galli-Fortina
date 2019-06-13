@@ -229,6 +229,12 @@ public class Controller {
     @FXML
     public Button bReloadWeapon3;
     @FXML
+    public ImageView imReload1;
+    @FXML
+    public ImageView imReload2;
+    @FXML
+    public ImageView imReload3;
+    @FXML
     public Button bDiscardWeapon1;
     @FXML
     public Button bDiscardWeapon2;
@@ -779,9 +785,9 @@ public class Controller {
     }
 
     /**
-     * set trash's image on power up discard button
+     * set trash's image on power up discard button and reload image on reload button
      */
-    public void setDiscard(){
+    public void setDiscardReload(){
         bDiscardPowerup1.setGraphic(imTrashP1);
         bDiscardPowerup1.setStyle(transparent);
         bDiscardPowerup2.setGraphic(imTrashP2);
@@ -797,6 +803,13 @@ public class Controller {
         bDiscardWeapon2.setStyle(transparent);
         bDiscardWeapon3.setGraphic(imTrashW3);
         bDiscardWeapon3.setStyle(transparent);
+
+        bReloadWeapon1.setGraphic(imReload1);
+        bReloadWeapon1.setStyle(transparent);
+        bReloadWeapon2.setGraphic(imReload2);
+        bReloadWeapon2.setStyle(transparent);
+        bReloadWeapon3.setGraphic(imReload3);
+        bReloadWeapon3.setStyle(transparent);
 
     }
 
