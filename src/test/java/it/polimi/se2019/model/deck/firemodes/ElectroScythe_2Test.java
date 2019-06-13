@@ -18,10 +18,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class ElectroScythe_1Test {
+public class ElectroScythe_2Test {
     private Player authorPlayer;
     private Player targetPlayer1;
     private Player targetPlayer2;
@@ -32,7 +32,7 @@ public class ElectroScythe_1Test {
     private Cell commonCell;
 
     private final static int ELECTROSCYTHE_WEAPON_ID = 1;
-    private final static int ELECTROSCYTHE_FIREMODE_ID = 11;
+    private final static int ELECTROSCYTHE_FIREMODE_2_ID = 12;
 
     @Before
     public void setUp() throws Exception {
@@ -74,7 +74,7 @@ public class ElectroScythe_1Test {
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode electroScythe_1 = gameHandler.getFireModeByID(ELECTROSCYTHE_FIREMODE_ID);
+        FireMode electroScythe_1 = gameHandler.getFireModeByID(ELECTROSCYTHE_FIREMODE_2_ID);
         shoot.addFireMode(electroScythe_1.getID());
     }
 
@@ -85,24 +85,24 @@ public class ElectroScythe_1Test {
 
         //target 1
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(1,targetPlayer1.getDamage().size());
+        assertEquals(2,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
         //target 2
-        assertEquals(1,targetPlayer2.getDamage().size());
+        assertEquals(2,targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
 
         //target 3
-        assertEquals(1,targetPlayer3.getDamage().size());
+        assertEquals(2,targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
 
         //author
         assertEquals(0, authorPlayer.getMark().getMarkDone().size());
 
         //cost after optional
-        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
         assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
-        assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
     }
 
     @Test
@@ -121,13 +121,13 @@ public class ElectroScythe_1Test {
 
         //target 1
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
-        assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(3,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
         //cost after optional and targeting
-        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
         assertEquals(3, authorPlayer.getAmmo().getYellowAmmo());
-        assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
+        assertEquals(1, authorPlayer.getAmmo().getBlueAmmo());
 
     }
 
@@ -145,4 +145,5 @@ public class ElectroScythe_1Test {
         shoot.addPlayerTarget(targetPlayer1.getID());
 
     }
+
 }

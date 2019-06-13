@@ -24,7 +24,7 @@ public class ElectroScythe_2 extends ElectroScythe_1 {
                 addDamageAndMarks(target, 2,0, true);
             }
         }
-        super.fire();
+        commonEndingFire();
     }
 
 }
