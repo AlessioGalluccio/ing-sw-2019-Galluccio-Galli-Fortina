@@ -405,6 +405,15 @@ public class Controller {
     public ImageView imTrashP3;
     @FXML
     public ImageView imTrashP4;
+    @FXML
+    public ImageView imTrashW1;
+    @FXML
+    public ImageView imTrashW2;
+    @FXML
+    public ImageView imTrashW3;
+    @FXML
+    public ImageView imTrashW4;
+
 
 
     private int suddenDeath = 2;
@@ -781,6 +790,13 @@ public class Controller {
         bDiscardPowerup3.setStyle(transparent);
         bDiscardPowerup4.setGraphic(imTrashP4);
         bDiscardPowerup4.setStyle(transparent);
+
+        bDiscardWeapon1.setGraphic(imTrashW1);
+        bDiscardWeapon1.setStyle(transparent);
+        bDiscardWeapon2.setGraphic(imTrashW2);
+        bDiscardWeapon2.setStyle(transparent);
+        bDiscardWeapon3.setGraphic(imTrashW3);
+        bDiscardWeapon3.setStyle(transparent);
 
     }
 
