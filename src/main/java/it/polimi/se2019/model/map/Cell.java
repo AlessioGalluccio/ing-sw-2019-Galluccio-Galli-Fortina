@@ -84,6 +84,15 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     public abstract Card grabCard(int cardID) throws NotCardException;
 
     /**
+     * Each cell has some card on it, this method grab a card and replace that with another one
+     * @param cardID ID of the card I wanna grab (ONLY FOR THOSE CELL THAT HAS MORE CARD ON IT)
+     * @param card The card to replace with
+     * @return the card on the cell
+     * @throws NotCardException If card has already taken or there not a card with the ID
+     */
+    public abstract Card grabCard(int cardID, WeaponCard card) throws NotCardException;
+
+    /**
      * Each cell has some card on it, this method return a list of that cards' IDs
      * @return the IDs of the cards on this cell
      */
