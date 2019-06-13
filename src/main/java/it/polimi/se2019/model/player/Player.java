@@ -15,6 +15,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
+import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 
 import java.io.Serializable;
@@ -75,7 +76,7 @@ public class Player extends Observable implements Target, Serializable {
     public Player(String nickname, int ID) {
         this.nickname = nickname;
         this.ID = ID;
-        this.damage = new ArrayList<Player>();  //empty
+        this.damage = new ArrayList<>();  //empty
         this.skull = STARTING_SKULLS;
         this.points = new Points(STARTING_POINTS);
         this.mark = new Mark();
@@ -650,19 +651,46 @@ public class Player extends Observable implements Target, Serializable {
 
     @Override
     public String toString() {
-        String s = nickname + "";
-
-        return "" +
-                "nickname='" + nickname + '\'' +
-                ", damage=" + damage +
-                ", skull=" + skull +
-                ", points=" + points +
-                ", mark=" + mark +
-                ", character=" + character +
-                ", ammoBag=" + ammoBag +
-                ", powerupCardList=" + powerupCardList +
-                ", weaponCardList=" + weaponCardList +
-                '}';
+        String s = nickname;
+        if(character!=null) s += " - " + character.toString();
+        s+="\n  Marks: ";
+        for(Player p : mark.getMarkReceived()) {
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+        }
+        s+=ConsoleColor.RESET+ "\n  Damages: " + damage.size() + "/12 ";
+        for(Player p : damage) {
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+        }
+        s+="\033[3m (remember frenzy actions)";
+        s+=ConsoleColor.RESET+"\n  Skulls: ";
+        if(!isFrenzyDeath) s+="8 6 4 2 1 1 \t";
+        else s+="2 1 1 1 ";
+        for(int i=0; i<skull; i++) {
+            s+= ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
+        }
+        s+="\n  Points: " + points.getSum();
+        s+="\n  Ammo: ";
+        for(int i=0; i< ammoBag.getBlueAmmo(); i++) {
+            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "✚";
+        }
+        for(int i=0; i< ammoBag.getRedAmmo(); i++) {
+            s+= ConsoleColor.RED_BOLD_BRIGHT+ "✚";
+        }
+        for(int i=0; i< ammoBag.getYellowAmmo(); i++) {
+            s+= ConsoleColor.YELLOW_BOLD+ "✚";
+        }
+        s+= ConsoleColor.RESET + "\n  Weapons: ";
+        for(WeaponCard weapon : weaponCardList) {
+            s+= weapon.getName();
+            if(weapon.isReloaded()) s+="* ";
+            else s+=" ";
+        }
+        s+="\033[3m(* means loaded)" + ConsoleColor.RESET;
+        s+="\n  Power ups: ";
+        for(PowerupCard powerup : powerupCardList) {
+            s+= powerup.toString() + " " + ConsoleColor.RESET;
+        }
+        return s;
     }
 
     private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {

@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.model.deck.NewtonCard;
 import it.polimi.se2019.model.deck.PointCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -237,6 +238,20 @@ public class TestPlayer {
     public void testPointCardList() {
         player.addPoints(5);
         assertEquals(player.getNumPoints(), 5);
+    }
+
+    @Test
+    public void testToString() throws TooManyException, YouOverkilledException, NotPresentException, YouDeadException {
+        player.receiveMarkBy(enemy);
+        player.receiveMarkBy(enemy);
+        player.receiveMarkBy(enemy_2);
+        player.receiveDamageBy(enemy_2);
+        player.receiveDamageBy(enemy_2);
+        player.receiveDamageBy(enemy_2);
+        player.receiveDamageBy(enemy);
+        player.addPowerupCard(new TeleporterCard(ColorRYB.BLUE, 0,0));
+        player.addPowerupCard(new NewtonCard(ColorRYB.RED, 0,0));
+        System.out.print(player.toString());
     }
 
 }

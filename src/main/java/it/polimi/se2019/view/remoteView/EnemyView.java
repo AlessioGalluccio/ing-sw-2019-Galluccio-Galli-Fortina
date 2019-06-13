@@ -4,6 +4,7 @@ import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
@@ -12,15 +13,16 @@ import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
 public class EnemyView extends Observable implements Observer, Serializable {
-
     private String nickname;
     private Character character;
     private AmmoBag ammo;
+    private ArrayList<Player> mark = new ArrayList<>();
     private ArrayList<WeaponCard> unloadedWeapon = new ArrayList<>();
     private int loadedWeapon;
     private int skull;
     private ArrayList<Player> damage = new ArrayList<>();
     private int powerup;
+    private boolean isFrenzyDeath;
     private boolean first = true;
 
     public EnemyView(String nickname) {
@@ -72,6 +74,7 @@ public class EnemyView extends Observable implements Observer, Serializable {
             first=false;
         }
         this.ammo = enemy.getAmmo();
+        this.mark = (ArrayList) enemy.getMark().getMarkReceived();
         this.damage = (ArrayList<Player>) enemy.getDamage();
         this.skull = enemy.getSkull();
         this.powerup =  enemy.getPowerupCardList().size();
@@ -79,5 +82,50 @@ public class EnemyView extends Observable implements Observer, Serializable {
             if(!w.isReloaded()) this.unloadedWeapon.add(w);
         }
         this.loadedWeapon = enemy.getWeaponCardList().size() - unloadedWeapon.size();
+        this.isFrenzyDeath = enemy.isFrenzyDeath();
+    }
+
+    public String toStringShort() {
+        String s = nickname;
+        if(character!=null) s += " - " + character.toString();
+        s+="\n  Marks: ";
+        for(Player p : mark) {
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+        }
+        s+=ConsoleColor.RESET+ "\n  Damages: " + damage.size() + "/12 ";
+        for(Player p : damage) {
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+        }
+        s+=ConsoleColor.RESET+"\n  Skulls: ";
+        if(isFrenzyDeath) s+="2 1 1 1 ";
+        else s+="8 6 4 2 1 1 \t";
+        for(int i=0; i<skull; i++) {
+            s+= ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
+        }
+        return s;
+    }
+
+    @Override
+    public String toString() {
+        String s = toStringShort();
+        s+="\n  Ammo: ";
+        for(int i=0; i< ammo.getBlueAmmo(); i++) {
+            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "✚";
+        }
+        for(int i=0; i< ammo.getYellowAmmo(); i++) {
+            s+= ConsoleColor.YELLOW_BOLD+ "✚";
+        }
+        for(int i=0; i< ammo.getRedAmmo(); i++) {
+            s+= ConsoleColor.RED_BOLD_BRIGHT+ "✚";
+        }
+        s+= ConsoleColor.RESET + "\n  Weapons loaded: " + loadedWeapon;
+        s+= "\n  Weapons unloaded: ";
+        for(WeaponCard weapon : unloadedWeapon) {
+            s+= weapon.getName();
+            if(weapon.isReloaded()) s+="* ";
+            else s+=" ";
+        }
+        s+="\n  Power ups: " + powerup;
+        return s;
     }
 }

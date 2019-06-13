@@ -94,11 +94,4 @@ public class TestDeck {
             }
         }
     }
-
-    @Test
-    public void lol() {
-        for(Card c : powerupDeck.getUnusedCard()) {
-            System.out.println(c.toString());
-        }
-    }
 }

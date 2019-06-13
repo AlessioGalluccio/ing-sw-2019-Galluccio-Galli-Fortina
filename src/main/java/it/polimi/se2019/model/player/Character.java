@@ -1,9 +1,10 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.ui.ConsoleColor;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-@Deprecated
 public class Character implements Serializable {
 
     private final String nameCharacter;
@@ -16,9 +17,7 @@ public class Character implements Serializable {
 
     @Override
     public String toString() {
-        return "Character{" +
-                nameCharacter + '\'' +
-                '}';
+        return ConsoleColor.colorByColor(color) + nameCharacter + ConsoleColor.RESET;
     }
 
     /**
