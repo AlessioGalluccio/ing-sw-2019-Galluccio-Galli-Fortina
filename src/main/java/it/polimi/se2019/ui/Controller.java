@@ -1221,7 +1221,7 @@ public class Controller {
      * @param skullNumber
      */
     public void updateSkullBoard(String skullNumber){
-
+        //TODO mettere segnalino giocatore
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -1248,6 +1248,39 @@ public class Controller {
 
             }
         });
+
+
+    }
+
+
+    //TODO FINIRE METODO
+
+    /**
+     * update weaponcard on map
+     */
+    public void updateWeaponMap(){
+        ArrayList<ImageView> weapons = new ArrayList();
+        weapons.add(imRedWeapon1);
+        weapons.add(imRedWeapon2);
+        weapons.add(imRedWeapon3);
+        weapons.add(imBlueWeapon1);
+        weapons.add(imBlueWeapon2);
+        weapons.add(imBlueWeapon3);
+        weapons.add(imYellowWeapon1);
+        weapons.add(imYellowWeapon2);
+        weapons.add(imYellowWeapon3);
+        List<CellSpawn> cellSpawn = mapView.getCellSpawn();
+        List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+        List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+        List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+
+
+
+
+        for(int counter = 0; counter< weapons.size(); counter++){
+
+            weapons.get(counter).setImage(new Image(""));
+        }
 
 
     }
