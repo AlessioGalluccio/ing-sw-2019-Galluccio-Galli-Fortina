@@ -12,6 +12,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
@@ -109,6 +110,7 @@ public class Controller {
     public TabPane container2;
     public AnchorPane enemy1back;
     ClientView clientView;
+    static ClientSkullBoardView skullBoardView;
     ClientMapView mapView;
     ClientEnemyView enemyView1;
     ClientEnemyView enemyView2;
@@ -1195,6 +1197,10 @@ public class Controller {
 
 
         }
+    }
+
+    static void setSkullBoard(ClientSkullBoardView sbv) {
+        skullBoardView = sbv;
     }
 }
 

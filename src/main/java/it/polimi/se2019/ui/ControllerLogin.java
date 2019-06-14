@@ -5,6 +5,7 @@ import it.polimi.se2019.network.configureMessage.LoginMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -137,14 +138,14 @@ public class ControllerLogin implements UiInterface {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnect(int matchID) {
 
     }
 
     @Override
-    public void setSkullBoard(SkullBoardView skullBoardView) {
-        this.skullBoardView = skullBoardView;
-        //Controller.setSkullBoard(skullBoardView);
+    public void setSkullBoard(SkullBoardView skullBoard) {
+        skullBoardView = skullBoard;
+        Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     @Override
