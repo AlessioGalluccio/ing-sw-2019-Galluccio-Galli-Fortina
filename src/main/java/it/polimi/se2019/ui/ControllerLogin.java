@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import static it.polimi.se2019.ui.Controller.choosenMap;
+
 
 public class ControllerLogin implements UiInterface {
 
@@ -120,7 +120,7 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void selectedMap(int choosMap){
-        choosenMap = choosMap;
+        controller.updateMap(choosMap);
     }
 
     /**

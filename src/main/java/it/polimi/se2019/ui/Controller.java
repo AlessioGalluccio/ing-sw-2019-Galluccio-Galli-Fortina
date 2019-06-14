@@ -30,6 +30,7 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -160,7 +161,7 @@ public class Controller {
     @FXML
     public Button showMap;
 
-    public static int choosenMap =0;
+    public int choosenMap =0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -421,6 +422,23 @@ public class Controller {
     @FXML
     public ImageView imTrashW4;
 
+    @FXML
+    public ImageView imSkull1;
+    @FXML
+    public ImageView imSkull2;
+    @FXML
+    public ImageView imSkull3;
+    @FXML
+    public ImageView imSkull4;
+    @FXML
+    public ImageView imSkull5;
+    @FXML
+    public ImageView imSkull6;
+    @FXML
+    public ImageView imSkull7;
+    @FXML
+    public ImageView imSkull8;
+
 
 
     private int suddenDeath = 2;
@@ -617,15 +635,7 @@ public class Controller {
     }
 
 
-    public void printf(String string){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                labelProva.setText(string);
-            }
-        });
 
-    }
 
 
     /**
@@ -778,9 +788,7 @@ public class Controller {
         imPowerupCard4.setImage(new Image("emptyPowerup.jpg"));
         bPowerupCard4.setGraphic(imPowerupCard4);
         bPowerupCard4.setStyle(transparent);
-        imWeaponCard4.setImage(new Image("emptyWeapon.jpg"));
-        bWeaponCard4.setGraphic(imWeaponCard4);
-        bWeaponCard4.setStyle(transparent);
+
 
 
     }
@@ -935,14 +943,6 @@ public class Controller {
 
     }
 
-    /**
-     * update label on gui that show player's points
-     * @param points
-     */
-    public void updatePoints(int points){
-        String string = Integer.toString(points);
-        yourPointsLabel.setText(string);
-    }
 
     /**
      * send ActionMessage with ClientView's method to the server when the player clicks on a action button
@@ -1195,6 +1195,69 @@ public class Controller {
 
 
         }
+    }
+
+
+
+
+    /**
+     * update label on gui that show player's points
+     * @param points
+     */
+    public void updatePoints(int points){
+        String string = Integer.toString(points);
+        yourPointsLabel.setText(string);
+    }
+
+
+
+    public void updateMap(int choosenMap){
+        this.choosenMap= choosenMap;
+    }
+
+    public void updateSkullBoard(String skullNumber){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> skull = new ArrayList();
+                skull.add(imSkull1);
+                skull.add(imSkull2);
+                skull.add(imSkull3);
+                skull.add(imSkull4);
+                skull.add(imSkull5);
+                skull.add(imSkull6);
+                skull.add(imSkull7);
+                skull.add(imSkull8);
+                int teschi = Integer.parseInt(skullNumber);
+                teschi--;
+                for(int counter = 0; counter< skull.size(); counter++){
+                    skull.get(counter).setVisible(false);
+                }
+                while(teschi>=0) {
+                    skull.get(teschi).setVisible(true);
+                    teschi--;
+                }
+
+
+            }
+        });
+
+
+    }
+
+
+
+
+    public void printf(String string){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                labelProva.setText(string);
+            }
+        });
+
     }
 }
 

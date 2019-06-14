@@ -19,7 +19,10 @@ public class MyThread extends Thread {
                 Scanner scanner = new Scanner(System.in);
 
                 //System.out.println("qualcosa");
-                controller.printf(scanner.nextLine());
+                //controller.printf(scanner.nextLine());
+                String teschi = scanner.nextLine();
+                //if(scanner.nextLine()=="ciao")
+                controller.updateSkullBoard(teschi);
 
             } catch(Exception e) {
             }
