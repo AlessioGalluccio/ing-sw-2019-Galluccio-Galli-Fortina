@@ -192,10 +192,26 @@ public class ControllerLogin implements UiInterface {
     }
 
     /**
-     * update players' weapons images
+     * update player' weapons images
      */
     public void updateWeaponPlayer(){
         controller.updateWeaponPlayer();
+    }
+
+    /**
+     * update player ammo
+     */
+    public void updatePlayerAmmo(){
+        try {
+            int red = clientView.getPlayerCopy().getAmmo().getRedAmmo();
+            int blue = clientView.getPlayerCopy().getAmmo().getBlueAmmo();
+            int yellow = clientView.getPlayerCopy().getAmmo().getYellowAmmo();
+            controller.updatePlayerAmmo(red, blue, yellow);
+        }
+        catch (NullPointerException e){
+
+        }
+
     }
 
     /**
@@ -206,5 +222,6 @@ public class ControllerLogin implements UiInterface {
         //TODO mettere tutti i metodi di aggiornamento
         updateWeaponMap();
         updateWeaponPlayer();
+        updatePlayerAmmo();
     }
 }

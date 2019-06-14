@@ -22,7 +22,8 @@ public class MyThread extends Thread {
                 //controller.printf(scanner.nextLine());
                 String teschi = scanner.nextLine();
                 //if(scanner.nextLine()=="ciao")
-                controller.updateSkullBoard(teschi);
+                //controller.updateSkullBoard(teschi);
+                //controller.updatePlayerAmmo();
 
             } catch(Exception e) {
             }

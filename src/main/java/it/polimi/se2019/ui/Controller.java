@@ -439,6 +439,27 @@ public class Controller {
     @FXML
     public ImageView imSkull8;
 
+    @FXML
+    public ImageView bammo1;
+    @FXML
+    public ImageView bammo2;
+    @FXML
+    public ImageView bammo3;
+    @FXML
+    public ImageView rammo1;
+    @FXML
+    public ImageView rammo2;
+    @FXML
+    public ImageView rammo3;
+    @FXML
+    public ImageView yammo1;
+    @FXML
+    public ImageView yammo2;
+    @FXML
+    public ImageView yammo3;
+
+
+
 
 
     private int suddenDeath = 2;
@@ -1212,6 +1233,7 @@ public class Controller {
 
 
     public void updateMap(int choosenMap){
+
         this.choosenMap= choosenMap;
     }
 
@@ -1379,6 +1401,115 @@ public class Controller {
             }
         });
 
+    }
+
+
+    /**
+     * update Player's Red Ammo
+     * @param red
+     */
+    public void updatePlayerRedAmmo(String red){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> redAmmo = new ArrayList();
+                redAmmo.add(rammo1);
+                redAmmo.add(rammo2);
+                redAmmo.add(rammo3);
+                int redNumber = Integer.parseInt(red);
+                redNumber--;
+                for(int counter = 0; counter< redAmmo.size(); counter++){
+                    redAmmo.get(counter).setVisible(false);
+                }
+                while(redNumber>=0) {
+                    redAmmo.get(redNumber).setVisible(true);
+                    redNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+    /**
+     * update Player's Blue Ammo
+     * @param blu
+     */
+    public void updatePlayerBlueAmmo(String blu){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> blueAmmo = new ArrayList();
+                blueAmmo.add(bammo1);
+                blueAmmo.add(bammo2);
+                blueAmmo.add(bammo3);
+                int blueNumber = Integer.parseInt(blu);
+                blueNumber--;
+                for(int counter = 0; counter< blueAmmo.size(); counter++){
+                    blueAmmo.get(counter).setVisible(false);
+                }
+                while(blueNumber>=0) {
+                    blueAmmo.get(blueNumber).setVisible(true);
+                    blueNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update Player's Yellow Ammo
+     * @param yellow
+     */
+    public void updatePlayerYellowAmmo(String yellow){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> yellowAmmo = new ArrayList();
+                yellowAmmo.add(bammo1);
+                yellowAmmo.add(bammo2);
+                yellowAmmo.add(bammo3);
+                int yellowNumber = Integer.parseInt(yellow);
+                yellowNumber--;
+                for(int counter = 0; counter< yellowAmmo.size(); counter++){
+                    yellowAmmo.get(counter).setVisible(false);
+                }
+                while(yellowNumber>=0) {
+                    yellowAmmo.get(yellowNumber).setVisible(true);
+                    yellowNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update all Player's ammo
+     * @param red
+     * @param blue
+     * @param yellow
+     */
+    public void updatePlayerAmmo(int red, int blue, int yellow){
+        String redAmmo = String.valueOf(red);
+        String blueAmmo = String.valueOf(blue);
+        String yellowAmmo = String.valueOf(yellow);
+
+        updatePlayerRedAmmo(redAmmo);
+        updatePlayerBlueAmmo(blueAmmo);
+        updatePlayerYellowAmmo(yellowAmmo);
     }
 
 

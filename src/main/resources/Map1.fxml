@@ -647,12 +647,12 @@
             <Image url="@Icon/Rammo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rammo11" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yammo1" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rammo111" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yammo2" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Yammo.png" />
          </image>
