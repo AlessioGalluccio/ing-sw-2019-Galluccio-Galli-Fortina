@@ -1256,32 +1256,49 @@ public class Controller {
     //TODO FINIRE METODO
 
     /**
-     * update weaponcard on map
+     * update weaponcards on map
      */
     public void updateWeaponMap(){
-        ArrayList<ImageView> weapons = new ArrayList();
-        weapons.add(imRedWeapon1);
-        weapons.add(imRedWeapon2);
-        weapons.add(imRedWeapon3);
-        weapons.add(imBlueWeapon1);
-        weapons.add(imBlueWeapon2);
-        weapons.add(imBlueWeapon3);
-        weapons.add(imYellowWeapon1);
-        weapons.add(imYellowWeapon2);
-        weapons.add(imYellowWeapon3);
-        List<CellSpawn> cellSpawn = mapView.getCellSpawn();
-        List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
-        List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
-        List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
+                ArrayList<ImageView> redWeapons = new ArrayList();
+                ArrayList<ImageView> blueWeapons = new ArrayList();
+                ArrayList<ImageView> yellowWeapons = new ArrayList();
 
+                redWeapons.add(imRedWeapon1);
+                redWeapons.add(imRedWeapon2);
+                redWeapons.add(imRedWeapon3);
 
-        for(int counter = 0; counter< weapons.size(); counter++){
+                blueWeapons.add(imBlueWeapon1);
+                blueWeapons.add(imBlueWeapon2);
+                blueWeapons.add(imBlueWeapon3);
 
-            //weapons.get(counter).setImage(setWeaponMap));
-        }
+                yellowWeapons.add(imYellowWeapon1);
+                yellowWeapons.add(imYellowWeapon2);
+                yellowWeapons.add(imYellowWeapon3);
 
+                List<CellSpawn> cellSpawn = mapView.getCellSpawn();
+                List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+                List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+                List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+
+                for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
+                    redWeapons.get(counter).setImage(setWeaponMap(weaponCardsRed.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
+                    blueWeapons.get(counter).setImage(setWeaponMap(weaponCardsBlue.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
+                    yellowWeapons.get(counter).setImage(setWeaponMap(weaponCardsYellow.get(counter).getID()));
+                }
+
+            }
+        });
 
     }
 
