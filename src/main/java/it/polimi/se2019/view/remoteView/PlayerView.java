@@ -7,7 +7,6 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
-import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
 
 import java.util.ArrayList;
@@ -39,8 +38,20 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return playerCopy;
     }
 
-    public ArrayList<? extends Target> getSelectedTargets() {
+    public List<? extends Target> getSelectedTargets() {
         return selectedTargets;
+    }
+
+    public Character getChoosenCharacter() {
+        return choosenCharacter;
+    }
+
+    public List<Character> getPossibleCharacter() {
+        return possibleCharacter;
+    }
+
+    public List<? extends Target> getPossibleTargets() {
+        return possibleTargets;
     }
 
     /**
@@ -53,18 +64,6 @@ public class PlayerView extends View /*View implement observer/observable*/{
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
         message.handleMessage(this);
         if(networkHandler!=null) networkHandler.update(null, message);
-    }
-
-    public Character getChoosenCharacter() {
-        return choosenCharacter;
-    }
-
-    public ArrayList<Character> getPossibleCharacter() {
-        return possibleCharacter;
-    }
-
-    public ArrayList<? extends Target> getPossibleTargets() {
-        return possibleTargets;
     }
 
     /**
@@ -98,10 +97,10 @@ public class PlayerView extends View /*View implement observer/observable*/{
 
     /**
      * Do nothing
-     * @param startGameMessage
+     * @param matchID
      */
     @Override
-    public void handleStartGameMessage(StartGameMessage startGameMessage) {
+    public void handleStartGameMessage(int matchID) {
         //Is only to forward, already done by update()
     }
 

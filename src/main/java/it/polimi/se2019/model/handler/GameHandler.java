@@ -12,7 +12,6 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
-import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
@@ -509,7 +508,7 @@ public class GameHandler extends Observable {
         notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
 
         for(PlayerView pw : playerViews) {
-            pw.update(null, new StartGameMessage());
+            pw.update(null, new StartGameMessage(matchID));
         }
         //TODO set state controller for first player
     }
@@ -523,7 +522,7 @@ public class GameHandler extends Observable {
         player.setConnected(isConnected);
         if(isConnected) {
             PlayerView playerView = getViewByPlayer(player);
-            playerView.update(null, new StartGameMessage());
+            playerView.update(null, new StartGameMessage(matchID));
         } else {
             //TODO printformcontroller che qualcuno si è disconneso
         }

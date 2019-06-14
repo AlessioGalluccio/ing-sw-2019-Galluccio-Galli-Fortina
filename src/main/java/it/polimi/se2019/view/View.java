@@ -15,7 +15,7 @@ public abstract class View extends Observable implements Observer {
 
     public abstract void printFromController(String string);
 
-    public abstract void handleStartGameMessage(StartGameMessage startGameMessage);
+    public abstract void handleStartGameMessage(int matchID);
 
     public abstract void handlePlayerMessage(Player p);
 }

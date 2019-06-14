@@ -23,6 +23,15 @@ public class SkullBoardView extends Observable implements Observer {
         return numSkullCopy;
     }
 
+    /**
+     * This method is called whenever the array of Death object is changed. An
+     * application calls an <tt>Observable</tt> object's
+     * <code>notifyObservers</code> method to have all the object's
+     * observers notified of the change.
+     *
+     * @param   o     Always null
+     * @param   arg   The message with which update the skull board
+     */
     @Override
     public void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerSkullViewMessage message = (HandlerSkullViewMessage) arg;

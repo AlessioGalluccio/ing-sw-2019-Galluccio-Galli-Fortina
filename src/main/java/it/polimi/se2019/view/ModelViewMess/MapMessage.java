@@ -10,11 +10,14 @@ import it.polimi.se2019.view.remoteView.MapView;
  * After that use CellMessage!
  */
 public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
-
+    private static int ID=0;
+    private int ack;
     private Map mapCopy;
 
     public MapMessage(Map mapCopy) {
         this.mapCopy = mapCopy;
+        ID++;
+        ack=ID;
     }
 
     public Map getMapCopy() {
@@ -29,5 +32,9 @@ public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
     @Override
     public void handleMessage(Client client) {
 
+    }
+
+    public int getAck() {
+        return ack;
     }
 }

@@ -12,7 +12,7 @@ public interface UiInterface {
 
     void startGame();
 
-    void disconnect();
+    void disconnect(int matchID);
 
     void setSkullBoard(SkullBoardView skullBoardView);
 

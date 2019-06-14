@@ -33,7 +33,19 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         clientView.handleLogin(success, isFirst);
     }
 
-    public void forwardToClientView(ModelViewMessage message) {
+    public synchronized void forwardToClientView(ModelViewMessage message) {
+        //If views are not initialized wait
+        while(mapView.getMapCopy()==null &&
+                clientView.getPlayerCopy()==null &&
+                enemyViews.get(0).getNickname()==null &&
+                enemyViews.get(1).getNickname()==null &&
+                enemyViews.get(2).getNickname()==null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
         clientView.update(null, message);
     }
 
@@ -46,11 +58,9 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     public void forwardToEnemyView(ModelViewMessage message) {
-
     }
 
     public void forwardToMapView(ModelViewMessage message) {
-
     }
 
     public void forwardToSkullBoardView(ModelViewMessage message) {
