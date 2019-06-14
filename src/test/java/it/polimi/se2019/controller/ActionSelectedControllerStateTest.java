@@ -4,15 +4,15 @@ import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
+import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.deck.firemodes.CyberBlade_1;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
-import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.NotPresentException;
+import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
@@ -23,47 +23,85 @@ import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
 
+import java.lang.Character;
+import java.util.ArrayList;
+
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class ActionSelectedControllerStateTest {
-    private int authorID = 1;
-    private PlayerView playerViewMock;
+
+    private Player authorPlayer;
+    private Player targetPlayer1;
+    private Player targetPlayer2;
+    private Player targetPlayer3;
+    private PlayerView playerView;
     private GameHandler gameHandler;
     private Controller controller;
-    private StateController state;
-    private Action actionMock;
+    private Shoot shoot;
+    private FireMode lockRifle_1;
+    private Cell commonCell;
+    private Cell notVisibleCell;
+    private StateController stateController;
 
     @Before
     public void setUp() throws Exception {
-        gameHandler = mock(GameHandler.class);
-        playerViewMock = mock(PlayerView.class);
+        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
+        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
+
+        //we add the players to the game
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(authorPlayer);
+        players.add(targetPlayer1);
+        players.add(targetPlayer2);
+        players.add(targetPlayer3);
+
+        //settings of mock connection
+        Server serverMock = mock(Server.class);
+        Player playerCopyMock = mock(Player.class);
+        playerView = new PlayerView(serverMock, playerCopyMock);
+        gameHandler = new GameHandler(players, 8);
+        gameHandler.setMap(1);
         controller = new Controller(gameHandler, null);
-        controller.setPlayerView(playerViewMock);
-        this.actionMock = mock(Shoot.class);
-        state = new ActionSelectedControllerState(controller, gameHandler, actionMock);
-        controller.setState(state);
+        controller.setPlayerView(playerView);
+        controller.setAuthor(authorPlayer);
+        Shoot shoot = new Shoot(gameHandler, controller);
+
+        controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
+        stateController = controller.getState();
     }
 
     @Test
     public void correctCallOfHandleFromController(){
-        ActionSelectedControllerState stateMock = mock(ActionSelectedControllerState.class);
-        GameHandler gameHandler = mock(GameHandler.class);
-        Controller controller = new Controller(gameHandler,  null);
-        controller.setState(stateMock);
-        StringAndMessage stringAndMessage = new StringAndMessage(Identificator.TELEPORTER_MESSAGE,
-                                                                        "ok");
-        controller.addMessageListExpected(stringAndMessage);
 
-        TeleporterCard teleporterCard = mock(TeleporterCard.class);
-        PlayerView playerView = mock(PlayerView.class);
+        TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);
+
+
         TeleporterMessage teleporterMessage = new TeleporterMessage(teleporterCard, 1, playerView);
 
         controller.update(null, teleporterMessage);
 
-        verify(stateMock).handle(ArgumentMatchers.eq(teleporterMessage));
+        assertEquals(StateController.CANT_DO_THIS + controller.getCopyMessageListExpected().get(0).getString(),
+                playerView.getLastStringPrinted());
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     public void handleAction() {
@@ -76,28 +114,7 @@ public class ActionSelectedControllerStateTest {
 
     @Test
     public void handleTargetingWrongInput(){
-        //TODO controllare eccezioni
-        int targetingID = 1;
-        int IDtype = 1;
-        TargetingScopeCard targetingScopeCard = new TargetingScopeCard(ColorRYB.RED,targetingID,IDtype);
-        AmmoBag cost = new AmmoBag(0,0,1);
-        state.handleTargeting(targetingScopeCard, cost);
 
-        /*
-        try {
-            doThrow(new WrongInputException()).when(actionMock).addTargetingScope(anyObject(), anyObject());
-        } catch (Exception e) {
-            //DO nothing, it's needed for IntelliJ
-        }
-
-        state.handleTargeting(targetingScopeCard, cost);
-        verify(playerViewMock, times(1)).printFromController("You have already selected this, you can't use again");
-        */
-        try{
-            verify(actionMock, times(1)).addTargetingScope(targetingID, cost);
-        }catch(Exception e){
-            //do nothing
-        }
 
 
 

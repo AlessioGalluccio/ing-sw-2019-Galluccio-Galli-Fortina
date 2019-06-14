@@ -49,7 +49,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
                 }
             }
 
-            super.fire();
+            commonEndingFire();
 
         }
         else{

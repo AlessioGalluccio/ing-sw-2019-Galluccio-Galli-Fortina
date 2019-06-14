@@ -14,7 +14,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class ActionSelectedControllerState extends StateController {
 
-    private Player player;
+    private Player playerAuthor;
     private PlayerView playerView;
     private Controller controller;
     private GameHandler gameHandler;
@@ -23,25 +23,16 @@ public class ActionSelectedControllerState extends StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    private static final String PLAYER_WRONG = "You can't select this target. ";
-    private static final String CELL_WRONG = "You can't select this cell. ";
-    private static final String OPTIONAL_WRONG = "You can't select this optional effect. ";
 
-    private static final String NOT_ENOUGH = "You don't have enough Ammo for this. ";
-    private static final String ONLY_MARKS = "The firemode selected gives only marks, you can't use targeting. ";
-    private static final String CARD_NOT_PRESENT = "The player doesn't have this card. ";
-    private static final String ALREADY_SELECTED = "You have already selected this, you can't use again. ";
-    private static final String WEAPON_NOT_PRESENT = "This weapon is not present. ";
-    private static final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
-    private static final String CANT_DO_THIS = "You can't do this now. ";
 
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
         this.controller = controller;
         this.gameHandler = gameHandler;
-        this.player = controller.getAuthor();
+        this.playerAuthor = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;
+        this.controller.addMessageListExpected(action.getStringAndMessageExpected());
     }
 
 
@@ -206,6 +197,7 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
+        //TODO niente entra qui dentro. Starting Handler blocca
         errorString = CANT_DO_THIS;
         controller.removeReceived();
     }
@@ -239,7 +231,7 @@ public class ActionSelectedControllerState extends StateController {
     public void handleReconnection(boolean isConnected) {
         //TODO controlla da sistemare sicuramente
         if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.setPlayerConnectionStatus(playerAuthor, false);
             gameHandler.nextTurn();
             controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
@@ -247,12 +239,22 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        try{
+            playerAuthor.discardCard(gameHandler.getPowerupCardByID(powerupID));
+        }catch (NotPresentException e){
+            errorString = POWERUP_NOT_PRESENT_DISCARD;
+        }
+
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        try{
+            action.addDiscardWeapon(gameHandler.getWeaponCardByID(weaponID));
+        }catch(WrongInputException e){
+            errorString = e.getMessage();
+            controller.removeReceived();
+        }
     }
 
     @Override
@@ -280,8 +282,7 @@ public class ActionSelectedControllerState extends StateController {
             return true;
         }
         else {
-            String response = controller.getCopyMessageListExpected().get(index).getString();
-            arg.getAuthorView().printFromController(response);
+            stringToPlayerView = CANT_DO_THIS + controller.getCopyMessageListExpected().get(index).getString();
             return false;
         }
     }

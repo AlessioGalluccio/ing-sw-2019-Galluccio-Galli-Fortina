@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -18,6 +19,9 @@ import java.util.List;
 
 public class ElectroScythe_1 extends FireMode {
     private static final String SEND_FIRE = "Press fire to complete the action";
+
+    private static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
+    private static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -49,11 +53,104 @@ public class ElectroScythe_1 extends FireMode {
         throw new WrongInputException();
     }
 
+
     @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-        throw new WrongInputException();
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
+        if(shoot.getTargetingScopeCards().contains(card)){
+            throw new WrongInputException();
+        }
+        else if(!author.containsPowerup(card)){
+            throw new NotPresentException();
+        }
+        else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
+            throw new NotEnoughAmmoException();
+        }
+        else{
+            boolean canTargeting = false;
+            List<Player> list = author.getCell().getPlayerHere();
+            if(list.isEmpty()){
+                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
+            }
+            for(Player target: list){
+                if(target.isVisibleBy(author)){
+                    canTargeting = true;
+                }
+            }
+            if(!canTargeting){
+                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
+            }
+            else{
+                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
+                shoot.addCost(cost);
+            }
+        }
     }
 
+    @Override
+    public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
+        Player target = gameHandler.getPlayerByID(playerID);
+        if(author.getCell().getPlayerHere().contains(target)){
+            shoot.addTargetForTargetingFromFiremode(target);
+        }
+        else{
+            throw new WrongInputException(INVALID_TARGET_FOR_TARGETING);
+        }
+    }
+
+
+    /*
+    //COULD BE USEFUL FOR OTHER FIREMODES THAT HAVE TO SELECT A CELL TARGET
+
+    @Override
+    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+        PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
+        if(shoot.getTargetingScopeCards().contains(card)){
+            throw new WrongInputException();
+        }
+        else if(!author.containsPowerup(card)){
+            throw new NotPresentException();
+        }
+        else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
+            throw new NotEnoughAmmoException();
+        }
+        else if(shoot.getTargetsCells().isEmpty()){
+            throw new WrongInputException();
+        }
+        else{
+            boolean canTargeting = false;
+            List<Player> list = shoot.getTargetsCells().get(0).getPlayerHere();
+            if(list.isEmpty()){
+                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
+            }
+            for(Player target: list){
+                if(target.isVisibleBy(author)){
+                    canTargeting = true;
+                }
+            }
+            if(!canTargeting){
+                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
+            }
+            else{
+                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
+                shoot.addCost(cost);
+            }
+        }
+    }
+
+    @Override
+    public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
+        Player target = gameHandler.getPlayerByID(playerID);
+        if(!shoot.getTargetsCells().isEmpty() && !shoot.getTargetsCells().get(0).getPlayerHere().isEmpty()
+                &&shoot.getTargetsCells().get(0).getPlayerHere().contains(target)){
+            shoot.addTargetForTargetingFromFiremode(target);
+        }
+        else{
+            throw new WrongInputException(INVALID_TARGET_FOR_TARGETING);
+        }
+    }
+
+    */
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {

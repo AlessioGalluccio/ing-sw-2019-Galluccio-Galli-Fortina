@@ -15,6 +15,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observer;
 
 
@@ -109,12 +110,20 @@ public class Controller implements Observer {
     }
 
 
+    public void addMessageListExpected(List<StringAndMessage> arg) {
+        this.messageListExpected.addAll(arg);
+    }
+
     public void addMessageListExpected(StringAndMessage arg) {
         this.messageListExpected.add(arg);
     }
 
     public void addMessageListImmediateNext(ArrayList<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(indexExpected, messageListExpected);
+    }
+
+    public void addMessageListImmediateNext(StringAndMessage messageExpected){
+        this.messageListExpected.add(indexExpected, messageExpected);
     }
 
     public void addMessageListBeforeLastOne(ArrayList<StringAndMessage> messageListExpected){

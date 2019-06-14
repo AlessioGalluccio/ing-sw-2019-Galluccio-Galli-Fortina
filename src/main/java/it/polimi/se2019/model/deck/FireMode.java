@@ -32,7 +32,11 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     private static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
     private static final String KILLED = "You killed ths Player";
 
+    private static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
+    private static final String CANT_PAY = "You don't have enough Ammo for this";
+
     protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted";
+
 
     public GameHandler getGameHandler() {
         //TODO Eliminala, serve SOLO PER TESTING
@@ -103,21 +107,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      *
      */
     public void fire() throws WrongInputException{
-        //damage of targetings
-        if(!shoot.getTargetsOfTargetings().isEmpty()){
-            for(Player targetTargeting: shoot.getTargetsOfTargetings()){
-                addDamageAndMarks(targetTargeting, 1,0, false);
-            }
-        }
-
-        //payment of the total cost of this action
-        try{
-            author.payAmmoCost(shoot.getCost());
-            endFiremode();
-        }catch (NotEnoughAmmoException e){
-            //it should never happen, because cost must always be controlled before
-            throw new WrongInputException();
-        }
+        commonEndingFire();
     }
 
     @Override
@@ -147,6 +137,15 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         this.playerView = shoot.getPlayerView();
     }
 
+    /**
+     * add a targeting scope. Use this method only if weapon shhots only visible targets, otherwise override it
+     * @param targetingCardID
+     * @param cost
+     * @throws WrongInputException
+     * @throws NotPresentException
+     * @throws NotEnoughAmmoException
+     * @throws FiremodeOfOnlyMarksException
+     */
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException,
             NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         //Use Override if the firemode can't use Targeting scopes because it only adds marks
@@ -158,7 +157,10 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             throw new NotPresentException();
         }
         else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
-            throw new NotEnoughAmmoException();
+            throw new NotEnoughAmmoException(CANT_PAY);
+        }
+        else if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException(NO_TARGET_TARGETING);
         }
         else{
             //I consider the target as the last selected Player
@@ -223,6 +225,13 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         throw new WrongInputException();
     }
 
+    //USED ONLY IN SHOOT AND NOT IN OTHER ACTIONS
+
+    public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
+        throw new WrongInputException();
+    }
+
+
     //COMMON METHODS
 
     /**
@@ -281,6 +290,27 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      */
     public void endFiremode(){
         shoot.endAction();
+    }
+
+    /**
+     * end of fire, call it if you can't use super.fire() in the firemode
+     */
+    public void commonEndingFire() throws WrongInputException{
+        //damage of targetings
+        if(!shoot.getTargetsOfTargetings().isEmpty()){
+            for(Player targetTargeting: shoot.getTargetsOfTargetings()){
+                addDamageAndMarks(targetTargeting, 1,0, false);
+            }
+        }
+
+        //payment of the total cost of this action
+        try{
+            author.payAmmoCost(shoot.getCost());
+            endFiremode();
+        }catch (NotEnoughAmmoException e){
+            //it should never happen, because cost must always be controlled before
+            throw new WrongInputException();
+        }
     }
 
 

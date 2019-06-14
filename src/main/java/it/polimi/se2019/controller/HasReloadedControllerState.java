@@ -15,12 +15,8 @@ public class HasReloadedControllerState extends StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    //they are public for tests
-    public static final String CANT_DO = "You have already reloaded. ";
-    public static final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";
-    public static final String NOT_PRESENT_WEAPON_RELOAD = "Player doesn't have this Weapon. ";
-    public static final String WEAPON_LOADED_RELOAD = "This weapon is already loaded. ";
-    public static final String NOT_ENOUGH_AMMO_RELOAD = "To reload this weapon, you need more ammo. Discard correct PowerUp cards and try again. ";
+
+
 
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         this.controller = controller;
@@ -167,7 +163,7 @@ public class HasReloadedControllerState extends StateController {
     }
 
     private void youCantDoThis(){
-        errorString = CANT_DO;
+        errorString = CANT_DO_ALREADY_RELOADED;
         controller.removeReceived();
     }
 
