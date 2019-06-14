@@ -173,4 +173,14 @@ public class ControllerLogin implements UiInterface {
         String skullNumberString = String.valueOf(skullNumber);
         controller.updateSkullBoard(skullNumberString);
     }
+
+    /**
+     * update initial setting of map number and skulls
+     * @param choosenMap
+     * @param skull
+     */
+    public void updateSetting(int choosenMap, int skull){
+        this.updateSkullMap(skull);
+        this.selectedMap(choosenMap);
+    }
 }
