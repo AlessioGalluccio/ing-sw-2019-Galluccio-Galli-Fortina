@@ -164,4 +164,13 @@ public class ControllerLogin implements UiInterface {
         Player player = clientView.getPlayerCopy();
         controller.updatePoints(player.getNumPoints());
     }
+
+    /**
+     * update number of skulls on gui map
+     * @param skullNumber
+     */
+    public void updateSkullMap(int skullNumber){
+        String skullNumberString = String.valueOf(skullNumber);
+        controller.updateSkullBoard(skullNumberString);
+    }
 }

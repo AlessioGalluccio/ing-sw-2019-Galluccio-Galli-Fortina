@@ -1215,6 +1215,11 @@ public class Controller {
         this.choosenMap= choosenMap;
     }
 
+
+    /**
+     * update skulls' imageviews on map 
+     * @param skullNumber
+     */
     public void updateSkullBoard(String skullNumber){
 
         Platform.runLater(new Runnable() {
