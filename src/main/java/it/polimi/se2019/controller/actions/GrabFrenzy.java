@@ -15,7 +15,7 @@ public class GrabFrenzy extends Grab {
     }
 
     @Override
-    public void executeAction() {
+    public void executeAction() throws WrongInputException {
         super.executeAction();
     }
 

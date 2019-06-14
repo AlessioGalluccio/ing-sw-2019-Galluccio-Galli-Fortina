@@ -19,7 +19,7 @@ public class GrabAdrenaline extends Grab {
     }
 
     @Override
-    public void executeAction() {
+    public void executeAction() throws WrongInputException {
         super.executeAction();
     }
 
