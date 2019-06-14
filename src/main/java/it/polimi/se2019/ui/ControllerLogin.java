@@ -183,4 +183,28 @@ public class ControllerLogin implements UiInterface {
         this.updateSkullMap(skull);
         this.selectedMap(choosenMap);
     }
+
+    /**
+     * update weapons images on map
+     */
+    public void updateWeaponMap(){
+        controller.updateWeaponMap();
+    }
+
+    /**
+     * update players' weapons images
+     */
+    public void updateWeaponPlayer(){
+        controller.updateWeaponPlayer();
+    }
+
+    /**
+     * update game display
+     */
+    public void updateMap(){
+
+        //TODO mettere tutti i metodi di aggiornamento
+        updateWeaponMap();
+        updateWeaponPlayer();
+    }
 }
