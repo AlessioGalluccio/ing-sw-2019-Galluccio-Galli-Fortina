@@ -1279,10 +1279,60 @@ public class Controller {
 
         for(int counter = 0; counter< weapons.size(); counter++){
 
-            weapons.get(counter).setImage(new Image(""));
+            //weapons.get(counter).setImage(setWeaponMap));
         }
 
 
+    }
+
+    public Image setWeaponMap(int weaponID){
+        Image image = new Image("cards/AD_weapons_IT_0225.png");
+        switch (weaponID){
+            case 13: image = new Image("cards/AD_weapons_IT_022.png");
+                break;
+            case 21: image = new Image("cards/AD_weapons_IT_023.png");
+                break;
+            case 10: image = new Image("cards/AD_weapons_IT_024.png");
+                break;
+            case 9: image = new Image("cards/AD_weapons_IT_025.png");
+                break;
+            case 11: image = new Image("cards/AD_weapons_IT_026.png");
+                break;
+            case 8: image = new Image("cards/AD_weapons_IT_027.png");
+                break;
+            case 12: image = new Image("cards/AD_weapons_IT_028.png");
+                break;
+            case 18: image = new Image("cards/AD_weapons_IT_029.png");
+                break;
+            case 4: image = new Image("cards/AD_weapons_IT_0210.png");
+                break;
+            case 20: image = new Image("cards/AD_weapons_IT_0211.png");
+                break;
+            case 19: image = new Image("cards/AD_weapons_IT_0212.png");
+                break;
+            case 7: image = new Image("cards/AD_weapons_IT_0213.png");
+                break;
+            case 3: image = new Image("cards/AD_weapons_IT_0214.png");
+                break;
+            case 6: image = new Image("cards/AD_weapons_IT_0215.png");
+                break;
+            case 16: image = new Image("cards/AD_weapons_IT_0216.png");
+                break;
+            case 2: image = new Image("cards/AD_weapons_IT_0217.png");
+                break;
+            case 5: image = new Image("cards/AD_weapons_IT_0218.png");
+                break;
+            case 17: image = new Image("cards/AD_weapons_IT_0219.png");
+                break;
+            case 15: image = new Image("cards/AD_weapons_IT_0220.png");
+                break;
+            case 14: image = new Image("cards/AD_weapons_IT_0221.png");
+                break;
+            case 1: image = new Image("cards/AD_weapons_IT_0222.png");
+                break;
+
+        }
+        return image;
     }
 
 
