@@ -76,18 +76,16 @@ public class HasReloadedControllerState extends StateController {
     public void handleReload(int weaponID) {
         try{
             player.loadWeapon(weaponID);
+            controller.addReceived();
         }catch(NotPresentException e){
             errorString = NOT_PRESENT_WEAPON_RELOAD;
-            controller.removeReceived();
 
         }catch(WeaponIsLoadedException e){
             errorString = WEAPON_LOADED_RELOAD;
-            controller.removeReceived();
 
 
         }catch(NotEnoughAmmoException e){
             errorString = NOT_ENOUGH_AMMO_RELOAD;
-            controller.removeReceived();
         }
     }
 
@@ -164,7 +162,6 @@ public class HasReloadedControllerState extends StateController {
 
     private void youCantDoThis(){
         errorString = CANT_DO_ALREADY_RELOADED;
-        controller.removeReceived();
     }
 
 }

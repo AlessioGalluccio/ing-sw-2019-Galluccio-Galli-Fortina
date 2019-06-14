@@ -48,7 +48,7 @@ public class EmptyControllerState extends StateController {
                     youCantDoThis();
                 }
             }
-
+            controller.addReceived();
             //messageListExpected
             Action action = gameHandler.getActionByID(actionID, player);
             ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
@@ -59,7 +59,6 @@ public class EmptyControllerState extends StateController {
         }
         else{
             errorString = TOO_MANY_ACTIONS;
-            controller.removeReceived();
         }
 
     }

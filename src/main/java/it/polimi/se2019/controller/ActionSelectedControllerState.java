@@ -52,10 +52,10 @@ public class ActionSelectedControllerState extends StateController {
     public void handleCell(int coordinateX, int coordinateY) {
         try{
             action.addCell(coordinateX, coordinateY);
+            controller.addReceived();
         }catch(WrongInputException e){
             errorString = e.getMessage();
             //playerView.printFromController(CELL_WRONG);
-            controller.removeReceived();
         }
     }
 
@@ -63,9 +63,9 @@ public class ActionSelectedControllerState extends StateController {
     public void handleFiremode(int firemodeID) {
         try{
             action.addFireMode(firemodeID);
+            controller.addReceived();
         }catch (WrongInputException e){
             errorString = e.getMessage();
-            controller.removeReceived();
         }
         /*
         Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
@@ -121,9 +121,9 @@ public class ActionSelectedControllerState extends StateController {
     public void handlePlayer(int playerID) {
         try{
             action.addPlayerTarget(playerID);
+            controller.addReceived();
         }catch (WrongInputException e){
             errorString = e.getMessage();
-            controller.removeReceived();
         }
 
     }
@@ -132,13 +132,12 @@ public class ActionSelectedControllerState extends StateController {
     public void handleOptional(int numOptional) {
         try{
             action.addOptional(numOptional);
+            controller.addReceived();
         }catch (WrongInputException e){
             //playerView.printFromController(OPTIONAL_WRONG);
-            errorString = e.getMessage();
-            controller.removeReceived();
+            errorString = e.getMessage();;
         }catch (NotEnoughAmmoException e){
-            errorString = NOT_ENOUGH;;
-            controller.removeReceived();
+            errorString = NOT_ENOUGH;
         }
     }
 
@@ -148,19 +147,20 @@ public class ActionSelectedControllerState extends StateController {
 
         try {
             action.addReload(weaponID);
+            //it's very rare that there's the StringAndMessage
+            if(controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getMessageID()
+                    == Identificator.RELOAD_MESSAGE){
+                controller.addReceived();
+            }
         } catch (WrongInputException e) {
             errorString = e.getMessage();
-            controller.removeReceived();
 
         } catch (NotPresentException e) {
             errorString = WEAPON_NOT_PRESENT;
-            controller.removeReceived();
         } catch (NotEnoughAmmoException e) {
             errorString = NOT_ENOUGH;
-            controller.removeReceived();
         } catch (WeaponIsLoadedException e) {
             errorString = WEAPON_LOADED_RELOAD;
-            controller.removeReceived();
         }
 
     }
@@ -168,29 +168,25 @@ public class ActionSelectedControllerState extends StateController {
     @Override
     public void handleTagback(TagbackGranedCard usedCard) {
         stringToPlayerView = CANT_DO_THIS;
-        controller.removeReceived();
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
         try{
             action.addTargetingScope(usedCard.getID(), cost);
+            //no addReceived, because no StringAndMessage
 
         }catch(WrongInputException e){
-            errorString = ALREADY_SELECTED;
-            controller.removeReceived();
+            errorString = ALREADY_SELECTED;;
 
         }catch(NotEnoughAmmoException e){
             errorString = NOT_ENOUGH;
-            controller.removeReceived();
 
         }catch(NotPresentException e){
             errorString = CARD_NOT_PRESENT;
-            controller.removeReceived();
 
         }catch (FiremodeOfOnlyMarksException e){
-            errorString = ONLY_MARKS;
-            controller.removeReceived();
+            errorString = ONLY_MARKS;;
         }
 
     }
@@ -199,13 +195,13 @@ public class ActionSelectedControllerState extends StateController {
     public void handleTeleporter(TeleporterCard usedCard) {
         //TODO niente entra qui dentro. Starting Handler blocca
         errorString = CANT_DO_THIS;
-        controller.removeReceived();
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
         try{
             action.addWeapon(usedCard);
+            controller.addReceived();
         }catch(WrongInputException e){
             errorString = e.getMessage();
         }
@@ -220,9 +216,9 @@ public class ActionSelectedControllerState extends StateController {
     public void handleFire() {
         try {
             action.fire();
+            controller.addReceived();
             stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
         }catch(WrongInputException e){
-            controller.removeReceived();
             errorString = e.getMessage();
         }
     }
@@ -251,9 +247,13 @@ public class ActionSelectedControllerState extends StateController {
     public void handleDiscardWeapon(int weaponID) {
         try{
             action.addDiscardWeapon(gameHandler.getWeaponCardByID(weaponID));
+            //it's a rare case that there's the StringAndMessage, or it should never happen?
+            if(controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getMessageID()
+                    == Identificator.DISCARD_WEAPON_MESSAGE){
+                controller.addReceived();
+            }
         }catch(WrongInputException e){
             errorString = e.getMessage();
-            controller.removeReceived();
         }
     }
 
@@ -278,7 +278,9 @@ public class ActionSelectedControllerState extends StateController {
         int index = controller.getIndexExpected();
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
         int messageID = arg.getMessageID();
-        if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE) {
+        if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE
+                || messageID == Identificator.OPTIONAL_MESSAGE || messageID == Identificator.RELOAD_MESSAGE
+                || messageID == Identificator.PASS_MESSAGE) {
             return true;
         }
         else {

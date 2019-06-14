@@ -28,8 +28,9 @@ public class Shoot extends Action{
     boolean neededTargetForTargeting;   //if true, next targetPlayer is for targeting, not weapon
 
     //STRING AND MESSAGE
-    private String FIRST_MESSAGE = "Please, select a Weapon";
-    private String SECOND_MESSAGE = "Please, select a Firemode";
+    public static final String FIRST_MESSAGE = "Please, select a Weapon";
+    public static final String SECOND_MESSAGE = "Please, select a Firemode";
+    public static final String LAST_MESSAGE = "Please, press Fire";
 
     private String SELECT_TARGET_FOR_TARGETING = "Select a target for the Targeting Scope";
 
@@ -57,10 +58,12 @@ public class Shoot extends Action{
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
         StringAndMessage firstMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, FIRST_MESSAGE);
         StringAndMessage secondMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, SECOND_MESSAGE);
+        StringAndMessage lastMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, LAST_MESSAGE);
 
         ArrayList<StringAndMessage> list = new ArrayList<>();
         list.add(firstMessage);
         list.add(secondMessage);
+        list.add(lastMessage);
         return list;
     }
 
@@ -116,10 +119,9 @@ public class Shoot extends Action{
             if(Identificator.containsFiremode(weapon, fireModeSelected)){
                 this.fireMode = fireModeSelected;
                 this.cost = newCost;
-                //adding expected messeages of firemode
-                for(StringAndMessage stringAndMessage: fireMode.getMessageListExpected()){
-                    controller.addMessageListExpected(stringAndMessage);
-                }
+                //adding expected messages of firemode before fire message
+                controller.addMessageListBeforeLastOne(fireMode.getMessageListExpected());
+
                 //since firemode doesn't have a constructor, we need to send them here
                 this.fireMode.sendPossibleTargetsAtStart();
             }
