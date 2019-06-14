@@ -112,13 +112,4 @@ public class TestMap {
         }
     }
 
-    @Test
-    public void testPrint() {
-        map3.reloadAllCell();
-        //map3.printRow(0);
-
-    }
-
-
-
 }

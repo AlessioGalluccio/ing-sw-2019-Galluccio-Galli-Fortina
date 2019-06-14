@@ -12,6 +12,7 @@ public class ClientSkullBoardView extends SkullBoardView {
 
     public ClientSkullBoardView(UiInterface ui) {
         this.ui = ui;
+        ui.setSkullBoard(this);
     }
 
     @Override

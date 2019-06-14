@@ -12,8 +12,8 @@ import java.util.Observer;
 
 public class SkullBoardView extends Observable implements Observer {
 
-    private int numSkullCopy;
-    private ArrayList<Death> deathCopy;
+    private int numSkullCopy = 8;
+    private ArrayList<Death> deathCopy = new ArrayList<>();
 
     public ArrayList<Death> getDeathCopy() {
         return deathCopy;

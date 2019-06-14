@@ -5,6 +5,7 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
-public class EnemyView extends Observable implements Observer, Serializable {
+public class EnemyView extends Observable implements Observer, Serializable, Printable {
 
     private int ID;
     private String nickname;
@@ -99,18 +100,19 @@ public class EnemyView extends Observable implements Observer, Serializable {
         for(Player p : damage) {
             s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
         }
-        s+=ConsoleColor.RESET+"\n  Skulls: ";
-        if(isFrenzyDeath) s+="2 1 1 1 ";
-        else s+="8 6 4 2 1 1 \t";
-        for(int i=0; i<skull; i++) {
-            s+= ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
-        }
+        s+=ConsoleColor.RESET;
         return s;
     }
 
     @Override
     public String toString() {
         String s = toStringShort();
+        s+=ConsoleColor.RESET+"\n  Skulls: ";
+        if(isFrenzyDeath) s+="2 1 1 1 ";
+        else s+="8 6 4 2 1 1 \t";
+        for(int i=0; i<skull; i++) {
+            s+= ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
+        }
         s+="\n  Ammo: ";
         for(int i=0; i< ammo.getBlueAmmo(); i++) {
             s+= ConsoleColor.BLUE_BOLD_BRIGHT + "✚";
@@ -132,7 +134,40 @@ public class EnemyView extends Observable implements Observer, Serializable {
         return s;
     }
 
+
     public int getID() {
         return ID;
+    }
+
+    @Override
+    public String printRow(int row) {
+        String s = ConsoleColor.RESET.toString();
+        switch(row) {
+            case 0:
+                s+= nickname;
+                if(character!=null) s += " - " + character.toString();
+                break;
+            case 1:
+                s+="  Marks: ";
+                for(Player p : mark) {
+                    s += ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+                }
+                break;
+            case 2:
+                s+="  Damages: " + damage.size() + "/12 ";
+                for(Player p : damage) {
+                    s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+                }
+                break;
+            case 3:
+                s+="  Skulls: ";
+                if(isFrenzyDeath) s+="2 1 1 1 ";
+                else s+="8 6 4 2 1 1 \t";
+                for(int j=0; j<skull; j++) {
+                    s += ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
+                }
+                break;
+        }
+        return s;
     }
 }

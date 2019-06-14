@@ -20,5 +20,6 @@ public class ClientEnemyView extends EnemyView {
 
     public void setUi(UiInterface ui) {
         this.ui = ui;
+        ui.setEnemyView(this);
     }
 }

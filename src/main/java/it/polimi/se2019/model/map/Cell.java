@@ -18,7 +18,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     private Border eastBorder;
     private Border southBorder;
     private Border westBorder;
-    private transient Room room;
+    private Room room;
     private Coordinate coordinate;
     private ArrayList<Player> playerHere = new ArrayList<>();
     private boolean disable;
@@ -180,7 +180,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
-        if(!isDisable()) System.out.print(color);
+        if(!isDisable()) s+=color;
         switch (row) {
             case 0:
                 s+=getNorthBorder().printByDirection(0, true, color);

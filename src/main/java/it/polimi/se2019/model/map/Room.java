@@ -2,15 +2,17 @@ package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.player.Player;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Room implements Target {
-    private CellSpawn spawnCell;
+public class Room implements Target, Serializable {
+    private transient CellSpawn spawnCell;
     private String color;
-    private ArrayList<Cell> cellRoom;
-    private ArrayList<Player> playerHere = new ArrayList<>();
+    private transient ArrayList<Cell> cellRoom;
+    private transient ArrayList<Player> playerHere = new ArrayList<>();
 
     public Room(CellSpawn spawnCell, String color, ArrayList<Cell> cellRoom) {
         this.spawnCell = spawnCell;

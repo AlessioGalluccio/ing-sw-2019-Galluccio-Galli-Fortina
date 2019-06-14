@@ -3,7 +3,12 @@ package it.polimi.se2019.ui;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.LoginMessage;
 import it.polimi.se2019.ui.UiInterface;
+import it.polimi.se2019.view.clientView.ClientEnemyView;
+import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +24,15 @@ import static it.polimi.se2019.ui.Controller.choosenMap;
 
 public class ControllerLogin implements UiInterface {
 
-    Controller controller;
-    ClientView clientView;
+    static Controller controller;
+    static ClientView clientView;
+    static SkullBoardView skullBoardView;
+    static ClientEnemyView enemyView1;
+    static ClientEnemyView enemyView2;
+    static ClientEnemyView enemyView3;
+    static ClientEnemyView enemyView4;
+    static ClientMapView mapView;
+
     @FXML
     private TextField username;
 
@@ -129,12 +141,27 @@ public class ControllerLogin implements UiInterface {
 
     }
 
+    @Override
+    public void setSkullBoard(SkullBoardView skullBoardView) {
+        this.skullBoardView = skullBoardView;
+        //Controller.setSkullBoard(skullBoardView);
+    }
+
+    @Override
+    public void setMapView(MapView mapView) {
+
+    }
+
+    @Override
+    public void setEnemyView(EnemyView enemyView) {
+
+    }
+
     /**
      * update player's points on gui calling method on ui controller
      */
     public void updatePlayerPoints(){
         Player player = clientView.getPlayerCopy();
         controller.updatePoints(player.getNumPoints());
-
     }
 }

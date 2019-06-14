@@ -693,6 +693,10 @@ public class Player extends Observable implements Target, Serializable {
         return s;
     }
 
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
     private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {
         public boolean shouldSkipClass(Class<?> clazz) {
             return clazz.getAnnotation(NotForPlayer.class) != null;

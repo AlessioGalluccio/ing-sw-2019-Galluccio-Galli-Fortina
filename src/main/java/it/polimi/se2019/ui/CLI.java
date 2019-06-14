@@ -5,15 +5,21 @@ import it.polimi.se2019.model.map.Map2;
 import it.polimi.se2019.model.map.Map3;
 import it.polimi.se2019.model.map.Map4;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
     private final static int MIN_SKULL = 5;
     private ClientView view;
     private boolean online = true;
+    private SkullBoardView skullBoardView;
+    private List<EnemyView> enemyViews = new LinkedList<>();
+    private MapView mapView;
     private ParserCLI parser; //TODO crearlo dopo il login
 
     @SuppressWarnings("squid:S106")
@@ -48,12 +54,14 @@ public class CLI implements UiInterface {
     @Override
     public void startGame() {
         out.println(ConsoleColor.BLACK + "START" + ConsoleColor.RESET);
+        printAll();
     }
 
     @Override
     public void disconnect() {
         //TODO chiudere tutti i thread (parser) e terminare applicazione
         online=false;
+        out.println("\n");
         printLine();
         out.println(ConsoleColor.RED +
                 "OH NO!  ಥ_ಥ \nYou have been disconnected" +
@@ -64,7 +72,23 @@ public class CLI implements UiInterface {
         printLogo();
     }
 
+    @Override
+    public void setSkullBoard(SkullBoardView skullBoardView) {
+        this.skullBoardView = skullBoardView;
+    }
+
+    @Override
+    public void setMapView(MapView mapView) {
+        this.mapView = mapView;
+    }
+
+    @Override
+    public void setEnemyView(EnemyView enemyView) {
+        enemyViews.add(enemyView);
+    }
+
     public synchronized void start() {
+
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +
                 "\t\t \\ \\  \\   /  _ \\  |   __|   _ \\   __ `__ \\    _ \\      |  __ \\  \n" +
@@ -78,6 +102,7 @@ public class CLI implements UiInterface {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+        out.println("\n");
         printLine();
         login();
     }
@@ -176,12 +201,47 @@ public class CLI implements UiInterface {
         if(online) out.println("\nWaiting for other players...");
     }
 
-    static void clearScreen() {
-        System.out.print("\u001b[2J");
-        System.out.flush();
+    void clearScreen() {
+        out.print("\u001b[2J");
+        out.flush();
     }
 
     void printLine() {
-        out.println("\n\n______________________________________________________________________________________________\n");
+        out.println("______________________________________________________________________________________________\n");
+    }
+
+    void printAll() {
+        clearScreen();
+        out.println("\t" + skullBoardView);
+        out.println("");
+        out.println(mapView.printRow(2,0));
+        out.println(mapView.printRow(2,1));
+        out.println(mapView.printRow(2,2));
+        out.println(mapView.printRow(2,3));
+        out.println(mapView.printRow(2,4));
+        out.println(mapView.printRow(2,5));
+        out.println(mapView.printRow(2,6));
+        out.println(mapView.printRow(1,0));
+        out.println(mapView.printRow(1,1));
+        out.println(mapView.printRow(1,2));
+        out.println(mapView.printRow(1,3));
+        out.println(mapView.printRow(1,4));
+        out.println(mapView.printRow(1,5));
+        out.println(mapView.printRow(1,6));
+        out.println(mapView.printRow(0,0));
+        out.println(mapView.printRow(0,1));
+        out.println(mapView.printRow(0,2));
+        out.println(mapView.printRow(0,3));
+        out.println(mapView.printRow(0,4));
+        out.println(mapView.printRow(0,5));
+        out.println(mapView.printRow(0,6));
+        out.println(mapView.printRow(-1,0));
+        printLine();
+        for(EnemyView ew : enemyViews) {
+            out.println(ew.toStringShort() + "\n");
+        }
+        printLine();
+        out.println(view.getPlayerCopy().toString());
+        printLine();
     }
 }

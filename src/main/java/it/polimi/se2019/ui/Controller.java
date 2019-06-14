@@ -13,6 +13,7 @@ import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 
 
@@ -997,7 +998,7 @@ public class Controller {
      */
     public void sendMapWeapon(ActionEvent event){
         Object source = event.getSource();
-        List<CellSpawn> cellSpawns = mapView.getCellSpawn();
+        List<CellSpawn> cellSpawns = ControllerLogin.mapView.getCellSpawn();
         List<WeaponCard> redWeaponCards =  cellSpawns.get(0).getWeapon();
         List<WeaponCard> bluWeaponCards =  cellSpawns.get(1).getWeapon();
         List<WeaponCard> yellowWeaponCards =  cellSpawns.get(2).getWeapon();
@@ -1082,7 +1083,7 @@ public class Controller {
     public void selectEnemy(ActionEvent event) {
         Object source = event.getSource();
         if(enemyCharacter1 == source){
-            clientView.createPlayerMessage(enemyView1.getID());
+            clientView.createPlayerMessage(ControllerLogin.enemyView1.getID());
         }
         if(enemyCharacter2 == source){
             clientView.createPlayerMessage(enemyView2.getID());
@@ -1165,9 +1166,6 @@ public class Controller {
 
 
         }
-
-
-
     }
 }
 

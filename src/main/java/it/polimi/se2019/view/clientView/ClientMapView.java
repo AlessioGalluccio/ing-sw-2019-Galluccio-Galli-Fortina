@@ -9,6 +9,7 @@ public class ClientMapView extends MapView {
 
     public ClientMapView(UiInterface ui) {
         this.ui = ui;
+        ui.setMapView(this);
     }
 
 
