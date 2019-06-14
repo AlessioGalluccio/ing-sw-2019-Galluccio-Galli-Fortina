@@ -2,6 +2,7 @@ package it.polimi.se2019.view.remoteView;
 
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.ui.ConsoleColor;
@@ -44,6 +45,8 @@ public class MapView extends Observable implements Observer {
         cellSpawnList.add((CellSpawn)cells[3][0]);
         return cellSpawnList;
     }
+
+
 
     @Override
     public void update(java.util.Observable o /*Will be always null*/, Object arg) {

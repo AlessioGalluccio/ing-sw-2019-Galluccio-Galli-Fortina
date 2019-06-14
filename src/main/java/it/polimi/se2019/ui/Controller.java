@@ -7,12 +7,15 @@ import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.remoteView.EnemyView;
+import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 
@@ -1405,6 +1408,22 @@ public class Controller {
 
 
     /**
+     * update enemy's weapon cards
+     */
+    public void updateWeaponEnemy(EnemyView enemyView){
+        try{
+            ArrayList<WeaponCard> enemyCard = enemyView.getUnloadedWeapon();
+
+        }
+        catch (NullPointerException e){
+
+        }
+
+
+    }
+
+
+    /**
      * update Player's Red Ammo
      * @param red
      */
@@ -1512,6 +1531,11 @@ public class Controller {
         updatePlayerYellowAmmo(yellowAmmo);
     }
 
+    //TODO ricorda la prima volta ti arriva la mappa e poi la singola cella
+
+    public void updateAmmoCell(){
+        //mapView.getCell(0,0).getCardID();
+    }
 
 
     public void printf(String string){
@@ -1523,6 +1547,9 @@ public class Controller {
         });
 
     }
+
+
+
 }
 
 
