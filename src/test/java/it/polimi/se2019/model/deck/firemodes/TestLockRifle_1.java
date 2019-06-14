@@ -14,6 +14,7 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.StringAndMessage;
+import it.polimi.se2019.view.ViewControllerMess.OptionalMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
@@ -100,14 +101,14 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void sendPossibleTarget() {
+    public void sendPossibleTargetTest() {
         //TODO trovare un metodo per testarlo
         //lockRifle_1.sendPossibleTargetsAtStart();
 
     }
 
     @Test
-    public void firePositiveOneTargetNoOptional() throws Exception {
+    public void firePositiveOneTargetNoOptionalTest() throws Exception {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.fire();
@@ -125,7 +126,7 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void firePositiveWithOptional() throws Exception {
+    public void firePositiveWithOptionalTest() throws Exception {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addOptional(1);
@@ -152,7 +153,7 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void firePositiveNoTargetForOptional()  throws Exception{
+    public void firePositiveNoTargetForOptionalTest()  throws Exception{
         //even if optional has no target, you can fire
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addOptional(1);
@@ -166,7 +167,7 @@ public class TestLockRifle_1 {
 
 
     @Test
-    public void firePositiveWithTargeting() throws Exception {
+    public void firePositiveWithTargetingTest() throws Exception {
         int targetingID = 1;
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
         authorPlayer.addPowerupCard(card);
@@ -194,7 +195,7 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void firePositiveWithTargetingAndOptional() throws Exception {
+    public void firePositiveWithTargetingAndOptionalTest() throws Exception {
         int targetingID = 1;
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
         authorPlayer.addPowerupCard(card);
@@ -233,13 +234,26 @@ public class TestLockRifle_1 {
     }
 
     @Test
-    public void selectedYourself() throws Exception{
+    public void selectedYourselfFromControllerTest() throws Exception{
         controller.addReceived();
         controller.addReceived();
         PlayerMessage message = new PlayerMessage(authorPlayer.getID(), authorPlayer.getID(), playerView);
         controller.update(null, message);
         //shoot.addPlayerTarget(authorPlayer.getID());
         assertEquals("Error,you have selected yourself" + LockRifle_1.FIRST_MSG_STR, playerView.getLastStringPrinted());
+
+        PlayerMessage message2 = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, message2);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        OptionalMessage optionalMessage = new OptionalMessage(1,authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+        assertEquals(LockRifle_1.SECOND_MSG_STR, playerView.getLastStringPrinted());
+
+        PlayerMessage message3 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, message3);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
     }
 
 

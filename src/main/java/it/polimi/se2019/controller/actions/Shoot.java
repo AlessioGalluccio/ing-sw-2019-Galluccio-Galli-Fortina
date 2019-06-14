@@ -28,9 +28,9 @@ public class Shoot extends Action{
     boolean neededTargetForTargeting;   //if true, next targetPlayer is for targeting, not weapon
 
     //STRING AND MESSAGE
-    private String FIRST_MESSAGE = "Please, select a Weapon";
-    private String SECOND_MESSAGE = "Please, select a Firemode";
-    private String LAST_MESSAGE = "Please, press Fire";
+    public static final String FIRST_MESSAGE = "Please, select a Weapon";
+    public static final String SECOND_MESSAGE = "Please, select a Firemode";
+    public static final String LAST_MESSAGE = "Please, press Fire";
 
     private String SELECT_TARGET_FOR_TARGETING = "Select a target for the Targeting Scope";
 

@@ -119,26 +119,43 @@ public class Controller implements Observer {
     }
 
     public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
-        this.messageListExpected.addAll(indexExpected, messageListExpected);
+        if(indexExpected != this.messageListExpected.size() - 1){
+            this.messageListExpected.addAll(indexExpected , messageListExpected);
+        }
+        else{
+            this.messageListExpected.addAll(messageListExpected);
+        }
+
     }
 
     public void addMessageListImmediateNext(StringAndMessage messageExpected){
-        this.messageListExpected.add(indexExpected, messageExpected);
+        if(indexExpected != this.messageListExpected.size() - 1){
+            this.messageListExpected.add(indexExpected , messageExpected);
+        }
+        else{
+            this.messageListExpected.add(messageExpected);
+        }
     }
 
     public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
         this.messageListExpected.addAll(this.messageListExpected.size()- 1, messageList);
     }
 
+    public void addMessageListBeforeLastOne(StringAndMessage messageList){
+        this.messageListExpected.add(this.messageListExpected.size()- 1, messageList);
+    }
+
     public void addReceived() {
         this.indexExpected++;
     }
 
+    /*
     public void removeReceived(){
         if(indexExpected > 0){
             this.indexExpected--;
         }
     }
+     */
 
     public void setIndexExpected(int indexExpected) {
         this.indexExpected = indexExpected;

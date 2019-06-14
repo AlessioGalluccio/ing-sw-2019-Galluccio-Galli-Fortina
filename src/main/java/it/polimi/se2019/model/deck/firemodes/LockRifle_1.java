@@ -101,13 +101,12 @@ public class LockRifle_1 extends FireMode {
                     shoot.addOptionalSelected(numOptional);
                     StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                             SECOND_MSG_STR);
-                    controller.addMessageListExpected(stringAndMessage);
+                    controller.addMessageListImmediateNext(stringAndMessage);
                     shoot.addCost(COST_FIRST_OPTIONAL);
                 }
 
                 else{
-                    playerView.printFromController(NO_TARGET_NO_ACTION);
-                    throw new WrongInputException();
+                    throw new WrongInputException(NO_TARGET_NO_ACTION);
                 }
 
             }
