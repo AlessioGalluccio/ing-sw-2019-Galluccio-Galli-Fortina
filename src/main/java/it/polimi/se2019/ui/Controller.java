@@ -1256,7 +1256,7 @@ public class Controller {
     //TODO FINIRE METODO
 
     /**
-     * update weaponcards on map
+     * update weaponcards image on map
      */
     public void updateWeaponMap(){
 
@@ -1286,15 +1286,15 @@ public class Controller {
                 List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
                 for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
-                    redWeapons.get(counter).setImage(setWeaponMap(weaponCardsRed.get(counter).getID()));
+                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
                 }
 
                 for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
-                    blueWeapons.get(counter).setImage(setWeaponMap(weaponCardsBlue.get(counter).getID()));
+                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
                 }
 
                 for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
-                    yellowWeapons.get(counter).setImage(setWeaponMap(weaponCardsYellow.get(counter).getID()));
+                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
                 }
 
             }
@@ -1302,7 +1302,12 @@ public class Controller {
 
     }
 
-    public Image setWeaponMap(int weaponID){
+    /**
+     * set each weapon id with the image
+     * @param weaponID
+     * @return
+     */
+    public Image setWeapon(int weaponID){
         Image image = new Image("cards/AD_weapons_IT_0225.png");
         switch (weaponID){
             case 13: image = new Image("cards/AD_weapons_IT_022.png");
@@ -1352,6 +1357,29 @@ public class Controller {
         return image;
     }
 
+
+    /**
+     * update player's weapon images
+     */
+    public void updateWeaponPlayer(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<WeaponCard> weaponCards = clientView.getPlayerCopy().getWeaponCardList();
+                    imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
+                    imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
+                    imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
+                }
+                catch (NullPointerException e){
+
+                }
+
+
+            }
+        });
+
+    }
 
 
 
