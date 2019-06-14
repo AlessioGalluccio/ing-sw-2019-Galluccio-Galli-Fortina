@@ -234,6 +234,8 @@ public class TestLockRifle_1 {
 
     @Test
     public void selectedYourself() throws Exception{
+        controller.addReceived();
+        controller.addReceived();
         PlayerMessage message = new PlayerMessage(authorPlayer.getID(), authorPlayer.getID(), playerView);
         controller.update(null, message);
         //shoot.addPlayerTarget(authorPlayer.getID());

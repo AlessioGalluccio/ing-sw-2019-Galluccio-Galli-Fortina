@@ -279,6 +279,7 @@ public class ActionSelectedControllerState extends StateController {
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
         int messageID = arg.getMessageID();
         if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE) {
+            controller.addReceived();
             return true;
         }
         else {

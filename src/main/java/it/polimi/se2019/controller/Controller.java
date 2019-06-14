@@ -118,7 +118,7 @@ public class Controller implements Observer {
         this.messageListExpected.add(arg);
     }
 
-    public void addMessageListImmediateNext(ArrayList<StringAndMessage> messageListExpected){
+    public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(indexExpected, messageListExpected);
     }
 
@@ -126,8 +126,8 @@ public class Controller implements Observer {
         this.messageListExpected.add(indexExpected, messageExpected);
     }
 
-    public void addMessageListBeforeLastOne(ArrayList<StringAndMessage> messageListExpected){
-        this.messageListExpected.addAll(messageListExpected.size()- 2, messageListExpected);
+    public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
+        this.messageListExpected.addAll(this.messageListExpected.size()- 1, messageList);
     }
 
     public void addReceived() {
