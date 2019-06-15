@@ -37,4 +37,14 @@ public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
     public int getAck() {
         return ack;
     }
+
+    @Override
+    public int getX() {
+        return 0;
+    }
+
+    @Override
+    public int getY() {
+        return 0;
+    }
 }

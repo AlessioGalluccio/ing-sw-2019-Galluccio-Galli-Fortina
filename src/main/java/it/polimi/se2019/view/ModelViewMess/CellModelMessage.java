@@ -32,4 +32,14 @@ public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage
     public int getAck() {
         return ack;
     }
+
+    @Override
+    public int getX() {
+        return cellCopy.getCoordinateX();
+    }
+
+    @Override
+    public int getY() {
+        return cellCopy.getCoordinateY();
+    }
 }

@@ -312,6 +312,7 @@ public class Player extends Observable implements Target, Serializable {
         //If player is already kill throw exception, he cannot receive damage!
         if(isOverKilled()) throw new NotPresentException(toString() + " has been already over killed");
         damage.add(enemy);
+        notifyObservers(new PlayerModelMessage(this.clone()));
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
         if(isDead()) {
             bonusPowerup=true;

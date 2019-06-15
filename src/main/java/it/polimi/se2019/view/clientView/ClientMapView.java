@@ -6,8 +6,8 @@ import it.polimi.se2019.view.remoteView.MapView;
 
 public class ClientMapView extends MapView {
     private UiInterface ui;
-    private boolean first;
-    //private int[][]  lastAck= new int[4][3];
+    private boolean first = true;
+    private int[][]  lastAck = new int[4][3];
 
     public ClientMapView(UiInterface ui) {
         this.ui = ui;
@@ -27,10 +27,14 @@ public class ClientMapView extends MapView {
     @Override
     public synchronized void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerMapViewMessage message = (HandlerMapViewMessage) arg;
-       // if(message.getAck()>lastAck) {
-        //    lastAck = message.getAck();
+        if(first) {
             message.handleMessage(this);
-            // synchronized(ui) ui.printMap();
-       // }
+            first=false;
+        }
+        else if(message.getAck()>lastAck[message.getX()][message.getY()]) {
+            lastAck[message.getX()][message.getY()] = message.getAck();
+            message.handleMessage(this);
+        }
+        // synchronized(ui) ui.printMap();
     }
 }
