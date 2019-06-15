@@ -13,8 +13,6 @@ public interface UiInterface {
 
     void login(boolean success, boolean isFirst);
 
-    void selectedMap(int choosMap);
-
     void startGame();
 
     void disconnect(int matchID);

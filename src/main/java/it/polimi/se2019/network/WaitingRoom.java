@@ -3,7 +3,7 @@ package it.polimi.se2019.network;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
+import it.polimi.se2019.network.messages.HandlerConfigMessage;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;

@@ -6,12 +6,12 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Client;
-import it.polimi.se2019.network.configureMessage.SettingMessage;
+import it.polimi.se2019.network.messages.SettingMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
-import it.polimi.se2019.network.configureMessage.LoginMessage;
+import it.polimi.se2019.network.messages.LoginMessage;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,8 +24,7 @@ public class ClientView extends View /*View implement observer/observable*/{
     private ArrayList<Target> selectedTarget;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
-    private Client client;
-    private UiInterface ui;
+    private transient UiInterface ui;
     private int lastAck;
     private int matchId = 100;
 
@@ -283,8 +282,8 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param string
      */
     @Override
-    public void printFromController(String string) {
-        //TODO Call method from UiInterface
+    public synchronized void printFromController(String string) {
+        ui.printFromController(string);
     }
 
     /**
@@ -371,7 +370,8 @@ public class ClientView extends View /*View implement observer/observable*/{
         this.ui = ui;
     }
 
-    public  void shurdownServer() {
+    public  void shutdownServer() {
+        Client client = (Client) getObservers().get(0);
         client.unreferenced();
     }
 }

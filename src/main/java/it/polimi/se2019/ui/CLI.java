@@ -19,7 +19,7 @@ public class CLI implements UiInterface {
     private SkullBoardView skullBoardView;
     private List<EnemyView> enemyViews = new LinkedList<>();
     private MapView mapView;
-    private ParserCLI parser; //TODO crearlo dopo il login
+    private ParserCLI parser; //TODO crearlo allo startGame()
 
     @SuppressWarnings("squid:S106")
     private static PrintWriter out = new PrintWriter(System.out, true);
@@ -46,14 +46,12 @@ public class CLI implements UiInterface {
         }
     }
 
-    @Override
-    public void selectedMap(int chosenMap) {
-    }
 
     @Override
     public void startGame() {
-        out.println(ConsoleColor.BLACK + "START" + ConsoleColor.RESET);
+        out.println(ConsoleColor.BLACK + "\tSTART\n" + ConsoleColor.RESET);
         printAll();
+        in.close();
     }
 
     @Override
@@ -88,7 +86,7 @@ public class CLI implements UiInterface {
 
     @Override
     public void printFromController(String message) {
-
+        out.println(message);
     }
 
     @Override

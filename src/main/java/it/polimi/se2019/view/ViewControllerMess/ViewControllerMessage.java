@@ -1,8 +1,8 @@
 package it.polimi.se2019.view.ViewControllerMess;
 
 import it.polimi.se2019.controller.StateController;
-import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
-import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
+import it.polimi.se2019.network.messages.HandlerServerMessage;
+import it.polimi.se2019.network.messages.SwitchServerMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 

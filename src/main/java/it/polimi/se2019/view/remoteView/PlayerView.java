@@ -91,7 +91,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     @Override
     public void printFromController(String string) {
-        this.lastStringPrinted = string;
+        this.lastStringPrinted = string; //For testing
         networkHandler.send(string);
     }
 

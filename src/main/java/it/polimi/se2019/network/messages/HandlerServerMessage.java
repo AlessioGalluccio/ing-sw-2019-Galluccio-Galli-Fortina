@@ -1,4 +1,4 @@
-package it.polimi.se2019.network.configureMessage;
+package it.polimi.se2019.network.messages;
 
 
 public interface HandlerServerMessage {
