@@ -7,13 +7,15 @@ import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 
+import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.rmi.server.Unreferenced;
 import java.util.Observer;
 import java.util.List;
 import java.util.LinkedList;
 
-public abstract class Client extends UnicastRemoteObject implements Observer {
+public abstract class Client extends UnicastRemoteObject implements Observer, Unreferenced {
 
     protected ClientView clientView;
     private ClientSkullBoardView skullBoardView;
@@ -23,7 +25,6 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     private String ID;
 
     protected Client() throws RemoteException {
-        super();
     }
 
     /**
@@ -49,6 +50,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
 
     public void handleDisconnection() {
         clientView.handleDisconnection();
+        unreferenced();
     }
 
     public synchronized void handleStartGame(int matchID) {
@@ -99,4 +101,11 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         clientView.printFromController(string);
     }
 
+    public void unreferenced() {
+        try {
+            UnicastRemoteObject.unexportObject(this, true);
+        } catch (NoSuchObjectException e) {
+            e.printStackTrace();
+        }
+    }
 }

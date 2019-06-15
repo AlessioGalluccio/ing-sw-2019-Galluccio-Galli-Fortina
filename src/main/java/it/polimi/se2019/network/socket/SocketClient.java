@@ -83,9 +83,9 @@ public class SocketClient extends Client {
      */
     private void closeAll() {
         try {
+            socket.close();
             printSocket.close();
             scannerSocket.close();
-            socket.close();
         } catch (IOException e) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't close client socket", e);
         } finally {

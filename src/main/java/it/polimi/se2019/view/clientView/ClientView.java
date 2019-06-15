@@ -371,6 +371,9 @@ public class ClientView extends View /*View implement observer/observable*/{
         this.ui = ui;
     }
 
+    public  void shurdownServer() {
+        client.unreferenced();
+    }
 }
 
 
