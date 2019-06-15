@@ -33,9 +33,16 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     private static final String KILLED = "You killed ths Player";
 
     private static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
-    private static final String CANT_PAY = "You don't have enough Ammo for this";
+    private static final String CANT_PAY = "You don't have enough Ammo for this. ";
 
-    protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted";
+    protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
+
+    //common used in firemodes
+    protected static final String CANT_DO = "You can't do this.  ";
+    protected static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
+    protected static final String SELECTED_YOURSELF = "Error,you have selected yourself. ";
+    protected static final String NOT_VISIBLE = "Error,this player is not visible. ";
+    protected static final String CANT_DO_FIRE = "You can't do fire now. ";
 
 
     public GameHandler getGameHandler() {
@@ -228,6 +235,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     //USED ONLY IN SHOOT AND NOT IN OTHER ACTIONS
 
     public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
+        //must be overridden
         throw new WrongInputException();
     }
 

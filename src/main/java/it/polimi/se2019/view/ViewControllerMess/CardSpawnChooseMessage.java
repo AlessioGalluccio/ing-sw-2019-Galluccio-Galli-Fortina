@@ -41,6 +41,6 @@ public class CardSpawnChooseMessage extends ViewControllerMessage {
 
     @Override
     public void handle(StateController stateController) {
-        stateController.handleCardSpawn(cardChoosen, cardDiscarded);
+        //stateController.handleCardSpawn(cardChoosen, cardDiscarded);
     }
 }
