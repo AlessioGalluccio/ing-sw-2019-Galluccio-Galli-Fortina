@@ -108,4 +108,8 @@ public abstract class Client extends UnicastRemoteObject implements Observer, Un
             e.printStackTrace();
         }
     }
+
+    public void handleTurnMessage(String nickname) {
+        clientView.handleTurnMessage(nickname);
+    }
 }

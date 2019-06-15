@@ -19,6 +19,7 @@ public class CLI implements UiInterface {
     private SkullBoardView skullBoardView;
     private List<EnemyView> enemyViews = new LinkedList<>();
     private MapView mapView;
+    private boolean yourTurn;
     private ParserCLI parser; //TODO crearlo allo startGame()
 
     @SuppressWarnings("squid:S106")
@@ -115,8 +116,11 @@ public class CLI implements UiInterface {
     }
 
     @Override
-    public void turn() {
-
+    public void turn(String nickname, boolean yourTurn) {
+        this.yourTurn = yourTurn;
+        printAll();
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧");
+        else out.println("It's " + nickname + "'s turn\tಠᴗಠ");
     }
 
     public synchronized void start() {

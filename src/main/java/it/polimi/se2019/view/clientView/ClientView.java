@@ -374,6 +374,11 @@ public class ClientView extends View /*View implement observer/observable*/{
         Client client = (Client) getObservers().get(0);
         client.unreferenced();
     }
+
+    public void handleTurnMessage(String nickname) {
+        if(nickname.equals(playerCopy.getNickname())) ui.turn(nickname, true);
+        else ui.turn(nickname, false);
+    }
 }
 
 

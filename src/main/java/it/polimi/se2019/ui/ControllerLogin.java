@@ -215,7 +215,7 @@ public class ControllerLogin implements UiInterface {
     }
 
     @Override
-    public void turn() {
+    public void turn(String nickname, boolean yourTurn) {
 
     }
 

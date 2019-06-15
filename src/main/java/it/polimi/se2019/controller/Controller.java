@@ -37,6 +37,7 @@ public class Controller implements Observer {
         this.numOfActionTaken = 0;
         this.playerAuthor = playerAuthor;
         this.state = new NotYourTurnState(this, gameHandler);
+        this.playerView=playerView;
     }
 
     /////////////////GETTERS

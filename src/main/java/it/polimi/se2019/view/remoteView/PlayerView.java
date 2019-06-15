@@ -82,7 +82,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     public void setPossibleTargets(List<? extends Target> targets){
         this.possibleTargets = (ArrayList<? extends Target>) targets;
-        networkHandler.update(null, new PossibleTargetMessage(targets));
+        if(networkHandler!=null) networkHandler.update(null, new PossibleTargetMessage(targets));
     }
 
     /**
@@ -92,7 +92,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
     @Override
     public void printFromController(String string) {
         this.lastStringPrinted = string; //For testing
-        networkHandler.send(string);
+        if(networkHandler!=null) networkHandler.send(string);
     }
 
     /**
