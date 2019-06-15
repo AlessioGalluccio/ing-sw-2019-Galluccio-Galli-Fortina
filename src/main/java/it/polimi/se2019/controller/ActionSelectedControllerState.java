@@ -16,8 +16,6 @@ public class ActionSelectedControllerState extends StateController {
 
     private Player playerAuthor;
     private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private Action action;
     private static final int FIRST_MESSAGE = 0;
     private String errorString;
@@ -27,8 +25,7 @@ public class ActionSelectedControllerState extends StateController {
 
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;

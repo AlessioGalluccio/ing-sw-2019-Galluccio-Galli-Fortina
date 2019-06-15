@@ -1,6 +1,8 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
@@ -30,6 +32,17 @@ public abstract class StateController {
 
     public static final String CANT_DO_ALREADY_RELOADED = "You have already reloaded. ";
     public static final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";
+
+
+    protected Controller controller;
+    protected GameHandler gameHandler;
+
+
+    public StateController(Controller controller, GameHandler gameHandler) {
+        this.controller = controller;
+        this.gameHandler = gameHandler;
+    }
+
     /**
      * used by the controller to pass the new message, the other methods are used by messages themselves
      * @param arg
@@ -68,12 +81,23 @@ public abstract class StateController {
 
     public abstract void handleFire();
 
-    public abstract void handleReconnection(boolean isConnected);
+    public void handleReconnection(boolean isConnected){
+        //TODO controlla da sistemare sicuramente
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
+            gameHandler.nextTurn();
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
+    }
 
     public abstract void endAction();
 
     public abstract void handleDiscardPowerup(int powerupID);
 
     public abstract void handleDiscardWeapon(int weaponID);
+
+    public void handleCharacter(int characterID){
+        //do nothing
+    }
 
 }

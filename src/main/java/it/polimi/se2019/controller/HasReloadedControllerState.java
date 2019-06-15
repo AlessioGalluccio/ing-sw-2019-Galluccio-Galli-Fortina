@@ -10,8 +10,6 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 public class HasReloadedControllerState extends StateController {
     private Player player;
     private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private String errorString;
     private String stringToPlayerView;
 
@@ -19,8 +17,7 @@ public class HasReloadedControllerState extends StateController {
 
 
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }

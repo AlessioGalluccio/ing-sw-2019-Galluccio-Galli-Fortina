@@ -18,8 +18,7 @@ public class DisconnectedControllerState extends StateController {
 
 
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
     }

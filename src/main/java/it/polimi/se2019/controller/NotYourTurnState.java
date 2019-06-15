@@ -12,8 +12,6 @@ public class NotYourTurnState extends StateController {
 
     private Player player;
     private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private String errorString;
     private String stringToPlayerView;
 
@@ -21,8 +19,7 @@ public class NotYourTurnState extends StateController {
 
     public NotYourTurnState(Controller controller, GameHandler gameHandler) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         controller.setNumOfActionTaken(0);
         this.player = controller.getAuthor();
         this.playerView = controller.getPlayerView();
