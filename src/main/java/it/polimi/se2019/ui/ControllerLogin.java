@@ -5,6 +5,7 @@ import it.polimi.se2019.network.configureMessage.LoginMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -137,14 +138,14 @@ public class ControllerLogin implements UiInterface {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnect(int matchID) {
 
     }
 
     @Override
-    public void setSkullBoard(SkullBoardView skullBoardView) {
-        this.skullBoardView = skullBoardView;
-        //Controller.setSkullBoard(skullBoardView);
+    public void setSkullBoard(SkullBoardView skullBoard) {
+        skullBoardView = skullBoard;
+        Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     @Override
@@ -182,5 +183,46 @@ public class ControllerLogin implements UiInterface {
     public void updateSetting(int choosenMap, int skull){
         this.updateSkullMap(skull);
         this.selectedMap(choosenMap);
+    }
+
+    /**
+     * update weapons images on map
+     */
+    public void updateWeaponMap(){
+        controller.updateWeaponMap();
+    }
+
+    /**
+     * update player' weapons images
+     */
+    public void updateWeaponPlayer(){
+        controller.updateWeaponPlayer();
+    }
+
+    /**
+     * update player ammo
+     */
+    public void updatePlayerAmmo(){
+        try {
+            int red = clientView.getPlayerCopy().getAmmo().getRedAmmo();
+            int blue = clientView.getPlayerCopy().getAmmo().getBlueAmmo();
+            int yellow = clientView.getPlayerCopy().getAmmo().getYellowAmmo();
+            controller.updatePlayerAmmo(red, blue, yellow);
+        }
+        catch (NullPointerException e){
+
+        }
+
+    }
+
+    /**
+     * update game display
+     */
+    public void updateMap(){
+
+        //TODO mettere tutti i metodi di aggiornamento
+        updateWeaponMap();
+        updateWeaponPlayer();
+        updatePlayerAmmo();
     }
 }

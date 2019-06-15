@@ -12,6 +12,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
@@ -110,6 +111,7 @@ public class Controller {
     public TabPane container2;
     public AnchorPane enemy1back;
     ClientView clientView;
+    static ClientSkullBoardView skullBoardView;
     ClientMapView mapView;
     ClientEnemyView enemyView1;
     ClientEnemyView enemyView2;
@@ -438,6 +440,27 @@ public class Controller {
     public ImageView imSkull7;
     @FXML
     public ImageView imSkull8;
+
+    @FXML
+    public ImageView bammo1;
+    @FXML
+    public ImageView bammo2;
+    @FXML
+    public ImageView bammo3;
+    @FXML
+    public ImageView rammo1;
+    @FXML
+    public ImageView rammo2;
+    @FXML
+    public ImageView rammo3;
+    @FXML
+    public ImageView yammo1;
+    @FXML
+    public ImageView yammo2;
+    @FXML
+    public ImageView yammo3;
+
+
 
 
 
@@ -1212,12 +1235,13 @@ public class Controller {
 
 
     public void updateMap(int choosenMap){
+
         this.choosenMap= choosenMap;
     }
 
 
     /**
-     * update skulls' imageviews on map 
+     * update skulls' imageviews on map
      * @param skullNumber
      */
     public void updateSkullBoard(String skullNumber){
@@ -1256,36 +1280,58 @@ public class Controller {
     //TODO FINIRE METODO
 
     /**
-     * update weaponcard on map
+     * update weaponcards image on map
      */
     public void updateWeaponMap(){
-        ArrayList<ImageView> weapons = new ArrayList();
-        weapons.add(imRedWeapon1);
-        weapons.add(imRedWeapon2);
-        weapons.add(imRedWeapon3);
-        weapons.add(imBlueWeapon1);
-        weapons.add(imBlueWeapon2);
-        weapons.add(imBlueWeapon3);
-        weapons.add(imYellowWeapon1);
-        weapons.add(imYellowWeapon2);
-        weapons.add(imYellowWeapon3);
-        List<CellSpawn> cellSpawn = mapView.getCellSpawn();
-        List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
-        List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
-        List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
+                ArrayList<ImageView> redWeapons = new ArrayList();
+                ArrayList<ImageView> blueWeapons = new ArrayList();
+                ArrayList<ImageView> yellowWeapons = new ArrayList();
 
+                redWeapons.add(imRedWeapon1);
+                redWeapons.add(imRedWeapon2);
+                redWeapons.add(imRedWeapon3);
 
-        for(int counter = 0; counter< weapons.size(); counter++){
+                blueWeapons.add(imBlueWeapon1);
+                blueWeapons.add(imBlueWeapon2);
+                blueWeapons.add(imBlueWeapon3);
 
-            //weapons.get(counter).setImage(setWeaponMap));
-        }
+                yellowWeapons.add(imYellowWeapon1);
+                yellowWeapons.add(imYellowWeapon2);
+                yellowWeapons.add(imYellowWeapon3);
 
+                List<CellSpawn> cellSpawn = mapView.getCellSpawn();
+                List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+                List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+                List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+
+                for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
+                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
+                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
+                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+                }
+
+            }
+        });
 
     }
 
-    public Image setWeaponMap(int weaponID){
+    /**
+     * set each weapon id with the image
+     * @param weaponID
+     * @return
+     */
+    public Image setWeapon(int weaponID){
         Image image = new Image("cards/AD_weapons_IT_0225.png");
         switch (weaponID){
             case 13: image = new Image("cards/AD_weapons_IT_022.png");
@@ -1336,6 +1382,138 @@ public class Controller {
     }
 
 
+    /**
+     * update player's weapon images
+     */
+    public void updateWeaponPlayer(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<WeaponCard> weaponCards = clientView.getPlayerCopy().getWeaponCardList();
+                    imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
+                    imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
+                    imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
+                }
+                catch (NullPointerException e){
+
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update Player's Red Ammo
+     * @param red
+     */
+    public void updatePlayerRedAmmo(String red){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> redAmmo = new ArrayList();
+                redAmmo.add(rammo1);
+                redAmmo.add(rammo2);
+                redAmmo.add(rammo3);
+                int redNumber = Integer.parseInt(red);
+                redNumber--;
+                for(int counter = 0; counter< redAmmo.size(); counter++){
+                    redAmmo.get(counter).setVisible(false);
+                }
+                while(redNumber>=0) {
+                    redAmmo.get(redNumber).setVisible(true);
+                    redNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+    /**
+     * update Player's Blue Ammo
+     * @param blu
+     */
+    public void updatePlayerBlueAmmo(String blu){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> blueAmmo = new ArrayList();
+                blueAmmo.add(bammo1);
+                blueAmmo.add(bammo2);
+                blueAmmo.add(bammo3);
+                int blueNumber = Integer.parseInt(blu);
+                blueNumber--;
+                for(int counter = 0; counter< blueAmmo.size(); counter++){
+                    blueAmmo.get(counter).setVisible(false);
+                }
+                while(blueNumber>=0) {
+                    blueAmmo.get(blueNumber).setVisible(true);
+                    blueNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update Player's Yellow Ammo
+     * @param yellow
+     */
+    public void updatePlayerYellowAmmo(String yellow){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> yellowAmmo = new ArrayList();
+                yellowAmmo.add(bammo1);
+                yellowAmmo.add(bammo2);
+                yellowAmmo.add(bammo3);
+                int yellowNumber = Integer.parseInt(yellow);
+                yellowNumber--;
+                for(int counter = 0; counter< yellowAmmo.size(); counter++){
+                    yellowAmmo.get(counter).setVisible(false);
+                }
+                while(yellowNumber>=0) {
+                    yellowAmmo.get(yellowNumber).setVisible(true);
+                    yellowNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update all Player's ammo
+     * @param red
+     * @param blue
+     * @param yellow
+     */
+    public void updatePlayerAmmo(int red, int blue, int yellow){
+        String redAmmo = String.valueOf(red);
+        String blueAmmo = String.valueOf(blue);
+        String yellowAmmo = String.valueOf(yellow);
+
+        updatePlayerRedAmmo(redAmmo);
+        updatePlayerBlueAmmo(blueAmmo);
+        updatePlayerYellowAmmo(yellowAmmo);
+    }
+
 
 
     public void printf(String string){
@@ -1346,6 +1524,9 @@ public class Controller {
             }
         });
 
+    }
+    static void setSkullBoard(ClientSkullBoardView sbv) {
+        skullBoardView = sbv;
     }
 }
 

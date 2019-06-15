@@ -147,18 +147,7 @@ public class Player extends Observable implements Target, Serializable {
      * @return Deep copy of player's weapon card list
      */
     public List<WeaponCard> getWeaponCardList() {
-        /*
-        GsonBuilder g = new GsonBuilder()
-                .registerTypeAdapter(WeaponCard.class, new JsonAdapter<WeaponCard>())
-                .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>());
-        Gson gson = g.create();
-
-        Type TYPE = new TypeToken<List<WeaponCard>>() {
-        }.getType();
-
-        return gson.fromJson(gson.toJson(weaponCardList, TYPE), TYPE);
-        */
-        return weaponCardList;
+        return new ArrayList<>(weaponCardList);
     }
 
     /**
@@ -246,8 +235,7 @@ public class Player extends Observable implements Target, Serializable {
      */
     public void addPoints(int num) {
         points.addNewPoints(num);
-
-        //TODO notify() ??
+        notifyObservers(new PlayerModelMessage(this.clone()));
     }
 
     /**
@@ -661,7 +649,7 @@ public class Player extends Observable implements Target, Serializable {
         for(Player p : damage) {
             s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
         }
-        s+="\033[3m (remember frenzy actions)";
+        s+="\033[3m (remember adrenaline actions)";
         s+=ConsoleColor.RESET+"\n  Skulls: ";
         if(!isFrenzyDeath) s+="8 6 4 2 1 1 \t";
         else s+="2 1 1 1 ";

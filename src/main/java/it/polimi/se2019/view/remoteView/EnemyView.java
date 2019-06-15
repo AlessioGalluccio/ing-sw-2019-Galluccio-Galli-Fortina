@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
-public class EnemyView extends Observable implements Observer, Serializable, Printable {
+public class EnemyView implements Observer, Serializable, Printable {
 
     private int ID;
     private String nickname;

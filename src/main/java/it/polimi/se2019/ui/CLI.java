@@ -14,7 +14,7 @@ import java.util.*;
 import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
-    private final static int MIN_SKULL = 5;
+    private final int MIN_SKULL = 5;
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
@@ -58,7 +58,7 @@ public class CLI implements UiInterface {
     }
 
     @Override
-    public void disconnect() {
+    public void disconnect(int matchID) {
         //TODO chiudere tutti i thread (parser) e terminare applicazione
         online=false;
         out.println("\n");
@@ -67,7 +67,7 @@ public class CLI implements UiInterface {
                 "OH NO!  ಥ_ಥ \nYou have been disconnected" +
                 ConsoleColor.RESET);
         out.println("If the game has started and you want to reconnect to the same match remember this ID: "
-                + ConsoleColor.BLACK_BOLD + view.getMatchId() + ConsoleColor.RESET );
+                + ConsoleColor.BLACK_BOLD + matchID + ConsoleColor.RESET );
         out.println("\nThank you for playing at:");
         printLogo();
     }
@@ -149,6 +149,7 @@ public class CLI implements UiInterface {
     private void chooseSetting() {
         int map = 0;
         do {
+            if(map!=0) out.println("You can choose only between 1-4");
             try{
                 out.println("Which map do you want?");
                 out.println("\t1. " + Map1.getDescription());
@@ -165,6 +166,7 @@ public class CLI implements UiInterface {
 
         int skulls=0;
         do{
+            if(skulls!=0) out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
             try {
                 out.println("How many skulls?");
                 skulls = in.nextInt();
@@ -178,6 +180,7 @@ public class CLI implements UiInterface {
         int decision = 0;
         boolean sd = false;
         do {
+            if(decision!=0) out.println("You can't insert only 1 or 2");
             try {
                 out.println("Do you wanna play with sudden death?");
                 out.println("\t1. Yes");
@@ -186,8 +189,6 @@ public class CLI implements UiInterface {
                 in.skip("\n");
                 if (decision == 1) {
                     sd = true;
-                } else if (decision == 2) {
-                    sd = false;
                 }
             }catch (InputMismatchException e) {
                 out.println("You can't insert only 1 or 2");
