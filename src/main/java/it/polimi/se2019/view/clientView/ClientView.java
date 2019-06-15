@@ -333,7 +333,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param   arg   The message with which update the player board
      */
     @Override
-    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
+    public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
         if(message.getAck()>lastAck) {
             lastAck = message.getAck();

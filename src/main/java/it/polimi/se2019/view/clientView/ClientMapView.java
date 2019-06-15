@@ -24,7 +24,7 @@ public class ClientMapView extends MapView {
      * @param   arg   The message with which update the map
      */
     @Override
-    public void update(java.util.Observable o /*Will be always null*/, Object arg) {
+    public synchronized void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerMapViewMessage message = (HandlerMapViewMessage) arg;
         if(message.getAck()>lastAck) {
             lastAck = message.getAck();
