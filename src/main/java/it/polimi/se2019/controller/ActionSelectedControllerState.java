@@ -29,14 +29,14 @@ public class ActionSelectedControllerState extends StateController {
         this.playerAuthor = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;
+        this.controller.resetMessages();
         this.controller.addMessageListExpected(action.getStringAndMessageExpected());
     }
 
 
     @Override
     public void handleAction(int actionID) {
-        //TODO
-
+        //do nothing, should not arrive here
     }
 
     @Override
@@ -58,20 +58,6 @@ public class ActionSelectedControllerState extends StateController {
         }catch (WrongInputException e){
             errorString = e.getMessage();
         }
-        /*
-        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
-        FireMode fireMode = gameHandler.getFireModeByID(firemodeID);
-        AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
-
-        if(!player.canPayAmmo(cost)){
-            controller.getLastReceivedMessage().getAuthorView().printFromController("Not enough ammo for this firemode");
-            controller.removeReceived();
-        }
-        else{
-            //TODO sistema
-            //controller.sendTargetsToView(controller.getLastReceivedMessage());
-        }
-        */
     }
 
     @Override

@@ -10,17 +10,15 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class DisconnectedControllerState extends StateController {
     private Player player;
-    private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
-    private String errorString;
-    private String stringToPlayerView;
+    private String stringToPlayerView = STILL_DISCONNECTED;
+
+    //this string is for finding errors in testing. Should never appear
+    public static final String STILL_DISCONNECTED = "Still disconnecte";
 
 
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
     }
 
     @Override
@@ -103,12 +101,12 @@ public class DisconnectedControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        //do nothing
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        //do nothing
     }
 
 

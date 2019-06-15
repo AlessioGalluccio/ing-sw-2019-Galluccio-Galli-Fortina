@@ -124,14 +124,15 @@ public class FirstTurnState extends StateController {
             errorString = CANT_DO_THIS;
         }
         else{
-            PowerupCard powerupCard = gameHandler.getPowerupCardByID(powerupID);
-            String color = powerupCard.getColor();
-            Room room = gameHandler.getRoomByID(color);
-            Cell cellSpawn = room.getSpawnCell();
-            playerAuthor.setPosition(cellSpawn);
+            errorString = respawnPlayerWithPowerup(playerAuthor, powerupID);
 
-            //spawn process is finished. we go to the next state
-            controller.setState(new EmptyControllerState(controller, gameHandler));
+            //if it's null, there are no errors. If it is, we don't change the state and we wait another message
+            //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
+            if(errorString != null){
+                //spawn process is finished. we go to the next state
+                controller.setState(new EmptyControllerState(controller, gameHandler));
+            }
+
         }
     }
 
@@ -144,6 +145,7 @@ public class FirstTurnState extends StateController {
     public void handleCharacter(int characterID) {
         //TODO
         //playerAuthor.setCharacter(new Character());
+        //controller.addReceived();
     }
 
     @Override

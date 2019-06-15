@@ -3,9 +3,12 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 public abstract class StateController {
@@ -94,6 +97,28 @@ public abstract class StateController {
 
     public void handleCharacter(int characterID){
         //do nothing
+    }
+
+    //HELPER METHODS
+
+    /**
+     * handle the respwawn of the player. Returns a message string if there's an error
+     * @param playerToRespawn the player you want to repawn
+     * @param powerupID the powerup discarded by the player
+     * @return a string message if there's an error. Otherwise null.
+     */
+    protected String respawnPlayerWithPowerup(Player playerToRespawn, int powerupID){
+        PowerupCard powerupCard = gameHandler.getPowerupCardByID(powerupID);
+
+        if(!playerToRespawn.getPowerupCardList().contains(powerupCard)){
+            return CARD_NOT_PRESENT;
+        }
+
+        String color = powerupCard.getColor();
+        Room room = gameHandler.getRoomByID(color);
+        Cell cellSpawn = room.getSpawnCell();
+        playerToRespawn.setPosition(cellSpawn);
+        return null;
     }
 
 }

@@ -108,11 +108,15 @@ public class MustRespawnControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO fai spawn
-        gameHandler.nextTurn();   //TODO potrebbe creare
-        //     problemi di deadlock, nel caso in cui gamehandler cambi lo stato prima di
-        //     questo
-        controller.setState(new NotYourTurnState(controller, gameHandler));
+
+        errorString = respawnPlayerWithPowerup(controller.getAuthor(), powerupID);
+        //if it's null, there are no errors. If it is, we don't change the state and we wait another message
+        //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
+        if (errorString != null) {
+            //the NotYourTurnState will do the gamehandler.nextTurn()
+            controller.setState(new NotYourTurnState(controller, gameHandler));
+
+        }
     }
 
     @Override
@@ -124,7 +128,13 @@ public class MustRespawnControllerState extends StateController {
     @Override
     public String handle(ViewControllerMessage arg) {
         arg.handle(this);
-        stringToPlayerView = MUST_RESPAWN;
+        if(errorString != null){
+            stringToPlayerView = errorString + MUST_RESPAWN;
+            errorString = null;
+        }
+        else{
+            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+        }
         return stringToPlayerView;
     }
 

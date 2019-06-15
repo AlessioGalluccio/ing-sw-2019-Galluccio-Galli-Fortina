@@ -59,11 +59,6 @@ public class EmptyControllerState extends StateController {
 
     }
 
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO ??? cosa è?
-        youCantDoThis();
-    }
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
@@ -73,11 +68,6 @@ public class EmptyControllerState extends StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         youCantDoThis();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO
     }
 
     @Override
