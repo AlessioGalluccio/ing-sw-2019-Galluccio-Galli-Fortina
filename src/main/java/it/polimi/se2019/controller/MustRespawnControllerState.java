@@ -147,6 +147,5 @@ public class MustRespawnControllerState extends StateController {
     }
 
     private void youMustRespawn(){
-        controller.removeReceived();
     }
 }

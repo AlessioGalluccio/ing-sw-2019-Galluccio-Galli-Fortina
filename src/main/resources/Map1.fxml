@@ -34,7 +34,7 @@
             <Blend />
          </effect>
       </Button>
-      <Button fx:id="redweapon2" layoutX="1.0" layoutY="304.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
+      <Button fx:id="redWeapon2" layoutX="1.0" layoutY="304.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
       <Button fx:id="redWeapon3" layoutX="1.0" layoutY="390.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
       <Button fx:id="yellowWeapon1" layoutX="691.0" layoutY="341.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
       <Button fx:id="yellowWeapon2" layoutX="691.0" layoutY="426.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0" />
@@ -647,12 +647,12 @@
             <Image url="@Icon/Rammo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rammo11" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yammo1" fitHeight="31.0" fitWidth="31.0" layoutX="670.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rammo111" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yammo2" fitHeight="31.0" fitWidth="31.0" layoutX="709.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Yammo.png" />
          </image>
@@ -664,14 +664,37 @@
       </ImageView>
       <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Your Points : " textFill="WHITE" />
       <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" textFill="WHITE" />
-      <ImageView fx:id="imSkull8" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull7" fitHeight="38.0" fitWidth="31.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull6" fitHeight="38.0" fitWidth="31.0" layoutX="124.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull5" fitHeight="38.0" fitWidth="31.0" layoutX="157.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull4" fitHeight="38.0" fitWidth="31.0" layoutX="191.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull3" fitHeight="38.0" fitWidth="31.0" layoutX="225.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull2" fitHeight="38.0" fitWidth="31.0" layoutX="259.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imSkull1" fitHeight="38.0" fitWidth="31.0" layoutX="293.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imSkull8" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull7" fitHeight="38.0" fitWidth="31.0" layoutX="90.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull6" fitHeight="38.0" fitWidth="31.0" layoutX="124.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull5" fitHeight="38.0" fitWidth="31.0" layoutX="157.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull4" fitHeight="38.0" fitWidth="31.0" layoutX="191.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull3" fitHeight="38.0" fitWidth="31.0" layoutX="225.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull2" fitHeight="38.0" fitWidth="31.0" layoutX="259.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
+      <ImageView fx:id="imSkull1" fitHeight="38.0" fitWidth="31.0" layoutX="293.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@Icon/skull.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>

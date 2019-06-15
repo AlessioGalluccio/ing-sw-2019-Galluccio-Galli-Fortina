@@ -21,7 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import static it.polimi.se2019.ui.Controller.choosenMap;
+
 
 public class ControllerLogin implements UiInterface {
 
@@ -121,7 +121,7 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void selectedMap(int choosMap){
-        choosenMap = choosMap;
+        controller.updateMap(choosMap);
     }
 
     /**
@@ -164,5 +164,65 @@ public class ControllerLogin implements UiInterface {
     public void updatePlayerPoints(){
         Player player = clientView.getPlayerCopy();
         controller.updatePoints(player.getNumPoints());
+    }
+
+    /**
+     * update number of skulls on gui map
+     * @param skullNumber
+     */
+    public void updateSkullMap(int skullNumber){
+        String skullNumberString = String.valueOf(skullNumber);
+        controller.updateSkullBoard(skullNumberString);
+    }
+
+    /**
+     * update initial setting of map number and skulls
+     * @param choosenMap
+     * @param skull
+     */
+    public void updateSetting(int choosenMap, int skull){
+        this.updateSkullMap(skull);
+        this.selectedMap(choosenMap);
+    }
+
+    /**
+     * update weapons images on map
+     */
+    public void updateWeaponMap(){
+        controller.updateWeaponMap();
+    }
+
+    /**
+     * update player' weapons images
+     */
+    public void updateWeaponPlayer(){
+        controller.updateWeaponPlayer();
+    }
+
+    /**
+     * update player ammo
+     */
+    public void updatePlayerAmmo(){
+        try {
+            int red = clientView.getPlayerCopy().getAmmo().getRedAmmo();
+            int blue = clientView.getPlayerCopy().getAmmo().getBlueAmmo();
+            int yellow = clientView.getPlayerCopy().getAmmo().getYellowAmmo();
+            controller.updatePlayerAmmo(red, blue, yellow);
+        }
+        catch (NullPointerException e){
+
+        }
+
+    }
+
+    /**
+     * update game display
+     */
+    public void updateMap(){
+
+        //TODO mettere tutti i metodi di aggiornamento
+        updateWeaponMap();
+        updateWeaponPlayer();
+        updatePlayerAmmo();
     }
 }

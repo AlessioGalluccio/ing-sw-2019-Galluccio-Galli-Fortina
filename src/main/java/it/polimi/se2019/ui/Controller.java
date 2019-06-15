@@ -31,6 +31,7 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -162,7 +163,7 @@ public class Controller {
     @FXML
     public Button showMap;
 
-    public static int choosenMap =0;
+    public int choosenMap =0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -423,6 +424,44 @@ public class Controller {
     @FXML
     public ImageView imTrashW4;
 
+    @FXML
+    public ImageView imSkull1;
+    @FXML
+    public ImageView imSkull2;
+    @FXML
+    public ImageView imSkull3;
+    @FXML
+    public ImageView imSkull4;
+    @FXML
+    public ImageView imSkull5;
+    @FXML
+    public ImageView imSkull6;
+    @FXML
+    public ImageView imSkull7;
+    @FXML
+    public ImageView imSkull8;
+
+    @FXML
+    public ImageView bammo1;
+    @FXML
+    public ImageView bammo2;
+    @FXML
+    public ImageView bammo3;
+    @FXML
+    public ImageView rammo1;
+    @FXML
+    public ImageView rammo2;
+    @FXML
+    public ImageView rammo3;
+    @FXML
+    public ImageView yammo1;
+    @FXML
+    public ImageView yammo2;
+    @FXML
+    public ImageView yammo3;
+
+
+
 
 
     private int suddenDeath = 2;
@@ -619,15 +658,7 @@ public class Controller {
     }
 
 
-    public void printf(String string){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                labelProva.setText(string);
-            }
-        });
 
-    }
 
 
     /**
@@ -780,9 +811,7 @@ public class Controller {
         imPowerupCard4.setImage(new Image("emptyPowerup.jpg"));
         bPowerupCard4.setGraphic(imPowerupCard4);
         bPowerupCard4.setStyle(transparent);
-        imWeaponCard4.setImage(new Image("emptyWeapon.jpg"));
-        bWeaponCard4.setGraphic(imWeaponCard4);
-        bWeaponCard4.setStyle(transparent);
+
 
 
     }
@@ -937,14 +966,6 @@ public class Controller {
 
     }
 
-    /**
-     * update label on gui that show player's points
-     * @param points
-     */
-    public void updatePoints(int points){
-        String string = Integer.toString(points);
-        yourPointsLabel.setText(string);
-    }
 
     /**
      * send ActionMessage with ClientView's method to the server when the player clicks on a action button
@@ -1199,6 +1220,311 @@ public class Controller {
         }
     }
 
+
+
+
+    /**
+     * update label on gui that show player's points
+     * @param points
+     */
+    public void updatePoints(int points){
+        String string = Integer.toString(points);
+        yourPointsLabel.setText(string);
+    }
+
+
+
+    public void updateMap(int choosenMap){
+
+        this.choosenMap= choosenMap;
+    }
+
+
+    /**
+     * update skulls' imageviews on map
+     * @param skullNumber
+     */
+    public void updateSkullBoard(String skullNumber){
+        //TODO mettere segnalino giocatore
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> skull = new ArrayList();
+                skull.add(imSkull1);
+                skull.add(imSkull2);
+                skull.add(imSkull3);
+                skull.add(imSkull4);
+                skull.add(imSkull5);
+                skull.add(imSkull6);
+                skull.add(imSkull7);
+                skull.add(imSkull8);
+                int teschi = Integer.parseInt(skullNumber);
+                teschi--;
+                for(int counter = 0; counter< skull.size(); counter++){
+                    skull.get(counter).setVisible(false);
+                }
+                while(teschi>=0) {
+                    skull.get(teschi).setVisible(true);
+                    teschi--;
+                }
+
+
+            }
+        });
+
+
+    }
+
+
+    //TODO FINIRE METODO
+
+    /**
+     * update weaponcards image on map
+     */
+    public void updateWeaponMap(){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> redWeapons = new ArrayList();
+                ArrayList<ImageView> blueWeapons = new ArrayList();
+                ArrayList<ImageView> yellowWeapons = new ArrayList();
+
+                redWeapons.add(imRedWeapon1);
+                redWeapons.add(imRedWeapon2);
+                redWeapons.add(imRedWeapon3);
+
+                blueWeapons.add(imBlueWeapon1);
+                blueWeapons.add(imBlueWeapon2);
+                blueWeapons.add(imBlueWeapon3);
+
+                yellowWeapons.add(imYellowWeapon1);
+                yellowWeapons.add(imYellowWeapon2);
+                yellowWeapons.add(imYellowWeapon3);
+
+                List<CellSpawn> cellSpawn = mapView.getCellSpawn();
+                List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+                List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+                List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+
+                for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
+                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
+                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
+                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+                }
+
+            }
+        });
+
+    }
+
+    /**
+     * set each weapon id with the image
+     * @param weaponID
+     * @return
+     */
+    public Image setWeapon(int weaponID){
+        Image image = new Image("cards/AD_weapons_IT_0225.png");
+        switch (weaponID){
+            case 13: image = new Image("cards/AD_weapons_IT_022.png");
+                break;
+            case 21: image = new Image("cards/AD_weapons_IT_023.png");
+                break;
+            case 10: image = new Image("cards/AD_weapons_IT_024.png");
+                break;
+            case 9: image = new Image("cards/AD_weapons_IT_025.png");
+                break;
+            case 11: image = new Image("cards/AD_weapons_IT_026.png");
+                break;
+            case 8: image = new Image("cards/AD_weapons_IT_027.png");
+                break;
+            case 12: image = new Image("cards/AD_weapons_IT_028.png");
+                break;
+            case 18: image = new Image("cards/AD_weapons_IT_029.png");
+                break;
+            case 4: image = new Image("cards/AD_weapons_IT_0210.png");
+                break;
+            case 20: image = new Image("cards/AD_weapons_IT_0211.png");
+                break;
+            case 19: image = new Image("cards/AD_weapons_IT_0212.png");
+                break;
+            case 7: image = new Image("cards/AD_weapons_IT_0213.png");
+                break;
+            case 3: image = new Image("cards/AD_weapons_IT_0214.png");
+                break;
+            case 6: image = new Image("cards/AD_weapons_IT_0215.png");
+                break;
+            case 16: image = new Image("cards/AD_weapons_IT_0216.png");
+                break;
+            case 2: image = new Image("cards/AD_weapons_IT_0217.png");
+                break;
+            case 5: image = new Image("cards/AD_weapons_IT_0218.png");
+                break;
+            case 17: image = new Image("cards/AD_weapons_IT_0219.png");
+                break;
+            case 15: image = new Image("cards/AD_weapons_IT_0220.png");
+                break;
+            case 14: image = new Image("cards/AD_weapons_IT_0221.png");
+                break;
+            case 1: image = new Image("cards/AD_weapons_IT_0222.png");
+                break;
+
+        }
+        return image;
+    }
+
+
+    /**
+     * update player's weapon images
+     */
+    public void updateWeaponPlayer(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<WeaponCard> weaponCards = clientView.getPlayerCopy().getWeaponCardList();
+                    imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
+                    imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
+                    imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
+                }
+                catch (NullPointerException e){
+
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update Player's Red Ammo
+     * @param red
+     */
+    public void updatePlayerRedAmmo(String red){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> redAmmo = new ArrayList();
+                redAmmo.add(rammo1);
+                redAmmo.add(rammo2);
+                redAmmo.add(rammo3);
+                int redNumber = Integer.parseInt(red);
+                redNumber--;
+                for(int counter = 0; counter< redAmmo.size(); counter++){
+                    redAmmo.get(counter).setVisible(false);
+                }
+                while(redNumber>=0) {
+                    redAmmo.get(redNumber).setVisible(true);
+                    redNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+    /**
+     * update Player's Blue Ammo
+     * @param blu
+     */
+    public void updatePlayerBlueAmmo(String blu){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> blueAmmo = new ArrayList();
+                blueAmmo.add(bammo1);
+                blueAmmo.add(bammo2);
+                blueAmmo.add(bammo3);
+                int blueNumber = Integer.parseInt(blu);
+                blueNumber--;
+                for(int counter = 0; counter< blueAmmo.size(); counter++){
+                    blueAmmo.get(counter).setVisible(false);
+                }
+                while(blueNumber>=0) {
+                    blueAmmo.get(blueNumber).setVisible(true);
+                    blueNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update Player's Yellow Ammo
+     * @param yellow
+     */
+    public void updatePlayerYellowAmmo(String yellow){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+
+                ArrayList<ImageView> yellowAmmo = new ArrayList();
+                yellowAmmo.add(bammo1);
+                yellowAmmo.add(bammo2);
+                yellowAmmo.add(bammo3);
+                int yellowNumber = Integer.parseInt(yellow);
+                yellowNumber--;
+                for(int counter = 0; counter< yellowAmmo.size(); counter++){
+                    yellowAmmo.get(counter).setVisible(false);
+                }
+                while(yellowNumber>=0) {
+                    yellowAmmo.get(yellowNumber).setVisible(true);
+                    yellowNumber--;
+                }
+
+
+            }
+        });
+
+    }
+
+
+    /**
+     * update all Player's ammo
+     * @param red
+     * @param blue
+     * @param yellow
+     */
+    public void updatePlayerAmmo(int red, int blue, int yellow){
+        String redAmmo = String.valueOf(red);
+        String blueAmmo = String.valueOf(blue);
+        String yellowAmmo = String.valueOf(yellow);
+
+        updatePlayerRedAmmo(redAmmo);
+        updatePlayerBlueAmmo(blueAmmo);
+        updatePlayerYellowAmmo(yellowAmmo);
+    }
+
+
+
+    public void printf(String string){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                labelProva.setText(string);
+            }
+        });
+
+    }
     static void setSkullBoard(ClientSkullBoardView sbv) {
         skullBoardView = sbv;
     }
