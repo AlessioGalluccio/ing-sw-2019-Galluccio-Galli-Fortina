@@ -9,7 +9,6 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.configureMessage.SettingMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
-import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.network.configureMessage.LoginMessage;
@@ -85,15 +84,17 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
+
     /**
      * create a CardSpawnChooseMessage that the client send to the server
      * @param cardChoosen
      * @param cardDiscarded
      */
-    public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
+   /* public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,playerCopy.getID(),this);
         notifyObservers(message);
     }
+    */
 
     /**
      * create a NopeMessage that the client send to the server
@@ -304,6 +305,7 @@ public class ClientView extends View /*View implement observer/observable*/{
     @Override
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
+        //synchronized(ui) ui.printPlayer()
     }
 
 
@@ -331,12 +333,11 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param   arg   The message with which update the player board
      */
     @Override
-    public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
+    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
         if(message.getAck()>lastAck) {
+            lastAck = message.getAck();
             message.handleMessage(this);
-            notifyAll();
-            //synchronized(ui) ui.printPlayer()
         }
     }
 

@@ -6,7 +6,7 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.EnemyView;
 
 public class PlayerModelMessage implements ModelViewMessage, HandlerPlayerViewMessage, HandlerEnemyViewMessage {
-    private static int ID = 0;
+    private static int ID = 1;
     private int ack;
     private Player playerCopy;
 
@@ -32,7 +32,8 @@ public class PlayerModelMessage implements ModelViewMessage, HandlerPlayerViewMe
 
     @Override
     public void handleMessage(Client client) {
-
+        client.forwardToClientView(this, playerCopy.getNickname());
+        client.forwardToEnemyView(this, playerCopy.getNickname());
     }
 
     public int getAck() {

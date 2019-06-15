@@ -1,6 +1,8 @@
-package it.polimi.se2019.view.ModelViewMess;
+package it.polimi.se2019.view.configureMessage;
 
 import it.polimi.se2019.network.Client;
+import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
+import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.View;
 
 public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMessage {
@@ -10,9 +12,10 @@ public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMess
         this.matchID = matchID;
     }
 
+
     @Override
     public void handleMessage(View p) {
-        p.handleStartGameMessage(matchID);
+
     }
 
     @Override
@@ -22,7 +25,7 @@ public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMess
 
     @Override
     public void handleMessage(Client client) {
-        client.forwardToClientView(this);
+        client.handleStartGame(matchID);
     }
 
     public int getMatchID() {

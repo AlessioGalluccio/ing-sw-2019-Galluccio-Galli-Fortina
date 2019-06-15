@@ -19,6 +19,8 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     private ClientSkullBoardView skullBoardView;
     private List<ClientEnemyView> enemyViews = new LinkedList<>();
     private ClientMapView mapView;
+    private UiInterface ui;
+    private String ID;
 
     protected Client() throws RemoteException {
         super();
@@ -29,24 +31,16 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
      */
     public abstract void connect();
 
-    public void handleLoginMessage(boolean success, boolean isFirst) {
+    public void handleLoginMessage(boolean success, boolean isFirst, String nickname) {
+        if(success) this.ID = nickname;
         clientView.handleLogin(success, isFirst);
     }
 
-    public synchronized void forwardToClientView(ModelViewMessage message) {
-        //If views are not initialized wait
-        while(mapView.getMapCopy()==null &&
-                clientView.getPlayerCopy()==null &&
-                enemyViews.get(0).getNickname()==null &&
-                enemyViews.get(1).getNickname()==null &&
-                enemyViews.get(2).getNickname()==null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+    public synchronized void forwardToClientView(ModelViewMessage message, String nickname) {
+        if(nickname.equals(ID)) {
+            clientView.update(null, message);
+            notifyAll();
         }
-        clientView.update(null, message);
     }
 
     public void handleEnemyMessage(String nickname) {
@@ -57,21 +51,43 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         clientView.handleDisconnection();
     }
 
-    public void forwardToEnemyView(ModelViewMessage message) {
-    }
-
-    public void forwardToMapView(ModelViewMessage message) {
-    }
-
-    public void forwardToSkullBoardView(ModelViewMessage message) {
-
-    }
-
-    public void setUpUi(UiInterface ui) {
-        skullBoardView = new ClientSkullBoardView(ui);
+    public synchronized void handleStartGame(int matchID) {
+        //If views are not initialized wait
+        while (mapView.getMapCopy() == null ||
+                clientView.getPlayerCopy() == null ||
+                enemyViews.get(0).getNickname() == null ||
+                enemyViews.get(1).getNickname() == null) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+               Thread.currentThread().interrupt();
+            }
+        }
         for(ClientEnemyView ew : enemyViews) {
             ew.setUi(ui);
         }
+        clientView.handleStartGameMessage(matchID);
+    }
+
+    public synchronized void forwardToEnemyView(ModelViewMessage message, String nickname) {
+        for(ClientEnemyView ew : enemyViews) {
+            if(ew.getNickname().equals(nickname)) ew.update(null, message);
+        }
+        notifyAll();
+    }
+
+    public synchronized void forwardToMapView(ModelViewMessage message) {
+        mapView.update(null, message);
+        notifyAll();
+    }
+
+    public void forwardToSkullBoardView(ModelViewMessage message) {
+        skullBoardView.update(null, message);
+    }
+
+    public void setUpUi(UiInterface ui) {
+        this.ui = ui;
+        skullBoardView = new ClientSkullBoardView(ui);
         mapView = new ClientMapView(ui);
     }
 

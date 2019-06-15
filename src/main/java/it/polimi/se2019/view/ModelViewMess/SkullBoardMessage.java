@@ -34,7 +34,7 @@ public class SkullBoardMessage implements ModelViewMessage, HandlerSkullViewMess
 
     @Override
     public void handleMessage(Client client) {
-
+        client.forwardToSkullBoardView(this);
     }
 
     public int getAck() {

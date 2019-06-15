@@ -22,11 +22,11 @@ public class ClientEnemyView extends EnemyView {
      * @param   arg   The message with which update the enemy board
      */
     @Override
-    public synchronized void update(java.util.Observable o/*Will be always null*/, Object arg) {
+    public void update(java.util.Observable o/*Will be always null*/, Object arg) {
         HandlerEnemyViewMessage message = (HandlerEnemyViewMessage) arg;
         if(message.getAck()>lastAck) {
+            lastAck = message.getAck();
             message.handleMessage(this);
-            notifyAll();
             //synchronized(ui) ui.printEnemyView()
         }
     }

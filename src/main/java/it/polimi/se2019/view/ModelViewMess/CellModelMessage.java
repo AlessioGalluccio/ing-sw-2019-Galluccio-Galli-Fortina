@@ -26,7 +26,7 @@ public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage
 
     @Override
     public void handleMessage(Client client) {
-
+        client.forwardToMapView(this);
     }
 
     public int getAck() {

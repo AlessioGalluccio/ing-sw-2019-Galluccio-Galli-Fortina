@@ -2,7 +2,6 @@ package it.polimi.se2019.view;
 
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 
 import java.util.Observer;
 
