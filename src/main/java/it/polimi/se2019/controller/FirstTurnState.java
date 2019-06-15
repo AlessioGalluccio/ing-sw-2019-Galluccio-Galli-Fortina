@@ -3,8 +3,11 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
@@ -17,6 +20,7 @@ public class FirstTurnState extends StateController {
     private Player playerAuthor;
     private String errorString;
     private String stringToPlayerView;
+    private boolean isCharacterSelected = false;
 
     public static final String CHARACTER_REQUEST = "Please, select a Character";
     public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
@@ -34,6 +38,8 @@ public class FirstTurnState extends StateController {
         controller.resetMessages();
         controller.addMessageListExpected(listExpectedMessages);
         this.playerAuthor = controller.getAuthor();
+
+        //TODO al giocatore vengono dati due powerup
         //we immediately send a message to the player
         controller.getPlayerView().printFromController(CHARACTER_REQUEST);
     }
@@ -125,7 +131,19 @@ public class FirstTurnState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        if(!isCharacterSelected){
+            errorString = CANT_DO_THIS;
+        }
+        else{
+            PowerupCard powerupCard = gameHandler.getPowerupCardByID(powerupID);
+            String color = powerupCard.getColor();
+            Room room = gameHandler.getRoomByID(color);
+            Cell cellSpawn = room.getSpawnCell();
+            playerAuthor.setPosition(cellSpawn);
+
+            //spawn process is finished. we go to the next state
+            controller.setState(new EmptyControllerState(controller, gameHandler));
+        }
     }
 
     @Override
@@ -136,10 +154,27 @@ public class FirstTurnState extends StateController {
     @Override
     public void handleCharacter(int characterID) {
         //TODO
+        //playerAuthor.setCharacter(new Character());
     }
 
     @Override
     public String handle(ViewControllerMessage arg) {
-        return null;
+        if(arg.getMessageID() ==
+                controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getMessageID()){
+            arg.handle(this);
+        }
+        else{
+            errorString = CANT_DO_THIS;
+        }
+
+        if(errorString != null){
+            stringToPlayerView = errorString +
+                    controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            errorString = null;
+        }
+        else{
+            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+        }
+        return stringToPlayerView;
     }
 }

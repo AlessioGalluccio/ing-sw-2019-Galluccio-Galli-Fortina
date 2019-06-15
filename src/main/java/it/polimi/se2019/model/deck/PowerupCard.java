@@ -33,6 +33,19 @@ public abstract class PowerupCard implements Card {
         return color;
     }
 
+    /**
+     * return the color of this card, for the spawn
+     * @return ColoRYB of the card
+     */
+    public String getColor(){
+        switch(this.color){
+            case RED: return "RED";
+            case YELLOW: return "YELLOW";
+            case BLUE: return "BLUE";
+        }
+        return null;
+    }
+
     @Override
     public int getID() {
         return ID;
