@@ -119,22 +119,12 @@ public class Controller implements Observer {
     }
 
     public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
-        if(indexExpected != this.messageListExpected.size() - 1){
-            this.messageListExpected.addAll(indexExpected , messageListExpected);
-        }
-        else{
-            this.messageListExpected.addAll(messageListExpected);
-        }
+        this.messageListExpected.addAll(indexExpected , messageListExpected);
 
     }
 
     public void addMessageListImmediateNext(StringAndMessage messageExpected){
-        if(indexExpected != this.messageListExpected.size() - 1){
-            this.messageListExpected.add(indexExpected , messageExpected);
-        }
-        else{
-            this.messageListExpected.add(messageExpected);
-        }
+        this.messageListExpected.add(indexExpected , messageExpected);
     }
 
     public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
