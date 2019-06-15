@@ -51,13 +51,9 @@ public abstract class StateController {
 
     public abstract void handleAction(int actionID);
 
-    public abstract void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded);
-
     public abstract void handleCell(int coordinateX, int coordinateY);
 
     public abstract void handleFiremode(int firemodeID);
-
-    public abstract void handleLogin(String playerNickname, Character chosenCharacter);
 
     public abstract void handleNewton(NewtonCard usedCard);
 

@@ -31,11 +31,6 @@ public class NotYourTurnState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        cantDoThisHandler();
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         cantDoThisHandler();
 
@@ -45,12 +40,6 @@ public class NotYourTurnState extends StateController {
     public void handleFiremode(int firemodeID) {
         cantDoThisHandler();
 
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO controlla
-        cantDoThisHandler();
     }
 
 

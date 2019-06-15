@@ -30,22 +30,12 @@ public class HasReloadedControllerState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        youCantDoThis();
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         youCantDoThis();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youCantDoThis();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
         youCantDoThis();
     }
 

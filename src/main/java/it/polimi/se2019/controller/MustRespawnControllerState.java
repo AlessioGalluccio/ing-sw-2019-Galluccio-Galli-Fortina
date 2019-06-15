@@ -32,26 +32,12 @@ public class MustRespawnControllerState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO fai spawn
-        gameHandler.nextTurn();   //TODO potrebbe creare
-                                    //     problemi di deadlock, nel caso in cui gamehandler cambi lo stato prima di
-                                    //     questo
-        controller.setState(new NotYourTurnState(controller, gameHandler));
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         youMustRespawn();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youMustRespawn();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
         youMustRespawn();
     }
 
@@ -122,12 +108,16 @@ public class MustRespawnControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        //TODO fai spawn
+        gameHandler.nextTurn();   //TODO potrebbe creare
+        //     problemi di deadlock, nel caso in cui gamehandler cambi lo stato prima di
+        //     questo
+        controller.setState(new NotYourTurnState(controller, gameHandler));
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        youMustRespawn();
     }
 
 
@@ -144,5 +134,6 @@ public class MustRespawnControllerState extends StateController {
     }
 
     private void youMustRespawn(){
+        stringToPlayerView = MUST_RESPAWN;
     }
 }

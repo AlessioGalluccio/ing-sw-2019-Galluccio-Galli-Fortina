@@ -29,11 +29,6 @@ public class DisconnectedControllerState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //do nothing
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         //do nothing
     }
@@ -41,11 +36,6 @@ public class DisconnectedControllerState extends StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         //do nothing
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO controlla
     }
 
     @Override

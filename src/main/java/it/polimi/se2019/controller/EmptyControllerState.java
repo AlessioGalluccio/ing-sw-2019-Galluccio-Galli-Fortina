@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class EmptyControllerState extends StateController {
 
     private Player player;
-    private PlayerView playerView;;
     private String errorString;
     private String stringToPlayerView;
 
@@ -26,7 +25,7 @@ public class EmptyControllerState extends StateController {
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
+        controller.resetMessages();
     }
 
     @Override

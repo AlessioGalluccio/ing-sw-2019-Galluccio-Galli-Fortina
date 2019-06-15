@@ -48,12 +48,6 @@ public class FirstTurnState extends StateController {
     public void handleAction(int actionID) {
         errorString = CANT_DO_THIS;
     }
-
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        errorString = CANT_DO_THIS;
-    }
-
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
         errorString = CANT_DO_THIS;
@@ -61,11 +55,6 @@ public class FirstTurnState extends StateController {
 
     @Override
     public void handleFiremode(int firemodeID) {
-        errorString = CANT_DO_THIS;
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
         errorString = CANT_DO_THIS;
     }
 

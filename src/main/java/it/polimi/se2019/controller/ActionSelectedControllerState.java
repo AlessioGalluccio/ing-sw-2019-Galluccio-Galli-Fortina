@@ -40,12 +40,6 @@ public class ActionSelectedControllerState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO
-
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         try{
             action.addCell(coordinateX, coordinateY);
@@ -78,11 +72,6 @@ public class ActionSelectedControllerState extends StateController {
             //controller.sendTargetsToView(controller.getLastReceivedMessage());
         }
         */
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO
     }
 
     @Override
