@@ -92,8 +92,7 @@ public class LockRifle_1 extends FireMode {
         if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL))){
             if(shoot.getTargetsPlayer().isEmpty()){
-                playerView.printFromController(SELECT_FIRST_TARGET_BEFORE);
-                throw new WrongInputException();
+                throw new WrongInputException(SELECT_FIRST_TARGET_BEFORE);
             }
             else{
                 //TODO controlla
