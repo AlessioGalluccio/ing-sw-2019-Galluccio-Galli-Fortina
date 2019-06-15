@@ -1,29 +1,17 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.actions.Action;
-import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.deck.TeleporterCard;
-import it.polimi.se2019.model.deck.firemodes.CyberBlade_1;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
 
-import java.lang.Character;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
@@ -64,7 +52,7 @@ public class ActionSelectedControllerStateTest {
         playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        controller = new Controller(gameHandler, null);
+        controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         Shoot shoot = new Shoot(gameHandler, controller);

@@ -2,7 +2,6 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -55,7 +54,7 @@ public class HeatSeeker_1Test {
         PlayerView playerView = mock(PlayerView.class);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        controller = new Controller(gameHandler, null);
+        controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);

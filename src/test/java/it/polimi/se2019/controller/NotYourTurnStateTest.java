@@ -3,8 +3,6 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.ViewControllerMess.CellMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +22,7 @@ public class NotYourTurnStateTest {
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);
         GameHandler gameHandler = new GameHandler(players, 8);
-        this.controller = new Controller(gameHandler, null);
+        this.controller = new Controller(gameHandler, null, null);
         controller.setAuthor(player);
         this.controller.setState(new NotYourTurnState(controller, gameHandler));
         this.stateController = controller.getState();

@@ -110,7 +110,7 @@ public class WaitingRoom {
         player.attach(playerView);
         EnemyView enemyView = new EnemyView(nickname);
         player.attach(enemyView);
-        Controller controller = new Controller(matches.get(matches.size()-1).gameHandler, player);
+        Controller controller = new Controller(matches.get(matches.size()-1).gameHandler, player, playerView);
         playerView.attach(controller);
 
         synchronized(this) {

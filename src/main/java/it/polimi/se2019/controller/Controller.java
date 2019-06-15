@@ -21,7 +21,7 @@ import java.util.Observer;
 
 public class Controller implements Observer {
     private Player playerAuthor;
-    private PlayerView playerView; //TODO aggiungere al costruttore
+    private PlayerView playerView;
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
     private final GameHandler gameHandler;
@@ -31,8 +31,7 @@ public class Controller implements Observer {
 
     private String stringToPlayerView;
 
-    public Controller(GameHandler gameHandler, Player playerAuthor) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
+    public Controller(GameHandler gameHandler, Player playerAuthor, PlayerView playerView) {
         this.gameHandler = gameHandler;
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;

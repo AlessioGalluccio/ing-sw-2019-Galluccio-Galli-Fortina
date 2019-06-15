@@ -52,7 +52,7 @@ public class MachineGun_1Test {
         PlayerView playerView = mock(PlayerView.class);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        controller = new Controller(gameHandler, null);
+        controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
         shoot = new Shoot(gameHandler,controller);
