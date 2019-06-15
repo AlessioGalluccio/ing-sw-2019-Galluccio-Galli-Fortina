@@ -23,9 +23,7 @@
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
-         <image>
-            <Image url="@mappa3.jpg" />
-         </image></ImageView>
+        </ImageView>
       <Button fx:id="redWeapon1" layoutX="1.0" layoutY="218.0" mnemonicParsing="false" onAction="#sendMapWeapon" prefHeight="75.0" prefWidth="110.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />

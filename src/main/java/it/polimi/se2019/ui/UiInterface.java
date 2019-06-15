@@ -1,8 +1,13 @@
 package it.polimi.se2019.ui;
 
+import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
+
+import java.util.List;
 
 public interface UiInterface {
 
@@ -20,8 +25,19 @@ public interface UiInterface {
 
     void setEnemyView(EnemyView enemyView);
 
-    //TODO aggiungere metodo per gestire printFromController
+    void printFromController(String message);
 
-    //TODO aggiungere metodi per stampare mappa, player, enemy etc...
+    void updateCell(Cell cell);
+
+    void updatePlayer();
+
+    void updateEnemy(ClientEnemyView enemyView);
+
+    void updateSkullBoard();
+
+    void printRanking(List<Player> players);
+
+    void turn(); //TODO sceliere parametri
+
 
 }

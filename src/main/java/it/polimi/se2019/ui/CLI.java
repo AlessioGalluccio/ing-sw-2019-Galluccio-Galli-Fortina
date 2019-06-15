@@ -1,9 +1,8 @@
 package it.polimi.se2019.ui;
 
-import it.polimi.se2019.model.map.Map1;
-import it.polimi.se2019.model.map.Map2;
-import it.polimi.se2019.model.map.Map3;
-import it.polimi.se2019.model.map.Map4;
+import it.polimi.se2019.model.map.*;
+import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -85,6 +84,41 @@ public class CLI implements UiInterface {
     @Override
     public void setEnemyView(EnemyView enemyView) {
         enemyViews.add(enemyView);
+    }
+
+    @Override
+    public void printFromController(String message) {
+
+    }
+
+    @Override
+    public void updateCell(Cell cell) {
+
+    }
+
+    @Override
+    public void updatePlayer() {
+
+    }
+
+    @Override
+    public void updateEnemy(ClientEnemyView enemyView) {
+
+    }
+
+    @Override
+    public void updateSkullBoard() {
+
+    }
+
+    @Override
+    public void printRanking(List<Player> players) {
+
+    }
+
+    @Override
+    public void turn() {
+
     }
 
     public synchronized void start() {
