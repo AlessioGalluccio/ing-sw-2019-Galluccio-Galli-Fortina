@@ -96,20 +96,28 @@ public class PlayerView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * Do nothing
-     * @param matchID
-     */
-    @Override
-    public void handleStartGameMessage(int matchID) {
-        //Is only to forward, already done by update()
-    }
-
-    /**
      * Set the attribute playerCopy to the new playerCopy
      * @param p the new playerCopy
      */
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
+    }
+
+    /**
+     * Do nothing
+     */
+    @Override
+    public void handleTurnMessage(String nickname) {
+        //Is only to forward, already done by update()
+    }
+
+    /**
+     * Do nothing
+     * @param ranking
+     */
+    @Override
+    public void handleRankingMessage(List<Player> ranking) {
+        //Is only to forward, already done by update()
     }
 
 

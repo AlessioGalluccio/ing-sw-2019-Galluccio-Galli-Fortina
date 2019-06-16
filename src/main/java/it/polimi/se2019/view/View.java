@@ -3,6 +3,7 @@ package it.polimi.se2019.view;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.player.Player;
 
+import java.util.List;
 import java.util.Observer;
 
 /**
@@ -14,7 +15,9 @@ public abstract class View extends Observable implements Observer {
 
     public abstract void printFromController(String string);
 
-    public abstract void handleStartGameMessage(int matchID);
-
     public abstract void handlePlayerMessage(Player p);
+
+    public abstract void handleTurnMessage(String nickname);
+
+    public abstract void handleRankingMessage(List<Player> ranking);
 }

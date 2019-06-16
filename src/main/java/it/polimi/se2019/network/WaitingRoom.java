@@ -162,6 +162,11 @@ public class WaitingRoom {
                         pw.notifyObservers(new ReconnectionMessage(true,pw.getPlayerCopy().getID(),pw));
                     }
                 }
+                try {
+                    Thread.sleep(750);  //Wait all message arrive at the user
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
                 networkHandler.update(null, new StartGameMessage(m.matchID));
             }
         }
@@ -254,6 +259,9 @@ public class WaitingRoom {
         for(WaitingPlayer wp : playerWaiting) {
             if(wp.player.getNickname().equals(view.getPlayerCopy().getNickname())) {
                 playerWaiting.remove(wp);
+                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Disconnect " +
+                        view.getPlayerCopy().getNickname());
+                return;
             }
         }
         for(Match m : matches) {

@@ -287,28 +287,6 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * Notify the user about the start of the message
-     * @param matchId the id of the match just started
-     */
-    @Override
-    public synchronized void handleStartGameMessage(int matchId) {
-        this.matchId = matchId;
-        ui.startGame();
-    }
-
-    /**
-     * This method is call by a PlayerMessage object.
-     * It copy the content of the message in this object
-     * @param p the player contained in the object
-     */
-    @Override
-    public void handlePlayerMessage(Player p) {
-        playerCopy = p;
-        //synchronized(ui) ui.printPlayer()
-    }
-
-
-    /**
      * is used by RMIClient
      * @param possibleTarget
      */
@@ -328,14 +306,14 @@ public class ClientView extends View /*View implement observer/observable*/{
      * <code>notifyObservers</code> method to have all the object's
      * observers notified of the change.
      *
-     * @param   o     Always null
-     * @param   arg   The message with which update the player board
+     * @param o    Always null
+     * @param arg  The message with which update the player board
      */
     @Override
     public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
-        if(message.getAck()>lastAck) {
-            lastAck = message.getAck();
+        if(message.getAck()>lastAck  || message.getAck()==-1) { //message ack==-1 if isn't a PlayerModelMessage
+            if(message.getAck()!=-1) lastAck = message.getAck();
             message.handleMessage(this);
         }
     }
@@ -357,6 +335,47 @@ public class ClientView extends View /*View implement observer/observable*/{
         ui.disconnect(matchId);
     }
 
+
+    /**
+     * Notify the user about the start of the message
+     * @param matchId the id of the match just started
+     */
+    public synchronized void handleStartGameMessage(int matchId) {
+        this.matchId = matchId;
+        ui.startGame();
+    }
+
+    /**
+     * This method is call by a PlayerMessage object.
+     * It copy the content of the message in this object
+     * @param p the player contained in the object
+     */
+    @Override
+    public void handlePlayerMessage(Player p) {
+        playerCopy = p;
+        //synchronized(ui) ui.printPlayer()
+    }
+
+
+    /**
+     * This method is call by a NewTurnMessage object.
+     * It notify the user that a new turn is begin
+     * @param nickname the player's nickname of the turn
+     */
+    public void handleTurnMessage(String nickname) {
+        ui.turn(nickname, nickname.equals(playerCopy.getNickname()));
+    }
+
+    /**
+     * This method is call by a RankingMessage object.
+     * It forward to the ui the ranking of the game
+     * @param ranking the ranking
+     */
+    @Override
+    public void handleRankingMessage(List<Player> ranking) {
+        ui.printRanking(ranking);
+    }
+
     /**
      * Set up all views and attach the networkHandler
      * @param networkHandler the client
@@ -370,15 +389,14 @@ public class ClientView extends View /*View implement observer/observable*/{
         this.ui = ui;
     }
 
+    /**
+     * This method shutdown the RMI server
+     */
     public  void shutdownServer() {
         Client client = (Client) getObservers().get(0);
         client.unreferenced();
     }
 
-    public void handleTurnMessage(String nickname) {
-        if(nickname.equals(playerCopy.getNickname())) ui.turn(nickname, true);
-        else ui.turn(nickname, false);
-    }
 }
 
 

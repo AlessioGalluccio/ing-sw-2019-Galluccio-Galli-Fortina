@@ -50,7 +50,6 @@ public class CLI implements UiInterface {
 
     @Override
     public void startGame() {
-        out.println(ConsoleColor.BLACK + "\tSTART\n" + ConsoleColor.RESET);
         printAll();
         in.close();
     }
@@ -112,18 +111,27 @@ public class CLI implements UiInterface {
 
     @Override
     public void printRanking(List<Player> players) {
-
+        out.print("\n\n");
+        printLine();
+        out.println(ConsoleColor.MAGENTA_BOLD + "\t\tGAME OVER!\n" + ConsoleColor.RESET);
+        out.printf("%-25.25s %d %s%n", "  1. " + players.get(0).getNickname(), players.get(0).getNumPoints(),
+                ConsoleColor.GREEN + "\t(๑•̀ㅂ•́)ง✧" + ConsoleColor.RESET);
+        for(int i=1; i<players.size(); i++) {
+            out.printf("%-25.25s %d %n", "  "+i+". " + players.get(i).getNickname(), players.get(i).getNumPoints());
+        }
+        printLine();
+        //TODO close all and kill execution
     }
 
     @Override
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
         printAll();
-        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧");
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t୧☉□☉୨");
         else out.println("It's " + nickname + "'s turn\tಠᴗಠ");
     }
 
-    public synchronized void start() {
+    public void start() {
 
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +
@@ -134,7 +142,7 @@ public class CLI implements UiInterface {
 
         printLogo();
         try {
-            wait(1300);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -234,12 +242,11 @@ public class CLI implements UiInterface {
 
         view.createSettingMessage(map, skulls, sd);
 
-        //clearScreen();
         if(online) out.println("\nWaiting for other players...");
     }
 
     void clearScreen() {
-        out.print("\u001b[2J");
+        out.print("\033[2J \033[H");
         out.flush();
     }
 
