@@ -26,8 +26,8 @@ public class GrenadeLauncher_1 extends FireMode {
     public static final String SECOND_MESSAGE = "Select a cell where to move the target. Select the cell where he is if you don't want to move him";
     public static final String OPTIONAL_MESSAGE = "Select a cell to launch the extra granade";
 
-    private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-    private static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
+    public static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
+    public static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -77,6 +77,7 @@ public class GrenadeLauncher_1 extends FireMode {
                         shoot.addPlayerTargetFromFireMode(target);
                     }
                 }
+                nextCellIsForOptional = false;
             }
             //normal firemode, you move the target in a new position
             else{

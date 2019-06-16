@@ -48,11 +48,5 @@ public class ZX2_1 extends FireMode {
         }
     }
 
-    //THIS MUST REMAIN, IT LAUNCHES ANOTHER EXCEPTION
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        throw new FiremodeOfOnlyMarksException();
-    }
-
 
 }

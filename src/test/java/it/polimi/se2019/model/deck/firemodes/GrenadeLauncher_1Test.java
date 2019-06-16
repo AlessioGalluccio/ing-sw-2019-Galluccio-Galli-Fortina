@@ -5,6 +5,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.NotYourTurnState;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -167,10 +168,79 @@ public class GrenadeLauncher_1Test {
 
         //System.out.println(playerView.getLastStringPrinted());
 
-        shoot.fire();
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
         assertEquals(2,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getCell().getCoordinateX());
         assertEquals(1,targetPlayer1.getCell().getCoordinateY());
+
+    }
+
+    @Test
+    public void fireNegativeOneTargetMovementTest() throws Exception {
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
+
+        CellMessage cellMessage = new CellMessage(0,2,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
+
+        assertEquals(GrenadeLauncher_1.TOO_MUCH_DISTANCE + GrenadeLauncher_1.SECOND_MESSAGE,
+                playerView.getLastStringPrinted());
+        assertEquals(1, targetPlayer1.getCell().getCoordinateX());
+        assertEquals(1,targetPlayer1.getCell().getCoordinateY());
+
+    }
+
+    @Test
+    public void firePositiveTargetMovedAwayBeforeOptional() throws Exception {
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
+
+        CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
+
+        OptionalMessage optionalMessage = new OptionalMessage(1, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+
+        CellMessage cellMessage2 = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage2);
+
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
+        assertEquals(0, targetPlayer1.getCell().getCoordinateX());
+        assertEquals(1,targetPlayer1.getCell().getCoordinateY());
+
+        assertEquals(1,targetPlayer1.getDamage().size());    //must be damaged by primary only
+        assertEquals(1,targetPlayer2.getDamage().size());   //must be damaged by optional only
+        assertEquals(0,authorPlayer.getDamage().size());    //author must not be damaged
+
+    }
+
+    @Test
+    public void firePositiveTargetMovedAwayAfterOptional() throws Exception {
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
+
+        OptionalMessage optionalMessage = new OptionalMessage(1, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+
+        CellMessage cellMessage2 = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage2);
+
+        CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(), playerView);    //I move the target1 after optional
+        controller.update(null, cellMessage);
+
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
+        assertEquals(0, targetPlayer1.getCell().getCoordinateX());
+        assertEquals(1,targetPlayer1.getCell().getCoordinateY());
+
+        assertEquals(2,targetPlayer1.getDamage().size());    //must be damaged by primary and optional
+        assertEquals(1,targetPlayer2.getDamage().size());   //must be damaged by optional only
+        assertEquals(0,authorPlayer.getDamage().size());    //author must not be damaged
 
     }
 
