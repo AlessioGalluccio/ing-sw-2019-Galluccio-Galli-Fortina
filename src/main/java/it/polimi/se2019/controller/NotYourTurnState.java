@@ -73,7 +73,7 @@ public class NotYourTurnState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         //TODO implementami! Sono diverso!
 
     }

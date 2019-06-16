@@ -7,7 +7,6 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -137,7 +136,7 @@ public class ActionSelectedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         stringToPlayerView = CANT_DO_THIS;
     }
 

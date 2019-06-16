@@ -1,13 +1,10 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -68,7 +65,7 @@ public abstract class StateController {
 
     public abstract void handleReload(int weaponID);
 
-    public abstract void handleTagback(TagbackGranedCard usedCard);
+    public abstract void handleTagback(TagbackGrenadeCard usedCard);
 
     public abstract void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost);
 

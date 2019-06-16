@@ -3,9 +3,7 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class HasReloadedControllerState extends StateController {
     private Player player;
@@ -73,7 +71,7 @@ public class HasReloadedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         youCantDoThis();
     }
 
