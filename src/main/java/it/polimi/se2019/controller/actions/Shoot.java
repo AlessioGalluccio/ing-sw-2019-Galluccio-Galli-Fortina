@@ -78,8 +78,7 @@ public class Shoot extends Action{
             throw new WrongInputException();
         }
         else{
-            //TODO
-            //fireMode.addCell();
+            fireMode.addCell(x,y);
         }
 
     }

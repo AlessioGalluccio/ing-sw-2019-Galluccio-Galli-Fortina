@@ -74,7 +74,7 @@ public class GrenadeLauncher_1 extends FireMode {
                 for(Player target : cell.getPlayerHere()){
                     //if the first target is in this cell, he will be added two times. He will get both damages
                     if(target.getID() != author.getID()){
-                        shoot.addPlayerTarget(target.getID());
+                        shoot.addPlayerTargetFromFireMode(target);
                     }
                 }
             }
@@ -82,7 +82,7 @@ public class GrenadeLauncher_1 extends FireMode {
             else{
                 Player target = shoot.getTargetsPlayer().get(0);
                 int distance = gameHandler.getMap().getDistance(target.getCell(), cell);
-                if(distance < 1){
+                if(distance <= 1){
                     target.setPosition(cell);
                 }
                 else{
