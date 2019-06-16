@@ -2,6 +2,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
@@ -10,6 +11,7 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +33,7 @@ public class GrenadeLauncher_1Test {
     private Cell commonCell;
     private Cell notVisibleCell;
     private PlayerView playerView;
+    private StateController stateController;
 
     private final static int GRENADE_WEAPON_ID = 19;
     private final static int GRENADE_FIREMODE_ID = 191;
@@ -39,11 +42,10 @@ public class GrenadeLauncher_1Test {
 
     @Before
     public void setUp() throws Exception {
-        //TODO playerview non testata
-        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
+        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
@@ -61,8 +63,10 @@ public class GrenadeLauncher_1Test {
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
-        shoot = new Shoot(gameHandler,controller);
-        controller.setState(new ActionSelectedControllerState(controller,gameHandler, shoot));
+        shoot = new Shoot(gameHandler, controller);
+
+        controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
+        stateController = controller.getState();
 
 
         //author, target 1 and target 2 in the same cell
@@ -83,18 +87,24 @@ public class GrenadeLauncher_1Test {
         WeaponCard weapon = gameHandler.getWeaponCardByID(GRENADE_WEAPON_ID);
         weapon.reload();
         authorPlayer.addWeaponCard(weapon);
-        shoot.addWeapon(weapon);
+        WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
+        controller.update(null, weaponMessage);
+
+        //System.out.println(playerView.getLastStringPrinted());
 
         //add firemode
         firemode = gameHandler.getFireModeByID(GRENADE_FIREMODE_ID);
-        shoot.addFireMode(firemode.getID());
+        FireModeMessage fireModeMessage = new FireModeMessage(firemode.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, fireModeMessage);
+        //System.out.println(playerView.getLastStringPrinted());
 
     }
 
     @Test
     public void firePositiveOneTargetNoOptionalAndNoMovementTest() throws Exception {
 
-        shoot.addPlayerTarget(targetPlayer1.getID());
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
         shoot.fire();
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
         assertEquals(1,targetPlayer1.getDamage().size());
@@ -105,7 +115,8 @@ public class GrenadeLauncher_1Test {
 
     @Test
     public void firePositiveOneTargetNoOptionalButWithMovementTest() throws Exception {
-        shoot.addPlayerTarget(targetPlayer1.getID());
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
         shoot.addCell(0,1);
         shoot.fire();
         assertEquals(1,targetPlayer1.getDamage().size());
@@ -116,10 +127,26 @@ public class GrenadeLauncher_1Test {
 
     @Test
     public void firePositiveOneTargetWithOptionalAndMovementTest() throws Exception {
-        shoot.addPlayerTarget(targetPlayer1.getID());
-        shoot.addCell(0,1);
-        shoot.addOptional(1);
-        shoot.addCell(0,1);
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
+
+        //System.out.println(playerView.getLastStringPrinted());
+
+        CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
+
+        //System.out.println(playerView.getLastStringPrinted());
+
+        OptionalMessage optionalMessage = new OptionalMessage(1, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+
+        //System.out.println(playerView.getLastStringPrinted());
+
+        CellMessage cellMessage2 = new CellMessage(0,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage2);
+
+        //System.out.println(playerView.getLastStringPrinted());
+
         shoot.fire();
         assertEquals(2,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getCell().getCoordinateX());
