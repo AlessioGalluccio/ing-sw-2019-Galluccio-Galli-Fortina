@@ -46,7 +46,7 @@ public class FirstTurnState extends StateController {
         }catch (TooManyException e){
             errorString = TOO_MANY_CARDS;
         }
-        
+
         //we immediately send a message to the player
         if(errorString == null){
             controller.getPlayerView().printFromController(CHARACTER_REQUEST);
