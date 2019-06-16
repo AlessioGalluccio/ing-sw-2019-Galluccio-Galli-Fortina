@@ -5,10 +5,8 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Room;
-import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -24,6 +22,7 @@ public class FirstTurnState extends StateController {
 
     public static final String CHARACTER_REQUEST = "Please, select a Character";
     public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
+    public static final String TOO_MANY_CARDS = "The player has already three cards. ";
 
     private static StringAndMessage firstMessage =
             new StringAndMessage(Identificator.CHARACTER_MESSAGE, CHARACTER_REQUEST);
@@ -39,9 +38,24 @@ public class FirstTurnState extends StateController {
         controller.addMessageListExpected(listExpectedMessages);
         this.playerAuthor = controller.getAuthor();
 
-        //TODO al giocatore vengono dati due powerup
+        //player picks up two powerup cards
+        PowerupDeck deck = gameHandler.getPowerupDeck();
+        try{
+            playerAuthor.addPowerupCard(deck.pick());
+            playerAuthor.addPowerupCard(deck.pick());
+        }catch (TooManyException e){
+            errorString = TOO_MANY_CARDS;
+        }
+        
         //we immediately send a message to the player
-        controller.getPlayerView().printFromController(CHARACTER_REQUEST);
+        if(errorString == null){
+            controller.getPlayerView().printFromController(CHARACTER_REQUEST);
+        }
+        else {
+            controller.getPlayerView().printFromController(errorString + CHARACTER_REQUEST);
+            errorString = null;
+        }
+
     }
 
     @Override

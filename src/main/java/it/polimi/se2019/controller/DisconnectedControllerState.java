@@ -95,7 +95,7 @@ public class DisconnectedControllerState extends StateController {
     public void handleReconnection(boolean isConnected) {
         if(isConnected){
             gameHandler.setPlayerConnectionStatus(player, true);
-            controller.setState(new NotYourTurnState(controller, gameHandler));
+            controller.setState(new NotYourTurnState(controller, gameHandler, false));
         }
     }
 

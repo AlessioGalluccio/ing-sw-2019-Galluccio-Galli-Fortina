@@ -2,6 +2,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.NotYourTurnState;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.FireMode;
@@ -38,6 +39,9 @@ public class GrenadeLauncher_1Test {
     private final static int GRENADE_WEAPON_ID = 19;
     private final static int GRENADE_FIREMODE_ID = 191;
 
+    private Controller controller2;
+    private PlayerView playerView2;
+
 
 
     @Before
@@ -67,6 +71,16 @@ public class GrenadeLauncher_1Test {
 
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
         stateController = controller.getState();
+
+        //Another controller
+        Server serverMock2 = mock(Server.class);
+        Player playerCopyMock2 = mock(Player.class);
+        playerView2 = new PlayerView(serverMock2, playerCopyMock2);
+        controller2 = new Controller(gameHandler, null, playerView2);
+        controller2.setPlayerView(playerView2);
+        controller2.setAuthor(targetPlayer1);
+
+        controller2.setState(new NotYourTurnState(controller2, gameHandler, false));
 
 
         //author, target 1 and target 2 in the same cell
@@ -131,6 +145,12 @@ public class GrenadeLauncher_1Test {
         controller.update(null,playerMessage);
 
         //System.out.println(playerView.getLastStringPrinted());
+
+        /* test for arrival of another message from another player
+        PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer1.getID(), targetPlayer1.getID(), playerView2);
+        controller2.update(null, playerMessage2);
+        System.out.println("Player 2: " + playerView2.getLastStringPrinted());
+        */
 
         CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);

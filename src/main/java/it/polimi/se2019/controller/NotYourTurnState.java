@@ -14,11 +14,13 @@ public class NotYourTurnState extends StateController {
 
     private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
 
-    public NotYourTurnState(Controller controller, GameHandler gameHandler) {
+    public NotYourTurnState(Controller controller, GameHandler gameHandler, boolean passTurn) {
         //TODO aggiungere playerAuthor e playerView (anche a tutti gli stati!)
         super(controller, gameHandler);
-        //we do a next turn when we create this state
-        gameHandler.nextTurn();
+        //we do a next turn when we create this state if passTurn is true
+        if(passTurn){
+            gameHandler.nextTurn();
+        }
         controller.setNumOfActionTaken(0);
         controller.resetMessages();
         this.playerAuthor = controller.getAuthor();

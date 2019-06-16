@@ -211,8 +211,20 @@ public class GameHandler extends Observable {
         return weaponDeck.getCardById(cardId);
     }
 
+    /**
+     * returns the Map of the game
+     * @return Map of the game
+     */
     public Map getMap() {
         return map;
+    }
+
+    /**
+     * returns the powerup deck of the game
+     * @return PowerupDeck of the game
+     */
+    public PowerupDeck getPowerupDeck() {
+        return powerupDeck;
     }
 
     /**
