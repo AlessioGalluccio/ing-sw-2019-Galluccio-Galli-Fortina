@@ -17,10 +17,10 @@ public class CLI implements UiInterface {
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
-    private List<EnemyView> enemyViews = new LinkedList<>();
+    List<EnemyView> enemyViews = new LinkedList<>();
     private MapView mapView;
     private boolean yourTurn;
-    private ParserCLI parser; //TODO crearlo allo startGame()
+    private ParserCLI parser;
 
     @SuppressWarnings("squid:S106")
     private static PrintWriter out = new PrintWriter(System.out, true);
@@ -51,12 +51,13 @@ public class CLI implements UiInterface {
     @Override
     public void startGame() {
         printAll();
-        in.close();
+        //in.close();
+        parser = new ParserCLI(view, this);
     }
 
     @Override
     public void disconnect(int matchID) {
-        //TODO chiudere tutti i thread (parser) e terminare applicazione
+        parser.open = false;
         online=false;
         out.println("\n");
         printLine();
@@ -132,7 +133,6 @@ public class CLI implements UiInterface {
     }
 
     public void start() {
-
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +
                 "\t\t \\ \\  \\   /  _ \\  |   __|   _ \\   __ `__ \\    _ \\      |  __ \\  \n" +
@@ -256,6 +256,21 @@ public class CLI implements UiInterface {
 
     void printAll() {
         clearScreen();
+        printMap();
+        printLine();
+        for(EnemyView ew : enemyViews) {
+            out.println(ew.toStringShort() + "\n");
+        }
+        printLine();
+        out.println(view.getPlayerCopy().toString());
+        printLine();
+    }
+
+    void println(String string) {
+        out.println(string);
+    }
+
+    public void printMap() {
         out.println("\t" + skullBoardView);
         out.println("");
         out.println(mapView.printRow(2,0));
@@ -280,12 +295,5 @@ public class CLI implements UiInterface {
         out.println(mapView.printRow(0,5));
         out.println(mapView.printRow(0,6));
         out.println(mapView.printRow(-1,0));
-        printLine();
-        for(EnemyView ew : enemyViews) {
-            out.println(ew.toStringShort() + "\n");
-        }
-        printLine();
-        out.println(view.getPlayerCopy().toString());
-        printLine();
     }
 }

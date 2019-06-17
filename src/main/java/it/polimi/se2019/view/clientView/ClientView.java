@@ -75,27 +75,6 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * create a PlayerMessage that the client send to the server
-     * @param playerID
-     */
-    public void createPlayerViewMessage(int playerID, int authorID){
-        PlayerMessage message = new PlayerMessage(playerID, playerCopy.getID(),this);
-        notifyObservers(message);
-    }
-
-
-    /**
-     * create a CardSpawnChooseMessage that the client send to the server
-     * @param cardChoosen
-     * @param cardDiscarded
-     */
-   /* public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,playerCopy.getID(),this);
-        notifyObservers(message);
-    }
-    */
-
-    /**
      * create a NopeMessage that the client send to the server
      */
     public void createNopeMessage(){
@@ -136,7 +115,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param usedCard
      */
     public void createTeleporterMessage(TeleporterCard usedCard){
-        TeleporterMessage message = new TeleporterMessage(usedCard,playerCopy.getID(),this);
+        TeleporterMessage message = new TeleporterMessage(usedCard, playerCopy.getID(),this);
         notifyObservers(message);
     }
 
@@ -151,11 +130,11 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * create a TagbackGranateMessage that the client send to the server
+     * create a TagbackGrenadeMessage that the client send to the server
      * @param usedCard
      */
-    public void createTagbackGranadeMessage(TagbackGranedCard usedCard){
-        TagbackGranateMessage message = new TagbackGranateMessage(usedCard,playerCopy.getID(),this);
+    public void createTagbackGranadeMessage(TagbackGrenadeCard usedCard){
+        TagbackGrenadeMessage message = new TagbackGrenadeMessage(usedCard,playerCopy.getID(),this);
         notifyObservers(message);
     }
 
