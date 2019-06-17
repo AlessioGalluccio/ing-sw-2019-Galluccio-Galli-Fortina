@@ -113,7 +113,7 @@ public class CyberBlade_1 extends FireMode {
                 controller.addMessageListImmediateNext(stringAndMessage);
                 shoot.addCost(COST_FIRST_OPTIONAL);
             }
-            if(numOptional == Identificator.SECOND_OPTIONAL &&
+            else if(numOptional == Identificator.SECOND_OPTIONAL &&
                     author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_SECOND_OPTIONAL))){
                 ArrayList<Player> possibleTargets = new ArrayList<>();
                 for(Player target : author.getCell().getPlayerHere()){
@@ -127,7 +127,7 @@ public class CyberBlade_1 extends FireMode {
                 }
                 else if(!shoot.getTargetsPlayer().isEmpty() && !possibleTargets.isEmpty()){
                     shoot.addOptionalSelected(numOptional);
-                    StringAndMessage stringAndMessage = new StringAndMessage(Identificator.CELL_MESSAGE,
+                    StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                             SECOND_OPTIONAL_MESSAGE);
                     controller.addMessageListImmediateNext(stringAndMessage);
                     shoot.addCost(COST_SECOND_OPTIONAL);
