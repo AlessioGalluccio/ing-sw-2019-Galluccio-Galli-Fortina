@@ -55,7 +55,7 @@ public class HeatSeeker_1 extends FireMode {
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player targetPlayer = gameHandler.getPlayerByID(playerID);
         if(shoot.getTargetsPlayer().isEmpty() && !targetPlayer.isVisibleBy(author)){
-            shoot.addPlayerTargetFromFireMode(targetPlayer);
+            shoot.addPlayerTargetFromFireMode(targetPlayer, true);
         }
         else {
             throw new WrongInputException();

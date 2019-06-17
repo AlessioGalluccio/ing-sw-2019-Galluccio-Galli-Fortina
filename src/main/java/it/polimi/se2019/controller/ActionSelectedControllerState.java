@@ -187,7 +187,7 @@ public class ActionSelectedControllerState extends StateController {
         try {
             action.fire();
             controller.addReceived();
-            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            //TODO prossimo stato?
         }catch(WrongInputException e){
             errorString = e.getMessage();
         }

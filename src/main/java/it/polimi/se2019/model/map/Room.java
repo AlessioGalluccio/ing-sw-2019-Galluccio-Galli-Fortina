@@ -60,9 +60,7 @@ public class Room implements Target, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return spawnCell.getCoordinateX()== room.spawnCell.getCoordinateX() &&
-                spawnCell.getCoordinateY()== room.spawnCell.getCoordinateY() &&
-                color.equals(room.color);
+        return color.equals(room.color);
     }
 
     @Override

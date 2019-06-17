@@ -28,6 +28,12 @@ public class ElectroScythe_1 extends FireMode {
         StringAndMessage fireMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, SEND_FIRE);
         List<StringAndMessage> list = new ArrayList<>();
         list.add(fireMessage);
+
+        for(Player target : gameHandler.getOrderPlayerList()){
+            if(target.getCell().equals(author.getCell())){
+                shoot.addPlayerTargetFromFireMode(target, true);
+            }
+        }
         return list;
     }
 
@@ -54,49 +60,6 @@ public class ElectroScythe_1 extends FireMode {
     }
 
 
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
-        if(shoot.getTargetingScopeCards().contains(card)){
-            throw new WrongInputException();
-        }
-        else if(!author.containsPowerup(card)){
-            throw new NotPresentException();
-        }
-        else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
-            throw new NotEnoughAmmoException();
-        }
-        else{
-            boolean canTargeting = false;
-            List<Player> list = author.getCell().getPlayerHere();
-            if(list.isEmpty()){
-                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
-            }
-            for(Player target: list){
-                if(target.isVisibleBy(author)){
-                    canTargeting = true;
-                }
-            }
-            if(!canTargeting){
-                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
-            }
-            else{
-                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
-                shoot.addCost(cost);
-            }
-        }
-    }
-
-    @Override
-    public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
-        Player target = gameHandler.getPlayerByID(playerID);
-        if(author.getCell().getPlayerHere().contains(target)){
-            shoot.addTargetForTargetingFromFiremode(target);
-        }
-        else{
-            throw new WrongInputException(INVALID_TARGET_FOR_TARGETING);
-        }
-    }
 
 
     /*
@@ -139,7 +102,7 @@ public class ElectroScythe_1 extends FireMode {
     }
 
     @Override
-    public void addTargetForTargetingNotVisibleWeapon(int playerID) throws WrongInputException {
+    public void addTargetForTargeting(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
         if(!shoot.getTargetsCells().isEmpty() && !shoot.getTargetsCells().get(0).getPlayerHere().isEmpty()
                 &&shoot.getTargetsCells().get(0).getPlayerHere().contains(target)){

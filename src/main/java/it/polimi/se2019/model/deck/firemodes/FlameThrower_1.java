@@ -58,14 +58,14 @@ public class FlameThrower_1 extends FireMode {
         //it's the first target and direction is the same of the cell choosen
         if(!shoot.getTargetsCells().isEmpty() && (shoot.getTargetsPlayer().isEmpty()) &&
                 getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0))){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, true);
         }
         //it's the second target. He is not in the same cell of the precedent
         else if(!shoot.getTargetsCells().isEmpty() && (!shoot.getTargetsCells().isEmpty()) &&
                 shoot.getTargetsCells().size() == 1 &&
                 getDirectionMax2(target.getCell()) == getDirectionMax2(shoot.getTargetsCells().get(0)) &&
                 !(target.getCell().equals(shoot.getTargetsPlayer().get(0).getCell()))){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
             throw new WrongInputException();

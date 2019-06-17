@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -26,8 +27,8 @@ public class GrenadeLauncher_1 extends FireMode {
     public static final String SECOND_MESSAGE = "Select a cell where to move the target. Select the cell where he is if you don't want to move him";
     public static final String OPTIONAL_MESSAGE = "Select a cell to launch the extra granade";
 
-    private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-    private static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
+    public static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
+    public static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -74,9 +75,10 @@ public class GrenadeLauncher_1 extends FireMode {
                 for(Player target : cell.getPlayerHere()){
                     //if the first target is in this cell, he will be added two times. He will get both damages
                     if(target.getID() != author.getID()){
-                        shoot.addPlayerTargetFromFireMode(target);
+                        shoot.addPlayerTargetFromFireMode(target, true);
                     }
                 }
+                nextCellIsForOptional = false;
             }
             //normal firemode, you move the target in a new position
             else{
@@ -103,7 +105,7 @@ public class GrenadeLauncher_1 extends FireMode {
             throw new WrongInputException(SELECTED_YOURSELF);
         }
         else if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty()){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
             throw new WrongInputException(NOT_VISIBLE);
@@ -130,6 +132,8 @@ public class GrenadeLauncher_1 extends FireMode {
             throw new WrongInputException(CANT_DO);
         }
     }
+
+
 
 
 }
