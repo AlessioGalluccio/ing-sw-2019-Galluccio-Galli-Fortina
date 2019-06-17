@@ -4,9 +4,8 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
-
+@Deprecated
 public class CardSpawnChooseMessage extends ViewControllerMessage {
     private PowerupCard cardChoosen;
     private PowerupCard cardDiscarded;

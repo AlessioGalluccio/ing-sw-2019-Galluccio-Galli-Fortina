@@ -1,10 +1,13 @@
 package it.polimi.se2019.ui;
 
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.configureMessage.LoginMessage;
+import it.polimi.se2019.network.rmi.RMIClient;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -20,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
 
 
 public class ControllerLogin implements UiInterface {
@@ -49,14 +53,26 @@ public class ControllerLogin implements UiInterface {
 
 
     public void loginButton(ActionEvent event) throws Exception, InterruptedException {
-        if (matchID.getText().equals("")) {
-            loginMessage = new LoginMessage(username.getText());
+        if(clientView==null) {
+            clientView = new ClientView();
+            clientView.setUi(this);
 
+            RMIClient rmi = new RMIClient(clientView, "localhost");
+            rmi.connect();
+
+            // SocketClient socket = new SocketClient(9001, "localhost", clientView);
+            //socket.connect();
+            clientView.setUp(rmi);
+           // Controller.setClientView(clientView);
+        }
+        if (matchID.getText().equals("")) {
+            //loginMessage = new LoginMessage());
+            clientView.createLoginMessage(username.getText(),-1);
 
         } else {
             int matchId = Integer.parseInt(matchID.getText());
-            loginMessage = new LoginMessage(username.getText(), matchId);
-
+            //loginMessage = new LoginMessage(username.getText(), matchId);
+            clientView.createLoginMessage(username.getText(),matchId);
         }
 
 
@@ -109,8 +125,8 @@ public class ControllerLogin implements UiInterface {
      * @param height
      * @throws Exception
      */
-    public void open(String fileName, String windowName, int width, int height) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(fileName));
+    static void open(String fileName, String windowName, int width, int height) throws Exception {
+        Parent root = FXMLLoader.load(ControllerLogin.class.getClassLoader().getResource(fileName));
         Stage primaryStage = new Stage();
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
@@ -120,7 +136,7 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void selectedMap(int choosMap){
-        controller.updateMap(choosMap);
+        Controller.updateMap(choosMap);
     }
 
     /**
@@ -128,32 +144,79 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void startGame() {
+        selectedMap(mapView.getMapCopy().getID());
+        updateMap();
+        updateSkullMap(skullBoardView.getNumSkullCopy());
+       /* if(enemyView1!=null) {
+            setEnemyNickname(enemyView1.getNickname());
+        }*/
+       //TODO ETC...
+        Platform.runLater(() -> {
         try {
             open("Map1.fxml", "ADRENALINE", 700, 700);
         }
         catch (Exception e) {
+            e.printStackTrace();
         }
-
+            });
     }
 
     @Override
-    public void disconnect() {
-
+    public void disconnect(int matchID) {
+        //TODO
     }
 
     @Override
-    public void setSkullBoard(SkullBoardView skullBoardView) {
-        this.skullBoardView = skullBoardView;
-        //Controller.setSkullBoard(skullBoardView);
+    public void setSkullBoard(SkullBoardView skullBoard) {
+        skullBoardView = skullBoard;
+        Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     @Override
-    public void setMapView(MapView mapView) {
-
+    public void setMapView(MapView mapViev) {
+        mapView = (ClientMapView) mapViev;
     }
 
     @Override
     public void setEnemyView(EnemyView enemyView) {
+        if(enemyView1==null) enemyView1 = (ClientEnemyView) enemyView;
+        else if(enemyView2==null) enemyView2 = (ClientEnemyView) enemyView;
+        else if(enemyView3==null) enemyView3 = (ClientEnemyView) enemyView;
+        else if(enemyView4==null) enemyView4 = (ClientEnemyView) enemyView;
+    }
+
+    @Override
+    public void printFromController(String message) {
+
+    }
+
+    @Override
+    public void updateCell(Cell cell) {
+
+    }
+
+    @Override
+    public void updatePlayer() {
+
+    }
+
+    @Override
+    public void updateEnemy(ClientEnemyView enemyView) {
+
+    }
+
+    @Override
+    public void updateSkullBoard() {
+
+    }
+
+    @Override
+    public void printRanking(List<Player> players) {
+
+    }
+
+    @Override
+    public void turn() {
 
     }
 
@@ -171,7 +234,7 @@ public class ControllerLogin implements UiInterface {
      */
     public void updateSkullMap(int skullNumber){
         String skullNumberString = String.valueOf(skullNumber);
-        controller.updateSkullBoard(skullNumberString);
+        Controller.updateSkullBoard(skullNumberString);
     }
 
     /**

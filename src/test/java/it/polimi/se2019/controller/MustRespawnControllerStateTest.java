@@ -21,7 +21,7 @@ public class MustRespawnControllerStateTest {
     @Before
     public void setUp() throws Exception {
         gameHandler = mock(GameHandler.class);
-        controller = new Controller(gameHandler, null);
+        controller = new Controller(gameHandler, null, playerView);
         state = new MustRespawnControllerState(controller, gameHandler);
         controller.setState(state);
     }

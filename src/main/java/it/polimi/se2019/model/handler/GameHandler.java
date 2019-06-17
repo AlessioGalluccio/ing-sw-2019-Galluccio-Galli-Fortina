@@ -12,11 +12,10 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
-import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
-import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
+import it.polimi.se2019.view.configureMessage.StartGameMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -409,7 +408,7 @@ public class GameHandler extends Observable {
         return ranking;
     }
 
-    private List<Death> cloneDeath() {
+    public List<Death> cloneDeath() {
         Gson gson = new GsonBuilder()
                 .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
                 .create();
@@ -464,6 +463,7 @@ public class GameHandler extends Observable {
                 break;
             default: throw new IllegalArgumentException();
         }
+        this.map.reloadAllCell();
     }
 
     public void setSkull(int skulls) {
@@ -486,15 +486,6 @@ public class GameHandler extends Observable {
         map.attach(mapView);
         //GM -> skullBardView
         attach(skullBoardView);
-        //Player -> enemyView
-        for(Player p : orderPlayerList) {
-            for(PlayerView pv : playerViews) {
-                if (pv.getPlayerCopy().getNickname().equals(p.getNickname())) p.attach(pv);
-            }
-            for(EnemyView ev : enemyViews) {
-                if(ev.getNickname().equals(p.getNickname())) p.attach(ev);
-            }
-        }
     }
 
     /**
@@ -509,7 +500,7 @@ public class GameHandler extends Observable {
         notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
 
         for(PlayerView pw : playerViews) {
-            pw.update(null, new StartGameMessage());
+            pw.update(null, new StartGameMessage(matchID));
         }
         //TODO set state controller for first player
     }
@@ -523,7 +514,6 @@ public class GameHandler extends Observable {
         player.setConnected(isConnected);
         if(isConnected) {
             PlayerView playerView = getViewByPlayer(player);
-            playerView.update(null, new StartGameMessage());
         } else {
             //TODO printformcontroller che qualcuno si è disconneso
         }
@@ -534,6 +524,10 @@ public class GameHandler extends Observable {
             if(p.getNickname().equals(nickname)) return !p.isConnected();
         }
         return false;
+    }
+
+    public int getSkull() {
+        return skull;
     }
 }
 

@@ -54,7 +54,7 @@ public class HasReloadedControllerStateTest {
         playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        controller = new Controller(gameHandler, null);
+        controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
 

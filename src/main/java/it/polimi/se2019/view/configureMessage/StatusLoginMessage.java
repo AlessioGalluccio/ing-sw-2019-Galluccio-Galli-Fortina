@@ -8,10 +8,12 @@ import java.io.Serializable;
 public class StatusLoginMessage implements HandlerNetworkMessage, Serializable {
     private boolean status;
     private boolean isFirst;
+    private String nickname;
 
-    public StatusLoginMessage(boolean status, boolean isFirst) {
+    public StatusLoginMessage(boolean status, boolean isFirst, String nickname) {
         this.status = status;
         this.isFirst = isFirst;
+        this.nickname = nickname;
     }
 
     public boolean isStatus() {
@@ -24,6 +26,6 @@ public class StatusLoginMessage implements HandlerNetworkMessage, Serializable {
 
     @Override
     public void handleMessage(Client client) {
-        client.handleLoginMessage(status, isFirst);
+        client.handleLoginMessage(status, isFirst, nickname);
     }
 }

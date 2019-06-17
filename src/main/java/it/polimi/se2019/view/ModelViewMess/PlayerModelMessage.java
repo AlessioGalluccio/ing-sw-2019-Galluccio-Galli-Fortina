@@ -4,14 +4,16 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.EnemyView;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class PlayerModelMessage implements ModelViewMessage, HandlerPlayerViewMessage, HandlerEnemyViewMessage {
-
+    private static int ID = 1;
+    private int ack;
     private Player playerCopy;
 
     public PlayerModelMessage(Player playerCopy) {
         this.playerCopy = playerCopy;
+        ID++;
+        ack = ID;
     }
 
     public Player getPlayerCopy() {
@@ -30,6 +32,11 @@ public class PlayerModelMessage implements ModelViewMessage, HandlerPlayerViewMe
 
     @Override
     public void handleMessage(Client client) {
+        client.forwardToClientView(this, playerCopy.getNickname());
+        client.forwardToEnemyView(this, playerCopy.getNickname());
+    }
 
+    public int getAck() {
+        return ack;
     }
 }

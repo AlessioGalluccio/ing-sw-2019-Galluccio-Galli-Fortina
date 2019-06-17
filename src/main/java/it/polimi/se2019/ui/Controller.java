@@ -7,15 +7,13 @@ import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
+import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
-import it.polimi.se2019.view.remoteView.EnemyView;
-import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 
@@ -104,7 +102,7 @@ public class Controller {
 
 
 
-
+    static ArrayList<ImageView> skull = new ArrayList<>();
     public Button fireButton;
     public Button endTurnButton;
     public Label yourPointsLabel;
@@ -112,7 +110,8 @@ public class Controller {
     public TabPane container1;
     public TabPane container2;
     public AnchorPane enemy1back;
-    ClientView clientView;
+    static ClientView clientView;
+    static ClientSkullBoardView skullBoardView;
     ClientMapView mapView;
     ClientEnemyView enemyView1;
     ClientEnemyView enemyView2;
@@ -164,7 +163,7 @@ public class Controller {
     @FXML
     public Button showMap;
 
-    public int choosenMap =0;
+    public static int choosenMap =0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -466,12 +465,16 @@ public class Controller {
 
 
     private int suddenDeath = 2;
-    private int skull = 0;
+    private int init_skull = 0;
 
     @FXML
     public Label labelProva;
 
     String transparent = "-fx-background-color: transparent;";
+
+    public static void setClientView(ClientView clientViev) {
+        clientView=clientViev;
+    }
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -480,15 +483,14 @@ public class Controller {
 
     public void skullCheck(ActionEvent event){
 
-        skull = Integer.parseInt(skulls.getText());
-        if(skull<1 ||skull >8){
+        init_skull = Integer.parseInt(skulls.getText());
+        if(init_skull <1 ||init_skull  >8){
             errorSkulls.setVisible(true);
         }
         else
             errorSkulls.setVisible(false);
 
-
-        System.out.println(skull);
+        System.out.println("Init skulls:" + init_skull );
 
 
     }
@@ -527,14 +529,14 @@ public class Controller {
         clientView = new ClientView();
         if(suddenDeathYes.isSelected()){
             suddenDeath=1;
-            System.out.println(suddenDeath);
+            System.out.println("Yes sudden death");
         }
         if(suddenDeathNo.isSelected()){
             suddenDeath=0;
-            System.out.println(suddenDeath);
+            System.out.println("No sudden death");
         }
 
-        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((skull>=1)&&(skull<=8))&&((suddenDeath==0) || (suddenDeath==1))){
+        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((init_skull >=1)&&(init_skull <=8))&&((suddenDeath==0) || (suddenDeath==1))){
             boolean sd;
             if(suddenDeath==0) {
                 sd=false;
@@ -544,13 +546,13 @@ public class Controller {
             }
             System.out.println("recap");
             System.out.println(choosenMap);
-            System.out.println(skull);
+            System.out.println("Skulls: " + init_skull );
             System.out.println(suddenDeath);
-            clientView.createSettingMessage(choosenMap,skull,sd);
+            ControllerLogin.clientView.createSettingMessage(choosenMap,init_skull ,sd);
 
             Stage stage = (Stage) rbmap2.getScene().getWindow();
             stage.close();
-            controllerLogin.open("WaitingRoom","LEAN BACK AND CHILL", 520, 400);
+            ControllerLogin.open("WaitingRoom.fxml","LEAN BACK AND CHILL", 520, 400);
 
         }
 
@@ -561,8 +563,15 @@ public class Controller {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
-
-
+        //Initialize skull
+        skull.add(imSkull1);
+        skull.add(imSkull2);
+        skull.add(imSkull3);
+        skull.add(imSkull4);
+        skull.add(imSkull5);
+        skull.add(imSkull6);
+        skull.add(imSkull7);
+        skull.add(imSkull8);
 
 
         setPlayerOnMap();
@@ -950,7 +959,7 @@ public class Controller {
      * @param event
      */
     public void fire(ActionEvent event) {
-        clientView.createFireMessage();
+        ControllerLogin.clientView.createFireMessage();
     }
 
     /**
@@ -1235,43 +1244,30 @@ public class Controller {
 
 
 
-    public void updateMap(int choosenMap){
-
-        this.choosenMap= choosenMap;
+    static void updateMap(int chosenMap){
+        choosenMap= chosenMap;
     }
 
 
     /**
-     * update skulls' imageviews on map 
+     * update skulls' imageviews on map
      * @param skullNumber
      */
-    public void updateSkullBoard(String skullNumber){
+    public static void updateSkullBoard(String skullNumber){
         //TODO mettere segnalino giocatore
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() -> {
 
-                ArrayList<ImageView> skull = new ArrayList();
-                skull.add(imSkull1);
-                skull.add(imSkull2);
-                skull.add(imSkull3);
-                skull.add(imSkull4);
-                skull.add(imSkull5);
-                skull.add(imSkull6);
-                skull.add(imSkull7);
-                skull.add(imSkull8);
-                int teschi = Integer.parseInt(skullNumber);
-                teschi--;
-                for(int counter = 0; counter< skull.size(); counter++){
-                    skull.get(counter).setVisible(false);
-                }
-                while(teschi>=0) {
-                    skull.get(teschi).setVisible(true);
-                    teschi--;
-                }
-
-
+            int teschi = Integer.parseInt(skullNumber);
+            teschi--;
+            for(int counter = 0; counter< skull.size(); counter++){
+                skull.get(counter).setVisible(false);
             }
+            while(teschi>=0) {
+                skull.get(teschi).setVisible(true);
+                teschi--;
+            }
+
+
         });
 
 
@@ -1285,44 +1281,41 @@ public class Controller {
      */
     public void updateWeaponMap(){
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() -> {
 
-                ArrayList<ImageView> redWeapons = new ArrayList();
-                ArrayList<ImageView> blueWeapons = new ArrayList();
-                ArrayList<ImageView> yellowWeapons = new ArrayList();
+            ArrayList<ImageView> redWeapons = new ArrayList<>();
+            ArrayList<ImageView> blueWeapons = new ArrayList<>();
+            ArrayList<ImageView> yellowWeapons = new ArrayList<>();
 
-                redWeapons.add(imRedWeapon1);
-                redWeapons.add(imRedWeapon2);
-                redWeapons.add(imRedWeapon3);
+            redWeapons.add(imRedWeapon1);
+            redWeapons.add(imRedWeapon2);
+            redWeapons.add(imRedWeapon3);
 
-                blueWeapons.add(imBlueWeapon1);
-                blueWeapons.add(imBlueWeapon2);
-                blueWeapons.add(imBlueWeapon3);
+            blueWeapons.add(imBlueWeapon1);
+            blueWeapons.add(imBlueWeapon2);
+            blueWeapons.add(imBlueWeapon3);
 
-                yellowWeapons.add(imYellowWeapon1);
-                yellowWeapons.add(imYellowWeapon2);
-                yellowWeapons.add(imYellowWeapon3);
+            yellowWeapons.add(imYellowWeapon1);
+            yellowWeapons.add(imYellowWeapon2);
+            yellowWeapons.add(imYellowWeapon3);
 
-                List<CellSpawn> cellSpawn = mapView.getCellSpawn();
-                List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
-                List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
-                List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+            List<CellSpawn> cellSpawn = ControllerLogin.mapView.getCellSpawn();
+            List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+            List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+            List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
-                for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
-                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
-                }
-
-                for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
-                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
-                }
-
-                for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
-                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
-                }
-
+            for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
+                redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
             }
+
+            for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
+                blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+            }
+
+            for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
+                yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+            }
+
         });
 
     }
@@ -1403,22 +1396,6 @@ public class Controller {
 
             }
         });
-
-    }
-
-
-    /**
-     * update enemy's weapon cards
-     */
-    public void updateWeaponEnemy(EnemyView enemyView){
-        try{
-            ArrayList<WeaponCard> enemyCard = enemyView.getUnloadedWeapon();
-
-        }
-        catch (NullPointerException e){
-
-        }
-
 
     }
 
@@ -1531,11 +1508,6 @@ public class Controller {
         updatePlayerYellowAmmo(yellowAmmo);
     }
 
-    //TODO ricorda la prima volta ti arriva la mappa e poi la singola cella
-
-    public void updateAmmoCell(){
-        //mapView.getCell(0,0).getCardID();
-    }
 
 
     public void printf(String string){
@@ -1547,9 +1519,9 @@ public class Controller {
         });
 
     }
-
-
-
+    static void setSkullBoard(ClientSkullBoardView sbv) {
+        skullBoardView = sbv;
+    }
 }
 
 

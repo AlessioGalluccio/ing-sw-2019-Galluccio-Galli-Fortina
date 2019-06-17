@@ -2,7 +2,6 @@ package it.polimi.se2019.view.clientView;
 
 
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
@@ -10,36 +9,31 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.configureMessage.SettingMessage;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
-import it.polimi.se2019.view.ModelViewMess.StartGameMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.network.configureMessage.LoginMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
+import java.util.List;
 import java.util.ArrayList;
-import java.util.Observable;
 
 
 public class ClientView extends View /*View implement observer/observable*/{
 
     private Player playerCopy;
-    private Map mapCopy;
     private ArrayList<Target> possibleTarget;
     private ArrayList<Target> selectedTarget;
     private ArrayList<Character> possibleCharacter;
     private Character choosenCharacter;
     private Client client;
     private UiInterface ui;
+    private int lastAck;
     private int matchId = 100;
-
-    public ClientView() {
-    }
 
     public Player getPlayerCopy() {
         return playerCopy;
     }
 
-    public ArrayList<Target> getSelectedTarget() {
+    public List<Target> getSelectedTarget() {
         return selectedTarget;
     }
 
@@ -47,17 +41,16 @@ public class ClientView extends View /*View implement observer/observable*/{
         return choosenCharacter;
     }
 
-    public ArrayList<Character> getPossibleCharacter() {
+    public List<Character> getPossibleCharacter() {
         return possibleCharacter;
     }
 
-    public ArrayList<Target> getPossibleTarget() {
-
+    public List<Target> getPossibleTarget() {
         return possibleTarget;
     }
 
-    public Map getMapCopy() {
-        return mapCopy;
+    public int getMatchId() {
+        return matchId;
     }
 
     /**
@@ -91,15 +84,17 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
+
     /**
      * create a CardSpawnChooseMessage that the client send to the server
      * @param cardChoosen
      * @param cardDiscarded
      */
-    public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
+   /* public void createCardSpawnChooseMessage(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         CardSpawnChooseMessage message = new CardSpawnChooseMessage(cardChoosen, cardDiscarded,playerCopy.getID(),this);
         notifyObservers(message);
     }
+    */
 
     /**
      * create a NopeMessage that the client send to the server
@@ -134,6 +129,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      */
     public void createReloadMessage(WeaponCard weapon){
         ReloadMessage message = new ReloadMessage(weapon, playerCopy.getID(),this);
+        notifyObservers(message);
     }
 
     /**
@@ -260,20 +256,16 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
 
-
-
     /**
      * verify that the target choosen by the player is contained in the ArrayList of available targets
      * @return
      */
     private boolean verifyTarget(){
-
-        for (int counter = 0; counter < possibleTarget.size(); counter++) {
+        for(int counter = 0; counter < possibleTarget.size(); counter++) {
             if(possibleTarget.get(counter).equals(selectedTarget)){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -282,10 +274,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @return
      */
     private boolean verifyCharacter(){
-        if (this.possibleCharacter.contains(this.choosenCharacter))
-            return true;
-
-        return false;
+        return this.possibleCharacter.contains(this.choosenCharacter);
     }
 
 
@@ -295,17 +284,28 @@ public class ClientView extends View /*View implement observer/observable*/{
      */
     @Override
     public void printFromController(String string) {
-        //Call method from UiInterface
+        //TODO Call method from UiInterface
     }
 
+    /**
+     * Notify the user about the start of the message
+     * @param matchId the id of the match just started
+     */
     @Override
-    public void handleStartGameMessage(StartGameMessage startGameMessage) {
+    public synchronized void handleStartGameMessage(int matchId) {
+        this.matchId = matchId;
         ui.startGame();
     }
 
+    /**
+     * This method is call by a PlayerMessage object.
+     * It copy the content of the message in this object
+     * @param p the player contained in the object
+     */
     @Override
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
+        //synchronized(ui) ui.printPlayer()
     }
 
 
@@ -319,29 +319,43 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
 
-
-    public void updatePlayerCopy(Player playerCopy){
-
-        this.playerCopy = playerCopy;
-    }
-
     public void setPossibleCharacter(ArrayList<Character> possibleCharacter){
         this.possibleCharacter = possibleCharacter;
     }
 
+    /**
+     * This method is called whenever the player object of this user is changed. An
+     * application calls an <tt>Observable</tt> object's
+     * <code>notifyObservers</code> method to have all the object's
+     * observers notified of the change.
+     *
+     * @param   o     Always null
+     * @param   arg   The message with which update the player board
+     */
     @Override
-    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
+    public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         HandlerPlayerViewMessage message = (HandlerPlayerViewMessage) arg;
-        message.handleMessage(this);
-        //ui.printPlayer()
+        if(message.getAck()>lastAck) {
+            lastAck = message.getAck();
+            message.handleMessage(this);
+        }
     }
 
+    /**
+     * Call a ui method to notify the user about the status of the login
+     * @param success the status, if is valid or not
+     * @param isFirst if the user is the first of the match
+     */
     public void handleLogin(boolean success, boolean isFirst) {
         ui.login(success, isFirst);
     }
 
+     /**
+      * Call a ui method to notify the user his has been disconnected from the macth
+      * A user can be disconnected due to network problem or due to inactivity
+     */
     public void handleDisconnection() {
-        ui.disconnect();
+        ui.disconnect(matchId);
     }
 
     /**
@@ -357,8 +371,8 @@ public class ClientView extends View /*View implement observer/observable*/{
         this.ui = ui;
     }
 
-    public int getMatchId() {
-        return matchId;
+    public  void shurdownServer() {
+        client.unreferenced();
     }
 }
 
