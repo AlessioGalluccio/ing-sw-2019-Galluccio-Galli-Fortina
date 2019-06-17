@@ -39,15 +39,15 @@ public class SocketClient extends Client {
 
             new Thread(() -> {
                 try {
-                    while (open) { // Fake condition: it's always true
+                    while (open) {
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
                         messageSocket.handleMessage(this);
                     }
                 } catch (java.net.SocketException e) {
                     //Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Connection closed", e);
-                    open=false;
                     closeAll();
-                    new DisconnectMessage().handleMessage(this);
+                    if(open) new DisconnectMessage().handleMessage(this);
+                    open=false;
                 } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
                 }  catch (IOException e) {
@@ -81,13 +81,16 @@ public class SocketClient extends Client {
     /**
      * Close all stream and disconnect this from the Server
      */
-    private void closeAll() {
+    @Override
+    public void closeAll() {
         try {
-            socket.close();
-            printSocket.close();
-            scannerSocket.close();
+            if(open) {
+                socket.close();
+                scannerSocket.close();
+                unreferenced();
+            }
         } catch (IOException e) {
-            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't close client socket", e);
+            Logger.getLogger(SocketClient.class.getName()).log(Level.FINE, "Can't close client socket", e);
         } finally {
             open = false;
         }

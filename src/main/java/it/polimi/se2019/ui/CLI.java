@@ -128,8 +128,8 @@ public class CLI implements UiInterface {
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
         printAll();
-        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t୧☉□☉୨");
-        else out.println("It's " + nickname + "'s turn\tಠᴗಠ");
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn! \t୧☉□☉୨" + ConsoleColor.RESET);
+        else out.println("It's " + nickname + "'s turn \tಠᴗಠ");
     }
 
     public void start() {

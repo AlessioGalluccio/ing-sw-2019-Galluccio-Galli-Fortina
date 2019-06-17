@@ -6,6 +6,7 @@ import it.polimi.se2019.network.messages.HandlerServerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -39,6 +40,15 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
             stub.connect(this);
         } catch (RemoteException |  NotBoundException e) {
             Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Problem connecting to RMI server", e);
+        }
+    }
+
+    @Override
+    public void closeAll() {
+        try {
+            unreferenced();
+        } catch (NoSuchObjectException e) {
+            Logger.getLogger(RMIClient.class.getName()).log(Level.WARNING, "Can't shutdown RMI", e);
         }
     }
 

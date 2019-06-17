@@ -57,6 +57,7 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     }
 
     public String getNickname() {
+
         return nickname;
     }
 

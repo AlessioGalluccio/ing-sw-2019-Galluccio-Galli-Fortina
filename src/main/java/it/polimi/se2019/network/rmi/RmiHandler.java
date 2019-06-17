@@ -141,7 +141,8 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
                 RmiHandler.nThreads--;
                 Logger.getLogger(RmiHandler.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
             } catch (RemoteException e) {
-                Logger.getLogger(RmiHandler.class.getName()).log(Level.SEVERE, "Can't send message to RMI client", e);
+                Logger.getLogger(RmiHandler.class.getName()).log(Level.INFO, "Can't send message to RMI client." +
+                        " It's close.", e);
                 disconnect();
             }
         }
