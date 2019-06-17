@@ -148,6 +148,7 @@ public class WaitingRoom {
                 for(EnemyView ew : m.enemyViews) {
                     if (!ew.getNickname().equals(nickname)) {
                         networkHandler.update(null, new EnemyMessage(ew.getNickname()));
+                        ew.attach(networkHandler);
                     }
                 }
 
@@ -211,6 +212,7 @@ public class WaitingRoom {
             for(WaitingPlayer enemy : playerWaiting) {
                 if(!enemy.enemyView.getNickname().equals(wp.player.getNickname())) {
                     wp.networkHandler.update(null, new EnemyMessage(enemy.enemyView.getNickname()));
+                    enemy.enemyView.attach(wp.networkHandler);
                 }
             }
             playerViews.add(wp.playerView);
@@ -269,6 +271,7 @@ public class WaitingRoom {
                 m.mapView.detach(server);
                 m.skullBoardView.detach(server);
                 view.setNetworkHandler(null);
+                for(EnemyView enemyView : m.enemyViews) enemyView.detach(server);
             }
         }
         Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Disconnect " +

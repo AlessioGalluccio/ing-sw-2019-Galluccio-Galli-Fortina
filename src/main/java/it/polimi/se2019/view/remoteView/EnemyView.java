@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import it.polimi.se2019.model.Observable;
 import java.util.Observer;
 
-public class EnemyView implements Observer, Serializable, Printable {
+public class EnemyView extends Observable implements Observer, Serializable, Printable {
 
     private int ID;
     private String nickname;
@@ -68,6 +68,7 @@ public class EnemyView implements Observer, Serializable, Printable {
     public void update(java.util.Observable o/*Will be always null*/, Object arg) {
         HandlerEnemyViewMessage message = (HandlerEnemyViewMessage) arg;
         message.handleMessage(this);
+        notifyObservers(message);
     }
 
     public void handlePlayerMessage(Player enemy) {
