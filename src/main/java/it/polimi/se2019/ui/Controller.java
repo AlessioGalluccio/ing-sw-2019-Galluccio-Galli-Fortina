@@ -22,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,11 +32,13 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
-public class Controller {
+public class Controller implements Initializable {
 
 
     //imageview of players' posizion on map
@@ -110,13 +113,8 @@ public class Controller {
     public TabPane container1;
     public TabPane container2;
     public AnchorPane enemy1back;
-    static ClientView clientView;
+
     static ClientSkullBoardView skullBoardView;
-    ClientMapView mapView;
-    ClientEnemyView enemyView1;
-    ClientEnemyView enemyView2;
-    ClientEnemyView enemyView3;
-    ClientEnemyView enemyView4;
 
 
     ControllerLogin controllerLogin;
@@ -472,9 +470,9 @@ public class Controller {
 
     String transparent = "-fx-background-color: transparent;";
 
-    public static void setClientView(ClientView clientViev) {
-        clientView=clientViev;
-    }
+    //public static void setClientView(ClientView clientViev) {
+        //clientView=clientViev;
+    //}
 
 
     //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
@@ -525,8 +523,7 @@ public class Controller {
 
 
         //mappa.setImage(new Image("mappa.jpg"));
-        //TODO creo sempre clientView??
-        clientView = new ClientView();
+
         if(suddenDeathYes.isSelected()){
             suddenDeath=1;
             System.out.println("Yes sudden death");
@@ -869,7 +866,7 @@ public class Controller {
      */
     public void addFiremode(ActionEvent event) throws Exception {
 
-        controllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
+        ControllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
 
     }
 
@@ -879,12 +876,12 @@ public class Controller {
      */
     public void sendFiremode(ActionEvent event) {
         if(firemode1.isSelected()) {
-            clientView.createFireModeMessage(1);
+            ControllerLogin.clientView.createFireModeMessage(1);
             Stage stage = (Stage) firemode1.getScene().getWindow();
             stage.close();
         }
         if(firemode2.isSelected()){
-            clientView.createFireModeMessage(2);
+            ControllerLogin.clientView.createFireModeMessage(2);
             Stage stage = (Stage) firemode1.getScene().getWindow();
             stage.close();
         }
@@ -899,17 +896,17 @@ public class Controller {
     public void sendOptional(ActionEvent event) {
 
         if(firemodeOp1.isSelected()){
-            clientView.createOptionalMessage(1);
+            ControllerLogin.clientView.createOptionalMessage(1);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
         if(firemodeOp2.isSelected()){
-            clientView.createOptionalMessage(2);
+            ControllerLogin.clientView.createOptionalMessage(2);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
         if(firemodeOp2.isSelected()){
-            clientView.createOptionalMessage(3);
+            ControllerLogin.clientView.createOptionalMessage(3);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
@@ -922,25 +919,25 @@ public class Controller {
      * @param event
      */
     public void selectWeapon(ActionEvent event) {
-        Player player = clientView.getPlayerCopy();
+        Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
             List<WeaponCard> weapons = player.getWeaponCardList();
 
             Object source = event.getSource();
 
             if(selectWeaponButton1 == source){
-                    clientView.createWeaponMessage(weapons.get(0));
+                ControllerLogin.clientView.createWeaponMessage(weapons.get(0));
 
             }
 
             if(selectWeaponButton2 == source){
 
-                    clientView.createWeaponMessage(weapons.get(1));
+                ControllerLogin.clientView.createWeaponMessage(weapons.get(1));
 
             }
 
             if(selectWeaponButton3 == source){
-                  clientView.createWeaponMessage(weapons.get(2));
+                ControllerLogin.clientView.createWeaponMessage(weapons.get(2));
 
 
             }
@@ -967,7 +964,7 @@ public class Controller {
      * @param event
      */
     public void endTurn(ActionEvent event) {
-        clientView.createPassTurnMessage();
+        ControllerLogin.clientView.createPassTurnMessage();
 
     }
 
@@ -985,15 +982,15 @@ public class Controller {
         Object source = event.getSource();
 
         if(moveButton == source){
-            clientView.createActionMessage(1);
+            ControllerLogin.clientView.createActionMessage(1);
         }
 
         if(grabButton == source){
-            clientView.createActionMessage(2);
+            ControllerLogin.clientView.createActionMessage(2);
         }
 
         if(grabButton == source){
-            clientView.createActionMessage(3);
+            ControllerLogin.clientView.createActionMessage(3);
         }
     }
 
@@ -1006,51 +1003,51 @@ public class Controller {
         Object source = event.getSource();
 
         if(cell00 == source){
-            clientView.createCellMessage(0,0);
+            ControllerLogin.clientView.createCellMessage(0,0);
         }
 
         if(cell01 == source){
-            clientView.createCellMessage(0,1);
+            ControllerLogin.clientView.createCellMessage(0,1);
         }
 
         if(cell02 == source){
-            clientView.createCellMessage(0,2);
+            ControllerLogin.clientView.createCellMessage(0,2);
         }
 
         if(cell10 == source){
-            clientView.createCellMessage(1,0);
+            ControllerLogin.clientView.createCellMessage(1,0);
         }
 
         if(cell11 == source){
-            clientView.createCellMessage(1,1);
+            ControllerLogin.clientView.createCellMessage(1,1);
         }
 
         if(cell12 == source){
-            clientView.createCellMessage(1,2);
+            ControllerLogin.clientView.createCellMessage(1,2);
         }
 
         if(cell20 == source){
-            clientView.createCellMessage(2,0);
+            ControllerLogin.clientView.createCellMessage(2,0);
         }
 
         if(cell21 == source){
-            clientView.createCellMessage(2,1);
+            ControllerLogin.clientView.createCellMessage(2,1);
         }
 
         if(cell22 == source){
-            clientView.createCellMessage(2,2);
+            ControllerLogin.clientView.createCellMessage(2,2);
         }
 
         if(cell30 == source){
-            clientView.createCellMessage(3,0);
+            ControllerLogin.clientView.createCellMessage(3,0);
         }
 
         if(cell31 == source){
-            clientView.createCellMessage(3,1);
+            ControllerLogin.clientView.createCellMessage(3,1);
         }
 
         if(cell32 == source){
-            clientView.createCellMessage(3,2);
+            ControllerLogin.clientView.createCellMessage(3,2);
         }
     }
 
@@ -1067,31 +1064,31 @@ public class Controller {
 
 
         if(redWeapon1 == source){
-            clientView.createWeaponMessage(redWeaponCards.get(0));
+            ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(0));
         }
         if(redWeapon2 == source){
-            clientView.createWeaponMessage(redWeaponCards.get(1));
+            ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(1));
         }
         if(redWeapon3 == source){
-            clientView.createWeaponMessage(redWeaponCards.get(2));
+            ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(2));
         }
         if(blueWeapon1 == source){
-            clientView.createWeaponMessage(bluWeaponCards.get(0));
+            ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(0));
         }
         if(blueWeapon2 == source){
-            clientView.createWeaponMessage(bluWeaponCards.get(1));
+            ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(1));
         }
         if(blueWeapon3 == source){
-            clientView.createWeaponMessage(bluWeaponCards.get(2));
+            ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(2));
         }
         if(yellowWeapon1 == source){
-            clientView.createWeaponMessage(yellowWeaponCards.get(0));
+            ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(0));
         }
         if(yellowWeapon2 == source){
-            clientView.createWeaponMessage(yellowWeaponCards.get(1));
+            ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(1));
         }
         if(yellowWeapon3 == source){
-            clientView.createWeaponMessage(yellowWeaponCards.get(2));
+            ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(2));
         }
 
 
@@ -1103,25 +1100,25 @@ public class Controller {
      * @param event
      */
     public void reloadWeapon(ActionEvent event) {
-        Player player = clientView.getPlayerCopy();
+        Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
             List<WeaponCard> weapons = player.getWeaponCardList();
 
             Object source = event.getSource();
 
             if(bReloadWeapon1 == source){
-                clientView.createReloadMessage(weapons.get(0));
+                ControllerLogin.clientView.createReloadMessage(weapons.get(0));
 
             }
 
             if(bReloadWeapon2 == source){
 
-                clientView.createReloadMessage(weapons.get(1));
+                ControllerLogin.clientView.createReloadMessage(weapons.get(1));
 
             }
 
             if(bReloadWeapon3 == source){
-                clientView.createReloadMessage(weapons.get(2));
+                ControllerLogin.clientView.createReloadMessage(weapons.get(2));
 
 
             }
@@ -1145,16 +1142,16 @@ public class Controller {
     public void selectEnemy(ActionEvent event) {
         Object source = event.getSource();
         if(enemyCharacter1 == source){
-            clientView.createPlayerMessage(ControllerLogin.enemyView1.getID());
+            ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView1.getID());
         }
         if(enemyCharacter2 == source){
-            clientView.createPlayerMessage(enemyView2.getID());
+            ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView2.getID());
         }
         if(enemyCharacter3 == source){
-            clientView.createPlayerMessage(enemyView3.getID());
+            ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView3.getID());
         }
         if(enemyCharacter4 == source){
-            clientView.createPlayerMessage(enemyView4.getID());
+            ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView4.getID());
         }
 
     }
@@ -1164,25 +1161,25 @@ public class Controller {
      * @param event
      */
     public void discardWeapon(ActionEvent event) {
-        Player player = clientView.getPlayerCopy();
+        Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
             List<WeaponCard> weapons = player.getWeaponCardList();
 
             Object source = event.getSource();
 
             if (bDiscardWeapon1 == source) {
-                clientView.createDiscardWeaponMessage(weapons.get(0));
+                ControllerLogin.clientView.createDiscardWeaponMessage(weapons.get(0));
 
             }
 
             if (bDiscardWeapon2 == source) {
 
-                clientView.createDiscardWeaponMessage(weapons.get(1));
+                ControllerLogin.clientView.createDiscardWeaponMessage(weapons.get(1));
 
             }
 
             if (bDiscardWeapon3 == source) {
-                clientView.createDiscardWeaponMessage(weapons.get(2));
+                ControllerLogin.clientView.createDiscardWeaponMessage(weapons.get(2));
 
 
             }
@@ -1195,31 +1192,31 @@ public class Controller {
     }
 
     public void discardPowerup(ActionEvent event) {
-            Player player = clientView.getPlayerCopy();
+            Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
             List<PowerupCard> powerupCards = player.getPowerupCardList();
 
             Object source = event.getSource();
 
             if (bDiscardPowerup1 == source) {
-                clientView.createDiscardPowerupMessage(powerupCards.get(0));
+                ControllerLogin.clientView.createDiscardPowerupMessage(powerupCards.get(0));
 
             }
 
             if (bDiscardPowerup2 == source) {
 
-                clientView.createDiscardPowerupMessage(powerupCards.get(1));
+                ControllerLogin.clientView.createDiscardPowerupMessage(powerupCards.get(1));
 
             }
 
             if (bDiscardPowerup3 == source) {
 
-                clientView.createDiscardPowerupMessage(powerupCards.get(2));
+                ControllerLogin.clientView.createDiscardPowerupMessage(powerupCards.get(2));
 
             }
             if (bDiscardPowerup3 == source) {
 
-                clientView.createDiscardPowerupMessage(powerupCards.get(3));
+                ControllerLogin.clientView.createDiscardPowerupMessage(powerupCards.get(3));
 
             }
 
@@ -1253,7 +1250,7 @@ public class Controller {
      * update skulls' imageviews on map
      * @param skullNumber
      */
-    public static void updateSkullBoard(String skullNumber){
+    public void updateSkullBoard(String skullNumber){
         //TODO mettere segnalino giocatore
         Platform.runLater(() -> {
 
@@ -1384,7 +1381,7 @@ public class Controller {
             @Override
             public void run() {
                 try{
-                    List<WeaponCard> weaponCards = clientView.getPlayerCopy().getWeaponCardList();
+                    List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
                     imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
                     imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
                     imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
@@ -1521,6 +1518,11 @@ public class Controller {
     }
     static void setSkullBoard(ClientSkullBoardView sbv) {
         skullBoardView = sbv;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
 

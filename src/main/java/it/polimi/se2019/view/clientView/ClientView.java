@@ -167,13 +167,6 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
-    /**
-     * create a UndoMessage that the client send to the server
-     */
-    public void createUndoMessage() {
-        UndoMessage message = new UndoMessage(playerCopy.getID(),this);
-        notifyObservers(message);
-    }
 
     /**
      * create a LoginMessage that the client send to the server

@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ControllerLogin implements UiInterface {
 
-    static Controller controller;
+    private Controller controller;
     static ClientView clientView;
     static SkullBoardView skullBoardView;
     static ClientEnemyView enemyView1;
@@ -35,6 +35,8 @@ public class ControllerLogin implements UiInterface {
     static ClientEnemyView enemyView3;
     static ClientEnemyView enemyView4;
     static ClientMapView mapView;
+
+    private FXMLLoader fxmlLoader;
 
     @FXML
     private TextField username;
@@ -62,7 +64,7 @@ public class ControllerLogin implements UiInterface {
             // SocketClient socket = new SocketClient(9001, "localhost", clientView);
             //socket.connect();
             clientView.setUp(rmi);
-           // Controller.setClientView(clientView);
+            //Controller.setClientView(clientView);
         }
         if (matchID.getText().equals("")) {
             //loginMessage = new LoginMessage());
@@ -87,21 +89,22 @@ public class ControllerLogin implements UiInterface {
         Platform.runLater(new Runnable() {
             @Override
             public void run(){
-                if(success==true) {
+                if(success) {
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
 
-                    if( isFirst== true) {
+                    if( isFirst) {
                         try {
-                            open("chooseMap.fxml", " CHOOSE MAP", 470, 400);
+                            fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 400);
+                            controller = fxmlLoader.getController();
                         } catch (Exception e) {
                         }
                     }
 
-                    if (isFirst == false){
+                    if (isFirst){
                         try {
-                            open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                            fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                         } catch (Exception e) {
                         }
                     }
@@ -124,12 +127,14 @@ public class ControllerLogin implements UiInterface {
      * @param height
      * @throws Exception
      */
-    static void open(String fileName, String windowName, int width, int height) throws Exception {
-        Parent root = FXMLLoader.load(ControllerLogin.class.getClassLoader().getResource(fileName));
+    static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
+        FXMLLoader loader= FXMLLoader.load(ControllerLogin.class.getClassLoader().getResource(fileName));
+        Parent root = (Parent) loader.load();
         Stage primaryStage = new Stage();
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
+        return loader;
 
     }
 
@@ -152,7 +157,8 @@ public class ControllerLogin implements UiInterface {
        //TODO ETC...
         Platform.runLater(() -> {
         try {
-            open("Map1.fxml", "ADRENALINE", 700, 700);
+            fxmlLoader = open("Map1.fxml", "ADRENALINE", 700, 700);
+            controller = fxmlLoader.getController();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -233,7 +239,7 @@ public class ControllerLogin implements UiInterface {
      */
     public void updateSkullMap(int skullNumber){
         String skullNumberString = String.valueOf(skullNumber);
-        Controller.updateSkullBoard(skullNumberString);
+        controller.updateSkullBoard(skullNumberString);
     }
 
     /**
