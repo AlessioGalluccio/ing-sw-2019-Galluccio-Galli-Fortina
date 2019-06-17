@@ -29,7 +29,7 @@ public class App {
                 //socketServer = new SocketServer(9001, timerWait, timerTurn);
               //socketServer.start();
 
-                RMIServer.start(9002, timerWait, timerTurn);
+                RMIServer.start(14000, timerWait, timerTurn);
             }
         } catch (IOException e) {
             System.out.println("Error while reading config file");

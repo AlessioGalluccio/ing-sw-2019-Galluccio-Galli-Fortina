@@ -89,12 +89,12 @@ public class ControllerLogin implements UiInterface {
         Platform.runLater(new Runnable() {
             @Override
             public void run(){
-                if(success==true) {
+                if(success) {
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
 
-                    if( isFirst== true) {
+                    if( isFirst) {
                         try {
                             fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 400);
                             controller = fxmlLoader.getController();
@@ -102,9 +102,9 @@ public class ControllerLogin implements UiInterface {
                         }
                     }
 
-                    if (isFirst == false){
+                    if (isFirst){
                         try {
-                            open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                            fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                         } catch (Exception e) {
                         }
                     }
@@ -140,7 +140,7 @@ public class ControllerLogin implements UiInterface {
 
 
     public void selectedMap(int choosMap){
-        controller.updateMap(choosMap);
+        Controller.updateMap(choosMap);
     }
 
     /**
@@ -174,7 +174,7 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void setSkullBoard(SkullBoardView skullBoard) {
         skullBoardView = skullBoard;
-        controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
+        Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     @Override
