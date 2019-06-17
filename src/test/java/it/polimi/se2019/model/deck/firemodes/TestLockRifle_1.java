@@ -172,6 +172,7 @@ public class TestLockRifle_1 {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.fire();
 
         //target 1
@@ -200,6 +201,7 @@ public class TestLockRifle_1 {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addOptional(1);
         shoot.addPlayerTarget(targetPlayer2.getID());
         shoot.fire();

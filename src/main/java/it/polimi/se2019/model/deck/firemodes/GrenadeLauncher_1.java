@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -74,7 +75,7 @@ public class GrenadeLauncher_1 extends FireMode {
                 for(Player target : cell.getPlayerHere()){
                     //if the first target is in this cell, he will be added two times. He will get both damages
                     if(target.getID() != author.getID()){
-                        shoot.addPlayerTargetFromFireMode(target);
+                        shoot.addPlayerTargetFromFireMode(target, true);
                     }
                 }
                 nextCellIsForOptional = false;
@@ -104,7 +105,7 @@ public class GrenadeLauncher_1 extends FireMode {
             throw new WrongInputException(SELECTED_YOURSELF);
         }
         else if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty()){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
             throw new WrongInputException(NOT_VISIBLE);
@@ -131,6 +132,8 @@ public class GrenadeLauncher_1 extends FireMode {
             throw new WrongInputException(CANT_DO);
         }
     }
+
+
 
 
 }

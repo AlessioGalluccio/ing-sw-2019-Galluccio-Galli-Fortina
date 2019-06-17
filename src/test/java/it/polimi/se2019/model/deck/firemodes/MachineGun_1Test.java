@@ -160,6 +160,7 @@ public class MachineGun_1Test {
 
         shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addTargetingScope(targetingID,ammoCostTargeting);
+        shoot.addPlayerTarget(targetPlayer1.getID());
         shoot.addPlayerTarget(targetPlayer2.getID());
         shoot.addOptional(1);
         shoot.addOptional(2);

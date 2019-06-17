@@ -50,7 +50,7 @@ public class Whisper_1 extends FireMode {
         Player target = gameHandler.getPlayerByID(playerID);
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(author.getCell(), 2);
         if(!shoot.getTargetsPlayer().isEmpty() && arrayCell.contains(target.getCell())){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
             throw new WrongInputException();

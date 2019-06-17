@@ -70,11 +70,11 @@ public class LockRifle_1 extends FireMode {
         }
         else if(target.isVisibleBy(author)){
             if(shoot.getTargetsPlayer().isEmpty()){
-                shoot.addPlayerTargetFromFireMode(target);
+                shoot.addPlayerTargetFromFireMode(target, true);
             }
             else if(shoot.getTargetsPlayer().size() == 1 && shoot.getTargetsPlayer().get(0).getID() != targetID
                     && shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
-                shoot.addPlayerTargetFromFireMode(target);
+                shoot.addPlayerTargetFromFireMode(target, false);
             }
             else{
                 throw new WrongInputException();

@@ -66,14 +66,14 @@ public class MachineGun_1 extends FireMode {
         }
         else if(target.isVisibleBy(author)){
             if(shoot.getTargetsPlayer().isEmpty()){
-                shoot.addPlayerTargetFromFireMode(target);
+                shoot.addPlayerTargetFromFireMode(target, true);
             }
             else if(shoot.getTargetsPlayer().size() < 2 && !shoot.getTargetsPlayer().contains(target)){
-                shoot.addPlayerTargetFromFireMode(target);
+                shoot.addPlayerTargetFromFireMode(target, true);
             }
             else if(shoot.getTargetsPlayer().size() == 2 && !shoot.getTargetsPlayer().contains(target)
                         && shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL)){
-                shoot.addPlayerTargetFromFireMode(target);
+                shoot.addPlayerTargetFromFireMode(target, true);
             }
             else{
                 throw new WrongInputException();
