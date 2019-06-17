@@ -1,8 +1,7 @@
 package it.polimi.se2019.network;
 
-import it.polimi.se2019.network.configureMessage.LoginMessage;
+import it.polimi.se2019.network.messages.LoginMessage;
 import it.polimi.se2019.network.socket.SocketHandler;
-import it.polimi.se2019.network.socket.SocketServer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +18,7 @@ public class WaitingRoomTest {
 
     @Test
     public void uniqueNickname() {
+
         SocketHandler mock =  mock(SocketHandler.class);
         waitingRoom.handleSettingMessage(1, 2, false, mock);
 

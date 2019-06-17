@@ -82,7 +82,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     public void setPossibleTargets(List<? extends Target> targets){
         this.possibleTargets = (ArrayList<? extends Target>) targets;
-        networkHandler.update(null, new PossibleTargetMessage(targets));
+        if(networkHandler!=null) networkHandler.update(null, new PossibleTargetMessage(targets));
     }
 
     /**
@@ -91,17 +91,8 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     @Override
     public void printFromController(String string) {
-        this.lastStringPrinted = string;
-        networkHandler.send(string);
-    }
-
-    /**
-     * Do nothing
-     * @param matchID
-     */
-    @Override
-    public void handleStartGameMessage(int matchID) {
-        //Is only to forward, already done by update()
+        this.lastStringPrinted = string; //For testing
+        if(networkHandler!=null) networkHandler.send(string);
     }
 
     /**
@@ -110,6 +101,23 @@ public class PlayerView extends View /*View implement observer/observable*/{
      */
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
+    }
+
+    /**
+     * Do nothing
+     */
+    @Override
+    public void handleTurnMessage(String nickname) {
+        //Is only to forward, already done by update()
+    }
+
+    /**
+     * Do nothing
+     * @param ranking
+     */
+    @Override
+    public void handleRankingMessage(List<Player> ranking) {
+        //Is only to forward, already done by update()
     }
 
 

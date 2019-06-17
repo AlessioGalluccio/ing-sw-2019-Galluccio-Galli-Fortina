@@ -3,29 +3,44 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class MustRespawnControllerState extends StateController {
-    private Player player;
+    private Player playerAuthor;
     private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private String errorString;
     private String stringToPlayerView;
 
 
     //TODO sistema questa stringa scrivendo qualcosa di più sensato
-    private static String MUST_RESPAWN = "Please, do a respawn";
+    public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
+    public static final String TOO_MANY_CARDS = "The player has already three cards. ";
 
     public MustRespawnControllerState(Controller controller, GameHandler gameHandler) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
-        this.controller = controller;
-        this.gameHandler = gameHandler;
-        this.player = controller.getAuthor();
+        //TODO aggiungere playerAuthor e playerView (anche a tutti gli stati!)
+        super(controller, gameHandler);
+        this.playerAuthor = controller.getAuthor();
         this.playerView = controller.getPlayerView();
+        //playerAuthor picks up one powerup cards
+        PowerupDeck deck = gameHandler.getPowerupDeck();
+        try{
+            playerAuthor.addPowerupCard(deck.pick());
+        }catch (TooManyException e){
+            errorString = TOO_MANY_CARDS;
+        }
+
+        //we immediately send a message to the player
+        if(errorString == null){
+            controller.getPlayerView().printFromController(POWERUP_DISCARD_REQUEST);
+        }
+        else {
+            controller.getPlayerView().printFromController(errorString + POWERUP_DISCARD_REQUEST);
+            errorString = null;
+        }
+
     }
 
 
@@ -35,26 +50,12 @@ public class MustRespawnControllerState extends StateController {
     }
 
     @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO fai spawn
-        gameHandler.nextTurn();   //TODO potrebbe creare
-                                    //     problemi di deadlock, nel caso in cui gamehandler cambi lo stato prima di
-                                    //     questo
-        controller.setState(new NotYourTurnState(controller, gameHandler));
-    }
-
-    @Override
     public void handleCell(int coordinateX, int coordinateY) {
         youMustRespawn();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youMustRespawn();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
         youMustRespawn();
     }
 
@@ -84,7 +85,7 @@ public class MustRespawnControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         youMustRespawn();
     }
 
@@ -117,7 +118,7 @@ public class MustRespawnControllerState extends StateController {
     public void handleReconnection(boolean isConnected) {
         //TODO controlla
         if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(player, false);
+            gameHandler.setPlayerConnectionStatus(playerAuthor, false);
             gameHandler.nextTurn();
             controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
@@ -125,19 +126,33 @@ public class MustRespawnControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+
+        errorString = respawnPlayerWithPowerup(controller.getAuthor(), powerupID);
+        //if it's null, there are no errors. If it is, we don't change the state and we wait another message
+        //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
+        if (errorString != null) {
+            //the NotYourTurnState will do the gamehandler.nextTurn()
+            controller.setState(new NotYourTurnState(controller, gameHandler, true));
+
+        }
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        youMustRespawn();
     }
 
 
     @Override
     public String handle(ViewControllerMessage arg) {
         arg.handle(this);
-        stringToPlayerView = MUST_RESPAWN;
+        if(errorString != null){
+            stringToPlayerView = errorString + POWERUP_DISCARD_REQUEST;
+            errorString = null;
+        }
+        else{
+            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+        }
         return stringToPlayerView;
     }
 
@@ -147,5 +162,6 @@ public class MustRespawnControllerState extends StateController {
     }
 
     private void youMustRespawn(){
+        stringToPlayerView = POWERUP_DISCARD_REQUEST;
     }
 }

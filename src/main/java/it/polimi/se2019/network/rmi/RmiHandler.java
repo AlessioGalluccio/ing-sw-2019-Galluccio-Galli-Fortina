@@ -11,9 +11,10 @@ import java.util.logging.Logger;
 import it.polimi.se2019.RMIServer;
 import it.polimi.se2019.network.HandlerNetworkMessage;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.network.configureMessage.HandlerConfigMessage;
-import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
-import it.polimi.se2019.network.configureMessage.SwitchServerMessage;
+import it.polimi.se2019.network.messages.HandlerConfigMessage;
+import it.polimi.se2019.network.messages.HandlerServerMessage;
+import it.polimi.se2019.network.messages.PrintFromControllerMessage;
+import it.polimi.se2019.network.messages.SwitchServerMessage;
 import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.configureMessage.DisconnectMessage;
@@ -63,7 +64,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
 
     @Override
     public void send(String string) {
-
+        executor.submit(new Sender(new PrintFromControllerMessage(string)));
     }
 
     /**

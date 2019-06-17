@@ -12,9 +12,7 @@ import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
-import it.polimi.se2019.view.ModelViewMess.MapMessage;
-import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
-import it.polimi.se2019.view.ModelViewMess.SkullBoardMessage;
+import it.polimi.se2019.view.ModelViewMess.*;
 import it.polimi.se2019.view.configureMessage.StartGameMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -75,27 +73,31 @@ public class GameHandler extends Observable {
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
         checkDeath(); //If someone is dead cash his point, add revenge mark and add him to the stack of just dead
-        if(justDied.isEmpty()) incrementTurn();  //I had to separate this method in order to improve efficiency test
+        if(justDied.isEmpty()) {
+            do {
+                incrementTurn();  //I had to separate this method in order to improve efficiency test
+            }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
+        }
         else {
             //TODO chiedere di respawnare
             //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
         }
         if(skull==0) modality = new Frenzy();
-        //TODO notify();
+        forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
     }
 
     /**
      * Increment the turn parameter
      */
-    protected void incrementTurn() { //I had to separate this method in order to improve efficiency test
-        turn =  (turn == orderPlayerList.size()) ? 0 : turn+1;
+    void incrementTurn() { //I had to separate this method in order to improve efficiency test
+        turn =  (turn == orderPlayerList.size()-1) ? 0 : turn+1;
     }
 
     /**
      * Called at the end of the game
      */
-    public void finishGame() {
-
+    public void endGame() {
+        forwardAllViews(new RankingMessage(getRanking()));
     }
 
     /**
@@ -209,8 +211,20 @@ public class GameHandler extends Observable {
         return weaponDeck.getCardById(cardId);
     }
 
+    /**
+     * returns the Map of the game
+     * @return Map of the game
+     */
     public Map getMap() {
         return map;
+    }
+
+    /**
+     * returns the powerup deck of the game
+     * @return PowerupDeck of the game
+     */
+    public PowerupDeck getPowerupDeck() {
+        return powerupDeck;
     }
 
     /**
@@ -447,6 +461,10 @@ public class GameHandler extends Observable {
         }
     }
 
+    /**
+     * Initialize the map in base the map's ID
+     * @param map The ID of the map to set (1-4)
+     */
     public void setMap(int map) {
         switch (map) {
             case 1:
@@ -499,9 +517,15 @@ public class GameHandler extends Observable {
         }
         notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
 
-        for(PlayerView pw : playerViews) {
-            pw.update(null, new StartGameMessage(matchID));
+        if(orderPlayerList.size()>3) {
+            try {
+                Thread.sleep(750); //Wait all message arrive at the user
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
+        forwardAllViews(new StartGameMessage(matchID));
+
         //TODO set state controller for first player
     }
 
@@ -513,12 +537,19 @@ public class GameHandler extends Observable {
     public void setPlayerConnectionStatus(Player player, boolean isConnected){
         player.setConnected(isConnected);
         if(isConnected) {
-            PlayerView playerView = getViewByPlayer(player);
+           // PlayerView playerView = getViewByPlayer(player); //WHY??
+           forwardAllViews(player.getNickname() + " is back!\n");
         } else {
-            //TODO printformcontroller che qualcuno si è disconneso
+            forwardAllViews(player.getNickname() + " has been disconnected! \n");
+            //TODO Se il numero di giocatori ancora connessi < 3, terminare la partita
         }
     }
 
+    /**
+     * Check if a player is disconnected
+     * @param nickname the player's nickname to check
+     * @return True if is disconnected, false if is connected
+     */
     public boolean isDisconnected(String nickname) {
         for(Player p : orderPlayerList) {
             if(p.getNickname().equals(nickname)) return !p.isConnected();
@@ -528,6 +559,26 @@ public class GameHandler extends Observable {
 
     public int getSkull() {
         return skull;
+    }
+
+    /**
+     * Send a common message to all player
+     * @param message the message to send
+     */
+    private void forwardAllViews(ModelViewMessage message) {
+        for(PlayerView pw : playerViews) {
+            pw.update(null, message);
+        }
+    }
+
+    /**
+     * Send a common message to all player
+     * @param message the message to send
+     */
+    private void forwardAllViews(String message) {
+        for(PlayerView playerView : playerViews) {
+            playerView.printFromController(message);
+        }
     }
 }
 

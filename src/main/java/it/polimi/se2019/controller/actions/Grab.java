@@ -60,7 +60,7 @@ public class Grab extends Action{
     @Override
     public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
-        List<Cell> arrayCellsAtDistance = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
+        List<Cell> arrayCellsAtDistance = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), getMaxDistance());
         try{
             if(arrayCellsAtDistance.contains(gameHandler.getCellByCoordinate(x,y))) {
                 cellObjective = gameHandler.getCellByCoordinate(x, y);
@@ -151,5 +151,9 @@ public class Grab extends Action{
     @Override
     public void fire() throws WrongInputException {
         throw new WrongInputException();
+    }
+
+    protected int getMaxDistance(){
+        return DISTANCE_MAX;
     }
 }

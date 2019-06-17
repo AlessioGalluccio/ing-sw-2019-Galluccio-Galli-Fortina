@@ -4,7 +4,6 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.PowerupCard;
-import it.polimi.se2019.model.deck.TargetingScopeCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -19,6 +18,7 @@ public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;
     protected ArrayList<Player> targets;
+    protected ArrayList<Player> canBeTargetedPlayers;
     protected ArrayList<Integer> optionalSelected;
     protected ArrayList<Cell> cells;
     protected ArrayList<PowerupCard> targetingScopeCards;
@@ -33,6 +33,7 @@ public class Shoot extends Action{
     public static final String LAST_MESSAGE = "Please, press Fire";
 
     private String SELECT_TARGET_FOR_TARGETING = "Select a target for the Targeting Scope";
+    public static final String NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL = "Finish Targeting before Optional, please. ";
 
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
@@ -46,6 +47,7 @@ public class Shoot extends Action{
         this.cells = new ArrayList<>();
         this.optionalSelected = new ArrayList<>();
         this.targetingScopeCards = new ArrayList<>();
+        this.canBeTargetedPlayers = new ArrayList<>();
         this.neededTargetForTargeting = false;
     }
 
@@ -78,8 +80,7 @@ public class Shoot extends Action{
             throw new WrongInputException();
         }
         else{
-            //TODO
-            //fireMode.addCell();
+            fireMode.addCell(x,y);
         }
 
     }
@@ -92,7 +93,7 @@ public class Shoot extends Action{
         else if(fireMode != null && neededTargetForTargeting){
             //for weapons who doesn't shoot to single visible targets, you ask one more message to select the target
             //and you controll it with this method
-            fireMode.addTargetForTargetingNotVisibleWeapon(playerID);
+            fireMode.addTargetForTargeting(playerID);
         }
 
     }
@@ -155,6 +156,9 @@ public class Shoot extends Action{
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         //TODO
+        if(neededTargetForTargeting){
+            throw new WrongInputException(NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL);
+        }
         fireMode.addOptional(numOptional);
     }
 
@@ -182,6 +186,10 @@ public class Shoot extends Action{
         return cells;
     }
 
+    public ArrayList<Player> getCanBeTargetedPlayers() {
+        return canBeTargetedPlayers;
+    }
+
     public ArrayList<Integer> getOptionalSelected() {
         return optionalSelected;
     }
@@ -202,8 +210,16 @@ public class Shoot extends Action{
         return cost;
     }
 
-    public void addPlayerTargetFromFireMode(Player player){
+    /**
+     * add a player to the targets
+     * @param player the target
+     * @param canBeTargeted true if the player can be targeted by a Targeting Scope, false if not
+     */
+    public void addPlayerTargetFromFireMode(Player player, boolean canBeTargeted){
         targets.add(player);
+        if(canBeTargeted){
+            canBeTargetedPlayers.add(player);
+        }
     }
 
     public void addCellFromFireMode(Cell cell){
@@ -211,18 +227,7 @@ public class Shoot extends Action{
     }
 
     /**
-     * Add a new targeting scope card and its Player target
-     * @param card the TargetingScopeCard used
-     * @param target the Playeyer target of this effect
-     */
-    public void addTargetingScopeFromFireMode(PowerupCard card, Player target){
-        targetingScopeCards.add(card);
-        targetsOfTargetings.add(target);
-        //TODO aggiungere colore quadrato o no?
-    }
-
-    /**
-     * Overload method. Add a new targeting scope and set to true the flag that makes the next PlayerMessage
+     * Add a new targeting scope and set to true the flag that makes the next PlayerMessage
      * for the firemode, not the weapon. Add a next MessageExpected PlayerMessage
      * @param card  the TargetingScopeCard used
      */

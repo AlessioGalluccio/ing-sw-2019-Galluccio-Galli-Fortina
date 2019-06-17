@@ -1,7 +1,7 @@
 package it.polimi.se2019.network.rmi;
 
 
-import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
+import it.polimi.se2019.network.messages.HandlerServerMessage;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

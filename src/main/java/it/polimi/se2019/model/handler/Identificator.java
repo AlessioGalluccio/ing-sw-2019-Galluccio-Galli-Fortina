@@ -28,6 +28,7 @@ public class Identificator {
     public static final int CONNECTION_MESSAGE = 18;
     public static final int DISCARD_POWERUP_MESSAGE = 19;
     public static final int DISCARD_WEAPON_MESSAGE = 20;
+    public static final int CHARACTER_MESSAGE = 21;
 
     //list of ID of actions
     public static final int MOVE = 1;
@@ -39,11 +40,25 @@ public class Identificator {
     public static final int SECOND_OPTIONAL = 2;
     public static final int THIRD_OPTIONAL = 3;
 
+    //list of ID of powerups
+    public static final int TARGETING_SCOPE_RED = 0;
+    public static final int TARGETING_SCOPE_BLUE = 1;
+    public static final int TARGETING_SCOPE_YELLOW = 2;
+    public static final int NEWTON_RED = 10;
+    public static final int NEWTON_BLUE = 11;
+    public static final int NEWTON_YELLOW = 12;
+    public static final int TELEPORTER_RED = 20;
+    public static final int TELEPORTER_BLUE = 21;
+    public static final int TELEPORTER_YELLOW = 22;
+    public static final int TAGBACK_GRENADE_RED = 30;
+    public static final int TAGBACK_GRENADE_BLUE = 31;
+    public static final int TAGBACK_GRENADE_YELLOW = 32;
+
     /**
-     * use this method to controll if a weapon has a firemode. contains() gives errors
+     * Use this method to control if a weapon has a firemode. contains() gives errors
      * @param weaponCard the weapon
      * @param fireMode the firemode
-     * @return true if it contsins, false if not
+     * @return true if it contains, false if not
      */
     public static boolean containsFiremode(WeaponCard weaponCard, FireMode fireMode){
         return (fireMode.getID())/10 == weaponCard.getID();

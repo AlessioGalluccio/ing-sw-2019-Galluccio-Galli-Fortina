@@ -13,8 +13,6 @@ public interface UiInterface {
 
     void login(boolean success, boolean isFirst);
 
-    void selectedMap(int choosMap);
-
     void startGame();
 
     void disconnect(int matchID);
@@ -37,7 +35,7 @@ public interface UiInterface {
 
     void printRanking(List<Player> players);
 
-    void turn(); //TODO sceliere parametri
+    void turn(String nickname, boolean yourTurn); //TODO sceliere parametri
 
 
 }

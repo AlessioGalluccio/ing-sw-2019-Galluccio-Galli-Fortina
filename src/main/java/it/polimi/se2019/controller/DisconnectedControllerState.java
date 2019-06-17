@@ -3,34 +3,24 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class DisconnectedControllerState extends StateController {
     private Player player;
-    private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
-    private String errorString;
-    private String stringToPlayerView;
+    private String stringToPlayerView = STILL_DISCONNECTED;
+
+    //this string is for finding errors in testing. Should never appear
+    public static final String STILL_DISCONNECTED = "Still disconnecte";
 
 
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.player = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
     }
 
     @Override
     public void handleAction(int actionID) {
-        //do nothing
-    }
-
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         //do nothing
     }
 
@@ -42,11 +32,6 @@ public class DisconnectedControllerState extends StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         //do nothing
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO controlla
     }
 
     @Override
@@ -75,7 +60,7 @@ public class DisconnectedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         //do nothing
     }
 
@@ -108,18 +93,18 @@ public class DisconnectedControllerState extends StateController {
     public void handleReconnection(boolean isConnected) {
         if(isConnected){
             gameHandler.setPlayerConnectionStatus(player, true);
-            controller.setState(new NotYourTurnState(controller, gameHandler));
+            controller.setState(new NotYourTurnState(controller, gameHandler, false));
         }
     }
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        //do nothing
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        //do nothing
     }
 
 

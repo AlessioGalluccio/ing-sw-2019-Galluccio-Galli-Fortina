@@ -47,7 +47,7 @@ public class Player extends Observable implements Target, Serializable {
     private boolean isFrenzyDeath = false;
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
-    private boolean isConnected;
+    private boolean isConnected = true;
 
 
     //constants

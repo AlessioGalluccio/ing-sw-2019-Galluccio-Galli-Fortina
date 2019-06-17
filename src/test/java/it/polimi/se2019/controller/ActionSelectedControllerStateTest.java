@@ -55,7 +55,7 @@ public class ActionSelectedControllerStateTest {
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
-        Shoot shoot = new Shoot(gameHandler, controller);
+        shoot = new Shoot(gameHandler, controller);
 
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
         stateController = controller.getState();

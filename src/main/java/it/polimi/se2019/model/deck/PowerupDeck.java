@@ -28,7 +28,7 @@ public class PowerupDeck extends Deck<PowerupCard> {
                 deck.add(new TargetingScopeCard(c, id++, c.ordinal()));
                 deck.add(new NewtonCard(c, id++, 10 + c.ordinal()));
                 deck.add(new TeleporterCard(c, id++, 20 + c.ordinal()));
-                deck.add(new TagbackGranedCard(c, id++, 30 + c.ordinal()));
+                deck.add(new TagbackGrenadeCard(c, id++, 30 + c.ordinal()));
             }
         }
         Collections.shuffle(deck);

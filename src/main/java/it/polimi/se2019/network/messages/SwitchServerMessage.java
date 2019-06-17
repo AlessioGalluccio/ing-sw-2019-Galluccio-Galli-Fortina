@@ -1,6 +1,5 @@
-package it.polimi.se2019.network.configureMessage;
+package it.polimi.se2019.network.messages;
 
-import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 public interface SwitchServerMessage {

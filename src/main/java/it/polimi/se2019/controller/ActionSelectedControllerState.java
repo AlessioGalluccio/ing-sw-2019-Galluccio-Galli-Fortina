@@ -7,7 +7,6 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
@@ -16,8 +15,6 @@ public class ActionSelectedControllerState extends StateController {
 
     private Player playerAuthor;
     private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private Action action;
     private static final int FIRST_MESSAGE = 0;
     private String errorString;
@@ -27,25 +24,18 @@ public class ActionSelectedControllerState extends StateController {
 
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
         //TODO aggiungere player e playerView (anche a tutti gli stati!)
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
         this.playerView = controller.getPlayerView();
         this.action = action;
+        this.controller.resetMessages();
         this.controller.addMessageListExpected(action.getStringAndMessageExpected());
     }
 
 
     @Override
     public void handleAction(int actionID) {
-        //TODO
-
-    }
-
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO
-
+        //do nothing, should not arrive here
     }
 
     @Override
@@ -67,25 +57,6 @@ public class ActionSelectedControllerState extends StateController {
         }catch (WrongInputException e){
             errorString = e.getMessage();
         }
-        /*
-        Player player = gameHandler.getPlayerByID(controller.getLastReceivedMessage().getAuthorID());
-        FireMode fireMode = gameHandler.getFireModeByID(firemodeID);
-        AmmoBag cost = AmmoBag.createAmmoFromList(fireMode.getCost());
-
-        if(!player.canPayAmmo(cost)){
-            controller.getLastReceivedMessage().getAuthorView().printFromController("Not enough ammo for this firemode");
-            controller.removeReceived();
-        }
-        else{
-            //TODO sistema
-            //controller.sendTargetsToView(controller.getLastReceivedMessage());
-        }
-        */
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO
     }
 
     @Override
@@ -165,7 +136,7 @@ public class ActionSelectedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         stringToPlayerView = CANT_DO_THIS;
     }
 
@@ -216,7 +187,7 @@ public class ActionSelectedControllerState extends StateController {
         try {
             action.fire();
             controller.addReceived();
-            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            //TODO prossimo stato?
         }catch(WrongInputException e){
             errorString = e.getMessage();
         }

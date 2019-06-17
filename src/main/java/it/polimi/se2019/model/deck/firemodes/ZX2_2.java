@@ -48,7 +48,7 @@ public class ZX2_2 extends FireMode {
         }
 
         if(shoot.getTargetsPlayer().size() < 3){
-            shoot.addPlayerTargetFromFireMode(target);
+            shoot.addPlayerTargetFromFireMode(target, false);
             sendAllVisiblePlayers(shoot.getTargetsPlayer());
         }
         else {

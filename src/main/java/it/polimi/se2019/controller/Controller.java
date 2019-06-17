@@ -36,7 +36,8 @@ public class Controller implements Observer {
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
         this.playerAuthor = playerAuthor;
-        this.state = new NotYourTurnState(this, gameHandler);
+        this.state = new NotYourTurnState(this, gameHandler, false);
+        this.playerView=playerView;
     }
 
     /////////////////GETTERS

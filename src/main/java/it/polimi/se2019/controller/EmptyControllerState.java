@@ -5,10 +5,8 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
@@ -16,9 +14,6 @@ import java.util.ArrayList;
 public class EmptyControllerState extends StateController {
 
     private Player player;
-    private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private String errorString;
     private String stringToPlayerView;
 
@@ -26,10 +21,9 @@ public class EmptyControllerState extends StateController {
 
 
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.player = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
+        controller.resetMessages();
     }
 
     @Override
@@ -63,11 +57,6 @@ public class EmptyControllerState extends StateController {
 
     }
 
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
-        //TODO ??? cosa è?
-        youCantDoThis();
-    }
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
@@ -77,11 +66,6 @@ public class EmptyControllerState extends StateController {
     @Override
     public void handleFiremode(int firemodeID) {
         youCantDoThis();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
-        //TODO
     }
 
     @Override
@@ -126,7 +110,7 @@ public class EmptyControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         youCantDoThis();
     }
 

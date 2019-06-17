@@ -3,15 +3,10 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class HasReloadedControllerState extends StateController {
     private Player player;
-    private PlayerView playerView;
-    private Controller controller;
-    private GameHandler gameHandler;
     private String errorString;
     private String stringToPlayerView;
 
@@ -19,21 +14,12 @@ public class HasReloadedControllerState extends StateController {
 
 
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
-        this.controller = controller;
-        this.gameHandler = gameHandler;
+        super(controller, gameHandler);
         this.player = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
     }
-
-
 
     @Override
     public void handleAction(int actionID) {
-        youCantDoThis();
-    }
-
-    @Override
-    public void handleCardSpawn(PowerupCard cardChoosen, PowerupCard cardDiscarded) {
         youCantDoThis();
     }
 
@@ -44,11 +30,6 @@ public class HasReloadedControllerState extends StateController {
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youCantDoThis();
-    }
-
-    @Override
-    public void handleLogin(String playerNickname, Character chosenCharacter) {
         youCantDoThis();
     }
 
@@ -90,7 +71,7 @@ public class HasReloadedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         youCantDoThis();
     }
 

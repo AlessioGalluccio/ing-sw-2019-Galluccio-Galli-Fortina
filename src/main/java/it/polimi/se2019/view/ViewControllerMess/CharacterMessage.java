@@ -3,24 +3,27 @@ package it.polimi.se2019.view.ViewControllerMess;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
-public class UndoMessage extends  ViewControllerMessage {
+public class CharacterMessage extends ViewControllerMessage {
 
-    //TODO classe forse da eliminare
-
+    private int characterID;
 
     /**
-     * UndoMessage class's constructor
+     * PlayerMessage class constructor
+     * @param characterID
      * @param authorID
      * @param authorView
      */
+    public CharacterMessage(int characterID, int authorID, View authorView) {
 
-    public UndoMessage(int authorID, View authorView) {
-
-        this.messageID = Identificator.UNDO_MESSAGE;
+        this.characterID = characterID;
+        this.messageID = Identificator.CHARACTER_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;
+    }
+
+    public int getCharacterID() {
+        return characterID;
     }
 
     @Override
@@ -30,6 +33,7 @@ public class UndoMessage extends  ViewControllerMessage {
 
     @Override
     public void handle(StateController stateController) {
-        //TODO
+        stateController.handleCharacter(characterID);
     }
 }
+

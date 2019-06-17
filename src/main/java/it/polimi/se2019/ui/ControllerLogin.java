@@ -2,9 +2,8 @@ package it.polimi.se2019.ui;
 
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.configureMessage.LoginMessage;
+import it.polimi.se2019.network.messages.LoginMessage;
 import it.polimi.se2019.network.rmi.RMIClient;
-import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
@@ -134,7 +133,7 @@ public class ControllerLogin implements UiInterface {
 
     }
 
-    @Override
+
     public void selectedMap(int choosMap){
         Controller.updateMap(choosMap);
     }
@@ -216,7 +215,7 @@ public class ControllerLogin implements UiInterface {
     }
 
     @Override
-    public void turn() {
+    public void turn(String nickname, boolean yourTurn) {
 
     }
 

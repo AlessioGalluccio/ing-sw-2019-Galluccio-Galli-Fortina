@@ -38,7 +38,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer, Un
     }
 
     public synchronized void forwardToClientView(ModelViewMessage message, String nickname) {
-        if(nickname.equals(ID)) {
+        if(nickname.equals(ID) || nickname.equalsIgnoreCase("BROADCAST")) {
             clientView.update(null, message);
             notifyAll();
         }
@@ -108,4 +108,5 @@ public abstract class Client extends UnicastRemoteObject implements Observer, Un
             e.printStackTrace();
         }
     }
+
 }

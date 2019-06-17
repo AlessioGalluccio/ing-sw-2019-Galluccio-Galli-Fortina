@@ -2,7 +2,7 @@ package it.polimi.se2019.network.rmi;
 
 import it.polimi.se2019.network.Client;
 import it.polimi.se2019.network.HandlerNetworkMessage;
-import it.polimi.se2019.network.configureMessage.HandlerServerMessage;
+import it.polimi.se2019.network.messages.HandlerServerMessage;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
@@ -80,7 +80,7 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
 
         @Override
         public void run() {
-            RMIClient.nThreads++;
+            RMIClient.nThreads++; //For testing
             message.handleMessage(client);
             RMIClient.nThreads--;
             Logger.getLogger(RMIClient.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
