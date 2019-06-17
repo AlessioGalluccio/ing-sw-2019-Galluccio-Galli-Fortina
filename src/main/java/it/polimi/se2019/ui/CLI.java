@@ -17,10 +17,10 @@ public class CLI implements UiInterface {
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
-    private List<EnemyView> enemyViews = new LinkedList<>();
+    List<EnemyView> enemyViews = new LinkedList<>();
     private MapView mapView;
     private boolean yourTurn;
-    private ParserCLI parser; //TODO crearlo allo startGame()
+    private ParserCLI parser;
 
     @SuppressWarnings("squid:S106")
     private static PrintWriter out = new PrintWriter(System.out, true);
@@ -50,14 +50,14 @@ public class CLI implements UiInterface {
 
     @Override
     public void startGame() {
-        out.println(ConsoleColor.BLACK + "\tSTART\n" + ConsoleColor.RESET);
         printAll();
-        in.close();
+        //in.close();
+        parser = new ParserCLI(view, this);
     }
 
     @Override
     public void disconnect(int matchID) {
-        //TODO chiudere tutti i thread (parser) e terminare applicazione
+        parser.open = false;
         online=false;
         out.println("\n");
         printLine();
@@ -112,19 +112,27 @@ public class CLI implements UiInterface {
 
     @Override
     public void printRanking(List<Player> players) {
-
+        out.print("\n\n");
+        printLine();
+        out.println(ConsoleColor.MAGENTA_BOLD + "\t\tGAME OVER!\n" + ConsoleColor.RESET);
+        out.printf("%-25.25s %d %s%n", "  1. " + players.get(0).getNickname(), players.get(0).getNumPoints(),
+                ConsoleColor.GREEN + "\t(๑•̀ㅂ•́)ง✧" + ConsoleColor.RESET);
+        for(int i=1; i<players.size(); i++) {
+            out.printf("%-25.25s %d %n", "  "+i+". " + players.get(i).getNickname(), players.get(i).getNumPoints());
+        }
+        printLine();
+        //TODO close all and kill execution
     }
 
     @Override
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
         printAll();
-        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧");
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t୧☉□☉୨");
         else out.println("It's " + nickname + "'s turn\tಠᴗಠ");
     }
 
-    public synchronized void start() {
-
+    public void start() {
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +
                 "\t\t \\ \\  \\   /  _ \\  |   __|   _ \\   __ `__ \\    _ \\      |  __ \\  \n" +
@@ -134,7 +142,7 @@ public class CLI implements UiInterface {
 
         printLogo();
         try {
-            wait(1300);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -234,12 +242,11 @@ public class CLI implements UiInterface {
 
         view.createSettingMessage(map, skulls, sd);
 
-        //clearScreen();
         if(online) out.println("\nWaiting for other players...");
     }
 
     void clearScreen() {
-        out.print("\u001b[2J");
+        out.print("\033[2J \033[H");
         out.flush();
     }
 
@@ -249,6 +256,21 @@ public class CLI implements UiInterface {
 
     void printAll() {
         clearScreen();
+        printMap();
+        printLine();
+        for(EnemyView ew : enemyViews) {
+            out.println(ew.toStringShort() + "\n");
+        }
+        printLine();
+        out.println(view.getPlayerCopy().toString());
+        printLine();
+    }
+
+    void println(String string) {
+        out.println(string);
+    }
+
+    public void printMap() {
         out.println("\t" + skullBoardView);
         out.println("");
         out.println(mapView.printRow(2,0));
@@ -273,12 +295,5 @@ public class CLI implements UiInterface {
         out.println(mapView.printRow(0,5));
         out.println(mapView.printRow(0,6));
         out.println(mapView.printRow(-1,0));
-        printLine();
-        for(EnemyView ew : enemyViews) {
-            out.println(ew.toStringShort() + "\n");
-        }
-        printLine();
-        out.println(view.getPlayerCopy().toString());
-        printLine();
     }
 }

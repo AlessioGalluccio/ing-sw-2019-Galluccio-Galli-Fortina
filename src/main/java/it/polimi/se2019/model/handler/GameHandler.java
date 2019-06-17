@@ -96,8 +96,8 @@ public class GameHandler extends Observable {
     /**
      * Called at the end of the game
      */
-    public void finishGame() {
-
+    public void endGame() {
+        forwardAllViews(new RankingMessage(getRanking()));
     }
 
     /**
@@ -517,6 +517,13 @@ public class GameHandler extends Observable {
         }
         notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
 
+        if(orderPlayerList.size()>3) {
+            try {
+                Thread.sleep(750); //Wait all message arrive at the user
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
         forwardAllViews(new StartGameMessage(matchID));
 
         //TODO set state controller for first player

@@ -3,10 +3,8 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class DisconnectedControllerState extends StateController {
     private Player player;
@@ -62,7 +60,7 @@ public class DisconnectedControllerState extends StateController {
     }
 
     @Override
-    public void handleTagback(TagbackGranedCard usedCard) {
+    public void handleTagback(TagbackGrenadeCard usedCard) {
         //do nothing
     }
 

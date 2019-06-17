@@ -12,16 +12,16 @@ public class NewTurnMessage implements ModelViewMessage, HandlerPlayerViewMessag
 
     @Override
     public void handleMessage(Client client) {
-        client.handleTurnMessage(nickname);
+        client.forwardToClientView(this, "BROADCAST");
     }
 
     @Override
     public void handleMessage(View p) {
-
+        p.handleTurnMessage(nickname);
     }
 
     @Override
     public int getAck() {
-        return 0;
+        return -1;
     }
 }

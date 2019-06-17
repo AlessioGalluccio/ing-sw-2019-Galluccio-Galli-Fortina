@@ -5,7 +5,7 @@ public interface Printable {
 
     /**
      * Print a specific line of the object
-     * @param row the line to print
+     * @param row the line to println
      */
     String printRow(int row);
 }

@@ -8,10 +8,10 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
-public class TagbackGranedCard extends PowerupCard{
+public class TagbackGrenadeCard extends PowerupCard{
 
 
-    public TagbackGranedCard(ColorRYB color, int id, int IDtype) {
+    public TagbackGrenadeCard(ColorRYB color, int id, int IDtype) {
         super(color, id, IDtype);
     }
 
@@ -27,6 +27,6 @@ public class TagbackGranedCard extends PowerupCard{
 
     @Override
     public String toString() {
-        return ConsoleColor.colorByColor(getAmmo().toString()) + "Tagback Graned" + ConsoleColor.RESET;
+        return ConsoleColor.colorByColor(getAmmo().toString()) + "Tagback Grenade" + ConsoleColor.RESET;
     }
 }
