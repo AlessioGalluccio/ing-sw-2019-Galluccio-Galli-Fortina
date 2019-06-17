@@ -89,7 +89,7 @@ public class Shoot extends Action{
         if(fireMode != null && !neededTargetForTargeting){
             fireMode.addPlayerTarget( playerID);
         }
-        else if(neededTargetForTargeting){
+        else if(fireMode != null && neededTargetForTargeting){
             //for weapons who doesn't shoot to single visible targets, you ask one more message to select the target
             //and you controll it with this method
             fireMode.addTargetForTargetingNotVisibleWeapon(playerID);

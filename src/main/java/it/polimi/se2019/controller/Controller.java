@@ -21,7 +21,7 @@ import java.util.Observer;
 
 public class Controller implements Observer {
     private Player playerAuthor;
-    private PlayerView playerView; //TODO aggiungere al costruttore
+    private PlayerView playerView;
     private ArrayList<StringAndMessage> messageListExpected;
     private int indexExpected = 0;
     private final GameHandler gameHandler;
@@ -31,8 +31,7 @@ public class Controller implements Observer {
 
     private String stringToPlayerView;
 
-    public Controller(GameHandler gameHandler, Player playerAuthor) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
+    public Controller(GameHandler gameHandler, Player playerAuthor, PlayerView playerView) {
         this.gameHandler = gameHandler;
         this.messageListExpected = new ArrayList<>();
         this.numOfActionTaken = 0;
@@ -119,30 +118,31 @@ public class Controller implements Observer {
     }
 
     public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
-        if(indexExpected != this.messageListExpected.size() - 1){
-            this.messageListExpected.addAll(indexExpected , messageListExpected);
-        }
-        else{
-            this.messageListExpected.addAll(messageListExpected);
-        }
+        this.messageListExpected.addAll(indexExpected , messageListExpected);
 
     }
 
     public void addMessageListImmediateNext(StringAndMessage messageExpected){
-        if(indexExpected != this.messageListExpected.size() - 1){
-            this.messageListExpected.add(indexExpected , messageExpected);
-        }
-        else{
-            this.messageListExpected.add(messageExpected);
-        }
+        this.messageListExpected.add(indexExpected , messageExpected);
     }
 
     public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
-        this.messageListExpected.addAll(this.messageListExpected.size()- 1, messageList);
+        if(this.messageListExpected.isEmpty()){
+            this.messageListExpected.addAll(messageList);
+        }
+        else{
+            this.messageListExpected.addAll(this.messageListExpected.size()- 1, messageList);
+        }
+
     }
 
     public void addMessageListBeforeLastOne(StringAndMessage messageList){
-        this.messageListExpected.add(this.messageListExpected.size()- 1, messageList);
+        if(this.messageListExpected.isEmpty()){
+            this.messageListExpected.add(messageList);
+        }
+        else{
+            this.messageListExpected.add(this.messageListExpected.size()- 1, messageList);
+        }
     }
 
     public void addReceived() {

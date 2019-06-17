@@ -132,7 +132,6 @@ public class ActionSelectedControllerState extends StateController {
     public void handleOptional(int numOptional) {
         try{
             action.addOptional(numOptional);
-            controller.addReceived();
         }catch (WrongInputException e){
             //playerView.printFromController(OPTIONAL_WRONG);
             errorString = e.getMessage();;
