@@ -97,12 +97,15 @@ public class Controller implements Initializable {
     public ImageView imPlayer3Cell22;
     public ImageView imPlayer4Cell22;
     public ImageView imPlayer5Cell22;
-    public ImageView imPlayer1Cell23;
-    public ImageView imPlayer2Cell23;
-    public ImageView imPlayer3Cell23;
-    public ImageView imPlayer4Cell23;
-    public ImageView imPlayer5Cell23;
-
+    public ImageView imPlayer1Cell32;
+    public ImageView imPlayer2Cell32;
+    public ImageView imPlayer3Cell32;
+    public ImageView imPlayer4Cell32;
+    public ImageView imPlayer5Cell32;
+    public Tab tabEnemy1;
+    public Tab tabEnemy2;
+    public Tab tabEnemy3;
+    public Tab tabEnemy4;
 
 
     private ArrayList<ImageView> skull = new ArrayList<>();
@@ -559,6 +562,8 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
+        // set enemy nickname on window
+        setEnemyNickname();
 
         // set weapon card on map
         updateWeaponMap();
@@ -1536,6 +1541,40 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     * change enemys' nickname on map's window
+     */
+    public void setEnemyNickname(){
+        if(ControllerLogin.enemyView1!=null) {
+            tabEnemy1.setText(ControllerLogin.enemyView1.getNickname());
+        }
+        else{
+            tabEnemy1.setDisable(true);
+            tabEnemy1.setStyle(transparent);
+        }
+        if(ControllerLogin.enemyView2!=null) {
+            tabEnemy2.setText(ControllerLogin.enemyView2.getNickname());
+
+        }
+        else{
+            tabEnemy2.setDisable(true);
+            tabEnemy2.setStyle(transparent);
+        }
+        if(ControllerLogin.enemyView3!=null) {
+            tabEnemy3.setText(ControllerLogin.enemyView3.getNickname());
+        }
+        else{
+            tabEnemy3.setDisable(true);
+            tabEnemy3.setStyle(transparent);
+        }
+        if(ControllerLogin.enemyView4!=null) {
+            tabEnemy4.setText(ControllerLogin.enemyView4.getNickname());
+        }
+        else{
+            tabEnemy4.setDisable(true);
+            tabEnemy4.setStyle(transparent);
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

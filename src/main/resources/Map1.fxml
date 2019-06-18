@@ -171,7 +171,7 @@
       <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="86.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
       <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="enemy">
+          <Tab fx:id="tabEnemy1">
             <content>
               <AnchorPane fx:id="enemy1back" minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="527.0">
                      <children>
@@ -220,7 +220,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="enemy">
+          <Tab fx:id="tabEnemy2">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -269,7 +269,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="enemy">
+            <Tab fx:id="tabEnemy3">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -350,7 +350,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="enemy">
+            <Tab fx:id="tabEnemy4">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
