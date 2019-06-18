@@ -316,6 +316,12 @@ public class ControllerLogin implements UiInterface {
     public void updateAmmoCardMap(){
         controller.updateAmmoCardMap();
     }
+
+
+    public void updateEnemyWeapon(){
+        controller.updateEnemyWeapon();
+    }
+
     /**
      * update game display
      */

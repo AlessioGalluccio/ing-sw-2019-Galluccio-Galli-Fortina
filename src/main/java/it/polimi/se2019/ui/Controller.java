@@ -1692,6 +1692,11 @@ public class Controller implements Initializable {
 
     }
 
+
+    /**
+     * set ImageView based on the character choosen
+     * @param event
+     */
     public void chooseCharacter(ActionEvent event) {
 
         possibleActions.setVisible(true);
@@ -1787,6 +1792,14 @@ public class Controller implements Initializable {
 
         return images;
 
+    }
+
+
+    public void updateEnemyWeapon(){
+        if(ControllerLogin.enemyView1!=null){
+            ArrayList<WeaponCard> weaponCards = ControllerLogin.enemyView1.getUnloadedWeapon();
+            
+        }
     }
 
 }
