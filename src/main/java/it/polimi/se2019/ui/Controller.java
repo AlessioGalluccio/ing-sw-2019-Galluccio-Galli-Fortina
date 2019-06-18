@@ -1520,6 +1520,9 @@ public class Controller implements Initializable {
                         if(weaponCards.get(i).isReloaded()==false){
                             selectWeapon.get(i).setDisable(true);
                         }
+                        else{
+                            selectWeapon.get(i).setDisable(false);
+                        }
                             reloadWeapon.get(i).setDisable(false);
                             discardWeapon.get(i).setDisable(false);
 
