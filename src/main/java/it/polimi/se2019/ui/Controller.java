@@ -481,7 +481,7 @@ public class Controller implements Initializable {
     public void skullCheck(ActionEvent event){
 
         init_skull = Integer.parseInt(skulls.getText());
-        if(init_skull <1 ||init_skull  >8){
+        if(init_skull <5 ||init_skull  >8){
             errorSkulls.setVisible(true);
         }
         else
@@ -532,7 +532,7 @@ public class Controller implements Initializable {
             System.out.println("No sudden death");
         }
 
-        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((init_skull >=1)&&(init_skull <=8))&&((suddenDeath==0) || (suddenDeath==1))){
+        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((init_skull >=5)&&(init_skull <=8))&&((suddenDeath==0) || (suddenDeath==1))){
             boolean sd;
             if(suddenDeath==0) {
                 sd=false;
@@ -951,6 +951,7 @@ public class Controller implements Initializable {
      * @param event
      */
     public void fire(ActionEvent event) {
+
         ControllerLogin.clientView.createFireMessage();
     }
 

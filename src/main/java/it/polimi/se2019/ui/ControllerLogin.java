@@ -4,6 +4,7 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.messages.LoginMessage;
 import it.polimi.se2019.network.rmi.RMIClient;
+import it.polimi.se2019.network.socket.SocketClient;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
@@ -19,7 +20,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -28,6 +31,9 @@ import java.util.List;
 public class ControllerLogin implements UiInterface {
 
     private static FXMLLoader fxmlLoader;
+
+
+
     private Controller controller;
     static ClientView clientView;
     static SkullBoardView skullBoardView;
@@ -39,6 +45,14 @@ public class ControllerLogin implements UiInterface {
 
 
 
+    @FXML
+    public RadioButton rbRmi;
+    @FXML
+    public RadioButton rbSocket;
+    @FXML
+    public TextField ipAddress;
+    @FXML
+    public Button closeWaiting;
     @FXML
     private TextField username;
 
@@ -57,25 +71,26 @@ public class ControllerLogin implements UiInterface {
     public void loginButton(ActionEvent event) throws Exception, InterruptedException {
         if(clientView==null) {
             clientView = new ClientView();
+        }
             clientView.setUi(this);
+            if (rbRmi.isSelected()) {
+                RMIClient rmi = new RMIClient(clientView, "localhost");
+                rmi.connect();
+                clientView.setUp(rmi);
+            } else {
+                SocketClient socket = new SocketClient(9001, "localhost", clientView);
+                socket.connect();
+                clientView.setUp(socket);
+            }
 
-            RMIClient rmi = new RMIClient(clientView, "localhost");
-            rmi.connect();
+            if (matchID.getText().equals("")) {
+                clientView.createLoginMessage(username.getText(), -1);
 
-            // SocketClient socket = new SocketClient(9001, "localhost", clientView);
-            //socket.connect();
-            clientView.setUp(rmi);
-            //Controller.setClientView(clientView);
-        }
-        if (matchID.getText().equals("")) {
-            //loginMessage = new LoginMessage());
-            clientView.createLoginMessage(username.getText(),-1);
+            } else {
+                int matchId = Integer.parseInt(matchID.getText());
+                clientView.createLoginMessage(username.getText(), matchId);
+            }
 
-        } else {
-            int matchId = Integer.parseInt(matchID.getText());
-            //loginMessage = new LoginMessage(username.getText(), matchId);
-            clientView.createLoginMessage(username.getText(),matchId);
-        }
 
 
     }
@@ -99,7 +114,7 @@ public class ControllerLogin implements UiInterface {
                     if(isFirst) {
                         try {
                             System.out.println(8);
-                            fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 400);
+                            fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 510);
                             controller = fxmlLoader.getController();
                             System.out.println(8);
                         } catch (Exception e) {
@@ -154,22 +169,28 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void startGame() {
-        selectedMap(mapView.getMapCopy().getID());
-        
+
+
        /* if(enemyView1!=null) {
             setEnemyNickname(enemyView1.getNickname());
         }*/
        //TODO ETC...
-        Platform.runLater(() -> {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run(){
+
         try {
+            selectedMap(mapView.getMapCopy().getID());
             fxmlLoader = open("Map1.fxml", "ADRENALINE", 700, 700);
+
             controller = fxmlLoader.getController();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-            });
-    }
+            }});
+
+        }
 
     @Override
     public void disconnect(int matchID) {

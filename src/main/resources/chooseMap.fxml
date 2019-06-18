@@ -18,7 +18,7 @@
       </RadioButton>
       <RadioButton fx:id="rbmap2" layoutX="326.0" layoutY="165.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="28.0" prefWidth="77.0" text="mappa 2" toggleGroup="$mappaGroup" />
       <RadioButton fx:id="rbmap3" layoutX="82.0" layoutY="365.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="28.0" prefWidth="71.0" text="mappa 3" toggleGroup="$mappaGroup" />
-      <RadioButton fx:id="rbmap4" layoutX="327.0" layoutY="365.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="77.0" text="mappa 4" toggleGroup="$mappaGroup" />
+      <RadioButton fx:id="rbmap4" layoutX="327.0" layoutY="365.0" mnemonicParsing="false" onAction="#chooseMap" prefHeight="28.0" prefWidth="77.0" text="mappa 4" toggleGroup="$mappaGroup" />
       <ImageView fx:id="mappa1prev" fitHeight="151.0" fitWidth="200.0" layoutX="17.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@mappa.jpg" />
@@ -41,8 +41,8 @@
       </ImageView>
       <Label layoutX="29.0" layoutY="400.0" prefHeight="28.0" prefWidth="100.0" text="SKULL'S NUMBER" textAlignment="RIGHT" />
       <Label layoutX="288.0" layoutY="406.0" prefHeight="17.0" prefWidth="110.0" text="SUDDEN DEATH?" />
-      <TextField fx:id="skulls" layoutX="17.0" layoutY="438.0" onAction="#skullCheck" promptText="FROM 1 TO 8" />
-      <Label fx:id="errorSkulls" layoutX="29.0" layoutY="475.0" prefHeight="17.0" prefWidth="110.0" text="FROM 1 TO 8" textFill="RED" visible="false" />
+      <TextField fx:id="skulls" layoutX="17.0" layoutY="438.0" onAction="#skullCheck" promptText="FROM 5 TO 8" />
+      <Label fx:id="errorSkulls" layoutX="29.0" layoutY="475.0" prefHeight="17.0" prefWidth="110.0" text="FROM 5 TO 8" textFill="RED" visible="false" />
       <RadioButton fx:id="suddenDeathYes" layoutX="315.0" layoutY="442.0" mnemonicParsing="false" text="YES">
          <toggleGroup>
             <ToggleGroup fx:id="suddenDeathGroup" />
