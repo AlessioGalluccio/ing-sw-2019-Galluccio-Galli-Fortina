@@ -7,6 +7,7 @@ import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
@@ -562,6 +563,9 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
+
+        //set ammo card on map
+        updateAmmoCardMap();
         // set enemy nickname on window
         setEnemyNickname();
 
@@ -1387,7 +1391,96 @@ public class Controller implements Initializable {
         return image;
     }
 
+    /**
+     * set AmmoCard on map
+     */
+    public void updateAmmoCardMap(){
+        ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
+        ArrayList<ImageView> imAmmoCell = new ArrayList<>();
 
+
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,2));
+        imAmmoCell.add(ammoCell02);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,0));
+        imAmmoCell.add(ammoCell10);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,1));
+        imAmmoCell.add(ammoCell11);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,2));
+        imAmmoCell.add(ammoCell12);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2,0));
+        imAmmoCell.add(ammoCell20);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2,1));
+        imAmmoCell.add(ammoCell21);
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,1));
+        imAmmoCell.add(ammoCell31);
+
+
+        if(choosenMap == 1){
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,2));
+            imAmmoCell.add(ammoCell32);
+        }
+
+        if(choosenMap == 2){
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,0));
+            imAmmoCell.add(ammoCell00);
+        }
+
+        if(choosenMap == 3){
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,0));
+            imAmmoCell.add(ammoCell00);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,2));
+        }
+
+
+
+
+        for (int i=0; i<cellAmmos.size(); i++){
+            imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getCardID()));
+        }
+
+
+
+
+    }
+
+    /**
+     * set each ammoCard id with the image
+     * @param ammoID
+     * @return
+     */
+    public Image setAmmoCard(List<Integer> ammoID){
+        int ammoCardId = ammoID.get(0);
+        Image image = new Image("ammo/AD_ammo_04.png");
+        switch (ammoCardId){
+            case 0: image = new Image("ammo/AD_ammo_0421.png");
+                break;
+            case 1: image = new Image("ammo/AD_ammo_0429.png");
+                break;
+            case 2: image = new Image("ammo/AD_ammo_0431.png");
+                break;
+            case 4: image = new Image("ammo/AD_ammo_0432.png");
+                break;
+            case 5: image = new Image("ammo/AD_ammo_0428.png");
+                break;
+            case 8: image = new Image("ammo/AD_ammo_0427.png");
+                break;
+            case 13: image = new Image("ammo/AD_ammo_0417.png");
+                break;
+            case 14: image = new Image("ammo/AD_ammo_0416.png");
+                break;
+            case 15: image = new Image("ammo/AD_ammo_0415.png");
+                break;
+            case 17: image = new Image("ammo/AD_ammo_0414.png");
+                break;
+            case 18: image = new Image("ammo/AD_ammo_0413.png");
+                break;
+            case 19: image = new Image("ammo/AD_ammo_0418.png");
+                break;
+
+        }
+        return image;
+
+    }
     /**
      * update player's weapon images
      */
