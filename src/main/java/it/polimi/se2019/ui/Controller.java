@@ -1491,10 +1491,25 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 try{
+                    ArrayList<Button> selectWeapon = new ArrayList<>();
+                    selectWeapon.add(selectWeaponButton1);
+                    selectWeapon.add(selectWeaponButton2);
+                    selectWeapon.add(selectWeaponButton3);
                     List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
-                    imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
-                    imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
-                    imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
+                    ArrayList <ImageView> imWeapon = new ArrayList<>();
+                    imWeapon.add(imWeaponCard1);
+                    imWeapon.add(imWeaponCard2);
+                    imWeapon.add(imWeaponCard3);
+                    for(int i=0; i<weaponCards.size(); i++) {
+                        imWeapon.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
+                        if(weaponCards.get(i).isReloaded()==false){
+                            selectWeapon.get(i).setDisable(true);
+                        }
+                    }
+                    for(int i=weaponCards.size(); i<3; i++){
+                        imWeapon.get(i).setImage(new Image("emptyWeapon.jpg"));
+                        selectWeapon.get(i).setDisable(true);
+                    }
                 }
                 catch (Exception e){
 
