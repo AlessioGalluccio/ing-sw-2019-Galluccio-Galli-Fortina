@@ -565,6 +565,8 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
+        //set enemy weapon
+        updateEnemyWeapon();
 
         //set ammo card on map
         updateAmmoCardMap();
@@ -573,6 +575,10 @@ public class Controller implements Initializable {
 
         // set weapon card on map
         updateWeaponMap();
+        //update player's weapon
+        updateWeaponPlayer();
+        //update palyer's powerup
+        updatePlayerPowerup();
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
@@ -1489,10 +1495,46 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 try{
+
+                    ArrayList<Button> selectWeapon = new ArrayList<>();
+                    selectWeapon.add(selectWeaponButton1);
+                    selectWeapon.add(selectWeaponButton2);
+                    selectWeapon.add(selectWeaponButton3);
+
+                    ArrayList<Button> reloadWeapon = new ArrayList<>();
+                    reloadWeapon.add(bReloadWeapon1);
+                    reloadWeapon.add(bReloadWeapon2);
+                    reloadWeapon.add(bReloadWeapon3);
+
+                    ArrayList<Button> discardWeapon = new ArrayList<>();
+                    discardWeapon.add(bDiscardWeapon1);
+                    discardWeapon.add(bDiscardWeapon2);
+                    discardWeapon.add(bDiscardWeapon3);
+
+
                     List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
-                    imWeaponCard1.setImage(setWeapon(weaponCards.get(0).getID()));
-                    imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
-                    imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
+                    ArrayList <ImageView> imWeapon = new ArrayList<>();
+                    imWeapon.add(imWeaponCard1);
+                    imWeapon.add(imWeaponCard2);
+                    imWeapon.add(imWeaponCard3);
+                    for(int i=0; i<weaponCards.size(); i++) {
+                        imWeapon.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
+                        if(weaponCards.get(i).isReloaded()==false){
+                            selectWeapon.get(i).setDisable(true);
+                        }
+                        else{
+                            selectWeapon.get(i).setDisable(false);
+                        }
+                            reloadWeapon.get(i).setDisable(false);
+                            discardWeapon.get(i).setDisable(false);
+
+                    }
+                    for(int i=weaponCards.size(); i<3; i++){
+                        imWeapon.get(i).setImage(new Image("emptyWeapon.jpg"));
+                        selectWeapon.get(i).setDisable(true);
+                        reloadWeapon.get(i).setDisable(true);
+                        discardWeapon.get(i).setDisable(true);
+                    }
                 }
                 catch (Exception e){
 
@@ -1796,11 +1838,108 @@ public class Controller implements Initializable {
     }
 
 
-    public void updateEnemyWeapon(){
-        if(ControllerLogin.enemyView1!=null){
-            ArrayList<WeaponCard> weaponCards = ControllerLogin.enemyView1.getUnloadedWeapon();
+    /**
+     * update enemy's weapons
+     */
+    public void updateEnemyWeapon() {
+        if (ControllerLogin.enemyView1 != null) {
+            setEnemyWeapon(enemy1card1, enemy1card2, enemy1card3, ControllerLogin.enemyView1);
+        }
+        if (ControllerLogin.enemyView2 != null) {
+            setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
+        }
+        if (ControllerLogin.enemyView3 != null) {
+            setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
+        }
+        if (ControllerLogin.enemyView4 != null) {
+            setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
+        }
+    }
+
+    /**
+     * set enemy's weapon
+     * @param im1
+     * @param im2
+     * @param im3
+     * @param enemyView
+     */
+    public void setEnemyWeapon (ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView){
+        try {
+            ArrayList<WeaponCard> weaponCards = enemyView.getUnloadedWeapon();
+            int loadedWeapon = enemyView.getLoadedWeapon();
+            int emptyWeapon = 3 - (weaponCards.size() + loadedWeapon);
+            ArrayList<ImageView> enemy1card = new ArrayList<>();
+            enemy1card.add(im1);
+            enemy1card.add(im2);
+            enemy1card.add(im3);
+
+
+            for (int i = 0; i < emptyWeapon; i++) {
+                enemy1card.get(i).setImage(new Image("emptyWeapon.jpg"));
+
+            }
+
+            for (int i = emptyWeapon; i < (emptyWeapon + weaponCards.size()); i++) {
+                enemy1card.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
+
+            }
+
+            for (int k = (emptyWeapon + weaponCards.size()); k < 3; k++) {
+                enemy1card.get(k).setImage(new Image("cards/AD_weapons_IT_0225.png"));
+            }
+
+
+
 
         }
+        catch (Exception e){
+
+        }
+
+    }
+
+    /**
+     * update player's powerup
+     */
+    public void updatePlayerPowerup(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+
+
+
+                    ArrayList<Button> discardWeapon = new ArrayList<>();
+                    discardWeapon.add(bDiscardPowerup1);
+                    discardWeapon.add(bDiscardPowerup2);
+                    discardWeapon.add(bDiscardPowerup3);
+                    discardWeapon.add(bDiscardPowerup4);
+
+
+                    List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
+                    ArrayList <ImageView> imPower = new ArrayList<>();
+                    imPower.add(imPowerupCard1);
+                    imPower.add(imPowerupCard2);
+                    imPower.add(imPowerupCard3);
+                    imPower.add(imPowerupCard4);
+                    for(int i=0; i<powerupCards.size(); i++) {
+                        //TODO FARE METODO setPowerup
+                        //imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
+                        discardWeapon.get(i).setDisable(false);
+                    }
+                    for(int i=powerupCards.size(); i<4; i++){
+                        imPower.get(i).setImage(new Image("emptyPowerup.jpg"));
+                        discardWeapon.get(i).setDisable(true);
+                    }
+                }
+                catch (Exception e){
+
+                }
+
+
+            }
+        });
+
     }
 
 }

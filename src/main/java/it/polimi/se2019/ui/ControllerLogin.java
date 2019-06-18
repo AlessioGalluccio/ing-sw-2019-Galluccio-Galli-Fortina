@@ -226,12 +226,22 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updatePlayer() {
+        updateWeaponPlayer();
+        updatePlayerPowerup();
+        updatePlayerPoints();
+        updatePlayerAmmo();
 
+    }
+
+    private void updatePlayerPowerup() {
+        controller.updatePlayerPowerup();
     }
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
         controller.updateEnemyCharacter(enemyView);
+        updateEnemyWeapon();
+
     }
 
     @Override
