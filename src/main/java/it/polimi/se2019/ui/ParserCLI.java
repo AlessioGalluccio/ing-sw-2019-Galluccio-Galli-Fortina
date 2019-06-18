@@ -29,6 +29,7 @@ class ParserCLI {
                     split(command);
                 }
             }
+            in.close();
         }).start();
     }
 
@@ -48,6 +49,7 @@ class ParserCLI {
                 case "POWERUP":
                     parsePowerup(command2, true);
                     break;
+                case "ENEMY":
                 case "PLAYER":
                     parsePlayer(command2);
                     break;
@@ -60,6 +62,7 @@ class ParserCLI {
                 case "WEAPON":
                     parseWeapon(command2, true);
                     break;
+                case "FIRE!":
                 case "FIRE":
                     parseFire(command2);
                     break;
@@ -69,6 +72,7 @@ class ParserCLI {
                 case "UPDATE":
                     parseUpdate(command2);
                     break;
+                case "END":
                 case "PASS":
                     parsePass(command2);
                     break;
@@ -78,16 +82,21 @@ class ParserCLI {
                 case "SKIP":
                     parseSkip(command2);
                     break;
+                case "FIREMODE":
+                    parseFiremode(command2);
+                    break;
+                case "EXIT":
+                    parseExit();
+                    break;
                 //TODO character
-                //TODO firemode
-                //TODO optional
                 default:
-                    cli.println("Command '"+command[0]+"' dose not exist");
+                    cli.println("Command '"+command[0]+"' dose not exist.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            cli.println("Command '" + Arrays.toString(command) + "' dose not exist");
+            cli.println("Command '" + Arrays.toString(command) + "' dose not exist.");
         }
     }
+
 
     private void parseAction(String[] command) {
         switch (command[0]) {
@@ -99,6 +108,8 @@ class ParserCLI {
                 break;
             case "SHOOT":
                 view.createActionMessage(Identificator.SHOOT);
+                cli.println("You have this weapon reloaded: ");
+                cli.println("\t" + getWeapon());
                 break;
             default:
                 cli.println("Action '"+command[0]+"' dose not exist");
@@ -310,7 +321,7 @@ class ParserCLI {
             EnemyView enemy = findEnemy(command[0]);
             view.createPlayerMessage(enemy.getID());
         } catch (IllegalArgumentException e) {
-            cli.println("There's no player called " + command[0] + ".");
+            cli.println("There's no enemy called " + command[0] + ".");
         }
     }
 
@@ -349,7 +360,10 @@ class ParserCLI {
     private void parseWeapon(String[] command, Boolean use) {
         try {
             WeaponCard card = findWeapon(command[0]);
-            if(use) view.createWeaponMessage(card);
+            if(use) {
+                view.createWeaponMessage(card);
+                cli.println(card.toString());
+            }
             else view.createDiscardWeaponMessage(card);
         } catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] +".");
@@ -372,7 +386,7 @@ class ParserCLI {
                     break;
                 default:
                     cli.println("No info available for " + command[0] + ".\n" +
-                            "Please, retry specifying about what you want more info.");
+                            "Please, retry specifying 'weapon' or 'enemy'.");
             }
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             cli.println("What about do you want more info?\n" +
@@ -452,12 +466,53 @@ class ParserCLI {
         view.createNopeMessage();
     }
 
+    private void parseFiremode(String[] command) {
+        try {
+            switch (command[0]) {
+                case "BASE":
+                    view.createFireModeMessage(1);
+                    break;
+                case "ALT":
+                case "ALTERNATIVE":
+                    view.createFireModeMessage(2);
+                    break;
+                case "OPTIONAL":
+                    view.createOptionalMessage(Integer.parseInt(command[1]));
+                    break;
+                default:
+                    cli.println("Command 'FIREMODE " + command[0] + "' dose not exist.");
+            }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            cli.println("Missing info\n" +
+                    "Retry specifying which optional do you want (even if this weapon has only one optional).");
+        }
+    }
 
+    private void parseExit() {
+        cli.println("Are you sure do you wanna exit? \tಥ_ಥ");
+        String decision = in.nextLine();
+        switch (decision.toUpperCase()) {
+            case "Y":
+            case "YES":
+                open=false;
+                cli.println("You will be disconnected soon.");
+                view.shutdownServer();
+                cli.disconnect(view.getMatchId());
+                break;
+            case "N":
+            case "NO":
+                cli.println("Enjoy the game! \t୧☉□☉୨");
+                break;
+            default:
+                    cli.println(decision + " is not a command.\n" +
+                            "Please, retry with yes or no.");
+        }
+    }
 
 
     private WeaponCard findWeapon(String name) {
         for(WeaponCard weaponCard : weaponDeck) {
-            if(weaponCard.getName().equalsIgnoreCase(name)) return weaponCard;
+            if(weaponCard.getName().toUpperCase().contains(name)) return weaponCard;
         }
         throw new IllegalArgumentException("No weapon called " + name);
     }
@@ -467,6 +522,14 @@ class ParserCLI {
             if (enemyView.getNickname().equalsIgnoreCase(name)) return enemyView;
         }
         throw new IllegalArgumentException("No enemy called " + name);
+    }
+
+    private String getWeapon() {
+        String s = "";
+        for(WeaponCard weapon : view.getPlayerCopy().getWeaponCardList()) {
+            if(weapon.isReloaded()) s += weapon.getName() + " ";
+        }
+        return s;
     }
 
 }

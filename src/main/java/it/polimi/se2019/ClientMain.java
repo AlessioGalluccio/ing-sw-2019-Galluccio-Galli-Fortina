@@ -18,8 +18,8 @@ public class ClientMain {
         RMIClient rmi = new RMIClient(clientView, "localhost");
         rmi.connect();
 
-        // SocketClient socket = new SocketClient(9001, "localhost", clientView);
-         //socket.connect();
+        //SocketClient socket = new SocketClient(9001, "localhost", clientView);
+        //socket.connect();
         clientView.setUp(rmi);
         cli.start();
 

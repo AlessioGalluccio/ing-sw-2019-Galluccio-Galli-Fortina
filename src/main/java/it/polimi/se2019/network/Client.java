@@ -10,12 +10,11 @@ import it.polimi.se2019.view.clientView.ClientView;
 import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.rmi.server.Unreferenced;
 import java.util.Observer;
 import java.util.List;
 import java.util.LinkedList;
 
-public abstract class Client extends UnicastRemoteObject implements Observer, Unreferenced {
+public abstract class Client extends UnicastRemoteObject implements Observer {
 
     protected ClientView clientView;
     private ClientSkullBoardView skullBoardView;
@@ -50,7 +49,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer, Un
 
     public void handleDisconnection() {
         clientView.handleDisconnection();
-        unreferenced();
+        closeAll();
     }
 
     public synchronized void handleStartGame(int matchID) {
@@ -101,12 +100,10 @@ public abstract class Client extends UnicastRemoteObject implements Observer, Un
         clientView.printFromController(string);
     }
 
-    public void unreferenced() {
-        try {
-            UnicastRemoteObject.unexportObject(this, true);
-        } catch (NoSuchObjectException e) {
-            e.printStackTrace();
-        }
+
+    public void unreferenced() throws NoSuchObjectException {
+        UnicastRemoteObject.unexportObject(this, true);
     }
 
+    public abstract void closeAll();
 }

@@ -26,10 +26,10 @@ public class App {
                 int timerWait = Integer.parseInt(p.getProperty("timerWait"));
                 int timerTurn = Integer.parseInt(p.getProperty("timerTurn"));
 
-                //socketServer = new SocketServer(9001, timerWait, timerTurn);
-              //socketServer.start();
+                RMIServer.start(7001, timerWait, timerTurn);
+                socketServer = new SocketServer(9001, timerWait, timerTurn);
+                socketServer.start();
 
-                RMIServer.start(14000, timerWait, timerTurn);
             }
         } catch (IOException e) {
             System.out.println("Error while reading config file");

@@ -51,7 +51,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
                     message.handleMessage(this);
                 } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-                } catch (java.net.SocketException e) {
+                } catch (java.net.SocketException | java.io.EOFException e) {
                     Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Connection closed", e);
                     disconnect();
                 }
@@ -90,8 +90,10 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     @Override
     public void send(String string) {
         try {
-            printSocket.writeObject(new PrintFromControllerMessage(string));
-            printSocket.flush();
+            if(open) {
+                printSocket.writeObject(new PrintFromControllerMessage(string));
+                printSocket.flush();
+            }
         }catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem sending obj through socket", e);
             disconnect();
@@ -168,7 +170,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
         open = false;
         closeAll();
         //If match is started disconnect form controller
-        if(matchID!=0)view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
+        if(matchID!=0) view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
         server.waitingRoom.disconnect(this, view, matchID);
     }
 

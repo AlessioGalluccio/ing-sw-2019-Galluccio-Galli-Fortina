@@ -118,12 +118,21 @@ public class WaitingRoom {
                 try {
                     wait();
                 } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();  //Does it work??
+                    Thread.currentThread().interrupt();
                 }
             }
             playerWaiting.add(new WaitingPlayer(player, playerView, controller, networkHandler, enemyView));
             if(playerWaiting.size() == 3) setTimer();
-            if(playerWaiting.size() == 5) startMatch();
+            if(playerWaiting.size() == 5) {
+                while(matches.get(matches.size()-1).gameHandler.getMap()==null) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                startMatch();
+            }
 
             if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true, nickname));
             else networkHandler.update(null, new StatusLoginMessage(true, false, nickname));
@@ -142,6 +151,7 @@ public class WaitingRoom {
 
         for(Match m : matches) {
             if(m.matchID==matchID) {
+                networkHandler.setMatchID(m.matchID);
                 m.skullBoardView.attach(networkHandler);
                 m.mapView.attach(networkHandler);
 
@@ -159,6 +169,7 @@ public class WaitingRoom {
                 }
                 for(PlayerView pw : m.playerViews) {
                     if(pw.getPlayerCopy().getNickname().equals(nickname)) {
+                        networkHandler.setPlayerView(pw);
                         pw.setNetworkHandler(networkHandler);
                         pw.notifyObservers(new ReconnectionMessage(true,pw.getPlayerCopy().getID(),pw));
                     }
@@ -253,6 +264,7 @@ public class WaitingRoom {
             gm.setSuddenDeath(suddenDeath);
             isFirst = false;
             setTimer();
+            notifyAll();
         }
         Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Map&Co. set");
     }

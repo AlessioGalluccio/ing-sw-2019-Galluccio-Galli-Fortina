@@ -92,22 +92,27 @@ public class CLI implements UiInterface {
 
     @Override
     public void updateCell(Cell cell) {
-
+        if(yourTurn) printMap();
+        else out.println("Map has been updated. [Digit update map to see it]");
     }
 
     @Override
     public void updatePlayer() {
-
+        if(yourTurn) out.println(view.getPlayerCopy().toString());
+        else out.println("You have been updated. [Digit update me to see it]");
     }
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
-
+        if(yourTurn) out.println(enemyView.toStringShort());
+        else out.println(enemyView.getNickname() + " has been updated. [Digit update enemy "
+                +  enemyView.getNickname()+" to see it]");
     }
 
     @Override
     public void updateSkullBoard() {
-
+        if(yourTurn) printMap();
+        else out.println("The skull board has been updated. [Digit update map to see it]");
     }
 
     @Override
@@ -128,8 +133,8 @@ public class CLI implements UiInterface {
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
         printAll();
-        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn!\t୧☉□☉୨");
-        else out.println("It's " + nickname + "'s turn\tಠᴗಠ");
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn! \t୧☉□☉୨" + ConsoleColor.RESET);
+        else out.println("It's " + nickname + "'s turn \tಠᴗಠ");
     }
 
     public void start() {
@@ -271,6 +276,7 @@ public class CLI implements UiInterface {
     }
 
     public void printMap() {
+        out.println("");
         out.println("\t" + skullBoardView);
         out.println("");
         out.println(mapView.printRow(2,0));

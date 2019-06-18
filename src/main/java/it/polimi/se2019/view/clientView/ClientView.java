@@ -53,18 +53,6 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * create a TargetMessage that the client send to the server
-     * @param target
-     */
-    public void createTargetMessage(Target target){
-
-        if(verifyTarget()) {
-            TargetMessage message = new TargetMessage(target,playerCopy.getID(),this);
-            notifyObservers(message);
-        }
-    }
-
-    /**
      * create a CellMessage that the client send to the server
      * @param x
      * @param y
@@ -364,9 +352,9 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * This method shutdown the RMI server
      */
-    public  void shutdownServer() {
+    public void shutdownServer() {
         Client client = (Client) getObservers().get(0);
-        client.unreferenced();
+        client.closeAll();
     }
 
 }

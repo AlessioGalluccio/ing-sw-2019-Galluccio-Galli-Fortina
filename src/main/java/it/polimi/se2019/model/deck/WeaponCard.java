@@ -147,14 +147,7 @@ public abstract class WeaponCard implements Card {
 
     @Override
     public String toString() {
-        String string = name + ":\n" +
-                "\tCost: " + ConsoleColor.colorByColor(ammoGranted.toString()) +
-                "✚  ";
-        if(ammoNotGranted!=null) {
-            for (ColorRYB c : ammoNotGranted) {
-                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "✚";
-            }
-        }
+        String string = toStringShort();
         string += "\n\tDescription: " + description;
         return string;
     }
@@ -162,10 +155,10 @@ public abstract class WeaponCard implements Card {
     public String toStringShort() {
         String string = name + ": " +
                 ConsoleColor.colorByColor(ammoGranted.toString()) +
-                "✚ ";
+                "✚ " + ConsoleColor.RESET;
         if(ammoNotGranted!=null) {
             for (ColorRYB c : ammoNotGranted) {
-                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "✚";
+                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "✚" + ConsoleColor.RESET;
             }
         }
         return string;
