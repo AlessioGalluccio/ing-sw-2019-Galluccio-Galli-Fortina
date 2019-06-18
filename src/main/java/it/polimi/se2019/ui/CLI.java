@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
     private final int MIN_SKULL = 5;
+    public boolean endGame;
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
@@ -127,7 +128,7 @@ public class CLI implements UiInterface {
             out.printf("%-25.25s %d %n", "  "+i+". " + players.get(i).getNickname(), players.get(i).getNumPoints());
         }
         printLine();
-        //TODO close all and kill execution
+        endGame = true;
     }
 
     @Override
@@ -283,6 +284,10 @@ public class CLI implements UiInterface {
 
     void println(String string) {
         out.println(string);
+    }
+
+    void printf(String left, String right) {
+        out.printf("%-90.90s %-115.115s%n", left, right);
     }
 
     public void printMap() {
