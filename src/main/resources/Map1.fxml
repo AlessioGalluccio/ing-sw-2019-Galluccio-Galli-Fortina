@@ -197,16 +197,8 @@
                            <image>
                               <Image url="@characters/characterYellow.jpg" />
                            </image></ImageView>
-                        <ImageView fx:id="enemy1Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Blu.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="enemy1Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Verde.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="enemy1Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
@@ -246,16 +238,8 @@
                            <image>
                               <Image url="@characters/characterGreen.jpg" />
                            </image></ImageView>
-                        <ImageView fx:id="enemy2Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Blu.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="enemy2Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Giallo.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="enemy2Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
@@ -335,16 +319,8 @@
                               <Image url="@Icon/Blu.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="enemy3Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="314.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Verde.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="enemy3Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="339.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Icon/Giallo.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="enemy3Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="314.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="339.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="367.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="393.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                      </children></AnchorPane>
@@ -430,31 +406,11 @@
       <ImageView fx:id="imYellowWeapon1" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imYellowWeapon2" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imYellowWeapon3" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="playerDamage0" fitHeight="29.0" fitWidth="22.0" layoutX="151.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/Verde.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="playerDamage1" fitHeight="29.0" fitWidth="22.0" layoutX="180.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/Giallo.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="playerDamage2" fitHeight="29.0" fitWidth="22.0" layoutX="214.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/Viola.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="playerDamage3" fitHeight="29.0" fitWidth="22.0" layoutX="245.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/Viola.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="playerDamage4" fitHeight="29.0" fitWidth="22.0" layoutX="275.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icon/Viola.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="playerDamage0" fitHeight="29.0" fitWidth="22.0" layoutX="151.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage1" fitHeight="29.0" fitWidth="22.0" layoutX="180.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage2" fitHeight="29.0" fitWidth="22.0" layoutX="214.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage3" fitHeight="29.0" fitWidth="22.0" layoutX="245.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage4" fitHeight="29.0" fitWidth="22.0" layoutX="275.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage5" fitHeight="29.0" fitWidth="22.0" layoutX="309.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage6" fitHeight="29.0" fitWidth="22.0" layoutX="339.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage7" fitHeight="29.0" fitWidth="22.0" layoutX="369.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
