@@ -1520,6 +1520,9 @@ public class Controller implements Initializable {
                         if(weaponCards.get(i).isReloaded()==false){
                             selectWeapon.get(i).setDisable(true);
                         }
+                            reloadWeapon.get(i).setDisable(false);
+                            discardWeapon.get(i).setDisable(false);
+
                     }
                     for(int i=weaponCards.size(); i<3; i++){
                         imWeapon.get(i).setImage(new Image("emptyWeapon.jpg"));
