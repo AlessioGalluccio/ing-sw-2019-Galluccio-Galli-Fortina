@@ -227,7 +227,7 @@ public class WaitingRoom {
                 }
             }
             playerViews.add(wp.playerView);
-            gameHandler.setUp(wp.player, wp.playerView);
+            gameHandler.setUp(wp.player, wp.playerView, wp.controller);
             gameHandler.attachAll(mapView, skullBoardView, enemyViews);
         }
 

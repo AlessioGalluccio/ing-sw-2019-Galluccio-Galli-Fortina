@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
@@ -39,6 +40,7 @@ public class GameHandler extends Observable {
     private int skull;
     private boolean suddenDeath;
     private boolean firstTurn = true;
+    private List<Controller> controllers = new ArrayList<>();
     //TODO aggiungere lista di controller
 
     //Used only for testing
@@ -448,18 +450,24 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * Check if the match id of this game handler is equals to the param
-     * @param matchID id to check
-     * @return true if they are equals, false other way
+     * Return the controller of the player
+     * @param p player whose you want the controller
+     * @return controller of the player
      */
-    public boolean checkMatchID(int matchID) {
-        return matchID == this.matchID;
+    private Controller getControllerByPlayer(Player p) {
+        for(Controller controller : controllers) {
+            if(p.equals(controller.getAuthor())) return controller;
+        }
+        throw new IllegalArgumentException("There is no Controler linked to " + p.toString());
     }
 
-    public void setUp(Player p, PlayerView playerView) {
+
+
+    public void setUp(Player p, PlayerView playerView, Controller controller) {
         if(orderPlayerList.size()<=5) {
             orderPlayerList.add(p);
             playerViews.add(playerView);
+            controllers.add(controller);
         }
     }
 
