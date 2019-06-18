@@ -69,6 +69,12 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     }
 
     /**
+     * returns a list of AmmoBag. The first is the additional cost of the firemode (during shooting), the others are the optionals in sequence
+     * @return
+     */
+    public abstract List<AmmoBag> costOfFiremodeNotReloading();
+
+    /**
      *
      * @return true if it has been already used in this turn, else false
      */

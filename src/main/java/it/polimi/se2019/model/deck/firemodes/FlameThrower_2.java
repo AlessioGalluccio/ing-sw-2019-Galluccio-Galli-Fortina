@@ -2,6 +2,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.StringAndMessage;
 
@@ -14,6 +15,13 @@ public class FlameThrower_2 extends FlameThrower_1 {
     public List<StringAndMessage> getMessageListExpected() {
         //TODO da fare!
         return null;
+    }
+
+    @Override
+    public List<AmmoBag> costOfFiremodeNotReloading() {
+        List<AmmoBag> list = new ArrayList<>();
+        list.add(new AmmoBag(0,2,0)); //cost of shooting base firemode
+        return list;
     }
 
 
