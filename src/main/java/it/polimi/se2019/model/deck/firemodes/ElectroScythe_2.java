@@ -12,6 +12,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElectroScythe_2 extends ElectroScythe_1 {
@@ -26,5 +27,15 @@ public class ElectroScythe_2 extends ElectroScythe_1 {
         }
         commonEndingFire();
     }
+
+    @Override
+    public List<AmmoBag> costOfFiremodeNotReloading() {
+        List<AmmoBag> list = new ArrayList<>();
+        list.add(new AmmoBag(1,0,1)); //cost of shooting base firemode
+        return list;
+    }
+
+
+
 
 }

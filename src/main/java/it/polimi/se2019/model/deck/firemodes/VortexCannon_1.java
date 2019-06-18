@@ -11,9 +11,12 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VortexCannon_1 extends FireMode {
+    //COSTS
+    private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -23,6 +26,14 @@ public class VortexCannon_1 extends FireMode {
     @Override
     public void sendPossibleTargetsAtStart() {
         //TODO
+    }
+
+    @Override
+    public List<AmmoBag> costOfFiremodeNotReloading() {
+        List<AmmoBag> list = new ArrayList<>();
+        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
+        list.add(COST_FIRST_OPTIONAL);
+        return list;
     }
 
     @Override

@@ -16,6 +16,10 @@ public class MachineGun_1 extends FireMode {
     private static final String SECOND_MSG_STR = "Select a second player from possible targets";
     private static final String OPTIONAL_SECOND_MSG = "Select a third Player";
 
+    //COSTS
+    private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(0,1,0);
+    private static final AmmoBag COST_SECOND_OPTIONAL = new AmmoBag(0,0,1);
+
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -36,6 +40,15 @@ public class MachineGun_1 extends FireMode {
     public void sendPossibleTargetsAtStart() {
         //TODO se niente target?
         sendAllVisiblePlayers(null);
+    }
+
+    @Override
+    public List<AmmoBag> costOfFiremodeNotReloading() {
+        List<AmmoBag> list = new ArrayList<>();
+        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
+        list.add(COST_FIRST_OPTIONAL);
+        list.add(COST_SECOND_OPTIONAL);
+        return list;
     }
 
     @Override

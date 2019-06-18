@@ -11,6 +11,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ZX2_2 extends FireMode {
@@ -24,6 +25,13 @@ public class ZX2_2 extends FireMode {
     public void sendPossibleTargetsAtStart() {
 
         sendAllVisiblePlayers(null);
+    }
+
+    @Override
+    public List<AmmoBag> costOfFiremodeNotReloading() {
+        List<AmmoBag> list = new ArrayList<>();
+        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
+        return list;
     }
 
     @Override

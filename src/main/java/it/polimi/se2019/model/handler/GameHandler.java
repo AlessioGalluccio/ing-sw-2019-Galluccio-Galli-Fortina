@@ -51,6 +51,7 @@ public class GameHandler extends Observable {
         this.weaponDeck = new WeaponDeck();
         this.powerupDeck = new PowerupDeck();
         this.ammoDeck = new AmmoDeck(powerupDeck);
+        this.modality = new Normal();
     }
 
     public GameHandler(int matchID) {
