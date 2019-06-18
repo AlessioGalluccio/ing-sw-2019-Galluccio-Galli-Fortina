@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -229,6 +230,7 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
+        controller.updateEnemyCharacter();
 
     }
 
@@ -304,7 +306,7 @@ public class ControllerLogin implements UiInterface {
 
     }
 
-    public void chooseYourCharacter(){
+    public void chooseYourCharacter() throws Exception{
         controller.chooseYourCharacter();
     }
 

@@ -24,10 +24,10 @@ public class GameHandlerTest {
 
     @Before
     public void setUp() {
-        Player firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), FIRST_ID);
-        Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
-        Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
-        Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
+        Player firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow", id), FIRST_ID);
+        Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue", id), SECOND_ID);
+        Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red", id), THIRD_ID);
+        Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white", id), 4);
         ArrayList<Player> players = new ArrayList<>();
         players.add(firstPlayer);
         players.add(secondPlayer);

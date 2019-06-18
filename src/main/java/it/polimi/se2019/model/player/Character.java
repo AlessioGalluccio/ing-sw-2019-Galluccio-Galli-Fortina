@@ -9,10 +9,12 @@ public class Character implements Serializable {
 
     private final String nameCharacter;
     private final String color;
+    private final int Id;
 
-    public Character(String nameCharacter, String color) {
+    public Character(String nameCharacter, String color, int id) {
         this.nameCharacter = nameCharacter;
         this.color = color;
+        Id = id;
     }
 
     @Override
@@ -46,5 +48,9 @@ public class Character implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(nameCharacter, color);
+    }
+
+    public int getId() {
+        return Id;
     }
 }

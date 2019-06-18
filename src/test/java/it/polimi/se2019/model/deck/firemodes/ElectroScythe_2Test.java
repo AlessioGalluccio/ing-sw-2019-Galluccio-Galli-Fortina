@@ -37,10 +37,10 @@ public class ElectroScythe_2Test {
     @Before
     public void setUp() throws Exception {
         //TODO playerview non testata
-        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow", id), 2008);
+        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue", id), 2011);
+        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow", id), 3);
+        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple", id), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();

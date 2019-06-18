@@ -15,7 +15,7 @@ public class TestAmmoCard {
     @Before
     public void initTest(){
         this.deck = new AmmoDeck(new PowerupDeck());
-        this.player = new Player("Giorgio", new Character("Distruttore", "Blallo"), 1);
+        this.player = new Player("Giorgio", new Character("Distruttore", "Blallo", id), 1);
     }
 
 

@@ -71,10 +71,10 @@ public class TestCell {
 
     @Test
     public void testClone() {
-        Player pp = new Player("PeterParker", new Character("SpiderMan", "RED"), 2016);
+        Player pp = new Player("PeterParker", new Character("SpiderMan", "RED", id), 2016);
         pp.setPosition(cellAmmo);
 
-        Player mj = new Player("MJ", new Character("Girl", "BLUE"), 2001);
+        Player mj = new Player("MJ", new Character("Girl", "BLUE", id), 2001);
         mj.setPosition(cellSpawn);
 
         Cell clone = cellAmmo.clone();

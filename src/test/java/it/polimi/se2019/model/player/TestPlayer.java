@@ -7,7 +7,6 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -23,9 +22,9 @@ public class TestPlayer {
 
     @Before
     public void initTest() {
-        player = new Player("Nikola Tesla", new Character("CoilMan", "yellow"), 1856);
-        enemy = new Player("Thomas Edison", new Character("LightBulbMan", "white"), 1931);
-        enemy_2 = new Player("JP Morgan", new Character("MoneyMan", "green"), 1913);
+        player = new Player("Nikola Tesla", new Character("CoilMan", "yellow", id), 1856);
+        enemy = new Player("Thomas Edison", new Character("LightBulbMan", "white", id), 1931);
+        enemy_2 = new Player("JP Morgan", new Character("MoneyMan", "green", id), 1913);
 
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);

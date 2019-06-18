@@ -1676,7 +1676,14 @@ public class Controller implements Initializable {
 
     public void chooseYourCharacter() throws Exception{
         ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 500, 500);
-        if()
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //TODO IN BASE A QUELLO CHE MI VIENE PASSATO DISATTIVO I PERSONAGGI
+            }
+        });
+
+
     }
 
 
@@ -1689,35 +1696,80 @@ public class Controller implements Initializable {
 
         possibleActions.setVisible(true);
         yourCharacter.setVisible(true);
+        ArrayList<Image> images = new ArrayList<>();
 
         if(rbSprog.isSelected()){
             ControllerLogin.clientView.createCharacterMessage(1);
-            possibleActions.setImage(new Image("characters/actionsGreen.jpg"));
-            yourCharacter.setImage(new Image("characters/characterGreen.jpg"));
+            images = setCharacter(1);
 
         }
         if(rbViolet.isSelected()){
             ControllerLogin.clientView.createCharacterMessage(2);
-            possibleActions.setImage(new Image("characters/actionsViolet.jpg"));
-            yourCharacter.setImage(new Image("characters/characterViolet.jpg"));
+            images = setCharacter(2);
         }
         if(rbStruct.isSelected()){
             ControllerLogin.clientView.createCharacterMessage(3);
-            possibleActions.setImage(new Image("characters/actionsYellow.jpg"));
-            yourCharacter.setImage(new Image("characters/characterYellow.jpg"));
+            images = setCharacter(3);
         }
         if(rbDozer.isSelected()){
             ControllerLogin.clientView.createCharacterMessage(4);
-            possibleActions.setImage(new Image("characters/actionsGrey.jpg"));
-            yourCharacter.setImage(new Image("characters/characterGrey.jpg"));
+            images = setCharacter(4);
         }
         if(rbBanshee.isSelected()){
             ControllerLogin.clientView.createCharacterMessage(5);
-            possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
-            yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
+            images = setCharacter(5);
         }
 
+        yourCharacter.setImage(images.get(0));
+        possibleActions.setImage(images.get(1));
+
     }
+
+    /**
+     * update Enemy Character Image
+     */
+    public void updateEnemyCharacter() {
+        if(ControllerLogin.enemyView1!=null){
+            ControllerLogin.enemyView1.getCharacter().getId();
+        }
+    }
+
+    /**
+     * set each Character id with the image
+     */
+    public ArrayList<Image> setCharacter(int characterID){
+        Image image1 = new Image("characters/characterBlue.jpg");
+        Image image2= new Image("characters/actionsBlue.jpg");
+        switch (characterID) {
+            case 1:
+                image1 = new Image("characters/characterGreen.jpg");
+                image2 = new Image("actionsGreen.jpg");
+                break;
+            case 2:
+                image1 = new Image("characters/characterViolet.jpg");
+                image2 = new Image("characters/actionsViolet.jpg");
+                break;
+            case 3:
+                image1 = new Image("characters/characterYellow.jpg");
+                image2 = new Image("characters/actionsYellow.jpg");
+                break;
+            case 4:
+                image1 = new Image("characters/characterGrey.jpg");
+                image2 = new Image("characters/actionsGrey.jpg");
+                break;
+            case 5:
+                image1 = new Image("characters/characterBlue.jpg");
+                image2= new Image("characters/actionsBlue.jpg");
+                break;
+        }
+        ArrayList<Image> images = new ArrayList<>();
+        images.add(image1);
+        images.add(image2);
+
+        return images;
+
+    }
+
 }
 
 

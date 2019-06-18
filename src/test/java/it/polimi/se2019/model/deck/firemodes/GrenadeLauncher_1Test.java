@@ -5,12 +5,10 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.NotYourTurnState;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -47,10 +45,10 @@ public class GrenadeLauncher_1Test {
 
     @Before
     public void setUp() throws Exception {
-        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow", id), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue", id), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow", id), 3);
+        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple", id), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();

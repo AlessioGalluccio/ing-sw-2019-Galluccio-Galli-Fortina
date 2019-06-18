@@ -4,9 +4,7 @@ import it.polimi.se2019.model.deck.AmmoDeck;
 import it.polimi.se2019.model.deck.PowerupDeck;
 import it.polimi.se2019.model.deck.WeaponDeck;
 import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.map.Map1;
 import it.polimi.se2019.model.map.Map2;
-import it.polimi.se2019.model.map.Map4;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ModelViewMess.MapMessage;
@@ -17,8 +15,6 @@ import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CLITest {
     private CLI ui;
@@ -32,10 +28,10 @@ public class CLITest {
         Player player2 = new Player("Bruce Banner", 1);
         Player player3 = new Player("Tony Stark", 2);
         Player player4 = new Player("Steve Rogers", 3);
-        player1.setCharacter(new Character("Spider-Man", "RED"));
-        player2.setCharacter(new Character("Hulk", "GREEN"));
-        player3.setCharacter(new Character("Iron Man", "Yellow"));
-        player4.setCharacter(new Character("Cap America", "CYAN"));
+        player1.setCharacter(new Character("Spider-Man", "RED", id));
+        player2.setCharacter(new Character("Hulk", "GREEN", id));
+        player3.setCharacter(new Character("Iron Man", "Yellow", id));
+        player4.setCharacter(new Character("Cap America", "CYAN", id));
 
         player1.receiveDamageBy(player2);
         player1.receiveDamageBy(player2);

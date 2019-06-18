@@ -1,11 +1,8 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.CardSpawnChooseMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +10,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
 
 public class MustRespawnControllerStateTest {
     private int authorID = 1;
@@ -30,10 +25,10 @@ public class MustRespawnControllerStateTest {
 
     @Before
     public void setUp() throws Exception {
-        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow", id), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue", id), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow", id), 3);
+        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple", id), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
