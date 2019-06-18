@@ -1913,6 +1913,7 @@ public class Controller implements Initializable {
                     discardWeapon.add(bDiscardPowerup1);
                     discardWeapon.add(bDiscardPowerup2);
                     discardWeapon.add(bDiscardPowerup3);
+                    discardWeapon.add(bDiscardPowerup4);
 
 
                     List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
@@ -1926,8 +1927,8 @@ public class Controller implements Initializable {
                         //imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
                         discardWeapon.get(i).setDisable(false);
                     }
-                    for(int i=powerupCards.size(); i<3; i++){
-                        imPower.get(i).setImage(new Image("emptyWeapon.jpg"));
+                    for(int i=powerupCards.size(); i<4; i++){
+                        imPower.get(i).setImage(new Image("emptyPowerup.jpg"));
                         discardWeapon.get(i).setDisable(true);
                     }
                 }
