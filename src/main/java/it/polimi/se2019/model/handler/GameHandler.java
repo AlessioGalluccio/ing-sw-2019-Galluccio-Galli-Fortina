@@ -39,7 +39,9 @@ public class GameHandler extends Observable {
     private Modality modality;
     private int skull;
     private boolean suddenDeath;
+    private boolean firstTurn = true;
     private List<Controller> controllers = new ArrayList<>();
+    //TODO aggiungere lista di controller
 
     //Used only for testing
     public GameHandler(List<Player> list, int skull) {
@@ -49,6 +51,7 @@ public class GameHandler extends Observable {
         this.weaponDeck = new WeaponDeck();
         this.powerupDeck = new PowerupDeck();
         this.ammoDeck = new AmmoDeck(powerupDeck);
+        this.modality = new Normal();
     }
 
     public GameHandler(int matchID) {
