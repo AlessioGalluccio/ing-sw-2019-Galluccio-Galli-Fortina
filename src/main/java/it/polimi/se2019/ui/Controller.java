@@ -105,7 +105,7 @@ public class Controller implements Initializable {
 
 
 
-    static ArrayList<ImageView> skull = new ArrayList<>();
+    private ArrayList<ImageView> skull = new ArrayList<>();
     public Button fireButton;
     public Button endTurnButton;
     public Label yourPointsLabel;
@@ -560,15 +560,9 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException{
-        //Initialize skull
-        skull.add(imSkull1);
-        skull.add(imSkull2);
-        skull.add(imSkull3);
-        skull.add(imSkull4);
-        skull.add(imSkull5);
-        skull.add(imSkull6);
-        skull.add(imSkull7);
-        skull.add(imSkull8);
+
+        updateWeaponMap();
+
 
 
         setPlayerOnMap();
@@ -1251,19 +1245,33 @@ public class Controller implements Initializable {
      * @param skullNumber
      */
     public void updateSkullBoard(String skullNumber){
+
+        skull.add(imSkull1);
+        skull.add(imSkull2);
+        skull.add(imSkull3);
+        skull.add(imSkull4);
+        skull.add(imSkull5);
+        skull.add(imSkull6);
+        skull.add(imSkull7);
+        skull.add(imSkull8);
+
         //TODO mettere segnalino giocatore
         Platform.runLater(() -> {
+            try {
 
-            int teschi = Integer.parseInt(skullNumber);
-            teschi--;
-            for(int counter = 0; counter< skull.size(); counter++){
-                skull.get(counter).setVisible(false);
-            }
-            while(teschi>=0) {
-                skull.get(teschi).setVisible(true);
+                int teschi = Integer.parseInt(skullNumber);
                 teschi--;
+                for (int counter = 0; counter < skull.size(); counter++) {
+                    skull.get(counter).setVisible(false);
+                }
+                while (teschi >= 0) {
+                    skull.get(teschi).setVisible(true);
+                    teschi--;
+                }
             }
+            catch (Exception e){
 
+            }
 
         });
 
@@ -1386,7 +1394,7 @@ public class Controller implements Initializable {
                     imWeaponCard2.setImage(setWeapon(weaponCards.get(1).getID()));
                     imWeaponCard3.setImage(setWeapon(weaponCards.get(2).getID()));
                 }
-                catch (NullPointerException e){
+                catch (Exception e){
 
                 }
 
@@ -1406,22 +1414,25 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
-                ArrayList<ImageView> redAmmo = new ArrayList();
-                redAmmo.add(rammo1);
-                redAmmo.add(rammo2);
-                redAmmo.add(rammo3);
-                int redNumber = Integer.parseInt(red);
-                redNumber--;
-                for(int counter = 0; counter< redAmmo.size(); counter++){
-                    redAmmo.get(counter).setVisible(false);
-                }
-                while(redNumber>=0) {
-                    redAmmo.get(redNumber).setVisible(true);
+                try {
+                    ArrayList<ImageView> redAmmo = new ArrayList<>();
+                    redAmmo.add(rammo1);
+                    redAmmo.add(rammo2);
+                    redAmmo.add(rammo3);
+                    int redNumber = Integer.parseInt(red);
                     redNumber--;
+                    for (int counter = 0; counter < redAmmo.size(); counter++) {
+                        redAmmo.get(counter).setVisible(false);
+                    }
+                    while (redNumber >= 0) {
+                        redAmmo.get(redNumber).setVisible(true);
+                        redNumber--;
+                    }
+
                 }
+                catch (Exception e){
 
-
+                }
             }
         });
 
@@ -1436,22 +1447,25 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
-                ArrayList<ImageView> blueAmmo = new ArrayList();
-                blueAmmo.add(bammo1);
-                blueAmmo.add(bammo2);
-                blueAmmo.add(bammo3);
-                int blueNumber = Integer.parseInt(blu);
-                blueNumber--;
-                for(int counter = 0; counter< blueAmmo.size(); counter++){
-                    blueAmmo.get(counter).setVisible(false);
-                }
-                while(blueNumber>=0) {
-                    blueAmmo.get(blueNumber).setVisible(true);
+                try {
+                    ArrayList<ImageView> blueAmmo = new ArrayList();
+                    blueAmmo.add(bammo1);
+                    blueAmmo.add(bammo2);
+                    blueAmmo.add(bammo3);
+                    int blueNumber = Integer.parseInt(blu);
                     blueNumber--;
+                    for (int counter = 0; counter < blueAmmo.size(); counter++) {
+                        blueAmmo.get(counter).setVisible(false);
+                    }
+                    while (blueNumber >= 0) {
+                        blueAmmo.get(blueNumber).setVisible(true);
+                        blueNumber--;
+                    }
+
                 }
+                catch (Exception e){
 
-
+                }
             }
         });
 
@@ -1467,21 +1481,24 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
-                ArrayList<ImageView> yellowAmmo = new ArrayList();
-                yellowAmmo.add(bammo1);
-                yellowAmmo.add(bammo2);
-                yellowAmmo.add(bammo3);
-                int yellowNumber = Integer.parseInt(yellow);
-                yellowNumber--;
-                for(int counter = 0; counter< yellowAmmo.size(); counter++){
-                    yellowAmmo.get(counter).setVisible(false);
-                }
-                while(yellowNumber>=0) {
-                    yellowAmmo.get(yellowNumber).setVisible(true);
+                try {
+                    ArrayList<ImageView> yellowAmmo = new ArrayList();
+                    yellowAmmo.add(bammo1);
+                    yellowAmmo.add(bammo2);
+                    yellowAmmo.add(bammo3);
+                    int yellowNumber = Integer.parseInt(yellow);
                     yellowNumber--;
+                    for (int counter = 0; counter < yellowAmmo.size(); counter++) {
+                        yellowAmmo.get(counter).setVisible(false);
+                    }
+                    while (yellowNumber >= 0) {
+                        yellowAmmo.get(yellowNumber).setVisible(true);
+                        yellowNumber--;
+                    }
                 }
+                catch (Exception e){
 
+                }
 
             }
         });

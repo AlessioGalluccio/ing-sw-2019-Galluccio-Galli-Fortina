@@ -27,6 +27,7 @@ import java.util.List;
 
 public class ControllerLogin implements UiInterface {
 
+    private static FXMLLoader fxmlLoader;
     private Controller controller;
     static ClientView clientView;
     static SkullBoardView skullBoardView;
@@ -36,7 +37,7 @@ public class ControllerLogin implements UiInterface {
     static ClientEnemyView enemyView4;
     static ClientMapView mapView;
 
-    private FXMLLoader fxmlLoader;
+
 
     @FXML
     private TextField username;
@@ -50,7 +51,7 @@ public class ControllerLogin implements UiInterface {
     @FXML
     public Button login;
 
-    public LoginMessage loginMessage;
+
 
 
     public void loginButton(ActionEvent event) throws Exception, InterruptedException {
@@ -90,21 +91,24 @@ public class ControllerLogin implements UiInterface {
             @Override
             public void run(){
                 if(success) {
+                    System.out.println(8);
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
-
-                    if( isFirst) {
+                    System.out.println(8);
+                    if(isFirst) {
                         try {
+                            System.out.println(8);
                             fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 400);
                             controller = fxmlLoader.getController();
+                            System.out.println(8);
                         } catch (Exception e) {
                         }
                     }
 
-                    if (isFirst){
+                    else{
                         try {
-                            fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                            open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                         } catch (Exception e) {
                         }
                     }
@@ -128,15 +132,17 @@ public class ControllerLogin implements UiInterface {
      * @throws Exception
      */
     static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
-        FXMLLoader loader= FXMLLoader.load(ControllerLogin.class.getClassLoader().getResource(fileName));
-        Parent root = (Parent) loader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource(fileName));
+        Parent root = (Parent) fxmlLoader.load();
         Stage primaryStage = new Stage();
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
-        return loader;
 
+        return  fxmlLoader;
     }
+
+
 
 
     public void selectedMap(int choosMap){
@@ -288,7 +294,7 @@ public class ControllerLogin implements UiInterface {
     public void updateMap(){
 
         //TODO mettere tutti i metodi di aggiornamento
-        updateWeaponMap();
+        //updateWeaponMap();
         updateWeaponPlayer();
         updatePlayerAmmo();
     }
