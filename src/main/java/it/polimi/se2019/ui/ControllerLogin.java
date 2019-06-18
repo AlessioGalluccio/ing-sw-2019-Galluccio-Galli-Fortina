@@ -171,10 +171,6 @@ public class ControllerLogin implements UiInterface {
     public void startGame() {
 
 
-       /* if(enemyView1!=null) {
-            setEnemyNickname(enemyView1.getNickname());
-        }*/
-       //TODO ETC...
         Platform.runLater(new Runnable() {
             @Override
             public void run(){
@@ -308,13 +304,23 @@ public class ControllerLogin implements UiInterface {
 
     }
 
+    public void chooseYourCharacter(){
+        controller.chooseYourCharacter();
+    }
+
+    /**
+     * update ammoCard on Map
+     */
+    public void updateAmmoCardMap(){
+        controller.updateAmmoCardMap();
+    }
     /**
      * update game display
      */
 
     //TODO mettere tutti i metodi di aggiornamento NON DEVE ESSERE USATO PER L'INIZIO DEL GIOCO!!
     public void updateMap(){
-
+        updateAmmoCardMap();
         updateWeaponMap();
         updateWeaponPlayer();
         updatePlayerAmmo();

@@ -107,6 +107,11 @@ public class Controller implements Initializable {
     public Tab tabEnemy2;
     public Tab tabEnemy3;
     public Tab tabEnemy4;
+    public RadioButton rbSprog;
+    public RadioButton rbViolet;
+    public RadioButton rbStruct;
+    public RadioButton rbDozer;
+    public RadioButton rbBanshee;
 
 
     private ArrayList<ImageView> skull = new ArrayList<>();
@@ -653,10 +658,7 @@ public class Controller implements Initializable {
 
 
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
-        possibleActions.setVisible(true);
-        yourCharacter.setVisible(true);
-        possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
-        yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
+
 
         labelProva.setText("BENVENUTO");
 
@@ -1436,6 +1438,7 @@ public class Controller implements Initializable {
 
         for (int i=0; i<cellAmmos.size(); i++){
             imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getCardID()));
+            System.out.println(cellAmmos.get(i).getCardID());
         }
 
 
@@ -1669,8 +1672,50 @@ public class Controller implements Initializable {
         }
     }
 
+
+
+    public void chooseYourCharacter() throws Exception{
+        ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 500, 500);
+        if()
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public void chooseCharacter(ActionEvent event) {
+
+        possibleActions.setVisible(true);
+        yourCharacter.setVisible(true);
+
+        if(rbSprog.isSelected()){
+            ControllerLogin.clientView.createCharacterMessage(1);
+            possibleActions.setImage(new Image("characters/actionsGreen.jpg"));
+            yourCharacter.setImage(new Image("characters/characterGreen.jpg"));
+
+        }
+        if(rbViolet.isSelected()){
+            ControllerLogin.clientView.createCharacterMessage(2);
+            possibleActions.setImage(new Image("characters/actionsViolet.jpg"));
+            yourCharacter.setImage(new Image("characters/characterViolet.jpg"));
+        }
+        if(rbStruct.isSelected()){
+            ControllerLogin.clientView.createCharacterMessage(3);
+            possibleActions.setImage(new Image("characters/actionsYellow.jpg"));
+            yourCharacter.setImage(new Image("characters/characterYellow.jpg"));
+        }
+        if(rbDozer.isSelected()){
+            ControllerLogin.clientView.createCharacterMessage(4);
+            possibleActions.setImage(new Image("characters/actionsGrey.jpg"));
+            yourCharacter.setImage(new Image("characters/characterGrey.jpg"));
+        }
+        if(rbBanshee.isSelected()){
+            ControllerLogin.clientView.createCharacterMessage(5);
+            possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
+            yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
+        }
 
     }
 }

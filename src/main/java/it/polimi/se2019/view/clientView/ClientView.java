@@ -188,6 +188,14 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
+     * create a CharacterMessage that the client send to the server
+     * @param characterID
+     */
+    public void createCharacterMessage(int characterID){
+        CharacterMessage message = new CharacterMessage(characterID, playerCopy.getID(), this);
+    }
+
+    /**
      * create a WeaponMessage that the client sends to the server
      * @param weaponCard the weapon card
      */
