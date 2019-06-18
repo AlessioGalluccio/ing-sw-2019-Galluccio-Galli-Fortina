@@ -577,6 +577,8 @@ public class Controller implements Initializable {
         updateWeaponMap();
         //update player's weapon
         updateWeaponPlayer();
+        //update palyer's powerup
+        updatePlayerPowerup();
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
@@ -1893,6 +1895,49 @@ public class Controller implements Initializable {
         catch (Exception e){
 
         }
+
+    }
+
+    /**
+     * update player's powerup
+     */
+    public void updatePlayerPowerup(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try{
+
+
+
+                    ArrayList<Button> discardWeapon = new ArrayList<>();
+                    discardWeapon.add(bDiscardPowerup1);
+                    discardWeapon.add(bDiscardPowerup2);
+                    discardWeapon.add(bDiscardPowerup3);
+
+
+                    List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
+                    ArrayList <ImageView> imPower = new ArrayList<>();
+                    imPower.add(imPowerupCard1);
+                    imPower.add(imPowerupCard2);
+                    imPower.add(imPowerupCard3);
+                    imPower.add(imPowerupCard4);
+                    for(int i=0; i<powerupCards.size(); i++) {
+                        //TODO FARE METODO setPowerup
+                        //imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
+                        discardWeapon.get(i).setDisable(false);
+                    }
+                    for(int i=powerupCards.size(); i<3; i++){
+                        imPower.get(i).setImage(new Image("emptyWeapon.jpg"));
+                        discardWeapon.get(i).setDisable(true);
+                    }
+                }
+                catch (Exception e){
+
+                }
+
+
+            }
+        });
 
     }
 
