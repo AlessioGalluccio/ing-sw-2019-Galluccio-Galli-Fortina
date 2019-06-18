@@ -114,7 +114,6 @@ public class Controller implements Initializable {
     public TabPane container2;
     public AnchorPane enemy1back;
 
-    static ClientSkullBoardView skullBoardView;
 
 
     ControllerLogin controllerLogin;
@@ -561,9 +560,11 @@ public class Controller implements Initializable {
 
     public void showMap(ActionEvent event) throws InterruptedException{
 
+        // set weapon card on map
         updateWeaponMap();
-
-
+        //set skull on map
+        String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
+        updateSkullBoard(skullnum);
 
         setPlayerOnMap();
 
@@ -1533,9 +1534,7 @@ public class Controller implements Initializable {
         });
 
     }
-    static void setSkullBoard(ClientSkullBoardView sbv) {
-        skullBoardView = sbv;
-    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

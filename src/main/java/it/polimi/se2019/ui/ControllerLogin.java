@@ -155,8 +155,7 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void startGame() {
         selectedMap(mapView.getMapCopy().getID());
-        updateMap();
-        updateSkullMap(skullBoardView.getNumSkullCopy());
+        
        /* if(enemyView1!=null) {
             setEnemyNickname(enemyView1.getNickname());
         }*/
@@ -180,7 +179,7 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void setSkullBoard(SkullBoardView skullBoard) {
         skullBoardView = skullBoard;
-        Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
+        //Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     @Override
@@ -291,10 +290,11 @@ public class ControllerLogin implements UiInterface {
     /**
      * update game display
      */
+
+    //TODO mettere tutti i metodi di aggiornamento NON DEVE ESSERE USATO PER L'INIZIO DEL GIOCO!!
     public void updateMap(){
 
-        //TODO mettere tutti i metodi di aggiornamento
-        //updateWeaponMap();
+        updateWeaponMap();
         updateWeaponPlayer();
         updatePlayerAmmo();
     }
