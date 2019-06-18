@@ -38,6 +38,7 @@ public class GameHandler extends Observable {
     private Modality modality;
     private int skull;
     private boolean suddenDeath;
+    private boolean firstTurn = true;
     //TODO aggiungere lista di controller
 
     //Used only for testing
