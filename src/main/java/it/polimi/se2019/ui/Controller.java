@@ -575,6 +575,8 @@ public class Controller implements Initializable {
 
         // set weapon card on map
         updateWeaponMap();
+        //update player's weapon
+        updateWeaponPlayer();
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
@@ -1491,10 +1493,23 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 try{
+
                     ArrayList<Button> selectWeapon = new ArrayList<>();
                     selectWeapon.add(selectWeaponButton1);
                     selectWeapon.add(selectWeaponButton2);
                     selectWeapon.add(selectWeaponButton3);
+
+                    ArrayList<Button> reloadWeapon = new ArrayList<>();
+                    reloadWeapon.add(bReloadWeapon1);
+                    reloadWeapon.add(bReloadWeapon2);
+                    reloadWeapon.add(bReloadWeapon3);
+
+                    ArrayList<Button> discardWeapon = new ArrayList<>();
+                    discardWeapon.add(bDiscardWeapon1);
+                    discardWeapon.add(bDiscardWeapon2);
+                    discardWeapon.add(bDiscardWeapon3);
+
+
                     List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
                     ArrayList <ImageView> imWeapon = new ArrayList<>();
                     imWeapon.add(imWeaponCard1);
@@ -1509,6 +1524,8 @@ public class Controller implements Initializable {
                     for(int i=weaponCards.size(); i<3; i++){
                         imWeapon.get(i).setImage(new Image("emptyWeapon.jpg"));
                         selectWeapon.get(i).setDisable(true);
+                        reloadWeapon.get(i).setDisable(true);
+                        discardWeapon.get(i).setDisable(true);
                     }
                 }
                 catch (Exception e){
