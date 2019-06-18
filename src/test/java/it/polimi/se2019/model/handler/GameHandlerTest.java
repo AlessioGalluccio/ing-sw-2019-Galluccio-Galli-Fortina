@@ -24,10 +24,10 @@ public class GameHandlerTest {
 
     @Before
     public void setUp() {
-        Player firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow", id), FIRST_ID);
-        Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue", id), SECOND_ID);
-        Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red", id), THIRD_ID);
-        Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white", id), 4);
+        Player firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), FIRST_ID);
+        Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
+        Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
+        Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
         ArrayList<Player> players = new ArrayList<>();
         players.add(firstPlayer);
         players.add(secondPlayer);
@@ -304,5 +304,30 @@ public class GameHandlerTest {
         assertEquals(e2, gameHandler.getRanking().get(0));
         assertEquals(e1, gameHandler.getRanking().get(3));
         assertEquals(e3, gameHandler.getRanking().get(1));
+    }
+
+    @Test
+    public void testPossibleCharacter() {
+        Player firstPlayer = new Player("TonyStark", FIRST_ID);
+        Player secondPlayer = new Player("SteveRogers", SECOND_ID);
+        Player thirdPlayer = new Player("PeterParker", THIRD_ID);
+        Player fourthPlayer = new Player("CarolDenvers", 4);
+        ArrayList<Player> players = new ArrayList<>();
+        players.add(firstPlayer);
+        players.add(secondPlayer);
+        players.add(thirdPlayer);
+        players.add(fourthPlayer);
+
+        gameHandler = new GameHandler(players, 5);
+
+        assertEquals(5, gameHandler.possibleCharacter().size());
+        firstPlayer.setCharacter(new Character(3));
+        assertEquals(4, gameHandler.possibleCharacter().size());
+        secondPlayer.setCharacter(new Character(1));
+        assertEquals(3, gameHandler.possibleCharacter().size());
+        for(Character character : gameHandler.possibleCharacter()) {
+            assertNotEquals(3, character.getId());
+            assertNotEquals(1, character.getId());
+        }
     }
 }

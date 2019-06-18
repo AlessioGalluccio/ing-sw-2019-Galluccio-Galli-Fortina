@@ -17,7 +17,7 @@ public class NotYourTurnStateTest {
 
     @Before
     public void setUp() throws Exception {
-        Character character1 = new Character("Character1", "Yellow", id);
+        Character character1 = new Character("Character1", "Yellow");
         Player player = new Player("Bob", character1, 0);
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);

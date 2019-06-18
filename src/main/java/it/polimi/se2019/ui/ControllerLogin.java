@@ -1,6 +1,7 @@
 package it.polimi.se2019.ui;
 
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.messages.LoginMessage;
 import it.polimi.se2019.network.rmi.RMIClient;
@@ -231,22 +232,26 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
         controller.updateEnemyCharacter(enemyView);
-
     }
 
     @Override
     public void updateSkullBoard() {
-
+        //TODO
     }
 
     @Override
     public void printRanking(List<Player> players) {
-
+        //TODO
     }
 
     @Override
     public void turn(String nickname, boolean yourTurn) {
+        //TODO
+    }
 
+    @Override
+    public void chooseCharacter(List<Character> characters) {
+        //TODO
     }
 
     /**

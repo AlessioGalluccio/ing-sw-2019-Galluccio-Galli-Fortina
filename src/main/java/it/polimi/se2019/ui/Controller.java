@@ -11,10 +11,7 @@ import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
-import it.polimi.se2019.view.clientView.ClientEnemyView;
-import it.polimi.se2019.view.clientView.ClientMapView;
-import it.polimi.se2019.view.clientView.ClientSkullBoardView;
-import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.clientView.*;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 
@@ -1702,31 +1699,35 @@ public class Controller implements Initializable {
         possibleActions.setVisible(true);
         yourCharacter.setVisible(true);
         ArrayList<Image> images = new ArrayList<>();
+        try {
+            if (rbSprog.isSelected()) {
+                ControllerLogin.clientView.createCharacterMessage(1);
+                images = setCharacter(1);
 
-        if(rbSprog.isSelected()){
-            ControllerLogin.clientView.createCharacterMessage(1);
-            images = setCharacter(1);
+            }
+            if (rbViolet.isSelected()) {
+                ControllerLogin.clientView.createCharacterMessage(2);
+                images = setCharacter(2);
+            }
+            if (rbStruct.isSelected()) {
+                ControllerLogin.clientView.createCharacterMessage(3);
+                images = setCharacter(3);
+            }
+            if (rbDozer.isSelected()) {
+                ControllerLogin.clientView.createCharacterMessage(4);
+                images = setCharacter(4);
+            }
+            if (rbBanshee.isSelected()) {
+                ControllerLogin.clientView.createCharacterMessage(5);
+                images = setCharacter(5);
+            }
 
+            yourCharacter.setImage(images.get(0));
+            possibleActions.setImage(images.get(1));
+        }catch (NotCharacterException e) {
+            //TODO stampare che non può scegliere quel personaggio
+            //(In teoria con la GUI non potrebbe sucedere)
         }
-        if(rbViolet.isSelected()){
-            ControllerLogin.clientView.createCharacterMessage(2);
-            images = setCharacter(2);
-        }
-        if(rbStruct.isSelected()){
-            ControllerLogin.clientView.createCharacterMessage(3);
-            images = setCharacter(3);
-        }
-        if(rbDozer.isSelected()){
-            ControllerLogin.clientView.createCharacterMessage(4);
-            images = setCharacter(4);
-        }
-        if(rbBanshee.isSelected()){
-            ControllerLogin.clientView.createCharacterMessage(5);
-            images = setCharacter(5);
-        }
-
-        yourCharacter.setImage(images.get(0));
-        possibleActions.setImage(images.get(1));
 
     }
 
@@ -1803,5 +1804,3 @@ public class Controller implements Initializable {
     }
 
 }
-
-

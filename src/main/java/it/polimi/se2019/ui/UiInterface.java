@@ -1,6 +1,7 @@
 package it.polimi.se2019.ui;
 
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.remoteView.EnemyView;
@@ -35,7 +36,9 @@ public interface UiInterface {
 
     void printRanking(List<Player> players);
 
-    void turn(String nickname, boolean yourTurn); //TODO sceliere parametri
+    void turn(String nickname, boolean yourTurn);
+
+    void chooseCharacter(List<Character> characters);
 
 
 }

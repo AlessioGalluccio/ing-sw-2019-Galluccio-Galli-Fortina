@@ -5,6 +5,7 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.clientView.ClientView;
+import it.polimi.se2019.view.clientView.NotCharacterException;
 import it.polimi.se2019.view.remoteView.EnemyView;
 
 import java.util.Scanner;
@@ -88,7 +89,8 @@ class ParserCLI {
                 case "EXIT":
                     parseExit();
                     break;
-                //TODO character
+                case "CHARACTER":
+                    parseCharacter(command2);
                 default:
                     cli.println("Command '"+command[0]+"' dose not exist.");
             }
@@ -96,7 +98,6 @@ class ParserCLI {
             cli.println("Command '" + Arrays.toString(command) + "' dose not exist.");
         }
     }
-
 
     private void parseAction(String[] command) {
         switch (command[0]) {
@@ -506,6 +507,21 @@ class ParserCLI {
             default:
                     cli.println(decision + " is not a command.\n" +
                             "Please, retry with yes or no.");
+        }
+    }
+
+    private void parseCharacter(String[] command) {
+        if(view.getPlayerCopy().getCharacter()!=null)
+            cli.println("You have already chosen your character.");
+        try {
+            view.createCharacterMessage(view.getPossibleCharacter().get(Integer.parseInt(command[0])-1).getId());
+        } catch (NotCharacterException e) {
+            cli.println("You can't choose this character.");
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            cli.println("Missing info.\n" +
+                    "Retry specifying which character do you want (insert the relative number).");
+        } catch (NullPointerException e) {
+            cli.println("Wait your turn, you can't choose your character yet.");
         }
     }
 

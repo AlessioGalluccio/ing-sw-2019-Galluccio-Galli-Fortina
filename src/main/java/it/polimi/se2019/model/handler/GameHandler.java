@@ -9,6 +9,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
@@ -579,6 +580,21 @@ public class GameHandler extends Observable {
         for(PlayerView playerView : playerViews) {
             playerView.printFromController(message);
         }
+    }
+
+    public List<Character> possibleCharacter() {
+        List<Integer> charactersTaken = new LinkedList<>();
+        for(Player player : orderPlayerList) {
+            if(player.getCharacter()!=null) charactersTaken.add(player.getCharacter().getId());
+        }
+
+        List<Character> possibleCharacter= new LinkedList<>();
+
+        for(int i=1; i<=5; i++) {
+            if(!charactersTaken.contains(i)) possibleCharacter.add(new Character(i));
+        }
+
+        return possibleCharacter;
     }
 }
 
