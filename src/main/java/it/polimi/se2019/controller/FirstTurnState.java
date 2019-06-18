@@ -157,6 +157,7 @@ public class FirstTurnState extends StateController {
     @Override
     public void handleCharacter(int characterID) {
         playerAuthor.setCharacter(new Character(characterID));
+        this.isCharacterSelected = true;
         controller.addReceived();
     }
 
@@ -171,9 +172,14 @@ public class FirstTurnState extends StateController {
         }
 
         if(errorString != null){
-            stringToPlayerView = errorString +
-                    controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
-            errorString = null;
+            try{
+                stringToPlayerView = errorString +
+                        controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+                errorString = null;
+            }catch (IndexOutOfBoundsException e){ //it has finished the series of commands, we don't print anything
+                stringToPlayerView = null;
+            }
+
         }
         else{
             stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();

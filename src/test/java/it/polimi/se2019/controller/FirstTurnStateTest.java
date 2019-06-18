@@ -3,6 +3,7 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
@@ -64,15 +65,27 @@ public class FirstTurnStateTest {
 
     @Test
     public void handleAction() {
-        System.out.println(playerView.getLastStringPrinted());
+        //TODO errore in ottenere l'azione, manca il metodo!!!
+        //System.out.println(playerView.getLastStringPrinted());
 
         CharacterMessage characterMessage = new CharacterMessage(1, authorPlayer.getID(),playerView);
         controller.update(null,characterMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        //System.out.println(playerView.getLastStringPrinted());
 
         DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(authorPlayer.getPowerupCardList().get(0), authorPlayer.getID(), playerView);
         controller.update(null, discardPowerupMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        //System.out.println(playerView.getLastStringPrinted());
+
+        assertEquals(true, controller.getState() instanceof EmptyControllerState);
+
+        ActionMessage actionMessage = new ActionMessage(Identificator.SHOOT,authorPlayer.getID(),playerView);
+        controller.update(null, actionMessage);
+        //System.out.println(playerView.getLastStringPrinted());
+
+        //assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
+
+
+
     }
 
 }

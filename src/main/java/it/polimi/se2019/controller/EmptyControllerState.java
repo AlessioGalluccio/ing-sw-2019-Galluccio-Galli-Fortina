@@ -24,6 +24,7 @@ public class EmptyControllerState extends StateController {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
         controller.resetMessages();
+        controller.getPlayerView().printFromController(SELECT_ACTION_REQUEST);
     }
 
     @Override
