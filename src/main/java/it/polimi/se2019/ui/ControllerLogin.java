@@ -232,6 +232,7 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
         controller.updateEnemyCharacter(enemyView);
+        updateEnemyWeapon();
     }
 
     @Override
