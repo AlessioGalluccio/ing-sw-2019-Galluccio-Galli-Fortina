@@ -30,4 +30,6 @@ public interface Server extends Observer {
     void cancelTimer();
 
     void setMatchID(int matchID);
+
+    void closeAll();
 }
