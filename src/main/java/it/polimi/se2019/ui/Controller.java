@@ -1799,7 +1799,7 @@ public class Controller implements Initializable {
     public void updateEnemyWeapon(){
         if(ControllerLogin.enemyView1!=null){
             ArrayList<WeaponCard> weaponCards = ControllerLogin.enemyView1.getUnloadedWeapon();
-            
+
         }
     }
 
