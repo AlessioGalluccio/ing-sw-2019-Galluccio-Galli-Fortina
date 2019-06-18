@@ -1728,10 +1728,29 @@ public class Controller implements Initializable {
     /**
      * update Enemy Character Image
      */
-    public void updateEnemyCharacter() {
-        if(ControllerLogin.enemyView1!=null){
-            ControllerLogin.enemyView1.getCharacter().getId();
+    public void updateEnemyCharacter(ClientEnemyView enemyView) {
+        ArrayList<Image> images = new ArrayList<>();
+        if (enemyView.equals(ControllerLogin.enemyView1)) {
+            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
+            imEnemyCharacter1.setImage(images.get(0));
+            enemy1Actions.setImage(images.get(1));
         }
+        if (enemyView.equals(ControllerLogin.enemyView2)) {
+            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
+            imEnemyCharacter2.setImage(images.get(0));
+            enemy2Actions.setImage(images.get(1));
+        }
+        if (enemyView.equals(ControllerLogin.enemyView3)) {
+            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
+            imEnemyCharacter3.setImage(images.get(0));
+            enemy3Actions.setImage(images.get(1));
+        }
+        if (enemyView.equals(ControllerLogin.enemyView4)) {
+            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
+            imEnemyCharacter4.setImage(images.get(0));
+            enemy4Actions.setImage(images.get(1));
+        }
+
     }
 
     /**
