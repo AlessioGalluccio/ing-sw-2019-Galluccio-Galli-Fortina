@@ -184,7 +184,9 @@ public class Controller implements Observer {
     public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
             stringToPlayerView = state.handle((ViewControllerMessage) arg);
-            playerView.printFromController(stringToPlayerView);
+            if(stringToPlayerView != null){
+                playerView.printFromController(stringToPlayerView);
+            }
         }catch (Exception e) {
             System.err.println("Controller exception: " + e.toString());
             e.printStackTrace();

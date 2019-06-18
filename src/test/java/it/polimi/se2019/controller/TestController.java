@@ -19,7 +19,7 @@ public class TestController {
 
     @Before
     public void initTest() {
-        Character character1 = new Character("Character1", "Yellow", id);
+        Character character1 = new Character("Character1", "Yellow");
         Player temp = new Player("Bob", character1, 0);
         ArrayList<Player> players = new ArrayList<>();
         players.add(temp);

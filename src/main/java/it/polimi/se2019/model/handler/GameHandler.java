@@ -4,11 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.map.Map;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
@@ -37,6 +39,8 @@ public class GameHandler extends Observable {
     private Modality modality;
     private int skull;
     private boolean suddenDeath;
+    private boolean firstTurn = true;
+    private List<Controller> controllers = new ArrayList<>();
     //TODO aggiungere lista di controller
 
     //Used only for testing
@@ -446,18 +450,24 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * Check if the match id of this game handler is equals to the param
-     * @param matchID id to check
-     * @return true if they are equals, false other way
+     * Return the controller of the player
+     * @param p player whose you want the controller
+     * @return controller of the player
      */
-    public boolean checkMatchID(int matchID) {
-        return matchID == this.matchID;
+    private Controller getControllerByPlayer(Player p) {
+        for(Controller controller : controllers) {
+            if(p.equals(controller.getAuthor())) return controller;
+        }
+        throw new IllegalArgumentException("There is no Controler linked to " + p.toString());
     }
 
-    public void setUp(Player p, PlayerView playerView) {
+
+
+    public void setUp(Player p, PlayerView playerView, Controller controller) {
         if(orderPlayerList.size()<=5) {
             orderPlayerList.add(p);
             playerViews.add(playerView);
+            controllers.add(controller);
         }
     }
 
@@ -579,6 +589,21 @@ public class GameHandler extends Observable {
         for(PlayerView playerView : playerViews) {
             playerView.printFromController(message);
         }
+    }
+
+    public List<Character> possibleCharacter() {
+        List<Integer> charactersTaken = new LinkedList<>();
+        for(Player player : orderPlayerList) {
+            if(player.getCharacter()!=null) charactersTaken.add(player.getCharacter().getId());
+        }
+
+        List<Character> possibleCharacter= new LinkedList<>();
+
+        for(int i=1; i<=5; i++) {
+            if(!charactersTaken.contains(i)) possibleCharacter.add(new Character(i));
+        }
+
+        return possibleCharacter;
     }
 }
 

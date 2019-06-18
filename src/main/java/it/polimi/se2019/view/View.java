@@ -1,6 +1,7 @@
 package it.polimi.se2019.view;
 
 import it.polimi.se2019.model.Observable;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public abstract class View extends Observable implements Observer {
     public abstract void handleTurnMessage(String nickname);
 
     public abstract void handleRankingMessage(List<Player> ranking);
+
+    public abstract void setPossibleCharacter(List<Character> characters);
 }

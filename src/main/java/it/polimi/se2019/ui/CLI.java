@@ -1,6 +1,7 @@
 package it.polimi.se2019.ui;
 
 import it.polimi.se2019.model.map.*;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientView;
@@ -135,6 +136,15 @@ public class CLI implements UiInterface {
         printAll();
         if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn! \t୧☉□☉୨" + ConsoleColor.RESET);
         else out.println("It's " + nickname + "'s turn \tಠᴗಠ");
+    }
+
+    @Override
+    public void chooseCharacter(List<Character> characters) {
+        out.println("Choose your character form:");
+        for(int i=1; i<characters.size(); i++) {
+            out.println("\t" + i + ". " + characters.get(i).toString());
+        }
+        out.println("[Digit 'character' follow by  the relative number]");
     }
 
     public void start() {

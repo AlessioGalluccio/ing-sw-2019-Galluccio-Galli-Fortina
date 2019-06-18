@@ -5,6 +5,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.network.messages.PossibleCharacterMessage;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
 import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
 import it.polimi.se2019.view.View;
@@ -120,6 +121,10 @@ public class PlayerView extends View /*View implement observer/observable*/{
         //Is only to forward, already done by update()
     }
 
+    @Override
+    public void setPossibleCharacter(List<Character> characters) {
+        if(networkHandler!=null) networkHandler.update(null, new PossibleCharacterMessage(characters));
+    }
 
     //To use for reconnection
     public void setNetworkHandler(Server networkHandler) {

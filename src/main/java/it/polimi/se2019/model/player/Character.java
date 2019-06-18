@@ -9,12 +9,39 @@ public class Character implements Serializable {
 
     private final String nameCharacter;
     private final String color;
-    private final int Id;
+    private final int id;
 
-    public Character(String nameCharacter, String color, int id) {
+    public Character(String nameCharacter, String color) {
         this.nameCharacter = nameCharacter;
         this.color = color;
-        Id = id;
+        this.id = 0;
+    }
+
+    public Character(int id) {
+        switch (id) {
+            case 1:
+                this.nameCharacter = "Sprog";
+                this.color = "GREEN";
+                break;
+            case 2:
+                this.nameCharacter = "Violet";
+                this.color = "VIOLET";
+                break;
+            case 3:
+                this.nameCharacter = ":D-Struct-or";
+                this.color = "YELLOW";
+                break;
+            case 4:
+                this.nameCharacter = "Dozer";
+                this.color = "GREY";
+                break;
+            case 5:
+                this.nameCharacter = "Banshee";
+                this.color = "CYAN";
+                break;
+            default: throw new IllegalArgumentException();
+        }
+        this.id = id;
     }
 
     @Override
@@ -51,6 +78,6 @@ public class Character implements Serializable {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 }

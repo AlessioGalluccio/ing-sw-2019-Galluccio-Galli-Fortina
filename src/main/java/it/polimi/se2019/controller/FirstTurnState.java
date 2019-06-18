@@ -4,6 +4,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
@@ -52,6 +53,8 @@ public class FirstTurnState extends StateController {
             errorString = null;
         }
 
+        //I send the possible targets to the client
+        controller.getPlayerView().setPossibleCharacter(gameHandler.possibleCharacter());
     }
 
     @Override
@@ -153,9 +156,9 @@ public class FirstTurnState extends StateController {
 
     @Override
     public void handleCharacter(int characterID) {
-        //TODO
-        //playerAuthor.setCharacter(new Character());
-        //controller.addReceived();
+        playerAuthor.setCharacter(new Character(characterID));
+        this.isCharacterSelected = true;
+        controller.addReceived();
     }
 
     @Override
@@ -169,9 +172,14 @@ public class FirstTurnState extends StateController {
         }
 
         if(errorString != null){
-            stringToPlayerView = errorString +
-                    controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
-            errorString = null;
+            try{
+                stringToPlayerView = errorString +
+                        controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+                errorString = null;
+            }catch (IndexOutOfBoundsException e){ //it has finished the series of commands, we don't print anything
+                stringToPlayerView = null;
+            }
+
         }
         else{
             stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();

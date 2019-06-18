@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class ClientView extends View /*View implement observer/observable*/{
 
     private Player playerCopy;
-    private ArrayList<Target> possibleTarget;
-    private ArrayList<Target> selectedTarget;
-    private ArrayList<Character> possibleCharacter;
+    private List<Target> possibleTarget;
+    private List<Target> selectedTarget;
+    private List<Character> possibleCharacter;
     private Character choosenCharacter;
     private transient UiInterface ui;
     private int lastAck;
@@ -30,14 +30,6 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     public Player getPlayerCopy() {
         return playerCopy;
-    }
-
-    public List<Target> getSelectedTarget() {
-        return selectedTarget;
-    }
-
-    public Character getChoosenCharacter() {
-        return choosenCharacter;
     }
 
     public List<Character> getPossibleCharacter() {
@@ -137,7 +129,6 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a FireMessage that the client send to the server
-
      */
     public void createFireMessage() {
         FireMessage message = new FireMessage(playerCopy.getID(), this);
@@ -161,7 +152,6 @@ public class ClientView extends View /*View implement observer/observable*/{
     /**
      * create a PassTurnMessage that the client send to the server
      */
-
     public void createPassTurnMessage (){
         PassTurnMessage message = new PassTurnMessage(playerCopy.getID(),this);
         notifyObservers(message);
@@ -191,8 +181,10 @@ public class ClientView extends View /*View implement observer/observable*/{
      * create a CharacterMessage that the client send to the server
      * @param characterID
      */
-    public void createCharacterMessage(int characterID){
-        CharacterMessage message = new CharacterMessage(characterID, playerCopy.getID(), this);
+    public void createCharacterMessage(int characterID) throws NotCharacterException {
+        if(verifyCharacter(characterID))
+            notifyObservers( new CharacterMessage(characterID, playerCopy.getID(), this));
+        else throw new NotCharacterException("This character can't be chosen.");
     }
 
     /**
@@ -222,7 +214,6 @@ public class ClientView extends View /*View implement observer/observable*/{
         notifyObservers(message);
     }
 
-
     /**
      * verify that the target choosen by the player is contained in the ArrayList of available targets
      * @return
@@ -240,8 +231,11 @@ public class ClientView extends View /*View implement observer/observable*/{
      * verify that the character choosen by the player is cotained in the ArrayList of available characters
      * @return
      */
-    private boolean verifyCharacter(){
-        return this.possibleCharacter.contains(this.choosenCharacter);
+    private boolean verifyCharacter(int characterID) {
+        for(Character character : possibleCharacter) {
+            if(character.getId()==characterID) return true;
+        }
+        return false;
     }
 
 
@@ -264,8 +258,10 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
 
-    public void setPossibleCharacter(ArrayList<Character> possibleCharacter){
+    @Override
+    public void setPossibleCharacter(List<Character> possibleCharacter){
         this.possibleCharacter = possibleCharacter;
+        ui.chooseCharacter(possibleCharacter);
     }
 
     /**

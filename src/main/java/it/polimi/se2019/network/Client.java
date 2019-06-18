@@ -1,5 +1,6 @@
 package it.polimi.se2019.network;
 
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
@@ -106,4 +107,8 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     public abstract void closeAll();
+
+    public void handleCharacterMessage(List<Character> character) {
+        clientView.setPossibleCharacter(character);
+    }
 }
