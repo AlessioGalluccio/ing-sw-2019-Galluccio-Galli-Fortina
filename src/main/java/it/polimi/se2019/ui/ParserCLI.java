@@ -412,7 +412,6 @@ class ParserCLI {
         try {
             WeaponCard weapon = findWeapon(command[0]);
             cli.println("\n");
-            cli.println(weapon.toString());
             cli.println("\n");
         }catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] + ".");
@@ -553,7 +552,7 @@ class ParserCLI {
         cli.printf("FIRE", "Use this when you have selected all your targets.");
         cli.printf("FIREMODE [BASE | ALTERNATIVE | OPTIONAL] [[Optional's number]]",
                 "Select a firemode of the weapon just selected.");
-        cli.printf("DISCARD [POWERUP | WEAPON] [Powerup's name & color | Weaspon's name]",
+        cli.printf("DISCARD [POWERUP | WEAPON] [Powerup's name & color | Weapon's name]",
                 "Discard a card from your hand.");
         cli.printf("RELOAD [Weapon's name]", "Reload the weapon specified.");
         cli.printf("SKIP", "Use this if you don't have any target to shoot.");
@@ -562,7 +561,7 @@ class ParserCLI {
                 "Show all the information about an enemy/weapon.");
         cli.printf("UPDATE [MAP | ME | ENEMY] [[Enemy's name]]", "Show all the latest changes.");
         cli.printf("CHARACTER [Relative number]", "Select a character from the list." +
-                "If you don't have the list you should'nt use this command.");
+                " If you don't have the list you should'nt use it.");
         cli.printf("EXIT", "Quit the game.");
         cli.printLine();
     }

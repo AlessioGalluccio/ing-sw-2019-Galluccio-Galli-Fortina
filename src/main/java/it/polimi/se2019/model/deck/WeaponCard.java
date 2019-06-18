@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
@@ -148,7 +149,21 @@ public abstract class WeaponCard implements Card {
     @Override
     public String toString() {
         String string = toStringShort();
-        string += "\n\tDescription: " + description;
+        string += "\n\tDescription: \n\t" + description;
+        string += toStringFireMode();
+        return string;
+    }
+
+    private String toStringFireMode() {
+        String string = "";
+        for(FireMode fireMode : getFireMode()) {
+            for(AmmoBag ammoBag : fireMode.costOfFiremodeNotReloading()) {
+                if(ammoBag.getBlueAmmo()==0 &&
+                ammoBag.getRedAmmo()==0 &&
+                ammoBag.getYellowAmmo()==0) string += "\n\tCost firemode: FREE";
+                else string += "\n\tCost firemode: " + ammoBag.toString();
+            }
+        }
         return string;
     }
 
