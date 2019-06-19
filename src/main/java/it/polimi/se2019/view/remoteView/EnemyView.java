@@ -26,6 +26,15 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     private ArrayList<Player> damage = new ArrayList<>();
     private int powerup;
     private boolean isFrenzyDeath;
+
+    /**
+     *
+     * @return boolean isFrenzyDeath
+     */
+    public boolean isFrenzyDeath() {
+        return isFrenzyDeath;
+    }
+
     private boolean first = true;
 
     public EnemyView(String nickname) {

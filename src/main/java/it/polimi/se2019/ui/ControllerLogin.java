@@ -249,8 +249,10 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
+
         controller.updateEnemyCharacter(enemyView);
-        updateEnemyWeapon();
+        controller.updateEnemyWeapon(enemyView);
+        controller.frenzyEnemy(enemyView);
 
     }
 
@@ -343,12 +345,6 @@ public class ControllerLogin implements UiInterface {
     }
 
 
-    /**
-     * update enemys' weapons
-     */
-    public void updateEnemyWeapon(){
-        controller.updateEnemyWeapon();
-    }
 
     /**
      * set image franzy when the player is in frenzy mode
@@ -359,6 +355,10 @@ public class ControllerLogin implements UiInterface {
         }
     }
 
+    public void setEnemyFrenzy(ClientEnemyView enemyView){
+        controller.frenzyEnemy(enemyView);
+
+    }
     /**
      * update game display
      */

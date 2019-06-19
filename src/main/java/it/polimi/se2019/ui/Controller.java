@@ -563,8 +563,7 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException {
-        //set enemy weapon
-        updateEnemyWeapon();
+        
 
         //set ammo card on map
         updateAmmoCardMap();
@@ -1825,25 +1824,33 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 ArrayList<Image> images = new ArrayList<>();
-                if (enemyView == ControllerLogin.enemyView1) {
-                    images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
-                    imEnemyCharacter1.setImage(images.get(0));
-                    enemy1Actions.setImage(images.get(1));
+                if(ControllerLogin.enemyView1!=null){
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
+                        imEnemyCharacter1.setImage(images.get(0));
+                        enemy1Actions.setImage(images.get(1));
+                    }
                 }
-                if (enemyView == ControllerLogin.enemyView2) {
-                    images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
-                    imEnemyCharacter2.setImage(images.get(0));
-                    enemy2Actions.setImage(images.get(1));
+                if(ControllerLogin.enemyView2!=null) {
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
+                        images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
+                        imEnemyCharacter2.setImage(images.get(0));
+                        enemy2Actions.setImage(images.get(1));
+                    }
                 }
-                if (enemyView == ControllerLogin.enemyView3) {
-                    images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
-                    imEnemyCharacter3.setImage(images.get(0));
-                    enemy3Actions.setImage(images.get(1));
+                if(ControllerLogin.enemyView3!=null) {
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
+                        images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
+                        imEnemyCharacter3.setImage(images.get(0));
+                        enemy3Actions.setImage(images.get(1));
+                    }
                 }
-                if (enemyView == ControllerLogin.enemyView4) {
-                    images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
-                    imEnemyCharacter4.setImage(images.get(0));
-                    enemy4Actions.setImage(images.get(1));
+                if(ControllerLogin.enemyView4!=null) {
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
+                        images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
+                        imEnemyCharacter4.setImage(images.get(0));
+                        enemy4Actions.setImage(images.get(1));
+                    }
                 }
 
             }
@@ -1894,21 +1901,29 @@ public class Controller implements Initializable {
     /**
      * update enemy's weapons
      */
-    public void updateEnemyWeapon() {
+    public void updateEnemyWeapon(ClientEnemyView enemyView) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 if (ControllerLogin.enemyView1 != null) {
-                    setEnemyWeapon(enemy1card1, enemy1card2, enemy1card3, ControllerLogin.enemyView1);
+                    if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        setEnemyWeapon(enemy1card1, enemy1card2, enemy1card3, ControllerLogin.enemyView1);
+                    }
                 }
                 if (ControllerLogin.enemyView2 != null) {
-                    setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
+                    if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
+                    }
                 }
                 if (ControllerLogin.enemyView3 != null) {
-                    setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
+                    if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
+                    }
                 }
                 if (ControllerLogin.enemyView4 != null) {
-                    setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
+                    if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
+                    }
                 }
             }
         });
@@ -1959,6 +1974,8 @@ public class Controller implements Initializable {
         });
 
     }
+
+
 
     /**
      * update player's powerup
@@ -2233,6 +2250,38 @@ public class Controller implements Initializable {
         return images;
 
 
+
+    }
+
+    /**
+     * update enemy if they are in frenzy mode
+     */
+    public void frenzyEnemy(ClientEnemyView enemyView){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (enemyView.isFrenzyDeath()) {
+                    ArrayList<Image> images = setFrenzyCharacter(enemyView.getCharacter().getId());
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        imEnemyCharacter1.setImage(images.get(0));
+                        enemy1Actions.setImage(images.get(1));
+                    }
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
+                        imEnemyCharacter2.setImage(images.get(0));
+                        enemy2Actions.setImage(images.get(1));
+                    }
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
+                        imEnemyCharacter3.setImage(images.get(0));
+                        enemy3Actions.setImage(images.get(1));
+                    }
+                    if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
+                        imEnemyCharacter4.setImage(images.get(0));
+                        enemy4Actions.setImage(images.get(1));
+                    }
+
+                }
+            }
+        });
 
     }
 }
