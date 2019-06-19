@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.EmptyControllerState;
+import it.polimi.se2019.controller.FirstTurnState;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
@@ -83,12 +85,16 @@ public class GameHandler extends Observable {
             do {
                 incrementTurn();  //I had to separate this method in order to improve efficiency test
             }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
+            Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
+            if(firstTurn) {
+            controller.setState(new FirstTurnState(controller, this));
+            } else controller.setState(new EmptyControllerState(controller, this));
+            setNewTurn();
         }
         else {
             //TODO chiedere di respawnare
             //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
         }
-        setNewTurn();
     }
 
     private void setNewTurn() {
@@ -110,7 +116,10 @@ public class GameHandler extends Observable {
      * Increment the turn parameter
      */
     void incrementTurn() { //I had to separate this method in order to improve efficiency test
-        turn =  (turn == orderPlayerList.size()-1) ? 0 : turn+1;
+        if(turn == orderPlayerList.size()-1) {
+            turn = 0;
+            firstTurn = false;
+        } else turn = turn+1;
     }
 
     /**
@@ -166,8 +175,10 @@ public class GameHandler extends Observable {
      * @return the Room object that has that color
      */
     public Room getRoomByID(String colorRoom) {
-
-        return null; //TODO implementare
+        for(Room room : map.getRooms()) {
+            if(room.getColor().equalsIgnoreCase(colorRoom)) return room;
+        }
+        return null;
     }
 
     /**
@@ -557,7 +568,14 @@ public class GameHandler extends Observable {
         }
         forwardAllViews(new StartGameMessage(matchID));
 
-        //TODO set state controller for first player
+        try {
+            Thread.sleep(750); //Wait all message arrive at the user
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
+        controller.setState(new FirstTurnState(controller, this));
     }
 
     /**
