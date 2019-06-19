@@ -45,6 +45,7 @@ public class Player extends Observable implements Target, Serializable {
     private List<WeaponCard> weaponCardList = new ArrayList<>();
     private transient Cell cellPosition;
     private boolean isFrenzyDeath = false;
+    private boolean isFirstGroupFrenzy = false;
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
     private boolean isConnected = true;
@@ -98,6 +99,21 @@ public class Player extends Observable implements Target, Serializable {
         return isFrenzyDeath;
     }
 
+    /**
+     *
+     * @return if the player in frenzy mode has first gruop action or second
+     */
+    public boolean isFirstGroupFrenzy() {
+        return isFirstGroupFrenzy;
+    }
+
+    /**
+     * set isFirstGroup boolean variable
+     * @param isFirstGroup
+     */
+    public void setFirstGroupFrenzy(Boolean isFirstGroup){
+        this.isFirstGroupFrenzy= isFirstGroup;
+    }
     /**
      *
      * @return nickname of user

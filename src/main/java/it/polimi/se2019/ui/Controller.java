@@ -2169,6 +2169,26 @@ public class Controller implements Initializable {
                     grabButton.setVisible(false);
                     shootButton.setDisable(true);
                     shootButton.setVisible(false);
+
+                    if(ControllerLogin.clientView.getPlayerCopy().isFirstGroupFrenzy()){
+                        bFrenzyGrab1.setVisible(true);
+                        bFrenzyGrab1.setDisable(false);
+                        bFrenzyGrab1.setStyle(transparent);
+                        bFrenzyMove1.setVisible(true);
+                        bFrenzyMove1.setDisable(false);
+                        bFrenzyMove1.setStyle(transparent);
+                        bFrenzyShoot1.setVisible(true);
+                        bFrenzyShoot1.setStyle(transparent);
+                        bFrenzyShoot1.setDisable(false);
+                    }
+                    else{
+                        bFrenzyGrab2.setVisible(true);
+                        bFrenzyGrab2.setDisable(false);
+                        bFrenzyGrab2.setStyle(transparent);
+                        bFrenzyShoot2.setVisible(true);
+                        bFrenzyShoot2.setStyle(transparent);
+                        bFrenzyShoot2.setDisable(false);
+                    }
                 }
                 catch (Exception e){
 
