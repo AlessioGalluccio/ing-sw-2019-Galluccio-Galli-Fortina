@@ -2792,6 +2792,10 @@ public class Controller implements Initializable {
         });
     }
 
+    /**
+     * update enemy marks on gui
+     * @param enemyView
+     */
     public void updateEnemyMarks(ClientEnemyView enemyView){
 
         Platform.runLater(new Runnable() {
@@ -2853,15 +2857,22 @@ public class Controller implements Initializable {
      * update player's skull on gui map window
      */
     public void updatePlayerSkull(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
             int skullNumber = ControllerLogin.clientView.getPlayerCopy().getSkull();
             ArrayList<ImageView> imSkulls = new ArrayList<>();
+            imSkulls.add(playerSkull1);
+            imSkulls.add(playerSkull2);
+            imSkulls.add(playerSkull3);
+            imSkulls.add(playerSkull4);
+            imSkulls.add(playerSkull5);
+            imSkulls.add(playerSkull6);
              if(!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()){
-                 imSkulls.add(playerSkull1);
-                 imSkulls.add(playerSkull2);
-                 imSkulls.add(playerSkull3);
-                 imSkulls.add(playerSkull4);
-                 imSkulls.add(playerSkull5);
-                 imSkulls.add(playerSkull6);
+                 for(int i=0; i<skullNumber ; i++){
+                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                 }
              }
              else{
                  for(int i=0; i<skullNumber ; i++){
@@ -2870,13 +2881,119 @@ public class Controller implements Initializable {
 
              }
 
-            for(int i=0; i<skullNumber ; i++){
-                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                }
+                catch (Exception e){
+
+                }
             }
+        });
+
     }
 
 
+    /**
+     * update enemy skulls
+     * @param enemyView
+     */
+    public void updateEnemySkull(ClientEnemyView enemyView){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int skull= enemyView.getSkull();
+                    ArrayList <ImageView> imSkulls = new ArrayList<>();
+                    if(ControllerLogin.enemyView1!=null) {
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                            setSkull(imSkulls, enemy1Skull1, enemy1Skull2, enemy1Skull3, enemy1Skull4, enemy1Skull5, enemy1Skull6);
+                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                                }
+                            } else {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setVisible(false);
+                                }
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView2!=null){
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
+                            setSkull(imSkulls, enemy2Skull1, enemy2Skull2, enemy2Skull3, enemy2Skull4, enemy2Skull5, enemy2Skull6);
+                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                                }
+                            } else {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setVisible(false);
+                                }
+                            }
+                        }
 
+                    }
+                    if(ControllerLogin.enemyView3!=null){
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
+                            setSkull(imSkulls, enemy3Skull1, enemy3Skull2, enemy3Skull3, enemy3Skull4, enemy3Skull5, enemy3Skull6);
+                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                                }
+                            } else {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setVisible(false);
+                                }
+                            }
+                        }
+
+                    }
+                    if(ControllerLogin.enemyView4!=null){
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
+                            setSkull(imSkulls, enemy4Skull1, enemy4Skull2, enemy4Skull3, enemy4Skull4, enemy4Skull5, enemy4Skull6);
+                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                                }
+                            } else {
+                                for (int i = 0; i < skull; i++) {
+                                    imSkulls.get(i).setVisible(false);
+                                }
+                            }
+                        }
+
+                    }
+
+
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
+
+
+    }
+
+    /**
+     * set skull images in an arraylist
+     * @param imSkulls
+     * @param im1
+     * @param im2
+     * @param im3
+     * @param im4
+     * @param im5
+     * @param im6
+     * @return
+     */
+    public ArrayList<ImageView> setSkull(ArrayList <ImageView> imSkulls, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
+                                         ImageView im5,ImageView im6){
+        imSkulls.add(im1);
+        imSkulls.add(im2);
+        imSkulls.add(im3);
+        imSkulls.add(im4);
+        imSkulls.add(im5);
+        imSkulls.add(im6);
+        return imSkulls;
+    }
 
 
 }

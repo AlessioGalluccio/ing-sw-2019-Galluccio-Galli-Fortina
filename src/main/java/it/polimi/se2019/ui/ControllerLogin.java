@@ -259,6 +259,7 @@ public class ControllerLogin implements UiInterface {
         controller.frenzyEnemy(enemyView);
         controller.updateEnemyDamage(enemyView);
         controller.updateEnemyMarks(enemyView);
+        controller.updateEnemySkull(enemyView);
 
     }
 
@@ -374,7 +375,9 @@ public class ControllerLogin implements UiInterface {
         controller.updatePlayerMarks();
     }
 
-
+    /**
+     * update player skull on map
+     */
     public void updatePlayerSkull(){
         controller.updatePlayerSkull();
     }
