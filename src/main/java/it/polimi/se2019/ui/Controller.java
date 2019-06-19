@@ -2112,6 +2112,12 @@ public class Controller implements Initializable {
         ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
         yourCharacter.setImage(images.get(0));
         possibleActions.setImage(images.get(1));
+        moveButton.setDisable(true);
+        moveButton.setVisible(false);
+        grabButton.setDisable(true);
+        grabButton.setVisible(false);
+        shootButton.setDisable(true);
+        shootButton.setVisible(false);
     }
 
     /**

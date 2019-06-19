@@ -162,11 +162,11 @@
       </TabPane>
       <ImageView fx:id="yourCharacter" fitHeight="177.0" fitWidth="504.0" layoutX="145.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@characters/characterBlue.jpg" />
+            <Image url="@frenzyCharacters/frenzyCharacterViolet.png" />
          </image></ImageView>
       <ImageView fx:id="possibleActions" fitHeight="159.0" fitWidth="66.0" layoutX="95.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@characters/actionsBlue.jpg" />
+            <Image url="@frenzyCharacters/frenzyActionsBlue.png" />
          </image></ImageView>
       <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="86.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
       <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
@@ -406,8 +406,8 @@
       <ImageView fx:id="imYellowWeapon1" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imYellowWeapon2" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imYellowWeapon3" fitHeight="72.0" fitWidth="106.0" layoutX="693.0" layoutY="516.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="playerDamage0" fitHeight="29.0" fitWidth="22.0" layoutX="151.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="playerDamage1" fitHeight="29.0" fitWidth="22.0" layoutX="180.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage0" fitHeight="29.0" fitWidth="22.0" layoutX="154.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerDamage1" fitHeight="29.0" fitWidth="22.0" layoutX="182.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage2" fitHeight="29.0" fitWidth="22.0" layoutX="214.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage3" fitHeight="29.0" fitWidth="22.0" layoutX="245.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage4" fitHeight="29.0" fitWidth="22.0" layoutX="275.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
