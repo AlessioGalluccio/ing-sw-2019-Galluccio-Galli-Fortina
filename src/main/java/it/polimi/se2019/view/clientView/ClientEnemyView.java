@@ -8,8 +8,10 @@ public class ClientEnemyView extends EnemyView {
     private UiInterface ui;
     private int lastAck;
 
-    public ClientEnemyView(String nickname) {
+    public ClientEnemyView(String nickname, UiInterface ui) {
         super(nickname);
+        this.ui = ui;
+        ui.setEnemyView(this);
     }
 
     /**
@@ -27,7 +29,9 @@ public class ClientEnemyView extends EnemyView {
         if(message.getAck()>lastAck) {
             lastAck = message.getAck();
             message.handleMessage(this);
-            //synchronized(ui) ui.printEnemyView()
+            synchronized(ui) {
+                ui.updateEnemy(this);
+            }
         }
     }
 

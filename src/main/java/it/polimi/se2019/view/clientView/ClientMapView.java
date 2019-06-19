@@ -35,6 +35,8 @@ public class ClientMapView extends MapView {
             lastAck[message.getX()][message.getY()] = message.getAck();
             message.handleMessage(this);
         }
-        // synchronized(ui) ui.printMap();
+        synchronized(ui) {
+            ui.updateCell(getCell(message.getX(),message.getY()));
+        }
     }
 }

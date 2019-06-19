@@ -317,7 +317,9 @@ public class ClientView extends View /*View implement observer/observable*/{
     @Override
     public void handlePlayerMessage(Player p) {
         playerCopy = p;
-        //synchronized(ui) ui.printPlayer()
+        synchronized(ui) {
+            ui.updatePlayer();
+        }
     }
 
 

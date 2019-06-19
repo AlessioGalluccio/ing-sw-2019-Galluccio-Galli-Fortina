@@ -68,19 +68,24 @@ public class ControllerLogin implements UiInterface {
     public Button login;
 
 
-
-
+    /**
+     * send setting when login button is clicked
+     * @param event
+     * @throws Exception
+     * @throws InterruptedException
+     */
     public void loginButton(ActionEvent event) throws Exception, InterruptedException {
-        if(clientView==null) {
-            clientView = new ClientView();
-        }
+        //if(!ipAddress.getText().equals("")) {
+            if (clientView == null) {
+                clientView = new ClientView();
+            }
             clientView.setUi(this);
             if (rbRmi.isSelected()) {
-                RMIClient rmi = new RMIClient(clientView, "localhost");
+                RMIClient rmi = new RMIClient(clientView, ipAddress.getText());
                 rmi.connect();
                 clientView.setUp(rmi);
             } else {
-                SocketClient socket = new SocketClient(9001, "localhost", clientView);
+                SocketClient socket = new SocketClient(9001, ipAddress.getText(), clientView);
                 socket.connect();
                 clientView.setUp(socket);
             }
@@ -93,14 +98,16 @@ public class ControllerLogin implements UiInterface {
                 clientView.createLoginMessage(username.getText(), matchId);
             }
 
-
+       // }
 
     }
 
 
-
-
-
+    /**
+     * close login window and one choosemap window if the player is the first, else open waiting room
+     * @param success
+     * @param isFirst
+     */
     @Override
     public void login(boolean success, boolean isFirst) {
 
@@ -160,8 +167,10 @@ public class ControllerLogin implements UiInterface {
     }
 
 
-
-
+    /**
+     * pass to the controller map which map is choosen
+     * @param choosMap
+     */
     public void selectedMap(int choosMap){
         Controller.updateMap(choosMap);
     }
@@ -230,6 +239,8 @@ public class ControllerLogin implements UiInterface {
         updatePlayerPowerup();
         updatePlayerPoints();
         updatePlayerAmmo();
+        setPlayerFrenzy();
+        updatePlayerDamage();
 
     }
 
@@ -239,9 +250,11 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
-        controller.updateEnemyCharacter(enemyView);
-        updateEnemyWeapon();
 
+        controller.updateEnemyCharacter(enemyView);
+        controller.updateEnemyWeapon(enemyView);
+        controller.frenzyEnemy(enemyView);
+        controller.updateEnemyDamage(enemyView);
     }
 
     @Override
@@ -333,8 +346,20 @@ public class ControllerLogin implements UiInterface {
     }
 
 
-    public void updateEnemyWeapon(){
-        controller.updateEnemyWeapon();
+    /**
+     * update player damage on gui
+     */
+    public void updatePlayerDamage(){
+        controller.updatePlayerDamage();
+    }
+
+    /**
+     * set image franzy when the player is in frenzy mode
+     */
+    public void setPlayerFrenzy(){
+        if(clientView.getPlayerCopy().isFrenzyDeath()){
+            controller.frenzyPlayer();
+        }
     }
 
     /**
