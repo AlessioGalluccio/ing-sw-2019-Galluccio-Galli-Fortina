@@ -1883,6 +1883,13 @@ public class Controller implements Initializable {
                     discardWeapon.add(bDiscardWeapon2);
                     discardWeapon.add(bDiscardWeapon3);
 
+                    ArrayList<Button> firemode = new ArrayList<>();
+                    firemode.add(addFire1);
+                    firemode.add(addFire2);
+                    firemode.add(addFire3);
+
+
+
 
                     List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
                     ArrayList<ImageView> imWeapon = new ArrayList<>();
@@ -1891,10 +1898,12 @@ public class Controller implements Initializable {
                     imWeapon.add(imWeaponCard3);
                     for (int i = 0; i < weaponCards.size(); i++) {
                         imWeapon.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
-                        if (weaponCards.get(i).isReloaded() == false) {
+                        if (!weaponCards.get(i).isReloaded()) {
                             selectWeapon.get(i).setDisable(true);
+                            firemode.get(i).setDisable(true);
                         } else {
                             selectWeapon.get(i).setDisable(false);
+                            firemode.get(i).setDisable(false);
                         }
                         reloadWeapon.get(i).setDisable(false);
                         discardWeapon.get(i).setDisable(false);
@@ -1905,6 +1914,7 @@ public class Controller implements Initializable {
                         selectWeapon.get(i).setDisable(true);
                         reloadWeapon.get(i).setDisable(true);
                         discardWeapon.get(i).setDisable(true);
+                        firemode.get(i).setDisable(true);
                     }
                 } catch (Exception e) {
 
