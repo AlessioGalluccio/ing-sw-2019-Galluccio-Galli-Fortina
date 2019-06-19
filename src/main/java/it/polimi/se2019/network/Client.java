@@ -45,7 +45,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     public void handleEnemyMessage(String nickname) {
-        enemyViews.add(new ClientEnemyView(nickname));
+        enemyViews.add(new ClientEnemyView(nickname, ui));
     }
 
     public void handleDisconnection() {
@@ -64,9 +64,6 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
             } catch (InterruptedException e) {
                Thread.currentThread().interrupt();
             }
-        }
-        for(ClientEnemyView ew : enemyViews) {
-            ew.setUi(ui);
         }
         clientView.handleStartGameMessage(matchID);
     }

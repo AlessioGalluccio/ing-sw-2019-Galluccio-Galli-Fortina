@@ -117,13 +117,18 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         view.notifyObservers(message);
     }
 
-    private void disconnect() {
+    @Override
+    public void closeAll() {
         pingTimer.cancel();
+        executor.shutdown();
+        server.disconnect(this);
+    }
+
+    private void disconnect() {
+        closeAll();
         server.getWaitingRoom().disconnect(this, view, matchID);
         //If match is started disconnect form controller
         if(matchID!=0) view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
-        executor.shutdown();
-        server.disconnect(this);
     }
 
     private class Sender implements Runnable {

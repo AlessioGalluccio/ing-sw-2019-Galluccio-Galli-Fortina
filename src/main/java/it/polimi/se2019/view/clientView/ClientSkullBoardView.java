@@ -29,7 +29,9 @@ public class ClientSkullBoardView extends SkullBoardView {
         if(message.getAck()>lastAck) {
             lastAck = message.getAck();
             message.handleMessage(this);
-            // synchronized(ui) ui.printSkullBoard()
+            synchronized(ui) {
+                ui.updateSkullBoard();
+            }
         }
     }
 

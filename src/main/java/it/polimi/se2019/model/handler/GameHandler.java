@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.EmptyControllerState;
+import it.polimi.se2019.controller.FirstTurnState;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
@@ -14,6 +16,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
+import it.polimi.se2019.network.WaitingRoom;
 import it.polimi.se2019.view.ModelViewMess.*;
 import it.polimi.se2019.view.configureMessage.StartGameMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
@@ -31,21 +34,21 @@ public class GameHandler extends Observable {
     private PowerupDeck powerupDeck;
     private WeaponDeck weaponDeck;
     private Map map;
-    private ArrayList<Player> orderPlayerList = new ArrayList<>();
-    private ArrayList<PlayerView> playerViews = new ArrayList<>();
+    private List<Player> orderPlayerList = new ArrayList<>();
+    private List<PlayerView> playerViews = new ArrayList<>();
     private int turn;
-    private ArrayList<Death> arrayDeath = new ArrayList<>();
+    private List<Death> arrayDeath = new ArrayList<>();
     private Stack<Player> justDied = new Stack<>();
     private Modality modality;
     private int skull;
+    private int lastLap;
     private boolean suddenDeath;
     private boolean firstTurn = true;
-    private List<Controller> controllers = new ArrayList<>();
-    //TODO aggiungere lista di controller
+    private transient List<Controller> controllers = new ArrayList<>();
 
     //Used only for testing
     public GameHandler(List<Player> list, int skull) {
-        this.orderPlayerList = (ArrayList) list;
+        this.orderPlayerList = list;
         this.turn = 0;
         this.skull = skull;
         this.weaponDeck = new WeaponDeck();
@@ -82,20 +85,41 @@ public class GameHandler extends Observable {
             do {
                 incrementTurn();  //I had to separate this method in order to improve efficiency test
             }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
+            Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
+            if(firstTurn) {
+            controller.setState(new FirstTurnState(controller, this));
+            } else controller.setState(new EmptyControllerState(controller, this));
+            setNewTurn();
         }
         else {
             //TODO chiedere di respawnare
             //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
         }
-        if(skull==0) modality = new Frenzy();
-        forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
+    }
+
+    private void setNewTurn() {
+        lastLap--;
+        if(skull==0) setFrenzy();
+        if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode
+        else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
+    }
+
+    private void setFrenzy() {
+        if(suddenDeath && lastLap<0) {
+            modality = new Frenzy();
+            lastLap = playerConnected();
+        }
+        else endGame();
     }
 
     /**
      * Increment the turn parameter
      */
     void incrementTurn() { //I had to separate this method in order to improve efficiency test
-        turn =  (turn == orderPlayerList.size()-1) ? 0 : turn+1;
+        if(turn == orderPlayerList.size()-1) {
+            turn = 0;
+            firstTurn = false;
+        } else turn = turn+1;
     }
 
     /**
@@ -103,6 +127,11 @@ public class GameHandler extends Observable {
      */
     public void endGame() {
         forwardAllViews(new RankingMessage(getRanking()));
+        WaitingRoom.deleteMatch(this);
+    }
+
+    public int getMatchID() {
+        return matchID;
     }
 
     /**
@@ -146,8 +175,10 @@ public class GameHandler extends Observable {
      * @return the Room object that has that color
      */
     public Room getRoomByID(String colorRoom) {
-
-        return null; //TODO implementare
+        for(Room room : map.getRooms()) {
+            if(room.getColor().equalsIgnoreCase(colorRoom)) return room;
+        }
+        return null;
     }
 
     /**
@@ -537,7 +568,14 @@ public class GameHandler extends Observable {
         }
         forwardAllViews(new StartGameMessage(matchID));
 
-        //TODO set state controller for first player
+        try {
+            Thread.sleep(750); //Wait all message arrive at the user
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
+        controller.setState(new FirstTurnState(controller, this));
     }
 
     /**
@@ -552,8 +590,16 @@ public class GameHandler extends Observable {
            forwardAllViews(player.getNickname() + " is back!\n");
         } else {
             forwardAllViews(player.getNickname() + " has been disconnected! \n");
-            //TODO Se il numero di giocatori ancora connessi < 3, terminare la partita
+             if(playerConnected() < 3) endGame();
         }
+    }
+
+    private int playerConnected() {
+        int playerConnected = 0;
+        for(Player player : orderPlayerList) {
+            if(player.isConnected()) playerConnected++;
+        }
+        return playerConnected;
     }
 
     /**

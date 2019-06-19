@@ -1,5 +1,7 @@
 package it.polimi.se2019.model.player;
 
+import it.polimi.se2019.ui.ConsoleColor;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -66,6 +68,17 @@ public class AmmoBag implements Serializable {
 
     @Override
     public String toString() {
-        return "red: "+ this.redAmmo +" yellow: "+ this.yellowAmmo + " blue: " + this.blueAmmo;
+        String s = "";
+        for(int i=0; i<redAmmo; i++) {
+            s += ConsoleColor.RED + "✚";
+        }
+        for(int i=0; i<blueAmmo; i++) {
+            s += ConsoleColor.BLUE + "✚";
+        }
+        for(int i=0; i<yellowAmmo; i++) {
+            s += ConsoleColor.YELLOW + "✚";
+        }
+        s+=ConsoleColor.RESET;
+        return  s;
     }
 }

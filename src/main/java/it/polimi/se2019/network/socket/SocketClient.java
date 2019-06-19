@@ -38,20 +38,20 @@ public class SocketClient extends Client {
             scannerSocket =  new ObjectInputStream(socket.getInputStream());
 
             new Thread(() -> {
-                try {
-                    while (open) {
+                while (open) {
+                    try {
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
                         messageSocket.handleMessage(this);
+
+                    } catch (java.net.SocketException e) {
+                        closeAll();
+                        if(open) new DisconnectMessage().handleMessage(this);
+                        open=false;
+                    } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
+                        Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
+                    }  catch (IOException e) {
+                        Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem reading obj through socket", e);
                     }
-                } catch (java.net.SocketException e) {
-                    //Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Connection closed", e);
-                    closeAll();
-                    if(open) new DisconnectMessage().handleMessage(this);
-                    open=false;
-                } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
-                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-                }  catch (IOException e) {
-                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem reading obj through socket", e);
                 }
             }).start();
 
@@ -71,7 +71,6 @@ public class SocketClient extends Client {
                 printSocket.flush();
             }
         } catch (IOException e) {
-           // Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Problem writing on socket", e);
             open=false;
             closeAll();
             new DisconnectMessage().handleMessage(this);

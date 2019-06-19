@@ -41,61 +41,74 @@ class ParserCLI {
 
     private void mainParse(String[] command) {
         player = view.getPlayerCopy();
-        try {
-            String[] command2 = Arrays.copyOfRange(command, 1, command.length);
-            switch (command[0]) {
-                case "ACTION":
-                    parseAction(command2);
-                    break;
-                case "POWERUP":
-                    parsePowerup(command2, true);
-                    break;
-                case "ENEMY":
-                case "PLAYER":
-                    parsePlayer(command2);
-                    break;
-                case "CELL":
-                    parseCell(command2);
-                    break;
-                case "DISCARD":
-                    parseDiscard(command2);
-                    break;
-                case "WEAPON":
-                    parseWeapon(command2, true);
-                    break;
-                case "FIRE!":
-                case "FIRE":
-                    parseFire(command2);
-                    break;
-                case "INFO":
-                    parseInfo(command2);
-                    break;
-                case "UPDATE":
-                    parseUpdate(command2);
-                    break;
-                case "END":
-                case "PASS":
-                    parsePass(command2);
-                    break;
-                case "RELOAD":
-                    parseReload(command2);
-                    break;
-                case "SKIP":
-                    parseSkip(command2);
-                    break;
-                case "FIREMODE":
-                    parseFiremode(command2);
-                    break;
-                case "EXIT":
-                    parseExit();
-                    break;
-                case "CHARACTER":
-                    parseCharacter(command2);
-                default:
-                    cli.println("Command '"+command[0]+"' dose not exist.");
+        if(cli.endGame) {
+            if(command[0].equalsIgnoreCase("EXIT")) parseExit();
+            else cli.println("The game is ended, you can't do that.\n" +
+                    "For exit digit 'EXIT'");
+        } else {
+            try {
+                String[] command2 = Arrays.copyOfRange(command, 1, command.length);
+                switch (command[0]) {
+                    case "ACTION":
+                        parseAction(command2);
+                        break;
+                    case "POWERUP":
+                        parsePowerup(command2, true);
+                        break;
+                    case "ENEMY":
+                    case "PLAYER":
+                        parsePlayer(command2);
+                        break;
+                    case "CELL":
+                        parseCell(command2);
+                        break;
+                    case "DISCARD":
+                        parseDiscard(command2);
+                        break;
+                    case "WEAPON":
+                        parseWeapon(command2, true);
+                        break;
+                    case "FIRE!":
+                    case "FIRE":
+                        parseFire(command2);
+                        break;
+                    case "INFO":
+                        parseInfo(command2);
+                        break;
+                    case "UPDATE":
+                        parseUpdate(command2);
+                        break;
+                    case "END":
+                    case "PASS":
+                        parsePass(command2);
+                        break;
+                    case "RELOAD":
+                        parseReload(command2);
+                        break;
+                    case "SKIP":
+                        parseSkip(command2);
+                        break;
+                    case "FIREMODE":
+                        parseFiremode(command2);
+                        break;
+                    case "QUIT":
+                    case "EXIT":
+                        parseExit();
+                        break;
+                    case "CHARACTER":
+                        parseCharacter(command2);
+                        break;
+                    case "-H":
+                    case "-HELP":
+                        printGuide();
+                        break;
+                    default:
+                        cli.println("Command '" + command[0] + "' dose not exist.\n" +
+                                "Try whit -Help");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                cli.println("Command '" + Arrays.toString(command) + "' dose not exist.");
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            cli.println("Command '" + Arrays.toString(command) + "' dose not exist.");
         }
     }
 
@@ -399,7 +412,6 @@ class ParserCLI {
         try {
             WeaponCard weapon = findWeapon(command[0]);
             cli.println("\n");
-            cli.println(weapon.toString());
             cli.println("\n");
         }catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] + ".");
@@ -525,6 +537,34 @@ class ParserCLI {
         }
     }
 
+
+    private void printGuide() {
+        cli.clearScreen();
+        cli.printLine();
+        cli.println("Adrenaline by Cranio Creations\n");
+        cli.printf("ACTION [MOVE | GRAB | SHOOT]", "Create the action specified.");
+        cli.printf("POWERUP [NEWTON | TARGETING SCOPE | TELEPORTER | TAGBACK GRENADE] [RED | BLUE | YELLOW]",
+                "Use one of yours powerups of the type and color specified.");
+        cli.printf("PLAYER [Enemy's name]", "Select a player, use this command for shooting or moving someone.");
+        cli.printf("CELL [X],[Y]", "Select the cell with X,Y as coordinate." +
+                "Use this for moving or grabbing somewhere.");
+        cli.printf("WEAPON [Weapon's name]", "Select a weapon, use this for shooting with that weapon.");
+        cli.printf("FIRE", "Use this when you have selected all your targets.");
+        cli.printf("FIREMODE [BASE | ALTERNATIVE | OPTIONAL] [[Optional's number]]",
+                "Select a firemode of the weapon just selected.");
+        cli.printf("DISCARD [POWERUP | WEAPON] [Powerup's name & color | Weapon's name]",
+                "Discard a card from your hand.");
+        cli.printf("RELOAD [Weapon's name]", "Reload the weapon specified.");
+        cli.printf("SKIP", "Use this if you don't have any target to shoot.");
+        cli.printf("PASS TURN", "End your turn.");
+        cli.printf("INFO [ENEMY | WEAPON] [Enemy's name | Weapon's name]",
+                "Show all the information about an enemy/weapon.");
+        cli.printf("UPDATE [MAP | ME | ENEMY] [[Enemy's name]]", "Show all the latest changes.");
+        cli.printf("CHARACTER [Relative number]", "Select a character from the list." +
+                " If you don't have the list you should'nt use it.");
+        cli.printf("EXIT", "Quit the game.");
+        cli.printLine();
+    }
 
     private WeaponCard findWeapon(String name) {
         for(WeaponCard weaponCard : weaponDeck) {

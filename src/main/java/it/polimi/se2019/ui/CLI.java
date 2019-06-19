@@ -3,18 +3,22 @@ package it.polimi.se2019.ui;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.rmi.RMIClient;
+import it.polimi.se2019.network.socket.SocketClient;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 
+import java.rmi.RemoteException;
 import java.util.InputMismatchException;
 import java.util.*;
 import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
     private final int MIN_SKULL = 5;
+    public boolean endGame;
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
@@ -127,7 +131,7 @@ public class CLI implements UiInterface {
             out.printf("%-25.25s %d %n", "  "+i+". " + players.get(i).getNickname(), players.get(i).getNumPoints());
         }
         printLine();
-        //TODO close all and kill execution
+        endGame = true;
     }
 
     @Override
@@ -163,7 +167,42 @@ public class CLI implements UiInterface {
         }
         out.println("\n");
         printLine();
+        setConnection();
         login();
+    }
+
+    private void setConnection() {
+        out.println("HI!  ｡◕‿◕｡ ");
+        out.println("Please, insert the server's IP: ");
+        String IP = in.nextLine();
+        out.println("Which type of connection do you preferred?\n" +
+                "\t1. Socket" +
+                "\n\t2. RMI" +
+                "\n\t3. What are socket and RMI?");
+
+        int decision=0;
+        do{
+            try {
+                decision = in.nextInt();
+                in.skip("\n");
+                if (decision == 1||decision==3) {
+                    SocketClient socket = new SocketClient(9001, IP, view);
+                    socket.connect();
+                    view.setUp(socket);
+                } else if(decision==2) {
+                    RMIClient rmi = new RMIClient(view, IP);
+                    rmi.connect();
+                    view.setUp(rmi);
+                }
+            }catch (InputMismatchException e) {
+                out.println("You can't insert only 1 or 2");
+                in.nextLine();
+            } catch (RemoteException e) {
+                out.println("Sorry, we have problem connecting you to the server.\n" +
+                        "Retry later.");
+                in.close();
+            }
+        }while(decision<1||decision>3);
     }
 
     private void printLogo() {
@@ -178,7 +217,7 @@ public class CLI implements UiInterface {
     }
 
     private void login() {
-        out.println("Please, enter your name:");
+        out.println("\nPlease, enter your name:");
         String username = in.nextLine();
 
         int decision=0;
@@ -283,6 +322,10 @@ public class CLI implements UiInterface {
 
     void println(String string) {
         out.println(string);
+    }
+
+    void printf(String left, String right) {
+        out.printf("%-90.90s %-115.115s%n", left, right);
     }
 
     public void printMap() {

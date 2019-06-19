@@ -48,7 +48,7 @@ public abstract class Map extends Observable implements Serializable {
      * @return copy of the rooms
      */
     public List<Room> getRooms() {
-        return new ArrayList<Room>(room);
+        return new ArrayList<>(room);
     }
 
     public int getID() {

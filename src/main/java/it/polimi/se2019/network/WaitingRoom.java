@@ -77,7 +77,7 @@ public class WaitingRoom {
             else networkHandler.update(null, new StatusLoginMessage(false, false, nickname));
         } catch (DisconnectedException e) {
             networkHandler.update(null, new StatusLoginMessage(true, false, nickname));
-            reconnectPlayer(e.gameHandler, e.nickname, matchID, networkHandler);
+            reconnectPlayer(e.nickname, matchID, networkHandler);
         }
     }
 
@@ -143,44 +143,46 @@ public class WaitingRoom {
 
     /**
      * Reconnect a player to his match
-     * @param gameHandler Match where to be reconnected
      * @param nickname Nickname of the player
      * @param matchID The match where to be reconnected
      */
-    private void reconnectPlayer(GameHandler gameHandler, String nickname, int matchID, Server networkHandler) {
+    private void reconnectPlayer(String nickname, int matchID, Server networkHandler) {
+        Match m;
+        try {
+            m = getMatchById(matchID);
+            m.networkHandlers.add(networkHandler);
+            networkHandler.setMatchID(m.matchID);
+            m.skullBoardView.attach(networkHandler);
+            m.mapView.attach(networkHandler);
 
-        for(Match m : matches) {
-            if(m.matchID==matchID) {
-                networkHandler.setMatchID(m.matchID);
-                m.skullBoardView.attach(networkHandler);
-                m.mapView.attach(networkHandler);
-
-                for(EnemyView ew : m.enemyViews) {
-                    if (!ew.getNickname().equals(nickname)) {
-                        networkHandler.update(null, new EnemyMessage(ew.getNickname()));
-                        ew.attach(networkHandler);
-                    }
+            for(EnemyView ew : m.enemyViews) {
+                if (!ew.getNickname().equals(nickname)) {
+                    networkHandler.update(null, new EnemyMessage(ew.getNickname()));
+                    ew.attach(networkHandler);
                 }
-
-                networkHandler.update(null, new MapMessage(m.gameHandler.getMap().clone()));
-                networkHandler.update(null, new SkullBoardMessage(m.gameHandler.getSkull(), m.gameHandler.cloneDeath()));
-                for(Player p : m.gameHandler.getOrderPlayerList()) {
-                    networkHandler.update(null, new PlayerModelMessage(p.clone()));
-                }
-                for(PlayerView pw : m.playerViews) {
-                    if(pw.getPlayerCopy().getNickname().equals(nickname)) {
-                        networkHandler.setPlayerView(pw);
-                        pw.setNetworkHandler(networkHandler);
-                        pw.notifyObservers(new ReconnectionMessage(true,pw.getPlayerCopy().getID(),pw));
-                    }
-                }
-                try {
-                    Thread.sleep(750);  //Wait all message arrive at the user
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                networkHandler.update(null, new StartGameMessage(m.matchID));
             }
+
+            networkHandler.update(null, new MapMessage(m.gameHandler.getMap().clone()));
+            networkHandler.update(null, new SkullBoardMessage(m.gameHandler.getSkull(), m.gameHandler.cloneDeath()));
+            for(Player p : m.gameHandler.getOrderPlayerList()) {
+                networkHandler.update(null, new PlayerModelMessage(p.clone()));
+            }
+            for(PlayerView pw : m.playerViews) {
+                if(pw.getPlayerCopy().getNickname().equals(nickname)) {
+                    networkHandler.setPlayerView(pw);
+                    pw.setNetworkHandler(networkHandler);
+                    pw.notifyObservers(new ReconnectionMessage(true,pw.getPlayerCopy().getID(),pw));
+                }
+            }
+            try {
+                Thread.sleep(750);  //Wait all message arrive at the user
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            networkHandler.update(null, new StartGameMessage(m.matchID));
+        } catch (NotMatchException e) {
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
+                    "Impossible reconnect" + nickname + "to match #" + matchID ,e);
         }
     }
 
@@ -211,13 +213,17 @@ public class WaitingRoom {
         currentMatch.mapView = mapView;
         SkullBoardView skullBoardView = new SkullBoardView();
         currentMatch.skullBoardView = skullBoardView;
+
         List<EnemyView> enemyViews = new LinkedList<>();
         List<PlayerView> playerViews = new LinkedList<>();
+        List<Server> networkHandlers = new LinkedList<>();
 
         for (WaitingPlayer wp : playerWaiting) {
             mapView.attach(wp.networkHandler);
             skullBoardView.attach(wp.networkHandler);
             enemyViews.add(wp.enemyView);
+            networkHandlers.add(wp.networkHandler);
+            playerViews.add(wp.playerView);
             wp.networkHandler.setMatchID(currentMatch.matchID);
 
             for(WaitingPlayer enemy : playerWaiting) {
@@ -226,25 +232,30 @@ public class WaitingRoom {
                     enemy.enemyView.attach(wp.networkHandler);
                 }
             }
-            playerViews.add(wp.playerView);
             gameHandler.setUp(wp.player, wp.playerView, wp.controller);
             gameHandler.attachAll(mapView, skullBoardView, enemyViews);
         }
 
         currentMatch.playerViews = playerViews;
         currentMatch.enemyViews = enemyViews;
-
+        currentMatch.networkHandlers = networkHandlers;
 
         gameHandler.start();
-        playerWaiting.clear();
+
+        setNewMatch();
         notifyAll(); //Wake threads that are waiting the playerWaiting list is < 5
+
+        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO,
+                "Match #" + currentMatch.matchID + " has started" );
+    }
+
+    private void setNewMatch() {
+        playerWaiting.clear();
         isFirst = true;
         timer.cancel();
         timer = null;
         matches.add(new Match(matchID, new GameHandler(matchID)));
         matchID++;
-
-        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Match #" + currentMatch.matchID + " has started" );
     }
 
 
@@ -278,16 +289,40 @@ public class WaitingRoom {
                 return;
             }
         }
-        for(Match m : matches) {
-            if(m.matchID==matchID && matchID!=this.matchID) {
-                m.mapView.detach(server);
-                m.skullBoardView.detach(server);
-                view.setNetworkHandler(null);
-                for(EnemyView enemyView : m.enemyViews) enemyView.detach(server);
-            }
+
+        try {
+            Match m = getMatchById(matchID);
+            m.networkHandlers.remove(server);
+            m.mapView.detach(server);
+            m.skullBoardView.detach(server);
+            view.setNetworkHandler(null);
+            for(EnemyView enemyView : m.enemyViews) enemyView.detach(server);
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Disconnect " +
+                    view.getPlayerCopy().getNickname());
+        } catch (NotMatchException e) {
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
+                    "Impossible disconnect " + view.getPlayerCopy().getNickname() + " to match #" + matchID ,e);
         }
-        Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Disconnect " +
-                view.getPlayerCopy().getNickname());
+    }
+
+    public static void deleteMatch(GameHandler gameHandler) {
+        try {
+            Match m = getMatchById(gameHandler.getMatchID());
+            for(Server networkHandler : m.networkHandlers) {
+                networkHandler.closeAll();
+            }
+            matches.remove(m);
+        } catch (NotMatchException e) {
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
+                    "Impossible delete match #" + gameHandler.getMatchID() ,e);
+        }
+    }
+
+    private static Match getMatchById(int matchId) throws NotMatchException {
+        for(Match m : matches) {
+            if(m.matchID == matchId && matchId != matchID) return m;
+        }
+        throw new NotMatchException();
     }
 
     private class WaitingPlayer {
@@ -311,6 +346,7 @@ public class WaitingRoom {
         int matchID;
         List<PlayerView> playerViews;
         List<EnemyView> enemyViews;
+        List<Server> networkHandlers;
         MapView mapView;
         SkullBoardView skullBoardView;
 
