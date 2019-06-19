@@ -28,6 +28,7 @@ public class GameHandlerTest {
         Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
         Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
         Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
+
         ArrayList<Player> players = new ArrayList<>();
         players.add(firstPlayer);
         players.add(secondPlayer);
@@ -38,22 +39,10 @@ public class GameHandlerTest {
     }
 
     @Test
-    public void isFinished() {
-    }
-
-    @Test
-    public void nextTurn() {
-    }
-
-    @Test
-    public void finishGame() {
-    }
-
-    @Test
     public void getTurnPlayerID() {
         int ID = gameHandler.getTurnPlayerID();
         assertEquals(FIRST_ID,ID);
-        gameHandler.nextTurn();
+        gameHandler.incrementTurn();
         ID = gameHandler.getTurnPlayerID();
         assertEquals(SECOND_ID,ID);
     }
@@ -294,9 +283,9 @@ public class GameHandlerTest {
         assertEquals(e2, gameHandler.getRanking().get(0));
         assertEquals(p, gameHandler.getRanking().get(1));
         assertEquals(e1, gameHandler.getRanking().get(3));
-        gameHandler.nextTurn();
-        gameHandler.nextTurn();
-        gameHandler.nextTurn();
+        gameHandler.incrementTurn();
+        gameHandler.incrementTurn();
+        gameHandler.incrementTurn();
 
         kill(e1, e3, e2, p);
         p.addPoints(4);  //p and e3 have the same points
