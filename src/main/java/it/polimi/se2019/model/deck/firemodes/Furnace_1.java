@@ -53,7 +53,7 @@ public class Furnace_1 extends FireMode {
         super.fire();
     }
 
-
+    /*
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
@@ -61,7 +61,7 @@ public class Furnace_1 extends FireMode {
             throw new WrongInputException(INVALID_ROOM);
         }
         else {
-            for(Cell cell : /*TODO tutte le celle della room*/){
+            for(Cell cell : //TODO tutte le celle della room){
                 List<Player> players = cell.getPlayerHere();
                 for(Player player : players){
                     shoot.addPlayerTargetFromFireMode(player,true);
@@ -69,4 +69,5 @@ public class Furnace_1 extends FireMode {
             }
         }
     }
+    */
 }
