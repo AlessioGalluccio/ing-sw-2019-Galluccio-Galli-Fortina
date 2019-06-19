@@ -241,6 +241,9 @@ public class ControllerLogin implements UiInterface {
         updatePlayerAmmo();
         setPlayerFrenzy();
         updatePlayerDamage();
+        updatePlayerSkull();
+        updatePlayerMark();
+
 
     }
 
@@ -255,7 +258,7 @@ public class ControllerLogin implements UiInterface {
         controller.updateEnemyWeapon(enemyView);
         controller.frenzyEnemy(enemyView);
         controller.updateEnemyDamage(enemyView);
-        controller.updateEnemeyMarks(enemyView);
+        controller.updateEnemyMarks(enemyView);
 
     }
 
@@ -371,6 +374,10 @@ public class ControllerLogin implements UiInterface {
         controller.updatePlayerMarks();
     }
 
+
+    public void updatePlayerSkull(){
+        controller.updatePlayerSkull();
+    }
     /**
      * update game display
      */

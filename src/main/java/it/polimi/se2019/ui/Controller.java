@@ -642,6 +642,21 @@ public class Controller implements Initializable {
     @FXML
     public ImageView enemy1mark12;
 
+    //enemy 1 skull
+    @FXML
+    public ImageView enemy1Skull1;
+    @FXML
+    public ImageView enemy1Skull2;
+    @FXML
+    public ImageView enemy1Skull3;
+    @FXML
+    public ImageView enemy1Skull4;
+    @FXML
+    public ImageView enemy1Skull5;
+    @FXML
+    public ImageView enemy1Skull6;
+
+
 
     //enemy 2 marks
     @FXML
@@ -668,6 +683,20 @@ public class Controller implements Initializable {
     public ImageView enemy2mark11;
     @FXML
     public ImageView enemy2mark12;
+
+    //enemy 2 skull
+    @FXML
+    public ImageView enemy2Skull1;
+    @FXML
+    public ImageView enemy2Skull2;
+    @FXML
+    public ImageView enemy2Skull3;
+    @FXML
+    public ImageView enemy2Skull4;
+    @FXML
+    public ImageView enemy2Skull5;
+    @FXML
+    public ImageView enemy2Skull6;
 
 
     //enemy 3 marks
@@ -697,6 +726,22 @@ public class Controller implements Initializable {
     public ImageView enemy3mark12;
 
 
+    //enemy 3 skull
+    @FXML
+    public ImageView enemy3Skull1;
+    @FXML
+    public ImageView enemy3Skull2;
+    @FXML
+    public ImageView enemy3Skull3;
+    @FXML
+    public ImageView enemy3Skull4;
+    @FXML
+    public ImageView enemy3Skull5;
+    @FXML
+    public ImageView enemy3Skull6;
+
+
+
     //enemy 4 marks
     @FXML
     public ImageView enemy4mark1;
@@ -722,6 +767,35 @@ public class Controller implements Initializable {
     public ImageView enemy4mark11;
     @FXML
     public ImageView enemy4mark12;
+
+
+    //enemy 4 skull
+    @FXML
+    public ImageView enemy4Skull1;
+    @FXML
+    public ImageView enemy4Skull2;
+    @FXML
+    public ImageView enemy4Skull3;
+    @FXML
+    public ImageView enemy4Skull4;
+    @FXML
+    public ImageView enemy4Skull5;
+    @FXML
+    public ImageView enemy4Skull6;
+
+    //player skulls
+    @FXML
+    public ImageView playerSkull1;
+    @FXML
+    public ImageView playerSkull2;
+    @FXML
+    public ImageView playerSkull3;
+    @FXML
+    public ImageView playerSkull4;
+    @FXML
+    public ImageView playerSkull5;
+    @FXML
+    public ImageView playerSkull6;
 
 
 
@@ -2718,7 +2792,7 @@ public class Controller implements Initializable {
         });
     }
 
-    public void updateEnemeyMarks(ClientEnemyView enemyView){
+    public void updateEnemyMarks(ClientEnemyView enemyView){
 
         Platform.runLater(new Runnable() {
             @Override
@@ -2773,6 +2847,36 @@ public class Controller implements Initializable {
 
 
     }
+
+
+    /**
+     * update player's skull on gui map window
+     */
+    public void updatePlayerSkull(){
+            int skullNumber = ControllerLogin.clientView.getPlayerCopy().getSkull();
+            ArrayList<ImageView> imSkulls = new ArrayList<>();
+             if(!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()){
+                 imSkulls.add(playerSkull1);
+                 imSkulls.add(playerSkull2);
+                 imSkulls.add(playerSkull3);
+                 imSkulls.add(playerSkull4);
+                 imSkulls.add(playerSkull5);
+                 imSkulls.add(playerSkull6);
+             }
+             else{
+                 for(int i=0; i<skullNumber ; i++){
+                     imSkulls.get(i).setVisible(false);
+                 }
+
+             }
+
+            for(int i=0; i<skullNumber ; i++){
+                    imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+            }
+    }
+
+
+
 
 
 }

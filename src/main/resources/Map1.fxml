@@ -162,7 +162,7 @@
       </TabPane>
       <ImageView fx:id="yourCharacter" fitHeight="177.0" fitWidth="504.0" layoutX="145.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@frenzyCharacters/frenzyCharacterViolet.png" />
+            <Image url="@characters/characterBlue.jpg" />
          </image></ImageView>
       <ImageView fx:id="possibleActions" fitHeight="192.0" fitWidth="75.0" layoutX="69.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="66.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
@@ -224,6 +224,12 @@
                         <ImageView fx:id="enemy1mark3" fitHeight="35.0" fitWidth="30.0" layoutX="364.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1mark2" fitHeight="35.0" fitWidth="30.0" layoutX="394.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1mark1" fitHeight="35.0" fitWidth="30.0" layoutX="424.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull1" fitHeight="31.0" fitWidth="22.0" layoutX="156.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull2" fitHeight="31.0" fitWidth="22.0" layoutX="183.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull3" fitHeight="31.0" fitWidth="22.0" layoutX="212.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull4" fitHeight="31.0" fitWidth="22.0" layoutX="238.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull5" fitHeight="31.0" fitWidth="22.0" layoutX="262.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Skull6" fitHeight="31.0" fitWidth="22.0" layoutX="288.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -280,7 +286,13 @@
                         <ImageView fx:id="enemy2mark3" fitHeight="35.0" fitWidth="30.0" layoutX="352.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2mark2" fitHeight="35.0" fitWidth="30.0" layoutX="382.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2mark1" fitHeight="35.0" fitWidth="30.0" layoutX="412.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-                     </children></AnchorPane>enemy3
+                         <ImageView fx:id="enemy2Skull1" fitHeight="31.0" fitWidth="22.0" layoutX="156.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy2Skull2" fitHeight="31.0" fitWidth="22.0" layoutX="183.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy2Skull3" fitHeight="31.0" fitWidth="22.0" layoutX="212.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy2Skull4" fitHeight="31.0" fitWidth="22.0" layoutX="238.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy2Skull5" fitHeight="31.0" fitWidth="22.0" layoutX="262.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy2Skull6" fitHeight="31.0" fitWidth="22.0" layoutX="288.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="tabEnemy3">
@@ -356,18 +368,24 @@
                         <ImageView fx:id="enemy3Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="339.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="367.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="393.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark12enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark11enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="102.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark10enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="132.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark9enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark8enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="192.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark7enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="222.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark6enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="252.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark5enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="282.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark4enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="312.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark3enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="342.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark2enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="372.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3mark1enemy4" fitHeight="35.0" fitWidth="30.0" layoutX="402.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark12" fitHeight="35.0" fitWidth="30.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark11" fitHeight="35.0" fitWidth="30.0" layoutX="102.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark10" fitHeight="35.0" fitWidth="30.0" layoutX="132.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark9" fitHeight="35.0" fitWidth="30.0" layoutX="162.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark8" fitHeight="35.0" fitWidth="30.0" layoutX="192.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark7" fitHeight="35.0" fitWidth="30.0" layoutX="222.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark6" fitHeight="35.0" fitWidth="30.0" layoutX="252.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark5" fitHeight="35.0" fitWidth="30.0" layoutX="282.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark4" fitHeight="35.0" fitWidth="30.0" layoutX="312.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark3" fitHeight="35.0" fitWidth="30.0" layoutX="342.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark2" fitHeight="35.0" fitWidth="30.0" layoutX="372.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3mark1" fitHeight="35.0" fitWidth="30.0" layoutX="402.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull1" fitHeight="31.0" fitWidth="22.0" layoutX="156.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull2" fitHeight="31.0" fitWidth="22.0" layoutX="183.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull3" fitHeight="31.0" fitWidth="22.0" layoutX="212.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull4" fitHeight="31.0" fitWidth="22.0" layoutX="238.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull5" fitHeight="31.0" fitWidth="22.0" layoutX="262.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy3Skull6" fitHeight="31.0" fitWidth="22.0" layoutX="288.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" /3
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -432,6 +450,12 @@
                         <ImageView fx:id="enemy4mark3" fitHeight="35.0" fitWidth="30.0" layoutX="338.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy4mark2" fitHeight="35.0" fitWidth="30.0" layoutX="368.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy4mark1" fitHeight="35.0" fitWidth="30.0" layoutX="398.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull1" fitHeight="31.0" fitWidth="22.0" layoutX="156.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull2" fitHeight="31.0" fitWidth="22.0" layoutX="183.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull3" fitHeight="31.0" fitWidth="22.0" layoutX="212.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull4" fitHeight="31.0" fitWidth="22.0" layoutX="238.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull5" fitHeight="31.0" fitWidth="22.0" layoutX="262.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+                         <ImageView fx:id="enemy4Skull6" fitHeight="31.0" fitWidth="22.0" layoutX="288.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" /4
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -701,5 +725,11 @@
       <ImageView fx:id="mark3" fitHeight="35.0" fitWidth="30.0" layoutX="430.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mark2" fitHeight="35.0" fitWidth="30.0" layoutX="460.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="mark1" fitHeight="35.0" fitWidth="30.0" layoutX="490.0" layoutY="560.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull1" fitHeight="31.0" fitWidth="22.0" layoutX="213.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull2" fitHeight="31.0" fitWidth="22.0" layoutX="244.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull3" fitHeight="31.0" fitWidth="22.0" layoutX="275.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull4" fitHeight="31.0" fitWidth="22.0" layoutX="305.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull5" fitHeight="31.0" fitWidth="22.0" layoutX="333.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="playerSkull6" fitHeight="31.0" fitWidth="22.0" layoutX="363.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
