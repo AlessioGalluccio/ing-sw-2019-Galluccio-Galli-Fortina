@@ -216,6 +216,9 @@ public class Shoot extends Action{
      * @param canBeTargeted true if the player can be targeted by a Targeting Scope, false if not
      */
     public void addPlayerTargetFromFireMode(Player player, boolean canBeTargeted){
+        if(player == null){
+            return;
+        }
         targets.add(player);
         if(canBeTargeted){
             canBeTargetedPlayers.add(player);
