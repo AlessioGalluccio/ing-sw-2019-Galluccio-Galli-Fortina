@@ -205,7 +205,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected void addDamageAndMarks(Player targetPlayer, int numDamage, int numMarks, boolean useMarks){
         //TODO I must add also the damege of the previous marks!
         int numMakrsToConvert = 0;
-        if(useMarks){
+        if(useMarks && numDamage > 0){
             numMakrsToConvert = author.getMark().getNumMarkDoneTo(targetPlayer);
             targetPlayer.removeMarkReceivedBy(author);
         }

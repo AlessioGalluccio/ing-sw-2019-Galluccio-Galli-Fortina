@@ -14,17 +14,7 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hellion_2 extends FireMode {
-
-    @Override
-    public List<StringAndMessage> getMessageListExpected() {
-        return null;
-    }
-
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
+public class Hellion_2 extends Hellion_1 {
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
@@ -35,31 +25,19 @@ public class Hellion_2 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-
+        if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException(CANT_DO_FIRE);
+        }
+        else{
+            for(Player target : shoot.getTargetsPlayer()){
+                if(shoot.getTargetsPlayer().indexOf(target) == 0){  //the first one is the primary target
+                    addDamageAndMarks(target,1,2,true);
+                }
+                else {
+                    addDamageAndMarks(target,0,2,false);
+                }
+            }
+        }
     }
 
-    @Override
-    public void addCell(int x, int y) throws WrongInputException {
-
-    }
-
-    @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-
-    }
 }
