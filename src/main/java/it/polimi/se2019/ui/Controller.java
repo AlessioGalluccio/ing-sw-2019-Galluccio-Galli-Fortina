@@ -110,6 +110,11 @@ public class Controller implements Initializable {
     public RadioButton rbDozer;
     public RadioButton rbBanshee;
     public Button dbDropweapon;
+    public Button bFrenzyShoot1;
+    public Button bFrenzyMove1;
+    public Button bFrenzyGrab1;
+    public Button bFrenzyShoot2;
+    public Button bFrenzyGrab2;
 
 
     private ArrayList<ImageView> skull = new ArrayList<>();
@@ -1237,12 +1242,22 @@ public class Controller implements Initializable {
      * @param points
      */
     public void updatePoints(int points) {
-        String string = Integer.toString(points);
-        yourPointsLabel.setText(string);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String string = Integer.toString(points);
+                yourPointsLabel.setText(string);
+            }
+        });
+
     }
 
-
+    /**
+     * update int to set map
+     * @param chosenMap
+     */
     static void updateMap(int chosenMap) {
+
         choosenMap = chosenMap;
     }
 
@@ -1413,6 +1428,10 @@ public class Controller implements Initializable {
      * set AmmoCard on map
      */
     public void updateAmmoCardMap() {
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
         ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
         ArrayList<ImageView> imAmmoCell = new ArrayList<>();
 
@@ -1454,7 +1473,8 @@ public class Controller implements Initializable {
             imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getCardID()));
             System.out.println(cellAmmos.get(i).getCardID());
         }
-
+            }
+        });
 
     }
 
@@ -1677,13 +1697,19 @@ public class Controller implements Initializable {
      * @param yellow
      */
     public void updatePlayerAmmo(int red, int blue, int yellow) {
-        String redAmmo = String.valueOf(red);
-        String blueAmmo = String.valueOf(blue);
-        String yellowAmmo = String.valueOf(yellow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String redAmmo = String.valueOf(red);
+                String blueAmmo = String.valueOf(blue);
+                String yellowAmmo = String.valueOf(yellow);
 
-        updatePlayerRedAmmo(redAmmo);
-        updatePlayerBlueAmmo(blueAmmo);
-        updatePlayerYellowAmmo(yellowAmmo);
+                updatePlayerRedAmmo(redAmmo);
+                updatePlayerBlueAmmo(blueAmmo);
+                updatePlayerYellowAmmo(yellowAmmo);
+            }
+        });
+
     }
 
 
@@ -1794,27 +1820,37 @@ public class Controller implements Initializable {
      * update Enemy Character Image
      */
     public void updateEnemyCharacter(ClientEnemyView enemyView) {
-        ArrayList<Image> images = new ArrayList<>();
-        if (enemyView == ControllerLogin.enemyView1) {
-            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
-            imEnemyCharacter1.setImage(images.get(0));
-            enemy1Actions.setImage(images.get(1));
-        }
-        if (enemyView == ControllerLogin.enemyView2) {
-            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
-            imEnemyCharacter2.setImage(images.get(0));
-            enemy2Actions.setImage(images.get(1));
-        }
-        if (enemyView == ControllerLogin.enemyView3) {
-            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
-            imEnemyCharacter3.setImage(images.get(0));
-            enemy3Actions.setImage(images.get(1));
-        }
-        if (enemyView == ControllerLogin.enemyView4) {
-            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
-            imEnemyCharacter4.setImage(images.get(0));
-            enemy4Actions.setImage(images.get(1));
-        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Image> images = new ArrayList<>();
+                if (enemyView == ControllerLogin.enemyView1) {
+                    images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
+                    imEnemyCharacter1.setImage(images.get(0));
+                    enemy1Actions.setImage(images.get(1));
+                }
+                if (enemyView == ControllerLogin.enemyView2) {
+                    images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
+                    imEnemyCharacter2.setImage(images.get(0));
+                    enemy2Actions.setImage(images.get(1));
+                }
+                if (enemyView == ControllerLogin.enemyView3) {
+                    images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
+                    imEnemyCharacter3.setImage(images.get(0));
+                    enemy3Actions.setImage(images.get(1));
+                }
+                if (enemyView == ControllerLogin.enemyView4) {
+                    images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
+                    imEnemyCharacter4.setImage(images.get(0));
+                    enemy4Actions.setImage(images.get(1));
+                }
+
+            }
+        });
+
+
+
 
     }
 
@@ -1859,18 +1895,24 @@ public class Controller implements Initializable {
      * update enemy's weapons
      */
     public void updateEnemyWeapon() {
-        if (ControllerLogin.enemyView1 != null) {
-            setEnemyWeapon(enemy1card1, enemy1card2, enemy1card3, ControllerLogin.enemyView1);
-        }
-        if (ControllerLogin.enemyView2 != null) {
-            setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
-        }
-        if (ControllerLogin.enemyView3 != null) {
-            setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
-        }
-        if (ControllerLogin.enemyView4 != null) {
-            setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
-        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (ControllerLogin.enemyView1 != null) {
+                    setEnemyWeapon(enemy1card1, enemy1card2, enemy1card3, ControllerLogin.enemyView1);
+                }
+                if (ControllerLogin.enemyView2 != null) {
+                    setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
+                }
+                if (ControllerLogin.enemyView3 != null) {
+                    setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
+                }
+                if (ControllerLogin.enemyView4 != null) {
+                    setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
+                }
+            }
+        });
+
     }
 
     /**
@@ -1882,6 +1924,9 @@ public class Controller implements Initializable {
      * @param enemyView
      */
     public void setEnemyWeapon(ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
         try {
             ArrayList<WeaponCard> weaponCards = enemyView.getUnloadedWeapon();
             int loadedWeapon = enemyView.getLoadedWeapon();
@@ -1910,6 +1955,8 @@ public class Controller implements Initializable {
         } catch (Exception e) {
 
         }
+            }
+        });
 
     }
 
@@ -2107,17 +2154,27 @@ public class Controller implements Initializable {
     /**
      * change player's images with frenzy's
      */
-    public void frenzyPlayer(){
+    public void frenzyPlayer() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
 
-        ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
-        yourCharacter.setImage(images.get(0));
-        possibleActions.setImage(images.get(1));
-        moveButton.setDisable(true);
-        moveButton.setVisible(false);
-        grabButton.setDisable(true);
-        grabButton.setVisible(false);
-        shootButton.setDisable(true);
-        shootButton.setVisible(false);
+                    ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
+                    yourCharacter.setImage(images.get(0));
+                    possibleActions.setImage(images.get(1));
+                    moveButton.setDisable(true);
+                    moveButton.setVisible(false);
+                    grabButton.setDisable(true);
+                    grabButton.setVisible(false);
+                    shootButton.setDisable(true);
+                    shootButton.setVisible(false);
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
     }
 
     /**
@@ -2154,6 +2211,7 @@ public class Controller implements Initializable {
         images.add(image2);
 
         return images;
+
 
 
     }

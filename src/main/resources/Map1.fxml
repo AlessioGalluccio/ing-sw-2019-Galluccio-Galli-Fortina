@@ -13,6 +13,9 @@
 
 <AnchorPane fx:id="myContainer" prefHeight="705.0" prefWidth="1378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
+      <Button fx:id="moveButton" layoutX="70.0" layoutY="556.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="22.0" prefWidth="51.0" text="move" />
+      <Button fx:id="grabButton" layoutX="70.0" layoutY="589.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" text="grab" />
+      <Button fx:id="shootButton" layoutX="70.0" layoutY="622.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" text="shoot" />
       <ImageView fitHeight="710.0" fitWidth="1389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <image>
             <Image url="@back.jpg" />
@@ -164,11 +167,11 @@
          <image>
             <Image url="@frenzyCharacters/frenzyCharacterViolet.png" />
          </image></ImageView>
-      <ImageView fx:id="possibleActions" fitHeight="159.0" fitWidth="66.0" layoutX="95.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="possibleActions" fitHeight="192.0" fitWidth="75.0" layoutX="69.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@frenzyCharacters/frenzyActionsBlue.png" />
          </image></ImageView>
-      <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="86.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+      <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="66.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
       <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabEnemy1">
@@ -418,9 +421,6 @@
       <ImageView fx:id="playerDamage9" fitHeight="29.0" fitWidth="22.0" layoutX="429.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage10" fitHeight="29.0" fitWidth="22.0" layoutX="462.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage11" fitHeight="29.0" fitWidth="22.0" layoutX="491.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="moveButton" layoutX="94.0" layoutY="577.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="22.0" prefWidth="51.0" />
-      <Button fx:id="grabButton" layoutX="94.0" layoutY="605.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
-      <Button fx:id="shootButton" layoutX="94.0" layoutY="633.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
       <Label fx:id="labelProva" layoutX="810.0" layoutY="440.0" prefHeight="36.0" prefWidth="551.0" textFill="RED" />
       <Button fx:id="fireButton" layoutX="809.0" layoutY="383.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!!">
          <font>
@@ -624,5 +624,10 @@
             <Image url="@Icon/skull.png" />
          </image></ImageView>
       <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="DROP WEAPON" />
+      <Button fx:id="bFrenzyShoot1" disable="true" layoutX="70.0" layoutY="540.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyMove1" disable="true" layoutX="70.0" layoutY="566.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyGrab1" disable="true" layoutX="70.0" layoutY="592.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyShoot2" disable="true" layoutX="70.0" layoutY="646.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyGrab2" disable="true" layoutX="70.0" layoutY="674.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
    </children>
 </AnchorPane>
