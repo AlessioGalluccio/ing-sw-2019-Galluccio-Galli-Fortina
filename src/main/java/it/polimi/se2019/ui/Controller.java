@@ -4,11 +4,11 @@ package it.polimi.se2019.ui;
 
 
 import it.polimi.se2019.MyThread;
-import it.polimi.se2019.model.deck.PowerupCard;
-import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.*;
@@ -109,6 +109,7 @@ public class Controller implements Initializable {
     public RadioButton rbStruct;
     public RadioButton rbDozer;
     public RadioButton rbBanshee;
+    public Button dbDropweapon;
 
 
     private ArrayList<ImageView> skull = new ArrayList<>();
@@ -1928,6 +1929,12 @@ public class Controller implements Initializable {
                     discardWeapon.add(bDiscardPowerup3);
                     discardWeapon.add(bDiscardPowerup4);
 
+                    ArrayList<Button> usePowerup = new ArrayList<>();
+                    usePowerup.add(bPowerupCard1);
+                    usePowerup.add(bPowerupCard2);
+                    usePowerup.add(bPowerupCard3);
+                    usePowerup.add(bPowerupCard4);
+
 
                     List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
                     ArrayList<ImageView> imPower = new ArrayList<>();
@@ -1938,10 +1945,12 @@ public class Controller implements Initializable {
                     for (int i = 0; i < powerupCards.size(); i++) {
                         imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
                         discardWeapon.get(i).setDisable(false);
+                        usePowerup.get(i).setDisable(false);
                     }
                     for (int i = powerupCards.size(); i < 4; i++) {
                         imPower.get(i).setImage(new Image("emptyPowerup.jpg"));
                         discardWeapon.get(i).setDisable(true);
+                        usePowerup.get(i).setDisable(true);
                     }
                 } catch (Exception e) {
 
@@ -2002,5 +2011,95 @@ public class Controller implements Initializable {
 
         return image;
 
+    }
+
+    /**
+     * the player decide to not shoot, the weapon won't be discarded
+     * @param event
+     */
+    public void dropWeapon(ActionEvent event) {
+        //ControllerLogin.clientView.createWeaponMessage();
+    }
+
+
+    /**
+     * create a powerup message to send to the server
+     */
+    public void usePowerup(ActionEvent event){
+
+        Object source = event.getSource();
+        List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
+
+        if (bPowerupCard1 == source) {
+            createPowerupMessage(powerupCards.get(0));
+        }
+        if (bPowerupCard2 == source) {
+            createPowerupMessage(powerupCards.get(1));
+        }
+        if (bPowerupCard3 == source) {
+            createPowerupMessage(powerupCards.get(2));
+        }
+        if (bPowerupCard4 == source) {
+            createPowerupMessage(powerupCards.get(3));
+        }
+    }
+
+
+    /**
+     * connect each powerup id with the powerup message and create a powerupmessage to send to the server
+     * @param usedPowerup
+     */
+    public void createPowerupMessage(PowerupCard usedPowerup){
+        switch (usedPowerup.getID()){
+            case 0: {
+                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.RED);
+                break;
+            }
+            case 1: {
+                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.YELLOW);
+                break;
+            }
+            case 2: {
+                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.BLUE);
+                break;
+            }
+            case 10: {
+                ControllerLogin.clientView.createNewtonMessage((NewtonCard)usedPowerup);
+                break;
+            }
+            case 11: {
+                ControllerLogin.clientView.createNewtonMessage((NewtonCard)usedPowerup);
+                break;
+            }
+            case 12: {
+                ControllerLogin.clientView.createNewtonMessage((NewtonCard)usedPowerup);
+                break;
+            }
+            case 20: {
+                ControllerLogin.clientView.createTeleporterMessage((TeleporterCard) usedPowerup);
+                break;
+            }
+            case 21: {
+                ControllerLogin.clientView.createTeleporterMessage((TeleporterCard) usedPowerup);
+                break;
+            }
+            case 22: {
+                ControllerLogin.clientView.createTeleporterMessage((TeleporterCard) usedPowerup);
+                break;
+            }
+            case 30: {
+                ControllerLogin.clientView.createTagbackGranadeMessage((TagbackGrenadeCard) usedPowerup);
+                break;
+            }
+            case 31: {
+                ControllerLogin.clientView.createTagbackGranadeMessage((TagbackGrenadeCard) usedPowerup);
+                break;
+            }
+            case 32: {
+                ControllerLogin.clientView.createTagbackGranadeMessage((TagbackGrenadeCard) usedPowerup);
+                break;
+            }
+
+        }
     }
 }

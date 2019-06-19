@@ -623,5 +623,6 @@
          <image>
             <Image url="@Icon/skull.png" />
          </image></ImageView>
+      <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="DROP WEAPON" />
    </children>
 </AnchorPane>
