@@ -11,6 +11,9 @@ import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 import java.io.Serializable;
 import java.util.ArrayList;
 import it.polimi.se2019.model.Observable;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Observer;
 
 public class EnemyView extends Observable implements Observer, Serializable, Printable {
@@ -23,7 +26,7 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     private ArrayList<WeaponCard> unloadedWeapon = new ArrayList<>();
     private int loadedWeapon;
     private int skull;
-    private ArrayList<Player> damage = new ArrayList<>();
+    private List<Player> damage = new LinkedList<>();
     private int powerup;
     private boolean isFrenzyDeath;
 
@@ -45,7 +48,7 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
         return ammo;
     }
 
-    public ArrayList<Player> getDamage() {
+    public List<Player> getDamage() {
         return damage;
     }
 

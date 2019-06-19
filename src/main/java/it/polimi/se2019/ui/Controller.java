@@ -151,6 +151,144 @@ public class Controller implements Initializable {
     public Button sendButton;
 
 
+    //players damage
+    @FXML
+    public ImageView playerDamage0;
+    @FXML
+    public ImageView playerDamage1;
+    @FXML
+    public ImageView playerDamage2;
+    @FXML
+    public ImageView playerDamage3;
+    @FXML
+    public ImageView playerDamage4;
+    @FXML
+    public ImageView playerDamage5;
+    @FXML
+    public ImageView playerDamage6;
+    @FXML
+    public ImageView playerDamage7;
+    @FXML
+    public ImageView playerDamage8;
+    @FXML
+    public ImageView playerDamage9;
+    @FXML
+    public ImageView playerDamage10;
+    @FXML
+    public ImageView playerDamage11;
+
+    //enemy 1 damage
+
+    @FXML
+    public ImageView enemy1Damage0;
+    @FXML
+    public ImageView enemy1Damage1;
+    @FXML
+    public ImageView enemy1Damage2;
+    @FXML
+    public ImageView enemy1Damage3;
+    @FXML
+    public ImageView enemy1Damage4;
+    @FXML
+    public ImageView enemy1Damage5;
+    @FXML
+    public ImageView enemy1Damage6;
+    @FXML
+    public ImageView enemy1Damage7;
+    @FXML
+    public ImageView enemy1Damage8;
+    @FXML
+    public ImageView enemy1Damage9;
+    @FXML
+    public ImageView enemy1Damage10;
+    @FXML
+    public ImageView enemy1Damage11;
+
+    //enemy 2 damage
+
+    @FXML
+    public ImageView enemy2Damage0;
+    @FXML
+    public ImageView enemy2Damage1;
+    @FXML
+    public ImageView enemy2Damage2;
+    @FXML
+    public ImageView enemy2Damage3;
+    @FXML
+    public ImageView enemy2Damage4;
+    @FXML
+    public ImageView enemy2Damage5;
+    @FXML
+    public ImageView enemy2Damage6;
+    @FXML
+    public ImageView enemy2Damage7;
+    @FXML
+    public ImageView enemy2Damage8;
+    @FXML
+    public ImageView enemy2Damage9;
+    @FXML
+    public ImageView enemy2Damage10;
+    @FXML
+    public ImageView enemy2Damage11;
+
+
+    //enemy 3 damage
+
+    @FXML
+    public ImageView enemy3Damage0;
+    @FXML
+    public ImageView enemy3Damage1;
+    @FXML
+    public ImageView enemy3Damage2;
+    @FXML
+    public ImageView enemy3Damage3;
+    @FXML
+    public ImageView enemy3Damage4;
+    @FXML
+    public ImageView enemy3Damage5;
+    @FXML
+    public ImageView enemy3Damage6;
+    @FXML
+    public ImageView enemy3Damage7;
+    @FXML
+    public ImageView enemy3Damage8;
+    @FXML
+    public ImageView enemy3Damage9;
+    @FXML
+    public ImageView enemy3Damage10;
+    @FXML
+    public ImageView enemy3Damage11;
+
+    //enemy 4 damage
+
+    @FXML
+    public ImageView enemy4Damage0;
+    @FXML
+    public ImageView enemy4Damage1;
+    @FXML
+    public ImageView enemy4Damage2;
+    @FXML
+    public ImageView enemy4Damage3;
+    @FXML
+    public ImageView enemy4Damage4;
+    @FXML
+    public ImageView enemy4Damage5;
+    @FXML
+    public ImageView enemy4Damage6;
+    @FXML
+    public ImageView enemy4Damage7;
+    @FXML
+    public ImageView enemy4Damage8;
+    @FXML
+    public ImageView enemy4Damage9;
+    @FXML
+    public ImageView enemy4Damage10;
+    @FXML
+    public ImageView enemy4Damage11;
+
+
+
+
     @FXML
     MyThread myThread;
 
@@ -387,24 +525,7 @@ public class Controller implements Initializable {
     public Button blueWeapon3;
     @FXML
     public Button redWeapon1;
-    public ImageView enemy1Damage0;
-    public ImageView enemy1Damage1;
-    public ImageView enemy1Damage2;
-    public ImageView enemy1Damage3;
-    public ImageView enemy1Damage4;
-    public ImageView enemy1Damage5;
-    public ImageView enemy1Damage6;
-    public ImageView enemy1Damage7;
-    public ImageView enemy1Damage8;
-    public ImageView enemy1Damage9;
-    public ImageView enemy1Damage10;
-    public ImageView enemy1Damage11;
-    public ImageView enemy2Damage0;
-    public ImageView enemy2Damage1;
-    public ImageView enemy2Damage2;
-    public ImageView enemy2Damage3;
-    public ImageView enemy2Damage4;
-    public ImageView enemy2Damage5;
+
 
     @FXML
     public Button selectWeaponButton1;
@@ -563,7 +684,7 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException {
-        
+
 
         //set ammo card on map
         updateAmmoCardMap();
@@ -2284,4 +2405,149 @@ public class Controller implements Initializable {
         });
 
     }
+
+
+    /**
+     * update player's damage on gui map window
+     */
+    public void updatePlayerDamage(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Player> players = ControllerLogin.clientView.getPlayerCopy().getDamage();
+                    ArrayList<ImageView> imDamage = new ArrayList<>();
+                    setDamage(imDamage, playerDamage0, playerDamage1, playerDamage2, playerDamage3, playerDamage4, playerDamage5,
+                            playerDamage6, playerDamage7, playerDamage8, playerDamage9, playerDamage10, playerDamage11);
+
+                    for(int i=0; i<players.size(); i++){
+                        imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                    }
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
+    }
+
+    public void updateEnemyDamage(ClientEnemyView enemyView){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Player> players= enemyView.getDamage();
+                    ArrayList<ImageView> imDamage = new ArrayList<>();
+                    if(ControllerLogin.enemyView1!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())){
+                            setDamage(imDamage, enemy1Damage0,enemy1Damage1, enemy1Damage2, enemy1Damage3, enemy1Damage4,enemy1Damage5,
+                                    enemy1Damage6,enemy1Damage7, enemy1Damage8, enemy1Damage9, enemy1Damage10,enemy1Damage11);
+                            for(int i=0; i<players.size(); i++){
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView2!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())){
+                            setDamage(imDamage, enemy2Damage0,enemy2Damage1, enemy2Damage2, enemy2Damage3, enemy2Damage4,enemy2Damage5,
+                                    enemy2Damage6,enemy2Damage7, enemy2Damage8, enemy2Damage9, enemy2Damage10,enemy2Damage11);
+                            for(int i=0; i<players.size(); i++){
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView3!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())){
+                            setDamage(imDamage, enemy3Damage0,enemy3Damage1, enemy3Damage2, enemy3Damage3, enemy3Damage4,enemy3Damage5,
+                                    enemy3Damage6,enemy3Damage7, enemy3Damage8, enemy3Damage9, enemy3Damage10,enemy3Damage11);
+                            for(int i=0; i<players.size(); i++){
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView4!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())){
+                            setDamage(imDamage, enemy4Damage0,enemy4Damage1, enemy4Damage2, enemy4Damage3, enemy4Damage4,enemy4Damage5,
+                                    enemy4Damage6,enemy4Damage7, enemy4Damage8, enemy4Damage9, enemy4Damage10,enemy4Damage11);
+                            for(int i=0; i<players.size(); i++){
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    
+
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
+    }
+
+    /**
+     * add imageview to an arraylist
+     * @param imDamage
+     * @param im1
+     * @param im2
+     * @param im3
+     * @param im4
+     * @param im5
+     * @param im6
+     * @param im7
+     * @param im8
+     * @param im9
+     * @param im10
+     * @param im11
+     */
+    public void setDamage(ArrayList<ImageView> imDamage, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
+                          ImageView im5,ImageView im6,ImageView im7,ImageView im8,ImageView im9,ImageView im10,ImageView im11, ImageView im12 ){
+        imDamage.add(im1);
+        imDamage.add(im2);
+        imDamage.add(im3);
+        imDamage.add(im4);
+        imDamage.add(im5);
+        imDamage.add(im6);
+        imDamage.add(im7);
+        imDamage.add(im8);
+        imDamage.add(im9);
+        imDamage.add(im10);
+        imDamage.add(im11);
+        imDamage.add(im12);
+
+    }
+
+    /**
+     * connect each drop image with the character
+     * @param characterID
+     * @return
+     */
+    public Image setDamageImages(int characterID){
+        Image image = new Image("Icon/BlueDrop.png");
+
+        switch (characterID){
+            case 1:
+                image = new Image("Icon/GreenDrop.png");
+
+                break;
+            case 2:
+                image = new Image("Icon/PurpleDrop.png");
+
+                break;
+            case 3:
+                image = new Image("Icon/YellowDrop.png");
+
+                break;
+            case 4:
+                image = new Image("Icon/GreyDrop.png");
+
+                break;
+            case 5:
+                image = new Image("Icon/BlueDrop.png");
+
+                break;
+        }
+        return image;
+    }
+
+
 }

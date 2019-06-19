@@ -240,6 +240,7 @@ public class ControllerLogin implements UiInterface {
         updatePlayerPoints();
         updatePlayerAmmo();
         setPlayerFrenzy();
+        updatePlayerDamage();
 
     }
 
@@ -253,7 +254,7 @@ public class ControllerLogin implements UiInterface {
         controller.updateEnemyCharacter(enemyView);
         controller.updateEnemyWeapon(enemyView);
         controller.frenzyEnemy(enemyView);
-
+        controller.updateEnemyDamage(enemyView);
     }
 
     @Override
@@ -345,6 +346,12 @@ public class ControllerLogin implements UiInterface {
     }
 
 
+    /**
+     * update player damage on gui
+     */
+    public void updatePlayerDamage(){
+        controller.updatePlayerDamage();
+    }
 
     /**
      * set image franzy when the player is in frenzy mode
@@ -355,10 +362,6 @@ public class ControllerLogin implements UiInterface {
         }
     }
 
-    public void setEnemyFrenzy(ClientEnemyView enemyView){
-        controller.frenzyEnemy(enemyView);
-
-    }
     /**
      * update game display
      */
