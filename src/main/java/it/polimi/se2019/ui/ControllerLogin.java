@@ -363,6 +363,13 @@ public class ControllerLogin implements UiInterface {
     }
 
     /**
+     * update player's marks on gui
+     */
+    public void updatePlayerMark(){
+        controller.updatePlaperMarks();
+    }
+
+    /**
      * update game display
      */
 

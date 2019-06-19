@@ -9,6 +9,7 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.Mark;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.*;
@@ -588,6 +589,33 @@ public class Controller implements Initializable {
     public ImageView yammo2;
     @FXML
     public ImageView yammo3;
+
+    // player marks
+    @FXML
+    public ImageView mark1;
+    @FXML
+    public ImageView mark2;
+    @FXML
+    public ImageView mark3;
+    @FXML
+    public ImageView mark4;
+    @FXML
+    public ImageView mark5;
+    @FXML
+    public ImageView mark6;
+    @FXML
+    public ImageView mark7;
+    @FXML
+    public ImageView mark8;
+    @FXML
+    public ImageView mark9;
+    @FXML
+    public ImageView mark10;
+    @FXML
+    public ImageView mark11;
+    @FXML
+    public ImageView mark12;
+
 
 
     private int suddenDeath = 2;
@@ -2431,6 +2459,10 @@ public class Controller implements Initializable {
         });
     }
 
+    /**
+     * update enemy's damage on gui map window
+     * @param enemyView
+     */
     public void updateEnemyDamage(ClientEnemyView enemyView){
         Platform.runLater(new Runnable() {
             @Override
@@ -2474,7 +2506,7 @@ public class Controller implements Initializable {
                             }
                         }
                     }
-                    
+
 
                 }
                 catch (Exception e){
@@ -2547,6 +2579,36 @@ public class Controller implements Initializable {
                 break;
         }
         return image;
+    }
+
+    /**
+     * set image for the first player
+     */
+    public void setImFirstPlayer(){
+        //TODO
+    }
+
+    /**
+     * update player's marks on gui
+     */
+    public void updatePlaperMarks(){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Player> marks = ControllerLogin.clientView.getPlayerCopy().getMark().getMarkReceived();
+                    ArrayList<ImageView> imMarks = new ArrayList<>();
+                    setDamage(imMarks, mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9, mark10, mark11, mark12);
+
+                    for(int i=0; i<marks.size(); i++){
+                        imMarks.get(i).setImage(setDamageImages(marks.get(i).getCharacter().getId()));
+                    }
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
     }
 
 
