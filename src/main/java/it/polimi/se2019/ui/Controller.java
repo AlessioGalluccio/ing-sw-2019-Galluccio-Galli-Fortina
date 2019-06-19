@@ -2018,7 +2018,7 @@ public class Controller implements Initializable {
      * @param event
      */
     public void dropWeapon(ActionEvent event) {
-        //ControllerLogin.clientView.createWeaponMessage();
+        ControllerLogin.clientView.createNopeMessage();
     }
 
 
@@ -2101,5 +2101,54 @@ public class Controller implements Initializable {
             }
 
         }
+    }
+
+
+    /**
+     * change player's images with frenzy's
+     */
+    public void frenzyPlayer(){
+
+        ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
+        yourCharacter.setImage(images.get(0));
+        possibleActions.setImage(images.get(1));
+    }
+
+    /**
+     * connect each character id with the frenzy image
+     * @param characterID
+     */
+    public  ArrayList<Image> setFrenzyCharacter(int characterID){
+        Image image1 = new Image("characters/characterBlue.jpg");
+        Image image2 = new Image("characters/actionsBlue.jpg");
+        switch (characterID) {
+            case 1:
+                image1 = new Image("frenzyCharacters/frenzyCharacterGreen.png");
+                image2 = new Image("frenzyCharacters/frenzyActionGreen.png");
+                break;
+            case 2:
+                image1 = new Image("frenzyCharacters/frenzyCharacterViolet.png");
+                image2 = new Image("frenzyCharacters/frenzyActionsViolet.png");
+                break;
+            case 3:
+                image1 = new Image("frenzyCharacters/frenzyCharacterYellow.png");
+                image2 = new Image("frenzyCharacters/frenzyActionsYellow.png");
+                break;
+            case 4:
+                image1 = new Image("frenzyCharacters/frenzyCharacterGrey.png");
+                image2 = new Image("frenzyCharacters/frenzyActionsGrey.png");
+                break;
+            case 5:
+                image1 = new Image("frenzyCharacters/frenzyCharacterBlue.png");
+                image2 = new Image("frenzyCharacters/frenzyActionsBlue.png");
+                break;
+        }
+        ArrayList<Image> images = new ArrayList<>();
+        images.add(image1);
+        images.add(image2);
+
+        return images;
+
+
     }
 }

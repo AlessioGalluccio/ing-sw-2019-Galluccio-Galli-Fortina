@@ -239,6 +239,7 @@ public class ControllerLogin implements UiInterface {
         updatePlayerPowerup();
         updatePlayerPoints();
         updatePlayerAmmo();
+        setPlayerFrenzy();
 
     }
 
@@ -342,8 +343,20 @@ public class ControllerLogin implements UiInterface {
     }
 
 
+    /**
+     * update enemys' weapons
+     */
     public void updateEnemyWeapon(){
         controller.updateEnemyWeapon();
+    }
+
+    /**
+     * set image franzy when the player is in frenzy mode
+     */
+    public void setPlayerFrenzy(){
+        if(clientView.getPlayerCopy().isFrenzyDeath()){
+            controller.frenzyPlayer();
+        }
     }
 
     /**
