@@ -6,6 +6,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.sun.jmx.remote.internal.ArrayQueue;
 import it.polimi.se2019.cloneable.SkinnyObject;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.cloneable.NotForPlayer;
@@ -171,14 +172,7 @@ public class Player extends Observable implements Target, Serializable {
      * @return Deep copy of player's powerup card list
      */
     public List<PowerupCard> getPowerupCardList() {
-        GsonBuilder g = new GsonBuilder()
-                .registerTypeAdapter(PowerupCard.class, new JsonAdapter<PowerupCard>());
-        Gson gson = g.create();
-
-        Type TYPE = new TypeToken<List<PowerupCard>>() {
-        }.getType();
-
-        return gson.fromJson(gson.toJson(powerupCardList, TYPE), TYPE);
+        return new ArrayList<>(powerupCardList);
     }
 
     /**
@@ -700,6 +694,7 @@ public class Player extends Observable implements Target, Serializable {
 
     public void setCharacter(Character character) {
         this.character = character;
+        notifyObservers(new PlayerModelMessage(clone()));
     }
 
     private static class NotForPlayerExclusionStrategy implements ExclusionStrategy {

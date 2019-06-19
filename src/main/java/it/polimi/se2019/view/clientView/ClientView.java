@@ -14,7 +14,6 @@ import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.network.messages.LoginMessage;
 
 import java.util.List;
-import java.util.ArrayList;
 
 
 public class ClientView extends View /*View implement observer/observable*/{
@@ -215,19 +214,6 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * verify that the target choosen by the player is contained in the ArrayList of available targets
-     * @return
-     */
-    private boolean verifyTarget(){
-        for(int counter = 0; counter < possibleTarget.size(); counter++) {
-            if(possibleTarget.get(counter).equals(selectedTarget)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * verify that the character choosen by the player is cotained in the ArrayList of available characters
      * @return
      */
@@ -245,16 +231,9 @@ public class ClientView extends View /*View implement observer/observable*/{
      */
     @Override
     public synchronized void printFromController(String string) {
-        ui.printFromController(string);
-    }
-
-    /**
-     * is used by RMIClient
-     * @param possibleTarget
-     */
-     //TODO create the targetmessage after receiving the Arraylist
-    public void setPossibleTarget( ArrayList<Target> possibleTarget){
-        this.possibleTarget = possibleTarget;
+        synchronized (ui) {
+            ui.printFromController(string);
+        }
     }
 
 

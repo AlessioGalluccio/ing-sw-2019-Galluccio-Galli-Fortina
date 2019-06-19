@@ -26,7 +26,7 @@ public class ClientEnemyView extends EnemyView {
     @Override
     public synchronized void update(java.util.Observable o/*Will be always null*/, Object arg) {
         HandlerEnemyViewMessage message = (HandlerEnemyViewMessage) arg;
-        if(message.getAck()>lastAck) {
+        if(message.getAck()>=lastAck) {
             lastAck = message.getAck();
             message.handleMessage(this);
             synchronized(ui) {

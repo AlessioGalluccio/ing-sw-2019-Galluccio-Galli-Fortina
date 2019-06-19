@@ -55,8 +55,7 @@ public class CLI implements UiInterface {
 
     @Override
     public void startGame() {
-        printAll();
-        //in.close();
+        out.println(ConsoleColor.WHITE_BOLD_BRIGHT + "LET'S START! \t(๑•̀ㅂ•́)ง✧\n" + ConsoleColor.RESET);
         parser = new ParserCLI(view, this);
     }
 
@@ -92,7 +91,7 @@ public class CLI implements UiInterface {
 
     @Override
     public void printFromController(String message) {
-        out.println(message);
+        out.println("\n" + message);
     }
 
     @Override
@@ -145,8 +144,8 @@ public class CLI implements UiInterface {
     @Override
     public void chooseCharacter(List<Character> characters) {
         out.println("Choose your character form:");
-        for(int i=1; i<characters.size(); i++) {
-            out.println("\t" + i + ". " + characters.get(i).toString());
+        for(int i=1; i<=characters.size(); i++) {
+            out.println("\t" + i + ". " + characters.get(i-1).toString());
         }
         out.println("[Digit 'character' follow by  the relative number]");
     }
@@ -175,13 +174,13 @@ public class CLI implements UiInterface {
         out.println("HI!  ｡◕‿◕｡ ");
         out.println("Please, insert the server's IP: ");
         String IP = in.nextLine();
-        out.println("Which type of connection do you preferred?\n" +
-                "\t1. Socket" +
-                "\n\t2. RMI" +
-                "\n\t3. What are socket and RMI?");
 
         int decision=0;
         do{
+            out.println("Which type of connection do you preferred?\n" +
+                    "\t1. Socket" +
+                    "\n\t2. RMI" +
+                    "\n\t3. What are socket and RMI?");
             try {
                 decision = in.nextInt();
                 in.skip("\n");

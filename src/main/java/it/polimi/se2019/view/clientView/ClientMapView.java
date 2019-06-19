@@ -31,7 +31,7 @@ public class ClientMapView extends MapView {
             message.handleMessage(this);
             first=false;
         }
-        else if(message.getAck()>lastAck[message.getX()][message.getY()]) {
+        else if(message.getAck()>=lastAck[message.getX()][message.getY()]) {
             lastAck[message.getX()][message.getY()] = message.getAck();
             message.handleMessage(this);
         }

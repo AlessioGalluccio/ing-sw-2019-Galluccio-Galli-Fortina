@@ -26,7 +26,7 @@ public class ClientSkullBoardView extends SkullBoardView {
     @Override
     public synchronized void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerSkullViewMessage message = (HandlerSkullViewMessage) arg;
-        if(message.getAck()>lastAck) {
+        if(message.getAck()>=lastAck) {
             lastAck = message.getAck();
             message.handleMessage(this);
             synchronized(ui) {

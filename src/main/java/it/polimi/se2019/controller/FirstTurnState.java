@@ -141,7 +141,7 @@ public class FirstTurnState extends StateController {
 
             //if it's null, there are no errors. If it is, we don't change the state and we wait another message
             //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
-            if(errorString != null){
+            if(errorString == null){ //TODO check
                 //spawn process is finished. we go to the next state
                 controller.setState(new EmptyControllerState(controller, gameHandler));
             }
