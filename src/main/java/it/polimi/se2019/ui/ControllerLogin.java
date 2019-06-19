@@ -255,6 +255,8 @@ public class ControllerLogin implements UiInterface {
         controller.updateEnemyWeapon(enemyView);
         controller.frenzyEnemy(enemyView);
         controller.updateEnemyDamage(enemyView);
+        controller.updateEnemeyMarks(enemyView);
+
     }
 
     @Override
@@ -366,7 +368,7 @@ public class ControllerLogin implements UiInterface {
      * update player's marks on gui
      */
     public void updatePlayerMark(){
-        controller.updatePlaperMarks();
+        controller.updatePlayerMarks();
     }
 
     /**

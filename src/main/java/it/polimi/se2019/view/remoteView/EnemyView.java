@@ -40,6 +40,14 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
 
     private boolean first = true;
 
+    /**
+     *
+     * @return arraylist of players
+     */
+    public ArrayList<Player> getMark() {
+        return mark;
+    }
+
     public EnemyView(String nickname) {
         this.nickname = nickname;
     }

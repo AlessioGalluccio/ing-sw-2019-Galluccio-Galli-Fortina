@@ -616,6 +616,113 @@ public class Controller implements Initializable {
     @FXML
     public ImageView mark12;
 
+    //enemy 1 marks
+    @FXML
+    public ImageView enemy1mark1;
+    @FXML
+    public ImageView enemy1mark2;
+    @FXML
+    public ImageView enemy1mark3;
+    @FXML
+    public ImageView enemy1mark4;
+    @FXML
+    public ImageView enemy1mark5;
+    @FXML
+    public ImageView enemy1mark6;
+    @FXML
+    public ImageView enemy1mark7;
+    @FXML
+    public ImageView enemy1mark8;
+    @FXML
+    public ImageView enemy1mark9;
+    @FXML
+    public ImageView enemy1mark10;
+    @FXML
+    public ImageView enemy1mark11;
+    @FXML
+    public ImageView enemy1mark12;
+
+
+    //enemy 2 marks
+    @FXML
+    public ImageView enemy2mark1;
+    @FXML
+    public ImageView enemy2mark2;
+    @FXML
+    public ImageView enemy2mark3;
+    @FXML
+    public ImageView enemy2mark4;
+    @FXML
+    public ImageView enemy2mark5;
+    @FXML
+    public ImageView enemy2mark6;
+    @FXML
+    public ImageView enemy2mark7;
+    @FXML
+    public ImageView enemy2mark8;
+    @FXML
+    public ImageView enemy2mark9;
+    @FXML
+    public ImageView enemy2mark10;
+    @FXML
+    public ImageView enemy2mark11;
+    @FXML
+    public ImageView enemy2mark12;
+
+
+    //enemy 3 marks
+    @FXML
+    public ImageView enemy3mark1;
+    @FXML
+    public ImageView enemy3mark2;
+    @FXML
+    public ImageView enemy3mark3;
+    @FXML
+    public ImageView enemy3mark4;
+    @FXML
+    public ImageView enemy3mark5;
+    @FXML
+    public ImageView enemy3mark6;
+    @FXML
+    public ImageView enemy3mark7;
+    @FXML
+    public ImageView enemy3mark8;
+    @FXML
+    public ImageView enemy3mark9;
+    @FXML
+    public ImageView enemy3mark10;
+    @FXML
+    public ImageView enemy3mark11;
+    @FXML
+    public ImageView enemy3mark12;
+
+
+    //enemy 4 marks
+    @FXML
+    public ImageView enemy4mark1;
+    @FXML
+    public ImageView enemy4mark2;
+    @FXML
+    public ImageView enemy4mark3;
+    @FXML
+    public ImageView enemy4mark4;
+    @FXML
+    public ImageView enemy4mark5;
+    @FXML
+    public ImageView enemy4mark6;
+    @FXML
+    public ImageView enemy4mark7;
+    @FXML
+    public ImageView enemy4mark8;
+    @FXML
+    public ImageView enemy4mark9;
+    @FXML
+    public ImageView enemy4mark10;
+    @FXML
+    public ImageView enemy4mark11;
+    @FXML
+    public ImageView enemy4mark12;
+
 
 
     private int suddenDeath = 2;
@@ -2591,7 +2698,7 @@ public class Controller implements Initializable {
     /**
      * update player's marks on gui
      */
-    public void updatePlaperMarks(){
+    public void updatePlayerMarks(){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -2609,6 +2716,62 @@ public class Controller implements Initializable {
                 }
             }
         });
+    }
+
+    public void updateEnemeyMarks(ClientEnemyView enemyView){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Player> players= enemyView.getMark();
+                    ArrayList<ImageView> imMarks = new ArrayList<>();
+                    if(ControllerLogin.enemyView1!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())){
+                            setDamage(imMarks,enemy1mark1, enemy1mark2, enemy1mark3, enemy1mark4,enemy1mark5,
+                                    enemy1mark6,enemy1mark7, enemy1mark8, enemy1mark9, enemy1mark10,enemy1mark11, enemy1mark12);
+                            for(int i=0; i<players.size(); i++){
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView2!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())){
+                            setDamage(imMarks,enemy2mark1, enemy2mark2, enemy2mark3, enemy2mark4,enemy2mark5,
+                                    enemy2mark6,enemy2mark7, enemy2mark8, enemy2mark9, enemy2mark10,enemy2mark11, enemy2mark12);
+                            for(int i=0; i<players.size(); i++){
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView3!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())){
+                            setDamage(imMarks,enemy3mark1, enemy3mark2, enemy3mark3, enemy3mark4,enemy3mark5,
+                                    enemy3mark6,enemy3mark7, enemy3mark8, enemy3mark9, enemy3mark10,enemy3mark11, enemy3mark12);
+                            for(int i=0; i<players.size(); i++){
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+                    if(ControllerLogin.enemyView4!=null){
+                        if(enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())){
+                            setDamage(imMarks,enemy4mark1, enemy4mark2, enemy4mark3, enemy4mark4,enemy4mark5,
+                                    enemy4mark6,enemy4mark7, enemy4mark8, enemy4mark9, enemy4mark10,enemy4mark11, enemy4mark12);
+                            for(int i=0; i<players.size(); i++){
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                            }
+                        }
+                    }
+
+
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
+
+
     }
 
 
