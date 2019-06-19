@@ -83,6 +83,7 @@ public class GameHandler extends Observable {
             do {
                 incrementTurn();  //I had to separate this method in order to improve efficiency test
             }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
+
         }
         else {
             //TODO chiedere di respawnare
