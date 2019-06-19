@@ -121,7 +121,6 @@ public class Controller implements Initializable {
     public AnchorPane enemy1back;
 
 
-
     ControllerLogin controllerLogin;
 
     @FXML
@@ -166,7 +165,7 @@ public class Controller implements Initializable {
     @FXML
     public Button showMap;
 
-    public static int choosenMap =0;
+    public static int choosenMap = 0;
     @FXML
     public Button weaponDeck;
     @FXML
@@ -464,9 +463,6 @@ public class Controller implements Initializable {
     public ImageView yammo3;
 
 
-
-
-
     private int suddenDeath = 2;
     private int init_skull = 0;
 
@@ -476,7 +472,7 @@ public class Controller implements Initializable {
     String transparent = "-fx-background-color: transparent;";
 
     //public static void setClientView(ClientView clientViev) {
-        //clientView=clientViev;
+    //clientView=clientViev;
     //}
 
 
@@ -484,39 +480,38 @@ public class Controller implements Initializable {
     //con lo stesso come dato in fx:id e in onAction metto il metodo
 
 
-    public void skullCheck(ActionEvent event){
+    public void skullCheck(ActionEvent event) {
 
         init_skull = Integer.parseInt(skulls.getText());
-        if(init_skull <5 ||init_skull  >8){
+        if (init_skull < 5 || init_skull > 8) {
             errorSkulls.setVisible(true);
-        }
-        else
+        } else
             errorSkulls.setVisible(false);
 
-        System.out.println("Init skulls:" + init_skull );
+        System.out.println("Init skulls:" + init_skull);
 
 
     }
 
 
-    public void chooseMap(ActionEvent event){
+    public void chooseMap(ActionEvent event) {
 
-        if(rbmap1.isSelected()){
+        if (rbmap1.isSelected()) {
             choosenMap = 1;
             System.out.println(choosenMap);
         }
 
-        if(rbmap2.isSelected()){
+        if (rbmap2.isSelected()) {
             choosenMap = 2;
             System.out.println(choosenMap);
         }
 
-        if(rbmap3.isSelected()){
+        if (rbmap3.isSelected()) {
             choosenMap = 3;
             System.out.println(choosenMap);
         }
 
-        if(rbmap4.isSelected()){
+        if (rbmap4.isSelected()) {
             choosenMap = 4;
             System.out.println(choosenMap);
         }
@@ -524,47 +519,44 @@ public class Controller implements Initializable {
     }
 
 
-    public void sendSetting(ActionEvent event) throws Exception{
+    public void sendSetting(ActionEvent event) throws Exception {
 
 
         //mappa.setImage(new Image("mappa.jpg"));
 
-        if(suddenDeathYes.isSelected()){
-            suddenDeath=1;
+        if (suddenDeathYes.isSelected()) {
+            suddenDeath = 1;
             System.out.println("Yes sudden death");
         }
-        if(suddenDeathNo.isSelected()){
-            suddenDeath=0;
+        if (suddenDeathNo.isSelected()) {
+            suddenDeath = 0;
             System.out.println("No sudden death");
         }
 
-        if(((choosenMap==1)||(choosenMap==2)||(choosenMap==3)||(choosenMap==4))&&((init_skull >=5)&&(init_skull <=8))&&((suddenDeath==0) || (suddenDeath==1))){
+        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((init_skull >= 5) && (init_skull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
             boolean sd;
-            if(suddenDeath==0) {
-                sd=false;
-            }
-            else {
+            if (suddenDeath == 0) {
+                sd = false;
+            } else {
                 sd = true;
             }
             System.out.println("recap");
             System.out.println(choosenMap);
-            System.out.println("Skulls: " + init_skull );
+            System.out.println("Skulls: " + init_skull);
             System.out.println(suddenDeath);
-            ControllerLogin.clientView.createSettingMessage(choosenMap,init_skull ,sd);
+            ControllerLogin.clientView.createSettingMessage(choosenMap, init_skull, sd);
 
             Stage stage = (Stage) rbmap2.getScene().getWindow();
             stage.close();
-            ControllerLogin.open("WaitingRoom.fxml","LEAN BACK AND CHILL", 520, 400);
+            ControllerLogin.open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
 
         }
-
 
 
     }
 
 
-
-    public void showMap(ActionEvent event) throws InterruptedException{
+    public void showMap(ActionEvent event) throws InterruptedException {
         //set enemy weapon
         updateEnemyWeapon();
 
@@ -588,7 +580,6 @@ public class Controller implements Initializable {
         setDiscardReload();
 
 
-
         System.out.println(choosenMap);
 
         if (choosenMap == 2) {
@@ -609,12 +600,12 @@ public class Controller implements Initializable {
 
         }
 
-        if(choosenMap == 3){
+        if (choosenMap == 3) {
             mappa.setImage(new Image("mappa3.jpg"));
 
         }
 
-        if(choosenMap == 4){
+        if (choosenMap == 4) {
             mappa.setImage(new Image("mappa4.jpg"));
             cell32.setDisable(true);
             ammoCell32.setDisable(true);
@@ -636,7 +627,7 @@ public class Controller implements Initializable {
 
         //add background
 
-        BackgroundImage myBI= new BackgroundImage(new Image("background.png",32,32,false,true),
+        BackgroundImage myBI = new BackgroundImage(new Image("background.png", 32, 32, false, true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         //then you set to your node
@@ -659,7 +650,6 @@ public class Controller implements Initializable {
         setAction();
 
 
-
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
 
 
@@ -670,17 +660,13 @@ public class Controller implements Initializable {
         myThread.start();
 
 
-
     }
-
-
-
 
 
     /**
      * set actions' buttons for the player
      */
-    public void setAction(){
+    public void setAction() {
 
         moveButton.setStyle(transparent);
         grabButton.setStyle(transparent);
@@ -693,7 +679,7 @@ public class Controller implements Initializable {
     /**
      * set weapon cards buttons on the map
      */
-    public void setWeaponMap(){
+    public void setWeaponMap() {
 
         redWeapon1.setGraphic(imRedWeapon1);
         redWeapon1.setStyle(transparent);
@@ -728,7 +714,7 @@ public class Controller implements Initializable {
     /**
      * set map's cells
      */
-    public void setCellsMap(){
+    public void setCellsMap() {
 
         cell00.setStyle(transparent);
         cell00.setGraphic(ammoCell00);
@@ -772,7 +758,7 @@ public class Controller implements Initializable {
     /**
      * set enemys' characters buttons
      */
-    public void setEnemyCharacter(){
+    public void setEnemyCharacter() {
 
         enemyCharacter1.setGraphic(imEnemyCharacter1);
         enemyCharacter1.setStyle(transparent);
@@ -790,7 +776,7 @@ public class Controller implements Initializable {
     /**
      * set the buttons stile and images for powerup deck and weapon deck
      */
-    public void setDeck(){
+    public void setDeck() {
 
         impowerupDeck.setDisable(false);
         impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
@@ -807,7 +793,7 @@ public class Controller implements Initializable {
     /**
      * set the buttons stile and images for player's cards
      */
-    public void setPlayerCards(){
+    public void setPlayerCards() {
         bPowerupCard1.setGraphic(imPowerupCard1);
         bPowerupCard1.setStyle(transparent);
         bPowerupCard2.setGraphic(imWeaponCard2);
@@ -829,13 +815,12 @@ public class Controller implements Initializable {
         bPowerupCard4.setStyle(transparent);
 
 
-
     }
 
     /**
      * set trash's image on power up discard button and reload image on reload button
      */
-    public void setDiscardReload(){
+    public void setDiscardReload() {
         bDiscardPowerup1.setGraphic(imTrashP1);
         bDiscardPowerup1.setStyle(transparent);
         bDiscardPowerup2.setGraphic(imTrashP2);
@@ -861,8 +846,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void setPlayerOnMap(){
-
+    public void setPlayerOnMap() {
 
 
     }
@@ -870,26 +854,28 @@ public class Controller implements Initializable {
 
     /**
      * open Add Firemode's window when the player clicks on add firemode button
+     *
      * @param event
      * @throws Exception
      */
     public void addFiremode(ActionEvent event) throws Exception {
 
-        ControllerLogin.open("addFiremode.fxml","ADD FIREMODE",350,400);
+        ControllerLogin.open("addFiremode.fxml", "ADD FIREMODE", 350, 400);
 
     }
 
     /**
      * send FireModeMessage the the player choose the weapon's firemode on gui
+     *
      * @param event
      */
     public void sendFiremode(ActionEvent event) {
-        if(firemode1.isSelected()) {
+        if (firemode1.isSelected()) {
             ControllerLogin.clientView.createFireModeMessage(1);
             Stage stage = (Stage) firemode1.getScene().getWindow();
             stage.close();
         }
-        if(firemode2.isSelected()){
+        if (firemode2.isSelected()) {
             ControllerLogin.clientView.createFireModeMessage(2);
             Stage stage = (Stage) firemode1.getScene().getWindow();
             stage.close();
@@ -900,21 +886,22 @@ public class Controller implements Initializable {
 
     /**
      * send OptionalMessage the the player choose the weapon's optional firemode on gui
+     *
      * @param event
      */
     public void sendOptional(ActionEvent event) {
 
-        if(firemodeOp1.isSelected()){
+        if (firemodeOp1.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(1);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
-        if(firemodeOp2.isSelected()){
+        if (firemodeOp2.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(2);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
-        if(firemodeOp2.isSelected()){
+        if (firemodeOp2.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(3);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
@@ -925,6 +912,7 @@ public class Controller implements Initializable {
 
     /**
      * send weapon message with ClientView's method to the server, when the player clicks on a player's weaponcard button
+     *
      * @param event
      */
     public void selectWeapon(ActionEvent event) {
@@ -934,25 +922,24 @@ public class Controller implements Initializable {
 
             Object source = event.getSource();
 
-            if(selectWeaponButton1 == source){
+            if (selectWeaponButton1 == source) {
                 ControllerLogin.clientView.createWeaponMessage(weapons.get(0));
 
             }
 
-            if(selectWeaponButton2 == source){
+            if (selectWeaponButton2 == source) {
 
                 ControllerLogin.clientView.createWeaponMessage(weapons.get(1));
 
             }
 
-            if(selectWeaponButton3 == source){
+            if (selectWeaponButton3 == source) {
                 ControllerLogin.clientView.createWeaponMessage(weapons.get(2));
 
 
             }
 
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             //TODO
 
         }
@@ -962,6 +949,7 @@ public class Controller implements Initializable {
 
     /**
      * send Fire message with ClientView's method to the server, when the player clicks on FIRE button
+     *
      * @param event
      */
     public void fire(ActionEvent event) {
@@ -971,6 +959,7 @@ public class Controller implements Initializable {
 
     /**
      * send PassTurn message with ClientView's method to the server, when the player clicks End Turn's button
+     *
      * @param event
      */
     public void endTurn(ActionEvent event) {
@@ -986,118 +975,121 @@ public class Controller implements Initializable {
 
     /**
      * send ActionMessage with ClientView's method to the server when the player clicks on a action button
+     *
      * @param event
      */
-    public void sendActionMessage (ActionEvent event){
+    public void sendActionMessage(ActionEvent event) {
         Object source = event.getSource();
 
-        if(moveButton == source){
+        if (moveButton == source) {
             ControllerLogin.clientView.createActionMessage(1);
         }
 
-        if(grabButton == source){
+        if (grabButton == source) {
             ControllerLogin.clientView.createActionMessage(2);
         }
 
-        if(grabButton == source){
+        if (grabButton == source) {
             ControllerLogin.clientView.createActionMessage(3);
         }
     }
 
     /**
      * send CellMessage with ClientView's method to the server when the player clicks on a cell button
+     *
      * @param event
      */
-    public void sendCellMessage(ActionEvent event){
+    public void sendCellMessage(ActionEvent event) {
 
         Object source = event.getSource();
 
-        if(cell00 == source){
-            ControllerLogin.clientView.createCellMessage(0,0);
+        if (cell00 == source) {
+            ControllerLogin.clientView.createCellMessage(0, 0);
         }
 
-        if(cell01 == source){
-            ControllerLogin.clientView.createCellMessage(0,1);
+        if (cell01 == source) {
+            ControllerLogin.clientView.createCellMessage(0, 1);
         }
 
-        if(cell02 == source){
-            ControllerLogin.clientView.createCellMessage(0,2);
+        if (cell02 == source) {
+            ControllerLogin.clientView.createCellMessage(0, 2);
         }
 
-        if(cell10 == source){
-            ControllerLogin.clientView.createCellMessage(1,0);
+        if (cell10 == source) {
+            ControllerLogin.clientView.createCellMessage(1, 0);
         }
 
-        if(cell11 == source){
-            ControllerLogin.clientView.createCellMessage(1,1);
+        if (cell11 == source) {
+            ControllerLogin.clientView.createCellMessage(1, 1);
         }
 
-        if(cell12 == source){
-            ControllerLogin.clientView.createCellMessage(1,2);
+        if (cell12 == source) {
+            ControllerLogin.clientView.createCellMessage(1, 2);
         }
 
-        if(cell20 == source){
-            ControllerLogin.clientView.createCellMessage(2,0);
+        if (cell20 == source) {
+            ControllerLogin.clientView.createCellMessage(2, 0);
         }
 
-        if(cell21 == source){
-            ControllerLogin.clientView.createCellMessage(2,1);
+        if (cell21 == source) {
+            ControllerLogin.clientView.createCellMessage(2, 1);
         }
 
-        if(cell22 == source){
-            ControllerLogin.clientView.createCellMessage(2,2);
+        if (cell22 == source) {
+            ControllerLogin.clientView.createCellMessage(2, 2);
         }
 
-        if(cell30 == source){
-            ControllerLogin.clientView.createCellMessage(3,0);
+        if (cell30 == source) {
+            ControllerLogin.clientView.createCellMessage(3, 0);
         }
 
-        if(cell31 == source){
-            ControllerLogin.clientView.createCellMessage(3,1);
+        if (cell31 == source) {
+            ControllerLogin.clientView.createCellMessage(3, 1);
         }
 
-        if(cell32 == source){
-            ControllerLogin.clientView.createCellMessage(3,2);
+        if (cell32 == source) {
+            ControllerLogin.clientView.createCellMessage(3, 2);
         }
     }
 
     /**
      * send a WeaponMessage to the server when the player clicks on one of the map weapons button to collect the card
+     *
      * @param event
      */
-    public void sendMapWeapon(ActionEvent event){
+    public void sendMapWeapon(ActionEvent event) {
         Object source = event.getSource();
         List<CellSpawn> cellSpawns = ControllerLogin.mapView.getCellSpawn();
-        List<WeaponCard> redWeaponCards =  cellSpawns.get(0).getWeapon();
-        List<WeaponCard> bluWeaponCards =  cellSpawns.get(1).getWeapon();
-        List<WeaponCard> yellowWeaponCards =  cellSpawns.get(2).getWeapon();
+        List<WeaponCard> redWeaponCards = cellSpawns.get(0).getWeapon();
+        List<WeaponCard> bluWeaponCards = cellSpawns.get(1).getWeapon();
+        List<WeaponCard> yellowWeaponCards = cellSpawns.get(2).getWeapon();
 
 
-        if(redWeapon1 == source){
+        if (redWeapon1 == source) {
             ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(0));
         }
-        if(redWeapon2 == source){
+        if (redWeapon2 == source) {
             ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(1));
         }
-        if(redWeapon3 == source){
+        if (redWeapon3 == source) {
             ControllerLogin.clientView.createWeaponMessage(redWeaponCards.get(2));
         }
-        if(blueWeapon1 == source){
+        if (blueWeapon1 == source) {
             ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(0));
         }
-        if(blueWeapon2 == source){
+        if (blueWeapon2 == source) {
             ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(1));
         }
-        if(blueWeapon3 == source){
+        if (blueWeapon3 == source) {
             ControllerLogin.clientView.createWeaponMessage(bluWeaponCards.get(2));
         }
-        if(yellowWeapon1 == source){
+        if (yellowWeapon1 == source) {
             ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(0));
         }
-        if(yellowWeapon2 == source){
+        if (yellowWeapon2 == source) {
             ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(1));
         }
-        if(yellowWeapon3 == source){
+        if (yellowWeapon3 == source) {
             ControllerLogin.clientView.createWeaponMessage(yellowWeaponCards.get(2));
         }
 
@@ -1107,6 +1099,7 @@ public class Controller implements Initializable {
 
     /**
      * send reload message when the player selects a weapon to be reload
+     *
      * @param event
      */
     public void reloadWeapon(ActionEvent event) {
@@ -1116,30 +1109,27 @@ public class Controller implements Initializable {
 
             Object source = event.getSource();
 
-            if(bReloadWeapon1 == source){
+            if (bReloadWeapon1 == source) {
                 ControllerLogin.clientView.createReloadMessage(weapons.get(0));
 
             }
 
-            if(bReloadWeapon2 == source){
+            if (bReloadWeapon2 == source) {
 
                 ControllerLogin.clientView.createReloadMessage(weapons.get(1));
 
             }
 
-            if(bReloadWeapon3 == source){
+            if (bReloadWeapon3 == source) {
                 ControllerLogin.clientView.createReloadMessage(weapons.get(2));
 
 
             }
 
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             //TODO
 
         }
-
-
 
 
     }
@@ -1147,20 +1137,21 @@ public class Controller implements Initializable {
 
     /**
      * send a player message when the player selects a target to shoot
+     *
      * @param event
      */
     public void selectEnemy(ActionEvent event) {
         Object source = event.getSource();
-        if(enemyCharacter1 == source){
+        if (enemyCharacter1 == source) {
             ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView1.getID());
         }
-        if(enemyCharacter2 == source){
+        if (enemyCharacter2 == source) {
             ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView2.getID());
         }
-        if(enemyCharacter3 == source){
+        if (enemyCharacter3 == source) {
             ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView3.getID());
         }
-        if(enemyCharacter4 == source){
+        if (enemyCharacter4 == source) {
             ControllerLogin.clientView.createPlayerMessage(ControllerLogin.enemyView4.getID());
         }
 
@@ -1168,6 +1159,7 @@ public class Controller implements Initializable {
 
     /**
      * Send a discard weapon message when the player selects a weapon discard button
+     *
      * @param event
      */
     public void discardWeapon(ActionEvent event) {
@@ -1202,7 +1194,7 @@ public class Controller implements Initializable {
     }
 
     public void discardPowerup(ActionEvent event) {
-            Player player = ControllerLogin.clientView.getPlayerCopy();
+        Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
             List<PowerupCard> powerupCards = player.getPowerupCardList();
 
@@ -1238,29 +1230,28 @@ public class Controller implements Initializable {
     }
 
 
-
-
     /**
      * update label on gui that show player's points
+     *
      * @param points
      */
-    public void updatePoints(int points){
+    public void updatePoints(int points) {
         String string = Integer.toString(points);
         yourPointsLabel.setText(string);
     }
 
 
-
-    static void updateMap(int chosenMap){
-        choosenMap= chosenMap;
+    static void updateMap(int chosenMap) {
+        choosenMap = chosenMap;
     }
 
 
     /**
      * update skulls' imageviews on map
+     *
      * @param skullNumber
      */
-    public void updateSkullBoard(String skullNumber){
+    public void updateSkullBoard(String skullNumber) {
 
         skull.add(imSkull1);
         skull.add(imSkull2);
@@ -1284,8 +1275,7 @@ public class Controller implements Initializable {
                     skull.get(teschi).setVisible(true);
                     teschi--;
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
 
@@ -1300,7 +1290,7 @@ public class Controller implements Initializable {
     /**
      * update weaponcards image on map
      */
-    public void updateWeaponMap(){
+    public void updateWeaponMap() {
 
         Platform.runLater(() -> {
 
@@ -1343,53 +1333,75 @@ public class Controller implements Initializable {
 
     /**
      * set each weapon id with the image
+     *
      * @param weaponID
      * @return
      */
-    public Image setWeapon(int weaponID){
+    public Image setWeapon(int weaponID) {
         Image image = new Image("cards/AD_weapons_IT_0225.png");
-        switch (weaponID){
-            case 13: image = new Image("cards/AD_weapons_IT_022.png");
+        switch (weaponID) {
+            case 13:
+                image = new Image("cards/AD_weapons_IT_022.png");
                 break;
-            case 21: image = new Image("cards/AD_weapons_IT_023.png");
+            case 21:
+                image = new Image("cards/AD_weapons_IT_023.png");
                 break;
-            case 10: image = new Image("cards/AD_weapons_IT_024.png");
+            case 10:
+                image = new Image("cards/AD_weapons_IT_024.png");
                 break;
-            case 9: image = new Image("cards/AD_weapons_IT_025.png");
+            case 9:
+                image = new Image("cards/AD_weapons_IT_025.png");
                 break;
-            case 11: image = new Image("cards/AD_weapons_IT_026.png");
+            case 11:
+                image = new Image("cards/AD_weapons_IT_026.png");
                 break;
-            case 8: image = new Image("cards/AD_weapons_IT_027.png");
+            case 8:
+                image = new Image("cards/AD_weapons_IT_027.png");
                 break;
-            case 12: image = new Image("cards/AD_weapons_IT_028.png");
+            case 12:
+                image = new Image("cards/AD_weapons_IT_028.png");
                 break;
-            case 18: image = new Image("cards/AD_weapons_IT_029.png");
+            case 18:
+                image = new Image("cards/AD_weapons_IT_029.png");
                 break;
-            case 4: image = new Image("cards/AD_weapons_IT_0210.png");
+            case 4:
+                image = new Image("cards/AD_weapons_IT_0210.png");
                 break;
-            case 20: image = new Image("cards/AD_weapons_IT_0211.png");
+            case 20:
+                image = new Image("cards/AD_weapons_IT_0211.png");
                 break;
-            case 19: image = new Image("cards/AD_weapons_IT_0212.png");
+            case 19:
+                image = new Image("cards/AD_weapons_IT_0212.png");
                 break;
-            case 7: image = new Image("cards/AD_weapons_IT_0213.png");
+            case 7:
+                image = new Image("cards/AD_weapons_IT_0213.png");
                 break;
-            case 3: image = new Image("cards/AD_weapons_IT_0214.png");
+            case 3:
+                image = new Image("cards/AD_weapons_IT_0214.png");
                 break;
-            case 6: image = new Image("cards/AD_weapons_IT_0215.png");
+            case 6:
+                image = new Image("cards/AD_weapons_IT_0215.png");
                 break;
-            case 16: image = new Image("cards/AD_weapons_IT_0216.png");
+            case 16:
+                image = new Image("cards/AD_weapons_IT_0216.png");
                 break;
-            case 2: image = new Image("cards/AD_weapons_IT_0217.png");
+            case 2:
+                image = new Image("cards/AD_weapons_IT_0217.png");
                 break;
-            case 5: image = new Image("cards/AD_weapons_IT_0218.png");
+            case 5:
+                image = new Image("cards/AD_weapons_IT_0218.png");
                 break;
-            case 17: image = new Image("cards/AD_weapons_IT_0219.png");
+            case 17:
+                image = new Image("cards/AD_weapons_IT_0219.png");
                 break;
-            case 15: image = new Image("cards/AD_weapons_IT_0220.png");
+            case 15:
+                image = new Image("cards/AD_weapons_IT_0220.png");
                 break;
-            case 14: image = new Image("cards/AD_weapons_IT_0221.png");
+            case 14:
+                image = new Image("cards/AD_weapons_IT_0221.png");
                 break;
-            case 1: image = new Image("cards/AD_weapons_IT_0222.png");
+            case 1:
+                image = new Image("cards/AD_weapons_IT_0222.png");
                 break;
 
         }
@@ -1399,102 +1411,112 @@ public class Controller implements Initializable {
     /**
      * set AmmoCard on map
      */
-    public void updateAmmoCardMap(){
+    public void updateAmmoCardMap() {
         ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
         ArrayList<ImageView> imAmmoCell = new ArrayList<>();
 
 
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,2));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 2));
         imAmmoCell.add(ammoCell02);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,0));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 0));
         imAmmoCell.add(ammoCell10);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,1));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 1));
         imAmmoCell.add(ammoCell11);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1,2));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 2));
         imAmmoCell.add(ammoCell12);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2,0));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 0));
         imAmmoCell.add(ammoCell20);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2,1));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 1));
         imAmmoCell.add(ammoCell21);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,1));
+        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 1));
         imAmmoCell.add(ammoCell31);
 
 
-        if(choosenMap == 1){
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,2));
+        if (choosenMap == 1) {
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
             imAmmoCell.add(ammoCell32);
         }
 
-        if(choosenMap == 2){
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,0));
+        if (choosenMap == 2) {
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
             imAmmoCell.add(ammoCell00);
         }
 
-        if(choosenMap == 3){
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0,0));
+        if (choosenMap == 3) {
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
             imAmmoCell.add(ammoCell00);
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3,2));
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
         }
 
 
-
-
-        for (int i=0; i<cellAmmos.size(); i++){
+        for (int i = 0; i < cellAmmos.size(); i++) {
             imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getCardID()));
             System.out.println(cellAmmos.get(i).getCardID());
         }
-
-
 
 
     }
 
     /**
      * set each ammoCard id with the image
+     *
      * @param ammoID
      * @return
      */
-    public Image setAmmoCard(List<Integer> ammoID){
+    public Image setAmmoCard(List<Integer> ammoID) {
         int ammoCardId = ammoID.get(0);
         Image image = new Image("ammo/AD_ammo_04.png");
-        switch (ammoCardId){
-            case 0: image = new Image("ammo/AD_ammo_0421.png");
+        switch (ammoCardId) {
+            case 0:
+                image = new Image("ammo/AD_ammo_0421.png");
                 break;
-            case 1: image = new Image("ammo/AD_ammo_0429.png");
+            case 1:
+                image = new Image("ammo/AD_ammo_0429.png");
                 break;
-            case 2: image = new Image("ammo/AD_ammo_0431.png");
+            case 2:
+                image = new Image("ammo/AD_ammo_0431.png");
                 break;
-            case 4: image = new Image("ammo/AD_ammo_0432.png");
+            case 4:
+                image = new Image("ammo/AD_ammo_0432.png");
                 break;
-            case 5: image = new Image("ammo/AD_ammo_0428.png");
+            case 5:
+                image = new Image("ammo/AD_ammo_0428.png");
                 break;
-            case 8: image = new Image("ammo/AD_ammo_0427.png");
+            case 8:
+                image = new Image("ammo/AD_ammo_0427.png");
                 break;
-            case 13: image = new Image("ammo/AD_ammo_0417.png");
+            case 13:
+                image = new Image("ammo/AD_ammo_0417.png");
                 break;
-            case 14: image = new Image("ammo/AD_ammo_0416.png");
+            case 14:
+                image = new Image("ammo/AD_ammo_0416.png");
                 break;
-            case 15: image = new Image("ammo/AD_ammo_0415.png");
+            case 15:
+                image = new Image("ammo/AD_ammo_0415.png");
                 break;
-            case 17: image = new Image("ammo/AD_ammo_0414.png");
+            case 17:
+                image = new Image("ammo/AD_ammo_0414.png");
                 break;
-            case 18: image = new Image("ammo/AD_ammo_0413.png");
+            case 18:
+                image = new Image("ammo/AD_ammo_0413.png");
                 break;
-            case 19: image = new Image("ammo/AD_ammo_0418.png");
+            case 19:
+                image = new Image("ammo/AD_ammo_0418.png");
                 break;
 
         }
         return image;
 
     }
+
     /**
      * update player's weapon images
      */
-    public void updateWeaponPlayer(){
+    public void updateWeaponPlayer() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
 
                     ArrayList<Button> selectWeapon = new ArrayList<>();
                     selectWeapon.add(selectWeaponButton1);
@@ -1513,30 +1535,28 @@ public class Controller implements Initializable {
 
 
                     List<WeaponCard> weaponCards = ControllerLogin.clientView.getPlayerCopy().getWeaponCardList();
-                    ArrayList <ImageView> imWeapon = new ArrayList<>();
+                    ArrayList<ImageView> imWeapon = new ArrayList<>();
                     imWeapon.add(imWeaponCard1);
                     imWeapon.add(imWeaponCard2);
                     imWeapon.add(imWeaponCard3);
-                    for(int i=0; i<weaponCards.size(); i++) {
+                    for (int i = 0; i < weaponCards.size(); i++) {
                         imWeapon.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
-                        if(weaponCards.get(i).isReloaded()==false){
+                        if (weaponCards.get(i).isReloaded() == false) {
                             selectWeapon.get(i).setDisable(true);
-                        }
-                        else{
+                        } else {
                             selectWeapon.get(i).setDisable(false);
                         }
-                            reloadWeapon.get(i).setDisable(false);
-                            discardWeapon.get(i).setDisable(false);
+                        reloadWeapon.get(i).setDisable(false);
+                        discardWeapon.get(i).setDisable(false);
 
                     }
-                    for(int i=weaponCards.size(); i<3; i++){
+                    for (int i = weaponCards.size(); i < 3; i++) {
                         imWeapon.get(i).setImage(new Image("emptyWeapon.jpg"));
                         selectWeapon.get(i).setDisable(true);
                         reloadWeapon.get(i).setDisable(true);
                         discardWeapon.get(i).setDisable(true);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -1549,9 +1569,10 @@ public class Controller implements Initializable {
 
     /**
      * update Player's Red Ammo
+     *
      * @param red
      */
-    public void updatePlayerRedAmmo(String red){
+    public void updatePlayerRedAmmo(String red) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -1571,8 +1592,7 @@ public class Controller implements Initializable {
                         redNumber--;
                     }
 
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -1582,9 +1602,10 @@ public class Controller implements Initializable {
 
     /**
      * update Player's Blue Ammo
+     *
      * @param blu
      */
-    public void updatePlayerBlueAmmo(String blu){
+    public void updatePlayerBlueAmmo(String blu) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -1604,8 +1625,7 @@ public class Controller implements Initializable {
                         blueNumber--;
                     }
 
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -1616,9 +1636,10 @@ public class Controller implements Initializable {
 
     /**
      * update Player's Yellow Ammo
+     *
      * @param yellow
      */
-    public void updatePlayerYellowAmmo(String yellow){
+    public void updatePlayerYellowAmmo(String yellow) {
 
         Platform.runLater(new Runnable() {
             @Override
@@ -1637,8 +1658,7 @@ public class Controller implements Initializable {
                         yellowAmmo.get(yellowNumber).setVisible(true);
                         yellowNumber--;
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -1650,11 +1670,12 @@ public class Controller implements Initializable {
 
     /**
      * update all Player's ammo
+     *
      * @param red
      * @param blue
      * @param yellow
      */
-    public void updatePlayerAmmo(int red, int blue, int yellow){
+    public void updatePlayerAmmo(int red, int blue, int yellow) {
         String redAmmo = String.valueOf(red);
         String blueAmmo = String.valueOf(blue);
         String yellowAmmo = String.valueOf(yellow);
@@ -1665,8 +1686,7 @@ public class Controller implements Initializable {
     }
 
 
-
-    public void printf(String string){
+    public void printf(String string) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -1679,41 +1699,36 @@ public class Controller implements Initializable {
     /**
      * change enemys' nickname on map's window
      */
-    public void setEnemyNickname(){
-        if(ControllerLogin.enemyView1!=null) {
+    public void setEnemyNickname() {
+        if (ControllerLogin.enemyView1 != null) {
             tabEnemy1.setText(ControllerLogin.enemyView1.getNickname());
-        }
-        else{
+        } else {
             tabEnemy1.setDisable(true);
             tabEnemy1.setStyle(transparent);
         }
-        if(ControllerLogin.enemyView2!=null) {
+        if (ControllerLogin.enemyView2 != null) {
             tabEnemy2.setText(ControllerLogin.enemyView2.getNickname());
 
-        }
-        else{
+        } else {
             tabEnemy2.setDisable(true);
             tabEnemy2.setStyle(transparent);
         }
-        if(ControllerLogin.enemyView3!=null) {
+        if (ControllerLogin.enemyView3 != null) {
             tabEnemy3.setText(ControllerLogin.enemyView3.getNickname());
-        }
-        else{
+        } else {
             tabEnemy3.setDisable(true);
             tabEnemy3.setStyle(transparent);
         }
-        if(ControllerLogin.enemyView4!=null) {
+        if (ControllerLogin.enemyView4 != null) {
             tabEnemy4.setText(ControllerLogin.enemyView4.getNickname());
-        }
-        else{
+        } else {
             tabEnemy4.setDisable(true);
             tabEnemy4.setStyle(transparent);
         }
     }
 
 
-
-    public void chooseYourCharacter() throws Exception{
+    public void chooseYourCharacter() throws Exception {
         ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 500, 500);
         Platform.runLater(new Runnable() {
             @Override
@@ -1734,6 +1749,7 @@ public class Controller implements Initializable {
 
     /**
      * set ImageView based on the character choosen
+     *
      * @param event
      */
     public void chooseCharacter(ActionEvent event) {
@@ -1766,7 +1782,7 @@ public class Controller implements Initializable {
 
             yourCharacter.setImage(images.get(0));
             possibleActions.setImage(images.get(1));
-        }catch (NotCharacterException e) {
+        } catch (NotCharacterException e) {
             //TODO stampare che non può scegliere quel personaggio
             //(In teoria con la GUI non potrebbe sucedere)
         }
@@ -1804,9 +1820,9 @@ public class Controller implements Initializable {
     /**
      * set each Character id with the image
      */
-    public ArrayList<Image> setCharacter(int characterID){
+    public ArrayList<Image> setCharacter(int characterID) {
         Image image1 = new Image("characters/characterBlue.jpg");
-        Image image2= new Image("characters/actionsBlue.jpg");
+        Image image2 = new Image("characters/actionsBlue.jpg");
         switch (characterID) {
             case 1:
                 image1 = new Image("characters/characterGreen.jpg");
@@ -1826,7 +1842,7 @@ public class Controller implements Initializable {
                 break;
             case 5:
                 image1 = new Image("characters/characterBlue.jpg");
-                image2= new Image("characters/actionsBlue.jpg");
+                image2 = new Image("characters/actionsBlue.jpg");
                 break;
         }
         ArrayList<Image> images = new ArrayList<>();
@@ -1858,12 +1874,13 @@ public class Controller implements Initializable {
 
     /**
      * set enemy's weapon
+     *
      * @param im1
      * @param im2
      * @param im3
      * @param enemyView
      */
-    public void setEnemyWeapon (ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView){
+    public void setEnemyWeapon(ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView) {
         try {
             ArrayList<WeaponCard> weaponCards = enemyView.getUnloadedWeapon();
             int loadedWeapon = enemyView.getLoadedWeapon();
@@ -1889,10 +1906,7 @@ public class Controller implements Initializable {
             }
 
 
-
-
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -1901,12 +1915,11 @@ public class Controller implements Initializable {
     /**
      * update player's powerup
      */
-    public void updatePlayerPowerup(){
+    public void updatePlayerPowerup() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                try{
-
+                try {
 
 
                     ArrayList<Button> discardWeapon = new ArrayList<>();
@@ -1917,22 +1930,20 @@ public class Controller implements Initializable {
 
 
                     List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
-                    ArrayList <ImageView> imPower = new ArrayList<>();
+                    ArrayList<ImageView> imPower = new ArrayList<>();
                     imPower.add(imPowerupCard1);
                     imPower.add(imPowerupCard2);
                     imPower.add(imPowerupCard3);
                     imPower.add(imPowerupCard4);
-                    for(int i=0; i<powerupCards.size(); i++) {
-                        //TODO FARE METODO setPowerup
-                        //imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
+                    for (int i = 0; i < powerupCards.size(); i++) {
+                        imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
                         discardWeapon.get(i).setDisable(false);
                     }
-                    for(int i=powerupCards.size(); i<4; i++){
+                    for (int i = powerupCards.size(); i < 4; i++) {
                         imPower.get(i).setImage(new Image("emptyPowerup.jpg"));
                         discardWeapon.get(i).setDisable(true);
                     }
-                }
-                catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -1942,4 +1953,54 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     * set each powerup id with an image
+     * @param PowerupID
+     * @return
+     */
+    public Image setPowerup(int PowerupID) {
+
+        Image image = new Image("AD_powerups_IT_02.jpg");
+        switch (PowerupID) {
+            case 32:
+                image = new Image("cards/AD_powerups_IT_022.png");
+                break;
+            case 30:
+                image = new Image("cards/AD_powerups_IT_023.png");
+                break;
+            case 31:
+                image = new Image("cards/AD_powerups_IT_024.png");
+                break;
+            case 2:
+                image = new Image("cards/AD_powerups_IT_025.png");
+                break;
+            case 0:
+                image = new Image("cards/AD_powerups_IT_026.png");
+                break;
+            case 1:
+                image = new Image("cards/AD_powerups_IT_027.png");
+                break;
+            case 12:
+                image = new Image("cards/AD_powerups_IT_028.png");
+                break;
+            case 10:
+                image = new Image("cards/AD_powerups_IT_029.png");
+                break;
+            case 11:
+                image = new Image("cards/AD_powerups_IT_0210.png");
+                break;
+            case 22:
+                image = new Image("cards/AD_powerups_IT_0211.png");
+                break;
+            case 20:
+                image = new Image("cards/AD_powerups_IT_0212.png");
+                break;
+            case 21:
+                image = new Image("cards/AD_powerups_IT_0213.png");
+                break;
+        }
+
+        return image;
+
+    }
 }
