@@ -32,14 +32,14 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     }
 
     @Override
-    public void connect() {
+    public void connect() throws RemoteException {
         executor = Executors.newCachedThreadPool();
         Registry registry = null;
         try {
             registry = LocateRegistry.getRegistry(IP, Registry.REGISTRY_PORT);
             RmiServerInterface stub = (RmiServerInterface) registry.lookup("RMIServer");
             stub.connect(this);
-        } catch (RemoteException |  NotBoundException e) {
+        } catch ( NotBoundException e) {
             Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Problem connecting to RMI server", e);
         }
     }

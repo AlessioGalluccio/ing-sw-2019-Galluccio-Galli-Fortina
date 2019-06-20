@@ -55,7 +55,7 @@ public class CLI implements UiInterface {
 
     @Override
     public void startGame() {
-        out.println(ConsoleColor.WHITE_BOLD_BRIGHT + "LET'S START! \t(๑•̀ㅂ•́)ง✧\n" + ConsoleColor.RESET);
+        out.println(ConsoleColor.WHITE_BRIGHT + "LET'S START! \t(๑•̀ㅂ•́)ง✧\n" + ConsoleColor.RESET);
         parser = new ParserCLI(view, this);
     }
 
@@ -193,13 +193,14 @@ public class CLI implements UiInterface {
                     rmi.connect();
                     view.setUp(rmi);
                 }
-            }catch (InputMismatchException e) {
-                out.println("You can't insert only 1 or 2");
+            } catch (InputMismatchException e) {
+                out.println("You can insert only 1, 2 or 3");
                 in.nextLine();
-            } catch (RemoteException e) {
-                out.println("Sorry, we have problem connecting you to the server.\n" +
-                        "Retry later.");
-                in.close();
+            } catch (RemoteException | java.net.UnknownHostException e) {
+                out.println(ConsoleColor.RED + "Wrong IP, retry." + ConsoleColor.RESET);
+                out.println("Please, insert the server's IP:");
+                IP = in.nextLine();
+                decision=0;
             }
         }while(decision<1||decision>3);
     }
@@ -235,7 +236,7 @@ public class CLI implements UiInterface {
                    in.skip("\n");
                }
            }catch (InputMismatchException e) {
-               out.println("You can't insert only 1 or 2");
+               out.println("You can insert only 1 or 2");
                in.nextLine();
            }
         }while(decision<1||decision>2);
@@ -256,14 +257,14 @@ public class CLI implements UiInterface {
                 map = in.nextInt();
                 in.skip("\n");
             }catch (InputMismatchException e) {
-                out.println("You can't insert only a digit");
+                out.println("You can insert only a digit");
                 in.nextLine();
             }
         }while(map<1||map>4);
 
         int skulls=0;
         do{
-            if(skulls!=0) out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
+            if(skulls!=0) out.println("You can insert only a digit between " + MIN_SKULL + " and 8" );
             try {
                 out.println("How many skulls?");
                 skulls = in.nextInt();
@@ -277,7 +278,7 @@ public class CLI implements UiInterface {
         int decision = 0;
         boolean sd = false;
         do {
-            if(decision!=0) out.println("You can't insert only 1 or 2");
+            if(decision!=0) out.println("You can insert only 1 or 2");
             try {
                 out.println("Do you wanna play with sudden death?");
                 out.println("\t1. Yes");
@@ -288,7 +289,7 @@ public class CLI implements UiInterface {
                     sd = true;
                 }
             }catch (InputMismatchException e) {
-                out.println("You can't insert only 1 or 2");
+                out.println("You can insert only 1 or 2");
                 in.nextLine();
             }
         }while(decision<1||decision>2);

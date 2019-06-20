@@ -7,6 +7,7 @@ import it.polimi.se2019.view.configureMessage.DisconnectMessage;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -32,7 +33,7 @@ public class SocketClient extends Client {
      * Connect the client to the server
      */
     @Override
-    public void connect() {
+    public void connect() throws UnknownHostException {
         try {
             socket = new Socket(IP, port); /*Connection established*/
             createNewStream();
@@ -56,7 +57,7 @@ public class SocketClient extends Client {
             }).start();
 
         } catch (IOException e) {
-            Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't open client socket", e);
+            throw new UnknownHostException();
         }
     }
 

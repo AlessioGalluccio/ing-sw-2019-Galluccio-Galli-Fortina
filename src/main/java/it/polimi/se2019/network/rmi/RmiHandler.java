@@ -55,7 +55,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
 
     @Override
     public void update(java.util.Observable o, Object arg) {
-        executor.submit(new Sender((HandlerNetworkMessage) arg));
+        if(!executor.isShutdown()) executor.submit(new Sender((HandlerNetworkMessage) arg));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
 
     @Override
     public void send(String string) {
-        executor.submit(new Sender(new PrintFromControllerMessage(string)));
+        if(!executor.isShutdown()) executor.submit(new Sender(new PrintFromControllerMessage(string)));
     }
 
     /**

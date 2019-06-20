@@ -8,6 +8,7 @@ import it.polimi.se2019.view.clientView.ClientMapView;
 import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 
+import java.net.UnknownHostException;
 import java.rmi.NoSuchObjectException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -29,8 +30,10 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
 
     /**
      * Connect client to server
+     * @throws UnknownHostException if the IP of the socket server is not correct
+     * @throws RemoteException if the IP of the RMI server is not correct
      */
-    public abstract void connect();
+    public abstract void connect() throws UnknownHostException, RemoteException;
 
     public void handleLoginMessage(boolean success, boolean isFirst, String nickname) {
         if(success) this.ID = nickname;
