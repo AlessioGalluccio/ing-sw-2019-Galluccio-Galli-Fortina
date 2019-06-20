@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public abstract class Action implements AddActionMethods {
     protected GameHandler gameHandler;
-    protected ArrayList<StringAndMessage> correctMessages;
     protected Player playerAuthor;
     protected PlayerView playerView;
     protected Controller controller;
@@ -33,9 +32,7 @@ public abstract class Action implements AddActionMethods {
     public void executeAction() throws WrongInputException{
 
     }
-    public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        return correctMessages;
-    }
+    public abstract ArrayList<StringAndMessage> getStringAndMessageExpected();
 
     public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
 
