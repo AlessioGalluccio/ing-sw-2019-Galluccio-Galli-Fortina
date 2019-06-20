@@ -1808,8 +1808,8 @@ public class Controller implements Initializable {
 
 
         for (int i = 0; i < cellAmmos.size(); i++) {
-            imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getCardID()));
-            System.out.println(cellAmmos.get(i).getCardID());
+            imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+
         }
             }
         });
@@ -1822,10 +1822,10 @@ public class Controller implements Initializable {
      * @param ammoID
      * @return
      */
-    public Image setAmmoCard(List<Integer> ammoID) {
-        int ammoCardId = ammoID.get(0);
+    public Image setAmmoCard(int ammoID) {
+
         Image image = new Image("ammo/AD_ammo_04.png");
-        switch (ammoCardId) {
+        switch (ammoID) {
             case 0:
                 image = new Image("ammo/AD_ammo_0421.png");
                 break;
@@ -2369,7 +2369,7 @@ public class Controller implements Initializable {
                     imPower.add(imPowerupCard3);
                     imPower.add(imPowerupCard4);
                     for (int i = 0; i < powerupCards.size(); i++) {
-                        imPower.get(i).setImage(setPowerup(powerupCards.get(i).getID()));
+                        imPower.get(i).setImage(setPowerup(powerupCards.get(i).getIDtype()));
                         discardWeapon.get(i).setDisable(false);
                         usePowerup.get(i).setDisable(false);
                     }

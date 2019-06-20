@@ -42,6 +42,14 @@ public class CellAmmo extends Cell {
         return grabCard(cardID);
     }
 
+    /**
+     *
+     * @return ammo card
+     */
+    public AmmoCard getAmmo() {
+        return ammo;
+    }
+
     @Override
     public List<Integer> getCardID() {
         ArrayList<Integer> cardId = new ArrayList<>();
