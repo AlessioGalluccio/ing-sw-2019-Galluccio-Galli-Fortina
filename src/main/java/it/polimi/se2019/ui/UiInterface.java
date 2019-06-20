@@ -38,7 +38,7 @@ public interface UiInterface {
 
     void turn(String nickname, boolean yourTurn);
 
-    void chooseCharacter(List<Character> characters);
+    void chooseCharacter(List<Character> characters) throws Exception;
 
 
 }

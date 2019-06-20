@@ -240,7 +240,12 @@ public class ClientView extends View /*View implement observer/observable*/{
     @Override
     public void setPossibleCharacter(List<Character> possibleCharacter){
         this.possibleCharacter = possibleCharacter;
-        ui.chooseCharacter(possibleCharacter);
+        try {
+            ui.chooseCharacter(possibleCharacter);
+        }
+        catch (Exception e){
+
+        }
     }
 
     /**
