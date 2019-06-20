@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RMIClient extends Client implements RmiClientInterface, Observer {
+    private static final long serialVersionUID = 7523008212736615992L;
     private RmiHandlerInterface server;
     private ExecutorService executor;
     static int nThreads =0;

@@ -24,6 +24,7 @@ import java.rmi.RemoteException;
 import java.util.Observer;
 
 public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHandlerInterface, Server, SwitchServerMessage {
+    private static final long serialVersionUID = 3131880418047594201L;
     private RMIServer server;
     private transient Timer timer = new Timer();
     private RmiClientInterface client;

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SocketClient extends Client {
+    private static final long serialVersionUID = -8669608992693984456L;
     private int port;
     private String IP;
     private boolean open;

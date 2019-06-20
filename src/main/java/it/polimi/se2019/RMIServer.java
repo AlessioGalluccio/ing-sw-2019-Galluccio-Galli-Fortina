@@ -15,8 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RMIServer extends UnicastRemoteObject implements RmiServerInterface {
+    private static final long serialVersionUID = 7125169937302118373L;
     static RmiServerInterface remoteObj;
-    private static final long serialVersionUID = 1L;
     private LinkedList<RmiHandlerInterface> handlers;
     private int timerTurn;
     private transient WaitingRoom waitingRoom;
