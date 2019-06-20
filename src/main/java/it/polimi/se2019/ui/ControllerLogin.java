@@ -56,8 +56,6 @@ public class ControllerLogin implements UiInterface {
     @FXML
     public TextField ipAddress;
     @FXML
-    public Button closeWaiting;
-    @FXML
     private TextField username;
 
     @FXML
@@ -142,7 +140,8 @@ public class ControllerLogin implements UiInterface {
 
                     else{
                         try {
-                            open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                            fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                            controller = fxmlLoader.getController();
                         } catch (Exception e) {
                         }
                     }
