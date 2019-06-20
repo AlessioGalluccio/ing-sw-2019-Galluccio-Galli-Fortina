@@ -6,6 +6,7 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.EnemyView;
 
 public class PlayerModelMessage implements ModelViewMessage, HandlerPlayerViewMessage, HandlerEnemyViewMessage {
+    private static final long serialVersionUID = 2959843277760360653L;
     private static int ID = 1;
     private int ack;
     private Player playerCopy;

@@ -5,6 +5,7 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
 public class OptionalMessage extends ViewControllerMessage{
+    private static final long serialVersionUID = -1651278236277548533L;
     private int optionalID;
 
     /**

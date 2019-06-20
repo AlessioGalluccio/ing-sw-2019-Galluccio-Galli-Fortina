@@ -6,6 +6,7 @@ import it.polimi.se2019.network.*;
 import java.io.Serializable;
 
 public class LoginMessage implements HandlerServerMessage, HandlerConfigMessage, Serializable {
+    private static final long serialVersionUID = -2692756102145802983L;
     private int messageID;
     private int matchID;
     private String playerNickname;

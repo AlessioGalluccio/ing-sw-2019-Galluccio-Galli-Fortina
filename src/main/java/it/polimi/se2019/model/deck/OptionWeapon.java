@@ -5,6 +5,7 @@ import java.util.*;
 
 public class OptionWeapon extends WeaponCard {
 
+    private static final long serialVersionUID = 4350546617698640742L;
     private ArrayList<? extends FireMode> optionalFireModeList = new ArrayList<>();
     private FireMode primaryFireMode;
 

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class CellAmmo extends Cell {
+    private static final long serialVersionUID = 2030465796514725765L;
     private AmmoCard ammo;
     private transient AmmoDeck deck;
 

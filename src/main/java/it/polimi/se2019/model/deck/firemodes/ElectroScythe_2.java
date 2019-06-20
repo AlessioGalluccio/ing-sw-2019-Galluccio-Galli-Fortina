@@ -17,6 +17,8 @@ import java.util.List;
 
 public class ElectroScythe_2 extends ElectroScythe_1 {
 
+    private static final long serialVersionUID = 6200012478870176300L;
+
     @Override
     public void fire() throws WrongInputException{
         Cell commonCell = author.getCell();

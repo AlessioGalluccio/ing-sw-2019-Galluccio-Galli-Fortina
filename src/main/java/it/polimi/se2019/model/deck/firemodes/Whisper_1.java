@@ -18,6 +18,8 @@ import java.util.List;
 
 public class Whisper_1 extends FireMode {
 
+    private static final long serialVersionUID = 2287199755551717645L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

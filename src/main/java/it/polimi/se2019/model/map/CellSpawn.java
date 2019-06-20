@@ -16,6 +16,7 @@ import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 public class CellSpawn extends Cell {
+    private static final long serialVersionUID = 4308424924665943011L;
     private final int MAX_WEAPONCARD = 3;
     private WeaponCard[] weapon = new WeaponCard[MAX_WEAPONCARD];
     private ColorRYB color;

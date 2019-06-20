@@ -5,6 +5,8 @@ import it.polimi.se2019.ui.Printable;
 
 public class Passage implements Border {
 
+    private static final long serialVersionUID = -2039080465510300245L;
+
     @Override
     public boolean isCrossable() {
         return true;

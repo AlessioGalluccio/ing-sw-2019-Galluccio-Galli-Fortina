@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class TeleporterCard extends PowerupCard{
 
 
+    private static final long serialVersionUID = -8724215878484689333L;
+
     public TeleporterCard(ColorRYB color, int id, int IDtype) {
         super(color, id, IDtype);
     }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class ReloadMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -5035315248432532602L;
     private int weaponID;
 
     /**

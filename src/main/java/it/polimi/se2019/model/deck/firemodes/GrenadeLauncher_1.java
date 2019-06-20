@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrenadeLauncher_1 extends FireMode {
+    private static final long serialVersionUID = -6042825291183206795L;
     private boolean nextCellIsForOptional = false;
     private AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
 

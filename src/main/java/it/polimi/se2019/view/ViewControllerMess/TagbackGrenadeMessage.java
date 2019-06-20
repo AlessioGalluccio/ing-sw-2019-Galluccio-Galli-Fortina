@@ -7,6 +7,7 @@ import it.polimi.se2019.view.View;
 
 public class TagbackGrenadeMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -6223826044088291462L;
     private TagbackGrenadeCard usedCard;
 
     /**

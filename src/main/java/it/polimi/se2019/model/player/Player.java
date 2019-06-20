@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Player extends Observable implements Target, Serializable {
+    private static final long serialVersionUID = -889271951458445330L;
     private String nickname;
     @SkinnyObject
     @NotForPlayer

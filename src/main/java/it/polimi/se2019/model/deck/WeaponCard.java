@@ -16,6 +16,7 @@ import java.util.List;
 
 public abstract class WeaponCard implements Card {
 
+    private static final long serialVersionUID = -3963551867744677662L;
     private List<StringAndMessage> correctMessages;
     private ColorRYB ammoGranted;
     private ArrayList<ColorRYB> ammoNotGranted;
@@ -138,7 +139,7 @@ public abstract class WeaponCard implements Card {
 
     @Override
     public void discard() {
-        //TODO ATTENZIONE: nello scarto non vanno messe in usedCard, perchè rimangono sempre in gioco!
+        //ATTENTION: you can't discard the weapon, they have to be replace on the map!
     }
 
     @Override

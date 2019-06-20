@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class TargetingScopeCard extends PowerupCard{
 
+    private static final long serialVersionUID = 1400744600083145830L;
+
     public TargetingScopeCard(ColorRYB color, int id, int IDtype) {
         super(color, id, IDtype);
     }

@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public abstract class Map extends Observable implements Serializable {
+    private static final long serialVersionUID = 7730216440770140648L;
     private int ID;
     private final Cell[][] cell;    //Cell[X][Y], according to cartesian plane (0,0 is at bottom-left)
     private transient final ArrayList<Room> room;

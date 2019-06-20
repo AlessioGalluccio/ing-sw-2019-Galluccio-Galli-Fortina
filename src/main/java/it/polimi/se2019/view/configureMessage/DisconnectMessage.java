@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 public class DisconnectMessage implements HandlerNetworkMessage, Serializable {
 
+    private static final long serialVersionUID = -9193123076232554727L;
+
     @Override
     public void handleMessage(Client client) {
         client.handleDisconnection();

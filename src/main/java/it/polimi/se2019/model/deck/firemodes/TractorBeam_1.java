@@ -1,20 +1,19 @@
 package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TractorBeam_1 extends FireMode {
+
+    private static final long serialVersionUID = 4282563996993084174L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -45,6 +44,7 @@ public class TractorBeam_1 extends FireMode {
 
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
+        Player target = gameHandler.getPlayerByID(playerID);
 
     }
 

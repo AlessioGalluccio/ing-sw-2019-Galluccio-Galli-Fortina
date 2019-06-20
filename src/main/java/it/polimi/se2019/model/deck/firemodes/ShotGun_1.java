@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ShotGun_1 extends FireMode {
 
+    private static final long serialVersionUID = 5078758035082132955L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

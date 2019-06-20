@@ -22,6 +22,7 @@ public class ElectroScythe_1 extends FireMode {
 
     private static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
     private static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
+    private static final long serialVersionUID = 5053678759660132677L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

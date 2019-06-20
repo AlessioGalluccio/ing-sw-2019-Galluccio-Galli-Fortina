@@ -8,6 +8,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class NewtonMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -9121530509137795994L;
     private NewtonCard usedCard;
 
     /**

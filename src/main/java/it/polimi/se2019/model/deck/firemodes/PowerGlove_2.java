@@ -16,6 +16,8 @@ import java.util.List;
 
 public class PowerGlove_2 extends FireMode {
 
+    private static final long serialVersionUID = 4773017297111698934L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

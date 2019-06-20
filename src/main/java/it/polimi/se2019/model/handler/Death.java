@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Death implements Serializable {
 
+    private static final long serialVersionUID = 3870159088946031617L;
     private final Player whoKilled;
     private final Player whoDied;
     private int points;
@@ -14,9 +15,7 @@ public class Death implements Serializable {
     private static final int POINTS_OVERKILLED = 2;
     private static final  int POINTS_NOT_OVERKILLED = 1;
 
-    public Death(Player whoKilled, Player whoDied) {
-        //TODO exception if Player whoDied is not dead
-
+    Death(Player whoKilled, Player whoDied) {
         this.whoKilled = whoKilled;
         this.whoDied = whoDied;
 

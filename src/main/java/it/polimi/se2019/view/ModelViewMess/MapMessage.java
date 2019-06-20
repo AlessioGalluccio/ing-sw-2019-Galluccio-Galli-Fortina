@@ -10,6 +10,7 @@ import it.polimi.se2019.view.remoteView.MapView;
  * After that use CellMessage!
  */
 public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
+    private static final long serialVersionUID = -5176554593125828697L;
     private static int ID=0;
     private int ack;
     private Map mapCopy;

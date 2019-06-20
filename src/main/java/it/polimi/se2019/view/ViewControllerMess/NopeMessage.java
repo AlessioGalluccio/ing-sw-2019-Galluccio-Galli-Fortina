@@ -8,6 +8,8 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 public class NopeMessage extends ViewControllerMessage {
 
 
+    private static final long serialVersionUID = 7607227832420930780L;
+
     /**
      * NopeMessage class's constructor
      * @param authorID

@@ -6,6 +6,7 @@ import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.View;
 
 public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMessage {
+    private static final long serialVersionUID = 7185709958314488390L;
     private int matchID;
 
     public StartGameMessage(int matchID) {

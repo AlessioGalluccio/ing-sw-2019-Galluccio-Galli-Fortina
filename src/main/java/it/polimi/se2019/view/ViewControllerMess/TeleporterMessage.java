@@ -9,6 +9,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TeleporterMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -2889714451554044214L;
     private TeleporterCard usedCard;
 
 

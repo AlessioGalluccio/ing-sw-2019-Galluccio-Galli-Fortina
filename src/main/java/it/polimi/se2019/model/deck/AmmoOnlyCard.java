@@ -8,6 +8,7 @@ import static it.polimi.se2019.model.player.ColorRYB.*;
 
 
 public class AmmoOnlyCard implements AmmoCard {
+    private static final long serialVersionUID = -2988304472701966764L;
     private final int ID;
     private final int IDtype;
     private transient AmmoDeck deck;

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class PossibleCharacterMessage implements HandlerNetworkMessage, Serializable {
 
+    private static final long serialVersionUID = 3661734970314913421L;
     private List<Character> possibleCharacter;
 
     public PossibleCharacterMessage(List<Character> possibleCharacter) {

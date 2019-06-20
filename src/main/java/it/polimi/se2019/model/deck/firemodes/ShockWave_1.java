@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ShockWave_1 extends FireMode {
 
+    private static final long serialVersionUID = -7666019166677851905L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

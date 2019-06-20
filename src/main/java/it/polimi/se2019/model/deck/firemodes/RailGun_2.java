@@ -16,6 +16,8 @@ import java.util.List;
 
 public class RailGun_2 extends FireMode {
 
+    private static final long serialVersionUID = 3954418059011118447L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

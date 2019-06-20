@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlameThrower_1 extends FireMode {
+    private static final long serialVersionUID = 6537862487999321509L;
 
     //firstly, we choose a direction of fire with CellMessage, then we select the targets inside
 

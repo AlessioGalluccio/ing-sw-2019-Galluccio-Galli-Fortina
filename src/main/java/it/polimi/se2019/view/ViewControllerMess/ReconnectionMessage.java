@@ -6,6 +6,7 @@ import it.polimi.se2019.view.View;
 
 public class ReconnectionMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = 5269430019416553245L;
     private boolean isConnected;
 
     /**

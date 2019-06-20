@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PossibleTargetMessage implements ModelViewMessage{
 
+    private static final long serialVersionUID = 6466147418722129048L;
     private ArrayList<? extends Target> possibleTarget;
 
     public PossibleTargetMessage(List<? extends Target> possibleTarget) {

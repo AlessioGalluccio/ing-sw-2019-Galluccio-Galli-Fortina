@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 
 public class Wall implements Border {
 
+    private static final long serialVersionUID = -6579182187447608328L;
+
     @Override
     public boolean isCrossable() {
         return false;

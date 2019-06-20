@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Immutable
 public class Coordinate implements Serializable {
+    private static final long serialVersionUID = -8917867784167746187L;
     private  final int x;
     private final int y;
 

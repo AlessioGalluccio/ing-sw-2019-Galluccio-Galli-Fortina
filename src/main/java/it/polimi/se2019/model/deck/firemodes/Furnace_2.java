@@ -24,6 +24,7 @@ public class Furnace_2 extends FireMode {
     //errors
     public static final String INVALID_CELL = "You can't select this cell. ";
     public static final String NO_TARGETS_IN_CELL = "There are no targets in this cell. ";
+    private static final long serialVersionUID = -315490042639058980L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

@@ -7,6 +7,7 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class WeaponMessage extends ViewControllerMessage {
+    private static final long serialVersionUID = -835200389203068573L;
     WeaponCard weaponCard;
 
     public WeaponMessage(WeaponCard weaponCard, int authorID, View authorView){

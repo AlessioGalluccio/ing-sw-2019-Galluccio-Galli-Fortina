@@ -6,6 +6,7 @@ import it.polimi.se2019.network.HandlerNetworkMessage;
 import java.io.Serializable;
 
 public class PrintFromControllerMessage implements HandlerNetworkMessage, Serializable {
+    private static final long serialVersionUID = -1838299026500487559L;
     private String message;
 
     public PrintFromControllerMessage(String string) {

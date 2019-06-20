@@ -11,6 +11,7 @@ import java.util.Collections;
 
 public class Mark implements Serializable {
     private static final int MAX_MARK = 3;
+    private static final long serialVersionUID = 7677576860792993751L;
     private ArrayList<Player> markDone = new ArrayList<>();
     private ArrayList<Player> markReceived = new ArrayList<>();
 

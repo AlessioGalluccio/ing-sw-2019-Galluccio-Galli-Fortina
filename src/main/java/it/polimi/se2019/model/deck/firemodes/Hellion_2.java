@@ -16,6 +16,8 @@ import java.util.List;
 
 public class Hellion_2 extends Hellion_1 {
 
+    private static final long serialVersionUID = -3964732490391201864L;
+
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
         List<AmmoBag> list = new ArrayList<>();

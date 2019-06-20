@@ -19,6 +19,7 @@ public class Thor_1 extends FireMode {
     //COSTS
     private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(0,0,1);
     private static final AmmoBag COST_SECOND_OPTIONAL = new AmmoBag(0,0,1);
+    private static final long serialVersionUID = 5449929047676709791L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

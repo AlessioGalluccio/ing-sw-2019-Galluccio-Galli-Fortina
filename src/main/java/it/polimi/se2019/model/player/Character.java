@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Character implements Serializable {
 
+    private static final long serialVersionUID = -6097552840845310529L;
     private final String nameCharacter;
     private final String color;
     private final int id;

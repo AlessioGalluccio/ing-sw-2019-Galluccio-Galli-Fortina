@@ -5,6 +5,7 @@ import java.util.List;
 
 public class BaseWeapon extends WeaponCard {
 
+    private static final long serialVersionUID = 8502911012102121335L;
     private ArrayList<? extends FireMode> fireModeList;
 
     /**

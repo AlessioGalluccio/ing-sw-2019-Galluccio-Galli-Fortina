@@ -14,6 +14,7 @@ import java.util.Objects;
 
 public abstract class Cell extends Observable implements Printable, Target, Serializable {
 
+    private static final long serialVersionUID = -7765300319324575872L;
     private Border northBorder;
     private Border eastBorder;
     private Border southBorder;

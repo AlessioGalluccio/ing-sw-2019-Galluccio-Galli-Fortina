@@ -21,9 +21,7 @@ public class LockRifle_1 extends FireMode {
 
     //ERROR MESSAGES
     private static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-
-
-
+    private static final long serialVersionUID = 3993004488978159721L;
 
 
     @Override

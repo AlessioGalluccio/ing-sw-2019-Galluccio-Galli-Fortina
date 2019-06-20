@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public abstract class FireMode implements AddFireModeMethods, Serializable {
+    private static final long serialVersionUID = 9095800883593243992L;
     private ArrayList<ColorRYB> cost;
     private transient ArrayList<? extends Target> target;
     private int ID;
@@ -39,9 +40,9 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     //common used in firemodes
     protected static final String CANT_DO = "You can't do this.  ";
-    protected static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
-    protected static final String SELECTED_YOURSELF = "Error,you have selected yourself. ";
-    protected static final String NOT_VISIBLE = "Error,this player is not visible. ";
+    protected static final String CELL_NOT_PRESENT = "This cell is not present on the map.";
+    protected static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
+    protected static final String NOT_VISIBLE = "Error, this player is not visible. ";
     protected static final String CANT_DO_FIRE = "You can't do fire now. ";
     private static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
     private static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";

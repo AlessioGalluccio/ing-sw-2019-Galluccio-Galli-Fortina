@@ -11,6 +11,8 @@ import java.util.List;
 
 public class FlameThrower_2 extends FlameThrower_1 {
 
+    private static final long serialVersionUID = -8030079729591996463L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         //TODO da fare!

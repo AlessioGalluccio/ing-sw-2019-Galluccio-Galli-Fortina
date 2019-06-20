@@ -10,6 +10,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class TargetingScopeMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -4381929763624561191L;
     private TargetingScopeCard usedCard;
     private ColorRYB colorAmmo;
 

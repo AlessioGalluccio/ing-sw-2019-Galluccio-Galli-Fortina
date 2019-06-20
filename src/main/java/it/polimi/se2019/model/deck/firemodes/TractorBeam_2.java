@@ -13,6 +13,7 @@ import java.util.List;
 
 
 public class TractorBeam_2 extends FireMode {
+    private static final long serialVersionUID = 5530034654912263654L;
     private final String TOO_DISTANT = "The target you chose is too distant from you.\n";
     private final String SELECT_PLAYER = "Select a player up to two cells distant from you, even if you can't see it. ";
 

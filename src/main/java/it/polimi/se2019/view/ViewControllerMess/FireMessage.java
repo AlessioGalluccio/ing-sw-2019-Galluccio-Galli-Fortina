@@ -7,6 +7,8 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class FireMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = -4311857432590616482L;
+
     /**
      * FireMessage class's constructor
      * @param authorID

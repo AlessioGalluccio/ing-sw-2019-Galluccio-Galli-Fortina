@@ -16,6 +16,8 @@ import java.util.List;
 
 public class SledgeHammer_1 extends FireMode {
 
+    private static final long serialVersionUID = 8298297204873304371L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

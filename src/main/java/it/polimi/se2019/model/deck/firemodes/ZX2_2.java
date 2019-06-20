@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ZX2_2 extends FireMode {
 
+    private static final long serialVersionUID = -1615539718713764664L;
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         return null;

@@ -23,6 +23,7 @@ public class Hellion_1 extends FireMode {
 
     //errors
     public static final String INVALID_TARGET = "You can't select this target. ";
+    private static final long serialVersionUID = -2441699796090988563L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class TagbackGrenadeCard extends PowerupCard{
 
 
+    private static final long serialVersionUID = -7421528938667576629L;
+
     public TagbackGrenadeCard(ColorRYB color, int id, int IDtype) {
         super(color, id, IDtype);
     }

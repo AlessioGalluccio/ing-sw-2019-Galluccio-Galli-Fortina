@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class NewtonCard extends PowerupCard{
 
 
+    private static final long serialVersionUID = -8414803787414827397L;
+
     public NewtonCard(ColorRYB color, int id, int IDtype) {
         super(color, id, IDtype);
     }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Map4 extends Map {
 
     private static final String description = "This map is excellent for three players";
+    private static final long serialVersionUID = -4653614637018380545L;
 
     public Map4(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {
         /*

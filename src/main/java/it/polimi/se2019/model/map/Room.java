@@ -5,10 +5,12 @@ import it.polimi.se2019.model.player.Player;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
 public class Room implements Target, Serializable {
+    private static final long serialVersionUID = -1001657778100220436L;
     private transient CellSpawn spawnCell;
     private String color;
     private transient ArrayList<Cell> cellRoom;
@@ -36,9 +38,9 @@ public class Room implements Target, Serializable {
      *
      * @return list of cell in this room
      */
-    public ArrayList<Cell> getCellRoom() {
+    public List<Cell> getCellRoom() {
 
-        return null; //TODO implementare
+        return new ArrayList<>(cellRoom);
     }
 
     /**
@@ -47,7 +49,7 @@ public class Room implements Target, Serializable {
      */
     public ArrayList<Player> getPlayerHere() {
 
-        return playerHere; //TODO implementare
+        return new ArrayList<>(playerHere);
     }
 
     /**
@@ -73,7 +75,7 @@ public class Room implements Target, Serializable {
      * @param playerToAdd the new player in the room to add
      * @throws NotHereException the player position is not in this room
      */
-    protected void addPlayer(Player playerToAdd) {
+    void addPlayer(Player playerToAdd) {
         if(playerToAdd.getCell().getRoom().getColor().equals(color)) playerHere.add(playerToAdd);
         else throw new NotHereException(playerToAdd.toString() + " is not in this room, color: " + color);
     }
@@ -83,7 +85,7 @@ public class Room implements Target, Serializable {
      * @param playerToRemove the player who was moved
      * @throws NotHereException the player was not moved from here
      */
-    protected void removePlayer(Player playerToRemove) {
+    void removePlayer(Player playerToRemove) {
         if(playerToRemove.getCell().getRoom().getColor().equals(color))  playerHere.remove(playerToRemove);
         else throw new NotHereException(playerToRemove.toString() + " was not in this room, color: " + color);
     }

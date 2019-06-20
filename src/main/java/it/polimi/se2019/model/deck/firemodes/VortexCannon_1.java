@@ -17,6 +17,7 @@ import java.util.List;
 public class VortexCannon_1 extends FireMode {
     //COSTS
     private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
+    private static final long serialVersionUID = 826096278509667369L;
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

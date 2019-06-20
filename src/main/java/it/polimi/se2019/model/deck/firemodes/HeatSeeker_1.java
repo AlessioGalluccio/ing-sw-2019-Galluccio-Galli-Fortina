@@ -17,6 +17,7 @@ import java.util.List;
 
 public class HeatSeeker_1 extends FireMode {
 
+    private static final long serialVersionUID = 4760119110368705474L;
     private static String FIRST_MSG_STR = "Select a player target";
 
 

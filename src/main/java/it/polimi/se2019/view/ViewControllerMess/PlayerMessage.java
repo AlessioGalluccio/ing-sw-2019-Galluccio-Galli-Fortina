@@ -7,6 +7,7 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class PlayerMessage extends ViewControllerMessage {
 
+    private static final long serialVersionUID = 5394848968896150380L;
     private int playerID;
 
     /**

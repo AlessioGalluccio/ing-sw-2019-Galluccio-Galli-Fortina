@@ -22,6 +22,7 @@ public class Furnace_1 extends FireMode {
 
     //errors
     public static final String INVALID_ROOM = "You can't select this room. ";
+    private static final long serialVersionUID = 7284647777673664015L;
 
 
     @Override

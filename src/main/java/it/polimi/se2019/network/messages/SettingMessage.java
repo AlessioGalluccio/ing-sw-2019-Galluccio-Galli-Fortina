@@ -6,6 +6,7 @@ import it.polimi.se2019.network.WaitingRoom;
 import java.io.Serializable;
 
 public class SettingMessage implements HandlerServerMessage, HandlerConfigMessage, Serializable {
+    private static final long serialVersionUID = -2954599084019987269L;
     private int map;
     private int skulls;
     private boolean suddendDeath;

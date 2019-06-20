@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class AmmoBag implements Serializable {
+    private static final long serialVersionUID = -3617983877168060807L;
     private final int redAmmo;
     private final int yellowAmmo;
     private final int blueAmmo;

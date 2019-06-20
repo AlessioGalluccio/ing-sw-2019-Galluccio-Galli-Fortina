@@ -4,6 +4,7 @@ import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.View;
 
 public class NewTurnMessage implements ModelViewMessage, HandlerPlayerViewMessage {
+    private static final long serialVersionUID = 8095022008364378923L;
     private String nickname;
 
     public NewTurnMessage(String nickname) {

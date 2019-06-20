@@ -6,6 +6,7 @@ import it.polimi.se2019.network.HandlerNetworkMessage;
 import java.io.Serializable;
 
 public class StatusLoginMessage implements HandlerNetworkMessage, Serializable {
+    private static final long serialVersionUID = 5877877795652127661L;
     private boolean status;
     private boolean isFirst;
     private String nickname;
