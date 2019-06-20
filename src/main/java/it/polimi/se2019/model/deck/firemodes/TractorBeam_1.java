@@ -62,7 +62,7 @@ public class TractorBeam_1 extends FireMode {
                 shoot.addCellFromFireMode(targetCell);
             else throw new WrongInputException(TOO_DISTANT);
         } catch (NotPresentException e) {
-            throw new WrongInputException("This cell dose not exist. ");
+            throw new WrongInputException(CELL_NOT_PRESENT);
         }
     }
 
