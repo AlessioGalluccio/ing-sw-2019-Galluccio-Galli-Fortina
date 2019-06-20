@@ -2,8 +2,7 @@ package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.model.deck.Card;
-import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
@@ -18,10 +17,10 @@ import java.util.List;
 
 public class Grab extends Action{
     private Cell cellObjective;
-    private Card cardObjective;
     private WeaponCard weaponToDiscard;
     private final int DISTANCE_MAX = 1;
     private boolean flagMustChooseWeapon;
+
 
     //messages
     public static final String CHOOSE_CELL = "Please, select a cell. ";
@@ -41,20 +40,27 @@ public class Grab extends Action{
 
     @Override
     public void executeAction() throws WrongInputException {
-        playerAuthor.setPosition(cellObjective);
         //TODO gestire prendere carte e munizioni
-        try{
-            cellObjective.grabCard(cardObjective.getID());
-        }catch(NotCardException e){
-            //it should be never launched here, because we already have cardObjective
-            throw new WrongInputException(CARD_NOT_PRESENT_IN_CELL_GRAB);
+        playerAuthor.setPosition(cellObjective);
+
+        if(playerAuthor.getPowerupCardList().size() < 3 && cellObjective.getCardID().size() < 3){
+            try{
+                Card cardObjective = cellObjective.grabCard(cellObjective.getCardID().get(0));
+                cardObjective.useCard(playerAuthor);
+
+            }catch(NotCardException e){
+                //it should be never launched here
+            }catch (TooManyException e) {
+                //should never be launched
+            }
         }
+
     }
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
         ArrayList<StringAndMessage> list = new ArrayList<>();
-        StringAndMessage firstMessage = new StringAndMessage(Identificator.MOVE, CHOOSE_CELL);
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL);
         list.add(firstMessage);
         return list;
     }
@@ -71,11 +77,16 @@ public class Grab extends Action{
         try{
             if(arrayCellsAtDistance.contains(gameHandler.getCellByCoordinate(x,y))) {
                 cellObjective = gameHandler.getCellByCoordinate(x, y);
-                //there's only one card to grab
-                if (cellObjective.getCardID().size() == 1) {
-                    //TODO cardObjective = gameHandler.getCardByID(cellObjective.getCardID().get(0));
+
+                if(cellObjective.getCardID().isEmpty()) {
+                    throw new WrongInputException(CARD_NOT_PRESENT_IN_CELL_GRAB);
+                }
+                else if (cellObjective.getCardID().size() == 1) {
+                    //there's only one card to grab
                     executeAction();
-                } else {
+
+                }
+                else {
                     //handling of WeaponCard
                     if (playerAuthor.getWeaponCardList().size() < 3) {
                         playerAuthor.setPosition(cellObjective);
@@ -127,7 +138,13 @@ public class Grab extends Action{
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         if(flagMustChooseWeapon){
             try{
-                cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
+                try{
+                    Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
+                    playerAuthor.addWeaponCard((WeaponCard) weapon);
+                }catch (TooManyException e){
+                    //should never happen
+                }
+
             }
             catch (NotCardException e){
                 throw new WrongInputException(WEAPON_NOT_PRESENT_IN_CELL_GRAB);

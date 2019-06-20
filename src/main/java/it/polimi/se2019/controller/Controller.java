@@ -166,10 +166,20 @@ public class Controller implements Observer {
         this.state = state;
     }
 
+    /**
+     * set num of actions taken
+     * @param numOfActionTaken the nume of actions
+     */
     public void setNumOfActionTaken(int numOfActionTaken) {
         this.numOfActionTaken = numOfActionTaken;
     }
 
+    /**
+     * add a new action taken. Call it at the end of an action
+     */
+    public void addNumOfActionTaken() {
+        this.numOfActionTaken++;
+    }
     /**
      * change the number of max actions per turn. The default is 2
      * @param numOfMaxActions
