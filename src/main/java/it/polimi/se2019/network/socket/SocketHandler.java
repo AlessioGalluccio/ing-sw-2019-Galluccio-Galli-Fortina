@@ -124,8 +124,8 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
      */
     @Override
     public void setTimer() {
-        if(timer==null) timer = new Timer();
-        else timer.cancel();
+        if(timer!=null) timer.cancel();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

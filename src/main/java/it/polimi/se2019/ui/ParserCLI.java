@@ -529,7 +529,7 @@ class ParserCLI {
             view.createCharacterMessage(view.getPossibleCharacter().get(Integer.parseInt(command[0])-1).getId());
         } catch (NotCharacterException e) {
             cli.println("You can't choose this character.");
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             cli.println("Missing info.\n" +
                     "Retry specifying which character do you want (insert the relative number).");
         } catch (NullPointerException e) {

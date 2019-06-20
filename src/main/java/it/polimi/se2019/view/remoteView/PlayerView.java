@@ -131,4 +131,9 @@ public class PlayerView extends View /*View implement observer/observable*/{
         this.networkHandler = networkHandler;
     }
 
+    public void setTimer(boolean set) {
+        if(set) networkHandler.setTimer();
+        else networkHandler.cancelTimer();
+    }
+
 }
