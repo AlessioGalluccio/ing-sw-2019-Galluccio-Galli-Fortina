@@ -23,6 +23,10 @@ public class Grab extends Action{
     private final int DISTANCE_MAX = 1;
     private boolean flagMustChooseWeapon;
 
+    //messages
+    public static final String CHOOSE_CELL = "Please, select a cell. ";
+
+    //errors
     public static final String CHOOSE_WEAPON = "Choose a weapon to grab. ";
     public static final String DISCARD_WEAPON = "Discard a weapon. ";
     public static final String WEAPON_NOT_PRESENT_IN_PLAYER_GRAB = "You don't have this weapon. ";
@@ -49,7 +53,10 @@ public class Grab extends Action{
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        return super.getStringAndMessageExpected();
+        ArrayList<StringAndMessage> list = new ArrayList<>();
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.MOVE, CHOOSE_CELL);
+        list.add(firstMessage);
+        return list;
     }
 
     @Override

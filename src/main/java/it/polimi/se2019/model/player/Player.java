@@ -15,6 +15,7 @@ import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
@@ -509,34 +510,13 @@ public class Player extends Observable implements Target, Serializable {
     }
 
 
-    public boolean isVisibleBy(Player shooter){
-        Cell enemyCell = shooter.getCell();
-        Room enemyRoom = enemyCell.getRoom();
-        Room roomOfThis = this.cellPosition.getRoom();
+    public boolean isVisibleBy(Map onThisMap, Player shooter){
+        Cell enemyCell = shooter.cellPosition;
         //it's the same player
         if(shooter.getID() == ID){
             return false;
         }
-        //in the same room
-        else if(enemyRoom.equals(roomOfThis)){
-            return true;
-        }
-        //
-        /*else if(enemyCell.getNorthBorder().isCrossable() && roomOfThis.equals(enemyCell.getNorthCell().getRoom())){
-            return true;
-        }
-        else if(enemyCell.getEastBorder().isCrossable() && roomOfThis.equals(enemyCell.getEastCell().getRoom())){
-            return true;
-        }
-        else if(enemyCell.getSouthBorder().isCrossable() && roomOfThis.equals(enemyCell.getSouthCell().getRoom())){
-            return true;
-        }
-        else if(enemyCell.getWestBorder().isCrossable() && roomOfThis.equals(enemyCell.getWestCell().getRoom())){
-            return true;
-        }*/
-        else{
-            return false;
-        }
+        return onThisMap.canSee(cellPosition, enemyCell);
     }
 
     /**

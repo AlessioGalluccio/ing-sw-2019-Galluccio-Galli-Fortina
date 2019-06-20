@@ -34,7 +34,8 @@ public class HeatSeeker_1 extends FireMode {
         //opposto di sendAllVisible
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && !playerOfGame.isVisibleBy(this.author)){
+            if(playerOfGame.getID() != this.author.getID() &&
+                    !playerOfGame.isVisibleBy(gameHandler.getMap(), this.author)){
                 listTarget.add(playerOfGame);
             }
         }
@@ -62,7 +63,7 @@ public class HeatSeeker_1 extends FireMode {
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player targetPlayer = gameHandler.getPlayerByID(playerID);
-        if(shoot.getTargetsPlayer().isEmpty() && !targetPlayer.isVisibleBy(author)){
+        if(shoot.getTargetsPlayer().isEmpty() && !targetPlayer.isVisibleBy(gameHandler.getMap(), author)){
             shoot.addPlayerTargetFromFireMode(targetPlayer, true);
         }
         else {

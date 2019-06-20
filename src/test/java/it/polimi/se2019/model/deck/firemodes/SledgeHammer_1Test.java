@@ -8,6 +8,7 @@ import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
@@ -16,7 +17,6 @@ import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
-import it.polimi.se2019.model.player.Character;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class TractorBeam_2Test {
+public class SledgeHammer_1Test {
 
     private Player authorPlayer;
     private Player targetPlayer1;
@@ -40,13 +40,13 @@ public class TractorBeam_2Test {
     private PlayerView playerView;
     private StateController stateController;
 
-    private final static int TRACTORBEAM_WEAPON_ID = 2;
-    private final static int TRACTORBEAM_2_FIREMODE_ID = 22;
+    private final static int TRACTORBEAM_WEAPON_ID = 13;
+    private final static int TRACTORBEAM_2_FIREMODE_ID = 131;
 
     @Before
     public void setUp() throws Exception {
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
+        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 1);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 2);
         targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 3);
 
@@ -71,15 +71,13 @@ public class TractorBeam_2Test {
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
         stateController = controller.getState();
 
-        //author and target 1 in the same cell
+        //author, target 1 and target 2 in the same cell
         commonCell = gameHandler.getCellByCoordinate(1,1);
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
+        targetPlayer2.setPosition(commonCell);
 
-        //target 2 in another room
-        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(0,1));
-
-        //target 3 distant 4 cells
+        //target 3 in another room
         notVisibleCell = gameHandler.getCellByCoordinate(1,2);
         targetPlayer3.setPosition(notVisibleCell);
 
@@ -101,71 +99,45 @@ public class TractorBeam_2Test {
     }
 
     @Test
-    public void oneTargetSameCell() {
+    public void oneTarget() {
         controller.update(null,
-                new PlayerMessage(2011, authorPlayer.getID(), playerView));
+                new PlayerMessage(1, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+
+        assertEquals(2, targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer2.getDamage().size());
+    }
+
+    @Test
+    public void twoTargetAndMark() throws TooManyException {
+        targetPlayer1.receiveMarkBy(authorPlayer);
+
+        controller.update(null,
+                new PlayerMessage(1, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new PlayerMessage(2, authorPlayer.getID(), playerView));
+        assertEquals("You can't do this now. Please, press Fire", playerView.getLastStringPrinted());
+        controller.update(null,
+                new FireMessage(authorPlayer.getID(), playerView));
+
         assertEquals(3, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer3.getDamage().size());
     }
-
     @Test
-    public void oneTargetDistant() {
-        controller.update(null,
-                new PlayerMessage(2, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(3, targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer3.getDamage().size());
-        assertEquals(authorPlayer.getCell(), targetPlayer2.getCell());
-        assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
-        assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
-    }
+    public void notSameCell() throws TooManyException {
+        targetPlayer1.receiveMarkBy(authorPlayer);
 
-    @Test
-    public void oneTargetTooDistant() {
-        controller.update(null,
-                new PlayerMessage(4, authorPlayer.getID(), playerView));
-        assertEquals("The target you chose is too distant from you.\n" +
-                "Select a player up to two cells distant from you, even if you can't see it. ",
-                playerView.getLastStringPrinted());
-        assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(0, targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer3.getDamage().size());
-    }
-
-    @Test
-    public void twoTarget() {
-        controller.update(null,
-                new PlayerMessage(2, authorPlayer.getID(), playerView));
         controller.update(null,
                 new PlayerMessage(3, authorPlayer.getID(), playerView));
+        assertEquals("This player is not on your cell. Select a player on your cell. ", playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+
         assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(3, targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
     }
 
-    @Test
-    public void withMark() throws TooManyException {
-        targetPlayer2.receiveMarkBy(authorPlayer);
-        controller.update(null,
-                new PlayerMessage(2, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(4, targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(0, targetPlayer3.getDamage().size());
-
-    }
 
 }

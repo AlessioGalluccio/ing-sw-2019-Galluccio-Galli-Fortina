@@ -23,7 +23,6 @@ public class Move extends Action {
 
     public Move(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
-        correctMessages.add(FIRST_STRING_AND_MESS);
 
     }
 
@@ -34,8 +33,9 @@ public class Move extends Action {
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-
-        return super.getStringAndMessageExpected();
+        ArrayList<StringAndMessage> list = new ArrayList<>();
+        list.add(FIRST_STRING_AND_MESS);
+        return list;
     }
 
     @Override

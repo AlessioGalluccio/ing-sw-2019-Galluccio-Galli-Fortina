@@ -58,7 +58,8 @@ public class Furnace_1 extends FireMode {
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
-        if(!target.isVisibleBy(author) || target.getCell().getRoom().equals(author.getCell().getRoom())){
+        if(!target.isVisibleBy(gameHandler.getMap(), author) ||
+                target.getCell().getRoom().equals(author.getCell().getRoom())){
             throw new WrongInputException(INVALID_ROOM);
         }
         else {

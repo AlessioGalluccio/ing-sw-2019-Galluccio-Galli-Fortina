@@ -30,6 +30,7 @@ public class ActionSelectedControllerState extends StateController {
         this.action = action;
         this.controller.resetMessages();
         this.controller.addMessageListExpected(action.getStringAndMessageExpected());
+        this.controller.getPlayerView().printFromController(controller.getCopyMessageListExpected().get(0).getString());
     }
 
 

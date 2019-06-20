@@ -50,7 +50,8 @@ public class ZX2_1 extends FireMode {
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
-        if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty() && target.getID() != author.getID()){
+        if(target.isVisibleBy(gameHandler.getMap(), author) &&
+                shoot.getTargetsPlayer().isEmpty() && target.getID() != author.getID()){
             shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{

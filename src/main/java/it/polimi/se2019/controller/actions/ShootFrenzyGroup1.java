@@ -10,8 +10,8 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
-public class ShootFrenzy extends Shoot {
-    public ShootFrenzy(GameHandler gameHandler, Controller controller) {
+public class ShootFrenzyGroup1 extends Shoot {
+    public ShootFrenzyGroup1(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }
 
