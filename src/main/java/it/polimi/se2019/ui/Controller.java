@@ -33,11 +33,16 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
+
+    //character button
+    @FXML
+    public Button bselectCharacter;
 
 
     //imageview of players' posizion on map
@@ -1804,6 +1809,7 @@ public class Controller implements Initializable {
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
             imAmmoCell.add(ammoCell00);
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
+            imAmmoCell.add(ammoCell32);
         }
 
 
@@ -2108,16 +2114,42 @@ public class Controller implements Initializable {
     }
 
 
-    public void chooseYourCharacter() throws Exception {
-        ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 500, 500);
+    /**
+     * open chooseCharacter window
+     * @param characterID
+     * @throws Exception
+     */
+    public void chooseYourCharacter(List<Integer> characterID) throws Exception {
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                //TODO IN BASE A QUELLO CHE MI VIENE PASSATO DISATTIVO I PERSONAGGI
+                try {
+                    rbSprog.setDisable(true);
+                    rbViolet.setDisable(true);
+                    rbDozer.setDisable(true);
+                    rbStruct.setDisable(true);
+                    rbBanshee.setDisable(true);
+                    for (int i = 0; i < characterID.size(); i++) {
+                        setPossibleTarget(characterID.get(i));
+                    }
+                } catch (NullPointerException e) {
+
+                }
             }
         });
 
 
+    }
+
+    public void setPossibleTarget(int i){
+        switch (i){
+            case 1: rbSprog.setDisable(false);
+            case 2: rbViolet.setDisable(false);
+            case 3: rbStruct.setDisable(false);
+            case 4: rbDozer.setDisable(false);
+            case 5: rbBanshee.setDisable(false);
+        }
     }
 
 
@@ -2128,46 +2160,97 @@ public class Controller implements Initializable {
 
 
     /**
-     * set ImageView based on the character choosen
+     * set ImageView of player character based on the character choosen
      *
      * @param event
      */
     public void chooseCharacter(ActionEvent event) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
 
-        possibleActions.setVisible(true);
-        yourCharacter.setVisible(true);
-        ArrayList<Image> images = new ArrayList<>();
-        try {
-            if (rbSprog.isSelected()) {
-                ControllerLogin.clientView.createCharacterMessage(1);
-                images = setCharacter(1);
+                ArrayList<Image> images = new ArrayList<>();
+                try {
+                    if (rbSprog.isSelected()) {
+                        ControllerLogin.clientView.createCharacterMessage(1);
+                        images = setCharacter(1);
 
-            }
-            if (rbViolet.isSelected()) {
-                ControllerLogin.clientView.createCharacterMessage(2);
-                images = setCharacter(2);
-            }
-            if (rbStruct.isSelected()) {
-                ControllerLogin.clientView.createCharacterMessage(3);
-                images = setCharacter(3);
-            }
-            if (rbDozer.isSelected()) {
-                ControllerLogin.clientView.createCharacterMessage(4);
-                images = setCharacter(4);
-            }
-            if (rbBanshee.isSelected()) {
-                ControllerLogin.clientView.createCharacterMessage(5);
-                images = setCharacter(5);
-            }
 
-            yourCharacter.setImage(images.get(0));
-            possibleActions.setImage(images.get(1));
-        } catch (NotCharacterException e) {
-            //TODO stampare che non può scegliere quel personaggio
-            //(In teoria con la GUI non potrebbe sucedere)
-        }
+                    }
+                    if (rbViolet.isSelected()) {
+                        ControllerLogin.clientView.createCharacterMessage(2);
+                        images = setCharacter(2);
+                    }
+                    if (rbStruct.isSelected()) {
+                        ControllerLogin.clientView.createCharacterMessage(3);
+                        images = setCharacter(3);
+                    }
+                    if (rbDozer.isSelected()) {
+                        ControllerLogin.clientView.createCharacterMessage(4);
+                        images = setCharacter(4);
+                    }
+                    if (rbBanshee.isSelected()) {
+                        ControllerLogin.clientView.createCharacterMessage(5);
+                        images = setCharacter(5);
+                    }
+
+                    updatePlayerCharacter(images.get(0),images.get(1));
+                    Stage stage = (Stage) rbBanshee.getScene().getWindow();
+                    stage.close();
+
+                } catch (NotCharacterException e) {
+                    //TODO stampare che non può scegliere quel personaggio
+                    //(In teoria con la GUI non potrebbe sucedere)
+                }
+            }
+        });
 
     }
+
+
+    /**
+     * open chooseCharacter window
+     * @param event
+     * @throws Exception
+     */
+    public void selectCharacter(ActionEvent event) throws Exception{
+        if (ControllerLogin.clientView.getPossibleCharacter() != null) {
+                ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 650, 500);
+                List<Integer> characterID = new LinkedList<>();
+                for(int i=0; i<ControllerLogin.characters.size(); i++){
+                    characterID.add(ControllerLogin.characters.get(i).getId());
+                }
+                chooseYourCharacter(characterID);
+            bselectCharacter.setVisible(false);
+            bselectCharacter.setDisable(true);
+
+        }
+        else
+            labelProva.setText("please wait your turn");
+
+
+    }
+    /**
+     *
+     * set player character images on map
+     * @param image1
+     * @param image2
+     */
+    public void updatePlayerCharacter(Image image1, Image image2){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                    possibleActions.setVisible(true);
+                    yourCharacter.setVisible(true);
+                    yourCharacter.setImage(image1);
+                    possibleActions.setImage(image2);
+
+            }
+        });
+    }
+
+
+
 
     /**
      * update Enemy Character Image

@@ -21,7 +21,7 @@ public class PossibleCharacterMessage implements HandlerNetworkMessage, Serializ
     }
 
     @Override
-    public void handleMessage(Client client) {
+    public void handleMessage (Client client) {
         client.handleCharacterMessage(possibleCharacter);
     }
 }

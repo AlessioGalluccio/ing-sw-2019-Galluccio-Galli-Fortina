@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -66,6 +67,8 @@ public class ControllerLogin implements UiInterface {
 
     @FXML
     public Button login;
+
+    static List<Character> characters;
 
 
     /**
@@ -285,9 +288,14 @@ public class ControllerLogin implements UiInterface {
         //TODO
     }
 
+    /**
+     * set possible character to choose
+     * @param character
+     */
     @Override
-    public void chooseCharacter(List<Character> characters) {
-        //TODO
+    public void chooseCharacter(List<Character> character) {
+        characters= character;
+
     }
 
     /**
@@ -347,9 +355,7 @@ public class ControllerLogin implements UiInterface {
 
     }
 
-    public void chooseYourCharacter() throws Exception{
-        controller.chooseYourCharacter();
-    }
+
 
     /**
      * update ammoCard on Map
