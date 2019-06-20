@@ -78,11 +78,12 @@ public class FirstTurnStateTest {
 
         assertEquals(true, controller.getState() instanceof EmptyControllerState);
 
-        ActionMessage actionMessage = new ActionMessage(Identificator.SHOOT,authorPlayer.getID(),playerView);
+        ActionMessage actionMessage = new ActionMessage(Identificator.MOVE,authorPlayer.getID(),playerView);
         controller.update(null, actionMessage);
         System.out.println(playerView.getLastStringPrinted());
 
         assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
+
 
 
 

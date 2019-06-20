@@ -48,10 +48,7 @@ public class EmptyControllerState extends StateController {
             //messageListExpected
             try {
                 Action action = gameHandler.getActionByID(actionID, controller);
-                ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
-                controller.setMessageListExpected(stringAndMessages);
-
-                //Change State
+                //Change State, we don't add the new messages beacuse it's already handled by the constructor of ActionSelected
                 controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
             }catch (WrongInputException e){
                 errorString = e.getMessage();
@@ -178,7 +175,13 @@ public class EmptyControllerState extends StateController {
             stringToPlayerView = errorString + SELECT_ACTION_REQUEST;
         }
         else {
-            stringToPlayerView = SELECT_ACTION_REQUEST;
+            if(controller.getState() == this){ //only if the controller has this EXACT state
+                stringToPlayerView = SELECT_ACTION_REQUEST;
+            }
+            else{
+                stringToPlayerView = null;
+            }
+
         }
         return stringToPlayerView;
     }
