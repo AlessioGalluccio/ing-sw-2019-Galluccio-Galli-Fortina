@@ -20,5 +20,6 @@
       </RadioButton>
       <RadioButton fx:id="rbSocket" layoutX="78.0" layoutY="196.0" mnemonicParsing="false" text="SOCKET" toggleGroup="$connectionType" />
       <TextField fx:id="ipAddress" layoutX="95.0" layoutY="119.0" prefHeight="25.0" prefWidth="102.0" promptText="IP Address" />
+      <Label fx:id="wrongIp" layoutX="189.0" layoutY="152.0" prefHeight="25.0" prefWidth="64.0" text="WRONG IP" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

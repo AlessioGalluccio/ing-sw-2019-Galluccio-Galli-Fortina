@@ -26,6 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.net.UnknownHostException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ import java.util.List;
 public class ControllerLogin implements UiInterface {
 
     private static FXMLLoader fxmlLoader;
-
+    public Label wrongIp;
 
 
     private Controller controller;
@@ -80,14 +82,22 @@ public class ControllerLogin implements UiInterface {
                 clientView = new ClientView();
             }
             clientView.setUi(this);
-            if (rbRmi.isSelected()) {
-                RMIClient rmi = new RMIClient(clientView, ipAddress.getText());
-                rmi.connect();
-                clientView.setUp(rmi);
-            } else {
-                SocketClient socket = new SocketClient(9001, ipAddress.getText(), clientView);
-                socket.connect();
-                clientView.setUp(socket);
+        if(!ipAddress.getText().equals("")) {
+            try {
+
+                    if (rbRmi.isSelected()) {
+                        RMIClient rmi = new RMIClient(clientView, ipAddress.getText());
+                        rmi.connect();
+                        clientView.setUp(rmi);
+                    } else {
+                        SocketClient socket = new SocketClient(9001, ipAddress.getText(), clientView);
+                        socket.connect();
+                        clientView.setUp(socket);
+                    }
+
+            }
+            catch(UnknownHostException | RemoteException ex){
+                wrongIp.setVisible(true);
             }
 
             if (matchID.getText().equals("")) {
@@ -98,7 +108,7 @@ public class ControllerLogin implements UiInterface {
                 clientView.createLoginMessage(username.getText(), matchId);
             }
 
-       // }
+       }
 
     }
 
@@ -253,13 +263,18 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                controller.updateEnemyCharacter(enemyView);
+                controller.updateEnemyWeapon(enemyView);
+                controller.frenzyEnemy(enemyView);
+                controller.updateEnemyDamage(enemyView);
+                controller.updateEnemyMarks(enemyView);
+                controller.updateEnemySkull(enemyView);
+            }
+        });
 
-        controller.updateEnemyCharacter(enemyView);
-        controller.updateEnemyWeapon(enemyView);
-        controller.frenzyEnemy(enemyView);
-        controller.updateEnemyDamage(enemyView);
-        controller.updateEnemyMarks(enemyView);
-        controller.updateEnemySkull(enemyView);
 
     }
 
