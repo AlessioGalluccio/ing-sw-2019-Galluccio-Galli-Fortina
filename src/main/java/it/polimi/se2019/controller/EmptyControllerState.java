@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
@@ -45,12 +46,17 @@ public class EmptyControllerState extends StateController {
             }
             controller.addReceived();
             //messageListExpected
-            Action action = gameHandler.getActionByID(actionID, player);
-            ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
-            controller.setMessageListExpected(stringAndMessages);
+            try {
+                Action action = gameHandler.getActionByID(actionID, controller);
+                ArrayList<StringAndMessage> stringAndMessages = action.getStringAndMessageExpected();
+                controller.setMessageListExpected(stringAndMessages);
 
-            //Change State
-            controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
+                //Change State
+                controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
+            }catch (WrongInputException e){
+                errorString = e.getMessage();
+            }
+
         }
         else{
             errorString = TOO_MANY_ACTIONS;

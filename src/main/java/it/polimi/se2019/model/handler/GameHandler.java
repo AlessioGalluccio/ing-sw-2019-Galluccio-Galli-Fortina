@@ -7,6 +7,7 @@ import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.EmptyControllerState;
 import it.polimi.se2019.controller.FirstTurnState;
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.*;
@@ -187,8 +188,8 @@ public class GameHandler extends Observable {
      * @param actionID the int ID of the action
      * @return
      */
-    public Action getActionByID(int actionID, Player author) {
-        return modality.getActionByID(actionID, author, this);
+    public Action getActionByID(int actionID, Controller controller) throws WrongInputException {
+        return modality.getActionByID(actionID, controller, this);
 
     }
 

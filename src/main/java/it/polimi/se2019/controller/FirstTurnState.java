@@ -182,7 +182,13 @@ public class FirstTurnState extends StateController {
 
         }
         else{
-            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            if(controller.getIndexExpected() < controller.getCopyMessageListExpected().size()){
+                stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            }
+            else{
+                stringToPlayerView = null; // no other messages
+            }
+
         }
         return stringToPlayerView;
     }

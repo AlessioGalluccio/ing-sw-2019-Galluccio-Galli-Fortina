@@ -66,23 +66,23 @@ public class FirstTurnStateTest {
     @Test
     public void handleAction() {
         //TODO errore in ottenere l'azione, manca il metodo!!!
-        //System.out.println(playerView.getLastStringPrinted());
+        System.out.println(playerView.getLastStringPrinted());
 
         CharacterMessage characterMessage = new CharacterMessage(1, authorPlayer.getID(),playerView);
         controller.update(null,characterMessage);
-        //System.out.println(playerView.getLastStringPrinted());
+        System.out.println(playerView.getLastStringPrinted());
 
         DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(authorPlayer.getPowerupCardList().get(0), authorPlayer.getID(), playerView);
         controller.update(null, discardPowerupMessage);
-        //System.out.println(playerView.getLastStringPrinted());
+        System.out.println(playerView.getLastStringPrinted());
 
         assertEquals(true, controller.getState() instanceof EmptyControllerState);
 
         ActionMessage actionMessage = new ActionMessage(Identificator.SHOOT,authorPlayer.getID(),playerView);
         controller.update(null, actionMessage);
-        //System.out.println(playerView.getLastStringPrinted());
+        System.out.println(playerView.getLastStringPrinted());
 
-        //assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
+        assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
 
 
 

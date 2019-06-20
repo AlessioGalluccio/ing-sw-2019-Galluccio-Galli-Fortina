@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.handler;
 
-import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.actions.*;
 import it.polimi.se2019.model.player.Player;
 
 /**
@@ -16,14 +17,40 @@ public class Normal implements Modality {
     /**
      * Return the correct action base on modality (normal in this case) and life points of the player
      * @param actionID action which want the user
-     * @param author the player linked to the user, this method need to know his damage (adrenaline action vs normal)
+     * @param controller the controller linked to the user, this method need to know his damage (adrenaline action vs normal)
      * @param gameHandler
+     * @throws WrongInputException if the actionID doesn't have a corresponding action
      * @return the correct action based on the life point of the player and the ID
      */
     //For frenzy action go in Frenzy class!
     @Override
-    public Action getActionByID(int actionID, Player author, GameHandler gameHandler) {
-        return null;
+    public Action getActionByID(int actionID, Controller controller, GameHandler gameHandler) throws WrongInputException{
+        Player author = controller.getAuthor();
+        int damage = author.getDamage().size();
+        switch(actionID){
+            case Identificator.MOVE:
+                return new Move(gameHandler, controller);
+
+            case Identificator.GRAB:
+                if(damage > 2){
+                    return new GrabAdrenaline(gameHandler, controller);
+                }
+                else{
+                    return new Grab(gameHandler,controller);
+                }
+
+            case Identificator.SHOOT:
+                if(damage < 6){
+                    return new Shoot(gameHandler, controller);
+                }
+                else{
+                    return new ShootAdrenaline(gameHandler, controller);
+                }
+
+
+            default: throw new WrongInputException(CANT_CHOOSE_ACTION);
+        }
+
     }
 
     @Override
