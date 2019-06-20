@@ -9,7 +9,6 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class CellAmmo extends Cell {
      */
     @Override
     protected void reloadCard() {
-        if(ammo==null&&!isDisable()) ammo = deck.pick();
+        if(ammo==null&& isActive()) ammo = deck.pick();
         notifyObservers(new CellModelMessage(this.clone()));
     }
 

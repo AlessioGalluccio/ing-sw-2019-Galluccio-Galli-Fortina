@@ -7,11 +7,8 @@ import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
-import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.remoteView.MapView;
 
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -70,14 +67,6 @@ public abstract class Map extends Observable implements Serializable {
         for(distance=0; !getCellAtDistance(cellStart, distance).contains(cellEnd); distance++);
         return distance;
 
-        /*if(cellEnd == cellStart) return 0;
-        if(cellStart.getNorthBorder().isCrossable()) {
-            return getDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()+1], cellEnd) +1;
-        }
-        if(cellStart.getEastBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()+1][cellStart.getCoordinateY()], cellEnd) +1;
-        if(cellStart.getSouthBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()-1], cellEnd) +1;
-        if(cellStart.getWestBorder().isCrossable()) return getDistance(cell[cellStart.getCoordinateX()-1][cellStart.getCoordinateY()], cellEnd) +1;
-        return 0;*/
     }
 
     /**
@@ -87,7 +76,7 @@ public abstract class Map extends Observable implements Serializable {
      * @return The cell with coordinate x,y , null if there's not
      */
     public Cell getCellByCoo(int x, int y) {
-        if(x<cell.length&&y<cell[x].length&&cell[x][y]!=null) return cell[x][y];
+        if(x<cell.length&&y<cell[x].length&&cell[x][y].isActive()) return cell[x][y];
         return null;
     }
 
