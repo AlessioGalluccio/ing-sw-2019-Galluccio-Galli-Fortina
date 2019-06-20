@@ -192,7 +192,7 @@ public class WaitingRoom {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Timeout, a new game is going to start");
+                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Timeout.");
                 if(playerWaiting.size()>=3 &&
                         matches.get(matches.size()-1).gameHandler.getMap()!=null) startMatch();
                 timer=null;
@@ -301,7 +301,7 @@ public class WaitingRoom {
                     view.getPlayerCopy().getNickname());
         } catch (NotMatchException e) {
             Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
-                    "Impossible disconnect " + view.getPlayerCopy().getNickname() + " to match #" + matchID ,e);
+                    "Impossible disconnect " + view.getPlayerCopy().getNickname() + " from match #" + matchID ,e);
         }
     }
 
@@ -311,7 +311,9 @@ public class WaitingRoom {
             for(Server networkHandler : m.networkHandlers) {
                 networkHandler.closeAll();
             }
-            matches.remove(m);
+            if(matches.remove(m))
+                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO,
+                    "Deleted match #" + gameHandler.getMatchID());
         } catch (NotMatchException e) {
             Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
                     "Impossible delete match #" + gameHandler.getMatchID() ,e);

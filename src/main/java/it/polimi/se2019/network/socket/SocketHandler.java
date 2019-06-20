@@ -40,25 +40,30 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
      */
     @Override
     public void run() {
-        try {
-            printSocket = new ObjectOutputStream(socket.getOutputStream());
-            scannerSocket =  new ObjectInputStream(socket.getInputStream());
-
-            while(open) {
-                try {
-                    //Receive message
-                    HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
-                    message.handleMessage(this);
-                } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
-                    Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-                } catch (java.net.SocketException | java.io.EOFException e) {
-                    disconnect();
-                }
+            createNewStream();
+        while(open) {
+            try {
+                //Receive message
+                HandlerServerMessage message = (HandlerServerMessage) scannerSocket.readObject();
+                message.handleMessage(this);
+            } catch (java.net.SocketException e) {
+                if(open) disconnect();
+            } catch (java.io.EOFException | StreamCorruptedException e) {
+                createNewStream();
+            } catch (ClassNotFoundException | IOException e) {
+                Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
             }
+        }
+    }
 
+    private void createNewStream() {
+        try {
+            if(open) {
+                printSocket = new ObjectOutputStream(socket.getOutputStream());
+                scannerSocket = new ObjectInputStream(socket.getInputStream());
+            }
         } catch (IOException e) {
-            Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
-            closeAll();
+            disconnect();
         }
     }
 
@@ -67,13 +72,11 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
      */
     public void closeAll() {
        try {
-            scannerSocket.close();
-            printSocket.close();
-            socket.close();
+           open = false;
+           scannerSocket.close();
+           socket.close();
         } catch (IOException e) {
             Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Scanner socket closed", e);
-        } finally {
-           open = false;
        }
     }
 

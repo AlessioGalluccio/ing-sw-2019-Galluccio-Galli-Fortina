@@ -35,8 +35,8 @@ public class SocketClient extends Client {
     public void connect() {
         try {
             socket = new Socket(IP, port); /*Connection established*/
-            printSocket = new ObjectOutputStream(socket.getOutputStream());
-            scannerSocket =  new ObjectInputStream(socket.getInputStream());
+            createNewStream();
+
 
             new Thread(() -> {
                 while (open) {
@@ -45,12 +45,11 @@ public class SocketClient extends Client {
                         messageSocket.handleMessage(this);
 
                     } catch (java.net.SocketException e) {
-                        closeAll();
-                        if(open) new DisconnectMessage().handleMessage(this);
-                        open=false;
-                    } catch (ClassNotFoundException | InvalidClassException | StreamCorruptedException | OptionalDataException e) {
-                        Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
-                    }  catch (IOException e) {
+                        disconnect();
+                    } catch (StreamCorruptedException | java.io.EOFException e) {
+                        createNewStream();
+                    }
+                    catch (IOException | ClassNotFoundException e) {
                         Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem reading obj through socket", e);
                     }
                 }
@@ -58,6 +57,23 @@ public class SocketClient extends Client {
 
         } catch (IOException e) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.WARNING, "Can't open client socket", e);
+        }
+    }
+
+    private void disconnect(){
+        closeAll();
+        if(open) new DisconnectMessage().handleMessage(this);
+        open=false;
+    }
+
+    private void createNewStream() {
+        try {
+            if(open) {
+                printSocket = new ObjectOutputStream(socket.getOutputStream());
+                scannerSocket = new ObjectInputStream(socket.getInputStream());
+            }
+        } catch (IOException e) {
+            disconnect();
         }
     }
 
