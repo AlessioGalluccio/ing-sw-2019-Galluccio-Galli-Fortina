@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 
 public class RMIClient extends Client implements RmiClientInterface, Observer {
     private static final long serialVersionUID = 7523008212736615992L;
-    private RmiHandlerInterface server;
-    private ExecutorService executor;
-    static int nThreads =0;
+    private transient RmiHandlerInterface server;
+    private transient ExecutorService executor;
+    private static int nThreads =0;
     private String IP;
 
     public RMIClient(ClientView view, String IP) throws RemoteException {
@@ -67,7 +67,8 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
 
     @Override
     public void receiveMessage(HandlerNetworkMessage message) throws RemoteException {
-        executor.submit(new Receiver(message, this));
+        message.handleMessage(this);
+        //executor.submit(new Receiver(message, this));
     }
 
     @Override

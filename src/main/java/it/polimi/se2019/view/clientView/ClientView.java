@@ -25,7 +25,7 @@ public class ClientView extends View /*View implement observer/observable*/{
     private Character choosenCharacter;
     private transient UiInterface ui;
     private int lastAck;
-    private int matchId = 100;
+    private int matchId = -1;
 
     public Player getPlayerCopy() {
         return playerCopy;
@@ -285,7 +285,10 @@ public class ClientView extends View /*View implement observer/observable*/{
      */
     public synchronized void handleStartGameMessage(int matchId) {
         this.matchId = matchId;
-        ui.startGame();
+        synchronized (ui) {
+            ui.startGame();
+        }
+        notifyAll();
     }
 
     /**
@@ -307,8 +310,17 @@ public class ClientView extends View /*View implement observer/observable*/{
      * It notify the user that a new turn is begin
      * @param nickname the player's nickname of the turn
      */
-    public void handleTurnMessage(String nickname) {
-        ui.turn(nickname, nickname.equals(playerCopy.getNickname()));
+    public synchronized void handleTurnMessage(String nickname) {
+        while(matchId==-1) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        synchronized (ui) {
+         ui.turn(nickname, nickname.equals(playerCopy.getNickname()));
+        }
     }
 
     /**

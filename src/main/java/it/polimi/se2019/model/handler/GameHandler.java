@@ -562,18 +562,22 @@ public class GameHandler extends Observable {
         if(orderPlayerList.size()>3) {
             try {
                 Thread.sleep(750); //Wait all message arrive at the user
-                forwardAllViews(new StartGameMessage(matchID));
-
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        forwardAllViews(new StartGameMessage(matchID));
+        try {
                 Thread.sleep(400); //Wait all message arrive at the user
                 forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
 
                 Thread.sleep(400); //Wait all message arrive at the user
                 Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
                 controller.setState(new FirstTurnState(controller, this));
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+
     }
 
     /**
