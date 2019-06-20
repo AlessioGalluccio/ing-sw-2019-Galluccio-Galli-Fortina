@@ -895,17 +895,8 @@ public class Controller implements Initializable {
     public void showMap(ActionEvent event) throws InterruptedException {
 
 
-        //set ammo card on map
-        updateAmmoCardMap();
-        // set enemy nickname on window
-        setEnemyNickname();
 
-        // set weapon card on map
-        updateWeaponMap();
-        //update player's weapon
-        updateWeaponPlayer();
-        //update palyer's powerup
-        updatePlayerPowerup();
+
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
@@ -960,6 +951,9 @@ public class Controller implements Initializable {
         //set the buttons stile and images for player's cards
         setPlayerCards();
 
+        //update palyer's powerup
+        updatePlayerPowerup();
+
         //add background
 
         BackgroundImage myBI = new BackgroundImage(new Image("background.png", 32, 32, false, true),
@@ -989,6 +983,16 @@ public class Controller implements Initializable {
 
 
         labelProva.setText("BENVENUTO");
+
+        //set ammo card on map
+        updateAmmoCardMap();
+        // set enemy nickname on window
+        setEnemyNickname();
+
+        // set weapon card on map
+        updateWeaponMap();
+        //update player's weapon
+        updateWeaponPlayer();
 
 
         myThread = new MyThread(this);
@@ -1131,7 +1135,7 @@ public class Controller implements Initializable {
     public void setPlayerCards() {
         bPowerupCard1.setGraphic(imPowerupCard1);
         bPowerupCard1.setStyle(transparent);
-        bPowerupCard2.setGraphic(imWeaponCard2);
+        bPowerupCard2.setGraphic(imPowerupCard2);
         bPowerupCard2.setStyle(transparent);
         imPowerupCard3.setImage(new Image("emptyPowerup.jpg"));
         bPowerupCard3.setGraphic(imPowerupCard3);
@@ -1574,8 +1578,13 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                String string = Integer.toString(points);
-               // yourPointsLabel.setText(string);
+                try {
+                    String string = Integer.toString(points);
+                    yourPointsLabel.setText(string);
+                }
+                catch (NullPointerException e){
+
+                }
             }
         });
 
@@ -2057,7 +2066,11 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                labelProva.setText(string);
+                try {
+                    labelProva.setText(string);
+                }catch (NullPointerException e){
+
+                }
             }
         });
 

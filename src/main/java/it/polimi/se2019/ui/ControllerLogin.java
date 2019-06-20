@@ -234,7 +234,7 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void printFromController(String message) {
-
+            controller.printf(message);
     }
 
     @Override
