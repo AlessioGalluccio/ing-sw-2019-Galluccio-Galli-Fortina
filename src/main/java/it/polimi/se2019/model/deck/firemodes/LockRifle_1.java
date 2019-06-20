@@ -74,7 +74,7 @@ public class LockRifle_1 extends FireMode {
             //shoot.getPlayerView().printFromController("Error,you have selected yourself");
             throw new WrongInputException("Error,you have selected yourself");
         }
-        else if(target.isVisibleBy(author)){
+        else if(target.isVisibleBy(gameHandler.getMap(), author)){
             if(shoot.getTargetsPlayer().isEmpty()){
                 shoot.addPlayerTargetFromFireMode(target, true);
             }

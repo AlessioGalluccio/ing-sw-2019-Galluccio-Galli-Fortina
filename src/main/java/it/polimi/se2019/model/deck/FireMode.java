@@ -182,7 +182,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
                 throw new WrongInputException(NO_TARGET_TARGETING);
             }
             for(Player target: list){
-                if(target.isVisibleBy(author)){
+                if(target.isVisibleBy( gameHandler.getMap(),author)){
                     canTargeting = true;
                 }
             }
@@ -255,7 +255,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     public void addTargetForTargeting(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
-        if(shoot.getCanBeTargetedPlayers().contains(target) && target.isVisibleBy(author)){
+        if(shoot.getCanBeTargetedPlayers().contains(target) && target.isVisibleBy(gameHandler.getMap(), author)){
             shoot.addTargetForTargetingFromFiremode(target);
         }
         else{
@@ -274,7 +274,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected boolean sendAllVisiblePlayers(ArrayList<Player> alreadySelected){
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(this.author)
+            if(playerOfGame.getID() != this.author.getID() && playerOfGame.isVisibleBy(gameHandler.getMap(),this.author)
                     && (alreadySelected == null || !alreadySelected.contains(playerOfGame))){
 
                 listTarget.add(playerOfGame);
@@ -363,7 +363,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
                 throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
             }
             for(Player target: list){
-                if(target.isVisibleBy(author)){
+                if(target.isVisibleBy(gameHandler.getMap(), author)){
                     canTargeting = true;
                 }
             }

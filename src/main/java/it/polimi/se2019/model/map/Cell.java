@@ -172,6 +172,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
 
     public abstract Cell clone();
 
+
     /**
      * Print this cell on System.out line by line
      * @param row the line to print
@@ -181,7 +182,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
-        if(!isDisable()) s+=color;
+        if(isActive()) s+=color;
         switch (row) {
             case 0:
                 s+=getNorthBorder().printByDirection(0, true, color);
@@ -254,7 +255,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
      */
     abstract String printMiddleRow();
 
-    boolean isDisable() {
-        return disable;
+    boolean isActive() {
+        return !disable;
     }
 }

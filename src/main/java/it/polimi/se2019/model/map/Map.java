@@ -158,6 +158,24 @@ public abstract class Map extends Observable implements Serializable {
         return cells;
     }
 
+    public boolean canSee(Cell cellStart, Cell target) {
+        if(target.equals(cellStart)) return true;
+        if(target.getRoom().equals(cellStart.getRoom())) return true;
+        if(cellStart.getNorthBorder().isCrossable() &&
+            cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()+1].getRoom().equals(target.getRoom()))
+            return true;
+        if(cellStart.getEastBorder().isCrossable() &&
+                cell[cellStart.getCoordinateX()+1][cellStart.getCoordinateY()].getRoom().equals(target.getRoom()))
+            return true;
+        if(cellStart.getSouthBorder().isCrossable() &&
+                cell[cellStart.getCoordinateX()][cellStart.getCoordinateY()-1].getRoom().equals(target.getRoom()))
+            return true;
+        if(cellStart.getWestBorder().isCrossable() &&
+                cell[cellStart.getCoordinateX()-1][cellStart.getCoordinateY()].getRoom().equals(target.getRoom()))
+            return true;
+        return false;
+    }
+
     /**
      * If the card on a cell was picked, put a new card on the cell
      */

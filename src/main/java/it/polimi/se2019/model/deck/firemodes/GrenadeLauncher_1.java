@@ -113,7 +113,7 @@ public class GrenadeLauncher_1 extends FireMode {
         if(targetID == author.getID()){
             throw new WrongInputException(SELECTED_YOURSELF);
         }
-        else if(target.isVisibleBy(author) && shoot.getTargetsPlayer().isEmpty()){
+        else if(target.isVisibleBy(gameHandler.getMap(), author) && shoot.getTargetsPlayer().isEmpty()){
             shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
