@@ -40,15 +40,18 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         clientView.handleLogin(success, isFirst);
     }
 
-    public synchronized void forwardToClientView(ModelViewMessage message, String nickname) {
-        if(nickname.equals(ID) || nickname.equalsIgnoreCase("BROADCAST")) {
-            clientView.update(null, message);
-            notifyAll();
+    public void forwardToClientView(ModelViewMessage message, String nickname) {
+        synchronized (clientView) {
+            if (nickname.equals(ID) || nickname.equalsIgnoreCase("BROADCAST")) {
+                clientView.update(null, message);
+                clientView.notifyAll();
+            }
         }
     }
 
-    public void handleEnemyMessage(String nickname) {
+    public synchronized void handleEnemyMessage(String nickname) {
         enemyViews.add(new ClientEnemyView(nickname, ui));
+        notifyAll();
     }
 
     public void handleDisconnection() {
@@ -56,31 +59,38 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         closeAll();
     }
 
-    public synchronized void handleStartGame(int matchID) {
-        //If views are not initialized wait
-        while (mapView.getMapCopy() == null ||
-                clientView.getPlayerCopy() == null ||
-                enemyViews.get(0).getNickname() == null ||
-                enemyViews.get(1).getNickname() == null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-               Thread.currentThread().interrupt();
+    public void handleStartGame(int matchID) {
+        synchronized (clientView) {
+            //If views are not initialized wait
+            while (mapView.getMapCopy() == null ||
+                    clientView.getPlayerCopy() == null ||
+                    enemyViews.get(0).getNickname() == null ||
+                    enemyViews.get(1).getNickname() == null) {
+                try {
+                    clientView.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
         }
+
         clientView.handleStartGameMessage(matchID);
     }
 
-    public synchronized void forwardToEnemyView(ModelViewMessage message, String nickname) {
-        for(ClientEnemyView ew : enemyViews) {
-            if(ew.getNickname().equals(nickname)) ew.update(null, message);
+    public void forwardToEnemyView(ModelViewMessage message, String nickname) {
+        synchronized (clientView) {
+            for (ClientEnemyView ew : enemyViews) {
+                if (ew.getNickname().equals(nickname)) ew.update(null, message);
+            }
+            clientView.notifyAll();
         }
-        notifyAll();
     }
 
-    public synchronized void forwardToMapView(ModelViewMessage message) {
-        mapView.update(null, message);
-        notifyAll();
+    public void forwardToMapView(ModelViewMessage message) {
+        synchronized (clientView) {
+            mapView.update(null, message);
+            clientView.notifyAll();
+        }
     }
 
     public void forwardToSkullBoardView(ModelViewMessage message) {

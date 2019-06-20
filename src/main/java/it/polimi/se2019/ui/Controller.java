@@ -1575,7 +1575,7 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 String string = Integer.toString(points);
-                yourPointsLabel.setText(string);
+               // yourPointsLabel.setText(string);
             }
         });
 

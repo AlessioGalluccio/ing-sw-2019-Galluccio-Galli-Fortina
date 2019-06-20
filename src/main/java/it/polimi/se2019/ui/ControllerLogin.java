@@ -262,19 +262,12 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                controller.updateEnemyCharacter(enemyView);
-                controller.updateEnemyWeapon(enemyView);
-                controller.frenzyEnemy(enemyView);
-                controller.updateEnemyDamage(enemyView);
-                controller.updateEnemyMarks(enemyView);
-                controller.updateEnemySkull(enemyView);
-            }
-        });
-
-
+        controller.updateEnemyCharacter(enemyView);
+        controller.updateEnemyWeapon(enemyView);
+        controller.frenzyEnemy(enemyView);
+        controller.updateEnemyDamage(enemyView);
+        controller.updateEnemyMarks(enemyView);
+        controller.updateEnemySkull(enemyView);
     }
 
     @Override
