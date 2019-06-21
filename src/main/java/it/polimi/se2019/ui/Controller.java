@@ -102,6 +102,16 @@ public class Controller implements Initializable {
     public ImageView imPlayer3Cell22;
     public ImageView imPlayer4Cell22;
     public ImageView imPlayer5Cell22;
+    public ImageView imPlayer1Cell30;
+    public ImageView imPlayer2Cell30;
+    public ImageView imPlayer3Cell30;
+    public ImageView imPlayer4Cell30;
+    public ImageView imPlayer5Cell30;
+    public ImageView imPlayer1Cell31;
+    public ImageView imPlayer2Cell31;
+    public ImageView imPlayer3Cell31;
+    public ImageView imPlayer4Cell31;
+    public ImageView imPlayer5Cell31;
     public ImageView imPlayer1Cell32;
     public ImageView imPlayer2Cell32;
     public ImageView imPlayer3Cell32;
@@ -3152,7 +3162,123 @@ public class Controller implements Initializable {
     }
 
 
-    public void updatePlayerPosition(){
-        //ControllerLogin.login
+    /**
+     * update players position on gui's cell
+     * @param cell
+     */
+    public void updatePlayersPosition(Cell cell){
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    List<Player> players = cell.getPlayerHere();
+                    ArrayList<ImageView> imPlayerPosition = setCellPlayersPosition(cell.getCoordinateX(), cell.getCoordinateY());
+                    for (int i = 0; i < imPlayerPosition.size(); i++) {
+                        imPlayerPosition.get(i).setVisible(false);
+                    }
+                    for (int i = 0; i < players.size(); i++) {
+                        imPlayerPosition.get(i).setImage(setPositionPlayerImages(players.get(i).getCharacter().getId()));
+                        imPlayerPosition.get(i).setVisible(true);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
+    }
+
+    /**
+     * add ImageView position in an arraylist
+     * @param imPlayerPosition
+     * @param im1
+     * @param im2
+     * @param im3
+     * @param im4
+     * @param im5
+     */
+    public ArrayList<ImageView> setCellImageViewPosition(ArrayList<ImageView> imPlayerPosition, ImageView im1, ImageView im2, ImageView im3, ImageView im4,ImageView im5 ){
+        imPlayerPosition.add(im1);
+        imPlayerPosition.add(im2);
+        imPlayerPosition.add(im3);
+        imPlayerPosition.add(im4);
+        imPlayerPosition.add(im5);
+        return imPlayerPosition;
+    }
+
+
+    /**
+     * set cell coordinates with player's position imageviews
+     * @param x
+     * @param y
+     * @return
+     */
+    public ArrayList<ImageView>  setCellPlayersPosition(int x, int y){
+        ArrayList<ImageView> images = new ArrayList<>();
+        if(x==0 && y==0)
+            images= setCellImageViewPosition(images, imPlayer1Cell00, imPlayer2Cell00,imPlayer3Cell00,imPlayer4Cell00,imPlayer5Cell00);
+        if(x==0 && y==1)
+            images= setCellImageViewPosition(images, imPlayer1Cell01, imPlayer2Cell01,imPlayer3Cell01,imPlayer4Cell01,imPlayer5Cell01);
+        if(x==0 && y==2)
+            images= setCellImageViewPosition(images, imPlayer1Cell02, imPlayer2Cell02,imPlayer3Cell02,imPlayer4Cell02,imPlayer5Cell02);
+        if(x==1 && y==0)
+            images= setCellImageViewPosition(images, imPlayer1Cell10, imPlayer2Cell10,imPlayer3Cell10,imPlayer4Cell10,imPlayer5Cell10);
+        if(x==1 && y==1)
+            images= setCellImageViewPosition(images, imPlayer1Cell11, imPlayer2Cell11,imPlayer3Cell11,imPlayer4Cell11,imPlayer5Cell11);
+        if(x==1 && y==2)
+            images= setCellImageViewPosition(images, imPlayer1Cell12, imPlayer2Cell12,imPlayer3Cell12,imPlayer4Cell12,imPlayer5Cell12);
+        if(x==2 && y==0)
+            images= setCellImageViewPosition(images, imPlayer1Cell20, imPlayer2Cell20,imPlayer3Cell20,imPlayer4Cell20,imPlayer5Cell20);
+        if(x==2 && y==1)
+            images= setCellImageViewPosition(images, imPlayer1Cell21, imPlayer2Cell21,imPlayer3Cell21,imPlayer4Cell21,imPlayer5Cell21);
+        if(x==2 && y==2)
+            images= setCellImageViewPosition(images, imPlayer1Cell22, imPlayer2Cell22,imPlayer3Cell22,imPlayer4Cell22,imPlayer5Cell22);
+        if(x==3 && y==0)
+            images= setCellImageViewPosition(images, imPlayer1Cell30, imPlayer2Cell30,imPlayer3Cell30,imPlayer4Cell30,imPlayer5Cell30);
+        if(x==3 && y==1)
+            images= setCellImageViewPosition(images, imPlayer1Cell31, imPlayer2Cell31,imPlayer3Cell31,imPlayer4Cell31,imPlayer5Cell31);
+        if(x==3 && y==2)
+            images= setCellImageViewPosition(images, imPlayer1Cell32, imPlayer2Cell32,imPlayer3Cell32,imPlayer4Cell32,imPlayer5Cell32);
+
+
+            return images;
+
+
+    }
+
+
+    /**
+     * set each position's image with the character color
+     * @param characterID
+     * @return
+     */
+    public Image setPositionPlayerImages(int characterID){
+        Image image = new Image("Icon/Blue.png");
+
+        switch (characterID){
+            case 1:
+                image = new Image("Icon/Green.png");
+
+                break;
+            case 2:
+                image = new Image("Icon/Purple.png");
+
+                break;
+            case 3:
+                image = new Image("Icon/Yellow.png");
+
+                break;
+            case 4:
+                image = new Image("Icon/Grey.png");
+
+                break;
+            case 5:
+                image = new Image("Icon/Blue.png");
+
+                break;
+        }
+        return image;
     }
 }

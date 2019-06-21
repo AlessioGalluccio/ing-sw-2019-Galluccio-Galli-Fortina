@@ -18,8 +18,7 @@
             <Image url="@back.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="cell00" layoutX="139.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
-      <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="1.0">
+      <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="-37.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-37.0" AnchorPane.topAnchor="-28.0">
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
@@ -394,17 +393,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="cell02" layoutX="153.0" layoutY="141.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="86.0" />
-      <Button fx:id="cell01" layoutX="148.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
-      <Button fx:id="cell10" layoutX="269.0" layoutY="415.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
-      <Button fx:id="cell11" layoutX="274.0" layoutY="276.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
-      <Button fx:id="cell12" layoutX="270.0" layoutY="138.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="127.0" />
-      <Button fx:id="cell22" layoutX="412.0" layoutY="142.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
-      <Button fx:id="cell21" layoutX="412.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="120.0" prefWidth="120.0" />
-      <Button fx:id="cell20" layoutX="408.0" layoutY="411.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
-      <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
-      <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
-      <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="94.0" prefWidth="99.0" />
       <ImageView fx:id="ammoCell02" fitHeight="49.0" fitWidth="51.0" layoutX="182.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="ammoCell00" fitHeight="49.0" fitWidth="51.0" layoutX="164.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="ammoCell10" fitHeight="49.0" fitWidth="51.0" layoutX="296.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
@@ -665,5 +653,17 @@
       <ImageView fx:id="playerSkull5" fitHeight="31.0" fitWidth="22.0" layoutX="333.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerSkull6" fitHeight="31.0" fitWidth="22.0" layoutX="363.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="bselectCharacter" layoutX="332.0" layoutY="602.0" mnemonicParsing="false" onAction="#selectCharacter" prefHeight="25.0" prefWidth="106.0" text="CHARACTER" />
+      <Button fx:id="cell02" layoutX="153.0" layoutY="141.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="86.0" />
+      <Button fx:id="cell01" layoutX="148.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
+      <Button fx:id="cell00" layoutX="139.0" layoutY="413.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="99.0" />
+      <Button fx:id="cell10" layoutX="269.0" layoutY="415.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
+      <Button fx:id="cell11" layoutX="274.0" layoutY="276.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
+      <Button fx:id="cell12" layoutX="270.0" layoutY="138.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="127.0" />
+      <Button fx:id="cell22" layoutX="412.0" layoutY="142.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="104.0" prefWidth="112.0" />
+      <Button fx:id="cell21" layoutX="412.0" layoutY="271.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="120.0" prefWidth="120.0" />
+      <Button fx:id="cell20" layoutX="408.0" layoutY="411.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="120.0" />
+      <Button fx:id="cell30" layoutX="552.0" layoutY="402.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
+      <Button fx:id="cell31" layoutX="547.0" layoutY="272.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="110.0" prefWidth="99.0" />
+      <Button fx:id="cell32" layoutX="559.0" layoutY="144.0" mnemonicParsing="false" onAction="#sendCellMessage" prefHeight="94.0" prefWidth="99.0" />
    </children>
 </AnchorPane>
