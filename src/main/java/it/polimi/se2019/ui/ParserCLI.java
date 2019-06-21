@@ -20,6 +20,9 @@ class ParserCLI {
     private Player player;
     private List<WeaponCard> weaponDeck = new WeaponDeck().getUnusedCard();
 
+    private static final String SPECIFY_WEAPON = "Retry specifying the name of the weapon.";
+    private static final String SPECIFY_PLAYER= "Retry specifying the name of the player.";
+
     ParserCLI(ClientView view, CLI cli) {
         this.cli = cli;
         this.view = view;
@@ -113,21 +116,27 @@ class ParserCLI {
     }
 
     private void parseAction(String[] command) {
-        switch (command[0]) {
-            case "MOVE":
-                view.createActionMessage(Identificator.MOVE);
-                break;
-            case "GRAB":
-                view.createActionMessage(Identificator.GRAB);
-                break;
-            case "SHOOT":
-                view.createActionMessage(Identificator.SHOOT);
-                cli.println("You have this weapon reloaded: ");
-                cli.println("\t" + getWeapon());
-                break;
-            default:
-                cli.println("Action '"+command[0]+"' dose not exist");
-                return;
+        try {
+            switch (command[0]) {
+                case "MOVE":
+                    view.createActionMessage(Identificator.MOVE);
+                    break;
+                case "GRAB":
+                    view.createActionMessage(Identificator.GRAB);
+                    break;
+                case "SHOOT":
+                    view.createActionMessage(Identificator.SHOOT);
+                    cli.println("You have this weapon reloaded: ");
+                    cli.println("\t" + getWeapon());
+                    break;
+                default:
+                    cli.println("Action '" + command[0] + "' dose not exist");
+                    return;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    "Retry specifying the type of action.");
+            return;
         }
         if(command.length>1) mainParse(Arrays.copyOfRange(command, 1, command.length));
     }
@@ -336,6 +345,9 @@ class ParserCLI {
             view.createPlayerMessage(enemy.getID());
         } catch (IllegalArgumentException e) {
             cli.println("There's no enemy called " + command[0] + ".");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    SPECIFY_PLAYER);
         }
     }
 
@@ -345,9 +357,12 @@ class ParserCLI {
             int x = Integer.parseInt(coordinate[0]);
             int y = Integer.parseInt(coordinate[1]);
             view.createCellMessage(x, y);
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             cli.println(command[0] + " is not a valid coordinate.\n" +
                     "Please, use X,Y format.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    "Retry specifying the coordinates of the cell.");
         }
     }
 
@@ -383,6 +398,9 @@ class ParserCLI {
             else view.createDiscardWeaponMessage(card);
         } catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] +".");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    SPECIFY_WEAPON);
         }
     }
 
@@ -414,9 +432,12 @@ class ParserCLI {
         try {
             WeaponCard weapon = findWeapon(command[0]);
             cli.println("\n");
+            cli.println(weapon.toString());
             cli.println("\n");
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] + ".");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" + SPECIFY_WEAPON);
         }
     }
 
@@ -426,8 +447,11 @@ class ParserCLI {
             cli.println("\n");
             cli.println(enemy.toString());
             cli.println("\n");
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             cli.println("There is no enemy called " + command[0] + ".");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    SPECIFY_PLAYER);
         }
     }
 
@@ -448,6 +472,8 @@ class ParserCLI {
                 case "ME":
                     cli.println(player.toString());
                     break;
+                default:
+                    cli.println("Can't show update of "+ command[0] + ".");
             }
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             cli.println("What do you want update?\n" +
@@ -462,6 +488,9 @@ class ParserCLI {
             cli.println("\n");
         } catch (IllegalArgumentException e) {
             cli.println("There in no enemy with that name.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    SPECIFY_PLAYER);
         }
     }
 
@@ -474,6 +503,9 @@ class ParserCLI {
             view.createReloadMessage(findWeapon(command[0]));
         } catch (IllegalArgumentException e) {
             cli.println("There is no weapon called " + command[0] + ".");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Missing info\n" +
+                    SPECIFY_WEAPON);
         }
     }
 
