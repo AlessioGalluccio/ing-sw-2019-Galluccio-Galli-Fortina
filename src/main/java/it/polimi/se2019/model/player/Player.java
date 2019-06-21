@@ -6,7 +6,6 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.sun.jmx.remote.internal.ArrayQueue;
 import it.polimi.se2019.cloneable.SkinnyObject;
 import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.cloneable.NotForPlayer;
@@ -16,7 +15,6 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Map;
-import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 
@@ -221,7 +219,7 @@ public class Player extends Observable implements Target, Serializable {
         }
 
         ammoBag = new AmmoBag(numRed, numYellow, numBlue);
-        notifyObservers(this.clone());
+        notifyObservers(new PlayerModelMessage(this.clone()));
         if(exception) throw new TooManyException("You have too many ammo of some color, they have been set to the maximum (3)");
     }
 

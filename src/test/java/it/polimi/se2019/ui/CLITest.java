@@ -23,6 +23,7 @@ public class CLITest {
     public void setUp() throws Exception {
         ClientView clientView = new ClientView();
         ui = new CLI(clientView);
+        clientView.setUi(ui);
         ui.setSkullBoard(new SkullBoardView());
         Player player1 = new Player("Peter Parker", 0);
         Player player2 = new Player("Bruce Banner", 1);
