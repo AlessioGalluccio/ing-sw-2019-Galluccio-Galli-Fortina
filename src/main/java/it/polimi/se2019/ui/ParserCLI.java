@@ -376,7 +376,9 @@ class ParserCLI {
             WeaponCard card = findWeapon(command[0]);
             if(use) {
                 view.createWeaponMessage(card);
-                cli.println(card.toString());
+                 synchronized (cli)  {
+                    cli.println(card.toString());
+                }
             }
             else view.createDiscardWeaponMessage(card);
         } catch (IllegalArgumentException e) {
@@ -548,7 +550,7 @@ class ParserCLI {
         cli.printf("PLAYER [Enemy's name]", "Select a player, use this command for shooting or moving someone.");
         cli.printf("CELL [X],[Y]", "Select the cell with X,Y as coordinate." +
                 "Use this for moving or grabbing somewhere.");
-        cli.printf("WEAPON [Weapon's name]", "Select a weapon, use this for shooting with that weapon.");
+        cli.printf("WEAPON [Weapon's name]", "Select a weapon, use this for shooting or grabbing.");
         cli.printf("FIRE", "Use this when you have selected all your targets.");
         cli.printf("FIREMODE [BASE | ALTERNATIVE | OPTIONAL] [[Optional's number]]",
                 "Select a firemode of the weapon just selected.");
