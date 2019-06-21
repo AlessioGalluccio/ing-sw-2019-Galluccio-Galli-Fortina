@@ -1670,40 +1670,44 @@ public class Controller implements Initializable {
     public void updateWeaponMap() {
 
         Platform.runLater(() -> {
+            try {
 
-            ArrayList<ImageView> redWeapons = new ArrayList<>();
-            ArrayList<ImageView> blueWeapons = new ArrayList<>();
-            ArrayList<ImageView> yellowWeapons = new ArrayList<>();
+                ArrayList<ImageView> redWeapons = new ArrayList<>();
+                ArrayList<ImageView> blueWeapons = new ArrayList<>();
+                ArrayList<ImageView> yellowWeapons = new ArrayList<>();
 
-            redWeapons.add(imRedWeapon1);
-            redWeapons.add(imRedWeapon2);
-            redWeapons.add(imRedWeapon3);
+                redWeapons.add(imRedWeapon1);
+                redWeapons.add(imRedWeapon2);
+                redWeapons.add(imRedWeapon3);
 
-            blueWeapons.add(imBlueWeapon1);
-            blueWeapons.add(imBlueWeapon2);
-            blueWeapons.add(imBlueWeapon3);
+                blueWeapons.add(imBlueWeapon1);
+                blueWeapons.add(imBlueWeapon2);
+                blueWeapons.add(imBlueWeapon3);
 
-            yellowWeapons.add(imYellowWeapon1);
-            yellowWeapons.add(imYellowWeapon2);
-            yellowWeapons.add(imYellowWeapon3);
+                yellowWeapons.add(imYellowWeapon1);
+                yellowWeapons.add(imYellowWeapon2);
+                yellowWeapons.add(imYellowWeapon3);
 
-            List<CellSpawn> cellSpawn = ControllerLogin.mapView.getCellSpawn();
-            List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
-            List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
-            List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
+                List<CellSpawn> cellSpawn = ControllerLogin.mapView.getCellSpawn();
+                List<WeaponCard> weaponCardsRed = cellSpawn.get(0).getWeapon();
+                List<WeaponCard> weaponCardsBlue = cellSpawn.get(1).getWeapon();
+                List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
-            for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
-                redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
+                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
+                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+                }
+
+                for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
+                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+                }
             }
+            catch (Exception e){
 
-            for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
-                blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
             }
-
-            for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
-                yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
-            }
-
         });
 
     }
@@ -1943,9 +1947,10 @@ public class Controller implements Initializable {
                             } else {
                                 selectWeapon.get(i).setDisable(false);
                                 firemode.get(i).setDisable(false);
+                                reloadWeapon.get(i).setDisable(true);
 
                             }
-                            reloadWeapon.get(i).setDisable(false);
+
                             discardWeapon.get(i).setDisable(false);
 
                         }
