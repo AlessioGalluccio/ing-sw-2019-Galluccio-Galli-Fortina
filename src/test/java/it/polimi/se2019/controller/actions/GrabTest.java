@@ -6,16 +6,18 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.Card;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.TeleporterCard;
+import it.polimi.se2019.model.deck.WeaponCard;
+import it.polimi.se2019.model.deck.firemodes.FlameThrower_1;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
-import it.polimi.se2019.view.ViewControllerMess.CellMessage;
-import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
+import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -117,5 +119,39 @@ public class GrabTest {
 
         assertEquals(Grab.TOO_MUCH_DISTANCE + Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
     }
+
+    @Test
+    public void switchWeapons(){
+        try{
+            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(1));
+            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(2));
+            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(3));
+
+            Cell cellWithWeapons = gameHandler.getCellByCoordinate(0,1);
+            authorPlayer.setPosition(cellWithWeapons);
+
+            CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(),playerView);
+            controller.update(null, cellMessage);
+            System.out.println(playerView.getLastStringPrinted());
+
+            DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(gameHandler.getWeaponCardByID(1), authorPlayer.getID(), playerView);
+            controller.update(null, discardWeaponMessage);
+            System.out.println(playerView.getLastStringPrinted());
+
+            WeaponMessage weaponMessage = new WeaponMessage(gameHandler.getWeaponCardByID(cellWithWeapons.getCardID().get(0)), authorPlayer.getID(), playerView);
+            controller.update(null, weaponMessage);
+            System.out.println(playerView.getLastStringPrinted());
+
+            System.out.println(authorPlayer);
+
+        }catch (TooManyException e){
+            //shouldn't happen
+        }catch (NotPresentException e){
+            //shouldn't happen
+        }
+
+    }
+
+
 
 }
