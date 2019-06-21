@@ -598,7 +598,7 @@
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rammo1111" fitHeight="31.0" fitWidth="31.0" layoutX="748.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yammo3" fitHeight="31.0" fitWidth="31.0" layoutX="748.0" layoutY="662.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Yammo.png" />
          </image>

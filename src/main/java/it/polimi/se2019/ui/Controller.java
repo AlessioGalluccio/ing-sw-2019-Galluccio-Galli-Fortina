@@ -2030,9 +2030,9 @@ public class Controller implements Initializable {
             public void run() {
                 try {
                     ArrayList<ImageView> yellowAmmo = new ArrayList();
-                    yellowAmmo.add(bammo1);
-                    yellowAmmo.add(bammo2);
-                    yellowAmmo.add(bammo3);
+                    yellowAmmo.add(yammo1);
+                    yellowAmmo.add(yammo2);
+                    yellowAmmo.add(yammo3);
                     int yellowNumber = Integer.parseInt(yellow);
                     yellowNumber--;
                     for (int counter = 0; counter < yellowAmmo.size(); counter++) {
