@@ -1,30 +1,24 @@
 package it.polimi.se2019.model.deck.firemodes;
 
-import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Furnace_2 extends FireMode {
+    private static final long serialVersionUID = -315490042639058980L;
 
     //messages
-    public static final String ADJACENT_CELL_REQUEST = "Select an adjacent cell. ";
+    static final String ADJACENT_CELL_REQUEST = "Select an adjacent cell. ";
 
     //errors
-    public static final String INVALID_CELL = "You can't select this cell. ";
-    public static final String NO_TARGETS_IN_CELL = "There are no targets in this cell. ";
-    private static final long serialVersionUID = -315490042639058980L;
+    static final String INVALID_CELL = "You can't select this cell. ";
+    static final String NO_TARGETS_IN_CELL = "There are no targets in this cell. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

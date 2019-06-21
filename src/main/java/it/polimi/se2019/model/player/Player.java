@@ -518,7 +518,7 @@ public class Player extends Observable implements Target, Serializable {
         if(shooter.getID() == ID){
             return false;
         }
-        return onThisMap.canSee(cellPosition, enemyCell);
+        return onThisMap.canSee(enemyCell, cellPosition);
     }
 
     /**

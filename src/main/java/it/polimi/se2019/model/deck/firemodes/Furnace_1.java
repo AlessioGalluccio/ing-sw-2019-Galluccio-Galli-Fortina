@@ -1,28 +1,21 @@
 package it.polimi.se2019.model.deck.firemodes;
 
-import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
-import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Furnace_1 extends FireMode {
+    private static final long serialVersionUID = 7284647777673664015L;
     //messages
-    public static final String PLAYER_OF_ROOM_REQUEST = "Select a player of a room. ";
+    static final String PLAYER_OF_ROOM_REQUEST = "Select a player of a room. ";
 
     //errors
-    public static final String INVALID_ROOM = "You can't select this room. ";
-    private static final long serialVersionUID = 7284647777673664015L;
+    static final String INVALID_ROOM = "You can't see this room. ";
 
 
     @Override
