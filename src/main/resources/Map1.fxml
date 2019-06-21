@@ -18,7 +18,7 @@
             <Image url="@back.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" layoutX="-37.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-37.0" AnchorPane.topAnchor="-28.0">
+      <ImageView fx:id="mappa" fitHeight="599.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <cursor>
             <Cursor fx:constant="DISAPPEAR" />
          </cursor>
@@ -96,12 +96,12 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="bWeaponCard1" disable="true" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
-                        <Button fx:id="bWeaponCard2" disable="true" layoutX="190.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
-                        <Button fx:id="bWeaponCard3" disable="true" layoutX="380.0" layoutY="2.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
-                        <ImageView fx:id="imWeaponCard1" disable="true" fitHeight="292.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="imWeaponCard2" disable="true" fitHeight="292.0" fitWidth="140.0" layoutX="190.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="imWeaponCard3" disable="true" fitHeight="292.0" fitWidth="140.0" layoutX="380.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="bWeaponCard1" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
+                        <Button fx:id="bWeaponCard2" layoutX="190.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
+                        <Button fx:id="bWeaponCard3" layoutX="380.0" layoutY="2.0" mnemonicParsing="false" prefHeight="192.0" prefWidth="140.0" />
+                        <ImageView fx:id="imWeaponCard1" fitHeight="292.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard2" fitHeight="292.0" fitWidth="140.0" layoutX="190.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imWeaponCard3" fitHeight="292.0" fitWidth="140.0" layoutX="380.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                         <Button fx:id="bReloadWeapon1" layoutX="125.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bReloadWeapon2" layoutX="315.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bReloadWeapon3" layoutX="505.0" layoutY="30.0" mnemonicParsing="false" onAction="#reloadWeapon" prefHeight="25.0" prefWidth="31.0" />

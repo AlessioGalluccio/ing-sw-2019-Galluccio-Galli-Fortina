@@ -93,12 +93,11 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     }
 
     public void handlePlayerMessage(Player enemy) {
-        if(first) {
+
             this.nickname = enemy.getNickname();
             this.ID = enemy.getID();
             this.character = enemy.getCharacter();
             first=false;
-        }
         this.ammo = enemy.getAmmo();
         this.mark = (ArrayList) enemy.getMark().getMarkReceived();
         this.damage = (ArrayList<Player>) enemy.getDamage();

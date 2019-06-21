@@ -1832,7 +1832,13 @@ public class Controller implements Initializable {
 
 
         for (int i = 0; i < cellAmmos.size(); i++) {
-            imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+            try {
+                imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+            }
+            catch (NullPointerException e){
+
+            }
+
 
         }
             }
@@ -1937,6 +1943,7 @@ public class Controller implements Initializable {
                             } else {
                                 selectWeapon.get(i).setDisable(false);
                                 firemode.get(i).setDisable(false);
+
                             }
                             reloadWeapon.get(i).setDisable(false);
                             discardWeapon.get(i).setDisable(false);
@@ -3255,30 +3262,32 @@ public class Controller implements Initializable {
      * @return
      */
     public Image setPositionPlayerImages(int characterID){
-        Image image = new Image("Icon/Blue.png");
+        Image image = new Image("Icon/Blu.png");
 
         switch (characterID){
             case 1:
-                image = new Image("Icon/Green.png");
+                image = new Image("Icon/Verde.png");
 
                 break;
             case 2:
-                image = new Image("Icon/Purple.png");
+                image = new Image("Icon/Viola.png");
 
                 break;
             case 3:
-                image = new Image("Icon/Yellow.png");
+                image = new Image("Icon/Giallo.png");
 
                 break;
             case 4:
-                image = new Image("Icon/Grey.png");
+                image = new Image("Icon/Grigio.png");
 
                 break;
             case 5:
-                image = new Image("Icon/Blue.png");
+                image = new Image("Icon/Blu.png");
 
                 break;
         }
         return image;
     }
+
+
 }
