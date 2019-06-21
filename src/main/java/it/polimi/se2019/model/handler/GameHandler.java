@@ -100,6 +100,7 @@ public class GameHandler extends Observable {
     }
 
     private void setNewTurn() {
+        map.reloadAllCell();
         lastLap--;
         if(skull==0) setFrenzy();
         if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode

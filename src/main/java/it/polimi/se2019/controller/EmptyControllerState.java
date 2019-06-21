@@ -42,6 +42,7 @@ public class EmptyControllerState extends StateController {
                 if(!canShoot){
                     errorString = CANT_SHOOT;
                     youCantDoThis();
+                    return;
                 }
             }
             controller.addReceived();
