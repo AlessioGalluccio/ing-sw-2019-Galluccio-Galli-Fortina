@@ -30,6 +30,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -903,15 +904,19 @@ public class Controller implements Initializable {
 
         //set Player ammo
         updatePlayerAmmo(ControllerLogin.clientView.getPlayerCopy().getAmmo().getRedAmmo(), ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo(),
-                ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo());
+                ControllerLogin.clientView.getPlayerCopy().getAmmo().getYellowAmmo());
 
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
 
+        //
         setPlayerOnMap();
 
         setDiscardReload();
+
+        possibleActions.setVisible(true);
+        yourCharacter.setVisible(true);
 
 
         System.out.println(choosenMap);
@@ -2118,15 +2123,20 @@ public class Controller implements Initializable {
 
 
     /**
-     * open chooseCharacter window
-     * @param characterID
+     * show possible character
+     * @param event
      * @throws Exception
      */
-    public void chooseYourCharacter(List<Integer> characterID) throws Exception {
+    public void chooseYourCharacter(ActionEvent event) throws Exception {
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+
+                List<Integer> characterID = new LinkedList<>();
+                for(int i=0; i<ControllerLogin.characters.size(); i++){
+                    characterID.add(ControllerLogin.characters.get(i).getId());
+                }
 
                 rbSprog.setDisable(true);
                 rbViolet.setDisable(true);
@@ -2134,7 +2144,7 @@ public class Controller implements Initializable {
                 rbStruct.setDisable(true);
                 rbBanshee.setDisable(true);
                     for (int i = 0; i < characterID.size(); i++) {
-                        setPossibleTarget(characterID.get(i));
+                        setPossibleCharacter(characterID.get(i));
                     }
 
             }
@@ -2143,17 +2153,25 @@ public class Controller implements Initializable {
 
     }
 
-    public void setPossibleTarget(int i){
+    /**
+     * set possible radio button character clickable
+     * @param i
+     */
+    public void setPossibleCharacter(int i){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 switch (i){
-            case 1: rbSprog.setDisable(false);
-            case 2: rbViolet.setDisable(false);
-            case 3: rbStruct.setDisable(false);
-            case 4: rbDozer.setDisable(false);
-            case 5: rbBanshee.setDisable(false);
-        }
+                    case 1: rbSprog.setDisable(false);
+                            break;
+                    case 2: rbViolet.setDisable(false);
+                            break;
+                    case 3: rbStruct.setDisable(false);
+                            break;
+                    case 4: rbDozer.setDisable(false);
+                            break;
+                    case 5: rbBanshee.setDisable(false);
+                }
             }
         });
     }
@@ -2228,16 +2246,25 @@ public class Controller implements Initializable {
      */
     public void selectCharacter(ActionEvent event) throws Exception{
         if (ControllerLogin.clientView.getPossibleCharacter() != null) {
-                ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 650, 500);
-                List<Integer> characterID = new LinkedList<>();
-                for(int i=0; i<ControllerLogin.characters.size(); i++){
-                    characterID.add(ControllerLogin.characters.get(i).getId());
-                }
+            ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 650, 500);
+
+
 
                 //TODO oscurare i bottoni
-                //chooseYourCharacter(characterID);
-                bselectCharacter.setVisible(false);
-                bselectCharacter.setDisable(true);
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        bselectCharacter.setVisible(false);
+                        bselectCharacter.setDisable(true);
+                    }
+                    catch (Exception e){
+
+                    }
+                }
+            });
+
+
 
         }
         else
