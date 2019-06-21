@@ -12,7 +12,6 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
-import static it.polimi.se2019.model.deck.FireMode.CELL_NOT_PRESENT;
 
 public class ShootAdrenaline extends Shoot {
 
