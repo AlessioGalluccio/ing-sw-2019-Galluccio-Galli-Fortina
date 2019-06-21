@@ -46,8 +46,8 @@ public abstract class WeaponCard implements Card {
      *
      * @return WeaponCard's buy cost
      */
-    public ColorRYB getBuyCost(){
-        return ammoGranted;
+    public List<ColorRYB> getBuyCost(){
+        return ammoNotGranted;
     }
 
     /**
