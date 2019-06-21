@@ -5,6 +5,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
@@ -115,6 +116,12 @@ public abstract class StateController {
         Room room = gameHandler.getRoomByID(color);
         Cell cellSpawn = room.getSpawnCell();
         playerToRespawn.setPosition(cellSpawn);
+        try{
+            playerToRespawn.discardCard(powerupCard);
+        }catch (NotPresentException e){
+            //should not happen
+        }
+
         return null;
     }
 
