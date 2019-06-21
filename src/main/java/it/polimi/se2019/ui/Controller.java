@@ -3167,11 +3167,26 @@ public class Controller implements Initializable {
      * @param cell
      */
     public void updatePlayersPosition(Cell cell){
-        List<Player> players= cell.getPlayerHere();
-        ArrayList<ImageView> imPlayerPosition = setCellPlayersPosition(cell.getCoordinateX(), cell.getCoordinateY());
-        for(int i = 0; i<players.size(); i++){
-            imPlayerPosition.get(i).setImage(setPositionPlayerImages(players.get(i).getCharacter().getId()));
-        }
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                    List<Player> players = cell.getPlayerHere();
+                    ArrayList<ImageView> imPlayerPosition = setCellPlayersPosition(cell.getCoordinateX(), cell.getCoordinateY());
+                    for (int i = 0; i < imPlayerPosition.size(); i++) {
+                        imPlayerPosition.get(i).setVisible(false);
+                    }
+                    for (int i = 0; i < players.size(); i++) {
+                        imPlayerPosition.get(i).setImage(setPositionPlayerImages(players.get(i).getCharacter().getId()));
+                        imPlayerPosition.get(i).setVisible(true);
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+        });
 
     }
 

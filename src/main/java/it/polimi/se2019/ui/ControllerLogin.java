@@ -413,7 +413,7 @@ public class ControllerLogin implements UiInterface {
      * update game display
      */
 
-    //TODO mettere tutti i metodi di aggiornamento NON DEVE ESSERE USATO PER L'INIZIO DEL GIOCO!!
+
     public void updateMap(){
         updateAmmoCardMap();
         updateWeaponMap();
