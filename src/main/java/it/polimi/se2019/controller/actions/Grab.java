@@ -91,13 +91,13 @@ public class Grab extends Action{
                     //handling of WeaponCard
                     if (playerAuthor.getWeaponCardList().size() < 3) {
                         playerAuthor.setPosition(cellObjective);
-                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
+                        controller.addMessageListExpected(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
                         flagMustChooseWeapon = true;
                     } else {
                         //player must discard a weapon
                         playerAuthor.setPosition(cellObjective);
-                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.DISCARD_WEAPON_MESSAGE, DISCARD_WEAPON));
-                        controller.addMessageListImmediateNext(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
+                        controller.addMessageListExpected(new StringAndMessage(Identificator.DISCARD_WEAPON_MESSAGE, DISCARD_WEAPON));
+                        controller.addMessageListExpected(new StringAndMessage(Identificator.WEAPON_MESSAGE, CHOOSE_WEAPON));
                         flagMustChooseWeapon = true;
                     }
                 }
