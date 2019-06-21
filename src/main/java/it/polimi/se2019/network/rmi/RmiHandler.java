@@ -74,12 +74,12 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
      */
     @Override
     public void setTimer() {
-        if(timer==null) timer = new Timer();
-        else timer.cancel();
+        if(timer!=null) timer.cancel();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                new Sender(new DisconnectMessage());
+                executor.submit(new Sender(new DisconnectMessage()));
                 disconnect();
             }
         }, duration);
@@ -128,7 +128,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
     private void disconnect() {
         closeAll();
         server.getWaitingRoom().disconnect(this, view, matchID);
-        //If match is started disconnect form controller
+        //If match is started disconnect from controller
         if(matchID!=0) view.notifyObservers(new ReconnectionMessage(false, view.getPlayerCopy().getID(), view));
     }
 
@@ -148,7 +148,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
                 Logger.getLogger(RmiHandler.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
             } catch (RemoteException e) {
                 Logger.getLogger(RmiHandler.class.getName()).log(Level.INFO, "Can't send message to RMI client." +
-                        " It's close.", e);
+                        " It's close. #" + matchID);
                 disconnect();
             }
         }

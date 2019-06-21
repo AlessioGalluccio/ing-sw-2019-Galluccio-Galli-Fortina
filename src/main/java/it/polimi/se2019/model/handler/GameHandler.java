@@ -81,16 +81,17 @@ public class GameHandler extends Observable {
     public void nextTurn() {
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
+        getViewByPlayer(player).setTimer(false);
         checkDeath(); //If someone is dead cash his point, add revenge mark and add him to the stack of just dead
         if(justDied.isEmpty()) {
             do {
                 incrementTurn();  //I had to separate this method in order to improve efficiency test
             }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
+            setNewTurn();
             Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
             if(firstTurn) {
                 controller.setState(new FirstTurnState(controller, this));
             } else controller.setState(new EmptyControllerState(controller, this));
-            setNewTurn();
         }
         else {
             //TODO chiedere di respawnare
@@ -103,6 +104,8 @@ public class GameHandler extends Observable {
         if(skull==0) setFrenzy();
         if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode
         else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
+        getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
+
     }
 
     private void setFrenzy() {
@@ -569,15 +572,17 @@ public class GameHandler extends Observable {
         }
         forwardAllViews(new StartGameMessage(matchID));
         try {
-                Thread.sleep(400); //Wait all message arrive at the user
-                forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
+            Thread.sleep(400); //Wait all message arrive at the user
+            forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
 
-                Thread.sleep(400); //Wait all message arrive at the user
-                Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
-                controller.setState(new FirstTurnState(controller, this));
+            Thread.sleep(400); //Wait all message arrive at the user
+            Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
+            controller.setState(new FirstTurnState(controller, this));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+
+        getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
 
     }
 
@@ -593,7 +598,7 @@ public class GameHandler extends Observable {
            forwardAllViews(player.getNickname() + " is back!\n");
         } else {
             forwardAllViews(player.getNickname() + " has been disconnected! \n");
-             if(playerConnected() < 3) endGame();
+            if(playerConnected() < 3) endGame();
         }
     }
 

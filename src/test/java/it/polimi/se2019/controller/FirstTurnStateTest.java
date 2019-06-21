@@ -9,6 +9,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
+import it.polimi.se2019.view.ViewControllerMess.CellMessage;
 import it.polimi.se2019.view.ViewControllerMess.CharacterMessage;
 import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;

@@ -85,7 +85,7 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleOptional(int numOptional) {
-
+        youCantDoThis();
     }
 
     @Override
@@ -137,12 +137,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        controller.setState(new NotYourTurnState(controller,gameHandler, true));
     }
 
     @Override
     public void handleFire() {
-        //TODO
+        youCantDoThis();
     }
 
     @Override
