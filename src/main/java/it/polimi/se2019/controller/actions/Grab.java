@@ -6,6 +6,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.NotCardException;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
@@ -139,16 +140,19 @@ public class Grab extends Action{
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
         if(flagMustChooseWeapon){
             try{
-                try{
-                    Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
-                    playerAuthor.addWeaponCard((WeaponCard) weapon);
-                }catch (TooManyException e){
-                    //should never happen
+                Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
+                if(weaponToDiscard != null){
+                    //((CellSpawn)cellObjective).replaceCard(weaponToDiscard);
+                    playerAuthor.discardCard(weaponToDiscard);
                 }
-
+                playerAuthor.addWeaponCard((WeaponCard) weapon);
             }
             catch (NotCardException e){
                 throw new WrongInputException(WEAPON_NOT_PRESENT_IN_CELL_GRAB);
+            }catch (TooManyException e){
+                //should never happen
+            }catch (NotPresentException e){
+                //should never happen
             }
         }
     }
