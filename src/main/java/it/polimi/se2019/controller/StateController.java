@@ -117,7 +117,7 @@ public abstract class StateController {
         Cell cellSpawn = room.getSpawnCell();
         playerToRespawn.setPosition(cellSpawn);
         try{
-            playerToRespawn.discardCard(powerupCard);
+            playerToRespawn.discardCard(powerupCard, true);
         }catch (NotPresentException e){
             //should not happen
         }

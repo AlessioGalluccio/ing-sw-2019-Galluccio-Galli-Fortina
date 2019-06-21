@@ -150,7 +150,7 @@ public class GrabTest {
             controller.update(null, weaponMessage);
             //System.out.println(playerView.getLastStringPrinted());
 
-            System.out.println(authorPlayer);
+            //System.out.println(authorPlayer);
             //System.out.println(cellWithWeapons.getCardID());
 
             assertEquals(3,authorPlayer.getWeaponCardList().size());
