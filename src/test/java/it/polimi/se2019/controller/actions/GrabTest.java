@@ -3,13 +3,17 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.StateController;
+import it.polimi.se2019.model.deck.Card;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
 import it.polimi.se2019.view.ViewControllerMess.CellMessage;
 import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -75,7 +79,7 @@ public class GrabTest {
         notVisibleCell = gameHandler.getCellByCoordinate(1,2);
         targetPlayer3.setPosition(notVisibleCell);
 
-        authorPlayer.setAmmoBag(3,3,3);
+        authorPlayer.setAmmoBag(0,0,0);
     }
 
     @Test
@@ -84,9 +88,34 @@ public class GrabTest {
         System.out.println(playerView.getLastStringPrinted());
 
         CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(),playerView);
+
         controller.update(null, cellMessage);
         System.out.println(playerView.getLastStringPrinted());
+        System.out.println(authorPlayer.getAmmo());
 
+        assertEquals(1,authorPlayer.getCell().getCoordinateX());
+        assertEquals(1,authorPlayer.getCell().getCoordinateY());
+
+        ActionMessage actionMessage = new ActionMessage(Identificator.GRAB, authorPlayer.getID(), playerView);
+
+        controller.update(null, actionMessage);
+        System.out.println(playerView.getLastStringPrinted());
+
+        CellMessage cellMessage2 = new CellMessage(1,0,authorPlayer.getID(),playerView);
+        controller.update(null, cellMessage2);
+        System.out.println(playerView.getLastStringPrinted());
+        System.out.println(authorPlayer.getAmmo());
+    }
+
+    @Test
+    public void tooDistantCell(){
+
+        System.out.println(playerView.getLastStringPrinted());
+
+        CellMessage cellMessage = new CellMessage(3,1,authorPlayer.getID(),playerView);
+        controller.update(null, cellMessage);
+
+        assertEquals(Grab.TOO_MUCH_DISTANCE + Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
     }
 
 }

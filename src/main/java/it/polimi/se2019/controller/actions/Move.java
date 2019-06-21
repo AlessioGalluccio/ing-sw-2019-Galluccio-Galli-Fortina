@@ -8,9 +8,7 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.CellMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,7 @@ public class Move extends Action {
     @Override
     public void addCell(int x, int y) throws WrongInputException {
         //TODO discutere sull'executeAction()
-        List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), DISTANCE_MAX);
+        List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), getMaxDistance());
 
         try {
             if(arrayCell.contains(gameHandler.getCellByCoordinate(x,y))) {
@@ -102,5 +100,9 @@ public class Move extends Action {
     @Override
     public void fire() throws WrongInputException {
         throw new WrongInputException();
+    }
+
+    protected int getMaxDistance(){
+        return DISTANCE_MAX;
     }
 }

@@ -31,6 +31,7 @@ public class Grab extends Action{
     public static final String WEAPON_NOT_PRESENT_IN_PLAYER_GRAB = "You don't have this weapon. ";
     public static final String WEAPON_NOT_PRESENT_IN_CELL_GRAB = "This weapon is not present in the cell. ";
     public static final String CARD_NOT_PRESENT_IN_CELL_GRAB = "This card is not present in the cell. ";
+    public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
 
 
 
@@ -102,7 +103,7 @@ public class Grab extends Action{
                 }
             }
             else{
-                throw new WrongInputException();
+                throw new WrongInputException(TOO_MUCH_DISTANCE);
             }
         }catch(NotPresentException e){
             //should not happen

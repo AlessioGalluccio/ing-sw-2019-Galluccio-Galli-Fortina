@@ -4,25 +4,42 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
+import static it.polimi.se2019.model.deck.FireMode.CELL_NOT_PRESENT;
+
 public class ShootAdrenaline extends Shoot {
+
+    private int DISTANCE_MAX = 1;
+    //messages
+    public static final String CHOOSE_CELL ="Select a cell. ";
+    //errors
+    public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
+    public static final String CELL_NOT_PRESENT = "This cell is not present. ";
+
     public ShootAdrenaline(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }
 
     @Override
-    public void executeAction() throws WrongInputException {
-        super.executeAction();
-    }
-
-    @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        return super.getStringAndMessageExpected();
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL);
+        StringAndMessage secondMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, Shoot.FIRST_MESSAGE);
+        StringAndMessage thirdMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, Shoot.SECOND_MESSAGE);
+        StringAndMessage lastMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, Shoot.LAST_MESSAGE);
+
+        ArrayList<StringAndMessage> list = new ArrayList<>();
+        list.add(firstMessage);
+        list.add(secondMessage);
+        list.add(thirdMessage);
+        list.add(lastMessage);
+        return list;
     }
 
     @Override
@@ -32,47 +49,26 @@ public class ShootAdrenaline extends Shoot {
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
-        super.addCell(x, y);
+        if (fireMode == null) {
+            try {
+                Cell cell = gameHandler.getCellByCoordinate(x,y);
+                if(gameHandler.getMap().getDistance(cell, playerAuthor.getCell()) > getMaxDistance()){
+                    throw new WrongInputException(TOO_MUCH_DISTANCE);
+                }
+                else{
+                    playerAuthor.setPosition(cell);
+                }
+            } catch (NotPresentException e) {
+                throw new WrongInputException(CELL_NOT_PRESENT);
+            }
+
+        } else {
+            fireMode.addCell(x, y);
+        }
+
     }
 
-    @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-        super.addPlayerTarget(playerID);
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        super.addTargetingScope(targetingCardID, cost);
-    }
-
-    @Override
-    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        super.addReload(weaponID);
-    }
-
-
-    @Override
-    public void addFireMode(int fireModeID) throws WrongInputException {
-        super.addFireMode(fireModeID);
-    }
-
-    @Override
-    public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
-        super.addWeapon(weaponCard);
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        super.addOptional(numOptional);
-    }
-
-    @Override
-    public void addNope() throws WrongInputException {
-        super.addNope();
-    }
-
-    @Override
-    public void fire() throws WrongInputException {
-        super.fire();
+    protected int getMaxDistance(){
+        return DISTANCE_MAX;
     }
 }
