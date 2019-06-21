@@ -255,10 +255,25 @@ public class ControllerLogin implements UiInterface {
         updatePlayerDamage();
         updatePlayerSkull();
         updatePlayerMark();
+        updatePlayerCharacter();
 
 
     }
 
+    /**
+     * update Player Character's Images
+     */
+    public void updatePlayerCharacter(){
+        try {
+            controller.updatePlayerCharacter(clientView.getPlayerCopy().getCharacter().getId());
+        }catch (NullPointerException e){
+
+        }
+    }
+
+    /**
+     * update Player Powerup's Images
+     */
     private void updatePlayerPowerup() {
         controller.updatePlayerPowerup();
     }

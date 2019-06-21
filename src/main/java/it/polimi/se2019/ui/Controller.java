@@ -901,6 +901,9 @@ public class Controller implements Initializable {
 
 
 
+        //set Player ammo
+        updatePlayerAmmo(ControllerLogin.clientView.getPlayerCopy().getAmmo().getRedAmmo(), ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo(),
+                ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo());
 
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
@@ -2124,18 +2127,16 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                try {
-                    rbSprog.setDisable(true);
-                    rbViolet.setDisable(true);
-                    rbDozer.setDisable(true);
-                    rbStruct.setDisable(true);
-                    rbBanshee.setDisable(true);
+
+                rbSprog.setDisable(true);
+                rbViolet.setDisable(true);
+                rbDozer.setDisable(true);
+                rbStruct.setDisable(true);
+                rbBanshee.setDisable(true);
                     for (int i = 0; i < characterID.size(); i++) {
                         setPossibleTarget(characterID.get(i));
                     }
-                } catch (NullPointerException e) {
 
-                }
             }
         });
 
@@ -2143,13 +2144,18 @@ public class Controller implements Initializable {
     }
 
     public void setPossibleTarget(int i){
-        switch (i){
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                switch (i){
             case 1: rbSprog.setDisable(false);
             case 2: rbViolet.setDisable(false);
             case 3: rbStruct.setDisable(false);
             case 4: rbDozer.setDisable(false);
             case 5: rbBanshee.setDisable(false);
         }
+            }
+        });
     }
 
 
@@ -2172,29 +2178,36 @@ public class Controller implements Initializable {
                 ArrayList<Image> images = new ArrayList<>();
                 try {
                     if (rbSprog.isSelected()) {
+
                         ControllerLogin.clientView.createCharacterMessage(1);
-                        images = setCharacter(1);
 
 
                     }
                     if (rbViolet.isSelected()) {
+
                         ControllerLogin.clientView.createCharacterMessage(2);
-                        images = setCharacter(2);
+
+
                     }
                     if (rbStruct.isSelected()) {
+
                         ControllerLogin.clientView.createCharacterMessage(3);
-                        images = setCharacter(3);
+
+
                     }
                     if (rbDozer.isSelected()) {
+
                         ControllerLogin.clientView.createCharacterMessage(4);
-                        images = setCharacter(4);
+
                     }
                     if (rbBanshee.isSelected()) {
+
                         ControllerLogin.clientView.createCharacterMessage(5);
-                        images = setCharacter(5);
+
                     }
 
-                    updatePlayerCharacter(images.get(0),images.get(1));
+
+
                     Stage stage = (Stage) rbBanshee.getScene().getWindow();
                     stage.close();
 
@@ -2220,9 +2233,11 @@ public class Controller implements Initializable {
                 for(int i=0; i<ControllerLogin.characters.size(); i++){
                     characterID.add(ControllerLogin.characters.get(i).getId());
                 }
-                chooseYourCharacter(characterID);
-            bselectCharacter.setVisible(false);
-            bselectCharacter.setDisable(true);
+
+                //TODO oscurare i bottoni
+                //chooseYourCharacter(characterID);
+                bselectCharacter.setVisible(false);
+                bselectCharacter.setDisable(true);
 
         }
         else
@@ -2233,17 +2248,16 @@ public class Controller implements Initializable {
     /**
      *
      * set player character images on map
-     * @param image1
-     * @param image2
      */
-    public void updatePlayerCharacter(Image image1, Image image2){
+    public void updatePlayerCharacter(int i){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                    ArrayList<Image> image= setCharacter(i);
                     possibleActions.setVisible(true);
                     yourCharacter.setVisible(true);
-                    yourCharacter.setImage(image1);
-                    possibleActions.setImage(image2);
+                    yourCharacter.setImage(image.get(0));
+                    possibleActions.setImage(image.get(1));
 
             }
         });
@@ -2311,7 +2325,7 @@ public class Controller implements Initializable {
         switch (characterID) {
             case 1:
                 image1 = new Image("characters/characterGreen.jpg");
-                image2 = new Image("actionsGreen.jpg");
+                image2 = new Image("characters/actionsGreen.jpg");
                 break;
             case 2:
                 image1 = new Image("characters/characterViolet.jpg");
