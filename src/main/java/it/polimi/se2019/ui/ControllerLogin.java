@@ -243,6 +243,8 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void updateCell(Cell cell) {
         controller.updatePlayersPosition(cell);
+        controller.updateWeaponMap();
+        updateAmmoCardMap();
     }
 
     @Override
