@@ -101,9 +101,9 @@ public class GrabTest {
         controller.update(null, actionMessage);
         //System.out.println(playerView.getLastStringPrinted());
 
-        CellMessage cellMessage2 = new CellMessage(1,0,authorPlayer.getID(),playerView);
+        CellMessage cellMessage2 = new CellMessage(0,1,authorPlayer.getID(),playerView);
         controller.update(null, cellMessage2);
-        //System.out.println(playerView.getLastStringPrinted());
+        System.out.println(playerView.getLastStringPrinted());
         //System.out.println(authorPlayer.getAmmo());
     }
 

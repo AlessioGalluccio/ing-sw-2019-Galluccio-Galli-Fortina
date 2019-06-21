@@ -289,6 +289,7 @@ public class ActionSelectedControllerState extends StateController {
             //the sequence is completed. It goes to the EmptyState because it could use powerus or recharge weapons
             controller.addNumOfActionTaken();
             controller.setState(new EmptyControllerState(controller, gameHandler));
+            stringToPlayerView = null;
         }
 
 

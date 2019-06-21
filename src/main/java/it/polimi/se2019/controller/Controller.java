@@ -127,6 +127,8 @@ public class Controller implements Observer {
         this.messageListExpected.add(indexExpected , messageExpected);
     }
 
+
+
     public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
         if(this.messageListExpected.isEmpty()){
             this.messageListExpected.addAll(messageList);
