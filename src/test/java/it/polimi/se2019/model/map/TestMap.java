@@ -91,6 +91,7 @@ public class TestMap {
         assertEquals(1, map1.getDistance(cellMap1[1][1], cellMap1[0][1]));
         assertEquals(2, map1.getDistance(cellMap1[1][1], cellMap1[0][2]));
         assertEquals(3, map1.getDistance(cellMap1[1][1], cellMap1[3][0]));
+        assertEquals(3, map1.getDistance(cellMap1[1][1], cellMap1[1][2]));
     }
 
     @Test
