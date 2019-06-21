@@ -4,9 +4,12 @@ import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
+import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
 import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
@@ -76,18 +79,26 @@ public class ActionSelectedControllerStateTest {
 
     }
 
+    @Test
+    public void skipPositive(){
 
+        NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
+        controller.update(null, nopeMessage);
+        assertTrue(controller.getState() instanceof EmptyControllerState);
+        assertEquals(1,controller.getNumOfActionTaken());
 
+        ActionMessage actionMessage = new ActionMessage(Identificator.GRAB,authorPlayer.getID(),playerView);
+        controller.update(null, actionMessage);
+        assertTrue(controller.getState() instanceof ActionSelectedControllerState);
+        controller.update(null, nopeMessage);
+        assertTrue(controller.getState() instanceof EmptyControllerState);
+        assertEquals(2,controller.getNumOfActionTaken());
 
+        controller.update(null, actionMessage);
+        //System.out.println(playerView.getLastStringPrinted());
+        assertTrue(controller.getState() instanceof EmptyControllerState); //I have alredy done two actions
 
-
-
-
-
-
-
-
-
+    }
 
 
 

@@ -163,10 +163,7 @@ public class Shoot extends Action{
         fireMode.addOptional(numOptional);
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-        //TODO
-    }
+
 
     public void fire() throws WrongInputException{
         if(fireMode != null){
@@ -207,6 +204,7 @@ public class Shoot extends Action{
         return targetsOfTargetings;
     }
 
+    @Override
     public AmmoBag getCost() {
         return cost;
     }

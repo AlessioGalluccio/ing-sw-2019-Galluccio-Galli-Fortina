@@ -6,10 +6,7 @@ import it.polimi.se2019.controller.EmptyControllerState;
 import it.polimi.se2019.controller.NotYourTurnState;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.player.NotEnoughAmmoException;
-import it.polimi.se2019.model.player.NotPresentException;
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.WeaponIsLoadedException;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -55,22 +52,28 @@ public abstract class Action implements AddActionMethods {
         return controller;
     }
 
+    /*
     @Override
     public void addNope() throws WrongInputException {
         endAction();
     }
+    */
 
     @Override
     public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
         throw new WrongInputException();
     }
 
+    public abstract AmmoBag getCost();
+
     /**
      * call it at the end of the action. It will change the state of the controller
      */
+    /*
     public void endAction(){
         controller.getState().endAction();
 
     }
+    */
 
 }

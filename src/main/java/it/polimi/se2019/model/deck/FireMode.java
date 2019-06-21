@@ -126,10 +126,6 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         commonEndingFire();
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-        shoot.endAction();
-    }
 
     /**
      * Set targets in order to fire it
@@ -320,9 +316,12 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     /**
      * call it when you abort the firemode
      */
+
+    /*
     public void endFiremode(){
         shoot.endAction();
     }
+    */
 
     /**
      * end of fire, call it if you can't use super.fire() in the firemode
@@ -338,7 +337,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         //payment of the total cost of this action
         try{
             author.payAmmoCost(shoot.getCost());
-            endFiremode();
+            //endFiremode();
         }catch (NotEnoughAmmoException e){
             //it should never happen, because cost must always be controlled before
             throw new WrongInputException();

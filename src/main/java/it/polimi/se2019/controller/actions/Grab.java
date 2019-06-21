@@ -171,11 +171,6 @@ public class Grab extends Action{
     }
 
     @Override
-    public void addNope() throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
         if(playerAuthor.getWeaponCardList().contains(weaponCard)){
             this.weaponToDiscard = weaponCard;
@@ -188,6 +183,11 @@ public class Grab extends Action{
     @Override
     public void fire() throws WrongInputException {
         throw new WrongInputException();
+    }
+
+    @Override
+    public AmmoBag getCost() {
+        return new AmmoBag(0,0,0);
     }
 
     protected int getMaxDistance(){

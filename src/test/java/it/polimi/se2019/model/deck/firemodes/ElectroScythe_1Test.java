@@ -74,8 +74,7 @@ public class ElectroScythe_1Test {
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode electroScythe_1 = gameHandler.getFireModeByID(ELECTROSCYTHE_FIREMODE_ID);
-        shoot.addFireMode(electroScythe_1.getID());
+        shoot.addFireMode(1);
     }
 
     @Test

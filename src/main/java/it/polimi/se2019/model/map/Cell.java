@@ -237,12 +237,12 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
         String space = ConsoleColor.WHITE_BOLD_BRIGHT + "▦" + color;
         s+=space + space;
-        if(getPlayerHere().size()==player1) {
+        if(getPlayerHere().size()>=player1) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player1-1).getCharacter().getColor());
             s+="◉";
         }else s+=space;
         s+=space;
-        if(getPlayerHere().size()==player2) {
+        if(getPlayerHere().size()>=player2) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player2-1).getCharacter().getColor());
             s+="◉";
         }else s+=space;
