@@ -625,7 +625,10 @@
          <image>
             <Image url="@Icon/skull.png" />
          </image></ImageView>
-      <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="DROP WEAPON" />
+      <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="SKIP">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
       <Button fx:id="bFrenzyShoot1" disable="true" layoutX="70.0" layoutY="540.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
       <Button fx:id="bFrenzyMove1" disable="true" layoutX="70.0" layoutY="566.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
       <Button fx:id="bFrenzyGrab1" disable="true" layoutX="70.0" layoutY="592.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
