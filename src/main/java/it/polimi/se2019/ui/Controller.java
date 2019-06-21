@@ -901,9 +901,9 @@ public class Controller implements Initializable {
 
 
 
-        yourCharacter.setVisible(true);
-        yourCharacter.setVisible(true);
-
+        //set Player ammo
+        updatePlayerAmmo(ControllerLogin.clientView.getPlayerCopy().getAmmo().getRedAmmo(), ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo(),
+                ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo());
 
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
