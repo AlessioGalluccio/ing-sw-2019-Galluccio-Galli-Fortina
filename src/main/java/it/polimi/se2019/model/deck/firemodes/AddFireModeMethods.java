@@ -18,7 +18,7 @@ public interface AddFireModeMethods {
 
     void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
 
-    void addNope() throws WrongInputException;
+    //void addNope() throws WrongInputException;
 
     void fire() throws WrongInputException;
 

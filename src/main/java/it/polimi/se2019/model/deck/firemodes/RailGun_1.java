@@ -60,8 +60,4 @@ public class RailGun_1 extends FireMode {
 
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-
-    }
 }

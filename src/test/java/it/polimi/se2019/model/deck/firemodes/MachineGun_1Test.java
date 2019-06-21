@@ -74,8 +74,7 @@ public class MachineGun_1Test {
         shoot.addWeapon(weapon);
 
         //add firemode
-        FireMode machineGun_1 = gameHandler.getFireModeByID(MACHINE_FIREMODE_ID);
-        shoot.addFireMode(machineGun_1.getID());
+        shoot.addFireMode(1);
 
 
     }

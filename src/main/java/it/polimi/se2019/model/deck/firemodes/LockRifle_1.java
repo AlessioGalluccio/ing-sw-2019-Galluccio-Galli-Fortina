@@ -29,7 +29,7 @@ public class LockRifle_1 extends FireMode {
         //TODO se niente target?
         if(!sendAllVisiblePlayers(null)){
             playerView.printFromController(NO_TARGET_NO_ACTION);
-            endFiremode();
+            //endFiremode();
         }
     }
 

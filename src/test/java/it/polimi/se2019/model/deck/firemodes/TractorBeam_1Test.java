@@ -92,8 +92,7 @@ public class TractorBeam_1Test {
 
 
         //add firemode
-        firemode = gameHandler.getFireModeByID(TRACTORBEAM_2_FIREMODE_ID);
-        FireModeMessage fireModeMessage = new FireModeMessage(firemode.getID(), authorPlayer.getID(), playerView);
+        FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, fireModeMessage);
     }
 
