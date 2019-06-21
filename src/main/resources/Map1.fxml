@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="myContainer" prefHeight="705.0" prefWidth="1378.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+<AnchorPane fx:id="myContainer" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
-      <ImageView fitHeight="710.0" fitWidth="1389.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@back.jpg" />
          </image>
@@ -50,7 +50,7 @@
       <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="682.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="702.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <TabPane fx:id="container1" layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="container1" layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
         <tabs>
           <Tab text="Powerup Cards">
             <content>
@@ -165,7 +165,7 @@
          <image>
             <Image url="@characters/firstPlayer.png" />
          </image></ImageView>
-      <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="container2" layoutX="817.0" layoutY="5.0" prefHeight="359.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <tabs>
           <Tab fx:id="tabEnemy1">
             <content>
@@ -423,13 +423,13 @@
       <ImageView fx:id="playerDamage9" fitHeight="29.0" fitWidth="22.0" layoutX="429.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage10" fitHeight="29.0" fitWidth="22.0" layoutX="462.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="playerDamage11" fitHeight="29.0" fitWidth="22.0" layoutX="491.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="labelProva" layoutX="810.0" layoutY="440.0" prefHeight="36.0" prefWidth="551.0" textFill="RED" />
-      <Button fx:id="fireButton" layoutX="809.0" layoutY="383.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!!">
+      <Label fx:id="labelProva" layoutX="810.0" layoutY="440.0" prefHeight="36.0" prefWidth="551.0" textFill="RED"/>
+      <Button fx:id="fireButton" layoutX="809.0" layoutY="383.0" mnemonicParsing="false" onAction="#fire" prefHeight="36.0" prefWidth="162.0" text="FIRE!" AnchorPane.rightAnchor="430.0">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="endTurnButton" layoutX="987.0" layoutY="375.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="49.0" prefWidth="162.0" text="END TURN">
+      <Button fx:id="endTurnButton" layoutX="987.0" layoutY="375.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="49.0" prefWidth="162.0" text="END TURN" AnchorPane.rightAnchor="250.0">
          <font>
             <Font size="25.0" />
          </font>
@@ -591,8 +591,8 @@
             <Image url="@Icon/Yammo.png" />
          </image>
       </ImageView>
-      <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Your Points : " textFill="WHITE" />
-      <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" textFill="WHITE" />
+      <Label layoutX="1166.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Points : " textFill="WHITE" AnchorPane.rightAnchor="163.0" />
+      <Label fx:id="yourPointsLabel" layoutX="1239.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="165.0" />
       <ImageView fx:id="imSkull8" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Icon/skull.png" />
@@ -625,7 +625,7 @@
          <image>
             <Image url="@Icon/skull.png" />
          </image></ImageView>
-      <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="SKIP">
+      <Button fx:id="dbDropweapon" layoutX="1260.0" layoutY="371.0" mnemonicParsing="false" onAction="#dropWeapon" prefHeight="54.0" prefWidth="106.0" text="SKIP" AnchorPane.rightAnchor="30.0">
          <font>
             <Font size="25.0" />
          </font></Button>

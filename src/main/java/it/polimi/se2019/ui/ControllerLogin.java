@@ -134,7 +134,7 @@ public class ControllerLogin implements UiInterface {
                     if(isFirst) {
                         try {
                             System.out.println(8);
-                            fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 470, 510);
+                            fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 450, 530);
                             controller = fxmlLoader.getController();
                             System.out.println(8);
                         } catch (Exception e) {
@@ -174,6 +174,8 @@ public class ControllerLogin implements UiInterface {
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
+        if(fileName.equalsIgnoreCase("chooseMap.fxml") || fileName.equalsIgnoreCase("login.fxml"))
+            primaryStage.setResizable(false);
 
         return  fxmlLoader;
     }
@@ -200,7 +202,7 @@ public class ControllerLogin implements UiInterface {
 
         try {
             selectedMap(mapView.getMapCopy().getID());
-            fxmlLoader = open("Map1.fxml", "ADRENALINE", 700, 700);
+            fxmlLoader = open("Map1.fxml", "ADRENALINE", 1730, 970);
 
             controller = fxmlLoader.getController();
         }

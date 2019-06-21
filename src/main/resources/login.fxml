@@ -9,17 +9,17 @@
 
 <AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.ControllerLogin">
    <children>
-      <Button fx:id="login" layoutX="123.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginButton" text="Login" />
-      <Label fx:id="status" layoutX="110.0" layoutY="226.0" prefHeight="25.0" prefWidth="72.0" />
-      <TextField fx:id="matchID" layoutX="76.0" layoutY="74.0" promptText="Match ID (optional)" />
-      <TextField fx:id="username" layoutX="76.0" layoutY="30.0" promptText="Username" />
-      <RadioButton fx:id="rbRmi" layoutX="78.0" layoutY="164.0" mnemonicParsing="false" text="RMI">
+      <Button fx:id="login" layoutX="123.0" layoutY="254.0" mnemonicParsing="false" onAction="#loginButton" text="Login" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" />
+      <Label fx:id="status" layoutX="110.0" layoutY="226.0" prefHeight="25.0" prefWidth="95.0" />
+      <TextField fx:id="matchID" layoutX="76.0" layoutY="74.0" promptText="Match ID (optional)" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+      <TextField fx:id="username" layoutX="76.0" layoutY="30.0" promptText="Username" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" />
+      <RadioButton fx:id="rbRmi" layoutX="78.0" layoutY="164.0" mnemonicParsing="false" text="RMI" AnchorPane.leftAnchor="90.0">
          <toggleGroup>
             <ToggleGroup fx:id="connectionType" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="rbSocket" layoutX="78.0" layoutY="196.0" mnemonicParsing="false" text="SOCKET" toggleGroup="$connectionType" />
-      <TextField fx:id="ipAddress" layoutX="95.0" layoutY="119.0" prefHeight="25.0" prefWidth="102.0" promptText="IP Address" />
-      <Label fx:id="wrongIp" layoutX="189.0" layoutY="152.0" prefHeight="25.0" prefWidth="64.0" text="WRONG IP" textFill="RED" visible="false" />
+      <RadioButton fx:id="rbSocket" layoutX="78.0" layoutY="196.0" mnemonicParsing="false" text="SOCKET" toggleGroup="$connectionType" AnchorPane.leftAnchor="90.0" />
+      <TextField fx:id="ipAddress" layoutX="95.0" layoutY="119.0" prefHeight="25.0" prefWidth="102.0" promptText="IP Address" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" />
+      <Label fx:id="wrongIp" layoutX="111.0" layoutY="217.0" prefHeight="25.0" prefWidth="80.0" text="WRONG IP" textFill="RED" visible="false" />
    </children>
 </AnchorPane>
