@@ -160,7 +160,10 @@
           </Tab>
         </tabs>
       </TabPane>
-      <ImageView fx:id="yourCharacter" fitHeight="177.0" fitWidth="504.0" layoutX="145.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="yourCharacter" fitHeight="177.0" fitWidth="504.0" layoutX="145.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@characters/characterViolet.jpg" />
+         </image></ImageView>
       <ImageView fx:id="possibleActions" fitHeight="192.0" fitWidth="75.0" layoutX="69.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="imFirstPlayer" fitHeight="177.0" fitWidth="66.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
