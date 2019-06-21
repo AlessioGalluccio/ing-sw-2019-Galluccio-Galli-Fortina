@@ -900,12 +900,10 @@ public class Controller implements Initializable {
     public void showMap(ActionEvent event) throws InterruptedException {
 
 
-        possibleActions.setDisable(false);
-        yourCharacter.setDisable(false);
+
         yourCharacter.setVisible(true);
         yourCharacter.setVisible(true);
-        yourCharacter.setImage(new Image("characters/characterBlue.jpg"));
-        possibleActions.setImage(new Image("characters/actionsBlue.jpg"));
+
 
         //set skull on map
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
@@ -2184,9 +2182,6 @@ public class Controller implements Initializable {
                         ControllerLogin.clientView.createCharacterMessage(1);
 
 
-
-
-
                     }
                     if (rbViolet.isSelected()) {
 
@@ -2330,7 +2325,7 @@ public class Controller implements Initializable {
         switch (characterID) {
             case 1:
                 image1 = new Image("characters/characterGreen.jpg");
-                image2 = new Image("actionsGreen.jpg");
+                image2 = new Image("characters/actionsGreen.jpg");
                 break;
             case 2:
                 image1 = new Image("characters/characterViolet.jpg");
