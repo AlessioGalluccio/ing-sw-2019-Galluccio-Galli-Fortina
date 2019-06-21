@@ -132,17 +132,28 @@ public class GrabTest {
 
             CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(),playerView);
             controller.update(null, cellMessage);
-            System.out.println(playerView.getLastStringPrinted());
+            //System.out.println(playerView.getLastStringPrinted());
 
-            DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(gameHandler.getWeaponCardByID(1), authorPlayer.getID(), playerView);
+            WeaponCard weaponToDiscard = gameHandler.getWeaponCardByID(1);
+            System.out.println(weaponToDiscard.getID());
+
+            DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(weaponToDiscard, authorPlayer.getID(), playerView);
             controller.update(null, discardWeaponMessage);
-            System.out.println(playerView.getLastStringPrinted());
+            //System.out.println(playerView.getLastStringPrinted());
 
-            WeaponMessage weaponMessage = new WeaponMessage(gameHandler.getWeaponCardByID(cellWithWeapons.getCardID().get(0)), authorPlayer.getID(), playerView);
+            WeaponCard weaponToGrab = gameHandler.getWeaponCardByID(cellWithWeapons.getCardID().get(0));
+            //System.out.println(weaponToGrab.getID());
+
+            WeaponMessage weaponMessage = new WeaponMessage(weaponToGrab, authorPlayer.getID(), playerView);
             controller.update(null, weaponMessage);
-            System.out.println(playerView.getLastStringPrinted());
+            //System.out.println(playerView.getLastStringPrinted());
 
-            System.out.println(authorPlayer);
+            //System.out.println(authorPlayer);
+            //System.out.println(cellWithWeapons.getCardID());
+
+            assertEquals(3,authorPlayer.getWeaponCardList().size());
+            assertTrue(authorPlayer.getWeaponCardList().contains(weaponToGrab)); //player contains weapon grabbed
+            assertTrue(cellWithWeapons.getCardID().contains(weaponToDiscard.getID())); //cell contains the weapon discarded
 
         }catch (TooManyException e){
             //shouldn't happen
