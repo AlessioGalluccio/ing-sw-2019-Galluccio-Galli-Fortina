@@ -93,8 +93,8 @@ public class Move extends Action {
     }
 
     @Override
-    public void addNope() throws WrongInputException {
-        throw new WrongInputException();
+    public AmmoBag getCost() {
+        return new AmmoBag(0,0,0);
     }
 
     @Override

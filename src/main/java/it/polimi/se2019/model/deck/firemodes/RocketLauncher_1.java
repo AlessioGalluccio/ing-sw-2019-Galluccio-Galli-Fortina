@@ -65,8 +65,5 @@ public class RocketLauncher_1 extends FireMode {
 
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
 
-    }
 }

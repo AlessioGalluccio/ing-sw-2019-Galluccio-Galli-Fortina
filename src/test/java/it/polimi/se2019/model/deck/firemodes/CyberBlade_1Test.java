@@ -96,8 +96,7 @@ public class CyberBlade_1Test {
         //System.out.println(playerView.getLastStringPrinted());
 
         //add firemode
-        firemode = gameHandler.getFireModeByID(CYBERBLADE_FIREMODE_ID);
-        FireModeMessage fireModeMessage = new FireModeMessage(firemode.getID(), authorPlayer.getID(), playerView);
+        FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, fireModeMessage);
         //System.out.println(playerView.getLastStringPrinted());
 

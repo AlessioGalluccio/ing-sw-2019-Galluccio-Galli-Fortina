@@ -90,8 +90,7 @@ public class TestLockRifle_1 {
         shoot.addWeapon(weapon);
 
         //add firemode
-        lockRifle_1 = gameHandler.getFireModeByID(LOCK_RIFLE_FIREMODE_ID);
-        shoot.addFireMode(lockRifle_1.getID());
+        shoot.addFireMode(1);
 
 
     }

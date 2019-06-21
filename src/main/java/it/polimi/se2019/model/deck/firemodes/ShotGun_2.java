@@ -60,8 +60,5 @@ public class ShotGun_2 extends FireMode {
 
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
 
-    }
 }

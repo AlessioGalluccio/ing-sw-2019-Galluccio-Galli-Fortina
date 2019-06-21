@@ -19,6 +19,8 @@ public class ActionSelectedControllerState extends StateController {
     private static final int FIRST_MESSAGE = 0;
     private String errorString;
     private String stringToPlayerView;
+    private boolean hasShoot = false;
+    private boolean skipSelected = false;
 
 
 
@@ -73,19 +75,12 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleNope() {
-        //TODO
-        /*
-        int index = controller.getIndexExpected();
-
-        if(!controller.getCopyMessageListExpected().get(index).isOptional()){
-            String response = controller.getCopyMessageListExpected().get(index).getString();
-            playerView.printFromController(response);
-            controller.removeReceived();
+        try {
+            playerAuthor.payAmmoCost(action.getCost());
+            this.skipSelected = true;
+        } catch (NotEnoughAmmoException e) {
+            //shouldn't happen
         }
-        else{
-            //do nothing
-        }
-        */
 
     }
 
@@ -188,7 +183,7 @@ public class ActionSelectedControllerState extends StateController {
         try {
             action.fire();
             controller.addReceived();
-            //TODO prossimo stato?
+            this.hasShoot = true; //even if I didn't finished the sequence but I could shoot (optional targets), I will end the action  in this way
         }catch(WrongInputException e){
             errorString = e.getMessage();
         }
@@ -207,7 +202,7 @@ public class ActionSelectedControllerState extends StateController {
     @Override
     public void handleDiscardPowerup(int powerupID) {
         try{
-            playerAuthor.discardCard(gameHandler.getPowerupCardByID(powerupID));
+            playerAuthor.discardCard(gameHandler.getPowerupCardByID(powerupID), false);
         }catch (NotPresentException e){
             errorString = POWERUP_NOT_PRESENT_DISCARD;
         }
@@ -274,7 +269,7 @@ public class ActionSelectedControllerState extends StateController {
      */
     private void endingHandler() {
         //controlls if the sequence of action is completed
-        if(controller.getIndexExpected() < controller.getCopyMessageListExpected().size()){
+        if(controller.getIndexExpected() < controller.getCopyMessageListExpected().size() && !hasShoot && !skipSelected){
             //The sequence is not completed. It prints the next request
             if(errorString != null){
                 stringToPlayerView = errorString + controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();

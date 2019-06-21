@@ -158,7 +158,11 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        try{
+            controller.getAuthor().discardCard(gameHandler.getPowerupCardByID(powerupID), false);
+        }catch (NotPresentException e){
+            errorString = POWERUP_NOT_PRESENT_DISCARD;
+        }
     }
 
     @Override

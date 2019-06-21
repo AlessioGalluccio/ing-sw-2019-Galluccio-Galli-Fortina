@@ -60,8 +60,4 @@ public class ShockWave_2 extends FireMode {
 
     }
 
-    @Override
-    public void addNope() throws WrongInputException {
-
-    }
 }

@@ -80,8 +80,7 @@ public class HeatSeeker_1Test {
         shoot.addWeapon(weapon);
 
         //add firemode
-        heatSeeker_1 = gameHandler.getFireModeByID(HEAT_SEEKER_FIREMODE_ID);
-        shoot.addFireMode(heatSeeker_1.getID());
+        shoot.addFireMode(1);
 
     }
 
