@@ -64,6 +64,10 @@ public class Identificator {
         return (fireMode.getID())/10 == weaponCard.getID();
     }
 
+    public static int createFiremode(int weaponId, int fireModeID) {
+        return weaponId*10 + fireModeID;
+    }
+
     //list of ID of Firemodes
    /* public static final int CYBERBLADE_1 = 1;
     public static final int CYBERBLADE_2 = 2;

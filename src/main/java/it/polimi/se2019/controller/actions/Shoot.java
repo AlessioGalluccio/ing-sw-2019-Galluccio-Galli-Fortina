@@ -112,6 +112,7 @@ public class Shoot extends Action{
 
     @Override
     public void addFireMode(int fireModeID) throws WrongInputException {
+        fireModeID = Identificator.createFiremode(this.weapon.getID(), fireModeID);
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
         fireModeSelected.addShoot(this);
 
