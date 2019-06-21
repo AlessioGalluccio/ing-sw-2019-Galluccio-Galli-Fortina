@@ -207,7 +207,7 @@ public class ActionSelectedControllerState extends StateController {
     @Override
     public void handleDiscardPowerup(int powerupID) {
         try{
-            playerAuthor.discardCard(gameHandler.getPowerupCardByID(powerupID));
+            playerAuthor.discardCard(gameHandler.getPowerupCardByID(powerupID), false);
         }catch (NotPresentException e){
             errorString = POWERUP_NOT_PRESENT_DISCARD;
         }

@@ -401,28 +401,32 @@ public class Player extends Observable implements Target, Serializable {
     /**
      * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
      * @param powerupCard the card which has to be discarded
+     * @param isRespawn true if it's a repawn (don't add temporary ammo), false if not (add temporary ammo)
      * @throws NotPresentException if the card is not possessed by the Player
      */
-    public void discardCard(PowerupCard powerupCard) throws NotPresentException {
+    public void discardCard(PowerupCard powerupCard, boolean isRespawn) throws NotPresentException {
         for(PowerupCard card : powerupCardList){
             if(card == powerupCard){
-                ColorRYB colorOfCard = card.getAmmo();
-                int tempRed = tempAmmo.getRedAmmo();
-                int tempYellow = tempAmmo.getYellowAmmo();
-                int tempBlue = tempAmmo.getBlueAmmo();
+                if(!isRespawn){
+                    ColorRYB colorOfCard = card.getAmmo();
+                    int tempRed = tempAmmo.getRedAmmo();
+                    int tempYellow = tempAmmo.getYellowAmmo();
+                    int tempBlue = tempAmmo.getBlueAmmo();
 
-                switch(colorOfCard){
-                    case RED:
-                        tempRed++;
-                        break;
-                    case YELLOW:
-                        tempYellow++;
-                        break;
-                    case BLUE:
-                        tempBlue++;
-                        break;
+                    switch(colorOfCard){
+                        case RED:
+                            tempRed++;
+                            break;
+                        case YELLOW:
+                            tempYellow++;
+                            break;
+                        case BLUE:
+                            tempBlue++;
+                            break;
+                    }
+                    tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
                 }
-                tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
+
                 card.discard();
                 powerupCardList.remove(card);
                 notifyObservers(new PlayerModelMessage(this.clone()));

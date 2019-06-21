@@ -33,6 +33,7 @@ public class Grab extends Action{
     public static final String WEAPON_NOT_PRESENT_IN_CELL_GRAB = "This weapon is not present in the cell. ";
     public static final String CARD_NOT_PRESENT_IN_CELL_GRAB = "This card is not present in the cell. ";
     public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
+    public static final String CANT_PAY_THIS_WEAPON = "You can't pay this weapon. ";
 
 
 
@@ -138,8 +139,10 @@ public class Grab extends Action{
 
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
+
         if(flagMustChooseWeapon){
             try{
+                playerAuthor.payAmmoCost(AmmoBag.createAmmoFromList(weaponCard.getBuyCost()));
                 Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
                 if(weaponToDiscard != null){
                     //((CellSpawn)cellObjective).replaceCard(weaponToDiscard);
@@ -149,11 +152,16 @@ public class Grab extends Action{
             }
             catch (NotCardException e){
                 throw new WrongInputException(WEAPON_NOT_PRESENT_IN_CELL_GRAB);
+            }catch (NotEnoughAmmoException e){
+                throw new WrongInputException(CANT_PAY_THIS_WEAPON);
             }catch (TooManyException e){
                 //should never happen
             }catch (NotPresentException e){
                 //should never happen
             }
+        }
+        else{
+            //shouldn't happen
         }
     }
 
