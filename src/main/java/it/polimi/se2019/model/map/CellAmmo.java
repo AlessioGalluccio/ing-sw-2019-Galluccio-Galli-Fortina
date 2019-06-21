@@ -61,8 +61,10 @@ public class CellAmmo extends Cell {
      */
     @Override
     protected void reloadCard() {
-        if(ammo==null&& isActive()) ammo = deck.pick();
-        notifyObservers(new CellModelMessage(this.clone()));
+        if(ammo==null&& isActive()) {
+            ammo = deck.pick();
+            notifyObservers(new CellModelMessage(this.clone()));
+        }
     }
 
     public Cell clone() {

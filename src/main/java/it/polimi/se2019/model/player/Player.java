@@ -304,7 +304,7 @@ public class Player extends Observable implements Target, Serializable {
      */
     public void addWeaponCard(WeaponCard weaponToAdd) throws TooManyException {
         //the +1 is due to the fact he can discard any weapon instead of the one just picked
-        if (weaponCardList.size() < MAX_CARD + 1) {
+        if (weaponCardList.size() < MAX_CARD) {
             weaponCardList.add(weaponToAdd);
             notifyObservers(new PlayerModelMessage(this.clone()));
         }

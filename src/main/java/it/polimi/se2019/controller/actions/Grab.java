@@ -141,12 +141,11 @@ public class Grab extends Action{
         if(flagMustChooseWeapon){
             try{
                 Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
-                playerAuthor.addWeaponCard((WeaponCard) weapon);
                 if(weaponToDiscard != null){
-                    ((CellSpawn)cellObjective).replaceCard(weaponToDiscard);
+                    //((CellSpawn)cellObjective).replaceCard(weaponToDiscard);
                     playerAuthor.discardCard(weaponToDiscard);
                 }
-
+                playerAuthor.addWeaponCard((WeaponCard) weapon);
             }
             catch (NotCardException e){
                 throw new WrongInputException(WEAPON_NOT_PRESENT_IN_CELL_GRAB);

@@ -75,7 +75,10 @@ public class CellSpawn extends Cell {
     public Card grabCard(int cardID, WeaponCard card) throws NotCardException {
         Card cardToReplace = grabCard(cardID);
         for(int i=0; i<MAX_WEAPONCARD; i++) {
-            if(weapon[i]==null) weapon[i]=card;
+            if(weapon[i]==null) {
+                weapon[i]=card;
+                return cardToReplace;
+            }
         }
         return cardToReplace;
     }
@@ -95,9 +98,11 @@ public class CellSpawn extends Cell {
     @Override
     protected void reloadCard(){
         for(int i=0; i<MAX_WEAPONCARD; i++) {
-            if(weapon[i]==null && deck.sizeUnususedCard()!=0) weapon[i]=deck.pick();
+            if(weapon[i]==null && deck.sizeUnususedCard()!=0) {
+                weapon[i]=deck.pick();
+                notifyObservers(new CellModelMessage(this.clone()));
+            }
         }
-        notifyObservers(new CellModelMessage(this.clone()));
     }
 
     /**
