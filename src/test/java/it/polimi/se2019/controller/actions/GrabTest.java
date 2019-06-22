@@ -12,6 +12,7 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.map.NotCardException;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
@@ -125,19 +126,21 @@ public class GrabTest {
         try{
             authorPlayer.setAmmoBag(3,3,3);
 
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(1));
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(2));
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(3));
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+
+            //System.out.println(authorPlayer);
 
             Cell cellWithWeapons = gameHandler.getCellByCoordinate(0,1);
             authorPlayer.setPosition(cellWithWeapons);
 
             CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(),playerView);
             controller.update(null, cellMessage);
-            //System.out.println(playerView.getLastStringPrinted());
+            System.out.println(playerView.getLastStringPrinted());
 
-            WeaponCard weaponToDiscard = gameHandler.getWeaponCardByID(1);
-            //System.out.println(weaponToDiscard.getID());
+            WeaponCard weaponToDiscard = authorPlayer.getWeaponCardList().get(0);
+            //System.out.println(weaponToDiscard.toString());
 
             DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(weaponToDiscard, authorPlayer.getID(), playerView);
             controller.update(null, discardWeaponMessage);
@@ -166,30 +169,40 @@ public class GrabTest {
     }
 
     @Test
-    public void switchWeaponsWithNotEnoughAmmo(){
+    public void switchWeaponsWithCostANdNotEnoughAmmo(){
         try{
             authorPlayer.setAmmoBag(0,0,0);
 
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(1));
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(2));
-            authorPlayer.addWeaponCard(gameHandler.getWeaponCardByID(3));
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+            authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
 
             Cell cellWithWeapons = gameHandler.getCellByCoordinate(0,1);
+
+            //I replace a weapon with one that I know that has a buy cost ( 5 -> whisper)
+            try {
+                ((CellSpawn)cellWithWeapons).grabCard(((CellSpawn)cellWithWeapons).getWeapon().get(0).getID());
+            } catch (NotCardException e) {
+                //shouldn't happen
+            }
+            WeaponCard weaponToGrab = gameHandler.getWeaponCardByID(5);
+            ((CellSpawn)cellWithWeapons).replaceCard(weaponToGrab);
+
             authorPlayer.setPosition(cellWithWeapons);
 
             CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(),playerView);
             controller.update(null, cellMessage);
             //System.out.println(playerView.getLastStringPrinted());
 
-            WeaponCard weaponToDiscard = gameHandler.getWeaponCardByID(1);
-            //System.out.println(weaponToDiscard.getID());
+            WeaponCard weaponToDiscard = authorPlayer.getWeaponCardList().get(0);
+            //System.out.println("I discard " + weaponToDiscard.getID());
 
             DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(weaponToDiscard, authorPlayer.getID(), playerView);
             controller.update(null, discardWeaponMessage);
             //System.out.println(playerView.getLastStringPrinted());
 
-            WeaponCard weaponToGrab = gameHandler.getWeaponCardByID(cellWithWeapons.getCardID().get(0));
-            //System.out.println(weaponToGrab.getID());
+
+            //System.out.println("I grab " + weaponToGrab.getID());
 
             WeaponMessage weaponMessage = new WeaponMessage(weaponToGrab, authorPlayer.getID(), playerView);
             controller.update(null, weaponMessage);

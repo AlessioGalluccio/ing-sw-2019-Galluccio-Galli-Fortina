@@ -172,7 +172,13 @@ public class Grab extends Action{
 
     @Override
     public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
-        if(playerAuthor.getWeaponCardList().contains(weaponCard)){
+        boolean itContains = false;
+        for(WeaponCard weapon : playerAuthor.getWeaponCardList()){
+            if(weapon.getID() == weaponCard.getID()){
+                itContains = true;
+            }
+        }
+        if(itContains){
             this.weaponToDiscard = weaponCard;
         }
         else{
