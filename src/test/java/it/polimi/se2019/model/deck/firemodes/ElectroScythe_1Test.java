@@ -13,6 +13,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -142,6 +143,11 @@ public class ElectroScythe_1Test {
         authorPlayer.setPosition(outsideCellWithNoTargets);
         shoot.addTargetingScope(targetingID,ammoCostTargeting);
         shoot.addPlayerTarget(targetPlayer1.getID());
+    }
 
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 }

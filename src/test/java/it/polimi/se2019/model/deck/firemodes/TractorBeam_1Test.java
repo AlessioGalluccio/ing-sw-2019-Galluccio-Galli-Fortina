@@ -107,6 +107,8 @@ public class TractorBeam_1Test {
 
         assertEquals(gameHandler.getCellByCoordinate(0,1), targetPlayer1.getCell());
         assertEquals(1, targetPlayer1.getDamage().size());
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
 
         setUp();
         controller.update(null,
@@ -149,6 +151,7 @@ public class TractorBeam_1Test {
 
         assertEquals(gameHandler.getCellByCoordinate(0,1), targetPlayer1.getCell());
         assertEquals(3, targetPlayer1.getDamage().size());
+        assertEquals(0, authorPlayer.getDamage().size());
 
         setUp();
         targetPlayer2.receiveDamageBy(authorPlayer);
@@ -161,6 +164,8 @@ public class TractorBeam_1Test {
 
         assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer2.getCell());
         assertEquals(2, targetPlayer2.getDamage().size());
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
 

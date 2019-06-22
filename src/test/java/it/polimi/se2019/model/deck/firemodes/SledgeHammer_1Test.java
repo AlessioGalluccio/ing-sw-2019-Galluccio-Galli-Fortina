@@ -17,6 +17,7 @@ import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -136,6 +137,12 @@ public class SledgeHammer_1Test {
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
+    }
+
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
 

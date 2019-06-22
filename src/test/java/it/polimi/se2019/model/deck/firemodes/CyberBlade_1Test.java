@@ -14,6 +14,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -235,7 +236,12 @@ public class CyberBlade_1Test {
         assertEquals(2, authorPlayer.getAmmo().getRedAmmo()); //paid targeting scope
         assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
         assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
-
-
     }
+
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
+    }
+
 }
