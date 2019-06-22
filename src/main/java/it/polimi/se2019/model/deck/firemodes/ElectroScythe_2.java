@@ -21,11 +21,8 @@ public class ElectroScythe_2 extends ElectroScythe_1 {
 
     @Override
     public void fire() throws WrongInputException{
-        Cell commonCell = author.getCell();
-        for(Player target : gameHandler.getOrderPlayerList()){
-            if(target.getCell().equals(commonCell)){
-                addDamageAndMarks(target, 2,0, true);
-            }
+        for(Player target : shoot.getTargetsPlayer()){
+            addDamageAndMarks(target, 2,0, true);
         }
         commonEndingFire();
     }

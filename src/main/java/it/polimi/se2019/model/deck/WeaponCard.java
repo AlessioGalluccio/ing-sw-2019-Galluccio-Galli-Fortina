@@ -108,7 +108,7 @@ public abstract class WeaponCard implements Card {
     /**
      * set reload parameter to false
      */
-    public void useAmmo(){
+    public void unload(){
         reload = false;
     }
 

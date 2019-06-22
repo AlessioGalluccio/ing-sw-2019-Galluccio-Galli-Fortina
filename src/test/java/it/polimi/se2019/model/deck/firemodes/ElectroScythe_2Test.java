@@ -96,7 +96,7 @@ public class ElectroScythe_2Test {
         assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
 
         //author
-        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
+        assertEquals(0, authorPlayer.getDamage().size());
 
         //cost after optional
         assertEquals(2, authorPlayer.getAmmo().getRedAmmo());

@@ -197,6 +197,12 @@ public class Shoot extends Action{
     }
 
     /**
+     * returns the weapon of the action
+     * @return
+     */
+    public WeaponCard getWeapon(){return weapon;}
+
+    /**
      * get the ordered list of players targeted by targeting scopes
      * @return ArrayList of Player
      */
