@@ -1,6 +1,7 @@
 package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.WrongInputException;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
@@ -13,10 +14,14 @@ public class FlameThrower_2 extends FlameThrower_1 {
 
     private static final long serialVersionUID = -8030079729591996463L;
 
+    //errors
+    public static final String TARGET_NOT_NEEDED = "This target is not needed. ";
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        //TODO da fare!
-        return null;
+        List<StringAndMessage> list = new ArrayList<>();
+        list.add(new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL_DIRECTION));
+        return list;
     }
 
     @Override
@@ -63,7 +68,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
 
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_DO_FIRE);
         }
 
 
@@ -71,10 +76,10 @@ public class FlameThrower_2 extends FlameThrower_1 {
 
 
     //THIS MUST BE OVERRIDED BECAUSE IT'S DIFFERENT FROM FLAAMETHROWER_1 !!!!!
-    //YOU CAN'T USE THE DAFUALT METHOD OF FIREMODE BECAUSE IT EXTENDS FLAMETHROWER_1
+    //YOU CAN'T USE THE DEFAULT METHOD OF FIREMODE BECAUSE IT EXTENDS FLAMETHROWER_1
     @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         //we don't need to specify the targets. We shoot to them all
-        throw new WrongInputException();
+        throw new WrongInputException(TARGET_NOT_NEEDED);
     }
 }
