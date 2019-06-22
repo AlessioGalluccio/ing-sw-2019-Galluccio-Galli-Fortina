@@ -36,7 +36,22 @@ import java.util.List;
 public class ControllerLogin implements UiInterface {
 
     private static FXMLLoader fxmlLoader;
+    @FXML
     public Label wrongIp;
+    @FXML
+    public Button bShowWinner;
+    @FXML
+    public Label rank1;
+    @FXML
+    public Label rank2;
+    @FXML
+    public Label rank3;
+    @FXML
+    public Label rank4;
+    @FXML
+    public Label rank5;
+    @FXML
+    public ImageView imWinner;
 
 
     private Controller controller;
@@ -71,6 +86,8 @@ public class ControllerLogin implements UiInterface {
     private boolean firstAgain = false;
 
     static List<Character> characters;
+
+    List<Player> playersRanking;
 
 
     /**
@@ -218,8 +235,9 @@ public class ControllerLogin implements UiInterface {
         try {
             selectedMap(mapView.getMapCopy().getID());
             fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
+            Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
+            stage.close();
 
-            closeWaitingRoom(controller);
             controller = fxmlLoader.getController();
         }
         catch (Exception e) {
@@ -313,14 +331,29 @@ public class ControllerLogin implements UiInterface {
         //TODO
     }
 
+    /**
+     * print player's ranking
+     * @param players
+     */
     @Override
-    public void printRanking(List<Player> players) {
-        //TODO
+    public void printRanking(List<Player> players) throws Exception {
+        open("playersRanking.fxml", "RANKING", 500, 600);
+        playersRanking = players;
     }
 
+    /**
+     * tell the player whose turn it is
+     * @param nickname
+     * @param yourTurn
+     */
     @Override
     public void turn(String nickname, boolean yourTurn) {
-        //TODO
+        if(!yourTurn) {
+            controller.printf(" It's" + nickname + "turn");
+        }
+        else{
+            controller.printf("It's your turn!!");
+        }
     }
 
     /**
@@ -441,8 +474,30 @@ public class ControllerLogin implements UiInterface {
         updatePlayerAmmo();
     }
 
-    static void closeWaitingRoom(Controller controller){
-        Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
-        stage.close();
+
+
+
+
+    /**
+     * show how win the game on gui
+     * @param event
+     */
+    public void showWinner(ActionEvent event) {
+        bShowWinner.setDisable(true);
+        bShowWinner.setVisible(false);
+        rank3.setDisable(false);
+        imWinner.setVisible(true);
+        ArrayList<Label> labelRanking = new ArrayList<>();
+        labelRanking.add(rank1);
+        labelRanking.add(rank2);
+        labelRanking.add(rank3);
+        labelRanking.add(rank4);
+        labelRanking.add(rank5);
+        labelRanking.get(0).setText("WINNER :" + playersRanking.get(0).getNickname() + playersRanking.get(0).getNumPoints());
+        labelRanking.get(1).setText("SECOND :" + playersRanking.get(1).getNickname() + playersRanking.get(1).getNumPoints());
+        for(int i=2; i<playersRanking.size(); i++){
+            labelRanking.get(i).setText(playersRanking.get(1).getNickname() + playersRanking.get(1).getNumPoints());
+        }
+
     }
 }

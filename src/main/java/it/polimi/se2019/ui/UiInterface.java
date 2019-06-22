@@ -34,7 +34,7 @@ public interface UiInterface {
 
     void updateSkullBoard();
 
-    void printRanking(List<Player> players);
+    void printRanking(List<Player> players) throws Exception;
 
     void turn(String nickname, boolean yourTurn);
 
