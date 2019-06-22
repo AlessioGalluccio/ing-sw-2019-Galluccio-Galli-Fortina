@@ -269,6 +269,14 @@ public class GameHandler extends Observable {
     }
 
     /**
+     * returns the weapon deck of the game
+     * @return WeaponDeck of the game
+     */
+    public WeaponDeck getWeaponDeck() {
+        return weaponDeck;
+    }
+
+    /**
      * When a player pass his turn, this method check if someone has died
      * If his the case create a Death object, cash point, reset damage of the death and ask player to re-spawn
      * @return the number of death
