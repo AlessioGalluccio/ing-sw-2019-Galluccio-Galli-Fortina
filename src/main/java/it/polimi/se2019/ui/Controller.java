@@ -46,6 +46,10 @@ public class Controller implements Initializable {
     public Button bselectCharacter;
 
 
+    //button to close wainting room
+    @FXML
+    public Button closeWaiting;
+
     //imageview of players' posizion on map
     public ImageView imPlayer1Cell00;
     public ImageView imPlayer2Cell00;
@@ -900,7 +904,8 @@ public class Controller implements Initializable {
 
             Stage stage = (Stage) rbmap2.getScene().getWindow();
             stage.close();
-            ControllerLogin.open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+
+            ControllerLogin.clientView.handleLogin(true, true);
 
         }
 
@@ -909,7 +914,6 @@ public class Controller implements Initializable {
 
 
     public void showMap(ActionEvent event) throws InterruptedException {
-
 
 
         //set Player ammo
@@ -2098,6 +2102,10 @@ public class Controller implements Initializable {
     }
 
 
+    /**
+     * print string from controller
+     * @param string
+     */
     public void printf(String string) {
         Platform.runLater(new Runnable() {
             @Override
@@ -2109,6 +2117,16 @@ public class Controller implements Initializable {
                 }
             }
         });
+
+    }
+
+    /**
+     * get close button for closing waiting room
+     * @return
+     */
+    public Button getCloseWaiting() {
+
+        return closeWaiting;
 
     }
 

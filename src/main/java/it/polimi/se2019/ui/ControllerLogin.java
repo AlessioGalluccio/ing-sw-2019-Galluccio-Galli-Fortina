@@ -68,6 +68,8 @@ public class ControllerLogin implements UiInterface {
     @FXML
     public Button login;
 
+    private boolean firstAgain = false;
+
     static List<Character> characters;
 
 
@@ -124,37 +126,43 @@ public class ControllerLogin implements UiInterface {
 
         Platform.runLater(new Runnable() {
             @Override
-            public void run(){
-                if(success) {
+            public void run() {
+
+                if (success && isFirst && firstAgain) {
+                    try {
+                        fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
+                        controller = fxmlLoader.getController();
+                    } catch (Exception e) {
+                    }
+                }
+                else if (success) {
                     System.out.println(8);
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
                     System.out.println(8);
-                    if(isFirst) {
+                    if (isFirst) {
                         try {
                             System.out.println(8);
                             fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 450, 530);
                             controller = fxmlLoader.getController();
+                            firstAgain = true;
                             System.out.println(8);
                         } catch (Exception e) {
                         }
-                    }
-
-                    else{
+                    } else {
                         try {
                             fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                             controller = fxmlLoader.getController();
                         } catch (Exception e) {
                         }
                     }
-                }
-                else{
+                } else {
                     status.setText("LOGIN FAILED");
+
                 }
-
-
             }
+
         });
 
     }
@@ -174,6 +182,9 @@ public class ControllerLogin implements UiInterface {
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            ControllerLogin.clientView.shutdownServer();
+        });
         if(!fileName.equalsIgnoreCase("Map1.fxml"))
             primaryStage.setResizable(false);
 
@@ -204,6 +215,7 @@ public class ControllerLogin implements UiInterface {
             selectedMap(mapView.getMapCopy().getID());
             fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
 
+            closeWaitingRoom(controller);
             controller = fxmlLoader.getController();
         }
         catch (Exception e) {
@@ -423,5 +435,10 @@ public class ControllerLogin implements UiInterface {
         updateWeaponMap();
         updateWeaponPlayer();
         updatePlayerAmmo();
+    }
+
+    static void closeWaitingRoom(Controller controller){
+        Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
+        stage.close();
     }
 }
