@@ -4,6 +4,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
 public class NotYourTurnState extends StateController {
@@ -11,8 +12,14 @@ public class NotYourTurnState extends StateController {
     private Player playerAuthor;
     private String errorString;
     private String stringToPlayerView;
+    boolean neededTargetForTagBack = false;
+    private TagbackGrenadeCard tagbackGrenadeCard;
 
-    private final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
+    public final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn";
+    public final String SELECT_TARGET_FOR_TAGBACK = "Select a target player for TagBack. ";
+    public final String NO_TARGETS_FOR_TAGBACK= "There are no targets for TagBack. ";
+    public final String IS_NOT_TARGET_FOR_TARGETING = "This can't be a target for TagBack. ";
+
 
     public NotYourTurnState(Controller controller, GameHandler gameHandler, boolean passTurn) {
         //TODO aggiungere playerAuthor e playerView (anche a tutti gli stati!)
@@ -63,7 +70,25 @@ public class NotYourTurnState extends StateController {
 
     @Override
     public void handlePlayer(int playerID) {
-        cantDoThisHandler();
+        Player target = gameHandler.getPlayerByID(playerID);
+
+        if(neededTargetForTagBack){
+            if(target.isVisibleBy(gameHandler.getMap(),playerAuthor)
+                    && playerAuthor.getTargetsForTagBack().contains(playerAuthor)){
+                try{
+                    target.receiveMarkBy(playerAuthor);
+                }catch (TooManyException e){
+                    //do nothing, you wasted the powerup
+                }
+                neededTargetForTagBack = false;
+            }
+            else{
+                errorString = IS_NOT_TARGET_FOR_TARGETING;
+            }
+        }
+        else{
+            cantDoThisHandler();
+        }
 
     }
 
@@ -74,7 +99,24 @@ public class NotYourTurnState extends StateController {
 
     @Override
     public void handleTagback(TagbackGrenadeCard usedCard) {
-        //TODO implementami! Sono diverso!
+        if(!playerAuthor.getTargetsForTagBack().isEmpty()){
+            boolean canUse = false;
+            for(Player target : playerAuthor.getTargetsForTagBack()){
+                if(target.isVisibleBy(gameHandler.getMap(), playerAuthor)){
+                    canUse = true;
+                }
+            }
+            if(canUse){
+                neededTargetForTagBack = true;
+                this.tagbackGrenadeCard = usedCard;
+            }
+            else{
+                errorString = NO_TARGETS_FOR_TAGBACK;
+            }
+        }
+        else{
+            errorString = NO_TARGETS_FOR_TAGBACK;
+        }
 
     }
 
@@ -96,23 +138,23 @@ public class NotYourTurnState extends StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        cantDoThisHandler();
     }
 
     @Override
     public void handleFire() {
-        //TODO
+        cantDoThisHandler();
     }
     
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        cantDoThisHandler();
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        cantDoThisHandler();
     }
 
 
@@ -134,6 +176,9 @@ public class NotYourTurnState extends StateController {
 
         if(errorString != null){
             stringToPlayerView = errorString;
+        }
+        else if(neededTargetForTagBack){
+            stringToPlayerView = SELECT_TARGET_FOR_TAGBACK;
         }
         else {
             stringToPlayerView = NOT_YOUR_TURN_RESPONSE;

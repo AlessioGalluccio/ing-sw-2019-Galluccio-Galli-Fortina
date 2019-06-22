@@ -6,10 +6,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
-
-import java.util.ArrayList;
 
 
 public class EmptyControllerState extends StateController {
@@ -24,6 +21,7 @@ public class EmptyControllerState extends StateController {
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
+        this.player.resetTargetsForTagBack(); //for tagBack grenade
         controller.resetMessages();
         controller.getPlayerView().printFromController(SELECT_ACTION_REQUEST);
     }
