@@ -12,6 +12,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -186,7 +187,11 @@ public class MachineGun_1Test {
         assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
         assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
         assertEquals(1, authorPlayer.getAmmo().getBlueAmmo());
+    }
 
-
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 }

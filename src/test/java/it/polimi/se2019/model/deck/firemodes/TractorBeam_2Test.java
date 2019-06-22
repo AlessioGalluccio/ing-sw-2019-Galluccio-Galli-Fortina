@@ -105,6 +105,7 @@ public class TractorBeam_2Test {
                 new PlayerMessage(2011, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(3, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer2.getDamage().size());
@@ -117,6 +118,7 @@ public class TractorBeam_2Test {
                 new PlayerMessage(2, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(3, targetPlayer2.getDamage().size());
@@ -124,6 +126,8 @@ public class TractorBeam_2Test {
         assertEquals(authorPlayer.getCell(), targetPlayer2.getCell());
         assertEquals(2, authorPlayer.getAmmo().getYellowAmmo());
         assertEquals(2, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
+
     }
 
     @Test
@@ -137,6 +141,7 @@ public class TractorBeam_2Test {
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
     @Test
@@ -147,10 +152,12 @@ public class TractorBeam_2Test {
                 new PlayerMessage(3, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(3, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
     @Test
@@ -160,10 +167,12 @@ public class TractorBeam_2Test {
                 new PlayerMessage(2, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(4, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
 
     }
 
