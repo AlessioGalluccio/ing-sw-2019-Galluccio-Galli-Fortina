@@ -103,15 +103,7 @@ public class NotYourTurnState extends StateController {
     public void handleFire() {
         //TODO
     }
-
-    @Override
-    public void handleReconnection(boolean isConnected) {
-        //TODO controlla
-        if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(playerAuthor, false);
-            controller.setState(new DisconnectedControllerState(controller, gameHandler));
-        }
-    }
+    
 
     @Override
     public void handleDiscardPowerup(int powerupID) {

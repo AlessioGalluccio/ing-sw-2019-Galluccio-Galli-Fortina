@@ -7,6 +7,7 @@ import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.EmptyControllerState;
 import it.polimi.se2019.controller.FirstTurnState;
+import it.polimi.se2019.controller.MustRespawnControllerState;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
@@ -94,8 +95,10 @@ public class GameHandler extends Observable {
             } else controller.setState(new EmptyControllerState(controller, this));
         }
         else {
-            //TODO chiedere di respawnare
-            //esiste il metodo getViewByPlayer che ritorna la player view del giocatore passato per parametro
+            //only the first one will get the modified state. When he will finish, he will do nextTurn, and the function
+            //will come back here
+            Controller controller = getControllerByPlayer(justDied.get(0));
+            controller.setState(new MustRespawnControllerState(controller, this));
         }
     }
 
@@ -668,6 +671,14 @@ public class GameHandler extends Observable {
         }
 
         return possibleCharacter;
+    }
+
+    /**
+     * remove the player from the list of dead players. Call it during the respwan
+     * @param player the player that is respawned
+     */
+    public void removeJustDied(Player player){
+        this.justDied.remove(player);
     }
 }
 

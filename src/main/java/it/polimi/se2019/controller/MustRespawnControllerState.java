@@ -10,20 +10,17 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class MustRespawnControllerState extends StateController {
     private Player playerAuthor;
-    private PlayerView playerView;
     private String errorString;
     private String stringToPlayerView;
+    boolean completedRespawn = false;
 
 
-    //TODO sistema questa stringa scrivendo qualcosa di più sensato
-    public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
-    public static final String TOO_MANY_CARDS = "The player has already three cards. ";
+    public static final String POWERUP_DISCARD_REQUEST = "Please, discard a PowerUp to spawn";
+    public static final String TOO_MANY_CARDS = "You have already three PowerUps. ";
 
     public MustRespawnControllerState(Controller controller, GameHandler gameHandler) {
-        //TODO aggiungere playerAuthor e playerView (anche a tutti gli stati!)
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
         //playerAuthor picks up one powerup cards
         PowerupDeck deck = gameHandler.getPowerupDeck();
         try{
@@ -114,15 +111,6 @@ public class MustRespawnControllerState extends StateController {
         youMustRespawn();
     }
 
-    @Override
-    public void handleReconnection(boolean isConnected) {
-        //TODO controlla
-        if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(playerAuthor, false);
-            gameHandler.nextTurn();
-            controller.setState(new DisconnectedControllerState(controller, gameHandler));
-        }
-    }
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
@@ -132,7 +120,9 @@ public class MustRespawnControllerState extends StateController {
         //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
         if (errorString != null) {
             //the NotYourTurnState will do the gamehandler.nextTurn()
+            gameHandler.removeJustDied(playerAuthor);
             controller.setState(new NotYourTurnState(controller, gameHandler, true));
+            completedRespawn = true;
 
         }
     }
@@ -146,7 +136,10 @@ public class MustRespawnControllerState extends StateController {
     @Override
     public String handle(ViewControllerMessage arg) {
         arg.handle(this);
-        if(errorString != null){
+        if(completedRespawn){
+            stringToPlayerView = null;
+        }
+        else if(errorString != null){
             stringToPlayerView = errorString + POWERUP_DISCARD_REQUEST;
             errorString = null;
         }

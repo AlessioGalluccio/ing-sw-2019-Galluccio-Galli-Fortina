@@ -100,15 +100,6 @@ public class HasReloadedControllerState extends StateController {
         youCantDoThis();
     }
 
-    @Override
-    public void handleReconnection(boolean isConnected) {
-        //TODO controlla
-        if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(player, false);
-            gameHandler.nextTurn();
-            controller.setState(new DisconnectedControllerState(controller, gameHandler));
-        }
-    }
 
     @Override
     public void handleDiscardPowerup(int powerupID) {

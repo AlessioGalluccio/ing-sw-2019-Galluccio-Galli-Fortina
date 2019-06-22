@@ -191,11 +191,14 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleReconnection(boolean isConnected) {
-        //TODO controlla da sistemare sicuramente
+        //I need to overload because the player must pay the cost of the action
+        super.handleReconnection(isConnected);
         if(!isConnected){
-            gameHandler.setPlayerConnectionStatus(playerAuthor, false);
-            gameHandler.nextTurn();
-            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+            try {
+                playerAuthor.payAmmoCost(action.getCost());
+            } catch (NotEnoughAmmoException e) {
+                //shouldn't happen
+            }
         }
     }
 
