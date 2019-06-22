@@ -148,7 +148,7 @@ public class Furnace_2Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
+        assertEquals("You can't do fire now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
@@ -169,7 +169,7 @@ public class Furnace_2Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
+        assertEquals("You can't do fire now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
