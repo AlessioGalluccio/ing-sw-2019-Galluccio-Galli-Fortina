@@ -50,7 +50,7 @@ public class Player extends Observable implements Target, Serializable {
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
     private boolean isConnected = true;
-    private List<Player> targetsForTagBack = new ArrayList<>(); //used for tagBack grenade
+    private List<Integer> targetsForTagBack = new ArrayList<>(); //used for tagBack grenade
 
 
     //constants
@@ -200,7 +200,7 @@ public class Player extends Observable implements Target, Serializable {
      * returns a list for possible targets of Tagback granade
      * @return a List of Players of possible targets of Tagback Granade
      */
-    public List<Player> getTargetsForTagBack() {
+    public List<Integer> getTargetsForTagBack() {
         return targetsForTagBack;
     }
 
@@ -331,7 +331,7 @@ public class Player extends Observable implements Target, Serializable {
         //If player is already kill throw exception, he cannot receive damage!
         if(isOverKilled()) throw new NotPresentException(toString() + " has been already over killed");
         damage.add(enemy);
-        this.targetsForTagBack.add(enemy); //for tagBack grenade
+        this.targetsForTagBack.add(enemy.getID()); //for tagBack grenade
         notifyObservers(new PlayerModelMessage(this.clone()));
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
         if(isDead()) {
