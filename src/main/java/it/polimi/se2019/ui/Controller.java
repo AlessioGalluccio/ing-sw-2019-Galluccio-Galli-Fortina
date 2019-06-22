@@ -1009,7 +1009,6 @@ public class Controller implements Initializable {
         //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
 
 
-        labelProva.setText("BENVENUTO");
 
         //set ammo card on map
         updateAmmoCardMap();
@@ -1355,7 +1354,7 @@ public class Controller implements Initializable {
             ControllerLogin.clientView.createActionMessage(2);
         }
 
-        if (grabButton == source) {
+        if (shootButton == source) {
             ControllerLogin.clientView.createActionMessage(3);
         }
     }
@@ -1698,15 +1697,27 @@ public class Controller implements Initializable {
                 List<WeaponCard> weaponCardsYellow = cellSpawn.get(2).getWeapon();
 
                 for (int counter = 0; counter < weaponCardsRed.size(); counter++) {
-                    redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                    redWeapons.get(counter).setVisible(false);
+                    if(weaponCardsRed.get(counter)!=null) {
+                        redWeapons.get(counter).setVisible(true);
+                        redWeapons.get(counter).setImage(setWeapon(weaponCardsRed.get(counter).getID()));
+                    }
                 }
 
                 for (int counter = 0; counter < weaponCardsBlue.size(); counter++) {
-                    blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+                    blueWeapons.get(counter).setVisible(false);
+                    if(weaponCardsBlue.get(counter)!=null) {
+                        blueWeapons.get(counter).setVisible(true);
+                        blueWeapons.get(counter).setImage(setWeapon(weaponCardsBlue.get(counter).getID()));
+                    }
                 }
 
                 for (int counter = 0; counter < weaponCardsYellow.size(); counter++) {
-                    yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+                    yellowWeapons.get(counter).setVisible(false);
+                    if(weaponCardsYellow.get(counter)!=null) {
+                        yellowWeapons.get(counter).setVisible(true);
+                        yellowWeapons.get(counter).setImage(setWeapon(weaponCardsYellow.get(counter).getID()));
+                    }
                 }
             }
             catch (Exception e){
@@ -1838,15 +1849,16 @@ public class Controller implements Initializable {
             imAmmoCell.add(ammoCell32);
         }
 
-
+        try {
         for (int i = 0; i < cellAmmos.size(); i++) {
-            try {
-                imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+            imAmmoCell.get(i).setVisible(false);
+                if(cellAmmos.get(i).getAmmo()!=null) {
+                    imAmmoCell.get(i).setVisible(true);
+                    imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+                }
             }
-            catch (NullPointerException e){
-
-            }
-
+        }
+        catch (NullPointerException e){
 
         }
             }
@@ -2290,13 +2302,14 @@ public class Controller implements Initializable {
 
 
 
-                //TODO oscurare i bottoni
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        bselectCharacter.setVisible(false);
-                        bselectCharacter.setDisable(true);
+
+                            bselectCharacter.setVisible(false);
+                            bselectCharacter.setDisable(true);
                     }
                     catch (Exception e){
 
@@ -2608,6 +2621,13 @@ public class Controller implements Initializable {
      * @param event
      */
     public void dropWeapon(ActionEvent event) {
+
+        if(ControllerLogin.clientView.getPlayerCopy().getCharacter()==null) {
+            bselectCharacter.setVisible(true);
+            bselectCharacter.setDisable(false);
+        }
+        printf("Please select a character");
+
         ControllerLogin.clientView.createNopeMessage();
     }
 
