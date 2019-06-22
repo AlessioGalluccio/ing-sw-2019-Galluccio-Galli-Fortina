@@ -1,9 +1,11 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.Player;
 
-public class PointCard {
+import java.io.Serializable;
 
+public class PointCard implements Serializable {
+
+    private static final long serialVersionUID = 2961486207387549526L;
     private final int value;
 
     public PointCard(int value) {
