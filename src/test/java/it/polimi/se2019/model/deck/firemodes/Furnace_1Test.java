@@ -123,7 +123,7 @@ public class Furnace_1Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. Select a player of a room. ",
+        assertEquals("You can't do fire now. Select a player of a room. ",
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
@@ -144,7 +144,7 @@ public class Furnace_1Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. Select a player of a room. ",
+        assertEquals("You can't do fire now. Select a player of a room. ",
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
