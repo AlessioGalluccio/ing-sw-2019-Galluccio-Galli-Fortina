@@ -334,7 +334,7 @@ public class ClientView extends View /*View implement observer/observable*/{
      * @param ranking the ranking
      */
     @Override
-    public void handleRankingMessage(List<Player> ranking) {
+    public void handleRankingMessage(List<Player> ranking) throws Exception {
         ui.printRanking(ranking);
     }
 

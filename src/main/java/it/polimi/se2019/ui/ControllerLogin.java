@@ -233,11 +233,10 @@ public class ControllerLogin implements UiInterface {
             public void run(){
 
         try {
-            selectedMap(mapView.getMapCopy().getID());
+            //selectedMap(mapView.getMapCopy().getID());
             fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
             Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
             stage.close();
-
             controller = fxmlLoader.getController();
         }
         catch (Exception e) {
@@ -349,7 +348,7 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void turn(String nickname, boolean yourTurn) {
         if(!yourTurn) {
-            controller.printf(" It's" + nickname + "turn");
+            controller.printf(" It's " + nickname + " turn");
         }
         else{
             controller.printf("It's your turn!!");
@@ -472,6 +471,7 @@ public class ControllerLogin implements UiInterface {
         updateWeaponMap();
         updateWeaponPlayer();
         updatePlayerAmmo();
+
     }
 
 

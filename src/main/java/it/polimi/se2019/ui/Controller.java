@@ -50,6 +50,10 @@ public class Controller implements Initializable {
     @FXML
     public Button closeWaiting;
 
+    // match ID
+    @FXML
+    public Label labelMatchID;
+
     //imageview of players' posizion on map
     public ImageView imPlayer1Cell00;
     public ImageView imPlayer2Cell00;
@@ -934,7 +938,7 @@ public class Controller implements Initializable {
 
 
         System.out.println(choosenMap);
-
+        choosenMap= ControllerLogin.mapView.getMapCopy().getID();
         if (choosenMap == 2) {
             mappa.setImage(new Image("mappa2.jpg"));
             cell32.setDisable(true);
@@ -1005,10 +1009,8 @@ public class Controller implements Initializable {
 
         setAction();
 
-
-        //TODO togliere queste immagini servite solo a impostare i bottoni nella giusta posizione
-
-
+        //show matchID
+        showMatchID(Integer.toString(ControllerLogin.clientView.getMatchId()));
 
         //set ammo card on map
         updateAmmoCardMap();
@@ -3077,26 +3079,25 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 try {
-            int skullNumber = ControllerLogin.clientView.getPlayerCopy().getSkull();
-            ArrayList<ImageView> imSkulls = new ArrayList<>();
-            imSkulls.add(playerSkull1);
-            imSkulls.add(playerSkull2);
-            imSkulls.add(playerSkull3);
-            imSkulls.add(playerSkull4);
-            imSkulls.add(playerSkull5);
-            imSkulls.add(playerSkull6);
-             if(!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()){
-                 for(int i=0; i<skullNumber ; i++){
-                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
-                 }
-             }
-             else{
-                 for(int i=0; i<skullNumber ; i++){
-                     imSkulls.get(i).setVisible(false);
-                 }
+                    int skullNumber = ControllerLogin.clientView.getPlayerCopy().getSkull();
+                    ArrayList<ImageView> imSkulls = new ArrayList<>();
+                    imSkulls.add(playerSkull1);
+                    imSkulls.add(playerSkull2);
+                    imSkulls.add(playerSkull3);
+                    imSkulls.add(playerSkull4);
+                    imSkulls.add(playerSkull5);
+                    imSkulls.add(playerSkull6);
+                     if(!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()){
+                         for(int i=0; i<skullNumber ; i++){
+                             imSkulls.get(i).setImage(new Image("Icon/skull.png"));
+                         }
+                     }
+                     else{
+                         for(int i=0; i<skullNumber ; i++){
+                             imSkulls.get(i).setVisible(false);
+                         }
 
-             }
-
+                     }
                 }
                 catch (Exception e){
 
@@ -3333,4 +3334,11 @@ public class Controller implements Initializable {
     }
 
 
+    /**
+     * print on gui match id
+     * @param matchId
+     */
+    public void showMatchID(String matchId){
+        labelMatchID.setText("Match ID :" + matchId);
+    }
 }

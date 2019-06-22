@@ -20,7 +20,7 @@ public abstract class View extends Observable implements Observer {
 
     public abstract void handleTurnMessage(String nickname);
 
-    public abstract void handleRankingMessage(List<Player> ranking);
+    public abstract void handleRankingMessage(List<Player> ranking) throws Exception;
 
     public abstract void setPossibleCharacter(List<Character> characters);
 }

@@ -21,7 +21,12 @@ public class RankingMessage implements ModelViewMessage, HandlerPlayerViewMessag
 
     @Override
     public void handleMessage(View view) {
-        view.handleRankingMessage(ranking);
+        try {
+            view.handleRankingMessage(ranking);
+        }
+        catch (Exception e){
+
+        }
     }
 
     @Override
