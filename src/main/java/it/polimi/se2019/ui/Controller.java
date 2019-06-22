@@ -2268,7 +2268,7 @@ public class Controller implements Initializable {
      */
     public void selectCharacter(ActionEvent event) throws Exception{
         if (ControllerLogin.clientView.getPossibleCharacter() != null) {
-            ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 650, 500);
+            ControllerLogin.open("chooseCharacter.fxml", "CHOOSE YOUR CHARACTER", 650,400);
 
 
 
