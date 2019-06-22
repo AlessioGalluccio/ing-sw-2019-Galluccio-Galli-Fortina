@@ -143,6 +143,11 @@ public class NotYourTurnState extends StateController {
     }
 
     @Override
+    public void handleReconnection(boolean isConnected) {
+        connectionDontPassTurn(isConnected);
+    }
+
+    @Override
     public void endAction() {
         //do nothing, shouldn't be called in this state
     }

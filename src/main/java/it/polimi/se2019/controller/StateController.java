@@ -125,4 +125,16 @@ public abstract class StateController {
         return null;
     }
 
+    /**
+     * it disconnettes the player withou passing the turn. Use it for states where it's not the player turn
+     * @param isConnected false if the player is disconnected, true if not
+     */
+    protected void connectionDontPassTurn(boolean isConnected){
+        //TODO controlla da sistemare sicuramente
+        if(!isConnected){
+            gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+        }
+    }
+
 }
