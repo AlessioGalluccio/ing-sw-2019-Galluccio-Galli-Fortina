@@ -418,13 +418,13 @@ public class Player extends Observable implements Target, Serializable {
     /**
      * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
      * @param powerupCard the card which has to be discarded
-     * @param isRespawn true if it's a repawn (don't add temporary ammo), false if not (add temporary ammo)
+     * @param isRespawnOrUse true if it's a respawn or it is used(don't add temporary ammo), false if not (add temporary ammo)
      * @throws NotPresentException if the card is not possessed by the Player
      */
-    public void discardCard(PowerupCard powerupCard, boolean isRespawn) throws NotPresentException {
+    public void discardCard(PowerupCard powerupCard, boolean isRespawnOrUse) throws NotPresentException {
         for(PowerupCard card : powerupCardList){
             if(card == powerupCard){
-                if(!isRespawn){
+                if(!isRespawnOrUse){
                     ColorRYB colorOfCard = card.getAmmo();
                     int tempRed = tempAmmo.getRedAmmo();
                     int tempYellow = tempAmmo.getYellowAmmo();

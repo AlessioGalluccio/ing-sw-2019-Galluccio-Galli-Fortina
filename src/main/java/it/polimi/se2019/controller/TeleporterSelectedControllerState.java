@@ -15,14 +15,16 @@ import java.util.ArrayList;
 public class TeleporterSelectedControllerState extends StateController{
     private Player playerAuthor;
     private String errorString;
+    private TeleporterCard teleporterCard;
     private boolean skipSelected = false;
 
     public static final String SELECT_CELL_TELEPORTER = "Select a cell for Teleporting. ";
     public static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
 
-    public TeleporterSelectedControllerState(Controller controller, GameHandler gameHandler) {
+    public TeleporterSelectedControllerState(Controller controller, GameHandler gameHandler, TeleporterCard teleporterCard) {
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
+        this.teleporterCard = teleporterCard;
         controller.resetMessages();
         controller.addMessageListExpected(new StringAndMessage(Identificator.CELL_MESSAGE, SELECT_CELL_TELEPORTER));
         controller.getPlayerView().printFromController(SELECT_CELL_TELEPORTER);
@@ -38,6 +40,7 @@ public class TeleporterSelectedControllerState extends StateController{
         try{
             Cell cell = gameHandler.getCellByCoordinate(coordinateX,coordinateY);
             playerAuthor.setPosition(cell);
+            playerAuthor.discardCard(teleporterCard, true);
         }catch (NotPresentException e){
             errorString = CELL_NOT_PRESENT;
         }

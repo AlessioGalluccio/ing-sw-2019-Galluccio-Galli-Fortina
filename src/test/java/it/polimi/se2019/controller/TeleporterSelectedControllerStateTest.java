@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 
 public class TeleporterSelectedControllerStateTest {
@@ -25,6 +26,7 @@ public class TeleporterSelectedControllerStateTest {
     private GameHandler gameHandler;
     private Controller controller;
     private StateController stateController;
+    private PowerupCard teleporterCard = null;
 
     @Before
     public void setUp() throws Exception {
@@ -40,11 +42,24 @@ public class TeleporterSelectedControllerStateTest {
         playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
+        
+        while(teleporterCard == null){
+            PowerupCard card = gameHandler.getPowerupDeck().pick();
+            if(card instanceof TeleporterCard){
+                teleporterCard = card;
+
+            }
+        }
+
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
 
-        controller.setState(new TeleporterSelectedControllerState(controller, gameHandler));
+        //add card and ammo
+        authorPlayer.addPowerupCard(teleporterCard);
+        authorPlayer.setAmmoBag(0,0,0);
+
+        controller.setState(new TeleporterSelectedControllerState(controller, gameHandler, (TeleporterCard)teleporterCard));
         stateController = controller.getState();
 
         Cell startingCell = gameHandler.getCellByCoordinate(1,1);
@@ -62,6 +77,7 @@ public class TeleporterSelectedControllerStateTest {
     @Test
     public void handleCellPositive() {
         assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
         CellMessage cellMessage = new CellMessage(1,2,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);
         assertEquals(1,authorPlayer.getCell().getCoordinateX());
@@ -69,11 +85,13 @@ public class TeleporterSelectedControllerStateTest {
         assertTrue(controller.getState() instanceof EmptyControllerState);
         assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST,
                 playerView.getLastStringPrinted());
+        assertTrue(!authorPlayer.getPowerupCardList().contains(teleporterCard));
     }
 
     @Test
     public void handleCellNotPresentCell() {
         assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
         CellMessage cellMessage = new CellMessage(1,3,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);
         assertEquals(1,authorPlayer.getCell().getCoordinateX());
@@ -81,6 +99,7 @@ public class TeleporterSelectedControllerStateTest {
         assertTrue(controller.getState() instanceof TeleporterSelectedControllerState);
         assertEquals(TeleporterSelectedControllerState.CELL_NOT_PRESENT + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
                 playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
     }
 
     @Test

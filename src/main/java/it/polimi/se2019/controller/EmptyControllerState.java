@@ -129,7 +129,7 @@ public class EmptyControllerState extends StateController {
             errorString = POWERUP_NOT_PRESENT_USE;
         }
         else{
-            controller.setState(new TeleporterSelectedControllerState(controller, gameHandler));
+            controller.setState(new TeleporterSelectedControllerState(controller, gameHandler, usedCard));
         }
 
     }
