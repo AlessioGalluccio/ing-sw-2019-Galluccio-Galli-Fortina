@@ -919,6 +919,30 @@ public class Controller implements Initializable {
 
     public void showMap(ActionEvent event) throws InterruptedException {
 
+        //disable character button if the player has been disconnected before and set character images
+        if(ControllerLogin.clientView.getPlayerCopy().getCharacter()!=null) {
+            bselectCharacter.setVisible(false);
+            bselectCharacter.setDisable(true);
+            yourCharacter.setVisible(true);
+            possibleActions.setVisible(true);
+            if(ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()){
+                frenzyPlayer();
+            }
+            else{
+                //TODO gestire il caso in cui è frenzy solo le action
+                ArrayList<Image> images= setCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId(),false);
+                yourCharacter.setImage(images.get(0));
+                possibleActions.setImage(images.get(1));
+
+            }
+
+        }
+        
+        else{
+            bselectCharacter.setVisible(true);
+            bselectCharacter.setDisable(false);
+        }
+
 
         //set Player ammo
         updatePlayerAmmo(ControllerLogin.clientView.getPlayerCopy().getAmmo().getRedAmmo(), ControllerLogin.clientView.getPlayerCopy().getAmmo().getBlueAmmo(),
@@ -2335,7 +2359,7 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                    ArrayList<Image> image= setCharacter(i);
+                    ArrayList<Image> image= setCharacter(i, false);
                     possibleActions.setVisible(true);
                     yourCharacter.setVisible(true);
                     yourCharacter.setImage(image.get(0));
@@ -2360,28 +2384,28 @@ public class Controller implements Initializable {
                     ArrayList<Image> images = new ArrayList<>();
                     if (ControllerLogin.enemyView1.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId());
+                            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId(),false);
                             imEnemyCharacter1.setImage(images.get(0));
                             enemy1Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView2.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId());
+                            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId(),false);
                             imEnemyCharacter2.setImage(images.get(0));
                             enemy2Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView3.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId());
+                            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId(),false);
                             imEnemyCharacter3.setImage(images.get(0));
                             enemy3Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView4.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId());
+                            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId(),false);
                             imEnemyCharacter4.setImage(images.get(0));
                             enemy4Actions.setImage(images.get(1));
                         }
@@ -2401,29 +2425,54 @@ public class Controller implements Initializable {
     /**
      * set each Character id with the image
      */
-    public ArrayList<Image> setCharacter(int characterID) {
+    public ArrayList<Image> setCharacter(int characterID, Boolean frenzy) {
         Image image1 = new Image("characters/characterBlue.jpg");
         Image image2 = new Image("characters/actionsBlue.jpg");
         switch (characterID) {
             case 1:
                 image1 = new Image("characters/characterGreen.jpg");
-                image2 = new Image("characters/actionsGreen.jpg");
+                if(frenzy){
+                    image2  = new Image("frenzyCharacters/frenzyActionGreen.png");
+                }
+                else {
+                    image2 = new Image("characters/actionsGreen.jpg");
+                }
                 break;
             case 2:
                 image1 = new Image("characters/characterViolet.jpg");
-                image2 = new Image("characters/actionsViolet.jpg");
+                if(frenzy){
+                    image2  = new Image("frenzyCharacters/frenzyActionsViolet.png");
+                }
+                else {
+                    image2 = new Image("characters/actionsViolet.jpg");
+                }
                 break;
             case 3:
                 image1 = new Image("characters/characterYellow.jpg");
-                image2 = new Image("characters/actionsYellow.jpg");
+                if(frenzy){
+                    image2  = new Image("frenzyCharacters/frenzyActionsYellow.png");
+                }
+                else {
+                    image2 = new Image("characters/actionsYellow.jpg");
+                }
                 break;
             case 4:
                 image1 = new Image("characters/characterGrey.jpg");
-                image2 = new Image("characters/actionsGrey.jpg");
+                if(frenzy){
+                    image2  = new Image("frenzyCharacters/frenzyActionsGrey.png");
+                }
+                else {
+                    image2 = new Image("characters/actionsGrey.jpg");
+                }
                 break;
             case 5:
                 image1 = new Image("characters/characterBlue.jpg");
-                image2 = new Image("characters/actionsBlue.jpg");
+                if(frenzy){
+                    image2  = new Image("frenzyCharacters/frenzyActionsBlue.png");
+                }
+                else {
+                    image2 = new Image("characters/actionsBlue.jpg");
+                }
                 break;
         }
         ArrayList<Image> images = new ArrayList<>();
