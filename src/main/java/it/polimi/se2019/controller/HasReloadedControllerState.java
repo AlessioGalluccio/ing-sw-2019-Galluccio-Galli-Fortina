@@ -90,10 +90,6 @@ public class HasReloadedControllerState extends StateController {
         youCantDoThis();
     }
 
-    @Override
-    public void handlePassTurn() {
-        //TODO
-    }
 
     @Override
     public void handleFire() {
@@ -125,11 +121,6 @@ public class HasReloadedControllerState extends StateController {
             stringToPlayerView = RELOAD_OR_PASS;
         }
         return stringToPlayerView;
-    }
-
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
     }
 
     private void youCantDoThis(){

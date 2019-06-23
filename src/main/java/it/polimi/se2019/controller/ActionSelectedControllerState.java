@@ -175,7 +175,7 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        errorString = CANT_DO_THIS;
     }
 
     @Override
@@ -256,14 +256,6 @@ public class ActionSelectedControllerState extends StateController {
             stringToPlayerView = CANT_DO_THIS + controller.getCopyMessageListExpected().get(index).getString();
             return false;
         }
-    }
-
-
-    @Override
-    public void endAction() {
-        //TODO da controllare pesantemente
-        controller.setNumOfActionTaken(controller.getNumOfActionTaken() + 1);
-        controller.setState(new EmptyControllerState(controller, gameHandler));
     }
 
     /**

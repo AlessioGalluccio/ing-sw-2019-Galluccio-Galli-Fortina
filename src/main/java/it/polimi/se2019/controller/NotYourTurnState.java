@@ -192,11 +192,6 @@ public class NotYourTurnState extends StateController {
         connectionDontPassTurn(isConnected);
     }
 
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
-    }
-
     private void cantDoThisHandler(){
         //controller.removeReceived();
     }

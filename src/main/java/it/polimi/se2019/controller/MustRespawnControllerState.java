@@ -149,11 +149,6 @@ public class MustRespawnControllerState extends StateController {
         return stringToPlayerView;
     }
 
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
-    }
-
     private void youMustRespawn(){
         stringToPlayerView = POWERUP_DISCARD_REQUEST;
     }

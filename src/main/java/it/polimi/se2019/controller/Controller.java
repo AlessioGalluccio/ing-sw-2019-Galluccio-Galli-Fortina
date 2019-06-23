@@ -193,7 +193,7 @@ public class Controller implements Observer {
     //methods
 
     @Override
-    public void update(java.util.Observable o /*will be always NULL*/, Object arg) {
+    public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
             stringToPlayerView = state.handle((ViewControllerMessage) arg);
             if(stringToPlayerView != null){ //otherwise states that are killed would print null
