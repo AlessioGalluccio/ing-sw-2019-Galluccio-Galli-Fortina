@@ -111,6 +111,7 @@ public class Whisper_1Test {
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(3, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
@@ -119,6 +120,7 @@ public class Whisper_1Test {
         assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
         assertEquals(gameHandler.getCellByCoordinate(2,0), targetPlayer1.getCell());
         assertEquals(gameHandler.getCellByCoordinate(3,1), targetPlayer2.getCell());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
     @Test
@@ -130,6 +132,7 @@ public class Whisper_1Test {
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
@@ -152,11 +155,13 @@ public class Whisper_1Test {
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
+        assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(4, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
         assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
 

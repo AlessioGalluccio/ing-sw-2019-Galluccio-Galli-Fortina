@@ -16,6 +16,7 @@ import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -168,6 +169,12 @@ public class Hellion_2Test {
         assertEquals(0, targetPlayer4.getDamage().size());
         assertEquals(3, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(2, targetPlayer3.getMark().getMarkReceived().size());
+    }
+
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
 }

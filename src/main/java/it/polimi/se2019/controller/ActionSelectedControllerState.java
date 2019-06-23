@@ -175,7 +175,7 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handlePassTurn() {
-        //TODO
+        errorString = CANT_DO_THIS;
     }
 
     @Override
@@ -249,21 +249,13 @@ public class ActionSelectedControllerState extends StateController {
         int messageID = arg.getMessageID();
         if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE
                 || messageID == Identificator.OPTIONAL_MESSAGE || messageID == Identificator.RELOAD_MESSAGE
-                || messageID == Identificator.PASS_MESSAGE) {
+                || messageID == Identificator.PASS_MESSAGE || messageID == Identificator.FIRE_MESSAGE) {
             return true;
         }
         else {
             stringToPlayerView = CANT_DO_THIS + controller.getCopyMessageListExpected().get(index).getString();
             return false;
         }
-    }
-
-
-    @Override
-    public void endAction() {
-        //TODO da controllare pesantemente
-        controller.setNumOfActionTaken(controller.getNumOfActionTaken() + 1);
-        controller.setState(new EmptyControllerState(controller, gameHandler));
     }
 
     /**

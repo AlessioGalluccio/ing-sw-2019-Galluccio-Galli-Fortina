@@ -1,6 +1,9 @@
 package it.polimi.se2019.model.deck.firemodes;
 
+import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.NotYourTurnState;
+import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
@@ -8,7 +11,11 @@ import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
+import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,9 +33,11 @@ public class HeatSeeker_1Test {
     private GameHandler gameHandler;
     private Controller controller;
     private Shoot shoot;
-    private FireMode heatSeeker_1;
+    private FireMode firemode;
     private Cell commonCell;
     private Cell notVisibleCell;
+    private PlayerView playerView;
+    private StateController stateController;
 
     private final static int HEAT_SEEKER_WEAPON_ID = 4;
     private final static int HEAT_SEEKER_FIREMODE_ID = 41;
@@ -37,11 +46,10 @@ public class HeatSeeker_1Test {
 
     @Before
     public void setUp() throws Exception {
-        //TODO playerview non testata
-        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
+        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
@@ -51,13 +59,20 @@ public class HeatSeeker_1Test {
         players.add(targetPlayer3);
 
         //settings of mock connection
-        PlayerView playerView = mock(PlayerView.class);
+        Server serverMock = mock(Server.class);
+        Player playerCopyMock = mock(Player.class);
+        playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
-        shoot = new Shoot(gameHandler,controller);
+        shoot = new Shoot(gameHandler, controller);
+
+        controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
+        stateController = controller.getState();
+
+
 
         //author, target 1 and target 2 in the same cell
         commonCell = gameHandler.getCellByCoordinate(1,1);
@@ -77,10 +92,14 @@ public class HeatSeeker_1Test {
         WeaponCard weapon = gameHandler.getWeaponCardByID(HEAT_SEEKER_WEAPON_ID);
         weapon.reload();
         authorPlayer.addWeaponCard(weapon);
-        shoot.addWeapon(weapon);
+        WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
+        controller.update(null, weaponMessage);
+        System.out.println(playerView.getLastStringPrinted());
 
         //add firemode
-        shoot.addFireMode(1);
+        FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
+        controller.update(null, fireModeMessage);
+        System.out.println(playerView.getLastStringPrinted());
 
     }
 
@@ -100,5 +119,11 @@ public class HeatSeeker_1Test {
         shoot.fire();
         assertEquals(4,targetPlayer3.getDamage().size());
         assertEquals(0,targetPlayer3.getMark().getMarkReceived().size());
+    }
+
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 }

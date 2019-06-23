@@ -1,26 +1,28 @@
 package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ZX2_2 extends FireMode {
-
     private static final long serialVersionUID = -1615539718713764664L;
+    static final String SELECT_PLAYERS = "Select up to three player you can see. ";
+    static final String WRONG_TARGET = "You can't shoot that player. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        return null;
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE, SELECT_PLAYERS);
+        List<StringAndMessage> list = new ArrayList<>();
+        list.add(firstMessage);
+        list.add(firstMessage);
+        list.add(firstMessage);
+        return list;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class ZX2_2 extends FireMode {
     public void addPlayerTarget(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
         if(!target.isVisibleBy(gameHandler.getMap(), author) || target.getID() == author.getID()){
-            throw new WrongInputException();
+            throw new WrongInputException(WRONG_TARGET);
         }
 
         if(shoot.getTargetsPlayer().size() < 3){
@@ -62,7 +64,7 @@ public class ZX2_2 extends FireMode {
             sendAllVisiblePlayers(shoot.getTargetsPlayer());
         }
         else {
-            throw new WrongInputException();
+            throw new WrongInputException(WRONG_TARGET);
         }
 
     }

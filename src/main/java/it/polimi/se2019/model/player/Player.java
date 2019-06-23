@@ -50,6 +50,7 @@ public class Player extends Observable implements Target, Serializable {
     private transient boolean bonusPowerup = false; //is the forth powerup used for respawn
     private int ID;
     private boolean isConnected = true;
+    private List<Integer> targetsForTagBack = new ArrayList<>(); //used for tagBack grenade
 
 
     //constants
@@ -196,6 +197,14 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
+     * returns a list for possible targets of Tagback granade
+     * @return a List of Players of possible targets of Tagback Granade
+     */
+    public List<Integer> getTargetsForTagBack() {
+        return targetsForTagBack;
+    }
+
+    /**
      * Set player's ammo to value indicated by params
      * If some param is grater than three the relative ammo is set to 3
      * @param numRed new value of red ammo
@@ -322,6 +331,7 @@ public class Player extends Observable implements Target, Serializable {
         //If player is already kill throw exception, he cannot receive damage!
         if(isOverKilled()) throw new NotPresentException(toString() + " has been already over killed");
         damage.add(enemy);
+        this.targetsForTagBack.add(enemy.getID()); //for tagBack grenade
         notifyObservers(new PlayerModelMessage(this.clone()));
         if(isOverKilled()) throw new YouOverkilledException(toString() + " has been over killed by " + enemy.toString());
         if(isDead()) {
@@ -334,6 +344,13 @@ public class Player extends Observable implements Target, Serializable {
     public void resetDamage() {
         damage.clear();
         //notify done by resurrection
+    }
+
+    /**
+     * reset the targets for tagBack grenade. Call it at the start of the player of the turn
+     */
+    public void resetTargetsForTagBack(){
+        targetsForTagBack = new ArrayList<>();
     }
 
     /**
@@ -401,13 +418,13 @@ public class Player extends Observable implements Target, Serializable {
     /**
      * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
      * @param powerupCard the card which has to be discarded
-     * @param isRespawn true if it's a repawn (don't add temporary ammo), false if not (add temporary ammo)
+     * @param isRespawnOrUse true if it's a respawn or it is used(don't add temporary ammo), false if not (add temporary ammo)
      * @throws NotPresentException if the card is not possessed by the Player
      */
-    public void discardCard(PowerupCard powerupCard, boolean isRespawn) throws NotPresentException {
+    public void discardCard(PowerupCard powerupCard, boolean isRespawnOrUse) throws NotPresentException {
         for(PowerupCard card : powerupCardList){
             if(card == powerupCard){
-                if(!isRespawn){
+                if(!isRespawnOrUse){
                     ColorRYB colorOfCard = card.getAmmo();
                     int tempRed = tempAmmo.getRedAmmo();
                     int tempYellow = tempAmmo.getYellowAmmo();

@@ -13,6 +13,7 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -122,7 +123,7 @@ public class Furnace_1Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. Select a player of a room. ",
+        assertEquals("You can't do fire now. Select a player of a room. ",
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
@@ -143,7 +144,7 @@ public class Furnace_1Test {
                 playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do this now. Select a player of a room. ",
+        assertEquals("You can't do fire now. Select a player of a room. ",
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
@@ -175,6 +176,12 @@ public class Furnace_1Test {
         assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer1.getCell());
         assertEquals(gameHandler.getCellByCoordinate(2,1), targetPlayer2.getCell());
         assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
+    }
+
+    @After
+    public void himself() {
+        assertEquals(0, authorPlayer.getDamage().size());
+        assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
 
 

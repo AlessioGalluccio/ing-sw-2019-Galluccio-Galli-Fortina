@@ -82,7 +82,7 @@ public class TestPlayer {
         try {
             player.setAmmoBag(4,5,8);
         } catch (TooManyException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         finally {
             assertEquals(MAX_AMMO, player.getAmmo().getBlueAmmo());

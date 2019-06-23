@@ -1,15 +1,13 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.controller.actions.NewtonSelectedControllerState;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.*;
-
-import java.util.ArrayList;
 
 
 public class EmptyControllerState extends StateController {
@@ -24,6 +22,7 @@ public class EmptyControllerState extends StateController {
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
+        this.player.resetTargetsForTagBack(); //for tagBack grenade
         controller.resetMessages();
         controller.getPlayerView().printFromController(SELECT_ACTION_REQUEST);
     }
@@ -75,7 +74,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        //TODO
+        if(!player.containsPowerup(usedCard)){
+            errorString = POWERUP_NOT_PRESENT_USE;
+        }
+        else{
+            controller.setState(new NewtonSelectedControllerState(controller, gameHandler, usedCard));
+        }
 
     }
 
@@ -127,18 +131,18 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        //TODO
+        if(!player.containsPowerup(usedCard)){
+            errorString = POWERUP_NOT_PRESENT_USE;
+        }
+        else{
+            controller.setState(new TeleporterSelectedControllerState(controller, gameHandler, usedCard));
+        }
 
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
         youCantDoThis();
-    }
-
-    @Override
-    public void handlePassTurn() {
-        controller.setState(new NotYourTurnState(controller,gameHandler, true));
     }
 
     @Override
@@ -180,11 +184,6 @@ public class EmptyControllerState extends StateController {
 
         }
         return stringToPlayerView;
-    }
-
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
     }
 
     private void youCantDoThis(){

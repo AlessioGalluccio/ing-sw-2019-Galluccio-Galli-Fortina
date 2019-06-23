@@ -337,6 +337,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         //payment of the total cost of this action
         try{
             author.payAmmoCost(shoot.getCost());
+            shoot.getWeapon().unload();
             //endFiremode();
         }catch (NotEnoughAmmoException e){
             //it should never happen, because cost must always be controlled before

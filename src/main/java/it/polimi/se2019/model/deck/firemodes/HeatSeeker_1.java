@@ -18,7 +18,7 @@ import java.util.List;
 public class HeatSeeker_1 extends FireMode {
 
     private static final long serialVersionUID = 4760119110368705474L;
-    private static String FIRST_MSG_STR = "Select a player target";
+    private static String FIRST_MSG_STR = "Select a player target. ";
 
 
     @Override
@@ -31,6 +31,7 @@ public class HeatSeeker_1 extends FireMode {
 
     @Override
     public void sendPossibleTargetsAtStart() {
+        /*
         //opposto di sendAllVisible
         ArrayList<Player> listTarget = new ArrayList<>();
         for(Player playerOfGame : gameHandler.getOrderPlayerList()){
@@ -40,6 +41,7 @@ public class HeatSeeker_1 extends FireMode {
             }
         }
         sendPossibleTargetsPlayers(listTarget);
+        */
     }
 
     @Override

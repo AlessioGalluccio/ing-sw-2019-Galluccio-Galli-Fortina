@@ -108,7 +108,7 @@ public abstract class WeaponCard implements Card {
     /**
      * set reload parameter to false
      */
-    public void useAmmo(){
+    public void unload(){
         reload = false;
     }
 
@@ -142,10 +142,6 @@ public abstract class WeaponCard implements Card {
         //ATTENTION: you can't discard the weapon, they have to be replace on the map!
     }
 
-    @Override
-    public void useCard(Player author) {
-
-    }
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package it.polimi.se2019.model.deck.firemodes;
 
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.StringAndMessage;
@@ -14,10 +15,22 @@ public class FlameThrower_1 extends FireMode {
 
     //firstly, we choose a direction of fire with CellMessage, then we select the targets inside
 
+    //messages
+    public static final String CHOOSE_CELL_DIRECTION = "Select a cell for the direction. ";
+    public static final String SELECT_FIRST_TARGET = "Select a player target. ";
+    public static final String SELECT_SECOND_TARGET = "Select a player target in another cell or fire. ";
+
+    //errors
+    public static final String NOT_IN_RANGE = "This cell is not in range. ";
+    public static final String TARGET_NOT_VALID = "This target is not valid. ";
+
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        //TODO da fare!
-        return null;
+        List<StringAndMessage> list = new ArrayList<>();
+        list.add(new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL_DIRECTION));
+        list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE, SELECT_FIRST_TARGET));
+        list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE, SELECT_SECOND_TARGET));
+        return list;
     }
 
     @Override
@@ -40,22 +53,26 @@ public class FlameThrower_1 extends FireMode {
             for(Player target : shoot.getTargetsPlayer()){
                 addDamageAndMarks(target,1,0, true);
             }
+            super.fire();
         }
-        super.fire();
+        else{
+            throw new WrongInputException(CANT_DO_FIRE);
+        }
+
     }
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
         try{
             Cell cell = gameHandler.getCellByCoordinate(x,y);
-            if(shoot.getTargetsCells() == null && createListCellTargetsFlameThrower().contains(cell)){
+            if(shoot.getTargetsCells().isEmpty() && createListCellTargetsFlameThrower().contains(cell)){
                 shoot.addCellFromFireMode(cell);
             }
             else{
-                throw new WrongInputException();
+                throw new WrongInputException(NOT_IN_RANGE);
             }
         }catch (NotPresentException e){
-            throw new WrongInputException();
+            throw new WrongInputException(CELL_NOT_PRESENT);
         }
 
     }
@@ -76,7 +93,7 @@ public class FlameThrower_1 extends FireMode {
             shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(TARGET_NOT_VALID);
         }
     }
 
@@ -92,8 +109,7 @@ public class FlameThrower_1 extends FireMode {
         Cell authorCell = author.getCell();
         ArrayList<Cell> cellTargets = new ArrayList<>();
 
-        List<Cell> cellsAtDistance1And2 = gameHandler.getMap().getCellAtDistance(authorCell,1);
-        cellsAtDistance1And2.addAll(gameHandler.getMap().getCellAtDistance(authorCell,2));
+        List<Cell> cellsAtDistance1And2 = gameHandler.getMap().getCellAtDistance(authorCell,2);
 
         List<Cell> cellsInDirection = gameHandler.getMap().getCellInDirection(authorCell,'N');
         cellsInDirection.addAll(gameHandler.getMap().getCellInDirection(authorCell,'E'));

@@ -4,7 +4,6 @@ import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
@@ -22,7 +21,8 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class Furnace_2Test {
+public class PowerGlove_2Test {
+
     private Player authorPlayer;
     private Player targetPlayer1;
     private Player targetPlayer2;
@@ -31,13 +31,11 @@ public class Furnace_2Test {
     private GameHandler gameHandler;
     private Controller controller;
     private Shoot shoot;
-    private FireMode firemode;
     private Cell commonCell;
-    private Cell notVisibleCell;
     private PlayerView playerView;
     private StateController stateController;
 
-    private final static int WEAPON_ID = 3;
+    private final static int WEAPON_ID = 10;
     private final static int FIREMODE_ID = 2;
 
     @Before
@@ -72,16 +70,17 @@ public class Furnace_2Test {
         stateController = controller.getState();
 
         //author and target 1 in the same cell
-        commonCell = gameHandler.getCellByCoordinate(1,0);
+        commonCell = gameHandler.getCellByCoordinate(2,0);
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
 
-        //target 2 and 3 in another cell visible
-        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(1,1));
-        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(1,1));
+        //target 2 and 3 in the same direction
+        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(2,1));
+        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(2,2));
 
-        //target 4 in another cell visible but too distant
-        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,0));
+        //target 4 don't valid
+        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,1));
+
         authorPlayer.setAmmoBag(3,3,3);
 
 
@@ -99,92 +98,111 @@ public class Furnace_2Test {
     }
 
     @Test
-    public void correctRoom() throws Exception {
+    public void noPlayer() throws Exception {
         controller.update(null,
-                new CellMessage(1,1, authorPlayer.getID(), playerView));
+                new CellMessage(2,1, authorPlayer.getID(), playerView));
+
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
         assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer2.getDamage().size());
-        assertEquals(1, targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(1, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(1, targetPlayer3.getMark().getMarkReceived().size());
-        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), authorPlayer.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer1.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,1), targetPlayer2.getCell());
+        assertEquals(gameHandler.getCellByCoordinate(2,1), authorPlayer.getCell());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
 
     @Test
-    public void withMark() throws Exception {
-        targetPlayer2.receiveMarkBy(authorPlayer);
-        targetPlayer2.receiveMarkBy(authorPlayer);
-        targetPlayer3.receiveMarkBy(authorPlayer);
-        targetPlayer2.receiveMarkBy(targetPlayer3);
-
+    public void onePlayer() throws Exception {
         controller.update(null,
-                new CellMessage(1,1, authorPlayer.getID(), playerView));
+                new CellMessage(2,1, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new PlayerMessage(2, authorPlayer.getID(), playerView));
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
         assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(3, targetPlayer2.getDamage().size());
+        assertEquals(2, targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer4.getDamage().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,1), authorPlayer.getCell());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
+    }
+
+
+
+    @Test
+    public void twoPlayer() throws Exception {
+        controller.update(null,
+                new CellMessage(2,1, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new PlayerMessage(2, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new CellMessage(2,2, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new PlayerMessage(3, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new FireMessage(authorPlayer.getID(), playerView));
+
+        assertEquals(0, targetPlayer1.getDamage().size());
+        assertEquals(2, targetPlayer2.getDamage().size());
         assertEquals(2, targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), authorPlayer.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer1.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,1), targetPlayer2.getCell());
-        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,2), authorPlayer.getCell());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
 
     @Test
-    public void sameCell() throws Exception {
+    public void notSameDirection() throws Exception {
         controller.update(null,
-                new CellMessage(1,0, authorPlayer.getID(), playerView));
-
-        assertEquals(Furnace_2.INVALID_CELL + Furnace_2.ADJACENT_CELL_REQUEST,
+                new CellMessage(2,1, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new PlayerMessage(2, authorPlayer.getID(), playerView));
+        controller.update(null,
+                new CellMessage(3,1, authorPlayer.getID(), playerView));
+        assertEquals("You can't select that cell. Select a another cell one move away. ",
                 playerView.getLastStringPrinted());
         controller.update(null,
-                new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do fire now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
+                new PlayerMessage(4, authorPlayer.getID(), playerView));
+
+        assertEquals(0, targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer4.getDamage().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
+    }
+
+    @Test
+    public void authorCell() throws Exception {
+        controller.update(null,
+                new CellMessage(2,0, authorPlayer.getID(), playerView));
+        assertEquals("You can't select that cell. Select a cell one move away. ",
                 playerView.getLastStringPrinted());
 
         assertEquals(0, targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), authorPlayer.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer1.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,1), targetPlayer2.getCell());
+        assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
 
-    @Test
-    public void cellTooDistant() throws Exception {
-        controller.update(null,
-                new CellMessage(3,0, authorPlayer.getID(), playerView));
-
-        assertEquals(Furnace_2.INVALID_CELL + Furnace_2.ADJACENT_CELL_REQUEST,
-                playerView.getLastStringPrinted());
-        controller.update(null,
-                new FireMessage(authorPlayer.getID(), playerView));
-        assertEquals("You can't do fire now. "+ Furnace_2.ADJACENT_CELL_REQUEST,
-                playerView.getLastStringPrinted());
-
-        assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getDamage().size());
-        assertEquals(0, targetPlayer3.getDamage().size());
-        assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), authorPlayer.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer1.getCell());
-        assertEquals(gameHandler.getCellByCoordinate(1,1), targetPlayer2.getCell());
-    }
 
     @After
     public void himself() {
         assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
     }
-
 }

@@ -19,13 +19,6 @@ public interface Card extends Serializable {
     */
    void discard();
 
-   /**
-    * Apply the effect of the card to the author
-    * @param author who use the card
-    * @throws TooManyException if the effect of this card allow author to pick a new card, this exception is thrown whenever author has already three cards
-    */
-   void useCard(Player author) throws TooManyException;
-
    int getID();
 
    int getIDtype();

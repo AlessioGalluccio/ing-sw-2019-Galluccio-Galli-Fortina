@@ -82,7 +82,7 @@ public class GameHandler extends Observable {
     public void nextTurn() {
         Player player = orderPlayerList.get(turn);
         player.endTurnSetting();
-        getViewByPlayer(player).setTimer(false);
+        if(player.isConnected()) getViewByPlayer(player).setTimer(false);
         checkDeath(); //If someone is dead cash his point, add revenge mark and add him to the stack of just dead
         if(justDied.isEmpty()) {
             do {

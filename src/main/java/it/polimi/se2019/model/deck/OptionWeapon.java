@@ -9,10 +9,6 @@ public class OptionWeapon extends WeaponCard {
     private ArrayList<? extends FireMode> optionalFireModeList = new ArrayList<>();
     private FireMode primaryFireMode;
 
-    public void setFireMode(ArrayList<FireMode> fire) {
-
-    }
-
     /**
      *
      * @return Deep copy of the fire mode list available with this weapon

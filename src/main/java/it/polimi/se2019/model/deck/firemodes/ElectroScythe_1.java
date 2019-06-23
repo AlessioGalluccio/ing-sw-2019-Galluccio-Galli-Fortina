@@ -31,7 +31,7 @@ public class ElectroScythe_1 extends FireMode {
         list.add(fireMessage);
 
         for(Player target : gameHandler.getOrderPlayerList()){
-            if(target.getCell().equals(author.getCell())){
+            if(target.getCell().equals(author.getCell()) && target.getID() != author.getID()){
                 shoot.addPlayerTargetFromFireMode(target, true);
             }
         }
@@ -53,11 +53,8 @@ public class ElectroScythe_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        Cell commonCell = author.getCell();
-        for(Player target : gameHandler.getOrderPlayerList()){
-            if(target.getCell().equals(commonCell)){
-                addDamageAndMarks(target, 1,0, true);
-            }
+        for(Player target : shoot.getTargetsPlayer()){
+            addDamageAndMarks(target, 1,0, true);
         }
         super.fire();
     }
