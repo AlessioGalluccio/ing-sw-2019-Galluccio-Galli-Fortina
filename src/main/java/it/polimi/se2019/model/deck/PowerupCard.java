@@ -19,14 +19,6 @@ public abstract class PowerupCard implements Card {
     }
 
     /**
-     * Create and send a message containing the possible targets to the view of player
-     * @param player the player who wants to use this card
-     * @param playerView receiver of the message
-     * @return the possible target that player can hit. It return null if there is no target
-     */
-    public abstract ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView);
-
-    /**
      *
      * @return Ammo that can be change for this powerup
      */
@@ -75,7 +67,4 @@ public abstract class PowerupCard implements Card {
     public void discard() {
         deck.discard(this);
     }
-
-    @Override
-    public abstract void useCard(Player author);
 }

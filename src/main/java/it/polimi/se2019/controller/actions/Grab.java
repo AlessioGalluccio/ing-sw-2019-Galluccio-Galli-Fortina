@@ -48,7 +48,7 @@ public class Grab extends Action{
 
         if(playerAuthor.getPowerupCardList().size() < 3 && cellObjective.getCardID().size() < 3){
             try{
-                Card cardObjective = cellObjective.grabCard(cellObjective.getCardID().get(0));
+                AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
                 cardObjective.useCard(playerAuthor);
 
             }catch(NotCardException e){

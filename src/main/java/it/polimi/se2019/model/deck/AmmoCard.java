@@ -14,4 +14,6 @@ public interface AmmoCard extends Card {
      */
     List<ColorRYB> getAmmo();
     void reloadAmmo(Player p) throws TooManyException;
+
+    void useCard(Player authot) throws TooManyException;
 }
