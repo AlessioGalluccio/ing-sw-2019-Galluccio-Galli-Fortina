@@ -2844,11 +2844,20 @@ public class Controller implements Initializable {
                 try {
                     List<Player> players = ControllerLogin.clientView.getPlayerCopy().getDamage();
                     ArrayList<ImageView> imDamage = new ArrayList<>();
+
                     setDamage(imDamage, playerDamage0, playerDamage1, playerDamage2, playerDamage3, playerDamage4, playerDamage5,
                             playerDamage6, playerDamage7, playerDamage8, playerDamage9, playerDamage10, playerDamage11);
 
+                    for(int i=0; i<imDamage.size(); i++){
+                        imDamage.get(i).setVisible(false);
+                    }
+
                     for(int i=0; i<players.size(); i++){
+                        imDamage.get(i).setVisible(true);
                         imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                        if(imDamage.get(10).isVisible() && !(imDamage.get(11).isVisible())){
+                            ControllerLogin.open("yourDead", "YOU DIED", 400,400);
+                        }
                     }
                 }
                 catch (Exception e){
