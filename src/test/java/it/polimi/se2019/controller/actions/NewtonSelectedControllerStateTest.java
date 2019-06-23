@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 public class NewtonSelectedControllerStateTest {
     private Player authorPlayer;
     private Player targetPlayer1;
+    private Player targetPlayer2;
     private PlayerView playerView;
     private GameHandler gameHandler;
     private Controller controller;
@@ -35,6 +36,7 @@ public class NewtonSelectedControllerStateTest {
     public void setUp() throws Exception {
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
+        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
@@ -69,6 +71,7 @@ public class NewtonSelectedControllerStateTest {
 
         Cell startingCell = gameHandler.getCellByCoordinate(1,1);
         authorPlayer.setPosition(startingCell);
+        targetPlayer2.setPosition(startingCell);
     }
 
     @Test
@@ -145,6 +148,29 @@ public class NewtonSelectedControllerStateTest {
         assertEquals(2,targetPlayer1.getCell().getCoordinateY());
         assertTrue(controller.getState() instanceof NewtonSelectedControllerState);
         assertEquals(NewtonSelectedControllerState.NOT_VALID_CELL + NewtonSelectedControllerState.SELECT_CELL_NEWTON,
+                playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
+    }
+
+    @Test
+    public void handleTooManyTargets() {
+        try{
+            targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
+        }catch (NotPresentException e){
+            //shouldn't happen
+        }
+        assertEquals(NewtonSelectedControllerState.SELECT_TARGET_NEWTON, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage);
+        assertEquals(NewtonSelectedControllerState.SELECT_CELL_NEWTON, playerView.getLastStringPrinted());
+        PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage2);
+
+        assertEquals(0,targetPlayer1.getCell().getCoordinateX());
+        assertEquals(2,targetPlayer1.getCell().getCoordinateY());
+        assertTrue(controller.getState() instanceof NewtonSelectedControllerState);
+        assertEquals(NewtonSelectedControllerState.PLAYER_ALREADY_SELECTED_NEWTON + NewtonSelectedControllerState.SELECT_CELL_NEWTON,
                 playerView.getLastStringPrinted());
         assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
     }
@@ -242,17 +268,7 @@ public class NewtonSelectedControllerStateTest {
 
     @Test
     public void handleDiscardPowerup() {
-        DiscardPowerupMessage message = new DiscardPowerupMessage(new PowerupCard(ColorRYB.BLUE,1,1) {
-            @Override
-            public ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView) {
-                return null;
-            }
-
-            @Override
-            public void useCard(Player author) {
-
-            }
-        }, authorPlayer.getID(), playerView);
+        DiscardPowerupMessage message = new DiscardPowerupMessage(new NewtonCard(ColorRYB.BLUE,1,1),  authorPlayer.getID(), playerView);
         controller.update(null, message);
         assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());

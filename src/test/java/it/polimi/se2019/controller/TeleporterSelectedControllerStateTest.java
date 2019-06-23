@@ -199,17 +199,7 @@ public class TeleporterSelectedControllerStateTest {
 
     @Test
     public void handleDiscardPowerup() {
-        DiscardPowerupMessage message = new DiscardPowerupMessage(new PowerupCard(ColorRYB.BLUE,1,1) {
-            @Override
-            public ArrayList<Target> sendPossibleTarget(Player player, PlayerView playerView) {
-                return null;
-            }
-
-            @Override
-            public void useCard(Player author) {
-
-            }
-        }, authorPlayer.getID(), playerView);
+        DiscardPowerupMessage message = new DiscardPowerupMessage(new NewtonCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
         assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
                 playerView.getLastStringPrinted());
