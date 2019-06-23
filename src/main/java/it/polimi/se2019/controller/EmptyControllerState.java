@@ -125,7 +125,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        //TODO
+        if(!player.containsPowerup(usedCard)){
+            errorString = POWERUP_NOT_PRESENT_USE;
+        }
+        else{
+            controller.setState(new TeleporterSelectedControllerState(controller, gameHandler));
+        }
 
     }
 
