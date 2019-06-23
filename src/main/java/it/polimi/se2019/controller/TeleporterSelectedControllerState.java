@@ -18,15 +18,16 @@ public class TeleporterSelectedControllerState extends StateController{
     private TeleporterCard teleporterCard;
     private boolean skipSelected = false;
 
+    //messages
     public static final String SELECT_CELL_TELEPORTER = "Select a cell for Teleporting. ";
+
+    //errors
     public static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
 
     public TeleporterSelectedControllerState(Controller controller, GameHandler gameHandler, TeleporterCard teleporterCard) {
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
         this.teleporterCard = teleporterCard;
-        controller.resetMessages();
-        controller.addMessageListExpected(new StringAndMessage(Identificator.CELL_MESSAGE, SELECT_CELL_TELEPORTER));
         controller.getPlayerView().printFromController(SELECT_CELL_TELEPORTER);
     }
 
@@ -119,11 +120,8 @@ public class TeleporterSelectedControllerState extends StateController{
             controller.setState(new EmptyControllerState(controller, gameHandler));
             return null;
         }
-        else if(errorString != null){
+        else {
             return errorString + SELECT_CELL_TELEPORTER;
-        }
-        else{
-            return SELECT_CELL_TELEPORTER;
         }
     }
 }
