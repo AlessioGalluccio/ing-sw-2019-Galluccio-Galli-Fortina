@@ -123,6 +123,10 @@ public class FlameThrower_2Test {
         assertEquals(1,targetPlayer4.getDamage().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
 
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(1, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
+
     }
 
     @Test
@@ -151,6 +155,10 @@ public class FlameThrower_2Test {
 
         assertEquals(1,targetPlayer4.getDamage().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
+
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(1, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(3, authorPlayer.getAmmo().getBlueAmmo());
     }
 
     @Test
@@ -188,6 +196,10 @@ public class FlameThrower_2Test {
 
         assertEquals(1,targetPlayer4.getDamage().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
+
+        assertEquals(3, authorPlayer.getAmmo().getRedAmmo());
+        assertEquals(1, authorPlayer.getAmmo().getYellowAmmo());
+        assertEquals(2, authorPlayer.getAmmo().getBlueAmmo()); //targeting uses blue
 
     }
 
