@@ -135,11 +135,6 @@ public class EmptyControllerState extends StateController {
     }
 
     @Override
-    public void handlePassTurn() {
-        controller.setState(new NotYourTurnState(controller,gameHandler, true));
-    }
-
-    @Override
     public void handleFire() {
         youCantDoThis();
     }
@@ -178,11 +173,6 @@ public class EmptyControllerState extends StateController {
 
         }
         return stringToPlayerView;
-    }
-
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
     }
 
     private void youCantDoThis(){

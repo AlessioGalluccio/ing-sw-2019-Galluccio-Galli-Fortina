@@ -74,7 +74,12 @@ public abstract class StateController {
 
     public abstract void handleWeaponCard(WeaponCard usedCard);
 
-    public abstract void handlePassTurn();
+    /**
+     * when called by a PassTurnMessage , it passes the turn
+     */
+    public void handlePassTurn() {
+        controller.setState(new NotYourTurnState(controller,gameHandler, true));
+    }
 
     public abstract void handleFire();
 
@@ -86,8 +91,6 @@ public abstract class StateController {
             controller.setState(new DisconnectedControllerState(controller, gameHandler));
         }
     }
-
-    public abstract void endAction();
 
     public abstract void handleDiscardPowerup(int powerupID);
 

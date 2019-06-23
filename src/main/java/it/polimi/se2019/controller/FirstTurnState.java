@@ -127,11 +127,6 @@ public class FirstTurnState extends StateController {
     }
 
     @Override
-    public void endAction() {
-        errorString = CANT_DO_THIS;
-    }
-
-    @Override
     public void handleDiscardPowerup(int powerupID) {
         if(!isCharacterSelected){
             errorString = CANT_DO_THIS;

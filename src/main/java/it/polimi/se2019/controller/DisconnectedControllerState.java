@@ -113,9 +113,4 @@ public class DisconnectedControllerState extends StateController {
         arg.handle(this);
         return stringToPlayerView;
     }
-
-    @Override
-    public void endAction() {
-        //do nothing, shouldn't be called in this state
-    }
 }
