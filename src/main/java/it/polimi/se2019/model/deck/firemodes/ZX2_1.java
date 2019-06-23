@@ -1,26 +1,25 @@
 package it.polimi.se2019.model.deck.firemodes;
 
-import it.polimi.se2019.controller.actions.FiremodeOfOnlyMarksException;
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.FireMode;
-import it.polimi.se2019.model.deck.Target;
-import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
-import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
-import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ZX2_1 extends FireMode {
-
     private static final long serialVersionUID = 1525303002085550524L;
+    static final String SELECT_PLAYER = "Select a player you can see it. ";
+    static final String WRONG_TARGET = "You can't shoot that player. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        return null;
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE, SELECT_PLAYER);
+        List<StringAndMessage> list = new ArrayList<>();
+        list.add(firstMessage);
+        return list;
     }
 
     @Override
@@ -44,7 +43,6 @@ public class ZX2_1 extends FireMode {
         else{
             throw new WrongInputException();
         }
-
     }
 
     @Override
@@ -55,7 +53,7 @@ public class ZX2_1 extends FireMode {
             shoot.addPlayerTargetFromFireMode(target, true);
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(WRONG_TARGET);
         }
     }
 
