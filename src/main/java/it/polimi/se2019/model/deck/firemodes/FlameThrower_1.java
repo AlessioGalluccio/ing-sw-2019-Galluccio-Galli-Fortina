@@ -65,7 +65,7 @@ public class FlameThrower_1 extends FireMode {
     public void addCell(int x, int y) throws WrongInputException {
         try{
             Cell cell = gameHandler.getCellByCoordinate(x,y);
-            if(shoot.getTargetsCells() == null && createListCellTargetsFlameThrower().contains(cell)){
+            if(shoot.getTargetsCells().isEmpty() && createListCellTargetsFlameThrower().contains(cell)){
                 shoot.addCellFromFireMode(cell);
             }
             else{
@@ -109,8 +109,7 @@ public class FlameThrower_1 extends FireMode {
         Cell authorCell = author.getCell();
         ArrayList<Cell> cellTargets = new ArrayList<>();
 
-        List<Cell> cellsAtDistance1And2 = gameHandler.getMap().getCellAtDistance(authorCell,1);
-        cellsAtDistance1And2.addAll(gameHandler.getMap().getCellAtDistance(authorCell,2));
+        List<Cell> cellsAtDistance1And2 = gameHandler.getMap().getCellAtDistance(authorCell,2);
 
         List<Cell> cellsInDirection = gameHandler.getMap().getCellInDirection(authorCell,'N');
         cellsInDirection.addAll(gameHandler.getMap().getCellInDirection(authorCell,'E'));
