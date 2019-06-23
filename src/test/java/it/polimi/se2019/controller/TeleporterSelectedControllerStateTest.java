@@ -42,7 +42,7 @@ public class TeleporterSelectedControllerStateTest {
         playerView = new PlayerView(serverMock, playerCopyMock);
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
-        
+
         while(teleporterCard == null){
             PowerupCard card = gameHandler.getPowerupDeck().pick();
             if(card instanceof TeleporterCard){

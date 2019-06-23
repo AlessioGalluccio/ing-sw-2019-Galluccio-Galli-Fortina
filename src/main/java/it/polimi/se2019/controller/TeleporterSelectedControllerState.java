@@ -40,7 +40,7 @@ public class TeleporterSelectedControllerState extends StateController{
         try{
             Cell cell = gameHandler.getCellByCoordinate(coordinateX,coordinateY);
             playerAuthor.setPosition(cell);
-            playerAuthor.discardCard(teleporterCard, true);
+            playerAuthor.discardCard(gameHandler.getPowerupCardByID(teleporterCard.getID()), true);
         }catch (NotPresentException e){
             errorString = CELL_NOT_PRESENT;
         }
