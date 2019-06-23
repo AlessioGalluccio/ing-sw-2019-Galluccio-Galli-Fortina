@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Action;
+import it.polimi.se2019.controller.actions.NewtonSelectedControllerState;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
@@ -73,7 +74,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        //TODO
+        if(!player.containsPowerup(usedCard)){
+            errorString = POWERUP_NOT_PRESENT_USE;
+        }
+        else{
+            controller.setState(new NewtonSelectedControllerState(controller, gameHandler, usedCard));
+        }
 
     }
 

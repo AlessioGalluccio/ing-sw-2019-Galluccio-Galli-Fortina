@@ -1,11 +1,15 @@
-package it.polimi.se2019.controller;
+package it.polimi.se2019.controller.actions;
 
-import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.EmptyControllerState;
+import it.polimi.se2019.controller.StateController;
+import it.polimi.se2019.controller.TeleporterSelectedControllerState;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.ColorRYB;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -17,23 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 
-public class TeleporterSelectedControllerStateTest {
+public class NewtonSelectedControllerStateTest {
     private Player authorPlayer;
+    private Player targetPlayer1;
     private PlayerView playerView;
     private GameHandler gameHandler;
     private Controller controller;
-    private PowerupCard teleporterCard = null;
+    private NewtonCard newtonCard = null;
 
     @Before
     public void setUp() throws Exception {
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
+        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
         players.add(authorPlayer);
+        players.add(targetPlayer1);
+
 
         //settings of mock connection
         Server serverMock = mock(Server.class);
@@ -42,10 +49,10 @@ public class TeleporterSelectedControllerStateTest {
         gameHandler = new GameHandler(players, 8);
         gameHandler.setMap(1);
 
-        while(teleporterCard == null){
+        while(newtonCard == null){
             PowerupCard card = gameHandler.getPowerupDeck().pick();
-            if(card instanceof TeleporterCard){
-                teleporterCard = card;
+            if(card instanceof NewtonCard){
+                newtonCard = (NewtonCard) card;
 
             }
         }
@@ -55,10 +62,10 @@ public class TeleporterSelectedControllerStateTest {
         controller.setAuthor(authorPlayer);
 
         //add card and ammo
-        authorPlayer.addPowerupCard(teleporterCard);
+        authorPlayer.addPowerupCard(newtonCard);
         authorPlayer.setAmmoBag(0,0,0);
 
-        controller.setState(new TeleporterSelectedControllerState(controller, gameHandler, (TeleporterCard)teleporterCard));
+        controller.setState(new NewtonSelectedControllerState(controller, gameHandler, newtonCard));
 
         Cell startingCell = gameHandler.getCellByCoordinate(1,1);
         authorPlayer.setPosition(startingCell);
@@ -68,43 +75,86 @@ public class TeleporterSelectedControllerStateTest {
     public void handleAction() {
         ActionMessage message = new ActionMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
     @Test
-    public void handleCellPositive() {
-        assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
-        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
-        CellMessage cellMessage = new CellMessage(1,2,authorPlayer.getID(), playerView);
+    public void handlePositive() {
+        try{
+            targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
+        }catch (NotPresentException e){
+            //shouldn't happen
+        }
+        assertEquals(NewtonSelectedControllerState.SELECT_TARGET_NEWTON, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
+
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage);
+        assertEquals(NewtonSelectedControllerState.SELECT_CELL_NEWTON, playerView.getLastStringPrinted());
+
+        CellMessage cellMessage = new CellMessage(2,2,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);
-        assertEquals(1,authorPlayer.getCell().getCoordinateX());
-        assertEquals(2,authorPlayer.getCell().getCoordinateY());
+
+        assertEquals(2,targetPlayer1.getCell().getCoordinateX());
+        assertEquals(2,targetPlayer1.getCell().getCoordinateY());
         assertTrue(controller.getState() instanceof EmptyControllerState);
         assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST,
                 playerView.getLastStringPrinted());
-        assertTrue(!authorPlayer.getPowerupCardList().contains(teleporterCard));
+        assertTrue(!authorPlayer.getPowerupCardList().contains(newtonCard));
+    }
+
+
+    @Test
+    public void handleCellNotPresent() {
+        try{
+            targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
+        }catch (NotPresentException e){
+            //shouldn't happen
+        }
+        assertEquals(NewtonSelectedControllerState.SELECT_TARGET_NEWTON, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage);
+        assertEquals(NewtonSelectedControllerState.SELECT_CELL_NEWTON, playerView.getLastStringPrinted());
+        CellMessage cellMessage = new CellMessage(1,3,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
+        assertEquals(0,targetPlayer1.getCell().getCoordinateX());
+        assertEquals(2,targetPlayer1.getCell().getCoordinateY());
+        assertTrue(controller.getState() instanceof NewtonSelectedControllerState);
+        assertEquals(NewtonSelectedControllerState.CELL_NOT_PRESENT + NewtonSelectedControllerState.SELECT_CELL_NEWTON,
+                playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
     }
 
     @Test
-    public void handleCellNotPresentCell() {
-        assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
-        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
-        CellMessage cellMessage = new CellMessage(1,3,authorPlayer.getID(), playerView);
+    public void handleCellNotValid() {
+        try{
+            targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
+        }catch (NotPresentException e){
+            //shouldn't happen
+        }
+        assertEquals(NewtonSelectedControllerState.SELECT_TARGET_NEWTON, playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage);
+        assertEquals(NewtonSelectedControllerState.SELECT_CELL_NEWTON, playerView.getLastStringPrinted());
+        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);
-        assertEquals(1,authorPlayer.getCell().getCoordinateX());
-        assertEquals(1,authorPlayer.getCell().getCoordinateY());
-        assertTrue(controller.getState() instanceof TeleporterSelectedControllerState);
-        assertEquals(TeleporterSelectedControllerState.CELL_NOT_PRESENT + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(0,targetPlayer1.getCell().getCoordinateX());
+        assertEquals(2,targetPlayer1.getCell().getCoordinateY());
+        assertTrue(controller.getState() instanceof NewtonSelectedControllerState);
+        assertEquals(NewtonSelectedControllerState.NOT_VALID_CELL + NewtonSelectedControllerState.SELECT_CELL_NEWTON,
                 playerView.getLastStringPrinted());
-        assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
+        assertTrue(authorPlayer.getPowerupCardList().contains(newtonCard));
     }
+
 
     @Test
     public void handleFiremode() {
         FireModeMessage message = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -112,7 +162,7 @@ public class TeleporterSelectedControllerStateTest {
     public void handleNewton() {
         NewtonMessage message = new NewtonMessage(new NewtonCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -127,17 +177,10 @@ public class TeleporterSelectedControllerStateTest {
     public void handleOptional() {
         OptionalMessage message = new OptionalMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
-    @Test
-    public void handlePlayer() {
-        PlayerMessage message = new PlayerMessage(1, authorPlayer.getID(), playerView);
-        controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
-                playerView.getLastStringPrinted());
-    }
 
     @Test
     public void handleReload() {
@@ -148,7 +191,7 @@ public class TeleporterSelectedControllerStateTest {
             }
         }, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -156,7 +199,7 @@ public class TeleporterSelectedControllerStateTest {
     public void handleTagback() {
         TagbackGrenadeMessage message = new TagbackGrenadeMessage(new TagbackGrenadeCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -164,7 +207,7 @@ public class TeleporterSelectedControllerStateTest {
     public void handleTargeting() {
         TargetingScopeMessage message = new TargetingScopeMessage(new TargetingScopeCard(ColorRYB.BLUE,1,1),ColorRYB.BLUE, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -172,7 +215,7 @@ public class TeleporterSelectedControllerStateTest {
     public void handleTeleporter() {
         TeleporterMessage message = new TeleporterMessage(new TeleporterCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -185,7 +228,7 @@ public class TeleporterSelectedControllerStateTest {
             }
         }, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -193,7 +236,7 @@ public class TeleporterSelectedControllerStateTest {
     public void handleFire() {
         FireMessage message = new FireMessage(authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -211,7 +254,7 @@ public class TeleporterSelectedControllerStateTest {
             }
         }, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
 
@@ -224,7 +267,8 @@ public class TeleporterSelectedControllerStateTest {
             }
         }, authorPlayer.getID(), playerView);
         controller.update(null, message);
-        assertEquals(TeleporterSelectedControllerState.CANT_DO_THIS + TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER,
+        assertEquals(StateController.CANT_DO_THIS + NewtonSelectedControllerState.SELECT_TARGET_NEWTON,
                 playerView.getLastStringPrinted());
     }
+
 }
