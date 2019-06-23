@@ -45,6 +45,9 @@ public class Controller implements Initializable {
     @FXML
     public Button bselectCharacter;
 
+    //true when all the skull are taken
+    boolean isFrenzyTime = false;
+
 
     //button to close wainting room
     @FXML
@@ -930,14 +933,14 @@ public class Controller implements Initializable {
             }
             else{
                 //TODO gestire il caso in cui è frenzy solo le action
-                ArrayList<Image> images= setCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId(),false);
+                ArrayList<Image> images= setCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId(),isFrenzyTime);
                 yourCharacter.setImage(images.get(0));
                 possibleActions.setImage(images.get(1));
 
             }
 
         }
-        
+
         else{
             bselectCharacter.setVisible(true);
             bselectCharacter.setDisable(false);
@@ -1668,7 +1671,7 @@ public class Controller implements Initializable {
         skull.add(imSkull7);
         skull.add(imSkull8);
 
-        //TODO mettere segnalino giocatore
+        //TODO mettere segnalino giocatore e mettere true IsFrenzyTime
         Platform.runLater(() -> {
             try {
 
@@ -2359,7 +2362,7 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                    ArrayList<Image> image= setCharacter(i, false);
+                    ArrayList<Image> image= setCharacter(i, isFrenzyTime);
                     possibleActions.setVisible(true);
                     yourCharacter.setVisible(true);
                     yourCharacter.setImage(image.get(0));
@@ -2384,28 +2387,28 @@ public class Controller implements Initializable {
                     ArrayList<Image> images = new ArrayList<>();
                     if (ControllerLogin.enemyView1.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId(),false);
+                            images = setCharacter(ControllerLogin.enemyView1.getCharacter().getId(),isFrenzyTime);
                             imEnemyCharacter1.setImage(images.get(0));
                             enemy1Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView2.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId(),false);
+                            images = setCharacter(ControllerLogin.enemyView2.getCharacter().getId(),isFrenzyTime);
                             imEnemyCharacter2.setImage(images.get(0));
                             enemy2Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView3.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId(),false);
+                            images = setCharacter(ControllerLogin.enemyView3.getCharacter().getId(),isFrenzyTime);
                             imEnemyCharacter3.setImage(images.get(0));
                             enemy3Actions.setImage(images.get(1));
                         }
                     }
                     if (ControllerLogin.enemyView4.getCharacter() != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
-                            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId(),false);
+                            images = setCharacter(ControllerLogin.enemyView4.getCharacter().getId(),isFrenzyTime);
                             imEnemyCharacter4.setImage(images.get(0));
                             enemy4Actions.setImage(images.get(1));
                         }

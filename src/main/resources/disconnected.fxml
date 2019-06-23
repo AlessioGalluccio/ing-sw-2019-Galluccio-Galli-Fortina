@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="243.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.ControllerLogin">
+   <children>
+      <Label layoutX="12.0" layoutY="69.0" prefHeight="99.0" prefWidth="382.0" text="OH NO! YOU HAVE BEEN DISCONNECTED!">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMatchId" layoutX="129.0" layoutY="157.0" prefHeight="52.0" prefWidth="147.0" />
+      <Label layoutX="161.0" layoutY="28.0" prefHeight="52.0" prefWidth="82.0" />
+   </children>
+</AnchorPane>

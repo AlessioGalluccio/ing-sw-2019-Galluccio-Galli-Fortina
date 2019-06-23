@@ -52,6 +52,8 @@ public class ControllerLogin implements UiInterface {
     public Label rank5;
     @FXML
     public ImageView imWinner;
+    @FXML
+    public Label labelMatchId;
 
 
     private Controller controller;
@@ -248,7 +250,17 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void disconnect(int matchID) {
-        //TODO
+        try {
+            open("disconnected.fxml", "DISCONNECT", 405, 243);
+        }catch (Exception e){
+
+        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                labelMatchId.setText("Match Id : " + clientView.getMatchId());
+            }
+        });
     }
 
     @Override
