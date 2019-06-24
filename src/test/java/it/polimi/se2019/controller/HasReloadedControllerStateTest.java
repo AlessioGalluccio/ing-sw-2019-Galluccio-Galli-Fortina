@@ -62,6 +62,7 @@ public class HasReloadedControllerStateTest {
 
     @Test
     public void handleAction() {
+        assertEquals(HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
         ActionMessage actionMessage = new ActionMessage(5,authorPlayer.getID(), playerView);
         controller.update(null,actionMessage);
         assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
@@ -70,6 +71,7 @@ public class HasReloadedControllerStateTest {
 
     @Test
     public void handleCell() {
+        assertEquals(HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
         CellMessage message = new CellMessage(1,1,authorPlayer.getID(), playerView);
         controller.update(null,message);
         assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());

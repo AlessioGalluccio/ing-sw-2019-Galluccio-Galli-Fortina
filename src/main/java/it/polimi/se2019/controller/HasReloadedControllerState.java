@@ -16,6 +16,7 @@ public class HasReloadedControllerState extends StateController {
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         super(controller, gameHandler);
         this.player = controller.getAuthor();
+        controller.getPlayerView().printFromController(RELOAD_OR_PASS);
     }
 
     @Override

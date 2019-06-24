@@ -33,7 +33,7 @@ public abstract class StateController {
     public static final String POWERUP_NOT_PRESENT_USE = "You can't use a card you don't have. ";
 
     public static final String CANT_DO_ALREADY_RELOADED = "You have already reloaded. ";
-    public static final String RELOAD_OR_PASS = "Please, select reload or pass your turn. ";
+    public static final String RELOAD_OR_PASS = "Reload another weapon or pass your turn. ";
 
 
     protected Controller controller;
