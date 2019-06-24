@@ -20,7 +20,13 @@ public class ShockWave_2 extends FireMode {
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        return null;
+        //no messages are needed, we only add the targets for the targeting scope
+        for(Player target : gameHandler.getOrderPlayerList()){
+            if(gameHandler.getMap().getDistance(author.getCell(), target.getCell()) == 1){
+               shoot.addPlayerTargetFromFireMode(target, true);
+            }
+        }
+        return new ArrayList<>(); //empty list
     }
 
     @Override
@@ -37,27 +43,12 @@ public class ShockWave_2 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-
+        for(Player target : shoot.getTargetsPlayer()){
+            addDamageAndMarks(target,1,0, true);
+        }
+        super.fire();
     }
 
-    @Override
-    public void addCell(int x, int y) throws WrongInputException {
 
-    }
-
-    @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-
-    }
 
 }

@@ -69,6 +69,7 @@ public class VortexCannon_1 extends FireMode {
                     addDamageAndMarks(target,1,0,true);
                 }
             }
+            super.fire();
         }
 
     }

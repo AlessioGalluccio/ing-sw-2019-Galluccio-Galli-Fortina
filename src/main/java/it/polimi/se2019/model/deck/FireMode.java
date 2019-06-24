@@ -177,6 +177,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             if(list.isEmpty()){
                 throw new WrongInputException(NO_TARGET_TARGETING);
             }
+            /*
             for(Player target: list){
                 if(target.isVisibleBy( gameHandler.getMap(),author)){
                     canTargeting = true;
@@ -185,6 +186,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             if(!canTargeting){
                 throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
             }
+            */
             else{
                 shoot.addTargetingScopeFromFireMode((PowerupCard)card);
                 shoot.addCost(cost);
@@ -251,7 +253,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     public void addTargetForTargeting(int playerID) throws WrongInputException {
         Player target = gameHandler.getPlayerByID(playerID);
-        if(shoot.getCanBeTargetedPlayers().contains(target) && target.isVisibleBy(gameHandler.getMap(), author)){
+        if(shoot.getCanBeTargetedPlayers().contains(target)){
             shoot.addTargetForTargetingFromFiremode(target);
         }
         else{
