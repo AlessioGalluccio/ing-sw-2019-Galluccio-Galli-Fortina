@@ -1,4 +1,4 @@
-package it.polimi.se2019.controller.actions;
+package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.EmptyControllerState;

@@ -40,7 +40,7 @@ public class FirstTurnState extends StateController {
             listExpectedMessages.add(secondMessage);
             controller.resetMessages();
             controller.addMessageListExpected(listExpectedMessages);
-            
+
             //player picks up two powerup cards
             PowerupDeck deck = gameHandler.getPowerupDeck();
             try{
@@ -174,7 +174,7 @@ public class FirstTurnState extends StateController {
     @Override
     public String handle(ViewControllerMessage arg) {
         if(arg.getMessageID() ==
-                controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getMessageID()){
+                controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getMessageID() || arg.getMessageID() == Identificator.CONNECTION_MESSAGE){
             arg.handle(this);
         }
         else{

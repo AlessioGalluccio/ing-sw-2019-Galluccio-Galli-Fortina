@@ -249,7 +249,7 @@ public class ActionSelectedControllerState extends StateController {
         int messageID = arg.getMessageID();
         if(messageID == expectedID || messageID == Identificator.TARGETING_SCOPE_MESSAGE || messageID == Identificator.NOPE_MESSAGE
                 || messageID == Identificator.OPTIONAL_MESSAGE || messageID == Identificator.RELOAD_MESSAGE
-                || messageID == Identificator.PASS_MESSAGE || messageID == Identificator.FIRE_MESSAGE) {
+                || messageID == Identificator.PASS_MESSAGE || messageID == Identificator.FIRE_MESSAGE || messageID == Identificator.CONNECTION_MESSAGE) {
             return true;
         }
         else {

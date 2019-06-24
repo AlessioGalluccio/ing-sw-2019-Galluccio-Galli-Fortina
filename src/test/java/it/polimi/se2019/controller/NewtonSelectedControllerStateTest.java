@@ -1,9 +1,6 @@
-package it.polimi.se2019.controller.actions;
+package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.controller.EmptyControllerState;
-import it.polimi.se2019.controller.StateController;
-import it.polimi.se2019.controller.TeleporterSelectedControllerState;
+import it.polimi.se2019.controller.*;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;

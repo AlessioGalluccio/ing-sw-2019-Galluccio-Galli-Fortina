@@ -9,10 +9,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
-import it.polimi.se2019.view.ViewControllerMess.CellMessage;
-import it.polimi.se2019.view.ViewControllerMess.CharacterMessage;
-import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
+import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -116,10 +113,5 @@ public class FirstTurnStateTest {
 
     }
 
-    @Test
-    public void handleReconnection(){
-        controller.getState().handleReconnection(false);
-        assertTrue(controller.getState() instanceof NotYourTurnState);
-    }
 
 }
