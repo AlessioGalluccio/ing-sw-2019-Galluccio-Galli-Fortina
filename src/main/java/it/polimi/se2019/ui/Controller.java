@@ -922,6 +922,16 @@ public class Controller implements Initializable {
 
     public void showMap(ActionEvent event) throws InterruptedException {
 
+
+        //update players position after disconnection
+        Cell[][] cells = ControllerLogin.mapView.getCells();
+        for(int i=0; i<3; i++){
+            for(int j=0; j<2; j++){
+                updatePlayersPosition(cells[i][j]);
+            }
+        }
+
+
         //disable character button if the player has been disconnected before and set character images
         if(ControllerLogin.clientView.getPlayerCopy().getCharacter()!=null) {
             bselectCharacter.setVisible(false);
@@ -2362,12 +2372,16 @@ public class Controller implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                    ArrayList<Image> image= setCharacter(i, isFrenzyTime);
+                try {
+                    ArrayList<Image> image = setCharacter(i, isFrenzyTime);
                     possibleActions.setVisible(true);
                     yourCharacter.setVisible(true);
                     yourCharacter.setImage(image.get(0));
                     possibleActions.setImage(image.get(1));
 
+                } catch (NullPointerException e) {
+
+                }
             }
         });
     }
