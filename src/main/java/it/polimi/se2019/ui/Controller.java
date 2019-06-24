@@ -41,6 +41,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    private int selectTargetingScope = 5;
+
     //character button
     @FXML
     public Button bselectCharacter;
@@ -2714,17 +2716,21 @@ public class Controller implements Initializable {
         Object source = event.getSource();
         List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
 
-        if (bPowerupCard1 == source) {
-            createPowerupMessage(powerupCards.get(0));
-        }
-        if (bPowerupCard2 == source) {
-            createPowerupMessage(powerupCards.get(1));
-        }
-        if (bPowerupCard3 == source) {
-            createPowerupMessage(powerupCards.get(2));
-        }
-        if (bPowerupCard4 == source) {
-            createPowerupMessage(powerupCards.get(3));
+        try {
+            if (bPowerupCard1 == source) {
+                createPowerupMessage(powerupCards.get(0), 0);
+            }
+            if (bPowerupCard2 == source) {
+                createPowerupMessage(powerupCards.get(1), 1);
+            }
+            if (bPowerupCard3 == source) {
+                createPowerupMessage(powerupCards.get(2), 2);
+            }
+            if (bPowerupCard4 == source) {
+                createPowerupMessage(powerupCards.get(3), 3);
+            }
+        }catch (Exception e){
+            
         }
     }
 
@@ -2733,20 +2739,20 @@ public class Controller implements Initializable {
      * connect each powerup id with the powerup message and create a powerupmessage to send to the server
      * @param usedPowerup
      */
-    public void createPowerupMessage(PowerupCard usedPowerup) throws  Exception{
+    public void createPowerupMessage(PowerupCard usedPowerup, int position) throws  Exception{
         switch (usedPowerup.getID()){
             case 0: {
-
+                selectTargetingScope = position;
                 ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 1: {
-                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.YELLOW);
+                selectTargetingScope = position;
                 ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 2: {
-                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.BLUE);
+                selectTargetingScope = position;
                 ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
@@ -3430,17 +3436,22 @@ public class Controller implements Initializable {
      * send Targeting scope message
      * @param event
      */
-    public void chooseTragetingAmmo(ActionEvent event, PowerupCard usedPowerup) {
-        if (rbRedAmmo.isSelected()) {
+    public void chooseTragetingAmmo(ActionEvent event,PowerupCard usedPowerup) {
 
-            ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.RED);
+        List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
+        if (rbRedAmmo.isSelected()) {
+            ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.RED);
+            selectTargetingScope = 5;
         }
 
         if (rbYellowAmmo.isSelected()) {
-
+            ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.YELLOW);
+            selectTargetingScope = 5;
         }
 
         if (rbBlueAmmo.isSelected()) {
+            ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.BLUE);
+            selectTargetingScope = 5;
 
         }
     }
