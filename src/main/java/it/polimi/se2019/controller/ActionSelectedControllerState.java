@@ -87,8 +87,14 @@ public class ActionSelectedControllerState extends StateController {
     @Override
     public void handlePlayer(int playerID) {
         try{
-            action.addPlayerTarget(playerID);
-            controller.addReceived();
+            if(gameHandler.getPlayerByID(playerID).getCell() != null){
+                action.addPlayerTarget(playerID);
+                controller.addReceived();
+            }
+            else{
+                errorString = PLAYER_NOT_PRESENT;
+            }
+
         }catch (WrongInputException e){
             errorString = e.getMessage();
         }

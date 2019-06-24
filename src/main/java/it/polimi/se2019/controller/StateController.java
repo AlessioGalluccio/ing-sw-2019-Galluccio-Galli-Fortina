@@ -35,6 +35,8 @@ public abstract class StateController {
     public static final String CANT_DO_ALREADY_RELOADED = "You have already reloaded. ";
     public static final String RELOAD_OR_PASS = "Reload another weapon or pass your turn. ";
 
+    public static final String PLAYER_NOT_PRESENT = "This player is not present on the map. ";
+
 
     protected Controller controller;
     protected GameHandler gameHandler;
