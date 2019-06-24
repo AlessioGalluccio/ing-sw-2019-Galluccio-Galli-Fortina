@@ -1,3 +1,3 @@
 side=SERVER
-timerWait=3
+timerWait=30
 timerTurn=500

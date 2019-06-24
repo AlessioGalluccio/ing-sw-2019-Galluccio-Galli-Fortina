@@ -21,40 +21,55 @@ public class FirstTurnState extends StateController {
     public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
     public static final String TOO_MANY_CARDS = "The player has already three cards. ";
 
-    private static StringAndMessage firstMessage =
+    private static final StringAndMessage firstMessage =
             new StringAndMessage(Identificator.CHARACTER_MESSAGE, CHARACTER_REQUEST);
-    private static StringAndMessage secondMessage =
+    private static final StringAndMessage secondMessage =
             new StringAndMessage(Identificator.DISCARD_POWERUP_MESSAGE, POWERUP_DISCARD_REQUEST);
 
+    /**
+     * constructor of FirstTurnState
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the game
+     */
     public FirstTurnState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
-        ArrayList<StringAndMessage> listExpectedMessages = new ArrayList<>();
-        listExpectedMessages.add(firstMessage);
-        listExpectedMessages.add(secondMessage);
-        controller.resetMessages();
-        controller.addMessageListExpected(listExpectedMessages);
-        this.playerAuthor = controller.getAuthor();
+        if(controller.getAuthor().getCharacter() == null){
+            ArrayList<StringAndMessage> listExpectedMessages = new ArrayList<>();
+            listExpectedMessages.add(firstMessage);
+            listExpectedMessages.add(secondMessage);
+            controller.resetMessages();
+            controller.addMessageListExpected(listExpectedMessages);
+            this.playerAuthor = controller.getAuthor();
 
-        //player picks up two powerup cards
-        PowerupDeck deck = gameHandler.getPowerupDeck();
-        try{
-            playerAuthor.addPowerupCard(deck.pick());
-            playerAuthor.addPowerupCard(deck.pick());
-        }catch (TooManyException e){
-            errorString = TOO_MANY_CARDS;
+            //player picks up two powerup cards
+            PowerupDeck deck = gameHandler.getPowerupDeck();
+            try{
+                playerAuthor.addPowerupCard(deck.pick());
+                playerAuthor.addPowerupCard(deck.pick());
+            }catch (TooManyException e){
+                errorString = TOO_MANY_CARDS;
+            }
+
+            //we immediately send a message to the player
+            if(errorString == null){
+                controller.getPlayerView().printFromController(CHARACTER_REQUEST);
+            }
+            else {
+                controller.getPlayerView().printFromController(errorString + CHARACTER_REQUEST);
+                errorString = null;
+            }
+
+            //I send the possible targets to the client
+            controller.getPlayerView().setPossibleCharacter(gameHandler.possibleCharacter());
+        }
+        else{
+            //the character is already selected. It happens if the player is disconnected after choosing the character,
+            // but before discarding the powerup
+            controller.resetMessages();
+            controller.addMessageListExpected(secondMessage);
+            controller.getPlayerView().printFromController(POWERUP_DISCARD_REQUEST);
         }
 
-        //we immediately send a message to the player
-        if(errorString == null){
-            controller.getPlayerView().printFromController(CHARACTER_REQUEST);
-        }
-        else {
-            controller.getPlayerView().printFromController(errorString + CHARACTER_REQUEST);
-            errorString = null;
-        }
-
-        //I send the possible targets to the client
-        controller.getPlayerView().setPossibleCharacter(gameHandler.possibleCharacter());
     }
 
     @Override

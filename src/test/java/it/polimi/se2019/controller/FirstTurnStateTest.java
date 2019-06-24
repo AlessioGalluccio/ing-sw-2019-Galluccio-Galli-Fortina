@@ -7,6 +7,7 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
 import it.polimi.se2019.view.ViewControllerMess.CellMessage;
@@ -38,10 +39,10 @@ public class FirstTurnStateTest {
 
     @Before
     public void setUp() throws Exception {
-        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 4);
+        authorPlayer = new Player("TonyStark", null, 2008);
+        targetPlayer1 = new Player("SteveRogers", null, 2011);
+        targetPlayer2 = new Player("Hulk", null, 3);
+        targetPlayer3 = new Player("Thor", null, 4);
 
         //we add the players to the game
         ArrayList<Player> players = new ArrayList<>();
@@ -73,6 +74,11 @@ public class FirstTurnStateTest {
         controller.update(null,characterMessage);
         System.out.println(playerView.getLastStringPrinted());
 
+        try {
+            authorPlayer.addPowerupCard(gameHandler.getPowerupCardByID(1));
+        } catch (TooManyException e) {
+            //shouldn't happen
+        }
         DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(authorPlayer.getPowerupCardList().get(0), authorPlayer.getID(), playerView);
         controller.update(null, discardPowerupMessage);
         System.out.println(playerView.getLastStringPrinted());
@@ -88,6 +94,12 @@ public class FirstTurnStateTest {
 
 
 
+    }
+
+    @Test
+    public void handleReconnection(){
+        controller.getState().handleReconnection(false);
+        assertTrue(controller.getState() instanceof NotYourTurnState);
     }
 
 }

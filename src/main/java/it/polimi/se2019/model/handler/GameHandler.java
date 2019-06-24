@@ -90,7 +90,10 @@ public class GameHandler extends Observable {
             }while(!orderPlayerList.get(turn).isConnected()); //If is disconnected, increment turn
             setNewTurn();
             Controller controller = getControllerByPlayer(orderPlayerList.get(turn));
-            if(firstTurn) {
+
+            //it's the first turn, or the player has disconnected during the spawn, so he doesn't have a position
+            //but he is not dead
+            if(firstTurn ||controller.getAuthor().getCell() == null) {
                 controller.setState(new FirstTurnState(controller, this));
             } else controller.setState(new EmptyControllerState(controller, this));
         }
