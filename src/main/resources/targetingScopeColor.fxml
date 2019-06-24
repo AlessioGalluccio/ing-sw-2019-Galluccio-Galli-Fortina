@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="346.0" prefWidth="223.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
+   <children>
+      <RadioButton fx:id="rbBlueAmmo" layoutX="91.0" layoutY="286.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="BLUE">
+         <toggleGroup>
+            <ToggleGroup fx:id="rbTragetingAmmo" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="rbYellowAmmo" layoutX="81.0" layoutY="192.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="YELLOW" toggleGroup="$rbTragetingAmmo" />
+      <RadioButton fx:id="rbRedAmmo" layoutX="93.0" layoutY="101.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="RED" toggleGroup="$rbTragetingAmmo" />
+      <ImageView fitHeight="56.0" fitWidth="43.0" layoutX="93.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Rammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="60.0" layoutX="91.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Yammo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="41.0" fitWidth="48.0" layoutX="91.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icon/Bammo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
