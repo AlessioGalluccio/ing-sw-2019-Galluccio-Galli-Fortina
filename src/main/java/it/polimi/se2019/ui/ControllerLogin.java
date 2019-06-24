@@ -85,6 +85,9 @@ public class ControllerLogin implements UiInterface {
     @FXML
     public Button login;
 
+    @FXML
+    public Button bshowMyMatchID;
+
     private boolean firstAgain = false;
 
     static List<Character> characters;
@@ -252,15 +255,25 @@ public class ControllerLogin implements UiInterface {
     public void disconnect(int matchID) {
         try {
             open("disconnected.fxml", "DISCONNECT", 405, 243);
+            FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource("disconnected.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("DISCONNECT");
+            primaryStage.setScene(new Scene(root, 405, 243));
+
+
+            primaryStage.show();
         }catch (Exception e){
 
         }
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                labelMatchId.setText("Match Id : " + clientView.getMatchId());
-            }
-        });
+    }
+
+    /**
+     * show to the player their match id
+     * @param event
+     */
+    public void showMyMatchID(ActionEvent event){
+        labelMatchId.setText("Match Id : " + clientView.getMatchId());
     }
 
     @Override

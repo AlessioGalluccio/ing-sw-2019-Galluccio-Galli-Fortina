@@ -44,6 +44,12 @@ public class Controller implements Initializable {
     //character button
     @FXML
     public Button bselectCharacter;
+    @FXML
+    public RadioButton rbBlueAmmo;
+    @FXML
+    public RadioButton rbRedAmmo;
+    @FXML
+    public RadioButton rbYellowAmmo;
 
     //true when all the skull are taken
     boolean isFrenzyTime = false;
@@ -2727,18 +2733,21 @@ public class Controller implements Initializable {
      * connect each powerup id with the powerup message and create a powerupmessage to send to the server
      * @param usedPowerup
      */
-    public void createPowerupMessage(PowerupCard usedPowerup){
+    public void createPowerupMessage(PowerupCard usedPowerup) throws  Exception{
         switch (usedPowerup.getID()){
             case 0: {
-                ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.RED);
+
+                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 1: {
                 ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.YELLOW);
+                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 2: {
                 ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.BLUE);
+                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 10: {
@@ -3415,5 +3424,24 @@ public class Controller implements Initializable {
      */
     public void showMatchID(String matchId){
         labelMatchID.setText("Match ID :" + matchId);
+    }
+
+    /**
+     * send Targeting scope message
+     * @param event
+     */
+    public void chooseTragetingAmmo(ActionEvent event, PowerupCard usedPowerup) {
+        if (rbRedAmmo.isSelected()) {
+
+            ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) usedPowerup, ColorRYB.RED);
+        }
+
+        if (rbYellowAmmo.isSelected()) {
+
+        }
+
+        if (rbBlueAmmo.isSelected()) {
+
+        }
     }
 }
