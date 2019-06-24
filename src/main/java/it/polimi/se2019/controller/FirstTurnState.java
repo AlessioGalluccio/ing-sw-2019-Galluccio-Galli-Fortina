@@ -33,14 +33,14 @@ public class FirstTurnState extends StateController {
      */
     public FirstTurnState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
+        this.playerAuthor = controller.getAuthor();
         if(controller.getAuthor().getCharacter() == null){
             ArrayList<StringAndMessage> listExpectedMessages = new ArrayList<>();
             listExpectedMessages.add(firstMessage);
             listExpectedMessages.add(secondMessage);
             controller.resetMessages();
             controller.addMessageListExpected(listExpectedMessages);
-            this.playerAuthor = controller.getAuthor();
-
+            
             //player picks up two powerup cards
             PowerupDeck deck = gameHandler.getPowerupDeck();
             try{
@@ -143,7 +143,7 @@ public class FirstTurnState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        if(!isCharacterSelected){
+        if(controller.getAuthor().getCharacter() == null){
             errorString = CANT_DO_THIS;
         }
         else{

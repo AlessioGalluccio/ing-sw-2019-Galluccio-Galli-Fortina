@@ -68,20 +68,17 @@ public class FirstTurnStateTest {
     @Test
     public void handleAction() {
         //TODO errore in ottenere l'azione, manca il metodo!!!
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
 
         CharacterMessage characterMessage = new CharacterMessage(1, authorPlayer.getID(),playerView);
         controller.update(null,characterMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(FirstTurnState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
 
-        try {
-            authorPlayer.addPowerupCard(gameHandler.getPowerupCardByID(1));
-        } catch (TooManyException e) {
-            //shouldn't happen
-        }
+
         DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(authorPlayer.getPowerupCardList().get(0), authorPlayer.getID(), playerView);
         controller.update(null, discardPowerupMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+        assertEquals(1, controller.getAuthor().getPowerupCardList().size());
 
         assertEquals(true, controller.getState() instanceof EmptyControllerState);
 
@@ -92,6 +89,29 @@ public class FirstTurnStateTest {
         assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
 
 
+    }
+
+    @Test
+    public void handleActionWithCharacterAlreadySelected() {
+        //TODO errore in ottenere l'azione, manca il metodo!!!
+
+        authorPlayer.setCharacter( new Character("IronMan", "yellow"));
+
+        controller.setState(new FirstTurnState(controller, gameHandler));
+        assertEquals(FirstTurnState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+
+        DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(authorPlayer.getPowerupCardList().get(0), authorPlayer.getID(), playerView);
+        controller.update(null, discardPowerupMessage);
+        assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+        assertEquals(1, controller.getAuthor().getPowerupCardList().size());
+
+        assertEquals(true, controller.getState() instanceof EmptyControllerState);
+
+        ActionMessage actionMessage = new ActionMessage(Identificator.MOVE,authorPlayer.getID(),playerView);
+        controller.update(null, actionMessage);
+        System.out.println(playerView.getLastStringPrinted());
+
+        assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
 
 
     }
