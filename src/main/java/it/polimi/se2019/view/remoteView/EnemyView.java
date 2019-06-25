@@ -93,16 +93,16 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     }
 
     public void handlePlayerMessage(Player enemy) {
-
-            this.nickname = enemy.getNickname();
-            this.ID = enemy.getID();
-            this.character = enemy.getCharacter();
-            first=false;
+        this.nickname = enemy.getNickname();
+        this.ID = enemy.getID();
+        this.character = enemy.getCharacter();
+        first=false;
         this.ammo = enemy.getAmmo();
-        this.mark = (ArrayList) enemy.getMark().getMarkReceived();
-        this.damage = (ArrayList<Player>) enemy.getDamage();
+        this.mark = (ArrayList<Player>) enemy.getMark().getMarkReceived();
+        this.damage = enemy.getDamage();
         this.skull = enemy.getSkull();
         this.powerup =  enemy.getPowerupCardList().size();
+        this.unloadedWeapon.clear();
         for(WeaponCard w : enemy.getWeaponCardList()) {
             if(!w.isReloaded()) this.unloadedWeapon.add(w);
         }
