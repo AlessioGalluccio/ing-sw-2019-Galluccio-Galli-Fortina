@@ -23,6 +23,12 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
+        <sonar.coverage.exclusions>
+            src/main/java/it/polimi/se2019/ui/*,
+            src/main/java/it/polimi/se2019/network/socket/*,
+            src/main/java/it/polimi/se2019/network/rmi/*
+        </sonar.coverage.exclusions>
+
 
         <sonar.host.url>http://localhost:9000/</sonar.host.url>
         <!--sonar.login>admin</sonar.login>

@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.StringAndMessage;
 
@@ -75,23 +74,6 @@ public abstract class WeaponCard implements Card {
     public boolean isReloaded(){
         return reload;
     }
-
-    /**
-     *
-     * @return A deep copy of correctMessages
-     */
-    public List<StringAndMessage> getCorrectMessages() {
-        return new ArrayList<>(correctMessages);  //basta una copia dell'array perchè StringAndMessage è immutabile
-    }
-
-    /**
-     * Set the fire mode chosen by the player for the very next shoot, it will used in order to fire
-     * @param fireModeChosen fire mode chosen by the player
-     */
-    public void setFireMode(FireMode fireModeChosen) {
-        this.fireModeChoosen = fireModeChosen;
-    }
-
     /**
      *
      * @return Deep copy of the fire mode list available with this weapon
@@ -118,7 +100,7 @@ public abstract class WeaponCard implements Card {
      * @param fireModeList fire modes to copy
      * @return deep copy of fireModeList
      */
-    protected List<FireMode> duplicateFireMode(List<FireMode> fireModeList) {
+    List<FireMode> duplicateFireMode(List<FireMode> fireModeList) {
         GsonBuilder g = new GsonBuilder()
                 .registerTypeAdapter(FireMode.class, new JsonAdapter<FireMode>())
                 .registerTypeAdapter(Target.class, new JsonAdapter<Target>());

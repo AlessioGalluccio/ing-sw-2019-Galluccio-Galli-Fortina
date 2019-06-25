@@ -2,7 +2,6 @@ package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
-import it.polimi.se2019.model.deck.firemodes.*;
 
 public class Identificator {
 
@@ -67,31 +66,5 @@ public class Identificator {
     public static int createFiremode(int weaponId, int fireModeID) {
         return weaponId*10 + fireModeID;
     }
-
-    //list of ID of Firemodes
-   /* public static final int CYBERBLADE_1 = 1;
-    public static final int CYBERBLADE_2 = 2;
-    public static final int CYBERBLADE_3 = 3;
-    public static final int ELECTROSCYTHE_1 = 4;
-    public static final int ELECTROSCYTHE_2 = 5;
-    public static final int FLAMETHROWER_1 = 6;
-    public static final int FLAMETHROWER_2 = 7;*/
-
-    //Sono salvati nel Json delle armi, non servono qui. Eliminiamo?
-
-
-
-
-
-
-    //Stesso methodo in GameHandler, usare quello che pesca gli ID dal json della armi
-
- /*   public static FireMode getFiremodeByID(int id){
-        switch(id){
-
-            default: throw new WrongIdRuntimeException(); //should not happen. Runtime Exception
-        }
-
-    }*/
 
 }
