@@ -118,7 +118,7 @@ public class MustRespawnControllerState extends StateController {
         errorString = respawnPlayerWithPowerup(controller.getAuthor(), powerupID);
         //if it's null, there are no errors. If it is, we don't change the state and we wait another message
         //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
-        if (errorString != null) {
+        if (errorString == null) {
             //the NotYourTurnState will do the gamehandler.nextTurn()
             gameHandler.removeJustDied(playerAuthor);
             controller.setState(new NotYourTurnState(controller, gameHandler, true));
@@ -144,7 +144,7 @@ public class MustRespawnControllerState extends StateController {
             errorString = null;
         }
         else{
-            stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
+            stringToPlayerView = POWERUP_DISCARD_REQUEST ;
         }
         return stringToPlayerView;
     }
