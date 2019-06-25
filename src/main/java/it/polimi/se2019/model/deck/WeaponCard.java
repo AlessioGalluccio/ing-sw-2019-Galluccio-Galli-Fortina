@@ -54,8 +54,9 @@ public abstract class WeaponCard implements Card {
      * @return A copy of WeaponCard's reload cost
      */
     public List<ColorRYB> getReloadCost() {
-        ArrayList<ColorRYB> reloadCost = new ArrayList<>(ammoNotGranted);
+        ArrayList<ColorRYB> reloadCost = new ArrayList<>();
         reloadCost.add(ammoGranted);
+        if(ammoNotGranted!=null) reloadCost.addAll(ammoNotGranted);
         return reloadCost;
     }
 
