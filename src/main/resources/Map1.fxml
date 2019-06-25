@@ -56,9 +56,9 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.0" prefWidth="589.0">
                      <children>
-                        <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
-                        <Button fx:id="bPowerupCard2" disable="true" layoutX="140.0" layoutY="3.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
-                        <Button fx:id="bPowerupCard3" disable="true" layoutX="279.0" layoutY="1.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
+                        <Button fx:id="bPowerupCard1" disable="true" layoutY="2.0" mnemonicParsing="false" onAction="#usePowerup" prefHeight="195.0" prefWidth="120.0" />
+                        <Button fx:id="bPowerupCard2" disable="true" layoutX="140.0" layoutY="3.0" mnemonicParsing="false" onAction="#usePowerup" prefHeight="195.0" prefWidth="120.0" />
+                        <Button fx:id="bPowerupCard3" disable="true" layoutX="279.0" layoutY="1.0" mnemonicParsing="false" onAction="#usePowerup" prefHeight="195.0" prefWidth="120.0" />
                         <ImageView fx:id="imPowerupCard1" disable="true" fitHeight="192.0" fitWidth="120.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imPowerupCard2" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="140.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imPowerupCard3" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="279.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
@@ -66,7 +66,7 @@
                         <Button fx:id="bDiscardPowerup2" layoutX="229.0" layoutY="4.0" mnemonicParsing="false" onAction="#discardPowerup" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bDiscardPowerup3" layoutX="368.0" layoutY="2.0" mnemonicParsing="false" onAction="#discardPowerup" prefHeight="25.0" prefWidth="31.0" />
                         <ImageView fx:id="imPowerupCard4" disable="true" fitHeight="192.0" fitWidth="120.0" layoutX="419.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="bPowerupCard4" disable="true" layoutX="419.0" layoutY="1.0" mnemonicParsing="false" prefHeight="195.0" prefWidth="120.0" />
+                        <Button fx:id="bPowerupCard4" disable="true" layoutX="419.0" layoutY="1.0" mnemonicParsing="false" onAction="#usePowerup" prefHeight="195.0" prefWidth="120.0" />
                         <Button fx:id="bDiscardPowerup4" layoutX="512.0" layoutY="2.0" mnemonicParsing="false" onAction="#discardPowerup" prefHeight="25.0" prefWidth="31.0" />
                         <ImageView fx:id="imTrashP1" fitHeight="25.0" fitWidth="31.0" layoutX="92.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -190,18 +190,18 @@
                            </image></ImageView>
                         <ImageView fx:id="enemy1Actions" fitHeight="120.0" fitWidth="51.0" layoutX="53.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imEnemyCharacter1" fitHeight="120.0" fitWidth="437.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage5" fitHeight="22.0" fitWidth="15.0" layoutX="242.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage6" fitHeight="22.0" fitWidth="15.0" layoutX="266.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage7" fitHeight="22.0" fitWidth="15.0" layoutX="291.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="319.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="344.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="372.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy1Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="398.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage0" fitHeight="27.0" fitWidth="20.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage1" fitHeight="27.0" fitWidth="20.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage2" fitHeight="27.0" fitWidth="20.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage3" fitHeight="27.0" fitWidth="20.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage4" fitHeight="27.0" fitWidth="20.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage5" fitHeight="27.0" fitWidth="20.0" layoutX="242.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage6" fitHeight="27.0" fitWidth="20.0" layoutX="266.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage7" fitHeight="27.0" fitWidth="20.0" layoutX="291.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage8" fitHeight="27.0" fitWidth="20.0" layoutX="319.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage9" fitHeight="27.0" fitWidth="20.0" layoutX="344.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage10" fitHeight="27.0" fitWidth="20.0" layoutX="372.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy1Damage11" fitHeight="27.0" fitWidth="20.0" layoutX="398.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1mark12" fitHeight="35.0" fitWidth="30.0" layoutX="94.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1mark11" fitHeight="35.0" fitWidth="30.0" layoutX="124.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy1mark10" fitHeight="35.0" fitWidth="30.0" layoutX="154.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
@@ -246,18 +246,18 @@
                            </image></ImageView>
                         <ImageView fx:id="enemy2Actions" fitHeight="120.0" fitWidth="51.0" layoutX="53.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imEnemyCharacter2" fitHeight="120.0" fitWidth="442.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage5" fitHeight="22.0" fitWidth="15.0" layoutX="242.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage6" fitHeight="22.0" fitWidth="15.0" layoutX="266.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage7" fitHeight="22.0" fitWidth="15.0" layoutX="291.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="319.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="344.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="372.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy2Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="398.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage0" fitHeight="27.0" fitWidth="20.0" layoutX="105.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage1" fitHeight="27.0" fitWidth="20.0" layoutX="131.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage2" fitHeight="27.0" fitWidth="20.0" layoutX="161.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage3" fitHeight="27.0" fitWidth="20.0" layoutX="187.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage4" fitHeight="27.0" fitWidth="20.0" layoutX="212.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage5" fitHeight="27.0" fitWidth="20.0" layoutX="242.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage6" fitHeight="27.0" fitWidth="20.0" layoutX="266.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage7" fitHeight="27.0" fitWidth="20.0" layoutX="291.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage8" fitHeight="27.0" fitWidth="20.0" layoutX="319.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage9" fitHeight="27.0" fitWidth="20.0" layoutX="344.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage10" fitHeight="27.0" fitWidth="20.0" layoutX="372.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy2Damage11" fitHeight="27.0" fitWidth="20.0" layoutX="398.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2mark12" fitHeight="35.0" fitWidth="30.0" layoutX="76.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2mark11" fitHeight="35.0" fitWidth="30.0" layoutX="112.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy2mark10" fitHeight="35.0" fitWidth="30.0" layoutX="142.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
@@ -302,18 +302,18 @@
                            </image></ImageView>
                         <ImageView fx:id="enemy3Actions" fitHeight="120.0" fitWidth="51.0" layoutX="53.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imEnemyCharacter3" fitHeight="120.0" fitWidth="438.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="100.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="126.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="156.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="182.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="207.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage5" fitHeight="22.0" fitWidth="15.0" layoutX="237.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage6" fitHeight="22.0" fitWidth="15.0" layoutX="261.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage7" fitHeight="22.0" fitWidth="15.0" layoutX="286.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="314.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="339.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="367.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy3Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="393.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage0" fitHeight="25.0" fitWidth="20.0" layoutX="100.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage1" fitHeight="25.0" fitWidth="20.0" layoutX="126.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage2" fitHeight="25.0" fitWidth="20.0" layoutX="156.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage3" fitHeight="25.0" fitWidth="20.0" layoutX="182.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage4" fitHeight="25.0" fitWidth="20.0" layoutX="207.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage5" fitHeight="25.0" fitWidth="20.0" layoutX="237.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage6" fitHeight="25.0" fitWidth="20.0" layoutX="261.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage7" fitHeight="25.0" fitWidth="20.0" layoutX="286.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage8" fitHeight="25.0" fitWidth="20.0" layoutX="314.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage9" fitHeight="25.0" fitWidth="20.0" layoutX="339.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage10" fitHeight="25.0" fitWidth="20.0" layoutX="367.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy3Damage11" fitHeight="25.0" fitWidth="20.0" layoutX="393.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3mark12" fitHeight="35.0" fitWidth="30.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3mark11" fitHeight="35.0" fitWidth="30.0" layoutX="102.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy3mark10" fitHeight="35.0" fitWidth="30.0" layoutX="132.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
@@ -358,18 +358,18 @@
                            </image></ImageView>
                         <ImageView fx:id="enemy4Actions" fitHeight="120.0" fitWidth="51.0" layoutX="53.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imEnemyCharacter4" fitHeight="120.0" fitWidth="437.0" layoutX="91.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage0" fitHeight="22.0" fitWidth="15.0" layoutX="101.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage1" fitHeight="22.0" fitWidth="15.0" layoutX="128.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage2" fitHeight="22.0" fitWidth="15.0" layoutX="157.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage3" fitHeight="22.0" fitWidth="15.0" layoutX="183.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage4" fitHeight="22.0" fitWidth="15.0" layoutX="208.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage5" fitHeight="22.0" fitWidth="15.0" layoutX="238.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage6" fitHeight="22.0" fitWidth="15.0" layoutX="262.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage7" fitHeight="22.0" fitWidth="15.0" layoutX="287.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage8" fitHeight="22.0" fitWidth="15.0" layoutX="315.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage9" fitHeight="22.0" fitWidth="15.0" layoutX="340.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage10" fitHeight="22.0" fitWidth="15.0" layoutX="368.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="enemy4Damage11" fitHeight="22.0" fitWidth="15.0" layoutX="394.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage0" fitHeight="25.0" fitWidth="20.0" layoutX="101.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage1" fitHeight="25.0" fitWidth="20.0" layoutX="128.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage2" fitHeight="25.0" fitWidth="20.0" layoutX="157.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage3" fitHeight="25.0" fitWidth="20.0" layoutX="183.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage4" fitHeight="25.0" fitWidth="20.0" layoutX="208.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage5" fitHeight="25.0" fitWidth="20.0" layoutX="238.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage6" fitHeight="25.0" fitWidth="20.0" layoutX="262.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage7" fitHeight="25.0" fitWidth="20.0" layoutX="287.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage8" fitHeight="25.0" fitWidth="20.0" layoutX="315.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage9" fitHeight="25.0" fitWidth="20.0" layoutX="340.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage10" fitHeight="25.0" fitWidth="20.0" layoutX="368.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="enemy4Damage11" fitHeight="25.0" fitWidth="20.0" layoutX="394.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy4mark12" fitHeight="35.0" fitWidth="30.0" layoutX="69.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy4mark11" fitHeight="35.0" fitWidth="30.0" layoutX="98.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="enemy4mark10" fitHeight="35.0" fitWidth="30.0" layoutX="128.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
