@@ -76,7 +76,7 @@ public class Thor_1Test {
         targetPlayer1.setPosition(gameHandler.getCellByCoordinate(2,1)); //visible by author
         targetPlayer2.setPosition(gameHandler.getCellByCoordinate(0,2)); //visible by target 1 but not author
         targetPlayer3.setPosition(gameHandler.getCellByCoordinate(1,1)); //visible by target 2 but not target 1 or author
-        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,1)); //not used
+        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,2)); //not visible by anyone
 
 
         authorPlayer.setAmmoBag(3,3,3);
@@ -293,6 +293,60 @@ public class Thor_1Test {
 
         controller.update(null,playerMessage2);
         assertEquals(Thor_1.CANT_DO + Thor_1.SELECT_TARGET_OPTIONAL_2, playerView.getLastStringPrinted());
+
+    }
+
+    @Test
+    public void fireNegativeFirstTargetNotVisible() throws Exception {
+        assertEquals(Thor_1.SELECT_TARGET_NORMAL, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage4 = new PlayerMessage(targetPlayer4.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage4);
+        assertEquals(Thor_1.NOT_VISIBLE_BY_AUTHOR + Thor_1.SELECT_TARGET_NORMAL, playerView.getLastStringPrinted());
+
+    }
+
+    @Test
+    public void fireNegativeSecondTargetNotVisible() throws Exception {
+        assertEquals(Thor_1.SELECT_TARGET_NORMAL, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage1 = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage1);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        OptionalMessage optionalMessage = new OptionalMessage(Identificator.FIRST_OPTIONAL, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+        assertEquals(Thor_1.SELECT_TARGET_OPTIONAL_1, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage4 = new PlayerMessage(targetPlayer4.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage4);
+        assertEquals(Thor_1.NOT_VISIBLE_BY_FIRST_TARGET + Thor_1.SELECT_TARGET_OPTIONAL_1, playerView.getLastStringPrinted());
+
+    }
+
+    @Test
+    public void fireNegativeThirdTargetNotVisible() throws Exception {
+        assertEquals(Thor_1.SELECT_TARGET_NORMAL, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage1 = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage1);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        OptionalMessage optionalMessage = new OptionalMessage(Identificator.FIRST_OPTIONAL, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage);
+        assertEquals(Thor_1.SELECT_TARGET_OPTIONAL_1, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage2);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        OptionalMessage optionalMessage2 = new OptionalMessage(Identificator.SECOND_OPTIONAL, authorPlayer.getID(), playerView);
+        controller.update(null, optionalMessage2);
+        assertEquals(Thor_1.SELECT_TARGET_OPTIONAL_2, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage4 = new PlayerMessage(targetPlayer4.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage4);
+        assertEquals(Thor_1.NOT_VISIBLE_BY_SECOND_TARGET+ Thor_1.SELECT_TARGET_OPTIONAL_2, playerView.getLastStringPrinted());
 
     }
 
