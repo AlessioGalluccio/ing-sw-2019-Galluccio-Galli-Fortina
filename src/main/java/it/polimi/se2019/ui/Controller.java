@@ -66,8 +66,11 @@ public class Controller implements Initializable {
     public Label labelMatchID;
 
     //imageview of players' posizion on map
+    @FXML
     public ImageView imPlayer1Cell00;
+    @FXML
     public ImageView imPlayer2Cell00;
+    @FXML
     public ImageView imPlayer3Cell00;
     public ImageView imPlayer4Cell00;
     public ImageView imPlayer5Cell00;
@@ -933,8 +936,8 @@ public class Controller implements Initializable {
 
         //update players position after disconnection
         Cell[][] cells = ControllerLogin.mapView.getCells();
-        for(int i=0; i<3; i++){
-            for(int j=0; j<2; j++){
+        for(int i=0; i<4; i++){
+            for(int j=0; j<3; j++){
                 updatePlayersPosition(cells[i][j]);
             }
         }
@@ -2730,7 +2733,7 @@ public class Controller implements Initializable {
                 createPowerupMessage(powerupCards.get(3), 3);
             }
         }catch (Exception e){
-            
+
         }
     }
 
@@ -2740,7 +2743,7 @@ public class Controller implements Initializable {
      * @param usedPowerup
      */
     public void createPowerupMessage(PowerupCard usedPowerup, int position) throws  Exception{
-        switch (usedPowerup.getID()){
+        switch (usedPowerup.getIDtype()){
             case 0: {
                 selectTargetingScope = position;
                 ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
@@ -3304,7 +3307,7 @@ public class Controller implements Initializable {
 
 
     /**
-     * update players position on gui's cell
+     * update players t on gui's cell
      * @param cell
      */
     public void updatePlayersPosition(Cell cell){
