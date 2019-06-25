@@ -336,6 +336,8 @@ class ParserCLI {
         } catch (IllegalArgumentException e) {
             cli.println(command[0] + " is not a color.\n" +
                     "Please, retry with blue, red or yellow.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            cli.println("Please, retry specifying the color of the ammo you wanna use.");
         }
     }
 
@@ -577,7 +579,7 @@ class ParserCLI {
         cli.printLine();
         cli.println("Adrenaline by Cranio Creations\n");
         cli.printf("ACTION [MOVE | GRAB | SHOOT]", "Create the action specified.");
-        cli.printf("POWERUP [NEWTON | TARGETING SCOPE | TELEPORTER | TAGBACK GRENADE] [RED | BLUE | YELLOW]",
+        cli.printf("POWERUP [NEWTON | TARGETING SCOPE | TELEPORTER | TAGBACK GRENADE] [RED | BLUE | YELLOW] *",
                 "Use one of yours powerups of the type and color specified.");
         cli.printf("PLAYER [Enemy's name]", "Select a player, use this command for shooting or moving someone.");
         cli.printf("CELL [X],[Y]", "Select the cell with X,Y as coordinate." +
@@ -597,6 +599,8 @@ class ParserCLI {
         cli.printf("CHARACTER [Relative number]", "Select a character from the list." +
                 " If you don't have the list you should'nt use it.");
         cli.printf("EXIT", "Quit the game.");
+        cli.printLine();
+        cli.println("* For TARGETING SCOPE indicate also the color of the ammo you wanna use.");
         cli.printLine();
     }
 
@@ -619,6 +623,7 @@ class ParserCLI {
         for(WeaponCard weapon : view.getPlayerCopy().getWeaponCardList()) {
             if(weapon.isReloaded()) s += weapon.getName() + " ";
         }
+        if(s.equalsIgnoreCase("")) s = "- No weapon loaded -";
         return s;
     }
 
