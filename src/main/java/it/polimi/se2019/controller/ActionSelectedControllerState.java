@@ -149,7 +149,7 @@ public class ActionSelectedControllerState extends StateController {
             //no addReceived, because no StringAndMessage
 
         }catch(WrongInputException e){
-            errorString = ALREADY_SELECTED;;
+            errorString = e.getMessage();
 
         }catch(NotEnoughAmmoException e){
             errorString = NOT_ENOUGH;
