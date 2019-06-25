@@ -105,18 +105,33 @@ public class GameHandler extends Observable {
         }
     }
 
+    /**
+     * Set everything necessary for a new turn:
+     * - Reload of cell of the map;
+     * - Notify the user of the change of the turn
+     * - If is the case, set the frenzy
+     * - If is the case, end the game
+     */
     private void setNewTurn() {
         map.reloadAllCell();
         lastLap--;
-        if(skull==0) setFrenzy();
+        if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
         if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode
         else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
         getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
 
     }
 
+    /**
+     * If sudden death is not active, it switches the modality of the game in Frenzy mode
+     * Otherwise call endGame()
+     */
     private void setFrenzy() {
-        if(suddenDeath && lastLap<0) {
+        for(Player player : orderPlayerList) {
+            player.setFirstGroupFrenzy(orderPlayerList.indexOf(player) >= turn);
+        }
+
+        if(!suddenDeath && lastLap<0) {
             modality = new Frenzy();
             lastLap = playerConnected();
         }
@@ -134,15 +149,20 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * Called at the end of the game
+     * To call at the end of the game.
+     * Send to all user connected the ranking and delete the macth
      */
-    public void endGame() {
+    void endGame() {
         forwardAllViews(new RankingMessage(getRanking()));
         WaitingRoom.deleteMatch(this);
     }
 
     public int getMatchID() {
         return matchID;
+    }
+
+    public int getSkull() {
+        return skull;
     }
 
     /**
@@ -194,7 +214,6 @@ public class GameHandler extends Observable {
 
     /**
      * It generates an Action object with reference to this GameHandler
-     *
      * @param actionID the int ID of the action
      * @return
      */
@@ -204,7 +223,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * return all the players of the game
+     * Return all the players of the game
      * @return all the players in order
      */
     public List<Player> getOrderPlayerList() {
@@ -230,7 +249,6 @@ public class GameHandler extends Observable {
 
     /**
      * Return the card with that id
-     *
      * @param cardId card's id
      * @return the card with that id
      */
@@ -240,7 +258,6 @@ public class GameHandler extends Observable {
 
     /**
      * Return the card with that id
-     *
      * @param cardId card's id
      * @return the card with that id
      */
@@ -250,7 +267,6 @@ public class GameHandler extends Observable {
 
     /**
      * Return the card with that id
-     *
      * @param cardId card's id
      * @return the card with that id
      */
@@ -259,7 +275,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * returns the Map of the game
+     * Returns the Map of the game
      * @return Map of the game
      */
     public Map getMap() {
@@ -267,7 +283,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * returns the powerup deck of the game
+     * Returns the powerup deck of the game
      * @return PowerupDeck of the game
      */
     public PowerupDeck getPowerupDeck() {
@@ -275,7 +291,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * returns the weapon deck of the game
+     * Returns the weapon deck of the game
      * @return WeaponDeck of the game
      */
     public WeaponDeck getWeaponDeck() {
@@ -317,7 +333,6 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * HELPER
      * Sort list of layer according to their frequency in that list
      * @param listToOrdinate list of player which you want to ordinate by damage
      * @return A list with the same element of the @param but sorted
@@ -364,7 +379,7 @@ public class GameHandler extends Observable {
      * @param doubleKill true if a player has killed more then one enemy in this turn
      * @param lastCash true if we are at the end of frenzy mode
      */
-    protected void cashPoint(Player whoDied, boolean doubleKill, boolean lastCash) {
+    void cashPoint(Player whoDied, boolean doubleKill, boolean lastCash) {
         List<Player> playerByDamage  = sortListByFrequency(whoDied.getDamage());
 
         if (whoDied.isFrenzyDeath()) {
@@ -432,7 +447,7 @@ public class GameHandler extends Observable {
      * At the end of the game each player receive points according to the killing he has done
      * This method calculate the points
      */
-    public void cashSkullBoardPoint() {
+    void cashSkullBoardPoint() {
         List<Player> skullBoardPlayer = new ArrayList<>();
 
         for(Death d : arrayDeath) {
@@ -457,7 +472,7 @@ public class GameHandler extends Observable {
      * If two player have the same point, win who had killed an enemy first
      * @return list of player in order by points
      */
-    public List<Player> getRanking() {
+    List<Player> getRanking() {
         List<Player> ranking = new ArrayList<>(orderPlayerList);
         List<Player> killer = new ArrayList<>();
 
@@ -477,6 +492,10 @@ public class GameHandler extends Observable {
         return ranking;
     }
 
+    /**
+     * Create a deep copy the death array
+     * @return a deep copy the death array
+     */
     public List<Death> cloneDeath() {
         Gson gson = new GsonBuilder()
                 .setExclusionStrategies(new SkinnyObjectExclusionStrategy())
@@ -512,8 +531,12 @@ public class GameHandler extends Observable {
         throw new IllegalArgumentException("There is no Controler linked to " + p.toString());
     }
 
-
-
+    /**
+     * Set player, playerView and controller of the same user all in one time
+     * @param p player to set
+     * @param playerView playerView to set
+     * @param controller controller to set
+     */
     public void setUp(Player p, PlayerView playerView, Controller controller) {
         if(orderPlayerList.size()<=5) {
             orderPlayerList.add(p);
@@ -602,7 +625,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * set the ConnectionState of the player
+     * Set the ConnectionState of the player
      * @param player the player
      * @param isConnected true if it's connected, false if not
      */
@@ -617,6 +640,10 @@ public class GameHandler extends Observable {
         }
     }
 
+    /**
+     * Calculate the number of players connected in this moment
+     * @return the number of players connected
+     */
     private int playerConnected() {
         int playerConnected = 0;
         for(Player player : orderPlayerList) {
@@ -634,11 +661,7 @@ public class GameHandler extends Observable {
         for(Player p : orderPlayerList) {
             if(p.getNickname().equals(nickname)) return !p.isConnected();
         }
-        return false;
-    }
-
-    public int getSkull() {
-        return skull;
+        throw new IllegalArgumentException("No player called " + nickname);
     }
 
     /**
@@ -661,6 +684,11 @@ public class GameHandler extends Observable {
         }
     }
 
+    /**
+     * Create a list with all characters which hasn't been assigned to some player yet.
+     * In oder words, create a list with all character free.
+     * @return A list with possible target to choose by the player
+     */
     public List<Character> possibleCharacter() {
         List<Integer> charactersTaken = new LinkedList<>();
         for(Player player : orderPlayerList) {

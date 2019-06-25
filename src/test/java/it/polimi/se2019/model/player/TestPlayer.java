@@ -1,8 +1,6 @@
 package it.polimi.se2019.model.player;
 
-import it.polimi.se2019.model.deck.NewtonCard;
-import it.polimi.se2019.model.deck.PointCard;
-import it.polimi.se2019.model.deck.TeleporterCard;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.*;
 import org.junit.Before;
@@ -21,10 +19,12 @@ public class TestPlayer {
     private int MAX_AMMO = 3;
 
     @Before
-    public void initTest() {
+    public void setUp() throws Exception {
         player = new Player("Nikola Tesla", new Character("CoilMan", "yellow"), 1856);
         enemy = new Player("Thomas Edison", new Character("LightBulbMan", "white"), 1931);
         enemy_2 = new Player("JP Morgan", new Character("MoneyMan", "green"), 1913);
+
+        player.setAmmoBag(2,2,2);
 
         ArrayList<Player> players = new ArrayList<>();
         players.add(player);
@@ -251,6 +251,110 @@ public class TestPlayer {
         player.addPowerupCard(new TeleporterCard(ColorRYB.BLUE, 0,0));
         player.addPowerupCard(new NewtonCard(ColorRYB.RED, 0,0));
         System.out.print(player.toString());
+    }
+
+    @Test (expected = TooManyException.class)
+    public void addWeaponTest() throws TooManyException {
+        player.addWeaponCard(gameHandler.getWeaponCardByID(1));
+        player.addWeaponCard(gameHandler.getWeaponCardByID(2));
+        player.addWeaponCard(gameHandler.getWeaponCardByID(3));
+        assertEquals(3, player.getWeaponCardList().size());
+        player.addWeaponCard(gameHandler.getWeaponCardByID(4));
+        assertEquals(3, player.getWeaponCardList().size());
+    }
+
+    @Test
+    public void loadWeapon() throws TooManyException, NotEnoughAmmoException, NotPresentException, WeaponIsLoadedException {
+        WeaponCard weapon = gameHandler.getWeaponCardByID(4);
+        player.addWeaponCard(weapon);
+        weapon.unload();
+        player.loadWeapon(4);
+        assertEquals(1, player.getAmmo().getYellowAmmo());
+        assertEquals(0, player.getAmmo().getRedAmmo());
+        assertEquals(2, player.getAmmo().getBlueAmmo());
+    }
+
+    @Test (expected = WeaponIsLoadedException.class)
+    public void loadWeaponReloaded() throws TooManyException, NotEnoughAmmoException, NotPresentException, WeaponIsLoadedException {
+        player.addWeaponCard(gameHandler.getWeaponCardByID(4));
+        player.loadWeapon(4);
+    }
+
+    @Test (expected = NotPresentException.class)
+    public void loadWeaponNotPresent() throws TooManyException, NotEnoughAmmoException, NotPresentException, WeaponIsLoadedException {
+        player.addWeaponCard(gameHandler.getWeaponCardByID(4));
+        player.loadWeapon(7);
+    }
+
+    @Test (expected = NotEnoughAmmoException.class)
+    public void loadWeaponNotAmmo() throws TooManyException, NotPresentException, WeaponIsLoadedException, NotEnoughAmmoException {
+        WeaponCard weapon = gameHandler.getWeaponCardByID(4);
+        player.addWeaponCard(weapon);
+        weapon.unload();
+        player.setAmmoBag(1,1,2);
+        try {
+            player.loadWeapon(4);
+        } catch (NotEnoughAmmoException e) {
+            //test ammo not changed
+            assertEquals(1, player.getAmmo().getYellowAmmo());
+            assertEquals(1, player.getAmmo().getRedAmmo());
+            assertEquals(2, player.getAmmo().getBlueAmmo());
+            throw new NotEnoughAmmoException();
+        }
+    }
+
+    @Test
+    public void discardPowerup() throws Exception {
+        PowerupCard card_1 = gameHandler.getPowerupCardByID(1);
+        PowerupCard card_2 = gameHandler.getPowerupCardByID(2);
+
+        player.setAmmoBag(0,0,0);
+
+        player.addPowerupCard(card_2);
+        player.addPowerupCard(card_1);
+        player.discardCard(card_1, true);
+        assertFalse(player.getPowerupCardList().contains(card_1));
+        assertTrue(player.getPowerupCardList().contains(card_2));
+        switch (card_1.getColor()) {
+            case "BLUE":
+                assertFalse(player.canPayAmmo(new AmmoBag(0,0,1)));
+                break;
+            case "RED":
+                assertFalse(player.canPayAmmo(new AmmoBag(1,0,0)));
+                break;
+            case "YELLOW":
+                assertFalse(player.canPayAmmo(new AmmoBag(0,1,0)));
+                break;
+        }
+
+        player.addPowerupCard(card_1);
+        player.discardCard(card_1, false);
+        assertFalse(player.getPowerupCardList().contains(card_1));
+        assertTrue(player.getPowerupCardList().contains(card_2));
+        switch (card_1.getColor()) {
+            case "BLUE":
+                assertTrue(player.canPayAmmo(new AmmoBag(0,0,1)));
+                break;
+            case "RED":
+                assertTrue(player.canPayAmmo(new AmmoBag(1,0,0)));
+                break;
+            case "YELLOW":
+                assertTrue(player.canPayAmmo(new AmmoBag(0,1,0)));
+                break;
+        }
+    }
+
+    @Test (expected = NotPresentException.class)
+    public void discardPowerupNotPresent() throws Exception {
+        PowerupCard card_1 = gameHandler.getPowerupCardByID(1);
+        PowerupCard card_2 = gameHandler.getPowerupCardByID(2);
+        PowerupCard card_3 = gameHandler.getPowerupCardByID(3);
+
+        player.setAmmoBag(0,0,0);
+
+        player.addPowerupCard(card_1);
+        player.addPowerupCard(card_2);
+        player.discardCard(card_3, true);
     }
 
 }

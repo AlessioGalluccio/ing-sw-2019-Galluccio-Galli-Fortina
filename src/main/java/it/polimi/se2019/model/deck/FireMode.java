@@ -8,6 +8,7 @@ import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 
@@ -28,24 +29,24 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected transient Player author;
     protected transient PlayerView playerView;
 
-    private static final String NOT_PRESENT = "Can't do more damage to this player";
-    private static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
-    private static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
-    private static final String KILLED = "You killed ths Player";
+    public static final String NOT_PRESENT = "Can't do more damage to this player";
+    public static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
+    public static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
+    public static final String KILLED = "You killed ths Player";
 
-    private static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
-    private static final String CANT_PAY = "You don't have enough Ammo for this. ";
+    public static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
+    public static final String CANT_PAY = "You don't have enough Ammo for this. ";
 
-    protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
+    public static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
 
     //common used in firemodes
-    protected static final String CANT_DO = "You can't do this.  ";
-    protected static final String CELL_NOT_PRESENT = "This cell is not present on the map.";
-    protected static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
-    protected static final String NOT_VISIBLE = "Error, this player is not visible. ";
-    protected static final String CANT_DO_FIRE = "You can't do fire now. ";
-    private static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
-    private static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
+    public static final String CANT_DO = "You can't do this.  ";
+    public static final String CELL_NOT_PRESENT = "This cell is not present on the map.";
+    public static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
+    public static final String NOT_VISIBLE = "Error, this player is not visible. ";
+    public static final String CANT_DO_FIRE = "You can't do fire now. ";
+    public static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
+    public static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
 
 
     public GameHandler getGameHandler() {
@@ -172,7 +173,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             throw new NotEnoughAmmoException(CANT_PAY);
         }
         else{
-            boolean canTargeting = false;
+            //boolean canTargeting = false;
             List<Player> list = shoot.getCanBeTargetedPlayers();
             if(list.isEmpty()){
                 throw new WrongInputException(NO_TARGET_TARGETING);
@@ -289,31 +290,6 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     }
 
-    /**
-     * send all players who are in the same cell of the author to the PlayerView only if there is at least one
-     * @param alreadySelected ArrayList of all targets already selected
-     * @return false if there is no target (and it doesn't send them), otherwise true and it sends them
-     */
-    protected boolean sendPlayersInYourCell(ArrayList<Player> alreadySelected){
-        Cell commonCell = author.getCell();
-        ArrayList<Player> listTarget = new ArrayList<>();
-        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && playerOfGame.getCell().equals(commonCell)
-                    && (alreadySelected == null || !alreadySelected.contains(playerOfGame))){
-
-                listTarget.add(playerOfGame);
-
-            }
-        }
-        if(listTarget.isEmpty()){
-            return false;
-        }
-        else{
-            sendPossibleTargetsPlayers(listTarget);
-            return true;
-        }
-    }
-
 
     /**
      * call it when you abort the firemode
@@ -340,6 +316,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         try{
             author.payAmmoCost(shoot.getCost());
             shoot.getWeapon().unload();
+            author.notifyObservers(new PlayerModelMessage(author.clone()));
             //endFiremode();
         }catch (NotEnoughAmmoException e){
             //it should never happen, because cost must always be controlled before
@@ -347,7 +324,9 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         }
     }
 
-    public void helperTargetingFiremodeNotVisibleTarget(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void helperTargetingFiremodeNotVisibleTarget(int targetingCardID, AmmoBag cost) throws WrongInputException,
+            NotPresentException, NotEnoughAmmoException {
+
         PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
         if(shoot.getTargetingScopeCards().contains(card)){
             throw new WrongInputException();
@@ -372,8 +351,8 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             if(!canTargeting){
                 throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
             }
-            else{
-                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
+            else {
+                shoot.addTargetingScopeFromFireMode(card);
                 shoot.addCost(cost);
             }
         }

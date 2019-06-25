@@ -189,7 +189,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * return a copy of the Cell where the player is
+     * Return a copy of the Cell where the player is
      * @return a copy of cellPosition
      */
     public Cell getCell(){
@@ -197,7 +197,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * returns a list for possible targets of Tagback granade
+     * Returns a list for possible targets of Tagback granade
      * @return a List of Players of possible targets of Tagback Granade
      */
     public List<Integer> getTargetsForTagBack() {
@@ -261,7 +261,6 @@ public class Player extends Observable implements Target, Serializable {
      * it respawns the player after death
      */
     public void resurrection(CellSpawn cellSpawn) {
-        //TODO exception if cell is not CellSpawn
         skull += 1;
         bonusPowerup = false;
         setPosition(cellSpawn);
@@ -341,13 +340,16 @@ public class Player extends Observable implements Target, Serializable {
         //notify done by FireMode when finish to fire
     }
 
+    /**
+     * Set all the damage of the player to zero
+     */
     public void resetDamage() {
         damage.clear();
         //notify done by resurrection
     }
 
     /**
-     * reset the targets for tagBack grenade. Call it at the start of the player of the turn
+     * Reset the targets for tagBack grenade. Call it at the start of the player of the turn
      */
     public void resetTargetsForTagBack(){
         targetsForTagBack = new ArrayList<>();
@@ -366,7 +368,6 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * HELPER
      * Add a mark to my list of markDone
      * @param enemyToMark the enemy I have marked
      * @throws TooManyException if you have already marked this enemy three times
@@ -404,6 +405,7 @@ public class Player extends Observable implements Target, Serializable {
                         weaponCard.reload();
                         this.payAmmoCost(cost);
                         notifyObservers(new PlayerModelMessage(this.clone()));
+                        return;
                     }
                     else{
                         throw new NotEnoughAmmoException();
@@ -416,9 +418,11 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * discard a Powerup card (not during spawn). It adds the ammo in the temporary ammo. If not used for a cost in the turn, the ammo will vanish
+     * Discard a Powerup card.
+     * If it's discarded explicity by the player in order to gain the corresponding ammo, it adds the ammo in the temporary ammo.
+     * If not used for a cost in the turn, the ammo will vanish.
      * @param powerupCard the card which has to be discarded
-     * @param isRespawnOrUse true if it's a respawn or it is used(don't add temporary ammo), false if not (add temporary ammo)
+     * @param isRespawnOrUse true if it's a respawn or it is used (don't add temporary ammo), false if not (add temporary ammo)
      * @throws NotPresentException if the card is not possessed by the Player
      */
     public void discardCard(PowerupCard powerupCard, boolean isRespawnOrUse) throws NotPresentException {
@@ -441,7 +445,7 @@ public class Player extends Observable implements Target, Serializable {
                             tempBlue++;
                             break;
                     }
-                    tempAmmo = new AmmoBag(tempRed,tempYellow, tempBlue);
+                    tempAmmo = new AmmoBag(tempRed, tempYellow, tempBlue);
                 }
 
                 card.discard();
@@ -454,7 +458,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * discard a weapon
+     * Discard a weapon
      * @param weaponToDiscard the weapon to discard
      * @throws NotPresentException if the player doesn't have the card
      */
@@ -528,7 +532,12 @@ public class Player extends Observable implements Target, Serializable {
         }
     }
 
-
+    /**
+     * Check if the player can be see by another on the specific map
+     * @param onThisMap The map on which the two player are
+     * @param shooter The enemy who could see this player
+     * @return True if it's visible, false otherwise.
+     */
     public boolean isVisibleBy(Map onThisMap, Player shooter){
         Cell enemyCell = shooter.cellPosition;
         //it's the same player
@@ -574,6 +583,12 @@ public class Player extends Observable implements Target, Serializable {
         this.isConnected = isConnected;
     }
 
+    /**
+     * Compare the player based on the ID, the nickname and the character
+     * Character could be null
+     * @param o The other player to compare
+     * @return True if the two player has the same ID, nickname and character. False otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -591,7 +606,6 @@ public class Player extends Observable implements Target, Serializable {
 
 
     /**
-     * HELPER
      * Used by clone to set the copy of mark
      * @param markClone
      */
@@ -600,7 +614,6 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * HELPER
      * Used by clone to set the copy damage
      * To add a damage by a enemy use receiveDamageBy()
      * @param damageCopy
@@ -648,6 +661,11 @@ public class Player extends Observable implements Target, Serializable {
         return clone;
     }
 
+    /**
+     * String the full player, representing each attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return The representation of the player
+     */
     @Override
     public String toString() {
         String s = nickname;
@@ -669,15 +687,7 @@ public class Player extends Observable implements Target, Serializable {
         }
         s+="\n  Points: " + points.getSum();
         s+="\n  Ammo: ";
-        for(int i=0; i< ammoBag.getBlueAmmo(); i++) {
-            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "✚";
-        }
-        for(int i=0; i< ammoBag.getRedAmmo(); i++) {
-            s+= ConsoleColor.RED_BOLD_BRIGHT+ "✚";
-        }
-        for(int i=0; i< ammoBag.getYellowAmmo(); i++) {
-            s+= ConsoleColor.YELLOW_BOLD+ "✚";
-        }
+        s+= ammoBag.toString();
         s+= ConsoleColor.RESET + "\n  Weapons: ";
         for(WeaponCard weapon : weaponCardList) {
             s+= weapon.getName();
@@ -692,8 +702,12 @@ public class Player extends Observable implements Target, Serializable {
         return s;
     }
 
+    /**
+     * Set the character of the player if it was never set before
+     * @param character The character to set
+     */
     public void setCharacter(Character character) {
-        this.character = character;
+        if(this.character==null) this.character = character;
         notifyObservers(new PlayerModelMessage(clone()));
     }
 

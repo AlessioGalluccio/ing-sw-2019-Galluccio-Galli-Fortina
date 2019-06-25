@@ -133,7 +133,7 @@ public class TractorBeam_2Test {
     @Test
     public void oneTargetTooDistant() {
         controller.update(null,
-                new PlayerMessage(4, authorPlayer.getID(), playerView));
+                new PlayerMessage(3, authorPlayer.getID(), playerView));
         assertEquals("The target you chose is too distant from you.\n" +
                 "Select a player up to two cells distant from you, even if you can't see it. ",
                 playerView.getLastStringPrinted());
