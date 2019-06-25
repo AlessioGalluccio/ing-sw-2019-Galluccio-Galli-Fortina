@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.handler;
 
+import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.firemodes.ElectroScythe_1;
 import it.polimi.se2019.model.deck.firemodes.ShockWave_2;
 import it.polimi.se2019.model.map.Cell;
@@ -7,6 +8,8 @@ import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,28 +17,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class GameHandlerTest {
 
     private GameHandler gameHandler;
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player thirdPlayer;
+    private Player fourthPlayer;
     private int FIRST_ID = 1;
     private int SECOND_ID = 2;
     private int THIRD_ID = 3;
 
     @Before
     public void setUp() {
-        Player firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), FIRST_ID);
-        Player secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
-        Player thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
-        Player fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
+        firstPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), FIRST_ID);
+        secondPlayer = new Player("SteveRogers", new Character("CapAmerica", "blue"), SECOND_ID);
+        thirdPlayer = new Player("PeterParker", new Character("SpiderMan", "red"), THIRD_ID);
+        fourthPlayer = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
 
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(firstPlayer);
-        players.add(secondPlayer);
-        players.add(thirdPlayer);
-        players.add(fourthPlayer);
+        gameHandler = new GameHandler(99);
 
-        gameHandler = new GameHandler(players, 5);
+        Server serverMock = mock(Server.class);
+
+        PlayerView firstPlayerView = new PlayerView(serverMock, firstPlayer);
+        PlayerView secondPlayerView = new PlayerView(serverMock, secondPlayer);
+        PlayerView thirdPlayerView = new PlayerView(serverMock, thirdPlayer);
+        PlayerView fourthPlayerView = new PlayerView(serverMock, fourthPlayer);
+        gameHandler.setUp(firstPlayer, firstPlayerView, new Controller(gameHandler, firstPlayer, firstPlayerView));
+        gameHandler.setUp(secondPlayer, secondPlayerView, new Controller(gameHandler, secondPlayer, secondPlayerView));
+        gameHandler.setUp(thirdPlayer, thirdPlayerView, new Controller(gameHandler, thirdPlayer, thirdPlayerView));
+        gameHandler.setUp(fourthPlayer, fourthPlayerView, new Controller(gameHandler, fourthPlayer, fourthPlayerView));
+
+        gameHandler.setSkull(5);
+        gameHandler.setMap(2);
     }
 
     @Test
@@ -53,19 +69,6 @@ public class GameHandlerTest {
         assertEquals("TonyStark", playerObtained.getNickname());
         playerObtained = gameHandler.getPlayerByID(SECOND_ID);
         assertEquals("SteveRogers", playerObtained.getNickname());
-    }
-
-    @Test
-    public void getCellByCoordinate() {
-    }
-
-    @Test
-    public void getRoomByID() {
-
-    }
-
-    @Test
-    public void getActionByID() {
     }
 
     @Test
@@ -133,9 +136,8 @@ public class GameHandlerTest {
         e3 = gameHandler.getPlayerByID(4);
 
         CellSpawn c = new CellSpawn(null, null,null, null, 1,1,null);
-        ArrayList<Cell> a = new ArrayList();
-        a.add(c);
-        Room r = new Room(c, "blue", a);
+        ArrayList<Cell> a = new ArrayList<>();
+        a.add(c);new Room(c, "blue", a);
         p.resurrection(c);
         kill(p, e1, e2, e3);
         gameHandler.checkDeath();
@@ -319,4 +321,46 @@ public class GameHandlerTest {
             assertNotEquals(1, character.getId());
         }
     }
+
+    @Test
+    public void isDisconnected() {
+        firstPlayer.setConnected(false);
+        assertTrue(gameHandler.isDisconnected(firstPlayer.getNickname()));
+        assertFalse(gameHandler.isDisconnected(secondPlayer.getNickname()));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void isDisconnectedEx() {
+        firstPlayer.setConnected(false);
+        gameHandler.isDisconnected("Parker");
+    }
+
+    @Test
+    public void nextTurnSimple() {
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+        gameHandler.nextTurn();
+        assertEquals(secondPlayer.getID(), gameHandler.getTurnPlayerID());
+        gameHandler.nextTurn(); //third player
+        gameHandler.nextTurn(); //fourth player
+        gameHandler.nextTurn();
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+    }
+
+    @Test
+    public void nextTurnDisconnect() {
+        secondPlayer.setConnected(false);
+        thirdPlayer.setConnected(false);
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+        gameHandler.nextTurn();
+        assertEquals(fourthPlayer.getID(), gameHandler.getTurnPlayerID());
+    }
+
+    @Test
+    public void nextTurnDeath() throws NotPresentException {
+        kill(thirdPlayer, firstPlayer, secondPlayer, fourthPlayer);
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+        gameHandler.nextTurn();
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+    }
+
 }

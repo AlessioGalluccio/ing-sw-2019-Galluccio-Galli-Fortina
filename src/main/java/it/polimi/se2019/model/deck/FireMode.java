@@ -8,6 +8,7 @@ import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
+import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import it.polimi.se2019.view.StringAndMessage;
 
@@ -340,6 +341,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         try{
             author.payAmmoCost(shoot.getCost());
             shoot.getWeapon().unload();
+            author.notifyObservers(new PlayerModelMessage(author.clone()));
             //endFiremode();
         }catch (NotEnoughAmmoException e){
             //it should never happen, because cost must always be controlled before

@@ -27,4 +27,9 @@ public class TestWeaponCard {
             assertTrue(f.getID() == card.getFireMode().get(fireModeList.indexOf(f)).getID());
         }
     }
+
+    @Test
+    public void toStringTest() {
+        System.out.println(deck.getCardById(1).toString());
+    }
 }
