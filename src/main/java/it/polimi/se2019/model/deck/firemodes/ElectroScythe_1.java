@@ -26,16 +26,12 @@ public class ElectroScythe_1 extends FireMode {
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
-        StringAndMessage fireMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, SEND_FIRE);
-        List<StringAndMessage> list = new ArrayList<>();
-        list.add(fireMessage);
-
-        for(Player target : gameHandler.getOrderPlayerList()){
-            if(target.getCell().equals(author.getCell()) && target.getID() != author.getID()){
+        for(Player target : author.getCell().getPlayerHere()){
+            if(target.getID() != author.getID()){
                 shoot.addPlayerTargetFromFireMode(target, true);
             }
         }
-        return list;
+        return new ArrayList<>(); //empty list
     }
 
     @Override
@@ -53,75 +49,19 @@ public class ElectroScythe_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        for(Player target : shoot.getTargetsPlayer()){
-            addDamageAndMarks(target, 1,0, true);
+        if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException(CANT_DO_FIRE);
         }
-        super.fire();
+        else{
+            for(Player target : shoot.getTargetsPlayer()){
+                addDamageAndMarks(target, 1,0, true);
+            }
+            super.fire();
+        }
     }
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-
-
-
-    /*
-    //COULD BE USEFUL FOR OTHER FIREMODES THAT HAVE TO SELECT A CELL TARGET
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
-        if(shoot.getTargetingScopeCards().contains(card)){
-            throw new WrongInputException();
-        }
-        else if(!author.containsPowerup(card)){
-            throw new NotPresentException();
-        }
-        else if(!author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), cost))){
-            throw new NotEnoughAmmoException();
-        }
-        else if(shoot.getTargetsCells().isEmpty()){
-            throw new WrongInputException();
-        }
-        else{
-            boolean canTargeting = false;
-            List<Player> list = shoot.getTargetsCells().get(0).getPlayerHere();
-            if(list.isEmpty()){
-                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
-            }
-            for(Player target: list){
-                if(target.isVisibleBy(author)){
-                    canTargeting = true;
-                }
-            }
-            if(!canTargeting){
-                throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
-            }
-            else{
-                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
-                shoot.addCost(cost);
-            }
-        }
-    }
-
-    @Override
-    public void addTargetForTargeting(int playerID) throws WrongInputException {
-        Player target = gameHandler.getPlayerByID(playerID);
-        if(!shoot.getTargetsCells().isEmpty() && !shoot.getTargetsCells().get(0).getPlayerHere().isEmpty()
-                &&shoot.getTargetsCells().get(0).getPlayerHere().contains(target)){
-            shoot.addTargetForTargetingFromFiremode(target);
-        }
-        else{
-            throw new WrongInputException(INVALID_TARGET_FOR_TARGETING);
-        }
-    }
-
-    */
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         throw new WrongInputException();
     }
 

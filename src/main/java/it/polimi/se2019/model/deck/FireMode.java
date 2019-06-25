@@ -29,24 +29,24 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected transient Player author;
     protected transient PlayerView playerView;
 
-    private static final String NOT_PRESENT = "Can't do more damage to this player";
-    private static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
-    private static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
-    private static final String KILLED = "You killed ths Player";
+    public static final String NOT_PRESENT = "Can't do more damage to this player";
+    public static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
+    public static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
+    public static final String KILLED = "You killed ths Player";
 
-    private static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
-    private static final String CANT_PAY = "You don't have enough Ammo for this. ";
+    public static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
+    public static final String CANT_PAY = "You don't have enough Ammo for this. ";
 
-    protected static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
+    public static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
 
     //common used in firemodes
-    protected static final String CANT_DO = "You can't do this.  ";
-    protected static final String CELL_NOT_PRESENT = "This cell is not present on the map.";
-    protected static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
-    protected static final String NOT_VISIBLE = "Error, this player is not visible. ";
-    protected static final String CANT_DO_FIRE = "You can't do fire now. ";
-    private static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
-    private static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
+    public static final String CANT_DO = "You can't do this.  ";
+    public static final String CELL_NOT_PRESENT = "This cell is not present on the map.";
+    public static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
+    public static final String NOT_VISIBLE = "Error, this player is not visible. ";
+    public static final String CANT_DO_FIRE = "You can't do fire now. ";
+    public static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
+    public static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
 
 
     public GameHandler getGameHandler() {
@@ -173,7 +173,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             throw new NotEnoughAmmoException(CANT_PAY);
         }
         else{
-            boolean canTargeting = false;
+            //boolean canTargeting = false;
             List<Player> list = shoot.getCanBeTargetedPlayers();
             if(list.isEmpty()){
                 throw new WrongInputException(NO_TARGET_TARGETING);
