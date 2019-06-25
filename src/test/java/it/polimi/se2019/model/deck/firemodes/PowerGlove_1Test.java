@@ -42,7 +42,7 @@ public class PowerGlove_1Test {
 
     @Before
     public void setUp() throws Exception {
-        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
+        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 0);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 1);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 2);
         targetPlayer3 = new Player("Thor", new Character("GodOfThunder", "purple"), 3);
@@ -98,28 +98,6 @@ public class PowerGlove_1Test {
     }
 
     @Test
-    public void allTarget() throws Exception {
-        controller.update(null,
-                new PlayerMessage(2, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new PlayerMessage(3, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new PlayerMessage(4, authorPlayer.getID(), playerView));
-
-        controller.update(null,
-                new FireMessage(authorPlayer.getID(), playerView));
-
-        assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(1, targetPlayer2.getDamage().size());
-        assertEquals(1, targetPlayer3.getDamage().size());
-        assertEquals(1, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(3,1), authorPlayer.getCell());
-        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(2, targetPlayer3.getMark().getMarkReceived().size());
-        assertEquals(2, targetPlayer4.getMark().getMarkReceived().size());
-    }
-
-    @Test
     public void oneTarget() throws Exception {
         controller.update(null,
                 new PlayerMessage(2, authorPlayer.getID(), playerView));
@@ -127,15 +105,12 @@ public class PowerGlove_1Test {
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
-        assertEquals("You can't do fire now. Select a player on each cell near you. ",
-                playerView.getLastStringPrinted());
-
         assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getDamage().size());
+        assertEquals(1, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(2,1), authorPlayer.getCell());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
+        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
@@ -150,42 +125,35 @@ public class PowerGlove_1Test {
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
-        assertEquals("You can't do fire now. Select a player on each cell near you. ",
-                playerView.getLastStringPrinted());
-
         assertEquals(0, targetPlayer1.getDamage().size());
-        assertEquals(0, targetPlayer2.getDamage().size());
+        assertEquals(1, targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer3.getDamage().size());
         assertEquals(0, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(2,1), authorPlayer.getCell());
-        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
+        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
 
     @Test
     public void withMark() throws Exception {
-        targetPlayer1.receiveMarkBy(authorPlayer);
         targetPlayer2.receiveMarkBy(authorPlayer);
+        targetPlayer2.receiveMarkBy(targetPlayer1);
 
         controller.update(null,
-                new PlayerMessage(2, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new PlayerMessage(3, authorPlayer.getID(), playerView));
-        controller.update(null,
-                new PlayerMessage(4, authorPlayer.getID(), playerView));
+                new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView));
 
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 
         assertEquals(0, targetPlayer1.getDamage().size());
-        //assertEquals(2, targetPlayer2.getDamage().size());
-        assertEquals(1, targetPlayer3.getDamage().size());
-        assertEquals(1, targetPlayer4.getDamage().size());
-        assertEquals(gameHandler.getCellByCoordinate(3,1), authorPlayer.getCell());
-        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
-        assertEquals(2, targetPlayer3.getMark().getMarkReceived().size());
-        assertEquals(2, targetPlayer4.getMark().getMarkReceived().size());
+        assertEquals(2, targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer4.getDamage().size());
+        assertEquals(gameHandler.getCellByCoordinate(2,0), authorPlayer.getCell());
+        assertEquals(3, targetPlayer2.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
     }
 
     @After

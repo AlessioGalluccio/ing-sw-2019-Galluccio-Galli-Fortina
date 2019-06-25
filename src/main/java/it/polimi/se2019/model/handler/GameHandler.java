@@ -115,7 +115,7 @@ public class GameHandler extends Observable {
     private void setNewTurn() {
         map.reloadAllCell();
         lastLap--;
-        if(skull==0) setFrenzy();
+        if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
         if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode
         else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
         getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
@@ -127,7 +127,11 @@ public class GameHandler extends Observable {
      * Otherwise call endGame()
      */
     private void setFrenzy() {
-        if(suddenDeath && lastLap<0) {
+        for(Player player : orderPlayerList) {
+            player.setFirstGroupFrenzy(orderPlayerList.indexOf(player) >= turn);
+        }
+
+        if(!suddenDeath && lastLap<0) {
             modality = new Frenzy();
             lastLap = playerConnected();
         }
