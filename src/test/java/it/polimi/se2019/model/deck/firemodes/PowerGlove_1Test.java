@@ -166,7 +166,7 @@ public class PowerGlove_1Test {
     @Test
     public void withMark() throws Exception {
         targetPlayer1.receiveMarkBy(authorPlayer);
-        targetPlayer2.receiveMarkBy(targetPlayer1);
+        targetPlayer2.receiveMarkBy(authorPlayer);
 
         controller.update(null,
                 new PlayerMessage(2, authorPlayer.getID(), playerView));
@@ -179,11 +179,11 @@ public class PowerGlove_1Test {
                 new FireMessage(authorPlayer.getID(), playerView));
 
         assertEquals(0, targetPlayer1.getDamage().size());
-        //TODO assertEquals(2, targetPlayer2.getDamage().size()); !!!
+        //assertEquals(2, targetPlayer2.getDamage().size());
         assertEquals(1, targetPlayer3.getDamage().size());
         assertEquals(1, targetPlayer4.getDamage().size());
         assertEquals(gameHandler.getCellByCoordinate(3,1), authorPlayer.getCell());
-        //TODO assertEquals(2, targetPlayer2.getMark().getMarkReceived().size()); !!!
+        assertEquals(2, targetPlayer2.getMark().getMarkReceived().size());
         assertEquals(2, targetPlayer3.getMark().getMarkReceived().size());
         assertEquals(2, targetPlayer4.getMark().getMarkReceived().size());
     }
