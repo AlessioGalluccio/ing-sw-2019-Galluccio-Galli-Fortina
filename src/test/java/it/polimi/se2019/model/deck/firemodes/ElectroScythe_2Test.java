@@ -74,12 +74,14 @@ public class ElectroScythe_2Test {
         authorPlayer.addWeaponCard(weapon);
         shoot.addWeapon(weapon);
 
-        //add firemode
-        shoot.addFireMode(2);
+        //we can't add here firemode, because it selects the targets at the moment of the creation.
+        //If we want to move a character in another position, we need to do it before adding the firemode
+
     }
 
     @Test
     public void firePositive() throws Exception {
+        shoot.addFireMode(2);
 
         shoot.fire();
 
@@ -107,6 +109,8 @@ public class ElectroScythe_2Test {
 
     @Test
     public void firePositiveWithTargeting() throws Exception {
+        shoot.addFireMode(2);
+
         int targetingID = 1;
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
         authorPlayer.addPowerupCard(card);
@@ -133,14 +137,18 @@ public class ElectroScythe_2Test {
 
     @Test(expected = WrongInputException.class)
     public void fireNegativeWithTargeting() throws Exception {
+        Cell outsideCellWithNoTargets = gameHandler.getCellByCoordinate(3,2);
+        authorPlayer.setPosition(outsideCellWithNoTargets);
+
+        shoot.addFireMode(2);
+
         int targetingID = 1;
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE,targetingID, targetingID);
         authorPlayer.addPowerupCard(card);
 
         AmmoBag ammoCostTargeting = new AmmoBag(0,0,1);
 
-        Cell outsideCellWithNoTargets = gameHandler.getCellByCoordinate(3,2);
-        authorPlayer.setPosition(outsideCellWithNoTargets);
+
         shoot.addTargetingScope(targetingID,ammoCostTargeting);
         shoot.addPlayerTarget(targetPlayer1.getID());
 

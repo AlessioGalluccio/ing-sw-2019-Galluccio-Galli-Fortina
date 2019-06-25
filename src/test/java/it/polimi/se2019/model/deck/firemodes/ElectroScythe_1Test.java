@@ -164,7 +164,7 @@ public class ElectroScythe_1Test {
         assertEquals(2, authorPlayer.getAmmo().getBlueAmmo());
 
     }
-    
+
     public void fireNegativeWithTargeting() throws Exception {
         //we move the authorPlayer befaore adding the firemode, so the firemode wll create the empty target list
 
