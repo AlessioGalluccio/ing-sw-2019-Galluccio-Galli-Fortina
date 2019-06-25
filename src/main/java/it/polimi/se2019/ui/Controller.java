@@ -2743,7 +2743,7 @@ public class Controller implements Initializable {
      * @param usedPowerup
      */
     public void createPowerupMessage(PowerupCard usedPowerup, int position) throws  Exception{
-        switch (usedPowerup.getID()){
+        switch (usedPowerup.getIDtype()){
             case 0: {
                 selectTargetingScope = position;
                 ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
