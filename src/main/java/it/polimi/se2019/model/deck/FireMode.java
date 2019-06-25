@@ -290,31 +290,6 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
 
     }
 
-    /**
-     * send all players who are in the same cell of the author to the PlayerView only if there is at least one
-     * @param alreadySelected ArrayList of all targets already selected
-     * @return false if there is no target (and it doesn't send them), otherwise true and it sends them
-     */
-    protected boolean sendPlayersInYourCell(ArrayList<Player> alreadySelected){
-        Cell commonCell = author.getCell();
-        ArrayList<Player> listTarget = new ArrayList<>();
-        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() && playerOfGame.getCell().equals(commonCell)
-                    && (alreadySelected == null || !alreadySelected.contains(playerOfGame))){
-
-                listTarget.add(playerOfGame);
-
-            }
-        }
-        if(listTarget.isEmpty()){
-            return false;
-        }
-        else{
-            sendPossibleTargetsPlayers(listTarget);
-            return true;
-        }
-    }
-
 
     /**
      * call it when you abort the firemode
@@ -349,7 +324,9 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
         }
     }
 
-    public void helperTargetingFiremodeNotVisibleTarget(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
+    public void helperTargetingFiremodeNotVisibleTarget(int targetingCardID, AmmoBag cost) throws WrongInputException,
+            NotPresentException, NotEnoughAmmoException {
+
         PowerupCard card = gameHandler.getPowerupCardByID(targetingCardID);
         if(shoot.getTargetingScopeCards().contains(card)){
             throw new WrongInputException();
@@ -374,8 +351,8 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
             if(!canTargeting){
                 throw new WrongInputException(NO_VISIBLE_FOR_TARGETING);
             }
-            else{
-                shoot.addTargetingScopeFromFireMode((PowerupCard)card);
+            else {
+                shoot.addTargetingScopeFromFireMode(card);
                 shoot.addCost(cost);
             }
         }
