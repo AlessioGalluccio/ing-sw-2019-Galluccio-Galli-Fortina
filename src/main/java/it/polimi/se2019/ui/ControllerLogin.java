@@ -31,6 +31,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ControllerLogin implements UiInterface {
@@ -155,28 +157,31 @@ public class ControllerLogin implements UiInterface {
                         fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                         controller = fxmlLoader.getController();
                     } catch (Exception e) {
+                        Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
                     }
                 }
                 else if (success) {
-                    System.out.println(8);
+
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
                     stage.close();
-                    System.out.println(8);
+
                     if (isFirst) {
                         try {
-                            System.out.println(8);
+
                             fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 450, 530);
                             controller = fxmlLoader.getController();
                             firstAgain = true;
-                            System.out.println(8);
+
                         } catch (Exception e) {
+                            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
                         }
                     } else {
                         try {
                             fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                             controller = fxmlLoader.getController();
                         } catch (Exception e) {
+                            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
                         }
                     }
                 } else {
@@ -245,7 +250,7 @@ public class ControllerLogin implements UiInterface {
             controller = fxmlLoader.getController();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
         }
             }});
 
@@ -264,6 +269,7 @@ public class ControllerLogin implements UiInterface {
 
             primaryStage.show();
         }catch (Exception e){
+            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
 
         }
     }
@@ -329,6 +335,7 @@ public class ControllerLogin implements UiInterface {
         try {
             controller.updatePlayerCharacter(clientView.getPlayerCopy().getCharacter().getId());
         }catch (NullPointerException e){
+            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
 
         }
     }
@@ -442,6 +449,7 @@ public class ControllerLogin implements UiInterface {
             controller.updatePlayerAmmo(red, blue, yellow);
         }
         catch (NullPointerException e){
+            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
 
         }
 
