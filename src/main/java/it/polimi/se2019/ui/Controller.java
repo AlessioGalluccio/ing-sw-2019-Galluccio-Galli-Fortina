@@ -41,7 +41,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
-    private int selectTargetingScope = 5;
+    private static int selectTargetingScope;
 
     //character button
     @FXML
@@ -2537,17 +2537,17 @@ public class Controller implements Initializable {
                         }
                     }
                     if (ControllerLogin.enemyView2 != null) {
-                        if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
                             setEnemyWeapon(enemy2card1, enemy2card2, enemy2card3, ControllerLogin.enemyView2);
                         }
                     }
                     if (ControllerLogin.enemyView3 != null) {
-                        if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
                             setEnemyWeapon(enemy3card1, enemy3card2, enemy3card3, ControllerLogin.enemyView3);
                         }
                     }
                     if (ControllerLogin.enemyView4 != null) {
-                        if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
+                        if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
                             setEnemyWeapon(enemy4card1, enemy4card2, enemy4card3, ControllerLogin.enemyView4);
                         }
                     }
@@ -2583,7 +2583,6 @@ public class Controller implements Initializable {
 
             for (int i = 0; i < emptyWeapon; i++) {
                 enemy1card.get(i).setImage(new Image("emptyWeapon.jpg"));
-
             }
             int j=0;
             for (int i = emptyWeapon; i < (emptyWeapon + weaponCards.size()); i++) {
@@ -3479,22 +3478,27 @@ public class Controller implements Initializable {
         List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
         if (rbRedAmmo.isSelected()) {
             ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.RED);
-            selectTargetingScope = 5;
+
+            Stage stage = (Stage) rbRedAmmo.getScene().getWindow();
+            stage.close();
         }
 
         if (rbYellowAmmo.isSelected()) {
             ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.YELLOW);
-            selectTargetingScope = 5;
+
+            Stage stage = (Stage) rbRedAmmo.getScene().getWindow();
+            stage.close();
         }
 
         if (rbBlueAmmo.isSelected()) {
             ControllerLogin.clientView.createTargetingScopeMessage((TargetingScopeCard) powerupCards.get(selectTargetingScope), ColorRYB.BLUE);
-            selectTargetingScope = 5;
+
+            Stage stage = (Stage) rbRedAmmo.getScene().getWindow();
+            stage.close();
 
         }
 
-        Stage stage = (Stage) rbRedAmmo.getScene().getWindow();
-        stage.close();
+
     }
 
 
