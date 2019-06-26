@@ -2,7 +2,6 @@ package it.polimi.se2019.controller.actions;
 
 
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
@@ -17,7 +16,7 @@ public class ShootAdrenaline extends Shoot {
 
     private int DISTANCE_MAX = 1;
     //messages
-    public static final String CHOOSE_CELL ="Select a cell. ";
+    public static final String CHOOSE_CELL_ADRENALINE_SHOOT ="Select a cell. ";
     //errors
     public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
     public static final String CELL_NOT_PRESENT = "This cell is not present. ";
@@ -28,7 +27,7 @@ public class ShootAdrenaline extends Shoot {
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
-        StringAndMessage firstMessage = new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL);
+        StringAndMessage firstMessage = new StringAndMessage(Identificator.CELL_MESSAGE, CHOOSE_CELL_ADRENALINE_SHOOT);
         StringAndMessage secondMessage = new StringAndMessage(Identificator.WEAPON_MESSAGE, Shoot.FIRST_MESSAGE);
         StringAndMessage thirdMessage = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, Shoot.SECOND_MESSAGE);
         StringAndMessage lastMessage = new StringAndMessage(Identificator.FIRE_MESSAGE, Shoot.LAST_MESSAGE);

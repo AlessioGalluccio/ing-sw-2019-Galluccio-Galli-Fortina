@@ -2,6 +2,7 @@ package it.polimi.se2019.controller.actions;
 
 import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
+import it.polimi.se2019.controller.EmptyControllerState;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.Card;
 import it.polimi.se2019.model.deck.FireMode;
@@ -88,11 +89,13 @@ public class GrabTest {
     @Test
     public void correctCallFromController(){
 
-        //System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
 
         CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(),playerView);
 
         controller.update(null, cellMessage);
+        assertTrue(controller.getState() instanceof EmptyControllerState);
+        assertEquals(ActionSelectedControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
         //System.out.println(playerView.getLastStringPrinted());
         //System.out.println(authorPlayer.getAmmo());
 
@@ -106,14 +109,14 @@ public class GrabTest {
 
         CellMessage cellMessage2 = new CellMessage(0,1,authorPlayer.getID(),playerView);
         controller.update(null, cellMessage2);
-        System.out.println(playerView.getLastStringPrinted());
+        //System.out.println(playerView.getLastStringPrinted());
         //System.out.println(authorPlayer.getAmmo());
     }
 
     @Test
     public void tooDistantCell(){
 
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
 
         CellMessage cellMessage = new CellMessage(3,1,authorPlayer.getID(),playerView);
         controller.update(null, cellMessage);
