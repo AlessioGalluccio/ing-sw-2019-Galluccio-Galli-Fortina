@@ -37,7 +37,7 @@ public class SocketClient extends Client {
         try {
             socket = new Socket(IP, port); /*Connection established*/
             createNewStream();
-
+            unreferenced();
 
             new Thread(() -> {
                 while (open) {
@@ -104,7 +104,6 @@ public class SocketClient extends Client {
             if(open) {
                 socket.close();
                 scannerSocket.close();
-                unreferenced();
             }
         } catch (IOException e) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.FINE, "Can't close client socket", e);

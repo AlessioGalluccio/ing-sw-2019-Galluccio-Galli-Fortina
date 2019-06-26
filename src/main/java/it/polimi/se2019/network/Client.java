@@ -18,6 +18,7 @@ import java.util.LinkedList;
 
 public abstract class Client extends UnicastRemoteObject implements Observer {
 
+    private static final long serialVersionUID = -1040745061995072394L;
     protected ClientView clientView;
     private ClientSkullBoardView skullBoardView;
     private List<ClientEnemyView> enemyViews = new LinkedList<>();
@@ -112,7 +113,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
 
-    public void unreferenced() throws NoSuchObjectException {
+    protected void unreferenced() throws NoSuchObjectException {
         UnicastRemoteObject.unexportObject(this, true);
     }
 

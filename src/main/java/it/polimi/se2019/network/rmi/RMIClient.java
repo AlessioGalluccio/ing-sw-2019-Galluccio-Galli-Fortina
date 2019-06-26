@@ -26,7 +26,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     private String IP;
 
     public RMIClient(ClientView view, String IP) throws RemoteException {
-        super();
         this.clientView = view;
         this.IP = IP;
     }
