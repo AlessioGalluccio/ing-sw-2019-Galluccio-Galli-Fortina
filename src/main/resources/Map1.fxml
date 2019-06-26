@@ -88,6 +88,10 @@
                               <Image url="@trash.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="bconvertAmmo1" disable="true" layoutX="77.0" layoutY="45.0" mnemonicParsing="false" onAction="#convertAmmo" text="convert" visible="false" />
+                        <Button fx:id="bconvertAmmo2" disable="true" layoutX="217.0" layoutY="45.0" mnemonicParsing="false" onAction="#convertAmmo" text="convert" visible="false" />
+                        <Button fx:id="bconvertAmmo3" disable="true" layoutX="356.0" layoutY="45.0" mnemonicParsing="false" onAction="#convertAmmo" text="convert" visible="false" />
+                        <Button fx:id="bconvertAmmo4" disable="true" layoutX="500.0" layoutY="45.0" mnemonicParsing="false" onAction="#convertAmmo" text="convert" visible="false" />
                      </children>
                   </AnchorPane>
             </content>

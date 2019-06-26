@@ -53,6 +53,16 @@ public class Controller implements Initializable {
     @FXML
     public RadioButton rbYellowAmmo;
 
+    //button to convert targeting scope in ammo
+    @FXML
+    public Button bconvertAmmo1;
+    @FXML
+    public Button bconvertAmmo2;
+    @FXML
+    public Button bconvertAmmo3;
+    @FXML
+    public Button bconvertAmmo4;
+
     //true when all the skull are taken
     boolean isFrenzyTime = false;
 
@@ -2010,6 +2020,7 @@ public class Controller implements Initializable {
                             if (!weaponCards.get(i).isReloaded()) {
                                 selectWeapon.get(i).setDisable(true);
                                 firemode.get(i).setDisable(true);
+                                reloadWeapon.get(i).setDisable(false);
                             } else {
                                 selectWeapon.get(i).setDisable(false);
                                 firemode.get(i).setDisable(false);
@@ -2574,10 +2585,11 @@ public class Controller implements Initializable {
                 enemy1card.get(i).setImage(new Image("emptyWeapon.jpg"));
 
             }
-
+            int j=0;
             for (int i = emptyWeapon; i < (emptyWeapon + weaponCards.size()); i++) {
-                enemy1card.get(i).setImage(setWeapon(weaponCards.get(i).getID()));
 
+                enemy1card.get(i).setImage(setWeapon(weaponCards.get(j).getIDtype()));
+                j++;
             }
 
             for (int k = (emptyWeapon + weaponCards.size()); k < 3; k++) {
@@ -2722,15 +2734,38 @@ public class Controller implements Initializable {
         try {
             if (bPowerupCard1 == source) {
                 createPowerupMessage(powerupCards.get(0), 0);
+                if(powerupCards.get(0).getIDtype()== 0 || powerupCards.get(0).getIDtype()== 1 || powerupCards.get(0).getIDtype()== 2){
+                    bconvertAmmo1.setVisible(true);
+                    bconvertAmmo1.setDisable(false);
+                    selectTargetingScope=0;
+
+                }
             }
             if (bPowerupCard2 == source) {
                 createPowerupMessage(powerupCards.get(1), 1);
+                if(powerupCards.get(1).getIDtype()== 0 || powerupCards.get(1).getIDtype()== 1 || powerupCards.get(1).getIDtype()== 2){
+                    selectTargetingScope=1;
+                    bconvertAmmo2.setVisible(true);
+                    bconvertAmmo2.setDisable(false);
+
+                }
             }
             if (bPowerupCard3 == source) {
                 createPowerupMessage(powerupCards.get(2), 2);
+                if(powerupCards.get(2).getIDtype()== 0 || powerupCards.get(2).getIDtype()== 1 || powerupCards.get(2).getIDtype()== 2){
+                    selectTargetingScope=2;
+                    bconvertAmmo3.setDisable(false);
+                    bconvertAmmo3.setVisible(true);
+
+                }
             }
             if (bPowerupCard4 == source) {
                 createPowerupMessage(powerupCards.get(3), 3);
+                if(powerupCards.get(3).getIDtype()== 0 || powerupCards.get(3).getIDtype()== 1 || powerupCards.get(3).getIDtype()== 2){
+                    selectTargetingScope=3;
+                    bconvertAmmo4.setDisable(false);
+                    bconvertAmmo4.setVisible(true);
+                }
             }
         }catch (Exception e){
 
@@ -2746,17 +2781,17 @@ public class Controller implements Initializable {
         switch (usedPowerup.getIDtype()){
             case 0: {
                 selectTargetingScope = position;
-                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
+                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 1: {
                 selectTargetingScope = position;
-                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
+                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 2: {
                 selectTargetingScope = position;
-                ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
+                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
                 break;
             }
             case 10: {
@@ -3439,7 +3474,7 @@ public class Controller implements Initializable {
      * send Targeting scope message
      * @param event
      */
-    public void chooseTragetingAmmo(ActionEvent event,PowerupCard usedPowerup) {
+    public void chooseTargetingAmmo(ActionEvent event) {
 
         List<PowerupCard> powerupCards = ControllerLogin.clientView.getPlayerCopy().getPowerupCardList();
         if (rbRedAmmo.isSelected()) {
@@ -3457,5 +3492,28 @@ public class Controller implements Initializable {
             selectTargetingScope = 5;
 
         }
+
+        Stage stage = (Stage) rbRedAmmo.getScene().getWindow();
+        stage.close();
     }
+
+
+    /**
+     * when a targeting scope is select open window to choose the ammo to convert
+     * @param event
+     * @throws Exception
+     */
+    public void convertAmmo(ActionEvent event) throws Exception{
+       ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
+        bconvertAmmo1.setDisable(true);
+        bconvertAmmo2.setDisable(true);
+        bconvertAmmo3.setDisable(true);
+        bconvertAmmo4.setDisable(true);
+        bconvertAmmo1.setVisible(false);
+        bconvertAmmo2.setVisible(false);
+        bconvertAmmo3.setVisible(false);
+        bconvertAmmo4.setVisible(false);
+
+    }
+
 }

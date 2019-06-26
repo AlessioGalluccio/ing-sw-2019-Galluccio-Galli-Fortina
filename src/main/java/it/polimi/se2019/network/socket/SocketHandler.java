@@ -143,7 +143,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
      */
     @Override
     public void cancelTimer() {
-        timer.cancel();
+        if(timer!=null) timer.cancel();
         timer = null;
     }
 

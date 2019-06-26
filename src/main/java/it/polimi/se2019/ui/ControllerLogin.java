@@ -204,7 +204,7 @@ public class ControllerLogin implements UiInterface {
         primaryStage.setTitle(windowName);
         primaryStage.setScene(new Scene(root, width, height));
         primaryStage.show();
-        if(fileName.equalsIgnoreCase("WaitingRoom.fxml") ||fileName.equalsIgnoreCase("login.fxml")
+        if(fileName.equalsIgnoreCase("WaitingRoom.fxml")
                 || fileName.equalsIgnoreCase("chooseMap.fxml") || fileName.equalsIgnoreCase("Map1.fxml")) {
             primaryStage.setOnCloseRequest(event -> {
                 ControllerLogin.clientView.shutdownServer();
