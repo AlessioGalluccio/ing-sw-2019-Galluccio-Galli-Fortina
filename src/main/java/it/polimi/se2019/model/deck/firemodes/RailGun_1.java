@@ -75,7 +75,10 @@ public class RailGun_1 extends FireMode {
         int targetX = cellOfTarget.getCoordinateX();
         int targetY = cellOfTarget.getCoordinateY();
 
-        if(authorX == targetX + 1 && autorY == targetY){
+        if(authorX == targetX && autorY == targetY){
+            return true;
+        }
+        else if(authorX == targetX + 1 && autorY == targetY){
             return true;
         }
         else if(authorX == targetX - 1 && autorY == targetY){
