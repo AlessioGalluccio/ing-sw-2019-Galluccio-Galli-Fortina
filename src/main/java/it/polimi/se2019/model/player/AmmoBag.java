@@ -37,26 +37,28 @@ public class AmmoBag implements Serializable {
     }
 
     public static AmmoBag createAmmoFromList(List<ColorRYB> list){
-        if(list == null){
+        if(list == null || list.isEmpty()){
             return new AmmoBag(0,0,0);
         }
-        int red = 0;
-        int yellow = 0;
-        int blue = 0;
-        for(ColorRYB color : list){
-            switch (color){
-                case RED:
-                    red++;
-                    break;
-                case YELLOW:
-                    yellow++;
-                    break;
-                case BLUE:
-                    blue++;
-                    break;
+        else{
+            int red = 0;
+            int yellow = 0;
+            int blue = 0;
+            for(ColorRYB color : list){
+                switch (color){
+                    case RED:
+                        red++;
+                        break;
+                    case YELLOW:
+                        yellow++;
+                        break;
+                    case BLUE:
+                        blue++;
+                        break;
+                }
             }
+            return new AmmoBag(red, yellow, blue);
         }
-        return new AmmoBag(red, yellow, blue);
     }
 
     public static AmmoBag sumAmmoBag(AmmoBag first, AmmoBag second){

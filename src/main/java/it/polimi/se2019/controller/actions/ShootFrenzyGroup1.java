@@ -24,7 +24,7 @@ public class ShootFrenzyGroup1 extends ShootAdrenaline {
 
     @Override
     public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        if(weapon == null){
+        if(this.weapon == null){
             playerAuthor.loadWeapon(weaponID);
         }
         else{
