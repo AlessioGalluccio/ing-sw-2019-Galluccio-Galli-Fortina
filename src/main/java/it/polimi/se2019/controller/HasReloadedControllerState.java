@@ -1,7 +1,9 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
@@ -100,14 +102,22 @@ public class HasReloadedControllerState extends StateController {
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        //TODO
+        try{
+            player.discardCard(gameHandler.getPowerupCardByID(powerupID), false);
+        }catch (NotPresentException e){
+            errorString = POWERUP_NOT_PRESENT_DISCARD;
+        }
+
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        try {
+            player.discardCard(gameHandler.getWeaponCardByID(weaponID));
+        } catch (NotPresentException e) {
+            errorString = WEAPON_NOT_PRESENT;
+        }
     }
-
 
     @Override
     public String handle(ViewControllerMessage arg) {

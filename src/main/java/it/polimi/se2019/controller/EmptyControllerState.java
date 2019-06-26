@@ -161,7 +161,11 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        //TODO
+        try {
+            player.discardCard(gameHandler.getWeaponCardByID(weaponID));
+        } catch (NotPresentException e) {
+            errorString = WEAPON_NOT_PRESENT;
+        }
     }
 
 
