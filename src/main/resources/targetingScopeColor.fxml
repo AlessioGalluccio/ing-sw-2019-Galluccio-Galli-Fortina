@@ -8,12 +8,12 @@
 
 <AnchorPane prefHeight="346.0" prefWidth="223.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.Controller">
    <children>
-      <RadioButton fx:id="rbBlueAmmo" layoutX="91.0" layoutY="286.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="BLUE">
+      <RadioButton fx:id="rbBlueAmmo" layoutX="91.0" layoutY="286.0" mnemonicParsing="false" onAction="#chooseTargetingAmmo" text="BLUE">
          <toggleGroup>
             <ToggleGroup fx:id="rbTragetingAmmo" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="rbYellowAmmo" layoutX="81.0" layoutY="192.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="YELLOW" toggleGroup="$rbTragetingAmmo" />
-      <RadioButton fx:id="rbRedAmmo" layoutX="93.0" layoutY="101.0" mnemonicParsing="false" onAction="#chooseTragetingAmmo" text="RED" toggleGroup="$rbTragetingAmmo" />
+      <RadioButton fx:id="rbYellowAmmo" layoutX="81.0" layoutY="192.0" mnemonicParsing="false" onAction="#chooseTargetingAmmo" text="YELLOW" toggleGroup="$rbTragetingAmmo" />
+      <RadioButton fx:id="rbRedAmmo" layoutX="93.0" layoutY="101.0" mnemonicParsing="false" onAction="#chooseTargetingAmmo" text="RED" toggleGroup="$rbTragetingAmmo" />
       <ImageView fitHeight="56.0" fitWidth="43.0" layoutX="93.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icon/Rammo.png" />
