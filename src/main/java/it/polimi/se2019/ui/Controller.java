@@ -1,8 +1,5 @@
 package it.polimi.se2019.ui;
 
-
-
-
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
@@ -1727,7 +1724,7 @@ public class Controller implements Initializable {
      *
      * @param points player's points
      */
-    public void updatePoints(int points) {
+    void updatePoints(int points) {
         Platform.runLater(() ->  {
                 try {
                     String string = Integer.toString(points);
@@ -1743,7 +1740,7 @@ public class Controller implements Initializable {
 
     /**
      * update int to set map
-     * @param chosenMap
+     * @param chosenMap int of map choosen
      */
     static void updateMap(int chosenMap) {
 
@@ -1754,7 +1751,7 @@ public class Controller implements Initializable {
     /**
      * update skulls' imageviews on map
      *
-     * @param skullNumber
+     * @param skullNumber number of skull on map
      */
     public void updateSkullBoard(String skullNumber) {
 
@@ -1790,12 +1787,11 @@ public class Controller implements Initializable {
     }
 
 
-    //TODO FINIRE METODO
 
     /**
      * update weaponcards image on map
      */
-    public void updateWeaponMap() {
+     void updateWeaponMap() {
 
         Platform.runLater(() -> {
             try {
@@ -1855,10 +1851,10 @@ public class Controller implements Initializable {
     /**
      * set each weapon id with the image
      *
-     * @param weaponID
-     * @return
+     * @param weaponID select weapon image by the id
+     * @return image of weapon
      */
-    public Image setWeapon(int weaponID) {
+    private Image setWeapon(int weaponID) {
         Image image = new Image("cards/AD_weapons_IT_0225.png");
         switch (weaponID) {
             case 13:
@@ -1924,7 +1920,7 @@ public class Controller implements Initializable {
             case 1:
                 image = new Image("cards/AD_weapons_IT_0222.png");
                 break;
-
+            default: break;
         }
         return image;
     }
@@ -1932,7 +1928,7 @@ public class Controller implements Initializable {
     /**
      * set AmmoCard on map
      */
-    public void updateAmmoCardMap() {
+    void updateAmmoCardMap() {
 
         Platform.runLater(() ->  {
         ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
@@ -1995,7 +1991,7 @@ public class Controller implements Initializable {
      * @param ammoID select the right ammo images by the id
      * @return ammo card image
      */
-    public Image setAmmoCard(int ammoID) {
+    private Image setAmmoCard(int ammoID) {
 
         Image image = new Image("ammo/AD_ammo_04.png");
         switch (ammoID) {
@@ -2035,7 +2031,7 @@ public class Controller implements Initializable {
             case 19:
                 image = new Image("ammo/AD_ammo_0418.png");
                 break;
-
+            default: break;
         }
         return image;
 
@@ -2044,7 +2040,7 @@ public class Controller implements Initializable {
     /**
      * update player's weapon images
      */
-    public void updateWeaponPlayer() {
+    void updateWeaponPlayer() {
         Platform.runLater(() ->  {
                 try {
 
@@ -2148,11 +2144,11 @@ public class Controller implements Initializable {
      *
      * @param blu number of blu ammo
      */
-    public void updatePlayerBlueAmmo(String blu) {
+    private void updatePlayerBlueAmmo(String blu) {
 
         Platform.runLater(() ->  {
                 try {
-                    ArrayList<ImageView> blueAmmo = new ArrayList();
+                    ArrayList<ImageView> blueAmmo = new ArrayList<>();
                     blueAmmo.add(bammo1);
                     blueAmmo.add(bammo2);
                     blueAmmo.add(bammo3);
@@ -3059,7 +3055,7 @@ public class Controller implements Initializable {
 
     /**
      * add imageview to an arraylist
-     * @param imDamage
+     * @param imDamage ararylist to insert imageviews
      * @param im1 imageview to add
      * @param im2 imageview to add
      * @param im3 imageview to add
@@ -3072,7 +3068,7 @@ public class Controller implements Initializable {
      * @param im10 imageview to add
      * @param im11 imageview to add
      */
-    public void setDamage(ArrayList<ImageView> imDamage, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
+    private void setDamage(ArrayList<ImageView> imDamage, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
                           ImageView im5,ImageView im6,ImageView im7,ImageView im8,ImageView im9,ImageView im10,ImageView im11, ImageView im12 ){
         imDamage.add(im1);
         imDamage.add(im2);
@@ -3325,7 +3321,7 @@ public class Controller implements Initializable {
 
     /**
      * set skull images in an arraylist
-     * @param imSkulls
+     * @param imSkulls Arraylist to insert imageviews
      * @param im1 imageview to add
      * @param im2 imageview to add
      * @param im3 imageview to add
@@ -3375,7 +3371,7 @@ public class Controller implements Initializable {
 
     /**
      * add ImageView position in an arraylist
-     * @param imPlayerPosition
+     * @param imPlayerPosition arraylist to insert imageviews
      * @param im1 imageview to add
      * @param im2 imageview to add
      * @param im3 imageview to add

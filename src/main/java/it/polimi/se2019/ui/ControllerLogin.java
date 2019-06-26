@@ -37,7 +37,7 @@ import java.util.logging.Logger;
 
 public class ControllerLogin implements UiInterface {
 
-    private static FXMLLoader fxmlLoader;
+    private FXMLLoader fxmlLoader;
     @FXML
     public Label wrongIp;
     @FXML
@@ -94,17 +94,15 @@ public class ControllerLogin implements UiInterface {
 
     static List<Character> characters;
 
-    List<Player> playersRanking;
+    private List<Player> playersRanking;
 
 
     /**
      * send setting when login button is clicked
-     * @param event
-     * @throws Exception
-     * @throws InterruptedException
+     * @param event after been clicked
      */
-    public void loginButton(ActionEvent event) throws Exception, InterruptedException {
-        //if(!ipAddress.getText().equals("")) {
+    public void loginButton(ActionEvent event) {
+
             if (clientView == null) {
                 clientView = new ClientView();
             }
@@ -142,15 +140,13 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * close login window and one choosemap window if the player is the first, else open waiting room
-     * @param success
-     * @param isFirst
+     * @param success true if the login has success
+     * @param isFirst true if the player is the first
      */
     @Override
     public void login(boolean success, boolean isFirst) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
 
                 if (success && isFirst && firstAgain) {
                     try {
@@ -188,7 +184,7 @@ public class ControllerLogin implements UiInterface {
                     status.setText("LOGIN FAILED");
 
                 }
-            }
+
 
         });
 
@@ -196,11 +192,11 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * open file FXML in a window
-     * @param fileName
-     * @param windowName
-     * @param width
-     * @param height
-     * @throws Exception
+     * @param fileName string name of the file fxml
+     * @param windowName string name of the window to open
+     * @param width of the window
+     * @param height of the window
+     * @throws Exception when opening the fxml file
      */
     static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource(fileName));
@@ -225,7 +221,7 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * pass to the controller map which map is choosen
-     * @param choosMap
+     * @param choosMap int to indicate the selected map
      */
     public void selectedMap(int choosMap){
         Controller.updateMap(choosMap);
@@ -238,12 +234,10 @@ public class ControllerLogin implements UiInterface {
     public void startGame() {
 
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run(){
+        Platform.runLater(() ->  {
 
         try {
-            //selectedMap(mapView.getMapCopy().getID());
+
             fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
             Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
             stage.close();
@@ -252,10 +246,15 @@ public class ControllerLogin implements UiInterface {
         catch (Exception e) {
             Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
         }
-            }});
+            });
 
         }
 
+
+    /**
+     * when the player is disconnect
+      * @param matchID show the matchId in gui to riconnection
+     */
     @Override
     public void disconnect(int matchID) {
         try {
@@ -276,23 +275,35 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * show to the player their match id
-     * @param event
+     * @param event after been clicked
      */
     public void showMyMatchID(ActionEvent event){
         labelMatchId.setText("Match Id : " + clientView.getMatchId());
     }
 
+    /**
+     * set the skullboard
+     * @param skullBoard pass the skullboard to ControllerLogin
+     */
     @Override
     public void setSkullBoard(SkullBoardView skullBoard) {
         skullBoardView = skullBoard;
         //Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
+    /**
+     * set mapView
+     * @param mapViev to initialize mapview in ControllerLogin
+     */
     @Override
     public void setMapView(MapView mapViev) {
         mapView = (ClientMapView) mapViev;
     }
 
+    /**
+     * set enemyviews
+     * @param enemyView to initialize enemyviews in ControllerLogin
+     */
     @Override
     public void setEnemyView(EnemyView enemyView) {
         if(enemyView1==null) enemyView1 = (ClientEnemyView) enemyView;
@@ -301,11 +312,19 @@ public class ControllerLogin implements UiInterface {
         else if(enemyView4==null) enemyView4 = (ClientEnemyView) enemyView;
     }
 
+    /**
+     * print string from controller
+     * @param message string from controller to show on gui
+     */
     @Override
     public void printFromController(String message) {
             controller.printf(message);
     }
 
+    /**
+     * update cell
+     * @param cell to update
+     */
     @Override
     public void updateCell(Cell cell) {
         controller.updatePlayersPosition(cell);
@@ -313,6 +332,9 @@ public class ControllerLogin implements UiInterface {
         updateAmmoCardMap();
     }
 
+    /**
+     * update the player
+     */
     @Override
     public void updatePlayer() {
         updateWeaponPlayer();
@@ -331,7 +353,7 @@ public class ControllerLogin implements UiInterface {
     /**
      * update Player Character's Images
      */
-    public void updatePlayerCharacter(){
+    private void updatePlayerCharacter(){
         try {
             controller.updatePlayerCharacter(clientView.getPlayerCopy().getCharacter().getId());
         }catch (NullPointerException e){
@@ -347,6 +369,10 @@ public class ControllerLogin implements UiInterface {
         controller.updatePlayerPowerup();
     }
 
+    /**
+     * update enemy
+     * @param enemyView for updating gui
+     */
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
         controller.updateEnemyCharacter(enemyView);
@@ -364,7 +390,7 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * print player's ranking
-     * @param players
+     * @param players list of player to show ranking
      */
     @Override
     public void printRanking(List<Player> players) throws Exception {
@@ -374,8 +400,8 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * tell the player whose turn it is
-     * @param nickname
-     * @param yourTurn
+     * @param nickname string of the person name
+     * @param yourTurn if true print message that says is the player turn
      */
     @Override
     public void turn(String nickname, boolean yourTurn) {
@@ -389,7 +415,7 @@ public class ControllerLogin implements UiInterface {
 
     /**
      * set possible character to choose
-     * @param character
+     * @param character list of possible character
      */
     @Override
     public void chooseCharacter(List<Character> character) {
@@ -400,24 +426,24 @@ public class ControllerLogin implements UiInterface {
     /**
      * update player's points on gui calling method on ui controller
      */
-    public void updatePlayerPoints(){
+    private void updatePlayerPoints(){
         Player player = clientView.getPlayerCopy();
         controller.updatePoints(player.getNumPoints());
     }
 
     /**
      * update number of skulls on gui map
-     * @param skullNumber
+     * @param skullNumber number of skull on map
      */
-    public void updateSkullMap(int skullNumber){
+    private void updateSkullMap(int skullNumber){
         String skullNumberString = String.valueOf(skullNumber);
         controller.updateSkullBoard(skullNumberString);
     }
 
     /**
      * update initial setting of map number and skulls
-     * @param choosenMap
-     * @param skull
+     * @param choosenMap int of map choosen
+     * @param skull int of skull number
      */
     public void updateSetting(int choosenMap, int skull){
         this.updateSkullMap(skull);
@@ -427,21 +453,21 @@ public class ControllerLogin implements UiInterface {
     /**
      * update weapons images on map
      */
-    public void updateWeaponMap(){
+    private void updateWeaponMap(){
         controller.updateWeaponMap();
     }
 
     /**
      * update player' weapons images
      */
-    public void updateWeaponPlayer(){
+    private void updateWeaponPlayer(){
         controller.updateWeaponPlayer();
     }
 
     /**
      * update player ammo
      */
-    public void updatePlayerAmmo(){
+    private void updatePlayerAmmo(){
         try {
             int red = clientView.getPlayerCopy().getAmmo().getRedAmmo();
             int blue = clientView.getPlayerCopy().getAmmo().getBlueAmmo();
@@ -460,7 +486,7 @@ public class ControllerLogin implements UiInterface {
     /**
      * update ammoCard on Map
      */
-    public void updateAmmoCardMap(){
+    private void updateAmmoCardMap(){
         controller.updateAmmoCardMap();
     }
 
@@ -468,14 +494,14 @@ public class ControllerLogin implements UiInterface {
     /**
      * update player damage on gui
      */
-    public void updatePlayerDamage(){
+    private void updatePlayerDamage(){
         controller.updatePlayerDamage();
     }
 
     /**
      * set image franzy when the player is in frenzy mode
      */
-    public void setPlayerFrenzy(){
+    private void setPlayerFrenzy(){
         if(clientView.getPlayerCopy().isFrenzyDeath()){
             controller.frenzyPlayer();
         }
@@ -484,36 +510,21 @@ public class ControllerLogin implements UiInterface {
     /**
      * update player's marks on gui
      */
-    public void updatePlayerMark(){
+    private void updatePlayerMark(){
         controller.updatePlayerMarks();
     }
 
     /**
      * update player skull on map
      */
-    public void updatePlayerSkull(){
+    private void updatePlayerSkull(){
         controller.updatePlayerSkull();
     }
-    /**
-     * update game display
-     */
-
-
-    public void updateMap(){
-        updateAmmoCardMap();
-        updateWeaponMap();
-        updateWeaponPlayer();
-        updatePlayerAmmo();
-
-    }
-
-
-
 
 
     /**
      * show how win the game on gui
-     * @param event
+     * @param event after been clicked
      */
     public void showWinner(ActionEvent event) {
         bShowWinner.setDisable(true);
