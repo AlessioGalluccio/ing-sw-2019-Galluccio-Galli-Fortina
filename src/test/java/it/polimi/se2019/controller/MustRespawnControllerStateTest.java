@@ -2,6 +2,7 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
@@ -28,30 +29,39 @@ public class MustRespawnControllerStateTest {
 
     @Before
     public void setUp() throws Exception {
-        authorPlayer = new Player("TonyStark", new it.polimi.se2019.model.player.Character("IronMan", "yellow"), 2008);
-        targetPlayer1 = new Player("SteveRogers", new it.polimi.se2019.model.player.Character("CapAmerica", "blue"), 2011);
-        targetPlayer2 = new Player("Hulk", new it.polimi.se2019.model.player.Character("Hulk", "yellow"), 3);
-        targetPlayer3 = new Player("Thor", new it.polimi.se2019.model.player.Character("GodOfThunder", "purple"), 4);
-
-        //we add the players to the game
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(authorPlayer);
-        players.add(targetPlayer1);
-        players.add(targetPlayer2);
-        players.add(targetPlayer3);
 
         //settings of mock connection
         Server serverMock = mock(Server.class);
-        Player playerCopyMock = mock(Player.class);
-        playerView = new PlayerView(serverMock, playerCopyMock);
-        gameHandler = new GameHandler(players, 8);
-        gameHandler.setMap(1);
-        controller = new Controller(gameHandler, null, playerView);
-        controller.setPlayerView(playerView);
-        controller.setAuthor(authorPlayer);
+
+        authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 1);
+        targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2);
+        targetPlayer2 = new Player("PeterParker", new Character("SpiderMan", "red"), 3);
+        targetPlayer3 = new Player("CarolDenvers", new Character("CapMarvel", "white"), 4);
+
+        gameHandler = new GameHandler(99);
+
+        playerView = new PlayerView(serverMock, authorPlayer);
+        PlayerView secondPlayerView = new PlayerView(serverMock, targetPlayer1);
+        PlayerView thirdPlayerView = new PlayerView(serverMock, targetPlayer2);
+        PlayerView fourthPlayerView = new PlayerView(serverMock, targetPlayer3);
+
+        controller = new Controller(gameHandler, authorPlayer, playerView);
+        Controller secondController = new Controller(gameHandler, targetPlayer1, secondPlayerView);
+        Controller thirdController = new Controller(gameHandler, targetPlayer2, thirdPlayerView);
+        Controller fourthController = new Controller(gameHandler, targetPlayer3, fourthPlayerView);
 
         controller.setState(new MustRespawnControllerState(controller, gameHandler));
         stateController = controller.getState();
+
+        gameHandler.setUp(authorPlayer, playerView, controller);
+        gameHandler.setUp(targetPlayer1, secondPlayerView, secondController);
+        gameHandler.setUp(targetPlayer2, thirdPlayerView, thirdController);
+        gameHandler.setUp(targetPlayer3, fourthPlayerView, fourthController);
+
+        gameHandler.setSkull(0);
+        gameHandler.setMap(2);
+        gameHandler.setSuddenDeath(false);
+
     }
 
     @Test

@@ -60,6 +60,19 @@ public class Grab extends Action{
 
     }
 
+    private void grabForAmmoCell() throws WrongInputException{
+        playerAuthor.setPosition(cellObjective);
+        try{
+            AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
+            cardObjective.useCard(playerAuthor);
+
+        }catch(NotCardException e){
+            //do nothing
+        }catch (TooManyException e) {
+            //do nothing
+        }
+    }
+
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
         ArrayList<StringAndMessage> list = new ArrayList<>();
