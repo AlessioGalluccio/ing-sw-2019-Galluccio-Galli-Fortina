@@ -6,12 +6,14 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.*;
+import it.polimi.se2019.view.ViewControllerMess.CellMessage;
+import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReloadMessage;
+import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class ShootFrenzyGroup1Test {
+public class ShootFrenzyGroup2Test {
 
     private Player authorPlayer;
     private Player targetPlayer1;
@@ -59,7 +61,7 @@ public class ShootFrenzyGroup1Test {
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
-        action = new ShootFrenzyGroup1(gameHandler, controller);
+        action = new ShootFrenzyGroup2(gameHandler, controller);
 
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
         stateController = controller.getState();
@@ -70,11 +72,16 @@ public class ShootFrenzyGroup1Test {
         targetPlayer1.setPosition(commonCell);
         targetPlayer2.setPosition(commonCell);
 
+        //target 3 is in another room
+        //TODO controlla che sia un'altra statnza!!
+        notVisibleCell = gameHandler.getCellByCoordinate(1,2);
+        targetPlayer3.setPosition(notVisibleCell);
+
         authorPlayer.setAmmoBag(3,3,3);
     }
 
     @Test
-    public void correctCallFromController(){
+    public void correctCallFromControllerDistance2(){
         //we pick a weapon and we unload it. Player must reload it to shoot
         WeaponCard weapon = gameHandler.getWeaponDeck().pick();
         weapon.unload();
@@ -93,11 +100,11 @@ public class ShootFrenzyGroup1Test {
         assertTrue(controller.getState() instanceof ActionSelectedControllerState);
         assertTrue(weapon.isReloaded());
 
-        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(),playerView); //distance 1
+        CellMessage cellMessage = new CellMessage(1,2,authorPlayer.getID(),playerView); //distance 2
 
         controller.update(null, cellMessage);
         assertEquals(1,authorPlayer.getCell().getCoordinateX());
-        assertEquals(1,authorPlayer.getCell().getCoordinateY());
+        assertEquals(2,authorPlayer.getCell().getCoordinateY());
         assertEquals(ShootFrenzyGroup1.FIRST_MESSAGE, playerView.getLastStringPrinted());
 
         WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
@@ -131,7 +138,7 @@ public class ShootFrenzyGroup1Test {
         assertTrue(controller.getState() instanceof ActionSelectedControllerState);
         assertTrue(weapon.isReloaded());
 
-        CellMessage cellMessage = new CellMessage(1,2,authorPlayer.getID(),playerView); //distance 2
+        CellMessage cellMessage = new CellMessage(2,0,authorPlayer.getID(),playerView); //distance 3
 
         controller.update(null, cellMessage);
         assertEquals(0,authorPlayer.getCell().getCoordinateX());
