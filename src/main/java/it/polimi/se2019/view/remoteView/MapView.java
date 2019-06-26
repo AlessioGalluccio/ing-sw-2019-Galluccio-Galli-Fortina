@@ -16,6 +16,10 @@ public class MapView extends Observable implements Observer {
     private Map mapCopy;
     private Cell[][] cells;
 
+    /**
+     * mapCopy getter
+     * @return mapCopy
+     */
     public Map getMapCopy() {
         return mapCopy;
     }
@@ -30,6 +34,10 @@ public class MapView extends Observable implements Observer {
         return cells[x][y];
     }
 
+    /**
+     * cells getter
+     * @return cells
+     */
     public Cell[][] getCells() {
         return cells;
     }
