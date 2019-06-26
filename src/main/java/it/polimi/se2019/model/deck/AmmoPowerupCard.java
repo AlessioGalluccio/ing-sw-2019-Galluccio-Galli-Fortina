@@ -18,6 +18,8 @@ public class AmmoPowerupCard implements AmmoCard {
     private final ColorRYB color1;
     private final ColorRYB color2;
 
+    public static final String TOO_MANY_AMMO = "You have already max ammo. ";
+
     public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID, int IDtype) {
         this.color1 = color1;
         this.color2 = color2;
@@ -87,7 +89,14 @@ public class AmmoPowerupCard implements AmmoCard {
      */
     @Override
     public void useCard(Player author) throws TooManyException {
-        reloadAmmo(author);
+        //in this way, reloadAmmo and addPowerup are executed even if one of the two
+        //launches an exception
+        try{
+            reloadAmmo(author);
+        }catch(TooManyException e){
+            author.addPowerupCard(powerupDeck.pick());
+            throw new TooManyException(TOO_MANY_AMMO);
+        }
         author.addPowerupCard(powerupDeck.pick());
     }
 
