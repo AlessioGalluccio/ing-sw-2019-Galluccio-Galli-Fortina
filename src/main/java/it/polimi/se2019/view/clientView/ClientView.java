@@ -27,26 +27,42 @@ public class ClientView extends View /*View implement observer/observable*/{
     private int lastAck;
     private int matchId = -1;
 
+    /**
+     * getter of playerCopy
+     * @return playerCopy
+     */
     public Player getPlayerCopy() {
         return playerCopy;
     }
 
+    /**
+     * getter of possibleCharacter
+     * @return possibleCharacter
+     */
     public List<Character> getPossibleCharacter() {
         return possibleCharacter;
     }
 
+    /**
+     *  getter of possibleTarget
+     * @return possibleTarget
+     */
     public List<Target> getPossibleTarget() {
         return possibleTarget;
     }
 
+    /**
+     * getter of matchId
+     * @return matchId
+     */
     public int getMatchId() {
         return matchId;
     }
 
     /**
      * create a CellMessage that the client send to the server
-     * @param x
-     * @param y
+     * @param x coordinate of cell
+     * @param y coordinate of cell
      */
     public void createCellMessage(int x, int y){
         CellMessage message = new CellMessage(x,y,playerCopy.getID(),this);
@@ -63,7 +79,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a ActionMessage that the client send to the server
-     * @param actionID
+     * @param actionID int id of action
      */
     public void createActionMessage(int actionID){
         ActionMessage message = new ActionMessage(actionID,playerCopy.getID(),this);
@@ -73,7 +89,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a NewtonMessage that the client send to the server
-     * @param usedCard
+     * @param usedCard newtoncard selected by the player
      */
     public void createNewtonMessage(NewtonCard usedCard){
         NewtonMessage message = new NewtonMessage(usedCard,playerCopy.getID(),this);
@@ -82,7 +98,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a ReloadMessage that the client send to the server
-     * @param weapon
+     * @param weapon card selected by the player
      */
     public void createReloadMessage(WeaponCard weapon){
         ReloadMessage message = new ReloadMessage(weapon, playerCopy.getID(),this);
@@ -91,7 +107,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a TeleporterMessage that the client send to the server
-     * @param usedCard
+     * @param usedCard card selected by the player
      */
     public void createTeleporterMessage(TeleporterCard usedCard){
         TeleporterMessage message = new TeleporterMessage(usedCard, playerCopy.getID(),this);
@@ -100,8 +116,8 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a TargetingScopeMessage that the client send to the server
-     * @param usedCard
-     * @param colorRYB
+     * @param usedCard card selected by the player
+     * @param colorRYB color of ammo
      */
     public void createTargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorRYB){
         TargetingScopeMessage message = new TargetingScopeMessage(usedCard, colorRYB, playerCopy.getID(),this);
@@ -110,7 +126,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a TagbackGrenadeMessage that the client send to the server
-     * @param usedCard
+     * @param usedCard card selected by the player
      */
     public void createTagbackGranadeMessage(TagbackGrenadeCard usedCard){
         TagbackGrenadeMessage message = new TagbackGrenadeMessage(usedCard,playerCopy.getID(),this);
@@ -119,7 +135,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a FireModeMessage that the client send to the server
-     * @param firemodeID
+     * @param firemodeID id of the firemode selected by the player
      */
     public void createFireModeMessage(int firemodeID) {
         FireModeMessage message = new FireModeMessage(firemodeID,playerCopy.getID(), this);
@@ -136,13 +152,17 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a FireModeMessage that the client send to the server
-     * @param optionalID
+     * @param optionalID id of the optional firemode selected by the player
      */
     public void createOptionalMessage(int optionalID) {
         OptionalMessage message = new OptionalMessage(optionalID,playerCopy.getID(), this);
         notifyObservers(message);
     }
 
+    /**
+     * create a PlayerMessage that the client send to the server
+     * @param playerID id of the player
+     */
     public void createPlayerMessage(int playerID) {
         PlayerMessage message = new PlayerMessage(playerID, playerCopy.getID(), this);
         notifyObservers(message);
@@ -159,7 +179,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a LoginMessage that the client send to the server
-     * @param nickname
+     * @param nickname string of nickname choosen by the player
      */
     public void createLoginMessage(String nickname, int matchID){
         LoginMessage message = new LoginMessage(nickname, matchID);
@@ -168,9 +188,9 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a SettingMessage that the client send to the server
-     * @param map
-     * @param skulls
-     * @param suddenDeath
+     * @param map map type
+     * @param skulls number of skull
+     * @param suddenDeath true if suddenDeath is selected
      */
     public void createSettingMessage(int map, int skulls, boolean suddenDeath) {
         notifyObservers(new SettingMessage(map, skulls, suddenDeath));
@@ -178,7 +198,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a CharacterMessage that the client send to the server
-     * @param characterID
+     * @param characterID id of the character choosen
      */
     public void createCharacterMessage(int characterID) throws NotCharacterException {
         if(verifyCharacter(characterID))
@@ -215,7 +235,8 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * verify that the character choosen by the player is cotained in the ArrayList of available characters
-     * @return
+     * @param characterID id of the character
+     * @return  boolean true if the character is possible
      */
     private boolean verifyCharacter(int characterID) {
         for(Character character : possibleCharacter) {
@@ -227,7 +248,7 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * is used by the controller to print string for the user
-     * @param string
+     * @param string printed from controller
      */
     @Override
     public synchronized void printFromController(String string) {
@@ -237,6 +258,10 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
 
+    /**
+     * set possible character for the player
+     * @param possibleCharacter list of possible character
+     */
     @Override
     public void setPossibleCharacter(List<Character> possibleCharacter){
         this.possibleCharacter = possibleCharacter;
@@ -347,6 +372,10 @@ public class ClientView extends View /*View implement observer/observable*/{
         attach(networkHandler);
     }
 
+    /**
+     * set ui
+     * @param ui for set ui
+     */
     public void setUi(UiInterface ui) {
         this.ui = ui;
     }

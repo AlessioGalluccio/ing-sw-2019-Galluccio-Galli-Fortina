@@ -9,6 +9,7 @@ public class ClientMapView extends MapView {
     private boolean first = true;
     private int[][]  lastAck = new int[4][3];
 
+
     public ClientMapView(UiInterface ui) {
         this.ui = ui;
         ui.setMapView(this);
