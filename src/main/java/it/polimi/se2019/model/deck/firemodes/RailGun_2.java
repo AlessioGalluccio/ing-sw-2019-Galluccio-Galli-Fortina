@@ -31,10 +31,6 @@ public class RailGun_2 extends RailGun_1 {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

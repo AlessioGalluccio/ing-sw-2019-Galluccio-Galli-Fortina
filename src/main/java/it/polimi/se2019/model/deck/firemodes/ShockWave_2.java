@@ -29,10 +29,6 @@ public class ShockWave_2 extends FireMode {
         return new ArrayList<>(); //empty list
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

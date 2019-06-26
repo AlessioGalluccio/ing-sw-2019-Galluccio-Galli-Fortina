@@ -24,11 +24,6 @@ public class PowerGlove_1 extends FireMode {
     }
 
     @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
-
-    @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode

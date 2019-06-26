@@ -38,10 +38,6 @@ public class PlasmaGun_1 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

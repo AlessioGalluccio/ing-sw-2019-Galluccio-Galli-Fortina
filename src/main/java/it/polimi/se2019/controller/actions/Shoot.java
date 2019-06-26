@@ -124,8 +124,6 @@ public class Shoot extends Action{
                 //adding expected messages of firemode before fire message
                 controller.addMessageListBeforeLastOne(fireMode.getMessageListExpected());
 
-                //since firemode doesn't have a constructor, we need to send them here
-                this.fireMode.sendPossibleTargetsAtStart();
             }
             else{
                 throw new WrongInputException();

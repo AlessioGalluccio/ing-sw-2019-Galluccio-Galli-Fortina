@@ -37,11 +37,6 @@ public class MachineGun_1 extends FireMode {
         return messageListExpected;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO se niente target?
-        sendAllVisiblePlayers(null);
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
@@ -111,18 +106,12 @@ public class MachineGun_1 extends FireMode {
         else if(numOptional == Identificator.SECOND_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL)
                 && shoot.getTargetsPlayer().size() == 2){
-
-            if(sendAllVisiblePlayers(shoot.getTargetsPlayer())){
                 shoot.addOptionalSelected(Identificator.SECOND_OPTIONAL);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                         OPTIONAL_SECOND_MSG);
                 controller.addMessageListExpected(stringAndMessage);
                 shoot.addCost(new AmmoBag(0,0,1));
-            }
-            else{
-                playerView.printFromController(NO_TARGET_NO_ACTION);
-                throw new WrongInputException();
-            }
+
         }
         else{
             throw new WrongInputException();

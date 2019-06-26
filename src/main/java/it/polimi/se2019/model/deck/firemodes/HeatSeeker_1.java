@@ -29,20 +29,6 @@ public class HeatSeeker_1 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        /*
-        //opposto di sendAllVisible
-        ArrayList<Player> listTarget = new ArrayList<>();
-        for(Player playerOfGame : gameHandler.getOrderPlayerList()){
-            if(playerOfGame.getID() != this.author.getID() &&
-                    !playerOfGame.isVisibleBy(gameHandler.getMap(), this.author)){
-                listTarget.add(playerOfGame);
-            }
-        }
-        sendPossibleTargetsPlayers(listTarget);
-        */
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

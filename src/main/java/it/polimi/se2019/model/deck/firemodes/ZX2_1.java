@@ -22,10 +22,6 @@ public class ZX2_1 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        sendAllVisiblePlayers(null);
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

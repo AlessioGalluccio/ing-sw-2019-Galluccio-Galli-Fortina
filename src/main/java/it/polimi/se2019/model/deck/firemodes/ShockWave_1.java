@@ -37,10 +37,6 @@ public class ShockWave_1 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public void fire() throws WrongInputException{

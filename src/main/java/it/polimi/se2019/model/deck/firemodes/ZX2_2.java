@@ -26,12 +26,6 @@ public class ZX2_2 extends FireMode {
     }
 
     @Override
-    public void sendPossibleTargetsAtStart() {
-
-        sendAllVisiblePlayers(null);
-    }
-
-    @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
@@ -61,7 +55,6 @@ public class ZX2_2 extends FireMode {
 
         if(shoot.getTargetsPlayer().size() < 3){
             shoot.addPlayerTargetFromFireMode(target, false);
-            sendAllVisiblePlayers(shoot.getTargetsPlayer());
         }
         else {
             throw new WrongInputException(WRONG_TARGET);
@@ -69,7 +62,7 @@ public class ZX2_2 extends FireMode {
 
     }
 
-    //THIS MUST REMAIN, IT LAUNCHES ANOTHER EXCEPTION
+    //THIS MUST REMAIN, IT LAUNCHES ANOTHER EXCEPTION COMPARED TO ZX2_1
     @Override
     public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
         throw new FiremodeOfOnlyMarksException();

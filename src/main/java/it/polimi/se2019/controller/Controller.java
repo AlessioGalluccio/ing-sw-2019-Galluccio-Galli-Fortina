@@ -27,7 +27,7 @@ public class Controller implements Observer {
     private final GameHandler gameHandler;
     private StateController state;
     private int numOfActionTaken;
-    public int numOfMaxActions = 2;
+    private int numOfMaxActions = 2;
 
     private String stringToPlayerView;
 

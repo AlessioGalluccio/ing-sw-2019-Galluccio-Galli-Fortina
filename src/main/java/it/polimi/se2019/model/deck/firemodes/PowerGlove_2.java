@@ -36,10 +36,6 @@ public class PowerGlove_2 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public void fire() throws WrongInputException{
