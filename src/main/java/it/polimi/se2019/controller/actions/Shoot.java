@@ -51,10 +51,6 @@ public class Shoot extends Action{
         this.neededTargetForTargeting = false;
     }
 
-    @Override
-    public void executeAction() throws WrongInputException {
-        super.executeAction();
-    }
 
     @Override
     public ArrayList<StringAndMessage> getStringAndMessageExpected() {
@@ -69,10 +65,7 @@ public class Shoot extends Action{
         return list;
     }
 
-    @Override
-    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
-        return super.verifyCorrectMessages(author, msg);
-    }
+
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
@@ -154,7 +147,6 @@ public class Shoot extends Action{
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        //TODO
         if(neededTargetForTargeting){
             throw new WrongInputException(NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL);
         }
@@ -275,14 +267,6 @@ public class Shoot extends Action{
         else{
             throw new NotEnoughAmmoException();
         }
-    }
-
-    /**
-     * unique method for paying the AmmoBag cost
-     * @throws NotEnoughAmmoException shouldn't be launched, cost is always controlled before beeing added
-     */
-    public void payActionCost() throws NotEnoughAmmoException{
-        playerAuthor.payAmmoCost(this.cost);
     }
 
     /**

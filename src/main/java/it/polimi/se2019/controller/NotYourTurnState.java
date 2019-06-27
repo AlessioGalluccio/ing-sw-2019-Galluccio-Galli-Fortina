@@ -23,8 +23,13 @@ public class NotYourTurnState extends StateController {
     public final String DONT_HAVE_THIS_CARD = "You don't have this TagBack. ";
 
 
+    /**
+     * constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     * @param passTurn true if the turn must be passed, false if not
+     */
     public NotYourTurnState(Controller controller, GameHandler gameHandler, boolean passTurn) {
-        //TODO aggiungere playerAuthor e playerView (anche a tutti gli stati!)
         super(controller, gameHandler);
         //we do a next turn when we create this state if passTurn is true
         if(passTurn){
@@ -192,6 +197,9 @@ public class NotYourTurnState extends StateController {
         connectionDontPassTurn(isConnected);
     }
 
+    /**
+     * handles the invalid messages for this State
+     */
     private void cantDoThisHandler(){
         //controller.removeReceived();
     }

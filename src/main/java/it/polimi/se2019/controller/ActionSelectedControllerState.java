@@ -14,21 +14,22 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 public class ActionSelectedControllerState extends StateController {
 
     private Player playerAuthor;
-    private PlayerView playerView;
     private Action action;
-    private static final int FIRST_MESSAGE = 0;
     private String errorString;
     private String stringToPlayerView;
     private boolean hasShoot = false;
     private boolean skipSelected = false;
 
 
-
+    /**
+     * constructor
+     * @param controller the Controller of the player
+     * @param gameHandler the GameHandler of the match
+     * @param action the action selected
+     */
     public ActionSelectedControllerState(Controller controller, GameHandler gameHandler, Action action) {
-        //TODO aggiungere player e playerView (anche a tutti gli stati!)
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
-        this.playerView = controller.getPlayerView();
         this.action = action;
         this.controller.resetMessages();
         this.controller.addMessageListExpected(action.getStringAndMessageExpected());

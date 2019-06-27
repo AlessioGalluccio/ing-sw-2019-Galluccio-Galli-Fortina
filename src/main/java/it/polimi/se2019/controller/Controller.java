@@ -155,14 +155,6 @@ public class Controller implements Observer {
         this.indexExpected++;
     }
 
-    /*
-    public void removeReceived(){
-        if(indexExpected > 0){
-            this.indexExpected--;
-        }
-    }
-     */
-
     public void setIndexExpected(int indexExpected) {
         this.indexExpected = indexExpected;
     }
@@ -210,32 +202,10 @@ public class Controller implements Observer {
 
     }
 
-
-
     /**
-     * It verifies the list of messages and, if it is correct, it modifies the model accordingly
-     * @param actionMessage the first message in the list. It defines what type of action
+     * get the playerView linked to the player of this Controller
+     * @return the PlayerView of the player of this controller
      */
-    public synchronized void modifyModel(ActionMessage actionMessage) {
-        //TODO verify()
-        //gameHandler.getActionByID(actionMessage.getActionID(), gameHandler.getPlayerByID(actionMessage.getAuthorID()))
-        //       .executeAction(gameHandler.getPlayerByID(actionMessage.getAuthorID()), messageListReceived);
-        //Commentato perchè non compilava
-    }
-
-    public synchronized void modifyModel(PowerupCard powerupCard) {
-        //TODO
-    }
-
-    /**
-     * general case, should not be used
-     * @param message
-     */
-    public synchronized void modifyModel(ViewControllerMessage message) {
-        //TODO scrivi eccezione!
-    }
-
-
     public PlayerView getPlayerView() {
         return playerView;
     }
