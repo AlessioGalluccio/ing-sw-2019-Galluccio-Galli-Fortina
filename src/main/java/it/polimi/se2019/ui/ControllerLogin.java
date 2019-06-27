@@ -198,7 +198,7 @@ public class ControllerLogin implements UiInterface {
      * @param height of the window
      * @throws Exception when opening the fxml file
      */
-    static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
+    public static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource(fileName));
         Parent root = (Parent) fxmlLoader.load();
         Stage primaryStage = new Stage();
@@ -207,9 +207,7 @@ public class ControllerLogin implements UiInterface {
         primaryStage.show();
         if(fileName.equalsIgnoreCase("WaitingRoom.fxml")
                 || fileName.equalsIgnoreCase("chooseMap.fxml") || fileName.equalsIgnoreCase("Map1.fxml")) {
-            primaryStage.setOnCloseRequest(event -> {
-                ControllerLogin.clientView.shutdownServer();
-            });
+            primaryStage.setOnCloseRequest(event -> clientView.shutdownServer());
         }
 
         if(!fileName.equalsIgnoreCase("Map1.fxml"))

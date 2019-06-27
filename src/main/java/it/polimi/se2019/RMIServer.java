@@ -37,7 +37,7 @@ public class RMIServer extends UnicastRemoteObject implements RmiServerInterface
             Registry registry = LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
             registry.rebind("RMIServer", remoteObj);
 
-            Logger.getLogger(RMIServer.class.getName()).log(Level.FINER, "Server ready");
+            Logger.getLogger(RMIServer.class.getName()).log(Level.INFO, "RMI server ready");
         } catch (Exception e) {
             Logger.getLogger(RMIServer.class.getName()).log(Level.SEVERE, "Problem starting RMI server", e);
         }

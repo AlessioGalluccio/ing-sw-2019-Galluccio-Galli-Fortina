@@ -25,7 +25,7 @@ public class SocketServer {
      * Start the server
      */
     public void start() {
-        Logger.getLogger(SocketServer.class.getName()).log(Level.FINER, "Server ready");
+        Logger.getLogger(SocketServer.class.getName()).log(Level.INFO, "Socket server ready");
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (open) {
                 Socket socket = serverSocket.accept();

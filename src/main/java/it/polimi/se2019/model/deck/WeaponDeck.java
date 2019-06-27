@@ -1,8 +1,7 @@
 package it.polimi.se2019.model.deck;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.*;
+import com.google.gson.reflect.*;
 import it.polimi.se2019.model.JsonAdapter;
 
 import java.io.*;
