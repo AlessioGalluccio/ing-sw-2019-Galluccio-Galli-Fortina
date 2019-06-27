@@ -180,6 +180,12 @@ public class GrabTest {
             authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
             authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
 
+            //player must not contains whisper, or there will be problems in the test
+            while (authorPlayer.getWeaponCardList().contains(gameHandler.getWeaponCardByID(5))){
+                authorPlayer.discardCard(gameHandler.getWeaponCardByID(5));
+                authorPlayer.addWeaponCard(gameHandler.getWeaponDeck().pick());
+            }
+
             Cell cellWithWeapons = gameHandler.getCellByCoordinate(0,1);
 
             //I replace a weapon with one that I know that has a buy cost ( 5 -> whisper)
@@ -211,8 +217,8 @@ public class GrabTest {
             controller.update(null, weaponMessage);
             //System.out.println(playerView.getLastStringPrinted());
 
-            //System.out.println(authorPlayer);
-            //System.out.println(cellWithWeapons.getCardID());
+            System.out.println(authorPlayer);
+            System.out.println(cellWithWeapons.getCardID());
 
             assertEquals(3,authorPlayer.getWeaponCardList().size());
             assertTrue(!authorPlayer.getWeaponCardList().contains(weaponToGrab)); //player contains weapon grabbed
