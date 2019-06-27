@@ -18,6 +18,11 @@ public class MustRespawnControllerState extends StateController {
     public static final String POWERUP_DISCARD_REQUEST = "Please, discard a PowerUp to spawn";
     public static final String TOO_MANY_CARDS = "You have already three PowerUps. ";
 
+    /**
+     * constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     */
     public MustRespawnControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
@@ -149,6 +154,9 @@ public class MustRespawnControllerState extends StateController {
         return stringToPlayerView;
     }
 
+    /**
+     * handles the invalid messages
+     */
     private void youMustRespawn(){
         stringToPlayerView = POWERUP_DISCARD_REQUEST;
     }

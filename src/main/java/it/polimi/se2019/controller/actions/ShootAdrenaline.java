@@ -40,10 +40,6 @@ public class ShootAdrenaline extends Shoot {
         return list;
     }
 
-    @Override
-    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
-        return super.verifyCorrectMessages(author, msg);
-    }
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {

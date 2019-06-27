@@ -41,26 +41,7 @@ public class Grab extends Action{
         super(gameHandler, controller);
     }
 
-    @Override
-    public void executeAction() throws WrongInputException {
-        //TODO gestire prendere carte e munizioni
-        playerAuthor.setPosition(cellObjective);
-
-        if(playerAuthor.getPowerupCardList().size() < 3 && cellObjective.getCardID().size() < 3){
-            try{
-                AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
-                cardObjective.useCard(playerAuthor);
-
-            }catch(NotCardException e){
-                //it should be never launched here
-            }catch (TooManyException e) {
-                //should never be launched
-            }
-        }
-
-    }
-
-    private void grabForAmmoCell() throws WrongInputException{
+    private void grabForAmmoCell(){
         playerAuthor.setPosition(cellObjective);
         try{
             AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
@@ -82,13 +63,7 @@ public class Grab extends Action{
     }
 
     @Override
-    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
-        return super.verifyCorrectMessages(author, msg);
-    }
-
-    @Override
     public void addCell(int x, int y) throws WrongInputException {
-        //TODO discutere sull'executeAction()
         List<Cell> arrayCellsAtDistance = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), getMaxDistance());
         try{
             if(arrayCellsAtDistance.contains(gameHandler.getCellByCoordinate(x,y))) {
@@ -99,7 +74,7 @@ public class Grab extends Action{
                 }
                 else if (cellObjective.getCardID().size() == 1) {
                     //there's only one card to grab
-                    executeAction();
+                    grabForAmmoCell();
 
                 }
                 else {
@@ -121,6 +96,7 @@ public class Grab extends Action{
                 throw new WrongInputException(TOO_MUCH_DISTANCE);
             }
         }catch(NotPresentException e){
+            //TODO controlla
             //should not happen
             throw new WrongInputException();
         }
@@ -158,7 +134,6 @@ public class Grab extends Action{
                 playerAuthor.payAmmoCost(AmmoBag.createAmmoFromList(weaponCard.getBuyCost()));
                 Card weapon = cellObjective.grabCard(weaponCard.getID(), weaponToDiscard);
                 if(weaponToDiscard != null){
-                    //((CellSpawn)cellObjective).replaceCard(weaponToDiscard);
                     playerAuthor.discardCard(weaponToDiscard);
                 }
                 playerAuthor.addWeaponCard((WeaponCard) weapon);

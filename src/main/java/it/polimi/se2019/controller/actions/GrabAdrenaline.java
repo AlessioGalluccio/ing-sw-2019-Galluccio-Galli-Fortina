@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GrabAdrenaline extends Grab {
 
     //the only change between GrabAdrenaline and Grab
-    private final int DISTANCE_MAX = 2;
+    private static final int DISTANCE_MAX = 2;
 
     public GrabAdrenaline(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);

@@ -87,7 +87,6 @@ public abstract class StateController {
     public abstract void handleFire();
 
     public void handleReconnection(boolean isConnected){
-        //TODO controlla da sistemare sicuramente
         if(!isConnected){
             gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
             gameHandler.nextTurn();

@@ -14,6 +14,11 @@ public class DisconnectedControllerState extends StateController {
     public static final String STILL_DISCONNECTED = "Still disconnecte";
 
 
+    /**
+     * constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     */
     public DisconnectedControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();

@@ -26,15 +26,8 @@ public abstract class Action implements AddActionMethods {
         this.playerView = controller.getPlayerView();
     }
 
-    public void executeAction() throws WrongInputException{
-
-    }
     public abstract ArrayList<StringAndMessage> getStringAndMessageExpected();
 
-    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
-
-        return false; //TODO implementare
-    }
 
     public GameHandler getGameHandler() {
         return gameHandler;
