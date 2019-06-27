@@ -718,7 +718,7 @@ public class GameHandler extends Observable {
      * respawn a disconnected player in a random cellSpawn
      * @param player the player who must reaspawn, but he is disconnected
      */
-    private void randomRespawnNotConnectedPlayer(Player player){
+    public void randomRespawnNotConnectedPlayer(Player player){
         PowerupCard powerupCard = powerupDeck.pick();
         String color = powerupCard.getColor();
         Room room = getRoomByID(color);

@@ -16,11 +16,11 @@ public class NotYourTurnState extends StateController {
     boolean neededTargetForTagBack = false;
     private TagbackGrenadeCard tagbackGrenadeCard;
 
-    public final String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn. ";
-    public final String SELECT_TARGET_FOR_TAGBACK = "Select a target player for TagBack. ";
-    public final String NO_TARGETS_FOR_TAGBACK= "There are no targets for TagBack. ";
-    public final String IS_NOT_TARGET_FOR_TARGETING = "This can't be a target for TagBack. ";
-    public final String DONT_HAVE_THIS_CARD = "You don't have this TagBack. ";
+    public final static String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn. ";
+    public final static String SELECT_TARGET_FOR_TAGBACK = "Select a target player for TagBack. ";
+    public final static String NO_TARGETS_FOR_TAGBACK= "There are no targets for TagBack. ";
+    public final static String IS_NOT_TARGET_FOR_TARGETING = "This can't be a target for TagBack. ";
+    public final static String DONT_HAVE_THIS_CARD = "You don't have this TagBack. ";
 
 
     /**

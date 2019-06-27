@@ -2,10 +2,12 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,5 +76,17 @@ public class MustRespawnControllerStateTest {
         controller.update(null, discardPowerupMessage);
         assertTrue(controller.getState() instanceof NotYourTurnState);
 
+    }
+
+    @Test
+    public void handleDisconnection() {
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST,playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().size() == 1);
+
+        ReconnectionMessage reconnectionMessage = new ReconnectionMessage(false,authorPlayer.getID(), playerView);
+        controller.update(null, reconnectionMessage);
+        assertTrue(authorPlayer.getCell() instanceof CellSpawn);
+        assertTrue(controller.getState() instanceof DisconnectedControllerState);
+        assertTrue(authorPlayer.getPowerupCardList().size() == 0);
     }
 }

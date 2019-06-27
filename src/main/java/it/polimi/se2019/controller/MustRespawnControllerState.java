@@ -3,6 +3,7 @@ package it.polimi.se2019.controller;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
@@ -137,6 +138,24 @@ public class MustRespawnControllerState extends StateController {
         youMustRespawn();
     }
 
+    @Override
+    //this will handle the spawn even if there's a disconnection in the middle
+    public void handleReconnection(boolean isConnected) {
+        //it's disconnected AND the state is this (it hasn't changed in the meantime
+        if(!isConnected && controller.getState() == this){
+            gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
+            //this is different from standard method
+            gameHandler.randomRespawnNotConnectedPlayer(playerAuthor);
+            //since this stae add a powerup, we must discard it
+            try {
+                playerAuthor.discardCard(playerAuthor.getPowerupCardList().get(0), true);
+            } catch (NotPresentException e) {
+                //shouldn't happen
+            }
+            controller.setState(new DisconnectedControllerState(controller, gameHandler));
+            completedRespawn = true;
+        }
+    }
 
     @Override
     public String handle(ViewControllerMessage arg) {
