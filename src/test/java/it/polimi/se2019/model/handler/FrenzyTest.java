@@ -92,4 +92,12 @@ public class FrenzyTest {
         }
     }
 
+    @Test
+    public void maxAction() {
+        assertEquals(1, firstController.getNumOfMaxActions());
+        assertEquals(1, secondController.getNumOfMaxActions());
+        assertEquals(2, thirdController.getNumOfMaxActions());
+        assertEquals(2, fourthController.getNumOfMaxActions());
+    }
+
 }

@@ -93,7 +93,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
      */
     @Override
     public void cancelTimer() {
-        timer.cancel();
+        if(timer != null) timer.cancel();
         timer = null;
     }
 

@@ -68,15 +68,6 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * Controls if the game is finished
-     * @return True if the game is finished, false if not
-     */
-    public boolean isFinished() {
-
-        return false; //TODO implementare
-    }
-
-    /**
      * Called when a player has finished his turn
      */
     public void nextTurn() {
@@ -128,7 +119,13 @@ public class GameHandler extends Observable {
      */
     private void setFrenzy() {
         for(Player player : orderPlayerList) {
-            player.setFirstGroupFrenzy(orderPlayerList.indexOf(player) >= turn);
+            if(orderPlayerList.indexOf(player) >= turn) {
+                player.setFirstGroupFrenzy(true);
+                getControllerByPlayer(player).setNumOfMaxActions(2);
+            } else {
+                player.setFirstGroupFrenzy(false);
+                getControllerByPlayer(player).setNumOfMaxActions(1);
+            }
         }
 
         if(!suddenDeath && lastLap<0) {
