@@ -29,61 +29,105 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     private List<Player> damage = new LinkedList<>();
     private int powerup;
     private boolean isFrenzyDeath;
+    private boolean first = true;
 
     /**
-     *
+     * true if enemy is in frenzy mode
      * @return boolean isFrenzyDeath
      */
     public boolean isFrenzyDeath() {
         return isFrenzyDeath;
     }
 
-    private boolean first = true;
-
     /**
-     *
+     * getter of mark
      * @return arraylist of players
      */
     public ArrayList<Player> getMark() {
         return mark;
     }
 
+    /**
+     *  set the enemy nickname
+     * @param nickname name of the enemy
+     */
     public EnemyView(String nickname) {
         this.nickname = nickname;
     }
 
+    /**
+     * getter of ammo
+     * @return ammo
+     */
     public AmmoBag getAmmo() {
         return ammo;
     }
 
+    /**
+     *  get list of player who give damage
+     * @return list of player who give damage
+     */
     public List<Player> getDamage() {
         return damage;
     }
 
+    /**
+     * getter of enemy character
+     * @return cìenemy character
+     */
     public Character getCharacter() {
         return character;
     }
 
+    /**
+     * getter of enemy UnloadedWeapon
+     * @return Arrylist of UnloadedWeapon
+     */
     public ArrayList<WeaponCard> getUnloadedWeapon() {
         return unloadedWeapon;
     }
 
+    /**
+     * getetr of enemy number of loadedWeapon
+     * @return loadedWeapon
+     */
     public int getLoadedWeapon() {
         return loadedWeapon;
     }
 
+    /**
+     * getter number of enemy skull
+     * @return number of enemy skull
+     */
     public int getSkull() {
         return skull;
     }
 
+    /**
+     * getetr of enemy Nickname
+     * @return enemy Nickname
+     */
     public String getNickname() {
 
         return nickname;
     }
 
+    /**
+     * getter of enemy powerup
+     * @return enemy powerup
+     */
     public int getPowerup() {
         return powerup;
     }
+
+    /**
+     * getter of enemy ID
+     * @return enemy ID
+     */
+    public int getID() {
+        return ID;
+    }
+
 
     @Override
     public void update(java.util.Observable o/*Will be always null*/, Object arg) {
@@ -156,10 +200,6 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     }
 
 
-    public int getID() {
-        return ID;
-    }
-
     @Override
     public String printRow(int row) {
         String s = ConsoleColor.RESET.toString();
@@ -188,6 +228,7 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
                     s += ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
                 }
                 break;
+            default: break;
         }
         return s;
     }

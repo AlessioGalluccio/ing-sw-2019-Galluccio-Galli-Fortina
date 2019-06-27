@@ -25,15 +25,6 @@ public class LockRifle_1 extends FireMode {
 
 
     @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO se niente target?
-        if(!sendAllVisiblePlayers(null)){
-            playerView.printFromController(NO_TARGET_NO_ACTION);
-            //endFiremode();
-        }
-    }
-
-    @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
@@ -101,18 +92,11 @@ public class LockRifle_1 extends FireMode {
                 throw new WrongInputException(SELECT_FIRST_TARGET_BEFORE);
             }
             else{
-                //TODO controlla
-                if(sendAllVisiblePlayers(shoot.getTargetsPlayer())) {
-                    shoot.addOptionalSelected(numOptional);
-                    StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
-                            SECOND_MSG_STR);
-                    controller.addMessageListImmediateNext(stringAndMessage);
-                    shoot.addCost(COST_FIRST_OPTIONAL);
-                }
-
-                else{
-                    throw new WrongInputException(NO_TARGET_NO_ACTION);
-                }
+                shoot.addOptionalSelected(numOptional);
+                StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
+                        SECOND_MSG_STR);
+                controller.addMessageListImmediateNext(stringAndMessage);
+                shoot.addCost(COST_FIRST_OPTIONAL);
 
             }
 

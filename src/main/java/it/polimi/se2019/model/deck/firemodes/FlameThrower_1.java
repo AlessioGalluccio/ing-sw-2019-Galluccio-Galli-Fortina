@@ -33,12 +33,6 @@ public class FlameThrower_1 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-
-        //send the complete list
-        sendPossibleTargetsCells(createListCellTargetsFlameThrower());
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

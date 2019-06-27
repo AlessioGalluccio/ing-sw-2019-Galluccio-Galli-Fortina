@@ -31,26 +31,50 @@ public class PlayerView extends View /*View implement observer/observable*/{
         networkHandler.setPlayerView(this);
     }
 
+    /**
+     * to initialize player
+     * @param player to initialize
+     */
     public PlayerView(Player player) {
         this.playerCopy = player;
     }
 
+    /**
+     * getter of playerCopy
+     * @return playerCopy
+     */
     public Player getPlayerCopy() {
         return playerCopy;
     }
 
+    /**
+     * getter of selectedTargets
+     * @return selectedTargets
+     */
     public List<? extends Target> getSelectedTargets() {
         return selectedTargets;
     }
 
+    /**
+     * getter of choosenCharacter
+     * @return choosenCharacter
+     */
     public Character getChoosenCharacter() {
         return choosenCharacter;
     }
 
+    /**
+     * getter of possibleCharacter
+     * @return possibleCharacter
+     */
     public List<Character> getPossibleCharacter() {
         return possibleCharacter;
     }
 
+    /**
+     * getter of possibleTargets
+     * @return possibleTargets
+     */
     public List<? extends Target> getPossibleTargets() {
         return possibleTargets;
     }
@@ -114,7 +138,7 @@ public class PlayerView extends View /*View implement observer/observable*/{
 
     /**
      * Do nothing
-     * @param ranking
+     * @param ranking list of player ordered by ranking
      */
     @Override
     public void handleRankingMessage(List<Player> ranking) {

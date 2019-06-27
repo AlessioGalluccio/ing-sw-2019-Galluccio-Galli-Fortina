@@ -31,10 +31,6 @@ public class RailGun_2 extends RailGun_1 {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {
@@ -74,7 +70,10 @@ public class RailGun_2 extends RailGun_1 {
         int targetX = cellOfTarget.getCoordinateX();
         int targetY = cellOfTarget.getCoordinateY();
 
-        if(authorX == targetX + 1 && autorY == targetY){
+        if(authorX == targetX && autorY == targetY){
+            return true;
+        }
+        else if(authorX == targetX + 1 && autorY == targetY){
             return true;
         }
         else if(authorX == targetX - 1 && autorY == targetY){

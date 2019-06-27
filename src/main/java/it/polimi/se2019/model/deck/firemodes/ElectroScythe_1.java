@@ -34,11 +34,6 @@ public class ElectroScythe_1 extends FireMode {
         return new ArrayList<>(); //empty list
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO controlla, non dovrebbe mandare nessun target
-        //do nothing
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

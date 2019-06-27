@@ -71,9 +71,9 @@ public class RailGun_1Test {
 
 
         authorPlayer.setPosition(gameHandler.getCellByCoordinate(2,1));
-        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(1,1));
-        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(3,0));
-        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(3,0));
+        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(1,1)); //target in line
+        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(3,0)); //not valid target
+        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(2,1)); //same cell
         targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,1));
 
 
@@ -114,6 +114,27 @@ public class RailGun_1Test {
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
     }
+
+    @Test
+    //target can be in the same cell of the shooter
+    public void firePositiveNoTargetingTargetInSameCell() throws Exception {
+        assertEquals(RailGun_1.SELECT_PLAYER_RAILGUN, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage3 = new PlayerMessage(targetPlayer3.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage3);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
+        assertEquals(0,authorPlayer.getDamage().size());
+        assertEquals(0,authorPlayer.getMark().getMarkReceived().size());
+        assertEquals(3,targetPlayer3.getDamage().size());
+        assertEquals(0, targetPlayer3.getMark().getMarkReceived().size());
+
+    }
+
 
     @Test
     public void firePositiveWithTargeting() throws Exception {

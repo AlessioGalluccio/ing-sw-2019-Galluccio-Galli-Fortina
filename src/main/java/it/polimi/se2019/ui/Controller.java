@@ -1,47 +1,39 @@
 package it.polimi.se2019.ui;
 
-
-
-
 import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Mark;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.Points;
 import it.polimi.se2019.view.clientView.*;
-import it.polimi.se2019.view.remoteView.SkullBoardView;
 import javafx.application.Platform;
 
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Controller implements Initializable {
 
-    private static int selectTargetingScope;
+    private int selectTargetingScope;
 
     //character button
     @FXML
@@ -64,7 +56,7 @@ public class Controller implements Initializable {
     public Button bconvertAmmo4;
 
     //true when all the skull are taken
-    boolean isFrenzyTime = false;
+    private boolean isFrenzyTime = false;
 
 
     //button to close wainting room
@@ -82,98 +74,168 @@ public class Controller implements Initializable {
     public ImageView imPlayer2Cell00;
     @FXML
     public ImageView imPlayer3Cell00;
+    @FXML
     public ImageView imPlayer4Cell00;
+    @FXML
     public ImageView imPlayer5Cell00;
+    @FXML
     public ImageView imPlayer1Cell01;
+    @FXML
     public ImageView imPlayer2Cell01;
+    @FXML
     public ImageView imPlayer3Cell01;
+    @FXML
     public ImageView imPlayer4Cell01;
+    @FXML
     public ImageView imPlayer5Cell01;
+    @FXML
     public ImageView imPlayer1Cell02;
+    @FXML
     public ImageView imPlayer2Cell02;
+    @FXML
     public ImageView imPlayer3Cell02;
+    @FXML
     public ImageView imPlayer4Cell02;
+    @FXML
     public ImageView imPlayer5Cell02;
-    public ImageView imPlayer1Cell03;
-    public ImageView imPlayer2Cell03;
-    public ImageView imPlayer3Cell03;
-    public ImageView imPlayer4Cell03;
-    public ImageView imPlayer5Cell03;
+    @FXML
     public ImageView imPlayer1Cell10;
+    @FXML
     public ImageView imPlayer2Cell10;
+    @FXML
     public ImageView imPlayer3Cell10;
+    @FXML
     public ImageView imPlayer4Cell10;
+    @FXML
     public ImageView imPlayer5Cell10;
+    @FXML
     public ImageView imPlayer1Cell11;
+    @FXML
     public ImageView imPlayer2Cell11;
+    @FXML
     public ImageView imPlayer3Cell11;
+    @FXML
     public ImageView imPlayer4Cell11;
+    @FXML
     public ImageView imPlayer5Cell11;
+    @FXML
     public ImageView imPlayer1Cell12;
+    @FXML
     public ImageView imPlayer2Cell12;
+    @FXML
     public ImageView imPlayer3Cell12;
+     @FXML
     public ImageView imPlayer4Cell12;
+     @FXML
     public ImageView imPlayer5Cell12;
-    public ImageView imPlayer1Cell13;
-    public ImageView imPlayer2Cell13;
-    public ImageView imPlayer3Cell13;
-    public ImageView imPlayer4Cell13;
-    public ImageView imPlayer5Cell13;
+     @FXML
     public ImageView imPlayer1Cell20;
+     @FXML
     public ImageView imPlayer2Cell20;
+     @FXML
     public ImageView imPlayer3Cell20;
+     @FXML
     public ImageView imPlayer4Cell20;
+     @FXML
     public ImageView imPlayer5Cell20;
+     @FXML
     public ImageView imPlayer1Cell21;
+     @FXML
     public ImageView imPlayer2Cell21;
+     @FXML
     public ImageView imPlayer3Cell21;
+     @FXML
     public ImageView imPlayer4Cell21;
+     @FXML
     public ImageView imPlayer5Cell21;
+     @FXML
     public ImageView imPlayer1Cell22;
+     @FXML
     public ImageView imPlayer2Cell22;
+     @FXML
     public ImageView imPlayer3Cell22;
+     @FXML
     public ImageView imPlayer4Cell22;
+     @FXML
     public ImageView imPlayer5Cell22;
+     @FXML
     public ImageView imPlayer1Cell30;
+     @FXML
     public ImageView imPlayer2Cell30;
+     @FXML
     public ImageView imPlayer3Cell30;
+     @FXML
     public ImageView imPlayer4Cell30;
+     @FXML
     public ImageView imPlayer5Cell30;
+     @FXML
     public ImageView imPlayer1Cell31;
+     @FXML
     public ImageView imPlayer2Cell31;
+     @FXML
     public ImageView imPlayer3Cell31;
+     @FXML
     public ImageView imPlayer4Cell31;
+     @FXML
     public ImageView imPlayer5Cell31;
+     @FXML
     public ImageView imPlayer1Cell32;
+     @FXML
     public ImageView imPlayer2Cell32;
+     @FXML
     public ImageView imPlayer3Cell32;
+     @FXML
     public ImageView imPlayer4Cell32;
+     @FXML
     public ImageView imPlayer5Cell32;
+     @FXML
     public Tab tabEnemy1;
+     @FXML
     public Tab tabEnemy2;
+     @FXML
     public Tab tabEnemy3;
+     @FXML
     public Tab tabEnemy4;
+     @FXML
     public RadioButton rbSprog;
+     @FXML
     public RadioButton rbViolet;
+     @FXML
     public RadioButton rbStruct;
+     @FXML
     public RadioButton rbDozer;
+     @FXML
     public RadioButton rbBanshee;
+     @FXML
     public Button dbDropweapon;
+     @FXML
     public Button bFrenzyShoot1;
+     @FXML
     public Button bFrenzyMove1;
+     @FXML
     public Button bFrenzyGrab1;
+     @FXML
     public Button bFrenzyShoot2;
+     @FXML
     public Button bFrenzyGrab2;
+
 
 
     private ArrayList<ImageView> skull = new ArrayList<>();
     public Button fireButton;
+     @FXML
     public Button endTurnButton;
+     @FXML
     public Label yourPointsLabel;
+     @FXML
     public AnchorPane myContainer;
+     @FXML
     public TabPane container1;
+     @FXML
     public TabPane container2;
+     @FXML
     public AnchorPane enemy1back;
+     @FXML
 
 
     ControllerLogin controllerLogin;
@@ -184,19 +246,33 @@ public class Controller implements Initializable {
     public Button grabButton;
     @FXML
     public Button shootButton;
+    @FXML
     public Button addFire1;
+    @FXML
     public Button addFire2;
+    @FXML
     public Button addFire3;
+    @FXML
     public RadioButton firemode1;
+    @FXML
     public RadioButton firemode2;
+    @FXML
     public RadioButton firemodeOp1;
+    @FXML
     public RadioButton firemodeOp2;
+    @FXML
     public RadioButton firemodeOp3;
+    @FXML
     public ToggleGroup AddFiremode;
+    @FXML
     public TextField skulls;
+    @FXML
     public Label errorSkulls;
+    @FXML
     public RadioButton suddenDeathYes;
+    @FXML
     public RadioButton suddenDeathNo;
+    @FXML
     public Button sendButton;
 
 
@@ -358,7 +434,8 @@ public class Controller implements Initializable {
     @FXML
     public Button showMap;
 
-    public static int choosenMap = 0;
+    static int choosenMap = 0;
+
     @FXML
     public Button weaponDeck;
     @FXML
@@ -583,9 +660,6 @@ public class Controller implements Initializable {
     @FXML
     public Button selectWeaponButton3;
     @FXML
-    public Button selectWeaponButton4;
-
-    @FXML
     public ImageView imTrashP1;
     @FXML
     public ImageView imTrashP2;
@@ -599,9 +673,6 @@ public class Controller implements Initializable {
     public ImageView imTrashW2;
     @FXML
     public ImageView imTrashW3;
-    @FXML
-    public ImageView imTrashW4;
-
     @FXML
     public ImageView imSkull1;
     @FXML
@@ -845,90 +916,87 @@ public class Controller implements Initializable {
     @FXML
     public ImageView playerSkull6;
 
-
-
     private int suddenDeath = 2;
-    private int init_skull = 0;
+    private int initSkull = 0;
 
     @FXML
     public Label labelProva;
 
-    String transparent = "-fx-background-color: transparent;";
-
-    //public static void setClientView(ClientView clientViev) {
-    //clientView=clientViev;
-    //}
+    private String transparent = "-fx-background-color: transparent;";
 
 
-    //ogni label o textfield ecc che vado a creare nel file fxml lo devo riportare come attributo nel controller
-    //con lo stesso come dato in fx:id e in onAction metto il metodo
-
-
+    /**
+     * take skulls' number from the user on gui
+     * @param event after been clicked
+     */
     public void skullCheck(ActionEvent event) {
 
-        init_skull = Integer.parseInt(skulls.getText());
-        if (init_skull < 5 || init_skull > 8) {
+        initSkull = Integer.parseInt(skulls.getText());
+        if (initSkull < 5 || initSkull > 8) {
             errorSkulls.setVisible(true);
         } else
             errorSkulls.setVisible(false);
 
-        System.out.println("Init skulls:" + init_skull);
 
 
     }
 
 
+    /**
+     * let the user select the game's map on gui
+     * @param event after been clicked
+     */
     public void chooseMap(ActionEvent event) {
 
         if (rbmap1.isSelected()) {
             choosenMap = 1;
-            System.out.println(choosenMap);
+
         }
 
         if (rbmap2.isSelected()) {
             choosenMap = 2;
-            System.out.println(choosenMap);
+
         }
 
         if (rbmap3.isSelected()) {
             choosenMap = 3;
-            System.out.println(choosenMap);
+
         }
 
         if (rbmap4.isSelected()) {
             choosenMap = 4;
-            System.out.println(choosenMap);
+
         }
 
     }
 
 
-    public void sendSetting(ActionEvent event) throws Exception {
+    /**
+     * send settings to the server from gui
+     * @param event after been clicked
+     */
+    public void sendSetting(ActionEvent event) {
 
 
-        //mappa.setImage(new Image("mappa.jpg"));
 
         if (suddenDeathYes.isSelected()) {
             suddenDeath = 1;
-            System.out.println("Yes sudden death");
+
         }
         if (suddenDeathNo.isSelected()) {
             suddenDeath = 0;
-            System.out.println("No sudden death");
+
         }
 
-        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((init_skull >= 5) && (init_skull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
+        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((initSkull >= 5) && (initSkull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
             boolean sd;
             if (suddenDeath == 0) {
                 sd = false;
             } else {
                 sd = true;
             }
-            System.out.println("recap");
-            System.out.println(choosenMap);
-            System.out.println("Skulls: " + init_skull);
-            System.out.println(suddenDeath);
-            ControllerLogin.clientView.createSettingMessage(choosenMap, init_skull, sd);
+
+            ControllerLogin.clientView.createSettingMessage(choosenMap, initSkull, sd);
 
             Stage stage = (Stage) rbmap2.getScene().getWindow();
             stage.close();
@@ -941,7 +1009,11 @@ public class Controller implements Initializable {
     }
 
 
-    public void showMap(ActionEvent event) throws InterruptedException {
+    /**
+     * show all the elements on gui to play the game
+     * @param event after been clicked
+     */
+    public void startGame(ActionEvent event)  {
 
 
         //update players position after disconnection
@@ -986,8 +1058,7 @@ public class Controller implements Initializable {
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
         updateSkullBoard(skullnum);
 
-        //
-        setPlayerOnMap();
+
 
         setDiscardReload();
 
@@ -995,8 +1066,6 @@ public class Controller implements Initializable {
         yourCharacter.setVisible(true);
 
 
-        System.out.println(choosenMap);
-        choosenMap= ControllerLogin.mapView.getMapCopy().getID();
         if (choosenMap == 2) {
             mappa.setImage(new Image("mappa2.jpg"));
             cell32.setDisable(true);
@@ -1091,7 +1160,7 @@ public class Controller implements Initializable {
     /**
      * set actions' buttons for the player
      */
-    public void setAction() {
+    private void setAction() {
 
         moveButton.setStyle(transparent);
         grabButton.setStyle(transparent);
@@ -1104,7 +1173,7 @@ public class Controller implements Initializable {
     /**
      * set weapon cards buttons on the map
      */
-    public void setWeaponMap() {
+    private void setWeaponMap() {
 
         redWeapon1.setGraphic(imRedWeapon1);
         redWeapon1.setStyle(transparent);
@@ -1139,7 +1208,7 @@ public class Controller implements Initializable {
     /**
      * set map's cells
      */
-    public void setCellsMap() {
+    private void setCellsMap() {
 
         cell00.setStyle(transparent);
         cell00.setGraphic(ammoCell00);
@@ -1183,7 +1252,7 @@ public class Controller implements Initializable {
     /**
      * set enemys' characters buttons
      */
-    public void setEnemyCharacter() {
+    private void setEnemyCharacter() {
 
         enemyCharacter1.setGraphic(imEnemyCharacter1);
         enemyCharacter1.setStyle(transparent);
@@ -1201,7 +1270,7 @@ public class Controller implements Initializable {
     /**
      * set the buttons stile and images for powerup deck and weapon deck
      */
-    public void setDeck() {
+    private void setDeck() {
 
         impowerupDeck.setDisable(false);
         impowerupDeck.setImage(new Image("AD_powerups_IT_02.jpg"));
@@ -1218,7 +1287,7 @@ public class Controller implements Initializable {
     /**
      * set the buttons stile and images for player's cards
      */
-    public void setPlayerCards() {
+    private void setPlayerCards() {
         bPowerupCard1.setGraphic(imPowerupCard1);
         bPowerupCard1.setStyle(transparent);
         bPowerupCard2.setGraphic(imPowerupCard2);
@@ -1245,7 +1314,7 @@ public class Controller implements Initializable {
     /**
      * set trash's image on power up discard button and reload image on reload button
      */
-    public void setDiscardReload() {
+      private void setDiscardReload() {
         bDiscardPowerup1.setGraphic(imTrashP1);
         bDiscardPowerup1.setStyle(transparent);
         bDiscardPowerup2.setGraphic(imTrashP2);
@@ -1271,19 +1340,15 @@ public class Controller implements Initializable {
 
     }
 
-    public void setPlayerOnMap() {
-
-
-    }
 
 
     /**
      * open Add Firemode's window when the player clicks on add firemode button
      *
-     * @param event
-     * @throws Exception
+     * @param event after been clicked
+     * @throws Exception for opening fxml file
      */
-    public void addFiremode(ActionEvent event) throws Exception {
+    public void selectFiremode(ActionEvent event) throws Exception {
 
         ControllerLogin.open("addFiremode.fxml", "ADD FIREMODE", 350, 400);
 
@@ -1292,7 +1357,7 @@ public class Controller implements Initializable {
     /**
      * send FireModeMessage the the player choose the weapon's firemode on gui
      *
-     * @param event
+     * @param event after been clicked
      */
     public void sendFiremode(ActionEvent event) {
         if (firemode1.isSelected()) {
@@ -1312,7 +1377,7 @@ public class Controller implements Initializable {
     /**
      * send OptionalMessage the the player choose the weapon's optional firemode on gui
      *
-     * @param event
+     * @param event after been clicked
      */
     public void sendOptional(ActionEvent event) {
 
@@ -1338,7 +1403,7 @@ public class Controller implements Initializable {
     /**
      * send weapon message with ClientView's method to the server, when the player clicks on a player's weaponcard button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void selectWeapon(ActionEvent event) {
         Player player = ControllerLogin.clientView.getPlayerCopy();
@@ -1365,7 +1430,7 @@ public class Controller implements Initializable {
             }
 
         } catch (NullPointerException e) {
-            //TODO
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
         }
 
@@ -1375,7 +1440,7 @@ public class Controller implements Initializable {
     /**
      * send Fire message with ClientView's method to the server, when the player clicks on FIRE button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void fire(ActionEvent event) {
 
@@ -1385,15 +1450,10 @@ public class Controller implements Initializable {
     /**
      * send PassTurn message with ClientView's method to the server, when the player clicks End Turn's button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void endTurn(ActionEvent event) {
         ControllerLogin.clientView.createPassTurnMessage();
-
-    }
-
-    public void printSomething(ActionEvent event) {
-        System.out.println("FUNZIONA");
 
     }
 
@@ -1401,7 +1461,7 @@ public class Controller implements Initializable {
     /**
      * send ActionMessage with ClientView's method to the server when the player clicks on a action button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void sendActionMessage(ActionEvent event) {
         Object source = event.getSource();
@@ -1422,7 +1482,7 @@ public class Controller implements Initializable {
     /**
      * send CellMessage with ClientView's method to the server when the player clicks on a cell button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void sendCellMessage(ActionEvent event) {
 
@@ -1480,7 +1540,7 @@ public class Controller implements Initializable {
     /**
      * send a WeaponMessage to the server when the player clicks on one of the map weapons button to collect the card
      *
-     * @param event
+     * @param event after been clicked
      */
     public void sendMapWeapon(ActionEvent event) {
         Object source = event.getSource();
@@ -1525,7 +1585,7 @@ public class Controller implements Initializable {
     /**
      * send reload message when the player selects a weapon to be reload
      *
-     * @param event
+     * @param event after been clicked
      */
     public void reloadWeapon(ActionEvent event) {
         Player player = ControllerLogin.clientView.getPlayerCopy();
@@ -1552,7 +1612,7 @@ public class Controller implements Initializable {
             }
 
         } catch (NullPointerException e) {
-            //TODO
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
         }
 
@@ -1563,7 +1623,7 @@ public class Controller implements Initializable {
     /**
      * send a player message when the player selects a target to shoot
      *
-     * @param event
+     * @param event after been clicked
      */
     public void selectEnemy(ActionEvent event) {
         Object source = event.getSource();
@@ -1585,7 +1645,7 @@ public class Controller implements Initializable {
     /**
      * Send a discard weapon message when the player selects a weapon discard button
      *
-     * @param event
+     * @param event after been clicked
      */
     public void discardWeapon(ActionEvent event) {
         Player player = ControllerLogin.clientView.getPlayerCopy();
@@ -1612,12 +1672,16 @@ public class Controller implements Initializable {
             }
 
         } catch (NullPointerException e) {
-            //TODO
-
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
         }
     }
 
+
+    /**
+     * send message to the server to discard the poerup selected on gui
+     * @param event after been clicked
+     */
     public void discardPowerup(ActionEvent event) {
         Player player = ControllerLogin.clientView.getPlayerCopy();
         try {
@@ -1648,7 +1712,7 @@ public class Controller implements Initializable {
             }
 
         } catch (NullPointerException e) {
-            //TODO
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
 
         }
@@ -1658,27 +1722,25 @@ public class Controller implements Initializable {
     /**
      * update label on gui that show player's points
      *
-     * @param points
+     * @param points player's points
      */
-    public void updatePoints(int points) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    void updatePoints(int points) {
+        Platform.runLater(() ->  {
                 try {
                     String string = Integer.toString(points);
                     yourPointsLabel.setText(string);
                 }
                 catch (NullPointerException e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
-        });
+            });
+
 
     }
 
     /**
      * update int to set map
-     * @param chosenMap
+     * @param chosenMap int of map choosen
      */
     static void updateMap(int chosenMap) {
 
@@ -1689,7 +1751,7 @@ public class Controller implements Initializable {
     /**
      * update skulls' imageviews on map
      *
-     * @param skullNumber
+     * @param skullNumber number of skull on map
      */
     public void updateSkullBoard(String skullNumber) {
 
@@ -1716,7 +1778,7 @@ public class Controller implements Initializable {
                     teschi--;
                 }
             } catch (Exception e) {
-
+                Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
             }
 
         });
@@ -1725,12 +1787,11 @@ public class Controller implements Initializable {
     }
 
 
-    //TODO FINIRE METODO
 
     /**
      * update weaponcards image on map
      */
-    public void updateWeaponMap() {
+     void updateWeaponMap() {
 
         Platform.runLater(() -> {
             try {
@@ -1781,7 +1842,7 @@ public class Controller implements Initializable {
                 }
             }
             catch (Exception e){
-
+                Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
             }
         });
 
@@ -1790,10 +1851,10 @@ public class Controller implements Initializable {
     /**
      * set each weapon id with the image
      *
-     * @param weaponID
-     * @return
+     * @param weaponID select weapon image by the id
+     * @return image of weapon
      */
-    public Image setWeapon(int weaponID) {
+    private Image setWeapon(int weaponID) {
         Image image = new Image("cards/AD_weapons_IT_0225.png");
         switch (weaponID) {
             case 13:
@@ -1859,7 +1920,7 @@ public class Controller implements Initializable {
             case 1:
                 image = new Image("cards/AD_weapons_IT_0222.png");
                 break;
-
+            default: break;
         }
         return image;
     }
@@ -1867,11 +1928,9 @@ public class Controller implements Initializable {
     /**
      * set AmmoCard on map
      */
-    public void updateAmmoCardMap() {
+    void updateAmmoCardMap() {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
         ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
         ArrayList<ImageView> imAmmoCell = new ArrayList<>();
 
@@ -1919,9 +1978,9 @@ public class Controller implements Initializable {
             }
         }
         catch (NullPointerException e){
-
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
         }
-            }
+
         });
 
     }
@@ -1929,10 +1988,10 @@ public class Controller implements Initializable {
     /**
      * set each ammoCard id with the image
      *
-     * @param ammoID
-     * @return
+     * @param ammoID select the right ammo images by the id
+     * @return ammo card image
      */
-    public Image setAmmoCard(int ammoID) {
+    private Image setAmmoCard(int ammoID) {
 
         Image image = new Image("ammo/AD_ammo_04.png");
         switch (ammoID) {
@@ -1972,7 +2031,7 @@ public class Controller implements Initializable {
             case 19:
                 image = new Image("ammo/AD_ammo_0418.png");
                 break;
-
+            default: break;
         }
         return image;
 
@@ -1981,10 +2040,8 @@ public class Controller implements Initializable {
     /**
      * update player's weapon images
      */
-    public void updateWeaponPlayer() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    void updateWeaponPlayer() {
+        Platform.runLater(() ->  {
                 try {
 
                     ArrayList<Button> selectWeapon = new ArrayList<>();
@@ -2040,11 +2097,12 @@ public class Controller implements Initializable {
                         }
                     }
                 } catch (Exception e) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
 
 
-            }
+
         });
 
     }
@@ -2053,13 +2111,11 @@ public class Controller implements Initializable {
     /**
      * update Player's Red Ammo
      *
-     * @param red
+     * @param red number of red ammo
      */
-    public void updatePlayerRedAmmo(String red) {
+    private void updatePlayerRedAmmo(String red) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
                     ArrayList<ImageView> redAmmo = new ArrayList<>();
                     redAmmo.add(rammo1);
@@ -2076,9 +2132,9 @@ public class Controller implements Initializable {
                     }
 
                 } catch (Exception e) {
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
     }
@@ -2086,15 +2142,13 @@ public class Controller implements Initializable {
     /**
      * update Player's Blue Ammo
      *
-     * @param blu
+     * @param blu number of blu ammo
      */
-    public void updatePlayerBlueAmmo(String blu) {
+    private void updatePlayerBlueAmmo(String blu) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
-                    ArrayList<ImageView> blueAmmo = new ArrayList();
+                    ArrayList<ImageView> blueAmmo = new ArrayList<>();
                     blueAmmo.add(bammo1);
                     blueAmmo.add(bammo2);
                     blueAmmo.add(bammo3);
@@ -2109,9 +2163,9 @@ public class Controller implements Initializable {
                     }
 
                 } catch (Exception e) {
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
     }
@@ -2120,13 +2174,11 @@ public class Controller implements Initializable {
     /**
      * update Player's Yellow Ammo
      *
-     * @param yellow
+     * @param yellow number of yellow ammo
      */
-    public void updatePlayerYellowAmmo(String yellow) {
+    private void updatePlayerYellowAmmo(String yellow) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
                     ArrayList<ImageView> yellowAmmo = new ArrayList();
                     yellowAmmo.add(yammo1);
@@ -2142,10 +2194,10 @@ public class Controller implements Initializable {
                         yellowNumber--;
                     }
                 } catch (Exception e) {
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
 
-            }
+
         });
 
     }
@@ -2154,14 +2206,12 @@ public class Controller implements Initializable {
     /**
      * update all Player's ammo
      *
-     * @param red
-     * @param blue
-     * @param yellow
+     * @param red red ammo number
+     * @param blue blue ammo number
+     * @param yellow yellow ammo number
      */
-    public void updatePlayerAmmo(int red, int blue, int yellow) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updatePlayerAmmo(int red, int blue, int yellow) {
+        Platform.runLater(() ->  {
                 String redAmmo = String.valueOf(red);
                 String blueAmmo = String.valueOf(blue);
                 String yellowAmmo = String.valueOf(yellow);
@@ -2169,7 +2219,7 @@ public class Controller implements Initializable {
                 updatePlayerRedAmmo(redAmmo);
                 updatePlayerBlueAmmo(blueAmmo);
                 updatePlayerYellowAmmo(yellowAmmo);
-            }
+
         });
 
     }
@@ -2177,27 +2227,25 @@ public class Controller implements Initializable {
 
     /**
      * print string from controller
-     * @param string
+     * @param string string from controller
      */
-    public void printf(String string) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void printf(String string) {
+        Platform.runLater(() ->  {
                 try {
                     labelProva.setText(string);
                 }catch (NullPointerException e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
     }
 
     /**
      * get close button for closing waiting room
-     * @return
+     * @return closeWaiting button
      */
-    public Button getCloseWaiting() {
+     Button getCloseWaiting() {
 
         return closeWaiting;
 
@@ -2206,7 +2254,7 @@ public class Controller implements Initializable {
     /**
      * change enemys' nickname on map's window
      */
-    public void setEnemyNickname() {
+    private void setEnemyNickname() {
         if (ControllerLogin.enemyView1 != null) {
             tabEnemy1.setText(ControllerLogin.enemyView1.getNickname());
         } else {
@@ -2237,14 +2285,12 @@ public class Controller implements Initializable {
 
     /**
      * show possible character
-     * @param event
-     * @throws Exception
-     */
-    public void chooseYourCharacter(ActionEvent event) throws Exception {
+     * @param event after been clicked
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     */
+    public void chooseYourCharacter(ActionEvent event) {
+
+        Platform.runLater(() ->  {
 
                 List<Integer> characterID = new LinkedList<>();
                 for(int i=0; i<ControllerLogin.characters.size(); i++){
@@ -2260,7 +2306,7 @@ public class Controller implements Initializable {
                         setPossibleCharacter(characterID.get(i));
                     }
 
-            }
+
         });
 
 
@@ -2268,12 +2314,10 @@ public class Controller implements Initializable {
 
     /**
      * set possible radio button character clickable
-     * @param i
+     * @param i int character id
      */
-    public void setPossibleCharacter(int i){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    private void setPossibleCharacter(int i){
+        Platform.runLater(() ->  {
                 switch (i){
                     case 1: rbSprog.setDisable(false);
                             break;
@@ -2285,7 +2329,7 @@ public class Controller implements Initializable {
                             break;
                     case 5: rbBanshee.setDisable(false);
                 }
-            }
+
         });
     }
 
@@ -2299,14 +2343,11 @@ public class Controller implements Initializable {
     /**
      * set ImageView of player character based on the character choosen
      *
-     * @param event
+     * @param event after been clicked
      */
     public void chooseCharacter(ActionEvent event) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
 
-                ArrayList<Image> images = new ArrayList<>();
                 try {
                     if (rbSprog.isSelected()) {
 
@@ -2343,10 +2384,9 @@ public class Controller implements Initializable {
                     stage.close();
 
                 } catch (NotCharacterException e) {
-                    //TODO stampare che non può scegliere quel personaggio
-                    //(In teoria con la GUI non potrebbe sucedere)
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
     }
@@ -2354,8 +2394,8 @@ public class Controller implements Initializable {
 
     /**
      * open chooseCharacter window
-     * @param event
-     * @throws Exception
+     * @param event after been clicked
+     * @throws Exception for opening fxml fil
      */
     public void selectCharacter(ActionEvent event) throws Exception{
         if (ControllerLogin.clientView.getPossibleCharacter() != null) {
@@ -2364,18 +2404,16 @@ public class Controller implements Initializable {
 
 
 
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
+            Platform.runLater(() ->  {
                     try {
 
                             bselectCharacter.setVisible(false);
                             bselectCharacter.setDisable(true);
                     }
                     catch (Exception e){
-
+                        Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                     }
-                }
+
             });
 
 
@@ -2390,10 +2428,8 @@ public class Controller implements Initializable {
      *
      * set player character images on map
      */
-    public void updatePlayerCharacter(int i){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updatePlayerCharacter(int i){
+        Platform.runLater(() ->  {
                 try {
                     ArrayList<Image> image = setCharacter(i, isFrenzyTime);
                     possibleActions.setVisible(true);
@@ -2402,23 +2438,20 @@ public class Controller implements Initializable {
                     possibleActions.setImage(image.get(1));
 
                 } catch (NullPointerException e) {
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
     }
 
 
-
-
     /**
      * update Enemy Character Image
+     * @param enemyView by ControllerLogin
      */
-    public void updateEnemyCharacter(ClientEnemyView enemyView) {
+     void updateEnemyCharacter(ClientEnemyView enemyView) {
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
                     ArrayList<Image> images = new ArrayList<>();
                     if (ControllerLogin.enemyView1.getCharacter() != null) {
@@ -2451,9 +2484,9 @@ public class Controller implements Initializable {
                     }
 
                 }catch (NullPointerException e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
 
@@ -2464,7 +2497,7 @@ public class Controller implements Initializable {
     /**
      * set each Character id with the image
      */
-    public ArrayList<Image> setCharacter(int characterID, Boolean frenzy) {
+    private ArrayList<Image> setCharacter(int characterID, Boolean frenzy) {
         Image image1 = new Image("characters/characterBlue.jpg");
         Image image2 = new Image("characters/actionsBlue.jpg");
         switch (characterID) {
@@ -2513,6 +2546,7 @@ public class Controller implements Initializable {
                     image2 = new Image("characters/actionsBlue.jpg");
                 }
                 break;
+            default: break;
         }
         ArrayList<Image> images = new ArrayList<>();
         images.add(image1);
@@ -2525,11 +2559,10 @@ public class Controller implements Initializable {
 
     /**
      * update enemy's weapons
+     * @param enemyView by ControllerLogin
      */
-    public void updateEnemyWeapon(ClientEnemyView enemyView) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updateEnemyWeapon(ClientEnemyView enemyView) {
+        Platform.runLater(() ->  {
                 try {
                     if (ControllerLogin.enemyView1 != null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
@@ -2552,9 +2585,9 @@ public class Controller implements Initializable {
                         }
                     }
                 }catch (NullPointerException e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
 
     }
@@ -2562,15 +2595,13 @@ public class Controller implements Initializable {
     /**
      * set enemy's weapon
      *
-     * @param im1
-     * @param im2
-     * @param im3
-     * @param enemyView
+     * @param im1 imageview to add
+     * @param im2 imageview to add
+     * @param im3 imageview to add
+     * @param enemyView by ControllerLogin
      */
-    public void setEnemyWeapon(ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    private void setEnemyWeapon(ImageView im1, ImageView im2, ImageView im3, ClientEnemyView enemyView) {
+        Platform.runLater(() ->  {
         try {
             ArrayList<WeaponCard> weaponCards = enemyView.getUnloadedWeapon();
             int loadedWeapon = enemyView.getLoadedWeapon();
@@ -2597,9 +2628,9 @@ public class Controller implements Initializable {
 
 
         } catch (Exception e) {
-
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
         }
-            }
+
         });
 
     }
@@ -2609,10 +2640,8 @@ public class Controller implements Initializable {
     /**
      * update player's powerup
      */
-    public void updatePlayerPowerup() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updatePlayerPowerup() {
+        Platform.runLater(() ->  {
                 try {
 
 
@@ -2646,24 +2675,22 @@ public class Controller implements Initializable {
                         usePowerup.get(i).setDisable(true);
                     }
                 } catch (Exception e) {
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
 
-
-            }
         });
 
     }
 
     /**
      * set each powerup id with an image
-     * @param PowerupID
-     * @return
+     * @param powerupID get the powerup images by the id
+     * @return poerup images
      */
-    public Image setPowerup(int PowerupID) {
+    private Image setPowerup(int powerupID) {
 
         Image image = new Image("AD_powerups_IT_02.jpg");
-        switch (PowerupID) {
+        switch (powerupID) {
             case 32:
                 image = new Image("cards/AD_powerups_IT_022.png");
                 break;
@@ -2708,7 +2735,7 @@ public class Controller implements Initializable {
 
     /**
      * the player decide to not shoot, the weapon won't be discarded
-     * @param event
+     * @param event after been clicked
      */
     public void dropWeapon(ActionEvent event) {
 
@@ -2724,6 +2751,7 @@ public class Controller implements Initializable {
 
     /**
      * create a powerup message to send to the server
+     * @param event after been clicked
      */
     public void usePowerup(ActionEvent event){
 
@@ -2732,7 +2760,7 @@ public class Controller implements Initializable {
 
         try {
             if (bPowerupCard1 == source) {
-                createPowerupMessage(powerupCards.get(0), 0);
+                createPowerupMessage(powerupCards.get(0));
                 if(powerupCards.get(0).getIDtype()== 0 || powerupCards.get(0).getIDtype()== 1 || powerupCards.get(0).getIDtype()== 2){
                     bconvertAmmo1.setVisible(true);
                     bconvertAmmo1.setDisable(false);
@@ -2741,7 +2769,7 @@ public class Controller implements Initializable {
                 }
             }
             if (bPowerupCard2 == source) {
-                createPowerupMessage(powerupCards.get(1), 1);
+                createPowerupMessage(powerupCards.get(1));
                 if(powerupCards.get(1).getIDtype()== 0 || powerupCards.get(1).getIDtype()== 1 || powerupCards.get(1).getIDtype()== 2){
                     selectTargetingScope=1;
                     bconvertAmmo2.setVisible(true);
@@ -2750,7 +2778,7 @@ public class Controller implements Initializable {
                 }
             }
             if (bPowerupCard3 == source) {
-                createPowerupMessage(powerupCards.get(2), 2);
+                createPowerupMessage(powerupCards.get(2));
                 if(powerupCards.get(2).getIDtype()== 0 || powerupCards.get(2).getIDtype()== 1 || powerupCards.get(2).getIDtype()== 2){
                     selectTargetingScope=2;
                     bconvertAmmo3.setDisable(false);
@@ -2759,7 +2787,7 @@ public class Controller implements Initializable {
                 }
             }
             if (bPowerupCard4 == source) {
-                createPowerupMessage(powerupCards.get(3), 3);
+                createPowerupMessage(powerupCards.get(3));
                 if(powerupCards.get(3).getIDtype()== 0 || powerupCards.get(3).getIDtype()== 1 || powerupCards.get(3).getIDtype()== 2){
                     selectTargetingScope=3;
                     bconvertAmmo4.setDisable(false);
@@ -2767,32 +2795,17 @@ public class Controller implements Initializable {
                 }
             }
         }catch (Exception e){
-
+            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
         }
     }
 
 
     /**
      * connect each powerup id with the powerup message and create a powerupmessage to send to the server
-     * @param usedPowerup
+     * @param usedPowerup poerup choosen by the player to be used
      */
-    public void createPowerupMessage(PowerupCard usedPowerup, int position) throws  Exception{
+    private void createPowerupMessage(PowerupCard usedPowerup){
         switch (usedPowerup.getIDtype()){
-            case 0: {
-                selectTargetingScope = position;
-                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
-                break;
-            }
-            case 1: {
-                selectTargetingScope = position;
-                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
-                break;
-            }
-            case 2: {
-                selectTargetingScope = position;
-                //ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );
-                break;
-            }
             case 10: {
                 ControllerLogin.clientView.createNewtonMessage((NewtonCard)usedPowerup);
                 break;
@@ -2829,6 +2842,9 @@ public class Controller implements Initializable {
                 ControllerLogin.clientView.createTagbackGranadeMessage((TagbackGrenadeCard) usedPowerup);
                 break;
             }
+            default: {
+                break;
+            }
 
         }
     }
@@ -2837,10 +2853,8 @@ public class Controller implements Initializable {
     /**
      * change player's images with frenzy's
      */
-    public void frenzyPlayer() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void frenzyPlayer() {
+        Platform.runLater(() ->  {
                 try {
 
                     ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
@@ -2874,17 +2888,18 @@ public class Controller implements Initializable {
                     }
                 }
                 catch (Exception e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
     }
 
     /**
      * connect each character id with the frenzy image
-     * @param characterID
+     * @param characterID take the right image base on the character id
+     * @return an arraylist of character and action image
      */
-    public  ArrayList<Image> setFrenzyCharacter(int characterID){
+    private  ArrayList<Image> setFrenzyCharacter(int characterID){
         Image image1 = new Image("characters/characterBlue.jpg");
         Image image2 = new Image("characters/actionsBlue.jpg");
         switch (characterID) {
@@ -2908,6 +2923,7 @@ public class Controller implements Initializable {
                 image1 = new Image("frenzyCharacters/frenzyCharacterBlue.png");
                 image2 = new Image("frenzyCharacters/frenzyActionsBlue.png");
                 break;
+            default: break;
         }
         ArrayList<Image> images = new ArrayList<>();
         images.add(image1);
@@ -2922,10 +2938,8 @@ public class Controller implements Initializable {
     /**
      * update enemy if they are in frenzy mode
      */
-    public void frenzyEnemy(ClientEnemyView enemyView){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    void frenzyEnemy(ClientEnemyView enemyView){
+        Platform.runLater(() ->{
                 if (enemyView.isFrenzyDeath()) {
                     ArrayList<Image> images = setFrenzyCharacter(enemyView.getCharacter().getId());
                     if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
@@ -2946,7 +2960,7 @@ public class Controller implements Initializable {
                     }
 
                 }
-            }
+
         });
 
     }
@@ -2955,10 +2969,8 @@ public class Controller implements Initializable {
     /**
      * update player's damage on gui map window
      */
-    public void updatePlayerDamage(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updatePlayerDamage(){
+        Platform.runLater(() ->  {
                 try {
                     List<Player> players = ControllerLogin.clientView.getPlayerCopy().getDamage();
                     ArrayList<ImageView> imDamage = new ArrayList<>();
@@ -2979,20 +2991,18 @@ public class Controller implements Initializable {
                     }
                 }
                 catch (Exception e){
-
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
-            }
+
         });
     }
 
     /**
      * update enemy's damage on gui map window
-     * @param enemyView
+     * @param enemyView by controllerLogin
      */
-    public void updateEnemyDamage(ClientEnemyView enemyView){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updateEnemyDamage(ClientEnemyView enemyView){
+        Platform.runLater(() ->  {
                 try {
                     List<Player> players= enemyView.getDamage();
                     ArrayList<ImageView> imDamage = new ArrayList<>();
@@ -3036,28 +3046,29 @@ public class Controller implements Initializable {
 
                 }
                 catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
     }
 
     /**
      * add imageview to an arraylist
-     * @param imDamage
-     * @param im1
-     * @param im2
-     * @param im3
-     * @param im4
-     * @param im5
-     * @param im6
-     * @param im7
-     * @param im8
-     * @param im9
-     * @param im10
-     * @param im11
+     * @param imDamage ararylist to insert imageviews
+     * @param im1 imageview to add
+     * @param im2 imageview to add
+     * @param im3 imageview to add
+     * @param im4 imageview to add
+     * @param im5 imageview to add
+     * @param im6 imageview to add
+     * @param im7 imageview to add
+     * @param im8 imageview to add
+     * @param im9 imageview to add
+     * @param im10 imageview to add
+     * @param im11 imageview to add
      */
-    public void setDamage(ArrayList<ImageView> imDamage, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
+    private void setDamage(ArrayList<ImageView> imDamage, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
                           ImageView im5,ImageView im6,ImageView im7,ImageView im8,ImageView im9,ImageView im10,ImageView im11, ImageView im12 ){
         imDamage.add(im1);
         imDamage.add(im2);
@@ -3076,10 +3087,10 @@ public class Controller implements Initializable {
 
     /**
      * connect each drop image with the character
-     * @param characterID
-     * @return
+     * @param characterID character id to set images
+     * @return image of character damage
      */
-    public Image setDamageImages(int characterID){
+    private Image setDamageImages(int characterID){
         Image image = new Image("Icon/BlueDrop.png");
 
         switch (characterID){
@@ -3103,24 +3114,17 @@ public class Controller implements Initializable {
                 image = new Image("Icon/BlueDrop.png");
 
                 break;
+            default: break;
         }
         return image;
     }
 
-    /**
-     * set image for the first player
-     */
-    public void setImFirstPlayer(){
-        //TODO
-    }
 
     /**
      * update player's marks on gui
      */
-    public void updatePlayerMarks(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+    void updatePlayerMarks(){
+        Platform.runLater(() ->  {
                 try {
                     List<Player> marks = ControllerLogin.clientView.getPlayerCopy().getMark().getMarkReceived();
                     ArrayList<ImageView> imMarks = new ArrayList<>();
@@ -3131,21 +3135,20 @@ public class Controller implements Initializable {
                     }
                 }
                 catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
     }
 
     /**
      * update enemy marks on gui
-     * @param enemyView
+     * @param enemyView by ControllerLogin
      */
-    public void updateEnemyMarks(ClientEnemyView enemyView){
+     void updateEnemyMarks(ClientEnemyView enemyView){
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
                     List<Player> players= enemyView.getMark();
                     ArrayList<ImageView> imMarks = new ArrayList<>();
@@ -3189,9 +3192,10 @@ public class Controller implements Initializable {
 
                 }
                 catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
 
 
@@ -3201,10 +3205,8 @@ public class Controller implements Initializable {
     /**
      * update player's skull on gui map window
      */
-    public void updatePlayerSkull(){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updatePlayerSkull(){
+        Platform.runLater(() ->  {
                 try {
                     int skullNumber = ControllerLogin.clientView.getPlayerCopy().getSkull();
                     ArrayList<ImageView> imSkulls = new ArrayList<>();
@@ -3227,9 +3229,10 @@ public class Controller implements Initializable {
                      }
                 }
                 catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
 
     }
@@ -3237,24 +3240,22 @@ public class Controller implements Initializable {
 
     /**
      * update enemy skulls
-     * @param enemyView
+     * @param enemyView by ControllerLogin
      */
-    public void updateEnemySkull(ClientEnemyView enemyView){
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+     void updateEnemySkull(ClientEnemyView enemyView){
+        Platform.runLater(() ->  {
                 try {
-                    int skull= enemyView.getSkull();
+                    int enemySkull= enemyView.getSkull();
                     ArrayList <ImageView> imSkulls = new ArrayList<>();
                     if(ControllerLogin.enemyView1!=null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
                             setSkull(imSkulls, enemy1Skull1, enemy1Skull2, enemy1Skull3, enemy1Skull4, enemy1Skull5, enemy1Skull6);
                             if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setVisible(false);
                                 }
                             }
@@ -3264,11 +3265,11 @@ public class Controller implements Initializable {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
                             setSkull(imSkulls, enemy2Skull1, enemy2Skull2, enemy2Skull3, enemy2Skull4, enemy2Skull5, enemy2Skull6);
                             if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setVisible(false);
                                 }
                             }
@@ -3279,11 +3280,11 @@ public class Controller implements Initializable {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
                             setSkull(imSkulls, enemy3Skull1, enemy3Skull2, enemy3Skull3, enemy3Skull4, enemy3Skull5, enemy3Skull6);
                             if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setVisible(false);
                                 }
                             }
@@ -3294,11 +3295,11 @@ public class Controller implements Initializable {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
                             setSkull(imSkulls, enemy4Skull1, enemy4Skull2, enemy4Skull3, enemy4Skull4, enemy4Skull5, enemy4Skull6);
                             if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
-                                for (int i = 0; i < skull; i++) {
+                                for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setVisible(false);
                                 }
                             }
@@ -3309,9 +3310,10 @@ public class Controller implements Initializable {
 
                 }
                 catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
 
 
@@ -3319,16 +3321,16 @@ public class Controller implements Initializable {
 
     /**
      * set skull images in an arraylist
-     * @param imSkulls
-     * @param im1
-     * @param im2
-     * @param im3
-     * @param im4
-     * @param im5
-     * @param im6
-     * @return
+     * @param imSkulls Arraylist to insert imageviews
+     * @param im1 imageview to add
+     * @param im2 imageview to add
+     * @param im3 imageview to add
+     * @param im4 imageview to add
+     * @param im5 imageview to add
+     * @param im6 imageview to add
+     * @return arraylist of imageview of skull
      */
-    public ArrayList<ImageView> setSkull(ArrayList <ImageView> imSkulls, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
+    private ArrayList<ImageView> setSkull(ArrayList <ImageView> imSkulls, ImageView im1,ImageView im2,ImageView im3,ImageView im4,
                                          ImageView im5,ImageView im6){
         imSkulls.add(im1);
         imSkulls.add(im2);
@@ -3342,13 +3344,11 @@ public class Controller implements Initializable {
 
     /**
      * update players t on gui's cell
-     * @param cell
+     * @param cell Cell to update
      */
-    public void updatePlayersPosition(Cell cell){
+     void updatePlayersPosition(Cell cell){
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+        Platform.runLater(() ->  {
                 try {
 
                     List<Player> players = cell.getPlayerHere();
@@ -3361,21 +3361,22 @@ public class Controller implements Initializable {
                         imPlayerPosition.get(i).setVisible(true);
                     }
                 } catch (Exception e) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
 
                 }
-            }
+
         });
 
     }
 
     /**
      * add ImageView position in an arraylist
-     * @param imPlayerPosition
-     * @param im1
-     * @param im2
-     * @param im3
-     * @param im4
-     * @param im5
+     * @param imPlayerPosition arraylist to insert imageviews
+     * @param im1 imageview to add
+     * @param im2 imageview to add
+     * @param im3 imageview to add
+     * @param im4 imageview to add
+     * @param im5 imageview to add
      */
     public ArrayList<ImageView> setCellImageViewPosition(ArrayList<ImageView> imPlayerPosition, ImageView im1, ImageView im2, ImageView im3, ImageView im4,ImageView im5 ){
         imPlayerPosition.add(im1);
@@ -3389,11 +3390,11 @@ public class Controller implements Initializable {
 
     /**
      * set cell coordinates with player's position imageviews
-     * @param x
-     * @param y
-     * @return
+     * @param x coordinate x of cell
+     * @param y coordinate y of cell
+     * @return arraylist of images of player position in cell
      */
-    public ArrayList<ImageView>  setCellPlayersPosition(int x, int y){
+    private ArrayList<ImageView>  setCellPlayersPosition(int x, int y){
         ArrayList<ImageView> images = new ArrayList<>();
         if(x==0 && y==0)
             images= setCellImageViewPosition(images, imPlayer1Cell00, imPlayer2Cell00,imPlayer3Cell00,imPlayer4Cell00,imPlayer5Cell00);
@@ -3429,10 +3430,10 @@ public class Controller implements Initializable {
 
     /**
      * set each position's image with the character color
-     * @param characterID
-     * @return
+     * @param characterID character id to select the right image
+     * @return icon character image
      */
-    public Image setPositionPlayerImages(int characterID){
+    private Image setPositionPlayerImages(int characterID){
         Image image = new Image("Icon/Blu.png");
 
         switch (characterID){
@@ -3456,6 +3457,7 @@ public class Controller implements Initializable {
                 image = new Image("Icon/Blu.png");
 
                 break;
+            default: break;
         }
         return image;
     }
@@ -3463,15 +3465,15 @@ public class Controller implements Initializable {
 
     /**
      * print on gui match id
-     * @param matchId
+     * @param matchId string of match id
      */
-    public void showMatchID(String matchId){
+    private void showMatchID(String matchId){
         labelMatchID.setText("Match ID :" + matchId);
     }
 
     /**
      * send Targeting scope message
-     * @param event
+     * @param event after been clicked
      */
     public void chooseTargetingAmmo(ActionEvent event) {
 
@@ -3504,8 +3506,8 @@ public class Controller implements Initializable {
 
     /**
      * when a targeting scope is select open window to choose the ammo to convert
-     * @param event
-     * @throws Exception
+     * @param event after been clicked
+     * @throws Exception for opening fxml file
      */
     public void convertAmmo(ActionEvent event) throws Exception{
        ControllerLogin.open("targetingScopeColor.fxml", "CHOOSE YOUR AMMO",223,346 );

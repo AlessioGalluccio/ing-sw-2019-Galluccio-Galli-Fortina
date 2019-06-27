@@ -24,10 +24,6 @@ public class SledgeHammer_2 extends FireMode {
         return list;
     }
 
-    @Override
-    public void sendPossibleTargetsAtStart() {
-        //TODO
-    }
 
     @Override
     public List<AmmoBag> costOfFiremodeNotReloading() {

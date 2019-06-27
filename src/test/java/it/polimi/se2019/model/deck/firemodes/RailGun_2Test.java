@@ -72,10 +72,10 @@ public class RailGun_2Test {
 
 
         authorPlayer.setPosition(gameHandler.getCellByCoordinate(2,1));
-        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(1,1));
-        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(1,1));
-        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(3,0));
-        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,1));
+        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(1,1)); //valid
+        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(1,1)); //valid
+        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(3,0)); //not valid
+        targetPlayer4.setPosition(gameHandler.getCellByCoordinate(2,1)); //same cell
 
 
         authorPlayer.setAmmoBag(3,3,3);
@@ -117,6 +117,32 @@ public class RailGun_2Test {
         assertEquals(0,authorPlayer.getMark().getMarkReceived().size());
         assertEquals(2,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
+        assertEquals(2,targetPlayer2.getDamage().size());
+        assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
+
+    }
+
+    @Test
+    //target can be in the same cell of the shooter
+    public void firePositiveNoTargetingTargetInSameCell() throws Exception {
+        assertEquals(RailGun_1.SELECT_PLAYER_RAILGUN, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage4 = new PlayerMessage(targetPlayer4.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage4);
+        assertEquals(RailGun_2.SELECT_SECOND_PLAYER, playerView.getLastStringPrinted());
+
+        PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage2);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
+        assertEquals(0,authorPlayer.getDamage().size());
+        assertEquals(0,authorPlayer.getMark().getMarkReceived().size());
+        assertEquals(2,targetPlayer4.getDamage().size());
+        assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
         assertEquals(2,targetPlayer2.getDamage().size());
         assertEquals(0, targetPlayer2.getMark().getMarkReceived().size());
 
