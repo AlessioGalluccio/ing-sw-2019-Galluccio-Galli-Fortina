@@ -137,6 +137,7 @@ public class ShotGun_1Test {
         assertEquals(3,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
 
+        //target doesn't move
         assertEquals(1, targetPlayer1.getCell().getCoordinateX());
         assertEquals(1,targetPlayer1.getCell().getCoordinateY());
 

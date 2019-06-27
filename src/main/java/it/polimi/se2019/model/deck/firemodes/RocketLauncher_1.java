@@ -19,7 +19,7 @@ public class RocketLauncher_1 extends FireMode {
     private static final long serialVersionUID = -6606954983898981384L;
 
     //messages
-    public static final String PLAYER_VISIBLE_NOT_AUTHOR_CELL = "Select a visible player not in your cell. ";
+    public static final String SELECT_PLAYER_VISIBLE_NOT_AUTHOR_CELL = "Select a visible player not in your cell. ";
     public static final String SELECT_CELL_TO_MOVE_TARGET = "Select a cell where to move the target. ";
     public static final String SELECT_CELL_TO_MOVE_YOURSELF = "Select a cell where to move yourself. ";
 
@@ -27,11 +27,12 @@ public class RocketLauncher_1 extends FireMode {
     public static final String TOO_DISTANT_CELL_YOURSELF = "This cell is too distant from you. ";
     public static final String TOO_DISTANT_CELL_TARGET = "This cell is too distant from the target. ";
     public static final String SELECT_TARGET_BEFORE = "Select a target before. ";
+    public static final String SAME_CELL_AUTHOR = "You can't shoot at a target in your cell. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
         List<StringAndMessage> list = new ArrayList<>();
-        list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE, PLAYER_VISIBLE_NOT_AUTHOR_CELL));
+        list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE, SELECT_PLAYER_VISIBLE_NOT_AUTHOR_CELL));
         list.add(new StringAndMessage(Identificator.CELL_MESSAGE, SELECT_CELL_TO_MOVE_TARGET));
         return list;
     }
@@ -58,6 +59,7 @@ public class RocketLauncher_1 extends FireMode {
                     addDamageAndMarks(target,1,0,true);
                 }
             }
+            commonEndingFire();
         }
     }
 
@@ -87,7 +89,7 @@ public class RocketLauncher_1 extends FireMode {
                 throw new WrongInputException(CELL_NOT_PRESENT);
             }
         }
-        //fore base firemode
+        //for base firemode
         else{
             try {
                 Cell targetCell = gameHandler.getCellByCoordinate(x,y);
@@ -109,7 +111,10 @@ public class RocketLauncher_1 extends FireMode {
         //if the player is visible, we add him and his cell to shoot. The cell will be useful in optional 2,
         //because we must use the originary poition of the target. We can move him before using optional, in fact
         Player target = gameHandler.getPlayerByID(playerID);
-        if(target.isVisibleBy(gameHandler.getMap(), author)){
+        if(target.getCell().equals(author.getCell())){
+            throw new WrongInputException(SAME_CELL_AUTHOR);
+        }
+        else if(target.isVisibleBy(gameHandler.getMap(), author)){
             shoot.addPlayerTargetFromFireMode(target,true);
             shoot.addCellFromFireMode(target.getCell());
         }
