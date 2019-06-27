@@ -64,42 +64,9 @@ public class RailGun_2 extends RailGun_1 {
 
     @Override
     protected boolean isInValidPosition(Cell cellOfTarget){
-        int authorX = author.getCell().getCoordinateX();
-        int autorY = author.getCell().getCoordinateY();
-
-        int targetX = cellOfTarget.getCoordinateX();
-        int targetY = cellOfTarget.getCoordinateY();
-
-        if(authorX == targetX && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX + 1 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX - 1 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY + 1){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY - 1){
-            return true;
-        }
-        else if(authorX == targetX + 2 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX - 2 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY + 2){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY - 2){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return (super.isInValidPosition(cellOfTarget) &&
+                (cellOfTarget.getCoordinateX() == author.getCell().getCoordinateX()
+                        || cellOfTarget.getCoordinateY() == author.getCell().getCoordinateY()));
     }
 
 }

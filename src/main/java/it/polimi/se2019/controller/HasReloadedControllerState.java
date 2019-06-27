@@ -11,6 +11,7 @@ public class HasReloadedControllerState extends StateController {
     private Player player;
     private String errorString;
     private String stringToPlayerView;
+    private boolean hasPassedTurn = false;
 
     /**
      * constructor
@@ -103,6 +104,12 @@ public class HasReloadedControllerState extends StateController {
 
 
     @Override
+    public void handlePassTurn() {
+        super.handlePassTurn();
+        hasPassedTurn = true;
+    }
+
+    @Override
     public void handleDiscardPowerup(int powerupID) {
         try{
             player.discardCard(gameHandler.getPowerupCardByID(powerupID), false);
@@ -127,7 +134,10 @@ public class HasReloadedControllerState extends StateController {
 
         arg.handle(this);
 
-        if(errorString != null){
+        if(hasPassedTurn){
+            stringToPlayerView = null;
+        }
+        else if(errorString != null){
             stringToPlayerView = errorString + RELOAD_OR_PASS;
         }
         else{

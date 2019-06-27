@@ -70,10 +70,10 @@ public class RailGun_1Test {
         stateController = controller.getState();
 
 
-        authorPlayer.setPosition(gameHandler.getCellByCoordinate(2,1));
-        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(1,1)); //target in line
-        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(3,0)); //not valid target
-        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(2,1)); //same cell
+        authorPlayer.setPosition(gameHandler.getCellByCoordinate(3,1));
+        targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,1)); //target in line
+        targetPlayer2.setPosition(gameHandler.getCellByCoordinate(2,0)); //not valid target
+        targetPlayer3.setPosition(gameHandler.getCellByCoordinate(3,1)); //same cell
         targetPlayer4.setPosition(gameHandler.getCellByCoordinate(3,1));
 
 
@@ -168,8 +168,8 @@ public class RailGun_1Test {
     public void fireNegativeNoTargeting() throws Exception {
         assertEquals(RailGun_1.SELECT_PLAYER_RAILGUN, playerView.getLastStringPrinted());
 
-        PlayerMessage playerMessage1 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
-        controller.update(null,playerMessage1);
+        PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage2);
         assertEquals(RailGun_1.INVALID_TARGET + RailGun_1.SELECT_PLAYER_RAILGUN, playerView.getLastStringPrinted());
 
         assertEquals(0,authorPlayer.getDamage().size());

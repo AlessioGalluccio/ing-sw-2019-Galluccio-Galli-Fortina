@@ -69,30 +69,10 @@ public class RailGun_1 extends FireMode {
     }
 
     protected boolean isInValidPosition(Cell cellOfTarget){
-        int authorX = author.getCell().getCoordinateX();
-        int autorY = author.getCell().getCoordinateY();
-
-        int targetX = cellOfTarget.getCoordinateX();
-        int targetY = cellOfTarget.getCoordinateY();
-
-        if(authorX == targetX && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX + 1 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX - 1 && autorY == targetY){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY + 1){
-            return true;
-        }
-        else if(authorX == targetX && autorY == targetY - 1){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return(gameHandler.getMap().getCellInDirection(author.getCell(),'N').contains(cellOfTarget) ||
+            gameHandler.getMap().getCellInDirection(author.getCell(),'E').contains(cellOfTarget) ||
+            gameHandler.getMap().getCellInDirection(author.getCell(),'S').contains(cellOfTarget) ||
+            gameHandler.getMap().getCellInDirection(author.getCell(),'W').contains(cellOfTarget));
     }
 
 }
