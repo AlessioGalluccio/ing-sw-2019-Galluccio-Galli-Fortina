@@ -4,6 +4,7 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.deck.firemodes.ElectroScythe_1;
 import it.polimi.se2019.model.deck.firemodes.ShockWave_2;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Room;
 import it.polimi.se2019.model.player.*;
@@ -360,7 +361,24 @@ public class GameHandlerTest {
         kill(thirdPlayer, firstPlayer, secondPlayer, fourthPlayer);
         assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
         gameHandler.nextTurn();
+        //the turn is not passed because not everyone has spawned yet
         assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+    }
+
+    @Test
+
+    public void nextTurnRespawnNotConnectedPlayer() throws NotPresentException {
+        //thirdPlayer is not in a cell spawn, he is disconnected and he is killed
+        thirdPlayer.setPosition(gameHandler.getCellByCoordinate(0,2));
+        assertFalse(thirdPlayer.getCell() instanceof CellSpawn);
+        thirdPlayer.setConnected(false);
+        kill(thirdPlayer, firstPlayer, secondPlayer, fourthPlayer);
+        assertEquals(firstPlayer.getID(), gameHandler.getTurnPlayerID());
+        gameHandler.nextTurn();
+        //when the killer passes his turn, the disconnected killed player has automatically respawned
+        assertTrue(thirdPlayer.getCell() instanceof CellSpawn);
+        //the turn is passed, since everyone has respawned
+        assertEquals(secondPlayer.getID(), gameHandler.getTurnPlayerID());
     }
 
 }

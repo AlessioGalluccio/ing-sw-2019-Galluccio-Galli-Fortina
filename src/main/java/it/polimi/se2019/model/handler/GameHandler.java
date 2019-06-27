@@ -91,8 +91,13 @@ public class GameHandler extends Observable {
         else {
             //only the first one will get the modified state. When he will finish, he will do nextTurn, and the function
             //will come back here
-            Controller controller = getControllerByPlayer(justDied.get(0));
-            controller.setState(new MustRespawnControllerState(controller, this));
+            if(justDied.get(0).isConnected()){
+                Controller controller = getControllerByPlayer(justDied.get(0));
+                controller.setState(new MustRespawnControllerState(controller, this));
+            }
+            else{
+                randomRespawnNotConnectedPlayer(justDied.get(0));
+            }
         }
     }
 
@@ -707,6 +712,21 @@ public class GameHandler extends Observable {
      */
     public void removeJustDied(Player player){
         this.justDied.remove(player);
+    }
+
+    /**
+     * respawn a disconnected player in a random cellSpawn
+     * @param player the player who must reaspawn, but he is disconnected
+     */
+    private void randomRespawnNotConnectedPlayer(Player player){
+        PowerupCard powerupCard = powerupDeck.pick();
+        String color = powerupCard.getColor();
+        Room room = getRoomByID(color);
+        Cell cellSpawn = room.getSpawnCell();
+        player.setPosition(cellSpawn);
+        powerupCard.discard();
+        removeJustDied(player);
+        nextTurn(); // we must return to this function
     }
 }
 
