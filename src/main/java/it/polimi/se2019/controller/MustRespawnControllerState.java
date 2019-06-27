@@ -126,10 +126,15 @@ public class MustRespawnControllerState extends StateController {
         //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
         if (errorString == null) {
             //the NotYourTurnState will do the gamehandler.nextTurn()
-            gameHandler.removeJustDied(playerAuthor);
-            controller.setState(new NotYourTurnState(controller, gameHandler, true));
-            completedRespawn = true;
 
+            gameHandler.removeJustDied(playerAuthor);
+
+            //we must do the next turn outside NotYourTurnState, otherwise if this player is the next in the turn
+            //the constructor of NotYouTurnState will put the controller in EMptySte, BUT at the end of this constructor
+            //the state will be set in NotYourTurnStateController
+            controller.setState(new NotYourTurnState(controller, gameHandler));
+            gameHandler.nextTurn();
+            completedRespawn = true;
         }
     }
 

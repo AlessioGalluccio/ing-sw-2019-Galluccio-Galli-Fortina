@@ -2,11 +2,13 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
+import it.polimi.se2019.view.ViewControllerMess.PassTurnMessage;
 import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
@@ -26,6 +28,8 @@ public class MustRespawnControllerStateTest {
     private PlayerView playerView;
     private GameHandler gameHandler;
     private Controller controller;
+    private Controller secondController;
+    private  Controller thirdController;
     private StateController stateController;
     private static String MUST_RESPAWN = "Please, do a respawn";
 
@@ -48,8 +52,8 @@ public class MustRespawnControllerStateTest {
         PlayerView fourthPlayerView = new PlayerView(serverMock, targetPlayer3);
 
         controller = new Controller(gameHandler, authorPlayer, playerView);
-        Controller secondController = new Controller(gameHandler, targetPlayer1, secondPlayerView);
-        Controller thirdController = new Controller(gameHandler, targetPlayer2, thirdPlayerView);
+        secondController = new Controller(gameHandler, targetPlayer1, secondPlayerView);
+        thirdController = new Controller(gameHandler, targetPlayer2, thirdPlayerView);
         Controller fourthController = new Controller(gameHandler, targetPlayer3, fourthPlayerView);
 
         controller.setState(new MustRespawnControllerState(controller, gameHandler));
@@ -64,6 +68,12 @@ public class MustRespawnControllerStateTest {
         gameHandler.setMap(2);
         gameHandler.setSuddenDeath(false);
 
+        Cell commonCell = gameHandler.getCellByCoordinate(1,1);
+        authorPlayer.setPosition(commonCell);
+        targetPlayer1.setPosition(commonCell);
+        targetPlayer2.setPosition(commonCell);
+        targetPlayer3.setPosition(commonCell);
+
     }
 
     @Test
@@ -75,8 +85,52 @@ public class MustRespawnControllerStateTest {
         DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(card,authorPlayer.getID(), playerView);
         controller.update(null, discardPowerupMessage);
         assertTrue(controller.getState() instanceof NotYourTurnState);
+        assertEquals(targetPlayer1.getID(), gameHandler.getTurnPlayerID());
+    }
+
+/*
+    @Test
+    public void handleCardSpawnIfNextPlayerIsDead() {
+        for(int i = 0; i < 4; i++){
+            gameHandler.nextTurn();
+        }
+        controller.setState(new MustRespawnControllerState(controller, gameHandler));
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST,playerView.getLastStringPrinted());
+        assertTrue(authorPlayer.getPowerupCardList().size() == 2);
+        PowerupCard card = authorPlayer.getPowerupCardList().get(0);
+
+        DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(card,authorPlayer.getID(), playerView);
+        controller.update(null, discardPowerupMessage);
+        assertTrue(controller.getState() instanceof NotYourTurnState);
+        assertTrue(secondController.getState() instanceof EmptyControllerState);
+        assertEquals(targetPlayer1.getID(), gameHandler.getTurnPlayerID());
+        for(int i = 0; i < 12; i++){
+            try {
+                targetPlayer2.receiveDamageBy(targetPlayer1);
+            } catch (NotPresentException e) {
+                //do nothing
+            } catch (YouDeadException e) {
+                //do nothing
+            } catch (YouOverkilledException e) {
+                //do nothing
+            }
+        }
+
+        PassTurnMessage passTurnMessage = new PassTurnMessage(authorPlayer.getID(), playerView);
+        controller.update(null, passTurnMessage);
+
+        assertTrue(targetPlayer2.getPowerupCardList().size() == 1);
+        PowerupCard card2 = targetPlayer2.getPowerupCardList().get(0);
+
+        DiscardPowerupMessage discardPowerupMessage2 = new DiscardPowerupMessage(card2,targetPlayer2.getID(), playerView);
+        thirdController.update(null, discardPowerupMessage2);
+        assertTrue(thirdController.getState() instanceof NotYourTurnState);
+        assertEquals(targetPlayer2.getID(), gameHandler.getTurnPlayerID());
+
+
 
     }
+*/
 
     @Test
     public void handleDisconnection() {

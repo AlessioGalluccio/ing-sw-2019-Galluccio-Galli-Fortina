@@ -81,7 +81,8 @@ public abstract class StateController {
      * when called by a PassTurnMessage , it passes the turn
      */
     public void handlePassTurn() {
-        controller.setState(new NotYourTurnState(controller,gameHandler, true));
+        controller.setState(new NotYourTurnState(controller,gameHandler));
+        gameHandler.nextTurn();
     }
 
     public abstract void handleFire();

@@ -80,7 +80,7 @@ public class GrenadeLauncher_1Test {
         controller2.setPlayerView(playerView2);
         controller2.setAuthor(targetPlayer1);
 
-        controller2.setState(new NotYourTurnState(controller2, gameHandler, false));
+        controller2.setState(new NotYourTurnState(controller2, gameHandler));
 
 
         //author, target 1 and target 2 in the same cell

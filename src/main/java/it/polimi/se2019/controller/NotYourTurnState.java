@@ -27,14 +27,10 @@ public class NotYourTurnState extends StateController {
      * constructor
      * @param controller the controller of the player
      * @param gameHandler the gamehandler of the match
-     * @param passTurn true if the turn must be passed, false if not
      */
-    public NotYourTurnState(Controller controller, GameHandler gameHandler, boolean passTurn) {
+    public NotYourTurnState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         //we do a next turn when we create this state if passTurn is true
-        if(passTurn){
-            gameHandler.nextTurn();
-        }
         controller.setNumOfActionTaken(0);
         controller.resetMessages();
         this.playerAuthor = controller.getAuthor();

@@ -61,7 +61,7 @@ public class NotYourTurnStateTest {
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
 
-        controller.setState(new NotYourTurnState(controller, gameHandler, false));
+        controller.setState(new NotYourTurnState(controller, gameHandler));
         stateController = controller.getState();
 
         //author and target 1 in the same cell
