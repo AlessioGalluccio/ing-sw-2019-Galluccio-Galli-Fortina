@@ -97,7 +97,6 @@ public class MachineGun_1 extends FireMode {
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        //TODO controlla
         if(numOptional == Identificator.FIRST_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
             shoot.addOptionalSelected(Identificator.FIRST_OPTIONAL);

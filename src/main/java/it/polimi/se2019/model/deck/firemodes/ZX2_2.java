@@ -41,7 +41,7 @@ public class ZX2_2 extends FireMode {
             super.fire();
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_DO_FIRE);
         }
 
     }

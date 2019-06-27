@@ -55,9 +55,4 @@ public class ElectroScythe_1 extends FireMode {
         }
     }
 
-    @Override
-    public void addCell(int x, int y) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
 }

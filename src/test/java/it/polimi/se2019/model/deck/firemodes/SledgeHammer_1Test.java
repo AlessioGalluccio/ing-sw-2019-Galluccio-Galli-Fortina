@@ -130,7 +130,7 @@ public class SledgeHammer_1Test {
 
         controller.update(null,
                 new PlayerMessage(3, authorPlayer.getID(), playerView));
-        assertEquals("This player is not on your cell. Select a player on your cell. ", playerView.getLastStringPrinted());
+        assertEquals(SledgeHammer_1.NOT_ON_YOUR_CELL + SledgeHammer_1.SELECT_PLAYER, playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 

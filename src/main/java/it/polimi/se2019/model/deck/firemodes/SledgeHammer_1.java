@@ -12,7 +12,12 @@ import java.util.List;
 public class SledgeHammer_1 extends FireMode {
 
     private static final long serialVersionUID = 8298297204873304371L;
-    private final String SELECT_PLAYER = "Select a player on your cell. ";
+
+    //messages
+    public static final String SELECT_PLAYER = "Select a player on your cell. ";
+
+    //errors
+    public static final String NOT_ON_YOUR_CELL = "This player is not on your cell. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -41,6 +46,6 @@ public class SledgeHammer_1 extends FireMode {
         Player targetPlayer = gameHandler.getPlayerByID(playerID);
         if(targetPlayer.getCell().equals(author.getCell()))
             shoot.addPlayerTargetFromFireMode(targetPlayer, true);
-        else throw new WrongInputException("This player is not on your cell. ");
+        else throw new WrongInputException(NOT_ON_YOUR_CELL);
     }
 }

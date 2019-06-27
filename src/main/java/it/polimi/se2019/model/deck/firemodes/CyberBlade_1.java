@@ -99,14 +99,6 @@ public class CyberBlade_1 extends FireMode {
 
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
-        /*
-        boolean alreadySelected = false;
-        for(Integer integer : shoot.getOptionalSelected()){
-            if(integer == numOptional){
-                alreadySelected = true;
-            }
-        }
-        */
         if(shoot.getOptionalSelected().contains(numOptional)){
             throw new WrongInputException(OPTIONAL_ALREADY_SELECTED);
         }

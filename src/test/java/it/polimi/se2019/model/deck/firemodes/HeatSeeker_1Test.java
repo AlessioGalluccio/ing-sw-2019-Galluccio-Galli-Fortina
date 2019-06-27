@@ -13,6 +13,7 @@ import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.FireModeMessage;
+import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.WeaponMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.After;
@@ -37,10 +38,8 @@ public class HeatSeeker_1Test {
     private Cell commonCell;
     private Cell notVisibleCell;
     private PlayerView playerView;
-    private StateController stateController;
 
     private final static int HEAT_SEEKER_WEAPON_ID = 4;
-    private final static int HEAT_SEEKER_FIREMODE_ID = 41;
 
 
 
@@ -70,7 +69,6 @@ public class HeatSeeker_1Test {
         shoot = new Shoot(gameHandler, controller);
 
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, shoot));
-        stateController = controller.getState();
 
 
 
@@ -94,18 +92,17 @@ public class HeatSeeker_1Test {
         authorPlayer.addWeaponCard(weapon);
         WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
         controller.update(null, weaponMessage);
-        System.out.println(playerView.getLastStringPrinted());
 
         //add firemode
         FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, fireModeMessage);
-        System.out.println(playerView.getLastStringPrinted());
 
     }
 
     @Test
     public void firePositive() throws Exception{
         //we add a not visible target, and this makes it throw and exception
+        assertEquals(HeatSeeker_1.SELECT_TARGET_NOT_VISIBLE, playerView.getLastStringPrinted());
         shoot.addPlayerTarget(targetPlayer3.getID());
         shoot.fire();
         assertEquals(3,targetPlayer3.getDamage().size());
@@ -114,11 +111,22 @@ public class HeatSeeker_1Test {
     @Test
     public void firePositiveWithOneOldMark() throws Exception{
         //we add a not visible target, and this makes it throw and exception
+        assertEquals(HeatSeeker_1.SELECT_TARGET_NOT_VISIBLE, playerView.getLastStringPrinted());
         targetPlayer3.receiveMarkBy(authorPlayer);
         shoot.addPlayerTarget(targetPlayer3.getID());
         shoot.fire();
         assertEquals(4,targetPlayer3.getDamage().size());
         assertEquals(0,targetPlayer3.getMark().getMarkReceived().size());
+    }
+
+    @Test
+    public void fireNegativeTargetVisible() throws Exception{
+        //we add a not visible target, and this makes it throw and exception
+        assertEquals(HeatSeeker_1.SELECT_TARGET_NOT_VISIBLE, playerView.getLastStringPrinted());
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null, playerMessage);
+        assertEquals(HeatSeeker_1.TARGET_NOT_VALID + HeatSeeker_1.SELECT_TARGET_NOT_VISIBLE,
+                playerView.getLastStringPrinted());
     }
 
     @After
