@@ -95,9 +95,9 @@ public enum ConsoleColor {
             case "CYAN": return CYAN_BOLD;
             case "VIOLET":
             case "PURPLE": return MAGENTA_BOLD;
-            case "BLACK": return WHITE_BOLD_BRIGHT;
-            case "GREY": return WHITE;
-            case "WHITE": return BLACK_BOLD;
+            case "BLACK": return BLACK;
+            case "GREY": return BLACK_BOLD_BRIGHT;
+            case "WHITE": return WHITE_BOLD_BRIGHT;
             default: return RESET;
         }
     }

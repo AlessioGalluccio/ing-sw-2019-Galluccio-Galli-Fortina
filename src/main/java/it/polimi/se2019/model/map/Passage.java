@@ -22,7 +22,7 @@ public class Passage implements Border {
     @Override
     public String printByDirection(int row, boolean horizontal, ConsoleColor color) {
         String s = color.toString();
-        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
+        String space = ConsoleColor.BLACK + "▦" + color;
         if(horizontal) {
             s+="▦";
             for(int i=1; i< Printable.DIMROW-1; i++){

@@ -55,6 +55,7 @@ public class CLI implements UiInterface {
 
     @Override
     public void startGame() {
+        clearScreen();
         out.println(ConsoleColor.WHITE_BRIGHT + "LET'S START! \t(๑•̀ㅂ•́)ง✧\n" + ConsoleColor.RESET);
         parser = new ParserCLI(view, this);
     }
@@ -63,6 +64,7 @@ public class CLI implements UiInterface {
     public void disconnect(int matchID) {
         parser.open = false;
         online=false;
+        clearScreen();
         out.println("\n");
         printLine();
         out.println(ConsoleColor.RED +
@@ -151,6 +153,7 @@ public class CLI implements UiInterface {
     }
 
     public void start() {
+        clearScreen();
         out.println("\n" +
                 "\t\t                  |                                   _)        \n" +
                 "\t\t \\ \\  \\   /  _ \\  |   __|   _ \\   __ `__ \\    _ \\      |  __ \\  \n" +
@@ -159,11 +162,6 @@ public class CLI implements UiInterface {
                 "\t\t                                                                ");
 
         printLogo();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
         out.println("\n");
         printLine();
         setConnection();
@@ -183,7 +181,7 @@ public class CLI implements UiInterface {
                     "\n\t3. What are socket and RMI?");
             try {
                 decision = in.nextInt();
-                in.skip("\n");
+                in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
                 if (decision == 1||decision==3) {
                     SocketClient socket = new SocketClient(9001, IP, view);
                     socket.connect();
@@ -207,7 +205,7 @@ public class CLI implements UiInterface {
 
     private void printLogo() {
         out.println(ConsoleColor.RED_BOLD);
-        out.print("\t\t\t/\\                                                                         \n" +
+        out.print("\t\t  /\\                                                                         \n" +
                 "\t\t      \\     __ \\    _ \\   ____|   \\  |     \\     |     _ _|   \\  |  ____| \n" +
                 "\t\t    __ \\    |   |  |   |  __|      \\ |    _ \\    |       |     \\ |  __|   \n" +
                 "\t\t   ____ \\   |   |  __ <   |      |\\  |   ___ \\   |       |   |\\  |  |     \n" +
@@ -229,11 +227,11 @@ public class CLI implements UiInterface {
                out.println("\t2. No");
 
                decision = in.nextInt();
-               in.skip("\n");
+               in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
                if (decision == 1) {
                    out.println("Enter the match ID");
                    matchID = in.nextInt();
-                   in.skip("\n");
+                   in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
                }
            }catch (InputMismatchException e) {
                out.println("You can insert only 1 or 2");
@@ -255,7 +253,7 @@ public class CLI implements UiInterface {
                 out.println("\t3. " + Map3.getDescription());
                 out.println("\t4. " + Map4.getDescription());
                 map = in.nextInt();
-                in.skip("\n");
+                in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             }catch (InputMismatchException e) {
                 out.println("You can insert only a digit");
                 in.nextLine();
@@ -268,7 +266,7 @@ public class CLI implements UiInterface {
             try {
                 out.println("How many skulls?");
                 skulls = in.nextInt();
-                in.skip("\n");
+                in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             }catch (InputMismatchException e) {
                 out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
                 in.nextLine();
@@ -284,7 +282,7 @@ public class CLI implements UiInterface {
                 out.println("\t1. Yes");
                 out.println("\t2. No");
                 decision = in.nextInt();
-                in.skip("\n");
+                in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
                 if (decision == 1) {
                     sd = true;
                 }

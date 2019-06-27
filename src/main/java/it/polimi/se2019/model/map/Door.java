@@ -19,7 +19,7 @@ public class Door implements Border {
     @Override
     public String printByDirection( int row, boolean horizontal, ConsoleColor color) {
         String s = color.toString();
-        String space = ConsoleColor.WHITE_BRIGHT + "▦" + color;
+        String space = ConsoleColor.BLACK + "▦" + color;
         if(horizontal) {
             s+="▦▦▦" +space+space+space+ "▦▦▦";
         } else {
