@@ -95,6 +95,7 @@ public class ControllerLogin implements UiInterface {
     static List<Character> characters;
 
     private List<Player> playersRanking;
+    private int skullNumber=0;
 
 
     /**
@@ -383,7 +384,8 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateSkullBoard() {
-        //TODO
+        updateSkullMap(skullNumber);
+        updateSetting(mapView.getMapCopy().getID(), skullNumber);
     }
 
     /**
@@ -446,6 +448,8 @@ public class ControllerLogin implements UiInterface {
     public void updateSetting(int choosenMap, int skull){
         this.updateSkullMap(skull);
         this.selectedMap(choosenMap);
+        this.skullNumber= skull;
+
     }
 
     /**

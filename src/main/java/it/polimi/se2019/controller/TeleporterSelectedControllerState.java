@@ -2,15 +2,11 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
-import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
-
-import java.util.ArrayList;
 
 public class TeleporterSelectedControllerState extends StateController{
     private Player playerAuthor;
@@ -24,6 +20,12 @@ public class TeleporterSelectedControllerState extends StateController{
     //errors
     public static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
 
+    /**
+     *
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     * @param teleporterCard the TeleporterCard selected
+     */
     public TeleporterSelectedControllerState(Controller controller, GameHandler gameHandler, TeleporterCard teleporterCard) {
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();

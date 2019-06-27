@@ -12,9 +12,11 @@ public class HasReloadedControllerState extends StateController {
     private String errorString;
     private String stringToPlayerView;
 
-
-
-
+    /**
+     * constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     */
     public HasReloadedControllerState(Controller controller, GameHandler gameHandler){
         super(controller, gameHandler);
         this.player = controller.getAuthor();
@@ -134,6 +136,9 @@ public class HasReloadedControllerState extends StateController {
         return stringToPlayerView;
     }
 
+    /**
+     * handles the invalid messages
+     */
     private void youCantDoThis(){
         errorString = CANT_DO_ALREADY_RELOADED;
     }

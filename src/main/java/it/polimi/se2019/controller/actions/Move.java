@@ -24,7 +24,7 @@ public class Move extends Action {
 
     }
 
-    @Override
+
     public void executeAction() throws WrongInputException{
         playerAuthor.setPosition(cellObjective);
     }
@@ -35,13 +35,6 @@ public class Move extends Action {
         list.add(FIRST_STRING_AND_MESS);
         return list;
     }
-
-    @Override
-    public boolean verifyCorrectMessages(Player author, ArrayList<ViewControllerMessage> msg) {
-        return super.verifyCorrectMessages(author, msg);
-    }
-
-
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {

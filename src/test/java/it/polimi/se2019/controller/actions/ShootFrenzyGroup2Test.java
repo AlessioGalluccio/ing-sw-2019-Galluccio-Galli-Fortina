@@ -84,6 +84,11 @@ public class ShootFrenzyGroup2Test {
     public void correctCallFromControllerDistance2(){
         //we pick a weapon and we unload it. Player must reload it to shoot
         WeaponCard weapon = gameHandler.getWeaponDeck().pick();
+
+
+        System.out.println(weapon);
+
+
         weapon.unload();
         assertFalse(weapon.isReloaded());
 
@@ -122,6 +127,10 @@ public class ShootFrenzyGroup2Test {
     public void tooDistantCell(){
         //we pick a weapon and we unload it. Player must reload it to shhot
         WeaponCard weapon = gameHandler.getWeaponDeck().pick();
+
+        System.out.println(weapon);
+
+
         weapon.unload();
         assertFalse(weapon.isReloaded());
 

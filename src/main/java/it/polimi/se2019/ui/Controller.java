@@ -1391,7 +1391,7 @@ public class Controller implements Initializable {
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
-        if (firemodeOp2.isSelected()) {
+        if (firemodeOp3.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(3);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
@@ -1764,11 +1764,15 @@ public class Controller implements Initializable {
         skull.add(imSkull7);
         skull.add(imSkull8);
 
-        //TODO mettere segnalino giocatore e mettere true IsFrenzyTime
+        
         Platform.runLater(() -> {
             try {
 
                 int teschi = Integer.parseInt(skullNumber);
+                int k = Integer.parseInt(skullNumber);
+                if (ControllerLogin.skullBoardView.getDeathCopy().size() == teschi){
+                    isFrenzyTime=true;
+                }
                 teschi--;
                 for (int counter = 0; counter < skull.size(); counter++) {
                     skull.get(counter).setVisible(false);
@@ -1776,6 +1780,11 @@ public class Controller implements Initializable {
                 while (teschi >= 0) {
                     skull.get(teschi).setVisible(true);
                     teschi--;
+                }
+                int j =0;
+                for ( int i=(8-k); i<ControllerLogin.skullBoardView.getDeathCopy().size(); i++ ){
+                    skull.get(i).setImage(setDamageImages(ControllerLogin.skullBoardView.getDeathCopy().get(j).getWhoKilled().getCharacter().getId(), ControllerLogin.skullBoardView.getDeathCopy().get(j).getPoints()));
+                    j++;
                 }
             } catch (Exception e) {
                 Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
@@ -2984,7 +2993,7 @@ public class Controller implements Initializable {
 
                     for(int i=0; i<players.size(); i++){
                         imDamage.get(i).setVisible(true);
-                        imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                        imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(), 1));
                         if(imDamage.get(10).isVisible() && !(imDamage.get(11).isVisible())){
                             ControllerLogin.open("yourDead", "YOU DIED", 400,400);
                         }
@@ -3011,7 +3020,7 @@ public class Controller implements Initializable {
                             setDamage(imDamage, enemy1Damage0,enemy1Damage1, enemy1Damage2, enemy1Damage3, enemy1Damage4,enemy1Damage5,
                                     enemy1Damage6,enemy1Damage7, enemy1Damage8, enemy1Damage9, enemy1Damage10,enemy1Damage11);
                             for(int i=0; i<players.size(); i++){
-                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3020,7 +3029,7 @@ public class Controller implements Initializable {
                             setDamage(imDamage, enemy2Damage0,enemy2Damage1, enemy2Damage2, enemy2Damage3, enemy2Damage4,enemy2Damage5,
                                     enemy2Damage6,enemy2Damage7, enemy2Damage8, enemy2Damage9, enemy2Damage10,enemy2Damage11);
                             for(int i=0; i<players.size(); i++){
-                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3029,7 +3038,7 @@ public class Controller implements Initializable {
                             setDamage(imDamage, enemy3Damage0,enemy3Damage1, enemy3Damage2, enemy3Damage3, enemy3Damage4,enemy3Damage5,
                                     enemy3Damage6,enemy3Damage7, enemy3Damage8, enemy3Damage9, enemy3Damage10,enemy3Damage11);
                             for(int i=0; i<players.size(); i++){
-                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3038,7 +3047,7 @@ public class Controller implements Initializable {
                             setDamage(imDamage, enemy4Damage0,enemy4Damage1, enemy4Damage2, enemy4Damage3, enemy4Damage4,enemy4Damage5,
                                     enemy4Damage6,enemy4Damage7, enemy4Damage8, enemy4Damage9, enemy4Damage10,enemy4Damage11);
                             for(int i=0; i<players.size(); i++){
-                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3090,31 +3099,61 @@ public class Controller implements Initializable {
      * @param characterID character id to set images
      * @return image of character damage
      */
-    private Image setDamageImages(int characterID){
+    private Image setDamageImages(int characterID, int doubleDrop) {
         Image image = new Image("Icon/BlueDrop.png");
+        if (doubleDrop==1) {
+            switch (characterID) {
+                case 1:
+                    image = new Image("Icon/GreenDrop.png");
 
-        switch (characterID){
-            case 1:
-                image = new Image("Icon/GreenDrop.png");
+                    break;
+                case 2:
+                    image = new Image("Icon/PurpleDrop.png");
 
-                break;
-            case 2:
-                image = new Image("Icon/PurpleDrop.png");
+                    break;
+                case 3:
+                    image = new Image("Icon/YellowDrop.png");
 
-                break;
-            case 3:
-                image = new Image("Icon/YellowDrop.png");
+                    break;
+                case 4:
+                    image = new Image("Icon/GreyDrop.png");
 
-                break;
-            case 4:
-                image = new Image("Icon/GreyDrop.png");
+                    break;
+                case 5:
+                    image = new Image("Icon/BlueDrop.png");
 
-                break;
-            case 5:
-                image = new Image("Icon/BlueDrop.png");
+                    break;
+                default:
+                    break;
+            }
 
-                break;
-            default: break;
+        } else {
+            switch (characterID) {
+                case 1:
+                    image = new Image("Icon/GreenDouble.png");
+
+                    break;
+                case 2:
+                    image = new Image("Icon/PurpleDouble.png");
+
+                    break;
+                case 3:
+                    image = new Image("Icon/YellowDouble.png");
+
+                    break;
+                case 4:
+                    image = new Image("Icon/GreyDouble.png");
+
+                    break;
+                case 5:
+                    image = new Image("Icon/BlueDouble.png");
+
+                    break;
+                default:
+                    break;
+
+            }
+
         }
         return image;
     }
@@ -3131,7 +3170,7 @@ public class Controller implements Initializable {
                     setDamage(imMarks, mark1, mark2, mark3, mark4, mark5, mark6, mark7, mark8, mark9, mark10, mark11, mark12);
 
                     for(int i=0; i<marks.size(); i++){
-                        imMarks.get(i).setImage(setDamageImages(marks.get(i).getCharacter().getId()));
+                        imMarks.get(i).setImage(setDamageImages(marks.get(i).getCharacter().getId(), 1));
                     }
                 }
                 catch (Exception e){
@@ -3157,7 +3196,7 @@ public class Controller implements Initializable {
                             setDamage(imMarks,enemy1mark1, enemy1mark2, enemy1mark3, enemy1mark4,enemy1mark5,
                                     enemy1mark6,enemy1mark7, enemy1mark8, enemy1mark9, enemy1mark10,enemy1mark11, enemy1mark12);
                             for(int i=0; i<players.size(); i++){
-                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(), 1));
                             }
                         }
                     }
@@ -3166,7 +3205,7 @@ public class Controller implements Initializable {
                             setDamage(imMarks,enemy2mark1, enemy2mark2, enemy2mark3, enemy2mark4,enemy2mark5,
                                     enemy2mark6,enemy2mark7, enemy2mark8, enemy2mark9, enemy2mark10,enemy2mark11, enemy2mark12);
                             for(int i=0; i<players.size(); i++){
-                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3175,7 +3214,7 @@ public class Controller implements Initializable {
                             setDamage(imMarks,enemy3mark1, enemy3mark2, enemy3mark3, enemy3mark4,enemy3mark5,
                                     enemy3mark6,enemy3mark7, enemy3mark8, enemy3mark9, enemy3mark10,enemy3mark11, enemy3mark12);
                             for(int i=0; i<players.size(); i++){
-                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }
@@ -3184,7 +3223,7 @@ public class Controller implements Initializable {
                             setDamage(imMarks,enemy4mark1, enemy4mark2, enemy4mark3, enemy4mark4,enemy4mark5,
                                     enemy4mark6,enemy4mark7, enemy4mark8, enemy4mark9, enemy4mark10,enemy4mark11, enemy4mark12);
                             for(int i=0; i<players.size(); i++){
-                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId()));
+                                imMarks.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(),1));
                             }
                         }
                     }

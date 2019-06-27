@@ -13,11 +13,12 @@ public class EmptyControllerState extends StateController {
 
     private Player player;
     private String errorString;
-    private String stringToPlayerView;
 
-
-
-
+    /**
+     * constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehnalder of the match
+     */
     public EmptyControllerState(Controller controller, GameHandler gameHandler) {
         super(controller, gameHandler);
         this.player = controller.getAuthor();
@@ -39,7 +40,7 @@ public class EmptyControllerState extends StateController {
                 }
                 if(!canShoot){
                     errorString = CANT_SHOOT;
-                    youCantDoThis();
+                    notPossible();
                     return;
                 }
             }
@@ -63,12 +64,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleCell(int coordinateX, int coordinateY) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
@@ -84,17 +85,17 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleNope() {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
     public void handleOptional(int numOptional) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
     public void handlePlayer(int playerID) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
@@ -104,13 +105,13 @@ public class EmptyControllerState extends StateController {
             player.loadWeapon(weaponID);
         }catch(NotPresentException e){
             errorString = NOT_PRESENT_WEAPON_RELOAD;
-            youCantDoThis();
+            notPossible();
         }catch(WeaponIsLoadedException e){
             errorString = WEAPON_LOADED_RELOAD;
-            youCantDoThis();
+            notPossible();
         }catch(NotEnoughAmmoException e){
             errorString = NOT_ENOUGH_AMMO_RELOAD;
-            youCantDoThis();
+            notPossible();
         }
 
         //after reloading, you go to HasReloadedState
@@ -119,12 +120,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleTagback(TagbackGrenadeCard usedCard) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
-        youCantDoThis();
+        notPossible();
 
     }
 
@@ -141,12 +142,12 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        youCantDoThis();
+        notPossible();
     }
 
     @Override
     public void handleFire() {
-        youCantDoThis();
+        notPossible();
     }
 
 
@@ -171,6 +172,7 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public String handle(ViewControllerMessage arg) {
+        String stringToPlayerView;
         errorString = null;
         controller.addReceived();
         arg.handle(this);
@@ -189,7 +191,10 @@ public class EmptyControllerState extends StateController {
         return stringToPlayerView;
     }
 
-    private void youCantDoThis(){
-        //controller.removeReceived();
+    /**
+     * handles the invalid messages
+     */
+    private void notPossible(){
+        //do nothing
     }
 }

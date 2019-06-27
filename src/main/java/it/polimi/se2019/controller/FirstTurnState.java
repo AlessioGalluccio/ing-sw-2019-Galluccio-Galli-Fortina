@@ -15,7 +15,6 @@ public class FirstTurnState extends StateController {
     private Player playerAuthor;
     private String errorString;
     private String stringToPlayerView;
-    private boolean isCharacterSelected = false;
 
     public static final String CHARACTER_REQUEST = "Please, select a Character";
     public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
@@ -167,7 +166,6 @@ public class FirstTurnState extends StateController {
     @Override
     public void handleCharacter(int characterID) {
         playerAuthor.setCharacter(new Character(characterID));
-        this.isCharacterSelected = true;
         controller.addReceived();
     }
 

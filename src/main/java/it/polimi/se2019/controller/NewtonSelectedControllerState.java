@@ -34,6 +34,12 @@ public class NewtonSelectedControllerState extends StateController {
     public static final String SELECTED_YOURSELF = "You can't select yourself. ";
     public static final String NOT_VALID_CELL = "This cell is not valid. ";
 
+    /**
+     * constructor
+     * @param controller the constroller of the player
+     * @param gameHandler the gamehandler of the match
+     * @param newtonCard the NewtonCard selected
+     */
     public NewtonSelectedControllerState(Controller controller, GameHandler gameHandler, NewtonCard newtonCard) {
         super(controller, gameHandler);
         this.playerAuthor = controller.getAuthor();
@@ -168,6 +174,11 @@ public class NewtonSelectedControllerState extends StateController {
         }
     }
 
+    /**
+     * create a list of possible cells where to move the target
+     * @param target the Player target of this card
+     * @return ArrayList of possible Cell where to move the target
+     */
     private ArrayList<Cell> createListCellForNewton(Player target){
         Cell targetCell = target.getCell();
         ArrayList<Cell> cellTargets = new ArrayList<>();
