@@ -5,7 +5,6 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
@@ -16,7 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Observer;
 
-public class EnemyView extends Observable implements Observer, Serializable, Printable {
+public class EnemyView extends Observable implements Observer, Serializable{
+    private static final long serialVersionUID = -3162602651843385228L;
 
     private int ID;
     private String nickname;
@@ -29,7 +29,6 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
     private List<Player> damage = new LinkedList<>();
     private int powerup;
     private boolean isFrenzyDeath;
-    private boolean first = true;
 
     /**
      * true if enemy is in frenzy mode
@@ -140,7 +139,6 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
         this.nickname = enemy.getNickname();
         this.ID = enemy.getID();
         this.character = enemy.getCharacter();
-        first=false;
         this.ammo = enemy.getAmmo();
         this.mark = (ArrayList<Player>) enemy.getMark().getMarkReceived();
         this.damage = enemy.getDamage();
@@ -159,11 +157,11 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
         if(character!=null) s += " - " + character.toString();
         s+="\n  Marks: ";
         for(Player p : mark) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
         }
         s+=ConsoleColor.RESET+ "\n  Damages: " + damage.size() + "/12 ";
         for(Player p : damage) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
         }
         s+=ConsoleColor.RESET;
         return s;
@@ -176,17 +174,17 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
         if(isFrenzyDeath) s+="2 1 1 1 ";
         else s+="8 6 4 2 1 1 \t";
         for(int i=0; i<skull; i++) {
-            s+= ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
+            s+= ConsoleColor.RED + " †" + ConsoleColor.RESET;
         }
         s+="\n  Ammo: ";
         for(int i=0; i< ammo.getBlueAmmo(); i++) {
-            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "✚";
+            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "▲";
         }
         for(int i=0; i< ammo.getYellowAmmo(); i++) {
-            s+= ConsoleColor.YELLOW_BOLD+ "✚";
+            s+= ConsoleColor.YELLOW_BOLD+ "▲";
         }
         for(int i=0; i< ammo.getRedAmmo(); i++) {
-            s+= ConsoleColor.RED_BOLD_BRIGHT+ "✚";
+            s+= ConsoleColor.RED_BOLD_BRIGHT+ "▲";
         }
         s+= ConsoleColor.RESET + "\n  Weapons loaded: " + loadedWeapon;
         s+= "\n  Weapons unloaded: ";
@@ -196,40 +194,6 @@ public class EnemyView extends Observable implements Observer, Serializable, Pri
             else s+=" ";
         }
         s+="\n  Power ups: " + powerup;
-        return s;
-    }
-
-
-    @Override
-    public String printRow(int row) {
-        String s = ConsoleColor.RESET.toString();
-        switch(row) {
-            case 0:
-                s+= nickname;
-                if(character!=null) s += " - " + character.toString();
-                break;
-            case 1:
-                s+="  Marks: ";
-                for(Player p : mark) {
-                    s += ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
-                }
-                break;
-            case 2:
-                s+="  Damages: " + damage.size() + "/12 ";
-                for(Player p : damage) {
-                    s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "◉";
-                }
-                break;
-            case 3:
-                s+="  Skulls: ";
-                if(isFrenzyDeath) s+="2 1 1 1 ";
-                else s+="8 6 4 2 1 1 \t";
-                for(int j=0; j<skull; j++) {
-                    s += ConsoleColor.RED + " ☠" + ConsoleColor.RESET;
-                }
-                break;
-            default: break;
-        }
         return s;
     }
 }

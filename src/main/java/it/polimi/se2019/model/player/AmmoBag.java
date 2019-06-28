@@ -73,13 +73,13 @@ public class AmmoBag implements Serializable {
     public String toString() {
         String s = "";
         for(int i=0; i<redAmmo; i++) {
-            s += ConsoleColor.RED + "✚";
+            s += ConsoleColor.RED + "▲";
         }
         for(int i=0; i<blueAmmo; i++) {
-            s += ConsoleColor.BLUE + "✚";
+            s += ConsoleColor.BLUE + "▲";
         }
         for(int i=0; i<yellowAmmo; i++) {
-            s += ConsoleColor.YELLOW + "✚";
+            s += ConsoleColor.YELLOW + "▲";
         }
         s+=ConsoleColor.RESET;
         return  s;

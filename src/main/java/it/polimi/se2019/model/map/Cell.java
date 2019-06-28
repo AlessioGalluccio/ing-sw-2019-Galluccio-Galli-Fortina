@@ -181,7 +181,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     public String printRow(int row) {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "▦" + color;
+        String space = ConsoleColor.BLACK + "◙" + color;
         if(isActive()) s+=color;
         switch (row) {
             case 0:
@@ -198,7 +198,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
                 s+=space;
                 if(getPlayerHere().size()==5) {
                     s+=ConsoleColor.colorByColor(getPlayerHere().get(4).getCharacter().getColor());
-                    s+="◉";
+                    s+="○";
                 }else s+=space;
                 s+=space;
                 s+=space + space;
@@ -235,16 +235,16 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     private String printPlayerOnCell(int player1, int player2) {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "▦" + color;
+        String space = ConsoleColor.BLACK + "◙" + color;
         s+=space + space;
         if(getPlayerHere().size()>=player1) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player1-1).getCharacter().getColor());
-            s+="◉";
+            s+="○";
         }else s+=space;
         s+=space;
         if(getPlayerHere().size()>=player2) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player2-1).getCharacter().getColor());
-            s+="◉";
+            s+="○";
         }else s+=space;
         s+=space + space;
         return s;

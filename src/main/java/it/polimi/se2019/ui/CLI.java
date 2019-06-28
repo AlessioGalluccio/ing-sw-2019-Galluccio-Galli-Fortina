@@ -11,6 +11,8 @@ import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.util.InputMismatchException;
 import java.util.*;
@@ -28,7 +30,8 @@ public class CLI implements UiInterface {
     private ParserCLI parser;
 
     @SuppressWarnings("squid:S106")
-    private static PrintWriter out = new PrintWriter(System.out, true);
+    private static PrintWriter out = new PrintWriter(new OutputStreamWriter(
+            System.out, StandardCharsets.UTF_8), true);
     private Scanner in = new Scanner(System.in);
 
     public CLI(ClientView view) {
@@ -306,7 +309,7 @@ public class CLI implements UiInterface {
         out.println("______________________________________________________________________________________________\n");
     }
 
-    void printAll() {
+    public void printAll() {
         clearScreen();
         printMap();
         printLine();

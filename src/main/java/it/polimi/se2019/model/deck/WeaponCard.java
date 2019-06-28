@@ -150,10 +150,10 @@ public abstract class WeaponCard implements Card {
     public String toStringShort() {
         String string = name + ": " +
                 ConsoleColor.colorByColor(ammoGranted.toString()) +
-                "✚ " + ConsoleColor.RESET;
+                "▲ " + ConsoleColor.RESET;
         if(ammoNotGranted!=null) {
             for (ColorRYB c : ammoNotGranted) {
-                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "✚" + ConsoleColor.RESET;
+                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "▲" + ConsoleColor.RESET;
             }
         }
         return string;

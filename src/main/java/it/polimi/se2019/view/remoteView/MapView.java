@@ -79,6 +79,7 @@ public class MapView extends Observable implements Observer {
      * @param row the line to print
      */
     public String printRow(int block, int row) {
+        String space = ConsoleColor.BLACK + "◙" + ConsoleColor.RESET;
         String s="";
         s+= ConsoleColor.RESET;
         if(row==3)s+=block + " "; //print coordinate
@@ -95,7 +96,10 @@ public class MapView extends Observable implements Observer {
             if(row>1) s+=printWeapon(row, block);
             s+=ConsoleColor.RESET;
         }
-        if(block==-1) s+="\t\t0\t\t\t1\t\t\t\t2\t\t\t3";
+        if(block==-1) s+=space +space +space + space +"0"+
+                space +space +space +space + space +space +space +space + "1" +
+        space +space +space +space + space +space +space +space + "2" +
+        space +space +space +space + space +space +space +space +space + "3";
         return s;
     }
 

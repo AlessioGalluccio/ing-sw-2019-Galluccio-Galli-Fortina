@@ -158,10 +158,10 @@ public class CellSpawn extends Cell {
     String printMiddleRow() {
         String s ="";
         ConsoleColor printColor = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "▦" + printColor;
+        String space = ConsoleColor.BLACK + "◙" + printColor;
         s+=getWestBorder().printByDirection(3, false, printColor);
         s+=space + space +
-                "↺↺↺" +
+                "☼☼☼" +
                 space + space;
         s+=getEastBorder().printByDirection(3, false, printColor);
         return s;

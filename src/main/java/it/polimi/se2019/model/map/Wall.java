@@ -26,10 +26,10 @@ public class Wall implements Border {
         String s = color.toString();
         if(horizontal) {
             for(int i = 0; i< Printable.DIMROW; i++){
-                s+="▦";
+                        s+="◙";
             }
         } else {
-            s+="▦";
+            s+="◙";
         }
         return  s;
     }

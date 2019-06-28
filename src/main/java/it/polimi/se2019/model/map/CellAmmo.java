@@ -85,14 +85,14 @@ public class CellAmmo extends Cell {
     String printMiddleRow() {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "▦" + color;
+        String space = ConsoleColor.BLACK + "◙" + color;
         s+=getWestBorder().printByDirection(3, false, color);
         if(ammo!=null) {
            s+= space + space
                     + ConsoleColor.colorByColor(ammo.getAmmo().get(0).toString()) +
-                    "✚" + ConsoleColor.colorByColor(ammo.getAmmo().get(1).toString()) +
-                    "✚" + thirdAmmo(ammo.getAmmo()) +
-                    "✚" + ConsoleColor.colorByColor(getRoom().getColor()) +
+                    "▲" + ConsoleColor.colorByColor(ammo.getAmmo().get(1).toString()) +
+                    "▲" + thirdAmmo(ammo.getAmmo()) +
+                    "▲" + ConsoleColor.colorByColor(getRoom().getColor()) +
                     space + space;
         } else s+=space + space + space + space + space + space + space;
         s+=getEastBorder().printByDirection(3, false, color);

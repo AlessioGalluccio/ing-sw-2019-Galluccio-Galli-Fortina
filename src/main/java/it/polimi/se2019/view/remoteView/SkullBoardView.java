@@ -2,7 +2,6 @@ package it.polimi.se2019.view.remoteView;
 
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.handler.Death;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.HandlerSkullViewMessage;
 
@@ -59,12 +58,12 @@ public class SkullBoardView extends Observable implements Observer {
         for(Death death : deathCopy) {
             skull--;
             for(int i=0; i<death.getPoints(); i++) {
-                s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) + "◉" + ConsoleColor.RESET;
+                s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) + "○" + ConsoleColor.RESET;
             }
             s+=" ";
         }
         for(int i=0; i<skull; i++) {
-            s += ConsoleColor.RED + "☠ " + ConsoleColor.RESET;
+            s += ConsoleColor.RED + "† " + ConsoleColor.RESET;
         }
         return s;
     }
