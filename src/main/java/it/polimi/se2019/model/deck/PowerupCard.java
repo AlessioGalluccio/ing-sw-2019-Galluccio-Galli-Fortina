@@ -39,11 +39,22 @@ public abstract class PowerupCard implements Card {
         return null;
     }
 
+    /**
+     * The ID is an unique number for each card.
+     * Can't exist two card of the SAME DECK with the same ID. If there are different there may be the same ID.
+     * @return The unique ID of the card.
+     */
     @Override
     public int getID() {
         return ID;
     }
 
+    /**
+     * The ID Type isn't unique for each card.
+     * It is the same for the card with the same status.
+     * So for the powerup which has the same color and is the same type (Teleporter, Newtown, Tagback or Targetting).
+     * @return the id type of the card
+     */
     @Override
     public int getIDtype() {
         return IDtype;

@@ -8,7 +8,7 @@ public interface Border extends PrintableDirection, Serializable {
 
     /**
      *
-     * @return TRUE if a player can move through it, FALSE otherway
+     * @return TRUE if a player can move through it, FALSE otherwise
      */
     boolean isCrossable();
 }

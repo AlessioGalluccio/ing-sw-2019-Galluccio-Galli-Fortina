@@ -10,6 +10,11 @@ public class TeleporterCard extends PowerupCard{
         super(color, id, IDtype);
     }
 
+    /**
+     * String the full card, representing each attributes the name of the card (Teleporter) and color
+     * Works with ANSI code
+     * @return The representation of the card
+     */
     @Override
     public String toString() {
         return ConsoleColor.colorByColor(getAmmo().toString()) + "Teleporter" + ConsoleColor.RESET;

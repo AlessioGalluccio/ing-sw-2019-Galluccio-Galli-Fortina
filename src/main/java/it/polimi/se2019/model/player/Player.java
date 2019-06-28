@@ -679,11 +679,13 @@ public class Player extends Observable implements Target, Serializable {
         }
         s+="\033[3m (remember adrenaline actions)";
         s+=ConsoleColor.RESET+"\n  Skulls: ";
-        if(!isFrenzyDeath) s+="8 6 4 2 1 1 \t";
-        else s+="2 1 1 1 ";
-        for(int i=0; i<skull; i++) {
-            s+= ConsoleColor.RED + " †" + ConsoleColor.RESET;
+        if(!isFrenzyDeath) {
+            s+="8 6 4 2 1 1 \t";
+            for(int i=0; i<skull; i++) {
+                s+= ConsoleColor.RED + " †" + ConsoleColor.RESET;
+            }
         }
+        else s+="2 1 1 1 ";
         s+="\n  Points: " + points.getSum();
         s+="\n  Ammo: ";
         s+= ammoBag.toString();

@@ -11,9 +11,6 @@ import it.polimi.se2019.model.player.Player;
  */
 public class Normal implements Modality {
 
-    public Normal() {
-    }
-
     /**
      * Return the correct action base on modality (normal in this case) and life points of the player
      * @param actionID action which want the user
@@ -53,6 +50,10 @@ public class Normal implements Modality {
 
     }
 
+    /**
+     * Return true if is a frenzy modality, false otherwise
+     * @return false
+     */
     @Override
     public boolean isFrenzyEnable() {
         return false;

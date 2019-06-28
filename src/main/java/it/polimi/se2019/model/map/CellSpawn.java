@@ -1,6 +1,5 @@
 package it.polimi.se2019.model.map;
 
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -83,6 +82,10 @@ public class CellSpawn extends Cell {
         return cardToReplace;
     }
 
+    /**
+     * Each cell has some card on it, this method return a list of that cards' IDs
+     * @return the IDs of the cards on this cell
+     */
     @Override
     public List<Integer> getCardID() {
         ArrayList <Integer> cardId = new ArrayList<>();
@@ -122,6 +125,11 @@ public class CellSpawn extends Cell {
         throw new TooManyException("In this cell there are already 3 cards");
     }
 
+    /**
+     * Each cell has to have a room, this method set the appropriate room
+     * @param room room of this cell
+     * @throws AlreadyRoomException if a room was already set for this cell, it can't be modified!
+     */
     @Override
     protected void setRoom(Room room) {
         super.setRoom(room);
@@ -138,6 +146,10 @@ public class CellSpawn extends Cell {
         }
     }
 
+    /**
+     * Create a deep copy of the cell
+     * @return a deep copy of the cell
+     */
     @Override
     public Cell clone() {
         Gson gson = new GsonBuilder()

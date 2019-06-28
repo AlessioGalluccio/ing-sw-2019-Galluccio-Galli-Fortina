@@ -27,14 +27,21 @@ public abstract class WeaponCard implements Card {
     private int ID;
 
     /**
-     *
-     * @return WeaponCard's ID
+     * The ID is an unique number for each card.
+     * Can't exist two card of the SAME DECK with the same ID. If there are different there may be the same ID.
+     * @return The unique ID of the card.
      */
     @Override
     public int getID(){
         return ID;
     }
 
+    /**
+     * In general, the ID Type isn't unique for each card.
+     * It is the same for the card with the same status.
+     * Weapon cards are all different, so ID Type and ID are the same.
+     * @return the id type of the card
+     */
     @Override
     public int getIDtype(){
         return ID;
@@ -115,17 +122,32 @@ public abstract class WeaponCard implements Card {
         return fireModeList;
     }
 
+    /**
+     * Set his deck for the card
+     * But weapons are created reading a Json file, so thi method is never called
+     * @param deck Deck of relatives cards to set
+     * @throws AlreadyDeckException If you try to reset the deck, it can change during game
+     */
     @Override
     public void setDeck(Deck deck) throws AlreadyDeckException {
-
+        //create by Json File
     }
 
+    /**
+     * In general, discard the card
+     * But weapons CANNOT be discarded, so this method dose nothing.
+     */
     @Override
     public void discard() {
         //ATTENTION: you can't discard the weapon, they have to be replace on the map!
     }
 
 
+    /**
+     * String the full card, representing each attributes with symbols and color
+     * Works with UTF-8 and ANSI code
+     * @return The representation of the card
+     */
     @Override
     public String toString() {
         String string = toStringShort();
@@ -134,6 +156,11 @@ public abstract class WeaponCard implements Card {
         return string;
     }
 
+    /**
+     * String the fire mode of this card, representing each attributes with symbols and color
+     * Works with UTF-8 and ANSI code
+     * @return The representation of the fire mode list
+     */
     private String toStringFireMode() {
         String string = "";
         for(FireMode fireMode : getFireMode()) {
@@ -147,6 +174,11 @@ public abstract class WeaponCard implements Card {
         return string;
     }
 
+    /**
+     * String the only the card's name and the cost, representing each attributes with symbols and color
+     * Works with UTF-8 and ANSI code
+     * @return A short representation of the card
+     */
     public String toStringShort() {
         String string = name + ": " +
                 ConsoleColor.colorByColor(ammoGranted.toString()) +

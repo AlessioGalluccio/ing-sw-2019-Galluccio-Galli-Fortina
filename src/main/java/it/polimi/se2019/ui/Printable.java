@@ -6,6 +6,7 @@ public interface Printable {
     /**
      * Print a specific line of the object
      * @param row the line to println
+     * @return The string to print
      */
     String printRow(int row);
 }
