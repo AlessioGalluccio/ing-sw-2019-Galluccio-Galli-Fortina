@@ -1068,7 +1068,7 @@ public class Controller implements Initializable {
         yourCharacter.setVisible(true);
 
 
-        if (choosenMap == 2) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 2) {
             mappa.setImage(new Image("mappa2.jpg"));
             cell32.setDisable(true);
             cell00.setDisable(false);
@@ -1077,7 +1077,7 @@ public class Controller implements Initializable {
 
         }
 
-        if (choosenMap == 1) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 1) {
             mappa.setImage(new Image("mappa.jpg"));
             cell00.setDisable(true);
             cell32.setDisable(false);
@@ -1086,12 +1086,12 @@ public class Controller implements Initializable {
 
         }
 
-        if (choosenMap == 3) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 3) {
             mappa.setImage(new Image("mappa3.jpg"));
 
         }
 
-        if (choosenMap == 4) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 4) {
             mappa.setImage(new Image("mappa4.jpg"));
             cell32.setDisable(true);
             ammoCell32.setDisable(true);
@@ -1740,14 +1740,7 @@ public class Controller implements Initializable {
 
     }
 
-    /**
-     * update int to set map
-     * @param chosenMap int of map choosen
-     */
-    static void updateMap(int chosenMap) {
 
-        choosenMap = chosenMap;
-    }
 
 
     /**
@@ -1775,18 +1768,26 @@ public class Controller implements Initializable {
                 if (ControllerLogin.skullBoardView.getDeathCopy().size() == teschi){
                     isFrenzyTime=true;
                 }
-                teschi--;
+                //teschi--;
                 for (int counter = 0; counter < skull.size(); counter++) {
                     skull.get(counter).setVisible(false);
                 }
+                /*
                 while (teschi >= 0) {
                     skull.get(teschi).setVisible(true);
                     teschi--;
                 }
-                int j =0;
-                for ( int i=(8-k); i<ControllerLogin.skullBoardView.getDeathCopy().size(); i++ ){
-                    skull.get(i).setImage(setDamageImages(ControllerLogin.skullBoardView.getDeathCopy().get(j).getWhoKilled().getCharacter().getId(), ControllerLogin.skullBoardView.getDeathCopy().get(j).getPoints()));
-                    j++;
+                */
+                for(int i=0; i<teschi; i++){
+
+                    skull.get(i).setImage(new Image("Icon/skull.png"));
+                    skull.get(i).setVisible(true);
+
+                }
+
+                for ( int i=0; i<ControllerLogin.skullBoardView.getDeathCopy().size(); i++ ){
+                    skull.get(i).setImage(setDamageImages(ControllerLogin.skullBoardView.getDeathCopy().get(i).getWhoKilled().getCharacter().getId(), ControllerLogin.skullBoardView.getDeathCopy().get(i).getPoints()));
+
                 }
             } catch (Exception e) {
                 Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
@@ -1962,17 +1963,17 @@ public class Controller implements Initializable {
         imAmmoCell.add(ammoCell31);
 
 
-        if (choosenMap == 1) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 1) {
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
             imAmmoCell.add(ammoCell32);
         }
 
-        if (choosenMap == 2) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 2) {
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
             imAmmoCell.add(ammoCell00);
         }
 
-        if (choosenMap == 3) {
+        if (ControllerLogin.mapView.getMapCopy().getID() == 3) {
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
             imAmmoCell.add(ammoCell00);
             cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
@@ -3305,7 +3306,7 @@ public class Controller implements Initializable {
                          }
                      }
                      else{
-                         for(int i=0; i<skullNumber ; i++){
+                         for(int i=0; i<imSkulls.size() ; i++){
                              imSkulls.get(i).setVisible(false);
                          }
 
@@ -3338,7 +3339,7 @@ public class Controller implements Initializable {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
-                                for (int i = 0; i < enemySkull; i++) {
+                                for (int i = 0; i <imSkulls.size(); i++) {
                                     imSkulls.get(i).setVisible(false);
                                 }
                             }

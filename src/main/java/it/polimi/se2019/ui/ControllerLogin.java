@@ -94,7 +94,7 @@ public class ControllerLogin implements UiInterface {
 
     static List<Character> characters;
 
-    private List<Player> playersRanking;
+    static List<Player> playersRanking;
     private int skullNumber=0;
 
 
@@ -218,13 +218,7 @@ public class ControllerLogin implements UiInterface {
     }
 
 
-    /**
-     * pass to the controller map which map is choosen
-     * @param choosMap int to indicate the selected map
-     */
-    public void selectedMap(int choosMap){
-        Controller.updateMap(choosMap);
-    }
+
 
     /**
      * open map window
@@ -256,20 +250,22 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void disconnect(int matchID) {
-        try {
-            open("disconnected.fxml", "DISCONNECT", 405, 243);
-            FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource("disconnected.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage primaryStage = new Stage();
-            primaryStage.setTitle("DISCONNECT");
-            primaryStage.setScene(new Scene(root, 405, 243));
+        Platform.runLater(() -> {
+            try {
+                open("disconnected.fxml", "DISCONNECT", 405, 243);
+                FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource("disconnected.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Stage primaryStage = new Stage();
+                primaryStage.setTitle("DISCONNECT");
+                primaryStage.setScene(new Scene(root, 405, 243));
 
 
-            primaryStage.show();
-        }catch (Exception e){
-            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
+                primaryStage.show();
+            } catch (Exception e) {
+                Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
 
-        }
+            }
+        });
     }
 
     /**
@@ -394,8 +390,15 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void printRanking(List<Player> players) throws Exception {
-        open("playersRanking.fxml", "RANKING", 500, 600);
-        playersRanking = players;
+        Platform.runLater(() -> {
+            try {
+                open("playersRanking.fxml", "RANKING", 600, 600);
+                playersRanking = players;
+            }
+            catch (Exception e){
+
+            }
+        });
     }
 
     /**
@@ -447,7 +450,6 @@ public class ControllerLogin implements UiInterface {
      */
     public void updateSetting(int choosenMap, int skull){
         this.updateSkullMap(skull);
-        this.selectedMap(choosenMap);
         this.skullNumber= skull;
 
     }
