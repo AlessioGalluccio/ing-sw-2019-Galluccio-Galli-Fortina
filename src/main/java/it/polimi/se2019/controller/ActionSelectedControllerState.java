@@ -74,6 +74,7 @@ public class ActionSelectedControllerState extends StateController {
             this.skipSelected = true;
         } catch (NotEnoughAmmoException e) {
             //shouldn't happen
+            this.skipSelected = true;
         }
 
     }
@@ -149,7 +150,7 @@ public class ActionSelectedControllerState extends StateController {
             errorString = CARD_NOT_PRESENT;
 
         }catch (FiremodeOfOnlyMarksException e){
-            errorString = ONLY_MARKS;;
+            errorString = ONLY_MARKS;
         }
 
     }

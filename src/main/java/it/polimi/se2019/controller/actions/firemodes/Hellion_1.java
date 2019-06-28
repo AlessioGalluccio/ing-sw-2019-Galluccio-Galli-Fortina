@@ -64,6 +64,7 @@ public class Hellion_1 extends FireMode {
                     addDamageAndMarks(target,numDamageOthers,numMarksOthers,false);
                 }
             }
+            commonEndingFire();
         }
     }
 
