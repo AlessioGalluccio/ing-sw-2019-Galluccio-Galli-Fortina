@@ -100,9 +100,11 @@ public class EmptyControllerState extends StateController {
 
     @Override
     public void handleReload(int weaponID) {
-        //TODO
+
         try{
             player.loadWeapon(weaponID);
+            //after reloading (if successful), you go to HasReloadedState
+            controller.setState(new HasReloadedControllerState(controller, gameHandler));
         }catch(NotPresentException e){
             errorString = NOT_PRESENT_WEAPON_RELOAD;
             notPossible();
@@ -113,9 +115,6 @@ public class EmptyControllerState extends StateController {
             errorString = NOT_ENOUGH_AMMO_RELOAD;
             notPossible();
         }
-
-        //after reloading, you go to HasReloadedState
-        controller.setState(new HasReloadedControllerState(controller, gameHandler));
     }
 
     @Override

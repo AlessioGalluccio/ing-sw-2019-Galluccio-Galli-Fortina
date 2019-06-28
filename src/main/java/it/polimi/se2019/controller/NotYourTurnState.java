@@ -14,7 +14,7 @@ public class NotYourTurnState extends StateController {
     private String errorString;
     private String stringToPlayerView;
     boolean neededTargetForTagBack = false;
-    private TagbackGrenadeCard tagbackGrenadeCard;
+    private int tagbackGrenadeCardID;
 
     public final static String NOT_YOUR_TURN_RESPONSE = "Please, wait your turn. ";
     public final static String SELECT_TARGET_FOR_TAGBACK = "Select a target player for TagBack. ";
@@ -80,8 +80,11 @@ public class NotYourTurnState extends StateController {
                     && playerAuthor.getTargetsForTagBack().contains(target.getID())){
                 try{
                     target.receiveMarkBy(playerAuthor);
+                    playerAuthor.discardCard(gameHandler.getPowerupCardByID(tagbackGrenadeCardID), true);
                 }catch (TooManyException e){
-                    //do nothing, you wasted the powerup
+                    //do nothing, you wasted the powerup bacause target can't have more marks
+                } catch (NotPresentException e) {
+                    //do nothing, shouldn't happen becuase it's a card you have
                 }
                 neededTargetForTagBack = false;
             }
@@ -121,7 +124,7 @@ public class NotYourTurnState extends StateController {
             }
             if(canUse){
                 neededTargetForTagBack = true;
-                this.tagbackGrenadeCard = usedCard;
+                this.tagbackGrenadeCardID = usedCard.getID();
             }
             else{
                 errorString = NO_TARGETS_FOR_TAGBACK;
