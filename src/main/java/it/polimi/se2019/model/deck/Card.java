@@ -1,7 +1,5 @@
 package it.polimi.se2019.model.deck;
 
-import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.model.player.TooManyException;
 
 import java.io.Serializable;
 
@@ -19,7 +17,17 @@ public interface Card extends Serializable {
     */
    void discard();
 
+   /**
+    * The ID is an unique number for each card.
+    * Can't exist two card of the SAME DECK with the same ID. If the decks are different there may be the same ID.
+    * @return The unique ID of the card.
+    */
    int getID();
 
+   /**
+    * The ID Type isn't unique for each card.
+    * It is the same for the card with the same status.
+    * @return the id type of the card
+    */
    int getIDtype();
 }

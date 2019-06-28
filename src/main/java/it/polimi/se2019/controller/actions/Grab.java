@@ -104,28 +104,6 @@ public class Grab extends Action{
 
     }
 
-
-    @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-        throw new WrongInputException();
-
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addFireMode(int fireModeID) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
     @Override
     public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
 
@@ -154,11 +132,6 @@ public class Grab extends Action{
     }
 
     @Override
-    public void addOptional(int numOptional) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException {
         boolean itContains = false;
         for(WeaponCard weapon : playerAuthor.getWeaponCardList()){
@@ -174,10 +147,6 @@ public class Grab extends Action{
         }
     }
 
-    @Override
-    public void fire() throws WrongInputException {
-        throw new WrongInputException();
-    }
 
     @Override
     public AmmoBag getCost() {

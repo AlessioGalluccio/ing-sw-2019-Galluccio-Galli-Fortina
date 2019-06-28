@@ -7,8 +7,12 @@ import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 
+/**
+ * this methods must be implemented by Action classes to permit a correct comunication. They also include the
+ * AddFireMode methods of the firemodes
+ */
 public interface AddActionMethods extends AddFireModeMethods{
-    //THE COMMENTENTED lines are already implemented in AddFireModeMethods
+    //THE COMMENTED lines are already implemented in AddFireModeMethods
 
     //void addCell(int x, int y) throws WrongInputException;
 
@@ -25,8 +29,6 @@ public interface AddActionMethods extends AddFireModeMethods{
     void addDiscardWeapon(WeaponCard weaponCard) throws WrongInputException;
 
     //void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
-
-    //void addNope() throws WrongInputException;
 
     //void fire() throws WrongInputException;
 }

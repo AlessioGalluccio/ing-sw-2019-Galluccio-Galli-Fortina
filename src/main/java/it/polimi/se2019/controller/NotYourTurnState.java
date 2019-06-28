@@ -12,7 +12,6 @@ public class NotYourTurnState extends StateController {
 
     private Player playerAuthor;
     private String errorString;
-    private String stringToPlayerView;
     boolean neededTargetForTagBack = false;
     private int tagbackGrenadeCardID;
 

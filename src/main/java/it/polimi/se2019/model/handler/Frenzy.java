@@ -4,10 +4,12 @@ import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.actions.*;
 import it.polimi.se2019.model.player.Player;
 
+/**
+ * This modality is for the last part of the game
+ * After the endgame you can have two or three 'frenzy' action
+ * This modality terminate at the end of the game
+ */
 public class Frenzy implements Modality {
-
-    public Frenzy() {
-    }
 
     /**
      * Return the correct action base on modality (normal in this case) and life points of the player
@@ -51,6 +53,10 @@ public class Frenzy implements Modality {
         }
     }
 
+    /**
+     * Return true if is a frenzy modality, false otherwise
+     * @return true
+     */
     @Override
     public boolean isFrenzyEnable() {
         return true;

@@ -42,6 +42,11 @@ public abstract class StateController {
     protected GameHandler gameHandler;
 
 
+    /**
+     * common constructor
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the match
+     */
     public StateController(Controller controller, GameHandler gameHandler) {
         this.controller = controller;
         this.gameHandler = gameHandler;
@@ -49,44 +54,100 @@ public abstract class StateController {
 
     /**
      * used by the controller to pass the new message, the other methods are used by messages themselves
-     * @param arg
+     * @param arg the ViewControllerMessage to be handled
      */
     public abstract String handle(ViewControllerMessage arg);
 
+    /**
+     * it handles an Action message
+     * @param actionID the ID of the action
+     */
     public abstract void handleAction(int actionID);
 
+    /**
+     * it handles a Cell message
+     * @param coordinateX the coordinate x of the cell
+     * @param coordinateY the coordinate y of the cell
+     */
     public abstract void handleCell(int coordinateX, int coordinateY);
 
+    /**
+     * it handles a Firemode message
+     * @param firemodeID the ID of the firemode
+     */
     public abstract void handleFiremode(int firemodeID);
 
+    /**
+     * it handles a NetonCard message
+     * @param usedCard the NewtonCard used
+     */
     public abstract void handleNewton(NewtonCard usedCard);
 
+    /**
+     * it handles the skip message
+     */
     public abstract void handleNope();
 
+    /**
+     * it handles an Optinal message
+     * @param numOptional the ID of the optional firemode
+     */
     public abstract void handleOptional(int numOptional);
 
+    /**
+     * it handles a plyaer message
+     * @param playerID the ID of the player
+     */
     public abstract void handlePlayer(int playerID);
 
+    /**
+     * it handles a Reoad message
+     * @param weaponID the ID of the weapon to load
+     */
     public abstract void handleReload(int weaponID);
 
+    /**
+     * it handles a Tagback message
+     * @param usedCard the Tagbcak card used
+     */
     public abstract void handleTagback(TagbackGrenadeCard usedCard);
 
+    /**
+     * it handles a TargetingScope message
+     * @param usedCard the TargetingScopeCard used
+     * @param cost the Ammo cost which must be converted in damage
+     */
     public abstract void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost);
 
+    /**
+     * it handles a Teleporter message
+     * @param usedCard the TeleporterCard used
+     */
     public abstract void handleTeleporter(TeleporterCard usedCard);
 
+    /**
+     * it handles a Weapon message
+     * @param usedCard the weapon card used
+     */
     public abstract void handleWeaponCard(WeaponCard usedCard);
 
     /**
-     * when called by a PassTurnMessage , it passes the turn
+     * it handles a PassTurn message
      */
     public void handlePassTurn() {
         controller.setState(new NotYourTurnState(controller,gameHandler));
         gameHandler.nextTurn();
     }
 
+    /**
+     * it handles a Fire message
+     */
     public abstract void handleFire();
 
+    /**
+     * it handles a Connection message
+     * @param isConnected true if the player is connected, false if he is disconnected
+     */
     public void handleReconnection(boolean isConnected){
         if(!isConnected){
             gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
@@ -95,12 +156,24 @@ public abstract class StateController {
         }
     }
 
+    /**
+     * it handles a DiscardPowerup message
+     * @param powerupID the ID of the powerup to discard
+     */
     public abstract void handleDiscardPowerup(int powerupID);
 
+    /**
+     * it handles a WeaponDiscard message
+     * @param weaponID the ID of the weapon card to discard
+     */
     public abstract void handleDiscardWeapon(int weaponID);
 
+    /**
+     * it handles a Character message
+     * @param characterID the ID of the Character
+     */
     public void handleCharacter(int characterID){
-        //do nothing
+        //do nothing, override it
     }
 
     //HELPER METHODS
@@ -136,7 +209,6 @@ public abstract class StateController {
      * @param isConnected false if the player is disconnected, true if not
      */
     protected void connectionDontPassTurn(boolean isConnected){
-        //TODO controlla da sistemare sicuramente
         if(!isConnected){
             gameHandler.setPlayerConnectionStatus(controller.getAuthor(), false);
             controller.setState(new DisconnectedControllerState(controller, gameHandler));

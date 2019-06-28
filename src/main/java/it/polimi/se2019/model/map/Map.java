@@ -147,6 +147,12 @@ public abstract class Map extends Observable implements Serializable {
         return cells;
     }
 
+    /**
+     * Check if a player from a cell can be see another one on the specific cell, according to the game rule
+     * @param cellStart The cell where is the observer
+     * @param target The cell of the observable
+     * @return True if the observer can see the observable, false otherwise
+     */
     public boolean canSee(Cell cellStart, Cell target) {
         if(target.equals(cellStart)) return true;
         if(target.getRoom().equals(cellStart.getRoom())) return true;

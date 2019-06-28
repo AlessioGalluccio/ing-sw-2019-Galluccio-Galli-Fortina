@@ -19,7 +19,7 @@ import java.util.*;
 import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
-    private final int MIN_SKULL = 5;
+    private final int MIN_SKULL = 1;
     public boolean endGame;
     private ClientView view;
     private boolean online = true;

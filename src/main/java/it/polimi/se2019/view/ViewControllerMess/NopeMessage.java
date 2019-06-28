@@ -3,7 +3,6 @@ package it.polimi.se2019.view.ViewControllerMess;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
-import it.polimi.se2019.view.remoteView.PlayerView;
 
 public class NopeMessage extends ViewControllerMessage {
 

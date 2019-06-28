@@ -27,29 +27,9 @@ public class Hellion_1 extends FireMode {
         return list;
     }
 
-
-    @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
-        List<AmmoBag> list = new ArrayList<>();
-        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
-        return list;
-    }
-
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsPlayer().isEmpty()){
-            throw new WrongInputException(CANT_DO_FIRE);
-        }
-        else{
-            for(Player target : shoot.getTargetsPlayer()){
-                if(shoot.getTargetsPlayer().indexOf(target) == 0){  //the first one is the primary target
-                    addDamageAndMarks(target,1,1,true);
-                }
-                else {
-                    addDamageAndMarks(target,0,1,false);
-                }
-            }
-        }
+        fireHellion(1,1,0,1);
     }
 
     @Override
@@ -68,6 +48,23 @@ public class Hellion_1 extends FireMode {
         }
         else{
             throw new WrongInputException(INVALID_TARGET);
+        }
+    }
+
+
+    protected void fireHellion(int numDamageFirst, int numMarksFirst, int numDamageOthers, int numMarksOthers) throws WrongInputException{
+        if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException(CANT_DO_FIRE);
+        }
+        else{
+            for(Player target : shoot.getTargetsPlayer()){
+                if(shoot.getTargetsPlayer().indexOf(target) == 0){  //the first one is the primary target
+                    addDamageAndMarks(target,numDamageFirst,numMarksFirst,true);
+                }
+                else {
+                    addDamageAndMarks(target,numDamageOthers,numMarksOthers,false);
+                }
+            }
         }
     }
 

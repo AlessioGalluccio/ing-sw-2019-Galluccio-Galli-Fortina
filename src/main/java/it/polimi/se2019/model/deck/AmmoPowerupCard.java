@@ -18,9 +18,9 @@ public class AmmoPowerupCard implements AmmoCard {
     private final ColorRYB color1;
     private final ColorRYB color2;
 
-    public static final String TOO_MANY_AMMO = "You have already max ammo. ";
+    static final String TOO_MANY_AMMO = "You have already max ammo. ";
 
-    public AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID, int IDtype) {
+    AmmoPowerupCard(ColorRYB color1, ColorRYB color2, PowerupDeck powerupDeck, int ID, int IDtype) {
         this.color1 = color1;
         this.color2 = color2;
         this.powerupDeck = powerupDeck;
@@ -51,11 +51,21 @@ public class AmmoPowerupCard implements AmmoCard {
         return ammo;
     }
 
+    /**
+     * The ID is an unique number for each card.
+     * Can't exist two card of the SAME DECK with the same ID. If the decks are different there may be the same ID.
+     * @return The unique ID of the card.
+     */
     @Override
     public int getID() {
         return ID;
     }
 
+    /**
+     * The ID Type isn't unique for each card.
+     * It is the same for the card with the same status, so for the card which has the same color of ammo.
+     * @return the id type of the card
+     */
     @Override
     public int getIDtype() {
         return IDtype;

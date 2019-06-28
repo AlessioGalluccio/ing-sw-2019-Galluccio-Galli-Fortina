@@ -6,7 +6,7 @@ import it.polimi.se2019.view.remoteView.MapView;
 
 /**
  * Send a copy of the map to the view
- * Util ONLY at the start of the game, when the view has to know which map rappresent
+ * Util ONLY at the start of the game, when the view has to know which map represent
  * After that use CellMessage!
  */
 public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
@@ -19,10 +19,6 @@ public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
         this.mapCopy = mapCopy;
         ID++;
         ack=ID;
-    }
-
-    public Map getMapCopy() {
-        return mapCopy;
     }
 
     @Override

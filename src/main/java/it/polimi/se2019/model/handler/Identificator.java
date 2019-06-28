@@ -63,6 +63,12 @@ public class Identificator {
         return (fireMode.getID())/10 == weaponCard.getID();
     }
 
+    /**
+     * Create a fire mode ID starting from the weapon of the fire mode and a suffix
+     * @param weaponId The id of the weapon containing the fire mode
+     * @param fireModeID The suffix of the fire mode ID
+     * @return The complete fire mode ID
+     */
     public static int createFiremode(int weaponId, int fireModeID) {
         return weaponId*10 + fireModeID;
     }

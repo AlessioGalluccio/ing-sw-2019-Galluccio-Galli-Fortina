@@ -35,9 +35,15 @@ public class PowerupDeck extends Deck<PowerupCard> {
         return deck;
     }
 
+    /**
+     * Used by Gson to serialize the deck
+     * Return a Type object according to the param: ArrayList or Stack
+     * @param arrayListORStack True if you want an ArrayList, false for a Stack
+     * @return A Type object of the specify class
+     */
     @Override
-    protected Type getType(boolean ArrayListORStack) {
-        return ArrayListORStack ?
+    protected Type getType(boolean arrayListORStack) {
+        return arrayListORStack ?
                 new TypeToken<ArrayList<PowerupCard>>() {}.getType() :
                 new TypeToken<Stack<PowerupCard>>() {}.getType();
     }
