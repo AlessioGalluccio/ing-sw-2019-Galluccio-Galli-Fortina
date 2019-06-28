@@ -40,14 +40,18 @@ public class FirstTurnState extends StateController {
             controller.resetMessages();
             controller.addMessageListExpected(listExpectedMessages);
 
-            //player picks up two powerup cards
-            PowerupDeck deck = gameHandler.getPowerupDeck();
-            try{
-                playerAuthor.addPowerupCard(deck.pick());
-                playerAuthor.addPowerupCard(deck.pick());
-            }catch (TooManyException e){
-                errorString = TOO_MANY_CARDS;
+            //if reconnection and character wasn't selected, the powerups are already in player
+            if(playerAuthor.getPowerupCardList().isEmpty()){
+                //player picks up two powerup cards
+                PowerupDeck deck = gameHandler.getPowerupDeck();
+                try{
+                    playerAuthor.addPowerupCard(deck.pick());
+                    playerAuthor.addPowerupCard(deck.pick());
+                }catch (TooManyException e){
+                    errorString = TOO_MANY_CARDS;
+                }
             }
+
 
             //we immediately send a message to the player
             if(errorString == null){
