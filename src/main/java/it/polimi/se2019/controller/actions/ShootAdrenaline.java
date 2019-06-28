@@ -16,7 +16,7 @@ public class ShootAdrenaline extends Shoot {
 
     private int DISTANCE_MAX = 1;
     //messages
-    public static final String CHOOSE_CELL_ADRENALINE_SHOOT ="Select a cell. ";
+    public static final String CHOOSE_CELL_ADRENALINE_SHOOT ="Select a cell for move with shoot. ";
     //errors
     public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
     public static final String CELL_NOT_PRESENT = "This cell is not present. ";
