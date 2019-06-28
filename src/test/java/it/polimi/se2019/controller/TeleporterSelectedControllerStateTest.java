@@ -1,7 +1,7 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.booleanThat;
 import static org.mockito.Mockito.mock;
 
 public class TeleporterSelectedControllerStateTest {

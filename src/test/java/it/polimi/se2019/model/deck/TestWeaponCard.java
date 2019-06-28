@@ -1,5 +1,6 @@
 package it.polimi.se2019.model.deck;
 
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.player.ColorRYB;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package it.polimi.se2019.controller.actions;
 
 import it.polimi.se2019.model.deck.WeaponCard;
-import it.polimi.se2019.model.deck.firemodes.AddFireModeMethods;
+import it.polimi.se2019.controller.actions.firemodes.AddFireModeMethods;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;

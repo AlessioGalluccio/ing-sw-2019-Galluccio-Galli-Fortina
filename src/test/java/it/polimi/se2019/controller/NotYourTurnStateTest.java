@@ -1,12 +1,9 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.model.deck.FireMode;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.TagbackGrenadeCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;

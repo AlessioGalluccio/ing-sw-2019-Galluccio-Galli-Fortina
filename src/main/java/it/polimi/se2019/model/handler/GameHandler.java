@@ -11,6 +11,7 @@ import it.polimi.se2019.controller.MustRespawnControllerState;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.map.*;
 import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.model.map.Map;

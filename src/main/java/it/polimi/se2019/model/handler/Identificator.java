@@ -1,6 +1,6 @@
 package it.polimi.se2019.model.handler;
 
-import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 
 public class Identificator {

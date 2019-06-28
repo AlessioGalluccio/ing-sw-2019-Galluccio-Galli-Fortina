@@ -1,8 +1,8 @@
 package it.polimi.se2019.model.handler;
 
 import it.polimi.se2019.controller.Controller;
-import it.polimi.se2019.model.deck.firemodes.ElectroScythe_1;
-import it.polimi.se2019.model.deck.firemodes.ShockWave_2;
+import it.polimi.se2019.controller.actions.firemodes.ElectroScythe_1;
+import it.polimi.se2019.controller.actions.firemodes.ShockWave_2;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;

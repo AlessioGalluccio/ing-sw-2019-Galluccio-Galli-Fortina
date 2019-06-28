@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;

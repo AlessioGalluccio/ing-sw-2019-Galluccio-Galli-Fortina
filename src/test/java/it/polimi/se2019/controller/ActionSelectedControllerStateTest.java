@@ -1,7 +1,7 @@
 package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Shoot;
-import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.TeleporterCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;

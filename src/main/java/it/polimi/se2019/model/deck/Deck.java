@@ -3,6 +3,7 @@ package it.polimi.se2019.model.deck;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import it.polimi.se2019.model.JsonAdapter;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 
 import java.lang.reflect.Type;
 import java.util.*;

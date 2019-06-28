@@ -3,7 +3,7 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.StateController;
-import it.polimi.se2019.model.deck.FireMode;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;

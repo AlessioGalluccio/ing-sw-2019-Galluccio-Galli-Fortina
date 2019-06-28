@@ -7,6 +7,7 @@ import it.polimi.se2019.cloneable.SkinnyObjectExclusionStrategy;
 import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.view.remoteView.MapView;
 
 import java.io.Serializable;
