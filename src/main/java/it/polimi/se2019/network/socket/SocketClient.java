@@ -44,7 +44,6 @@ public class SocketClient extends Client {
                     try {
                         HandlerNetworkMessage messageSocket = (HandlerNetworkMessage) scannerSocket.readObject();
                         messageSocket.handleMessage(this);
-
                     } catch (java.net.SocketException e) {
                         disconnect();
                     } catch (StreamCorruptedException | java.io.EOFException e) {
@@ -62,8 +61,8 @@ public class SocketClient extends Client {
     }
 
     private void disconnect(){
-        closeAll();
         if(open) new DisconnectMessage().handleMessage(this);
+        closeAll();
         open=false;
     }
 
@@ -89,9 +88,9 @@ public class SocketClient extends Client {
                 printSocket.flush();
             }
         } catch (IOException e) {
+            new DisconnectMessage().handleMessage(this);
             open=false;
             closeAll();
-            new DisconnectMessage().handleMessage(this);
         }
     }
 
