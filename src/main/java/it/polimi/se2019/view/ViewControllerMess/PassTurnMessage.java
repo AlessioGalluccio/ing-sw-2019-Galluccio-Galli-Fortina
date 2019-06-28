@@ -11,9 +11,9 @@ public class PassTurnMessage extends ViewControllerMessage {
     //TO PASS THE TURN
 
     /**
-     * PassTurnMessage class's constructor
-     * @param authorID
-     * @param authorView
+     * PassTurnMessage class constructor
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public PassTurnMessage(int authorID, View authorView) {
 

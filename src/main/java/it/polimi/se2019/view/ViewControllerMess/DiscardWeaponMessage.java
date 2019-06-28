@@ -9,6 +9,12 @@ public class DiscardWeaponMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 8135867227123013091L;
     private int weaponID;
 
+    /**
+     * DiscardWeaponMessage class constructor
+     * @param weaponCard the weaponCard selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
+     */
     public DiscardWeaponMessage(WeaponCard weaponCard, int authorID, View authorView) {
         this.weaponID = weaponCard.getID();
         this.messageID = Identificator.DISCARD_WEAPON_MESSAGE;
@@ -19,10 +25,6 @@ public class DiscardWeaponMessage extends ViewControllerMessage {
     @Override
     public int getMessageID() {
         return messageID;
-    }
-
-    public int getWeaponId() {
-        return weaponID;
     }
 
     @Override

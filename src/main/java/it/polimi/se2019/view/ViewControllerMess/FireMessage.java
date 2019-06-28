@@ -10,9 +10,9 @@ public class FireMessage extends ViewControllerMessage {
     private static final long serialVersionUID = -4311857432590616482L;
 
     /**
-     * FireMessage class's constructor
-     * @param authorID
-     * @param authorView
+     * FireMessage class constructor
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public FireMessage(int authorID, View authorView) {
 

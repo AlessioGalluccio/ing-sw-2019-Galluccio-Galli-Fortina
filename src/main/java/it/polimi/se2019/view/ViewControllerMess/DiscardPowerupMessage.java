@@ -9,6 +9,12 @@ public class DiscardPowerupMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 5729692987783697070L;
     private int powerupCardId;
 
+    /**
+     * DiscardPowerupMessage class constructor
+     * @param powerupCard the powerupCard selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
+     */
     public DiscardPowerupMessage(PowerupCard powerupCard, int authorID, View authorView) {
         this.powerupCardId = powerupCard.getID();
         this.messageID = Identificator.DISCARD_POWERUP_MESSAGE;
@@ -19,10 +25,6 @@ public class DiscardPowerupMessage extends ViewControllerMessage {
     @Override
     public int getMessageID() {
         return messageID;
-    }
-
-    public int getPowerupCardId() {
-        return powerupCardId;
     }
 
     @Override

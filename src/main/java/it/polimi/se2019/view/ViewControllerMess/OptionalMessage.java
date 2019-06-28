@@ -10,19 +10,15 @@ public class OptionalMessage extends ViewControllerMessage{
 
     /**
      * OptionalMessage class's constructor
-     * @param optionalID
-     * @param authorID
-     * @param authorView
+     * @param optionalID the ID of the optional firemode selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public OptionalMessage(int optionalID, int authorID, View authorView) {
         this.optionalID = optionalID;
         this.messageID = Identificator.OPTIONAL_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;
-    }
-
-    public int getOptionalID() {
-        return optionalID;
     }
 
     @Override

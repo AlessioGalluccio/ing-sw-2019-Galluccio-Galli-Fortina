@@ -10,6 +10,12 @@ public class WeaponMessage extends ViewControllerMessage {
     private static final long serialVersionUID = -835200389203068573L;
     WeaponCard weaponCard;
 
+    /**
+     * WeaponMessage constructor
+     * @param weaponCard the WeaponCard selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
+     */
     public WeaponMessage(WeaponCard weaponCard, int authorID, View authorView){
         this.weaponCard = weaponCard;
         this.messageID = Identificator.WEAPON_MESSAGE;
