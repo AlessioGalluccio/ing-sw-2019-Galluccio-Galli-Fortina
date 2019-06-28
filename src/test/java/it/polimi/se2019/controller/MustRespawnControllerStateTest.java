@@ -86,6 +86,7 @@ public class MustRespawnControllerStateTest {
         controller.update(null, discardPowerupMessage);
         assertTrue(controller.getState() instanceof NotYourTurnState);
         assertEquals(targetPlayer1.getID(), gameHandler.getTurnPlayerID());
+        assertEquals(1, authorPlayer.getSkull());
     }
 
 /*

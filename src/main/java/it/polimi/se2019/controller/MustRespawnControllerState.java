@@ -128,6 +128,7 @@ public class MustRespawnControllerState extends StateController {
             //the NotYourTurnState will do the gamehandler.nextTurn()
 
             gameHandler.removeJustDied(playerAuthor);
+            playerAuthor.resurrection(); //Increment player's skull and notifyObservers
 
             //we must do the next turn outside NotYourTurnState, otherwise if this player is the next in the turn
             //the constructor of NotYouTurnState will put the controller in EMptySte, BUT at the end of this constructor

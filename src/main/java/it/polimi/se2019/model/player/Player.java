@@ -260,10 +260,9 @@ public class Player extends Observable implements Target, Serializable {
     /**
      * it respawns the player after death
      */
-    public void resurrection(CellSpawn cellSpawn) {
+    public void resurrection() {
         skull += 1;
         bonusPowerup = false;
-        setPosition(cellSpawn);
         notifyObservers(new PlayerModelMessage(this.clone()));
     }
 

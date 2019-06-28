@@ -139,7 +139,7 @@ public class GameHandlerTest {
         CellSpawn c = new CellSpawn(null, null,null, null, 1,1,null);
         ArrayList<Cell> a = new ArrayList<>();
         a.add(c);new Room(c, "blue", a);
-        p.resurrection(c);
+        p.resurrection();
         kill(p, e1, e2, e3);
         gameHandler.checkDeath();
         assertEquals(0, p.getNumPoints());
