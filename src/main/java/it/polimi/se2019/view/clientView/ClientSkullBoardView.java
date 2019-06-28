@@ -7,7 +7,7 @@ import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 public class ClientSkullBoardView extends SkullBoardView {
     private UiInterface ui;
-    private int lastAck;
+    private int lastAck = -1;
 
     public ClientSkullBoardView(UiInterface ui) {
         this.ui = ui;
@@ -33,6 +33,10 @@ public class ClientSkullBoardView extends SkullBoardView {
                 ui.updateSkullBoard();
             }
         }
+    }
+
+    public int getLastAck() {
+        return lastAck;
     }
 
 }

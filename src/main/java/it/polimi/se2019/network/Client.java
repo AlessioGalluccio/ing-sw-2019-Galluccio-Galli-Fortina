@@ -64,6 +64,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         synchronized (clientView) {
             //If views are not initialized wait
             while (mapView.getMapCopy() == null ||
+                    skullBoardView.getLastAck() == -1 ||
                     clientView.getPlayerCopy() == null ||
                     enemyViews.get(0).getNickname() == null ||
                     enemyViews.get(1).getNickname() == null) {
@@ -105,8 +106,8 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     /**
-     * is used by the server to send string to the client with the rmi connection
-     * @param string
+     * It is used by the server to send string to the client with the rmi connection
+     * @param string the string send by the controller
      */
     public void printFromController(String string) {
         clientView.printFromController(string);
