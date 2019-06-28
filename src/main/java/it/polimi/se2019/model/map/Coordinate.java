@@ -11,7 +11,7 @@ public class Coordinate implements Serializable {
     private  final int x;
     private final int y;
 
-    public Coordinate(int x, int y) {
+    Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -24,6 +24,11 @@ public class Coordinate implements Serializable {
         return y;
     }
 
+    /**
+     * Compare the coordinate based on X and Y
+     * @param o The other player to compare
+     * @return True if the two coordinates has the same X and Y. False otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -152,17 +152,23 @@ public class GameHandler extends Observable {
 
     /**
      * To call at the end of the game.
-     * Send to all user connected the ranking and delete the macth
+     * Send to all user connected the ranking and delete the match
      */
-    void endGame() {
+    private void endGame() {
         forwardAllViews(new RankingMessage(getRanking()));
         WaitingRoom.deleteMatch(this);
     }
 
+    /**
+     * @return The id of this match
+     */
     public int getMatchID() {
         return matchID;
     }
 
+    /**
+     * @return The number of skull left
+     */
     public int getSkull() {
         return skull;
     }
@@ -217,7 +223,7 @@ public class GameHandler extends Observable {
     /**
      * It generates an Action object with reference to this GameHandler
      * @param actionID the int ID of the action
-     * @return
+     * @return An Action object according to the ID, the player and the modality of the game
      */
     public Action getActionByID(int actionID, Controller controller) throws WrongInputException {
         return modality.getActionByID(actionID, controller, this);
@@ -303,9 +309,8 @@ public class GameHandler extends Observable {
     /**
      * When a player pass his turn, this method check if someone has died
      * If his the case create a Death object, cash point, reset damage of the death and ask player to re-spawn
-     * @return the number of death
      */
-    protected void checkDeath() {
+    void checkDeath() {
         boolean doubleKill = false;
         for (Player p : orderPlayerList) {
             if (p.isDead()) {
@@ -707,7 +712,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * remove the player from the list of dead players. Call it during the respwan
+     * Remove the player from the list of dead players. Call it during the respwan
      * @param player the player that is respawned
      */
     public void removeJustDied(Player player){
@@ -715,7 +720,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * respawn a disconnected player in a random cellSpawn
+     * Respawn a disconnected player in a random cellSpawn
      * @param player the player who must reaspawn, but he is disconnected
      */
     public void randomRespawnNotConnectedPlayer(Player player){

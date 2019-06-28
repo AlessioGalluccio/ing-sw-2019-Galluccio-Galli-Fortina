@@ -10,6 +10,11 @@ public class TargetingScopeCard extends PowerupCard{
         super(color, id, IDtype);
     }
 
+    /**
+     * String the full card, representing each attributes the name of the card (Targeting Scope) and color
+     * Works with ANSI code
+     * @return The representation of the card
+     */
     @Override
     public String toString() {
         return ConsoleColor.colorByColor(getAmmo().toString()) + "Targeting Scope" + ConsoleColor.RESET;

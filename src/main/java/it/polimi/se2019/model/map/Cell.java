@@ -48,19 +48,19 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         return coordinate.getY();
     }
 
-    public Border getNorthBorder() {
+    Border getNorthBorder() {
         return northBorder;
     }
 
-    public Border getEastBorder() {
+    Border getEastBorder() {
         return eastBorder;
     }
 
-    public Border getSouthBorder() {
+    Border getSouthBorder() {
         return southBorder;
     }
 
-    public Border getWestBorder() {
+    Border getWestBorder() {
         return westBorder;
     }
 
@@ -144,6 +144,10 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         else throw new NotHereException(playerToRemove.toString() + " was not here " +toString());
     }
 
+    /**
+     * String the full cell, representing each the coordinate of the cell
+     * @return The representation of the cell
+     */
     @Override
     public String toString() {
         return "Cell{" +
@@ -152,6 +156,11 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
                 '}';
     }
 
+    /**
+     * Compare the cell based on the coordinate and the four border
+     * @param o The other cell to compare
+     * @return True if the two cell has the same coordinate and the same 4 border. False otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -170,6 +179,10 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
         return Objects.hash(northBorder, eastBorder, southBorder, westBorder, coordinate);
     }
 
+    /**
+     * Create a deep copy of the cell
+     * @return a deep copy of the cell
+     */
     public abstract Cell clone();
 
 
@@ -255,6 +268,10 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
      */
     abstract String printMiddleRow();
 
+    /**
+     * Some map are some invalid cell, instead of set null those cell they are set to "disable"
+     * @return true if is a valid (active) cell of the map, false otherwise
+     */
     boolean isActive() {
         return !disable;
     }

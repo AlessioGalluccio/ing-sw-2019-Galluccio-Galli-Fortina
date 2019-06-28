@@ -13,7 +13,7 @@ public abstract class Deck<T> {
     private ArrayList<T> inUseCard;
     private Stack<T> usedCard;
 
-    public Deck(Stack<T> unusedCard) {
+    Deck(Stack<T> unusedCard) {
         this.unusedCard = unusedCard;
         this.inUseCard = new ArrayList<>();
         this.usedCard = new Stack();
@@ -39,7 +39,7 @@ public abstract class Deck<T> {
      *
      * @return Deep copy of inUsedCard stack
      */
-    public ArrayList<T> getInUseCard() {
+    List<T> getInUseCard() {
         Gson gson = createGson();
         Type TYPE = getType(true);
 
@@ -50,7 +50,7 @@ public abstract class Deck<T> {
      * Return the number of cards in the deck
      * @return number of cards in the deck
      */
-    public int sizeDeck() {
+    int sizeDeck() {
         return unusedCard.size() +
                 usedCard.size() +
                 inUseCard.size();
@@ -76,16 +76,16 @@ public abstract class Deck<T> {
     }
 
     /**
-     * HELPER METHOD
-     * @param ArrayListORStack true if you want an ArrayList, false for a Stack
-     * @return Type parametrized of the deck (WeaponCard, PowerupCard, AmmoCard)
+     * Used by Gson to serialize the deck.
+     * Return a Type object according to the param: ArrayList or Stack
+     * @param arrayListORStack True if you want an ArrayList, false for a Stack
+     * @return A Type object of the specify class, parametrized of the deck (WeaponCard, PowerupCard, AmmoCard)
      */
-    protected abstract Type getType(boolean ArrayListORStack);
+    protected abstract Type getType(boolean arrayListORStack);
 
     /**
-     * HELPER METHOD
      * Create a serializer and deserializer for the deck
-     * @return a Gson objcet for a deep copy of deck
+     * @return a Gson object for a deep copy of deck
      */
     private Gson createGson() {
         GsonBuilder g = new GsonBuilder()
@@ -121,8 +121,8 @@ public abstract class Deck<T> {
     }
 
     /**
-     * Move the card in the discarted pile
-     * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARTED PILE
+     * Move the card in the discarded pile
+     * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARDED PILE
      * @param card Card to discard
      */
     protected void discard(T card) {
@@ -132,8 +132,8 @@ public abstract class Deck<T> {
 
     /**
      * Return the card corresponding to the id
-     * @param id FireMode's id
-     * @return the card with that id, null if there's not
+     * @param id Card's id
+     * @return The card with that id, null if there's not
      */
     public T getCardById(int id) {
         for(int i=0; i<inUseCard.size(); i++) {

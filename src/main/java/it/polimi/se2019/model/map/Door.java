@@ -1,21 +1,29 @@
 package it.polimi.se2019.model.map;
 
-
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.ui.Printable;
-
-import java.io.PrintWriter;
 
 public class Door implements Border {
 
     private static final long serialVersionUID = -4178550241484863775L;
 
+    /**
+     * Return true if a player can move through it, false otherwise
+     * @return True
+     */
     @Override
     public boolean isCrossable(){
         return true;
     }
 
-
+    /**
+     * Print a specific line of the door in one direction (horizontal/vertical)
+     * If the line is vertical will println only the char of that row
+     * @param row the line to print
+     * @param horizontal true if the line is horizontal, false if is vertical
+     * @param color the color of the room
+     * @return The string to print
+     */
     @Override
     public String printByDirection( int row, boolean horizontal, ConsoleColor color) {
         String s = color.toString();
@@ -29,6 +37,11 @@ public class Door implements Border {
         return s;
     }
 
+    /**
+     * Can't print a row without know the direction
+     * @param row the line to println
+     * @return The string to print
+     */
     @Override
     public String printRow(int row) {
         //Can't print a row without know the direction

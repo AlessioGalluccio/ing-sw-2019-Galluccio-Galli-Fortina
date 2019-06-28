@@ -53,9 +53,9 @@ public class Room implements Target, Serializable {
     }
 
     /**
-     * Compare two room in order to determinate if are equals
+     * Compare two room base on the unique color
      * @param o the second room to compare
-     * @return true if the rooms have the same ID and SpawnCell
+     * @return true if the rooms have the same color, false otherwise
      */
     @Override
     public boolean equals(Object o) {

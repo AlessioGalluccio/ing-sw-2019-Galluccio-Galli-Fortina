@@ -27,6 +27,12 @@ public class CellAmmo extends Cell {
     }
 
 
+    /**
+     * Each cell has some card on it, this method grab a card
+     * @param cardID ID of the card I wanna grab, for this type of cell there only one card on it. Can be omitted.
+     * @return the card on the cell
+     * @throws NotCardException If card has already taken or there not a card with the ID
+     */
     @Override
     public Card grabCard(int cardID) throws NotCardException {
         if(ammo == null) throw new NotCardException("Card already taken");
@@ -35,7 +41,14 @@ public class CellAmmo extends Cell {
         notifyObservers(new CellModelMessage(this.clone()));
         return cardToReturn;
     }
-
+    /**
+     * Each cell has some card on it, this method grab a card and replace that with another one.
+     * This type of cell can't replace the card on it with another, so this method do the same of grabCard(nt cardID)
+     * @param cardID ID of the card I wanna grab, for this type of cell there only one card on it. Can be omitted.
+     * @param card The card to replace with
+     * @return the card on the cell
+     * @throws NotCardException If card has already taken or there not a card with the ID
+     */
     @Override
     public Card grabCard(int cardID, WeaponCard card) throws NotCardException {
         return grabCard(cardID);
@@ -49,6 +62,11 @@ public class CellAmmo extends Cell {
         return ammo;
     }
 
+    /**
+     * Each cell has some card on it, this method return a list of that cards' IDs
+     * This type of cell has only one card on it, the list will have size == 1
+     * @return the IDs of the cards on this cell
+     */
     @Override
     public List<Integer> getCardID() {
         ArrayList<Integer> cardId = new ArrayList<>();
@@ -67,6 +85,10 @@ public class CellAmmo extends Cell {
         }
     }
 
+    /**
+     * Create a deep copy of the cell
+     * @return a deep copy of the cell
+     */
     public Cell clone() {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(AmmoCard.class, new JsonAdapter<AmmoCard>())
@@ -99,6 +121,12 @@ public class CellAmmo extends Cell {
         return  s;
     }
 
+    /**
+     * The cards on this cell can has or three ammo or two ammo and one powerup.
+     * This method change the color of the third element on base of the case.
+     * @param ammo The list with the ammo on this cell.
+     * @return The color of the third element
+     */
     private ConsoleColor thirdAmmo(List<ColorRYB> ammo) {
         if(ammo.size()==3) return ConsoleColor.colorByColor(ammo.get(2).toString());
         else return ConsoleColor.WHITE;

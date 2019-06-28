@@ -15,7 +15,7 @@ public class AmmoOnlyCard implements AmmoCard {
     private final ColorRYB colorSingle;
     private final ColorRYB colorDouble;
 
-    public AmmoOnlyCard(ColorRYB colorSingle, ColorRYB colorDouble, int ID,int IDtype) {
+    AmmoOnlyCard(ColorRYB colorSingle, ColorRYB colorDouble, int ID,int IDtype) {
         this.colorSingle = colorSingle;
         this.colorDouble = colorDouble;
         this.ID = ID;
@@ -35,11 +35,22 @@ public class AmmoOnlyCard implements AmmoCard {
         return ammo;
     }
 
+    /**
+     * The ID Type isn't unique for each card.
+     * It is the same for the card with the same status, so for the card which has the same color of ammo.
+     * @return the id type of the card
+     */
     @Override
     public int getIDtype() {
         return IDtype;
     }
 
+
+    /**
+     * The ID is an unique number for each card.
+     * Can't exist two card of the SAME DECK with the same ID. If the decks are different there may be the same ID.
+     * @return The unique ID of the card.
+     */
     @Override
     public int getID() {
         return ID;
@@ -86,6 +97,7 @@ public class AmmoOnlyCard implements AmmoCard {
     public void useCard(Player author) throws TooManyException {
         reloadAmmo(author);
     }
+
 
     @Override
     public String toString() {
