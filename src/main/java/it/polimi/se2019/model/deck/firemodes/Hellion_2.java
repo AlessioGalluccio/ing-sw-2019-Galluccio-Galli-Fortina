@@ -19,19 +19,7 @@ public class Hellion_2 extends Hellion_1 {
 
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsPlayer().isEmpty()){
-            throw new WrongInputException(CANT_DO_FIRE);
-        }
-        else{
-            for(Player target : shoot.getTargetsPlayer()){
-                if(shoot.getTargetsPlayer().indexOf(target) == 0){  //the first one is the primary target
-                    addDamageAndMarks(target,1,2,true);
-                }
-                else {
-                    addDamageAndMarks(target,0,2,false);
-                }
-            }
-        }
+        fireHellion(1,2,0,2);
     }
 
 }

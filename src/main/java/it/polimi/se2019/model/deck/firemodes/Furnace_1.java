@@ -29,16 +29,7 @@ public class Furnace_1 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsPlayer().isEmpty()){
-            throw new WrongInputException(CANT_DO_FIRE);
-        }
-        else{
-            for(Player target : shoot.getTargetsPlayer()){
-                addDamageAndMarks(target,1,0,true);
-            }
-            super.fire();
-        }
-
+        fireFurnace(1,0);
     }
 
 
@@ -55,6 +46,18 @@ public class Furnace_1 extends FireMode {
                 shoot.addPlayerTargetFromFireMode(player,true);
             }
 
+        }
+    }
+
+    protected void fireFurnace(int damage, int marks) throws WrongInputException{
+        if(shoot.getTargetsPlayer().isEmpty()){
+            throw new WrongInputException(CANT_DO_FIRE);
+        }
+        else{
+            for(Player target : shoot.getTargetsPlayer()){
+                addDamageAndMarks(target,damage,marks,true);
+            }
+            super.fire();
         }
     }
 

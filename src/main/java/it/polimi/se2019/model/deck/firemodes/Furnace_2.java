@@ -10,7 +10,7 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Furnace_2 extends FireMode {
+public class Furnace_2 extends Furnace_1 {
     private static final long serialVersionUID = -315490042639058980L;
 
     //messages
@@ -30,16 +30,7 @@ public class Furnace_2 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsPlayer().isEmpty()){
-            throw new WrongInputException(CANT_DO_FIRE);
-        }
-        else{
-            for(Player target : shoot.getTargetsPlayer()){
-                addDamageAndMarks(target,1,1,true);
-            }
-            super.fire();
-        }
-
+        fireFurnace(1,1);
     }
 
     @Override

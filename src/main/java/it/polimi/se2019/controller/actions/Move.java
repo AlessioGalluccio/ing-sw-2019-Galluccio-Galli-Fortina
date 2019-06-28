@@ -56,43 +56,8 @@ public class Move extends Action {
     }
 
     @Override
-    public void addPlayerTarget(int playerID) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addReload(int weaponID) throws WrongInputException, NotPresentException, NotEnoughAmmoException, WeaponIsLoadedException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addFireMode(int fireModeID) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addWeapon(WeaponCard weaponCard) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
-    public void addOptional(int numOptional) throws WrongInputException {
-        throw new WrongInputException();
-    }
-
-    @Override
     public AmmoBag getCost() {
         return new AmmoBag(0,0,0);
-    }
-
-    @Override
-    public void fire() throws WrongInputException {
-        throw new WrongInputException();
     }
 
     protected int getMaxDistance(){
