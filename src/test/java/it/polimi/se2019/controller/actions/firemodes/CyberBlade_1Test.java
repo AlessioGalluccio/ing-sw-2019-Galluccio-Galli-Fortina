@@ -104,15 +104,41 @@ public class CyberBlade_1Test {
 
     @Test
     public void firePositiveOneTargetNoOptional() throws Exception {
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(CyberBlade_1.FIRST_MESSAGE, playerView.getLastStringPrinted());
         PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
         controller.update(null,playerMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
         FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
         controller.update(null, fireMessage);
-        System.out.println(playerView.getLastStringPrinted());
+
         assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
         assertEquals(2,targetPlayer1.getDamage().size());
+        assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
+        assertEquals(0, authorPlayer.getMark().getMarkDone().size());
+
+    }
+
+    @Test
+    public void firePositiveOneTargetNoOptionalWithTargeting() throws Exception {
+        assertEquals(CyberBlade_1.FIRST_MESSAGE, playerView.getLastStringPrinted());
+        PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
+        controller.update(null,playerMessage);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE, 1,1);
+        authorPlayer.addPowerupCard(card);
+        TargetingScopeMessage targetingScopeMessage = new TargetingScopeMessage(card, ColorRYB.RED, authorPlayer.getID(),playerView);
+        controller.update(null, targetingScopeMessage);
+
+        controller.update(null,playerMessage);
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
+
+        FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
+        controller.update(null, fireMessage);
+
+        assertEquals(authorPlayer.getID(),targetPlayer1.getDamage().get(0).getID());
+        assertEquals(3,targetPlayer1.getDamage().size());
         assertEquals(0, targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(0, authorPlayer.getMark().getMarkDone().size());
 
@@ -192,40 +218,37 @@ public class CyberBlade_1Test {
     @Test
     public void firePositiveOneTargetFirstAndSecondOptionalWithTargeting() throws Exception {
         targetPlayer2.setPosition(gameHandler.getCellByCoordinate(0,1));
-        System.out.println(playerView.getLastStringPrinted());
 
         PlayerMessage playerMessage = new PlayerMessage(targetPlayer1.getID(), authorPlayer.getID(), playerView);
         controller.update(null,playerMessage);
-        System.out.println(playerView.getLastStringPrinted());
+
 
         OptionalMessage optionalMessage = new OptionalMessage(1,authorPlayer.getID(), playerView);
         controller.update(null,optionalMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(CyberBlade_1.FIRST_OPTIONAL_MESSAGE, playerView.getLastStringPrinted());
 
         CellMessage cellMessage = new CellMessage(0,1,authorPlayer.getID(), playerView);
         controller.update(null, cellMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
 
         OptionalMessage optionalMessage2 = new OptionalMessage(2,authorPlayer.getID(), playerView);
         controller.update(null,optionalMessage2);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(CyberBlade_1.SECOND_OPTIONAL_MESSAGE, playerView.getLastStringPrinted());
 
         PlayerMessage playerMessage2 = new PlayerMessage(targetPlayer2.getID(), authorPlayer.getID(), playerView);
         controller.update(null,playerMessage2);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
 
         TargetingScopeCard card = new TargetingScopeCard(ColorRYB.BLUE, 1,1);
         authorPlayer.addPowerupCard(card);
         TargetingScopeMessage targetingScopeMessage = new TargetingScopeMessage(card, ColorRYB.RED, authorPlayer.getID(),playerView);
         controller.update(null, targetingScopeMessage);
-        System.out.println(playerView.getLastStringPrinted());
 
         controller.update(null,playerMessage);
-        System.out.println(playerView.getLastStringPrinted());
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
 
         FireMessage fireMessage = new FireMessage(authorPlayer.getID(), playerView);
         controller.update(null, fireMessage);
-        System.out.println(playerView.getLastStringPrinted());
 
         assertEquals(3,targetPlayer1.getDamage().size());
         assertEquals(2,targetPlayer2.getDamage().size());
