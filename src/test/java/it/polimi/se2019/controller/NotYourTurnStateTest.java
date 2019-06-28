@@ -122,6 +122,7 @@ public class NotYourTurnStateTest {
         }catch (TooManyException e){
             //shouldn't happen
         }
+        assertTrue(authorPlayer.getPowerupCardList().size() == 1);
         TagbackGrenadeMessage message =
                 new TagbackGrenadeMessage((TagbackGrenadeCard) tagbackGrenadeCard,authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -132,7 +133,7 @@ public class NotYourTurnStateTest {
         controller.update(null, playerMessage);
 
         //System.out.println(playerView.getLastStringPrinted());
-
+        assertTrue(authorPlayer.getPowerupCardList().isEmpty());
         assertEquals(1,targetPlayer1.getMark().getMarkReceived().size());
         assertEquals(authorPlayer, targetPlayer1.getMark().getMarkReceived().get(0));
 

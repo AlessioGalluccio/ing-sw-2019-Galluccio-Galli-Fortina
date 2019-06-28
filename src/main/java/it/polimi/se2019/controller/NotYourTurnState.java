@@ -80,8 +80,11 @@ public class NotYourTurnState extends StateController {
                     && playerAuthor.getTargetsForTagBack().contains(target.getID())){
                 try{
                     target.receiveMarkBy(playerAuthor);
+                    playerAuthor.discardCard(tagbackGrenadeCard, true);
                 }catch (TooManyException e){
-                    //do nothing, you wasted the powerup
+                    //do nothing, you wasted the powerup bacause target can't have more marks
+                } catch (NotPresentException e) {
+                    //do nothing, shouldn't happen becuase it's a card you have
                 }
                 neededTargetForTagBack = false;
             }
