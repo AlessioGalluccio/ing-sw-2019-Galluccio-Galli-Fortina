@@ -34,14 +34,6 @@ public class ShotGun_2 extends FireMode {
         return list;
     }
 
-
-    @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
-        List<AmmoBag> list = new ArrayList<>();
-        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
-        return list;
-    }
-
     @Override
     public void fire() throws WrongInputException{
         if(shoot.getTargetsPlayer().isEmpty()){

@@ -52,14 +52,6 @@ public class ShockWave_1 extends FireMode {
     }
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
-        List<AmmoBag> list = new ArrayList<>();
-        list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
-        return list;
-    }
-
-
-    @Override
     public void addPlayerTarget(int playerID) throws WrongInputException {
         if(playerID == author.getID()){
             throw new WrongInputException(SELECTED_YOURSELF);

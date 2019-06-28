@@ -49,7 +49,6 @@ public class ActionSelectedControllerState extends StateController {
             controller.addReceived();
         }catch(WrongInputException e){
             errorString = e.getMessage();
-            //playerView.printFromController(CELL_WRONG);
         }
     }
 
@@ -65,13 +64,7 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        //TODO
-        /*
-        if(startingHandler(arg)){
-            controller.sendTargetsToView(arg);
-            endingHandler(arg);
-        }
-        */
+        //do nothing, shouldn't arrive here
     }
 
     @Override
@@ -107,7 +100,6 @@ public class ActionSelectedControllerState extends StateController {
         try{
             action.addOptional(numOptional);
         }catch (WrongInputException e){
-            //playerView.printFromController(OPTIONAL_WRONG);
             errorString = e.getMessage();;
         }catch (NotEnoughAmmoException e){
             errorString = NOT_ENOUGH;
@@ -116,8 +108,6 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleReload(int weaponID) {
-        //TODO
-
         try {
             action.addReload(weaponID);
             //it's very rare that there's the StringAndMessage
@@ -270,7 +260,7 @@ public class ActionSelectedControllerState extends StateController {
      * it sends them to the model and it changes the State of the controller
      */
     private void endingHandler() {
-        //controlls if the sequence of action is completed
+        //it controls if the sequence of action is completed
         if(controller.getIndexExpected() < controller.getCopyMessageListExpected().size() && !hasShoot && !skipSelected){
             //The sequence is not completed. It prints the next request
             if(errorString != null){
@@ -279,7 +269,7 @@ public class ActionSelectedControllerState extends StateController {
             else{
                 stringToPlayerView = controller.getCopyMessageListExpected().get(controller.getIndexExpected()).getString();
             }
-            //error string is resetted
+            //error string is reset to null
             errorString = null;
         }
         else{
@@ -288,40 +278,5 @@ public class ActionSelectedControllerState extends StateController {
             controller.setState(new EmptyControllerState(controller, gameHandler));
             stringToPlayerView = null;
         }
-
-
-
-
-        /*TODO
-        int index = controller.getIndexExpected();
-        controller.addReceived(arg);
-        controller.setIndexExpected(index + 1);
-        if(controller.getCopyMessageListExpected().size() == controller.getIndexExpected()) {
-            //Model is modified
-            ViewControllerMessage firstMessage = controller.getCopyMessageListReceived().get(FIRST_MESSAGE);
-            controller.modifyModel(firstMessage);
-
-            int num = controller.getNumOfActionTaken();
-            controller.setNumOfActionTaken(num + 1);
-
-            //TODO gestione array
-            controller.flushMessages();
-
-            if(controller.getNumOfActionTaken() == controller.MAX_NUM_OF_ACTION) {
-                controller.setState(new NotYourTurnState(controller, gameHandler));
-                gameHandler.nextTurn();
-            }
-            else {
-                controller.setState(new EmptyControllerState(controller, gameHandler));
-            }
-        }
-        else{
-            //print the next request
-            arg.getAuthorView().printFromController(controller.getCopyMessageListExpected().get(index).getString());
-        }
-        */
     }
-
-
-
 }

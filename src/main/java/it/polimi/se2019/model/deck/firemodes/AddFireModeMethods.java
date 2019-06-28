@@ -8,6 +8,9 @@ import it.polimi.se2019.model.player.NotEnoughAmmoException;
 import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.WeaponIsLoadedException;
 
+/**
+ * this methods must be implemented by both firemodes and actions to permit a correct communication
+ */
 public interface AddFireModeMethods {
 
     void addCell(int x, int y) throws WrongInputException;
@@ -17,8 +20,6 @@ public interface AddFireModeMethods {
     void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException, NotEnoughAmmoException, FiremodeOfOnlyMarksException;
 
     void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException;
-
-    //void addNope() throws WrongInputException;
 
     void fire() throws WrongInputException;
 

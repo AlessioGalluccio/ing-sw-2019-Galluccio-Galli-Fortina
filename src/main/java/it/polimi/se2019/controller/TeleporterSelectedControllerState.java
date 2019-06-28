@@ -10,7 +10,7 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 public class TeleporterSelectedControllerState extends StateController{
     private Player playerAuthor;
-    private String errorString;
+    private String message;
     private TeleporterCard teleporterCard;
     private boolean skipSelected = false;
 
@@ -35,7 +35,7 @@ public class TeleporterSelectedControllerState extends StateController{
 
     @Override
     public void handleAction(int actionID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
@@ -45,18 +45,18 @@ public class TeleporterSelectedControllerState extends StateController{
             playerAuthor.setPosition(cell);
             playerAuthor.discardCard(gameHandler.getPowerupCardByID(teleporterCard.getID()), true);
         }catch (NotPresentException e){
-            errorString = CELL_NOT_PRESENT;
+            message = CELL_NOT_PRESENT;
         }
     }
 
     @Override
     public void handleFiremode(int firemodeID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleNewton(NewtonCard usedCard) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
@@ -66,64 +66,64 @@ public class TeleporterSelectedControllerState extends StateController{
 
     @Override
     public void handleOptional(int numOptional) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handlePlayer(int playerID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleReload(int weaponID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleTagback(TagbackGrenadeCard usedCard) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleTargeting(TargetingScopeCard usedCard, AmmoBag cost) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleWeaponCard(WeaponCard usedCard) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleFire() {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleDiscardPowerup(int powerupID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public void handleDiscardWeapon(int weaponID) {
-        errorString = CANT_DO_THIS;
+        message = CANT_DO_THIS;
     }
 
     @Override
     public String handle(ViewControllerMessage arg) {
-        errorString = null;
+        message = null;
         arg.handle(this);
-        if(errorString == null || skipSelected){
+        if(message == null || skipSelected){
             controller.setState(new EmptyControllerState(controller, gameHandler));
             return null;
         }
         else {
-            return errorString + SELECT_CELL_TELEPORTER;
+            return message + SELECT_CELL_TELEPORTER;
         }
     }
 }
