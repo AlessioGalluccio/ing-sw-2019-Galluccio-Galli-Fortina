@@ -12,10 +12,10 @@ public class NewtonMessage extends ViewControllerMessage {
     private NewtonCard usedCard;
 
     /**
-     * NewtonMessage class's constructor
-     * @param usedCard
-     * @param authorID
-     * @param authorView
+     * NewtonMessage class constructor
+     * @param usedCard the NewtonCard used
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public NewtonMessage(NewtonCard usedCard, int authorID, View authorView) {
         this.usedCard = usedCard;
@@ -24,6 +24,10 @@ public class NewtonMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the NewtonCard used
+     * @return the NewtonCard used
+     */
     public NewtonCard getUsedCard() {
         return usedCard;
     }

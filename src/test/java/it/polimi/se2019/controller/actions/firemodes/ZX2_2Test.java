@@ -140,13 +140,16 @@ public class ZX2_2Test {
     @Test
     public void tooManyTarget() throws TooManyException {
         targetPlayer3.receiveMarkBy(authorPlayer);
-
+        assertEquals(ZX2_2.SELECT_PLAYER1, playerView.getLastStringPrinted());
         controller.update(null,
                 new PlayerMessage(1, authorPlayer.getID(), playerView));
+        assertEquals(ZX2_2.SELECT_PLAYER2, playerView.getLastStringPrinted());
         controller.update(null,
                 new PlayerMessage(2, authorPlayer.getID(), playerView));
+        assertEquals(ZX2_2.SELECT_PLAYER3, playerView.getLastStringPrinted());
         controller.update(null,
                 new PlayerMessage(3, authorPlayer.getID(), playerView));
+        assertEquals(Shoot.LAST_MESSAGE, playerView.getLastStringPrinted());
         controller.update(null,
                 new PlayerMessage(4, authorPlayer.getID(), playerView));
         assertEquals("You can't do this now. Please, press Fire", playerView.getLastStringPrinted());
@@ -162,13 +165,29 @@ public class ZX2_2Test {
         assertEquals(2, targetPlayer3.getMark().getMarkReceived().size());
         assertEquals(0, targetPlayer4.getMark().getMarkReceived().size());
 
+        assertFalse(authorPlayer.getWeaponCardList().get(0).isReloaded());
+
+    }
+
+    @Test
+    public void selectedTheSameTargetNegative() throws TooManyException {
+        targetPlayer3.receiveMarkBy(authorPlayer);
+        assertEquals(ZX2_2.SELECT_PLAYER1, playerView.getLastStringPrinted());
+        controller.update(null,
+                new PlayerMessage(1, authorPlayer.getID(), playerView));
+        assertEquals(ZX2_2.SELECT_PLAYER2, playerView.getLastStringPrinted());
+        controller.update(null,
+                new PlayerMessage(1, authorPlayer.getID(), playerView));
+        assertEquals(ZX2_2.PLAYER_ALREADY_SELECTED + ZX2_2.SELECT_PLAYER2, playerView.getLastStringPrinted());
+
     }
 
     @Test
     public void notVisible() {
+        assertEquals(ZX2_2.SELECT_PLAYER1, playerView.getLastStringPrinted());
         controller.update(null,
                 new PlayerMessage(4, authorPlayer.getID(), playerView));
-        assertEquals(ZX2_2.WRONG_TARGET + ZX2_2.SELECT_PLAYERS, playerView.getLastStringPrinted());
+        assertEquals(ZX2_2.WRONG_TARGET + ZX2_2.SELECT_PLAYER1, playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 

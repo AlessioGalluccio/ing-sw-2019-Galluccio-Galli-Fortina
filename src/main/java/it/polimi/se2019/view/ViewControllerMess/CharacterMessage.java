@@ -10,10 +10,10 @@ public class CharacterMessage extends ViewControllerMessage {
     private int characterID;
 
     /**
-     * PlayerMessage class constructor
-     * @param characterID
-     * @param authorID
-     * @param authorView
+     * CharacterMessage class constructor
+     * @param characterID the ID of the character
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public CharacterMessage(int characterID, int authorID, View authorView) {
 
@@ -21,10 +21,6 @@ public class CharacterMessage extends ViewControllerMessage {
         this.messageID = Identificator.CHARACTER_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;
-    }
-
-    public int getCharacterID() {
-        return characterID;
     }
 
     @Override

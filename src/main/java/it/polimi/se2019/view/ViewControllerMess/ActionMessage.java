@@ -12,9 +12,9 @@ public class ActionMessage extends ViewControllerMessage {
 
     /**
      * ActionMessage class's constructor
-     * @param actionID
-     * @param authorID
-     * @param authorView
+     * @param actionID the ID of the action
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public ActionMessage(int actionID, int authorID, View authorView) {
         this.actionID = actionID;
@@ -23,6 +23,10 @@ public class ActionMessage extends ViewControllerMessage {
         this.authorView= authorView;
     }
 
+    /**
+     * get the ID of the action
+     * @return the int ID of the action
+     */
     public int getActionID() {
         return actionID;
     }

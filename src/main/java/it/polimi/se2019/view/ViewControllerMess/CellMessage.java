@@ -13,10 +13,10 @@ public class CellMessage extends ViewControllerMessage {
 
     /**
      * CellMessage class's constructor
-     * @param x
-     * @param y
-     * @param authorID
-     * @param authorView
+     * @param x the coordinate X of the cell
+     * @param y the coordinate Y of the cell
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public CellMessage(int x, int y, int authorID, View authorView) {
         this.x = x;
@@ -26,10 +26,18 @@ public class CellMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the coordinate X of the cell
+     * @return the int value of the X coordinate of the cell
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * get the coordinate Y of the cell
+     * @return the int value of the Y coordinate of the cell
+     */
     public int getY() {
         return y;
     }

@@ -11,10 +11,10 @@ public class TagbackGrenadeMessage extends ViewControllerMessage {
     private TagbackGrenadeCard usedCard;
 
     /**
-     * TagbackGrenadeMessage class's constructor
-     * @param usedCard
-     * @param authorID
-     * @param authorView
+     * TagbackGrenadeMessage class constructor
+     * @param usedCard TagbackGrenadeCard selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public TagbackGrenadeMessage(TagbackGrenadeCard usedCard, int authorID, View authorView) {
 
@@ -24,6 +24,10 @@ public class TagbackGrenadeMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the selected TagbackGrenadeCard
+     * @return the TagbackGrenadeCard selected
+     */
     public TagbackGrenadeCard getUsedCard() {
         return usedCard;
     }

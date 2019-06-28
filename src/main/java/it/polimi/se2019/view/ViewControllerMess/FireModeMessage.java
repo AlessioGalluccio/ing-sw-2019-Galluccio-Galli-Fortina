@@ -11,10 +11,10 @@ public class FireModeMessage extends ViewControllerMessage {
     private int firemodeID;
 
     /**
-     * FireModeMessage class's constructor
-     * @param firemodeID
-     * @param authorID
-     * @param authorView
+     * FireModeMessage class constructor
+     * @param firemodeID the ID of the firemode selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public FireModeMessage(int firemodeID, int authorID, View authorView) {
         this.firemodeID = firemodeID;
@@ -23,6 +23,10 @@ public class FireModeMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the ID of the firemode selected
+     * @return the int ID of the firemode selected
+     */
     public int getFiremodeID() {
         return firemodeID;
     }

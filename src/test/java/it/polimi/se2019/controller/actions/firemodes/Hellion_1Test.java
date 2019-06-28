@@ -118,6 +118,8 @@ public class Hellion_1Test {
         assertEquals(gameHandler.getCellByCoordinate(1,0), targetPlayer2.getCell());
         assertEquals(0, authorPlayer.getDamage().size());
         assertEquals(0, authorPlayer.getMark().getMarkReceived().size());
+
+        assertFalse(authorPlayer.getWeaponCardList().get(0).isReloaded());
     }
 
     @Test

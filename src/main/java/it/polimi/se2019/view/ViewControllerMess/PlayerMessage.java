@@ -12,9 +12,9 @@ public class PlayerMessage extends ViewControllerMessage {
 
     /**
      * PlayerMessage class constructor
-     * @param playerID
-     * @param authorID
-     * @param authorView
+     * @param playerID the ID of the player selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public PlayerMessage(int playerID, int authorID, View authorView) {
 
@@ -24,6 +24,10 @@ public class PlayerMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the ID of the player selected
+     * @return the int ID of the player selected
+     */
     public int getPlayerID() {
         return playerID;
     }

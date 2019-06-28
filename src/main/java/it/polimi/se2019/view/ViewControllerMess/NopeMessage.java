@@ -10,9 +10,9 @@ public class NopeMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 7607227832420930780L;
 
     /**
-     * NopeMessage class's constructor
-     * @param authorID
-     * @param authorView
+     * NopeMessage class constructor
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public NopeMessage(int authorID, View authorView) {
         this.messageID = Identificator.NOPE_MESSAGE;

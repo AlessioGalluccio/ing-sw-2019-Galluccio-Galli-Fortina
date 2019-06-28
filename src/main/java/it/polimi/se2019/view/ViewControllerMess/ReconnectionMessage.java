@@ -10,20 +10,16 @@ public class ReconnectionMessage extends ViewControllerMessage {
     private boolean isConnected;
 
     /**
-     * FireModeMessage class's constructor
+     * ReconnectionMessage class constructor
      * @param isConnected true if I'm reconnection, false if I'm disconnecting
-     * @param authorID
-     * @param authorView
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public ReconnectionMessage(boolean isConnected, int authorID, View authorView) {
         this.isConnected= isConnected;
         this.messageID = Identificator.CONNECTION_MESSAGE;
         this.authorID = authorID;
         this.authorView = authorView;
-    }
-
-    public boolean getIsConnected() {
-        return isConnected;
     }
 
     @Override

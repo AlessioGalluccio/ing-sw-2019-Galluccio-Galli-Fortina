@@ -14,12 +14,11 @@ public class TeleporterMessage extends ViewControllerMessage {
 
 
     /**
-     * TeleporterMessage class's constructor
-     * @param usedCard
-     * @param authorID
-     * @param authorView
+     * TeleporterMessage class constructor
+     * @param usedCard the TeleporterCard selected
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
-
     public TeleporterMessage(TeleporterCard usedCard, int authorID, View authorView) {
 
         this.usedCard = usedCard;
@@ -28,6 +27,10 @@ public class TeleporterMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the TeleporterCard selected
+     * @return the TeleporterCard selected
+     */
     public TeleporterCard getUsedCard() {
         return usedCard;
     }

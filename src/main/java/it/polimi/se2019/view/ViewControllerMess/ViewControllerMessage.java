@@ -30,13 +30,25 @@ public abstract class ViewControllerMessage implements HandlerServerMessage, Ser
      */
     public abstract int getMessageID();
 
+    /**
+     * handles this message, calling the correct method in a StateController
+     * @param stateController the StateController of the controller of the player
+     */
     public abstract void handle(StateController stateController);
 
 
+    /**
+     * set the PlayerView parameter of the message
+     * @param view
+     */
     public void setView(PlayerView view) {
         authorView = view;
     }
 
+    /**
+     * handles the message
+     * @param s the SwitchServerMessage
+     */
     public void handleMessage(SwitchServerMessage s) {
         s.forwardViewMessage(this);
     }

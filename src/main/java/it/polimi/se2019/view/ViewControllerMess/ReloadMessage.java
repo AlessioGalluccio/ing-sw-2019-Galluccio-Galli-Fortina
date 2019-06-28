@@ -14,10 +14,10 @@ public class ReloadMessage extends ViewControllerMessage {
     private int weaponID;
 
     /**
-     * ReloadMessage class's constructor
-     * @param weapon
-     * @param authorID
-     * @param authorView
+     * ReloadMessage class constructor
+     * @param weapon the WeaponCard selected for reloading
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
     public ReloadMessage(WeaponCard weapon, int authorID, View authorView) {
 
@@ -27,6 +27,10 @@ public class ReloadMessage extends ViewControllerMessage {
         this.authorView = authorView;
     }
 
+    /**
+     * get the ID of the weapon selected
+     * @return the int ID of the weapon selected
+     */
     public int getWeaponID() {
         return weaponID;
     }

@@ -15,13 +15,12 @@ public class TargetingScopeMessage extends ViewControllerMessage {
     private ColorRYB colorAmmo;
 
     /**
-     * TargetingScopeMessage class's constructor
-     * @param usedCard
-     * @param colorAmmo
-     * @param authorID
-     * @param authorView
+     * TargetingScopeMessage class constructor
+     * @param usedCard the TargetingScope card selected
+     * @param colorAmmo the color of the ammo which must be converted in damage
+     * @param authorID the ID of the author
+     * @param authorView the playerView of the player
      */
-
     public TargetingScopeMessage(TargetingScopeCard usedCard, ColorRYB colorAmmo, int authorID, View authorView) {
 
         this.usedCard = usedCard;
