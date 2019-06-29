@@ -84,12 +84,12 @@ public class MachineGun_1 extends FireMode {
                 shoot.addPlayerTargetFromFireMode(target, true);
             }
             else{
-                throw new WrongInputException();
+                throw new WrongInputException(CANT_DO);
             }
 
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(NOT_VISIBLE);
         }
     }
 
