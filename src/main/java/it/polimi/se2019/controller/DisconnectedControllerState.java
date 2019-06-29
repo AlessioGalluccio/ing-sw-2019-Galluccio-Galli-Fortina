@@ -9,9 +9,10 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 public class DisconnectedControllerState extends StateController {
     private Player player;
     private String stringToPlayerView = STILL_DISCONNECTED;
+    private boolean hasReconnected = false;
 
     //this string is for finding errors in testing. Should never appear
-    public static final String STILL_DISCONNECTED = "Still disconnecte";
+    public static final String STILL_DISCONNECTED = "Still disconnected";
 
 
     /**
@@ -99,6 +100,7 @@ public class DisconnectedControllerState extends StateController {
         if(isConnected){
             gameHandler.setPlayerConnectionStatus(player, true);
             controller.setState(new NotYourTurnState(controller, gameHandler));
+            hasReconnected = true;
         }
     }
 
@@ -116,6 +118,12 @@ public class DisconnectedControllerState extends StateController {
     @Override
     public String handle(ViewControllerMessage arg) {
         arg.handle(this);
-        return stringToPlayerView;
+        if(hasReconnected){
+            return null;
+        }
+        else{
+            return stringToPlayerView;
+        }
+
     }
 }

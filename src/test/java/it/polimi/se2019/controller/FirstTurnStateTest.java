@@ -2,10 +2,13 @@ package it.polimi.se2019.controller;
 
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.controller.actions.firemodes.FireMode;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -14,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -110,6 +114,47 @@ public class FirstTurnStateTest {
         assertEquals(true, controller.getState() instanceof ActionSelectedControllerState);
 
 
+    }
+
+    @Test
+    //controls the all these methods write the correct string to playerView
+    public void notReconnected() {
+        NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
+        controller.update(null, nopeMessage);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleAction(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleCell(1,1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleFiremode(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleNewton(new NewtonCard(ColorRYB.BLUE,1,1));
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleOptional(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handlePlayer(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleReload(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTagback(new TagbackGrenadeCard(ColorRYB.BLUE,1,1));
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTargeting(new TargetingScopeCard(ColorRYB.BLUE,1,1), new AmmoBag(0,1,0));
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTeleporter(new TeleporterCard(ColorRYB.BLUE,1,1));
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleWeaponCard(new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        });
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handlePassTurn();
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleFire();
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleDiscardWeapon(1);
+        assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
     }
 
 

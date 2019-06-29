@@ -1,6 +1,7 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.deck.PowerupCard;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellSpawn;
@@ -8,6 +9,7 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
+import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
 import it.polimi.se2019.view.ViewControllerMess.PassTurnMessage;
 import it.polimi.se2019.view.ViewControllerMess.ReconnectionMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -15,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -143,5 +146,46 @@ public class MustRespawnControllerStateTest {
         assertTrue(authorPlayer.getCell() instanceof CellSpawn);
         assertTrue(controller.getState() instanceof DisconnectedControllerState);
         assertTrue(authorPlayer.getPowerupCardList().size() == 0);
+    }
+
+    @Test
+    //controls the all these methods write the correct string to playerView
+    public void youMustRepawnPositiveCall() {
+        NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
+        controller.update(null, nopeMessage);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleAction(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleCell(1,1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleFiremode(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleNewton(new NewtonCard(ColorRYB.BLUE,1,1));
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleOptional(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handlePlayer(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleReload(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTagback(new TagbackGrenadeCard(ColorRYB.BLUE,1,1));
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTargeting(new TargetingScopeCard(ColorRYB.BLUE,1,1), new AmmoBag(0,1,0));
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleTeleporter(new TeleporterCard(ColorRYB.BLUE,1,1));
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleWeaponCard(new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        });
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handlePassTurn();
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleFire();
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
+        controller.getState().handleDiscardWeapon(1);
+        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST, playerView.getLastStringPrinted());
     }
 }

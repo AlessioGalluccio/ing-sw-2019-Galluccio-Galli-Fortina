@@ -19,8 +19,8 @@ public class CyberBlade_1 extends FireMode {
     public static final String SECOND_OPTIONAL_MESSAGE = "Select a second player target. ";
 
     public static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-    public static final String OPTIONAL_ALREADY_SELECTED = "Optional already selected.";
-    public static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
+    public static final String OPTIONAL_ALREADY_SELECTED = "Optional already selected. ";
+    public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
