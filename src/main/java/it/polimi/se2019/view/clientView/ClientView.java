@@ -179,7 +179,9 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a LoginMessage that the client send to the server
-     * @param nickname string of nickname choosen by the player
+     * @param nickname string of nickname chosen by the player
+     * @param matchID The id of the match on which do you wanna reconnect
+     *                If is the first login or don't you wanna reconnect ignore this param
      */
     public void createLoginMessage(String nickname, int matchID){
         LoginMessage message = new LoginMessage(nickname, matchID);
@@ -381,11 +383,12 @@ public class ClientView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * This method shutdown the RMI server
+     * This method shutdown the server
      */
     public void shutdownServer() {
         Client client = (Client) getObservers().get(0);
         client.closeAll();
+        System.exit(0);
     }
 
 }
