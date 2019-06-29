@@ -121,7 +121,7 @@ public class GameHandlerTest {
                     gameHandler.checkDeath();
                     assertEquals(4, p.getNumPoints());
                     assertEquals(14, e2.getNumPoints());
-                    assertEquals(20, e1.getNumPoints());
+                    assertEquals(17, e1.getNumPoints());
                     assertEquals(4, e3.getNumPoints());
                     assertEquals(0, p.getDamage().size());
                     assertEquals(0, e3.getDamage().size());
@@ -144,7 +144,7 @@ public class GameHandlerTest {
         gameHandler.checkDeath();
         assertEquals(0, p.getNumPoints());
         assertEquals(5, e2.getNumPoints());
-        assertEquals(8, e1.getNumPoints());
+        assertEquals(6, e1.getNumPoints());
         assertEquals(2, e3.getNumPoints());
 
         //test isFrenzyDeath
@@ -158,7 +158,7 @@ public class GameHandlerTest {
         kill(p, e1, e2, e3);
         assertEquals(0, p.getNumPoints());
         assertEquals(1, e2.getNumPoints());
-        assertEquals(4, e1.getNumPoints());
+        assertEquals(2, e1.getNumPoints());
         assertEquals(1, e3.getNumPoints());
         assertEquals(0, p.getDamage().size());
 
@@ -174,7 +174,7 @@ public class GameHandlerTest {
         kill(p, e1, e2, e3);
         assertEquals(0, p.getNumPoints());
         assertEquals(7+1, e2.getNumPoints());
-        assertEquals(10+2+2, e1.getNumPoints());
+        assertEquals(10, e1.getNumPoints());
         assertEquals(4+1, e3.getNumPoints());
         assertEquals(0, p.getDamage().size());
 
@@ -197,7 +197,7 @@ public class GameHandlerTest {
             }
             assertEquals(0, p.getNumPoints());
             assertEquals(7+1, e2.getNumPoints());
-            assertEquals(10+2, e1.getNumPoints());
+            assertEquals(10, e1.getNumPoints());
             assertEquals(4+1, e3.getNumPoints());
         }
     }
@@ -291,7 +291,7 @@ public class GameHandlerTest {
         gameHandler.incrementTurn();
 
         kill(e1, e3, e2, p);
-        p.addPoints(4);  //p and e3 have the same points
+        p.addPoints(2);  //p and e3 have the same points
 
         assertEquals(e2, gameHandler.getRanking().get(0));
         assertEquals(e1, gameHandler.getRanking().get(3));
