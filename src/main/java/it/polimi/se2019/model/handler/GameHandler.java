@@ -529,7 +529,7 @@ public class GameHandler extends Observable {
      * @param p player whose you want the controller
      * @return controller of the player
      */
-    private Controller getControllerByPlayer(Player p) {
+    public Controller getControllerByPlayer(Player p) {
         for(Controller controller : controllers) {
             if(p.equals(controller.getAuthor())) return controller;
         }

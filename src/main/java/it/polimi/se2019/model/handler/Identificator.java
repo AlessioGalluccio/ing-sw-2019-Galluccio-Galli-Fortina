@@ -53,6 +53,9 @@ public class Identificator {
     public static final int TAGBACK_GRENADE_YELLOW = 31;
     public static final int TAGBACK_GRENADE_BLUE = 32;
 
+    //message death
+    public static final String YOU_DEAD = "You are dead. ";
+
     /**
      * Use this method to control if a weapon has a firemode. contains() gives errors
      * @param weaponCard the weapon

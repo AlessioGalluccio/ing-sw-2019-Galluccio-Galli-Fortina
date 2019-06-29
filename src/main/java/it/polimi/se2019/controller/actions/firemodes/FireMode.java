@@ -7,6 +7,7 @@ import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.deck.PowerupCard;
 import it.polimi.se2019.model.deck.Target;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -179,6 +180,8 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
                 break;
             }catch (YouDeadException e) {
                 playerView.printFromController(KILLED);
+                //we write in the playerView of the killed player
+                gameHandler.getControllerByPlayer(targetPlayer).getPlayerView().printFromController(Identificator.YOU_DEAD);
                 //We don't use break here. We can do one more damage to overkill the target
             }
         }
