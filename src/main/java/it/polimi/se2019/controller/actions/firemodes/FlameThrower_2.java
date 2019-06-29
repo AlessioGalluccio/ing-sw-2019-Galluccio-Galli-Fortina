@@ -29,7 +29,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
     }
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,2,0)); //cost of shooting base firemode
         return list;

@@ -78,7 +78,7 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
      * This method is for ZERO COST. Override it if the weapon has a cost
      * @return a list with the ammo cost of the firemode
      */
-    public List<AmmoBag> costOfFiremodeNotReloading(){
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot(){
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
         return list;

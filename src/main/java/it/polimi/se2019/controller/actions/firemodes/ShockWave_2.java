@@ -24,7 +24,7 @@ public class ShockWave_2 extends FireMode {
 
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,1,0)); //cost of shooting base firemode
         return list;

@@ -24,7 +24,7 @@ public class LockRifle_1 extends FireMode {
 
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,0)); //cost of shooting base firemode
         list.add(COST_FIRST_OPTIONAL);

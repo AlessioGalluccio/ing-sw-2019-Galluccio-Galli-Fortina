@@ -29,7 +29,7 @@ public class PowerGlove_2 extends FireMode {
     }
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(0,0,1)); //cost of shooting base firemode
         return list;

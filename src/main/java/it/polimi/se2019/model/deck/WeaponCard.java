@@ -165,7 +165,7 @@ public abstract class WeaponCard implements Card {
     private String toStringFireMode() {
         String string = "";
         for(FireMode fireMode : getFireMode()) {
-            for(AmmoBag ammoBag : fireMode.costOfFiremodeNotReloading()) {
+            for(AmmoBag ammoBag : fireMode.costAdditionalForFiremodeDuringShoot()) {
                 if(ammoBag.getBlueAmmo()==0 &&
                 ammoBag.getRedAmmo()==0 &&
                 ammoBag.getYellowAmmo()==0) string += "\n\tCost firemode: FREE";

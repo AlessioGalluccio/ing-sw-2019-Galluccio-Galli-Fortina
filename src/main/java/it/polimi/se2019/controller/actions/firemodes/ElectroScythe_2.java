@@ -19,7 +19,7 @@ public class ElectroScythe_2 extends ElectroScythe_1 {
     }
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(1,0,1)); //cost of shooting base firemode
         return list;

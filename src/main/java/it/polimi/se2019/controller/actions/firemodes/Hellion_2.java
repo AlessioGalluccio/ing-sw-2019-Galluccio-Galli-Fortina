@@ -11,7 +11,7 @@ public class Hellion_2 extends Hellion_1 {
     private static final long serialVersionUID = -3964732490391201864L;
 
     @Override
-    public List<AmmoBag> costOfFiremodeNotReloading() {
+    public List<AmmoBag> costAdditionalForFiremodeDuringShoot() {
         List<AmmoBag> list = new ArrayList<>();
         list.add(new AmmoBag(1,0,0)); //cost of shooting base firemode
         return list;
