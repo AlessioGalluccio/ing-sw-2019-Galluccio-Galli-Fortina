@@ -931,7 +931,7 @@ public class Controller implements Initializable {
     public void skullCheck(ActionEvent event) {
 
         initSkull = Integer.parseInt(skulls.getText());
-        if (initSkull < 5 || initSkull > 8) {
+        if (initSkull < 1 || initSkull > 8) {
             errorSkulls.setVisible(true);
         } else
             errorSkulls.setVisible(false);
@@ -987,7 +987,7 @@ public class Controller implements Initializable {
 
         }
 
-        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((initSkull >= 5) && (initSkull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
+        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((initSkull >= 1) && (initSkull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
             boolean sd;
             if (suddenDeath == 0) {
                 sd = false;
@@ -2950,6 +2950,7 @@ public class Controller implements Initializable {
      */
     void frenzyEnemy(ClientEnemyView enemyView){
         Platform.runLater(() ->{
+            try {
                 if (enemyView.isFrenzyDeath()) {
                     ArrayList<Image> images = setFrenzyCharacter(enemyView.getCharacter().getId());
                     if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
@@ -2970,6 +2971,10 @@ public class Controller implements Initializable {
                     }
 
                 }
+            }
+            catch(NullPointerException e){
+                Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+            }
 
         });
 
