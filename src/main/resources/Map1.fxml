@@ -596,7 +596,7 @@
          </image>
       </ImageView>
       <Label layoutX="1717.0" layoutY="383.0" prefHeight="38.0" prefWidth="78.0" text="Points : " textFill="WHITE" AnchorPane.rightAnchor="125.0" />
-      <Label fx:id="yourPointsLabel" layoutX="1781.0" layoutY="395.0" prefHeight="17.0" prefWidth="10.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="129.0" />
+      <Label fx:id="yourPointsLabel" layoutX="1766.0" layoutY="394.0" prefHeight="17.0" prefWidth="22.0" text="0" textFill="WHITE" AnchorPane.rightAnchor="132.0" />
       <ImageView fx:id="imSkull8" fitHeight="38.0" fitWidth="31.0" layoutX="56.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Icon/skull.png" />
