@@ -12,6 +12,11 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Parse of the command on the CLI
+ * Convert the string of the users in messages for the controller
+ * If a command does not exist an error message will be printed
+ */
 class ParserCLI {
     private final CLI cli;
     private ClientView view;

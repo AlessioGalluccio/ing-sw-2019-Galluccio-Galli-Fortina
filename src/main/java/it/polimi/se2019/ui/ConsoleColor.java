@@ -86,6 +86,11 @@ public enum ConsoleColor {
         return code;
     }
 
+    /**
+     * Confer a string to the corresponding ANSI code
+     * @param color the string representing a color to convert
+     * @return The ANSI code representing that color
+     */
     public static ConsoleColor colorByColor(String color) {
         switch (color.toUpperCase()) {
             case "RED": return RED_BOLD;

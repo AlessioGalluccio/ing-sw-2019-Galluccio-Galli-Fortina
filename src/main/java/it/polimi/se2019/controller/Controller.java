@@ -8,6 +8,7 @@ import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
+import it.polimi.se2019.network.socket.SocketHandler;
 import it.polimi.se2019.view.StringAndMessage;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.ViewControllerMess.*;
@@ -17,6 +18,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Controller implements Observer {
@@ -195,11 +198,8 @@ public class Controller implements Observer {
                 playerView.printFromController(stringToPlayerView);
             }
         }catch (Exception e) {
-            System.err.println("Controller exception: " + e.toString());
-            e.printStackTrace();
+            Logger.getLogger(Controller.class.getName()).log(Level.WARNING, "Can't handle properly a message", e);
         }
-
-
     }
 
     /**

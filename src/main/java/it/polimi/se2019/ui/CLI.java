@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 
 public class CLI implements UiInterface {
     private final int MIN_SKULL = 1;
-    public boolean endGame;
+    boolean endGame;
     private ClientView view;
     private boolean online = true;
     private SkullBoardView skullBoardView;
@@ -39,6 +39,11 @@ public class CLI implements UiInterface {
     }
 
 
+    /**
+     * Notify the users about the success of the login
+     * @param success true if the login works correctly, false otherwise
+     * @param isFirst true if the user is the first of the match, false otherwise
+     */
     @Override
     public void login(boolean success, boolean isFirst) {
         if(success) {
@@ -55,7 +60,9 @@ public class CLI implements UiInterface {
         }
     }
 
-
+    /**
+     * otify the users about the starting of the game
+     */
     @Override
     public void startGame() {
         clearScreen();
@@ -63,6 +70,10 @@ public class CLI implements UiInterface {
         parser = new ParserCLI(view, this);
     }
 
+    /**
+     * Notify the users they were be disconnected from the match
+     * @param matchID tha ID of the match they were playing
+     */
     @Override
     public void disconnect(int matchID) {
         parser.open = false;
@@ -79,38 +90,65 @@ public class CLI implements UiInterface {
         printLogo();
     }
 
+    /**
+     * A usual setter for the skullBoardView attribute
+     * @param skullBoardView the skullBoardView to set
+     */
     @Override
     public void setSkullBoard(SkullBoardView skullBoardView) {
         this.skullBoardView = skullBoardView;
     }
 
+    /**
+     * A usual setter for the mapView attribute
+     * @param mapView the mapView to set
+     */
     @Override
     public void setMapView(MapView mapView) {
         this.mapView = mapView;
     }
 
+    /**
+     * A usual setter for the enemyView attribute
+     * @param enemyView the enemyView to set
+     */
     @Override
     public void setEnemyView(EnemyView enemyView) {
         enemyViews.add(enemyView);
     }
 
+    /**
+     * Print a string from the controller
+     * @param message The message to print to the users
+     */
     @Override
     public void printFromController(String message) {
         out.println("\n" + message);
     }
 
+    /**
+     * Print all the map or simply notify the users it has changed
+     * @param cell the cell which has changed and has to be updated
+     */
     @Override
     public void updateCell(Cell cell) {
         if(yourTurn) printMap();
         else out.println("Map has been updated. [Digit update map to see it]");
     }
 
+    /**
+     * Print all the player info or simply notify the users it has changed
+     */
     @Override
     public void updatePlayer() {
         if(yourTurn) out.println(view.getPlayerCopy().toString());
         else out.println("You have been updated. [Digit update me to see it]");
     }
 
+    /**
+     * Print the enemy info or simply notify the users it has changed
+     * @param enemyView the enemy to updte
+     */
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
         if(yourTurn) out.println(enemyView.toStringShort());
@@ -118,12 +156,20 @@ public class CLI implements UiInterface {
                 +  enemyView.getNickname()+" to see it]");
     }
 
+    /**
+     * Print the map or simply notify the users the skull board has changed
+     */
     @Override
     public void updateSkullBoard() {
         if(yourTurn) printMap();
         else out.println("The skull board has been updated. [Digit update map to see it]");
     }
 
+    /**
+     * Notify the users about the ending of the game
+     * This method prints the ranking of the game
+     * @param players The list of player on order of ranking
+     */
     @Override
     public void printRanking(List<Player> players) {
         out.print("\n\n");
@@ -138,6 +184,11 @@ public class CLI implements UiInterface {
         endGame = true;
     }
 
+    /**
+     * Notify the users a new turn as begin
+     * @param nickname The nickname of the player whose turn it is
+     * @param yourTurn True if is your turn
+     */
     @Override
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
@@ -146,6 +197,10 @@ public class CLI implements UiInterface {
         else out.println("It's " + nickname + "'s turn \tಠᴗಠ");
     }
 
+    /**
+     * Notify the users they has to choose a character
+     * @param characters a list of available character from which to choose
+     */
     @Override
     public void chooseCharacter(List<Character> characters) {
         out.println("Choose your character form:");
@@ -155,6 +210,10 @@ public class CLI implements UiInterface {
         out.println("[Digit 'character' follow by  the relative number]");
     }
 
+    /**
+     * Start the CLI.
+     * Welcome the users, made they choose the connection and do he login
+     */
     public void start() {
         clearScreen();
         out.println("\n" +
@@ -171,6 +230,9 @@ public class CLI implements UiInterface {
         login();
     }
 
+    /**
+     * Let the users choose the type of connection they prefer
+     */
     private void setConnection() {
         out.println("HI!  ｡◕‿◕｡ ");
         out.println("Please, insert the server's IP: ");
@@ -206,6 +268,9 @@ public class CLI implements UiInterface {
         }while(decision<1||decision>3);
     }
 
+    /**
+     * Print the logo of Adrenaline
+     */
     private void printLogo() {
         out.println(ConsoleColor.RED_BOLD);
         out.print("\t\t  /\\                                                                         \n" +
@@ -217,6 +282,9 @@ public class CLI implements UiInterface {
         out.println(ConsoleColor.RESET);
     }
 
+    /**
+     * Let the users do the login
+     */
     private void login() {
         out.println("\nPlease, enter your name:");
         String username = in.nextLine();
@@ -245,6 +313,9 @@ public class CLI implements UiInterface {
         view.createLoginMessage(username, matchID);
     }
 
+    /**
+     * Let the users choose the map, che number of skulls and f they wanna the frenzy or not
+     */
     private void chooseSetting() {
         int map = 0;
         do {
@@ -300,16 +371,26 @@ public class CLI implements UiInterface {
         if(online) out.println("\nWaiting for other players...");
     }
 
+    /**
+     * Clear the screen and put the cursor on the top of the screen
+     */
     void clearScreen() {
         out.print("\033[2J \033[H");
         out.flush();
     }
 
+    /**
+     * Print a line long almost all the screen
+     */
     void printLine() {
         out.println("______________________________________________________________________________________________\n");
     }
 
-    public void printAll() {
+    /**
+     * Print all the useful info for the users.
+     * Print the skull board, the map, the enemies' info and the user's player's info
+     */
+    void printAll() {
         clearScreen();
         printMap();
         printLine();
@@ -321,15 +402,27 @@ public class CLI implements UiInterface {
         printLine();
     }
 
+    /**
+     * Print a string follow by "\n"
+     * @param string the string to print
+     */
     void println(String string) {
         out.println(string);
     }
 
+    /**
+     * Print to string in two different column
+     * @param left What has to be in the left column
+     * @param right What has to be in the right column
+     */
     void printf(String left, String right) {
         out.printf("%-90.90s %-115.115s%n", left, right);
     }
 
-    public void printMap() {
+    /**
+     * Print the map
+     */
+    void printMap() {
         out.println("");
         out.println("\t" + skullBoardView);
         out.println("");
