@@ -32,7 +32,10 @@ public class Shoot extends Action{
     public static final String LAST_MESSAGE = "Please, press Fire";
 
     private String SELECT_TARGET_FOR_TARGETING = "Select a target for the Targeting Scope";
-    public static final String NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL = "Finish Targeting before Optional, please. ";
+
+    //errors
+    static final String NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL = "Finish Targeting before Optional, please. ";
+    static final String SELECT_FIREMODE_BEFORE_OPTIONAL = "Select a a base firemode before an optional one. ";
 
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
@@ -143,6 +146,9 @@ public class Shoot extends Action{
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         if(neededTargetForTargeting){
             throw new WrongInputException(NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL);
+        }
+        if(fireMode == null){
+            throw new WrongInputException(SELECT_FIREMODE_BEFORE_OPTIONAL);
         }
         fireMode.addOptional(numOptional);
     }

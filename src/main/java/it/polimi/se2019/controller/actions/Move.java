@@ -17,7 +17,12 @@ public class Move extends Action {
 
     private Cell cellObjective;
     private final static int DISTANCE_MAX = 3;
+
+    //messages
     private final static StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell");
+
+    //errors
+    static final String TOO_DISTANT_CELL = "This cell is too distant. ";
 
     public Move(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
@@ -47,7 +52,7 @@ public class Move extends Action {
                 executeAction();
             }
             else{
-                throw new WrongInputException();
+                throw new WrongInputException(TOO_DISTANT_CELL);
             }
         } catch (NotPresentException e) {
             //should not happen

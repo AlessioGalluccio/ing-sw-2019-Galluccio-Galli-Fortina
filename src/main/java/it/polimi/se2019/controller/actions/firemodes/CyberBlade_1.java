@@ -106,13 +106,17 @@ public class CyberBlade_1 extends FireMode {
             }
             else if(numOptional == Identificator.SECOND_OPTIONAL &&
                     author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_SECOND_OPTIONAL))){
+
                 ArrayList<Player> possibleTargets = new ArrayList<>();
+
                 for(Player target : author.getCell().getPlayerHere()){
                     if(target.getID() != author.getID() && !shoot.getTargetsPlayer().isEmpty()
                             && target.getID() != shoot.getTargetsPlayer().get(0).getID()){
                         possibleTargets.add(target);
                     }
                 }
+
+
                 if(shoot.getTargetsPlayer().isEmpty()){
                     throw new WrongInputException(SELECT_FIRST_TARGET_BEFORE);
                 }
