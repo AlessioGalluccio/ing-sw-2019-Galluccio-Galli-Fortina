@@ -2683,7 +2683,7 @@ public class Controller implements Initializable {
                         discardWeapon.get(i).setDisable(true);
                         usePowerup.get(i).setDisable(true);
                     }
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
                 }
 
@@ -2997,26 +2997,19 @@ public class Controller implements Initializable {
                         imDamage.get(i).setVisible(false);
                     }
                     //danni a zero
-                    if(players.size()<10){
-                        yourDead=false;
-                    }
+
 
                     for(int i=0; i<players.size(); i++){
                         imDamage.get(i).setVisible(true);
                         imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(), 1));
-                        if( i==10 &&!yourDead){
-                            Platform.runLater(() -> {
-                                try {
-                                    ControllerLogin.open("yourDead", "YOU DIED", 400, 400);
-                                    yourDead = true;
-                                }
-                                catch(Exception e){
-                                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+
+
 
                                 }
-                            });
-                        }
-                    }
+
+
+
+
                 }
                 catch (Exception e){
                     Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
@@ -3344,8 +3337,9 @@ public class Controller implements Initializable {
                     if(ControllerLogin.enemyView1!=null) {
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
                             setSkull(imSkulls, enemy1Skull1, enemy1Skull2, enemy1Skull3, enemy1Skull4, enemy1Skull5, enemy1Skull6);
-                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                            if (!ControllerLogin.enemyView1.isFrenzyDeath()) {
                                 for (int i = 0; i < enemySkull; i++) {
+
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
                             } else {
@@ -3358,7 +3352,7 @@ public class Controller implements Initializable {
                     if(ControllerLogin.enemyView2!=null){
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView2.getNickname())) {
                             setSkull(imSkulls, enemy2Skull1, enemy2Skull2, enemy2Skull3, enemy2Skull4, enemy2Skull5, enemy2Skull6);
-                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                            if (!ControllerLogin.enemyView2.isFrenzyDeath()) {
                                 for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
@@ -3373,7 +3367,7 @@ public class Controller implements Initializable {
                     if(ControllerLogin.enemyView3!=null){
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView3.getNickname())) {
                             setSkull(imSkulls, enemy3Skull1, enemy3Skull2, enemy3Skull3, enemy3Skull4, enemy3Skull5, enemy3Skull6);
-                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                            if (!ControllerLogin.enemyView3.isFrenzyDeath()) {
                                 for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }
@@ -3388,7 +3382,7 @@ public class Controller implements Initializable {
                     if(ControllerLogin.enemyView4!=null){
                         if (enemyView.getNickname().equals(ControllerLogin.enemyView4.getNickname())) {
                             setSkull(imSkulls, enemy4Skull1, enemy4Skull2, enemy4Skull3, enemy4Skull4, enemy4Skull5, enemy4Skull6);
-                            if (!ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                            if (!ControllerLogin.enemyView4.isFrenzyDeath()) {
                                 for (int i = 0; i < enemySkull; i++) {
                                     imSkulls.get(i).setImage(new Image("Icon/skull.png"));
                                 }

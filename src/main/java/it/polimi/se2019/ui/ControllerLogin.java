@@ -1,5 +1,6 @@
 package it.polimi.se2019.ui;
 
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
@@ -313,7 +314,17 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void printFromController(String message) {
-            controller.printf(message);
+        Platform.runLater(() -> {
+            if (message.equals(Identificator.YOU_DEAD)) {
+                try {
+                    ControllerLogin.open("yourDead.fxml", "YOU DIED", 350, 400);
+                } catch (Exception e) {
+
+                }
+            }
+
+        });
+        controller.printf(message);
     }
 
     /**
