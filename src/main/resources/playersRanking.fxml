@@ -7,39 +7,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="544.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.ControllerLogin">
+<AnchorPane prefHeight="542.0" prefWidth="632.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.se2019.ui.ControllerLogin">
    <children>
-      <ImageView fitHeight="625.0" fitWidth="639.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="bShowWinner" layoutX="191.0" layoutY="224.0" mnemonicParsing="false" onAction="#showWinner" prefHeight="101.0" prefWidth="251.0" style="-fx-background-color: transparent;" text="SHOW ME THE RANKING">
+      <ImageView fitHeight="625.0" fitWidth="639.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background.png" />
+         </image></ImageView>
+      <Button fx:id="bShowWinner" layoutX="191.0" layoutY="224.0" mnemonicParsing="false" onAction="#showWinner" prefHeight="101.0" prefWidth="251.0" style="-fx-background-color: transparent;" text="SHOW ME THE RANKING" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label fx:id="rank1" layoutX="152.0" layoutY="25.0" prefHeight="116.0" prefWidth="451.0" textFill="#004dff">
+      <Label fx:id="rank1" layoutX="217.0" layoutY="25.0" prefHeight="116.0" prefWidth="386.0" textFill="#004dff">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="rank2" layoutX="130.0" layoutY="155.0" prefHeight="58.0" prefWidth="330.0" textFill="WHITE">
+      <Label fx:id="rank2" layoutX="94.0" layoutY="155.0" prefHeight="58.0" prefWidth="448.0" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="rank3" disable="true" layoutX="198.0" layoutY="234.0" prefHeight="58.0" prefWidth="278.0">
+      <Label fx:id="rank3" disable="true" layoutX="150.0" layoutY="234.0" prefHeight="58.0" prefWidth="386.0" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="rank4" layoutX="199.0" layoutY="311.0" prefHeight="58.0" prefWidth="290.0">
+      <Label fx:id="rank4" layoutX="150.0" layoutY="311.0" prefHeight="58.0" prefWidth="386.0" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label fx:id="rank5" layoutX="199.0" layoutY="392.0" prefHeight="58.0" prefWidth="278.0">
+      <Label fx:id="rank5" layoutX="150.0" layoutY="392.0" prefHeight="58.0" prefWidth="386.0" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ImageView fx:id="imWinner" fitHeight="138.0" fitWidth="213.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imWinner" fitHeight="123.0" fitWidth="114.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Icon/winner.jpg" />
          </image>

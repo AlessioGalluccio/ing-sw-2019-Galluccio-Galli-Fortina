@@ -220,10 +220,7 @@ public class Controller implements Initializable {
     public Button bFrenzyShoot2;
      @FXML
     public Button bFrenzyGrab2;
-
-
-
-    private ArrayList<ImageView> skull = new ArrayList<>();
+     @FXML
     public Button fireButton;
      @FXML
     public Button endTurnButton;
@@ -934,7 +931,7 @@ public class Controller implements Initializable {
     public void skullCheck(ActionEvent event) {
 
         initSkull = Integer.parseInt(skulls.getText());
-        if (initSkull < 5 || initSkull > 8) {
+        if (initSkull < 1 || initSkull > 8) {
             errorSkulls.setVisible(true);
         } else
             errorSkulls.setVisible(false);
@@ -990,7 +987,7 @@ public class Controller implements Initializable {
 
         }
 
-        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((initSkull >= 5) && (initSkull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
+        if (((choosenMap == 1) || (choosenMap == 2) || (choosenMap == 3) || (choosenMap == 4)) && ((initSkull >= 1) && (initSkull <= 8)) && ((suddenDeath == 0) || (suddenDeath == 1))) {
             boolean sd;
             if (suddenDeath == 0) {
                 sd = false;
@@ -1750,21 +1747,19 @@ public class Controller implements Initializable {
      */
     public void updateSkullBoard(String skullNumber) {
 
-        skull.add(imSkull1);
-        skull.add(imSkull2);
-        skull.add(imSkull3);
-        skull.add(imSkull4);
-        skull.add(imSkull5);
-        skull.add(imSkull6);
-        skull.add(imSkull7);
-        skull.add(imSkull8);
-
-
         Platform.runLater(() -> {
             try {
+                ArrayList<ImageView> skull = new ArrayList<>();
+                skull.add(imSkull8);
+                skull.add(imSkull7);
+                skull.add(imSkull6);
+                skull.add(imSkull5);
+                skull.add(imSkull4);
+                skull.add(imSkull3);
+                skull.add(imSkull2);
+                skull.add(imSkull1);
 
                 int teschi = Integer.parseInt(skullNumber);
-                int k = Integer.parseInt(skullNumber);
                 if (ControllerLogin.skullBoardView.getDeathCopy().size() == teschi){
                     isFrenzyTime=true;
                 }
@@ -1778,15 +1773,17 @@ public class Controller implements Initializable {
                     teschi--;
                 }
                 */
-                for(int i=0; i<teschi; i++){
+                for(int i=8-teschi; i<skull.size(); i++){
 
                     skull.get(i).setImage(new Image("Icon/skull.png"));
                     skull.get(i).setVisible(true);
 
                 }
 
-                for ( int i=0; i<ControllerLogin.skullBoardView.getDeathCopy().size(); i++ ){
-                    skull.get(i).setImage(setDamageImages(ControllerLogin.skullBoardView.getDeathCopy().get(i).getWhoKilled().getCharacter().getId(), ControllerLogin.skullBoardView.getDeathCopy().get(i).getPoints()));
+                int j=0;
+                for ( int i=8-teschi; i<(8- teschi + ControllerLogin.skullBoardView.getDeathCopy().size()); i++ ){
+                    skull.get(i).setImage(setDamageImages(ControllerLogin.skullBoardView.getDeathCopy().get(j).getWhoKilled().getCharacter().getId(), ControllerLogin.skullBoardView.getDeathCopy().get(j).getPoints()));
+
 
                 }
             } catch (Exception e) {
@@ -2953,6 +2950,7 @@ public class Controller implements Initializable {
      */
     void frenzyEnemy(ClientEnemyView enemyView){
         Platform.runLater(() ->{
+            try {
                 if (enemyView.isFrenzyDeath()) {
                     ArrayList<Image> images = setFrenzyCharacter(enemyView.getCharacter().getId());
                     if (enemyView.getNickname().equals(ControllerLogin.enemyView1.getNickname())) {
@@ -2973,6 +2971,10 @@ public class Controller implements Initializable {
                     }
 
                 }
+            }
+            catch(NullPointerException e){
+                Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+            }
 
         });
 
@@ -3003,8 +3005,16 @@ public class Controller implements Initializable {
                         imDamage.get(i).setVisible(true);
                         imDamage.get(i).setImage(setDamageImages(players.get(i).getCharacter().getId(), 1));
                         if( i==10 &&!yourDead){
-                            ControllerLogin.open("yourDead", "YOU DIED", 400,400);
-                            yourDead=true;
+                            Platform.runLater(() -> {
+                                try {
+                                    ControllerLogin.open("yourDead", "YOU DIED", 400, 400);
+                                    yourDead = true;
+                                }
+                                catch(Exception e){
+                                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+
+                                }
+                            });
                         }
                     }
                 }

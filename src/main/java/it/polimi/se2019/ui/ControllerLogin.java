@@ -95,7 +95,7 @@ public class ControllerLogin implements UiInterface {
     static List<Character> characters;
 
     static List<Player> playersRanking;
-    private int skullNumber=0;
+    static int skullNumber=0;
 
 
     /**
@@ -380,8 +380,11 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateSkullBoard() {
+        if(skullNumber == 0){
+            skullNumber = ControllerLogin.skullBoardView.getNumSkullCopy();
+        }
         updateSkullMap(skullNumber);
-        updateSetting(mapView.getMapCopy().getID(), skullNumber);
+        //updateSetting(mapView.getMapCopy().getID(), skullNumber);
     }
 
     /**
@@ -450,7 +453,7 @@ public class ControllerLogin implements UiInterface {
      */
     public void updateSetting(int choosenMap, int skull){
         this.updateSkullMap(skull);
-        this.skullNumber= skull;
+
 
     }
 
@@ -541,10 +544,10 @@ public class ControllerLogin implements UiInterface {
         labelRanking.add(rank3);
         labelRanking.add(rank4);
         labelRanking.add(rank5);
-        labelRanking.get(0).setText("WINNER :" + playersRanking.get(0).getNickname() + playersRanking.get(0).getNumPoints());
-        labelRanking.get(1).setText("SECOND :" + playersRanking.get(1).getNickname() + playersRanking.get(1).getNumPoints());
+        labelRanking.get(0).setText("WINNER : " + playersRanking.get(0).getNickname() + " Points : " + playersRanking.get(0).getNumPoints());
+        labelRanking.get(1).setText("SECOND : " + playersRanking.get(1).getNickname() + " Points : " + playersRanking.get(1).getNumPoints());
         for(int i=2; i<playersRanking.size(); i++){
-            labelRanking.get(i).setText(playersRanking.get(1).getNickname() + playersRanking.get(1).getNumPoints());
+            labelRanking.get(i).setText(" " +playersRanking.get(i).getNickname()+ " Points : " + playersRanking.get(i).getNumPoints());
         }
 
     }

@@ -32,7 +32,7 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
 
     @Override
     public void connect() throws RemoteException {
-        executor = Executors.newCachedThreadPool();
+        //executor = Executors.newCachedThreadPool();
         Registry registry = null;
         try {
             registry = LocateRegistry.getRegistry(IP, Registry.REGISTRY_PORT);
@@ -47,6 +47,7 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     public void closeAll() {
         try {
             unreferenced();
+            //executor.shutdown();
         } catch (NoSuchObjectException e) {
             Logger.getLogger(RMIClient.class.getName()).log(Level.WARNING, "Can't shutdown RMI", e);
         }
@@ -60,7 +61,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
         } catch (RemoteException e) {
            // Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
             new DisconnectMessage().handleMessage(this);
-            executor.shutdown();
         }
     }
 

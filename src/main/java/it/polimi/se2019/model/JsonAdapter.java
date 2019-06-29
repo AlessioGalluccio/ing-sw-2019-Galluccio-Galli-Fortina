@@ -16,6 +16,14 @@ import com.google.gson.JsonSerializer;
 public class JsonAdapter<T>
         implements JsonSerializer<T>, JsonDeserializer<T> {
 
+    /**
+     * Create a serializer for Gson for object saved thought the interface they implement
+     * Works whit abstract classes to
+     * @param object The object which implements the interface
+     * @param interfaceType the interface implemented
+     * @param context
+     * @return The serializer for that object
+     */
     @Override
     public final JsonElement serialize(final T object, final Type interfaceType, final JsonSerializationContext context) {
         final JsonObject member = new JsonObject();
@@ -27,6 +35,14 @@ public class JsonAdapter<T>
         return member;
     }
 
+    /**
+     * Create a deserializer for Gson for object saved thought the interface they implement
+     * Works whit abstract classes to
+     * @param elem The Json element of the object which implements the interface
+     * @param interfaceType the interface implemented
+     * @param context
+     * @return The serializer for that object
+     */
     @Override
     public final T deserialize(final JsonElement elem, final Type interfaceType, final JsonDeserializationContext context)
             throws JsonParseException {

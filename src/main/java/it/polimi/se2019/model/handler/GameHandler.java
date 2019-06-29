@@ -156,6 +156,7 @@ public class GameHandler extends Observable {
      * Send to all user connected the ranking and delete the match
      */
     private void endGame() {
+        cashSkullBoardPoint();
         forwardAllViews(new RankingMessage(getRanking()));
         WaitingRoom.deleteMatch(this);
     }
@@ -224,6 +225,8 @@ public class GameHandler extends Observable {
     /**
      * It generates an Action object with reference to this GameHandler
      * @param actionID the int ID of the action
+     * @param controller The controller of the player who make the action
+     * @throws WrongInputException If there's no action available for that ID anc that player
      * @return An Action object according to the ID, the player and the modality of the game
      */
     public Action getActionByID(int actionID, Controller controller) throws WrongInputException {
@@ -420,9 +423,8 @@ public class GameHandler extends Observable {
      * @param whoDied who has died
      * @param doubleKill true if p has killed more then one enemy in this turn
      * @param lastCash true if we are at the end of frenzy mode
-     * @return 3 if p is the first who shoot and overkill
-     *         2 is p overkill or is the first who shoot and the killer
-     *         1 if p is the first who shoot or the killer
+     * @return 2 if p is the first who shoot and made a double kill
+     *         1 if p is the first who shoot
      *         0 other way
      */
     private int bonusPoint(Player p, Player whoDied, boolean doubleKill, boolean lastCash) {
@@ -437,15 +439,10 @@ public class GameHandler extends Observable {
 
         Player killer = lastCash ? null : lastDeath.getWhoKilled();
 
-        int deadPoint = 0;
-        if(skull>=0) deadPoint = lastDeath.getPoints(); //If is not after at the end of frenzy
-        else if(whoDied.isDead()) deadPoint =  whoDied.isOverKilled() ? 2 : 1;  //If is at the end of frenzy
-                                                                                // is this case some one can be not dead
-
-        //if p is the killer and the first
-        if (damage.get(0).equals(p) && p.equals(killer)) return 1 + deadPoint + secondKill + isFrenzyDeath;
+        //if p is the first and
+        if (damage.get(0).equals(p) && p.equals(killer)) return 1 + secondKill + isFrenzyDeath;
         //if p is the killer
-        if (p.equals(killer)) return deadPoint + secondKill;
+        if (p.equals(killer)) return secondKill;
         //if p is the first
         if (damage.get(0).equals(p)) return 1 + isFrenzyDeath;
         return 0;
@@ -586,15 +583,15 @@ public class GameHandler extends Observable {
 
     /**
      * Attach every observer to his observable
-     * Cell -> mapView, GameHandler -> skullBardView, Player -> enemyView
-     * @param mapView the mapview of this match
+     * Cell to mapView, GameHandler to skullBardView
+     * @param mapView the mapView of this match
      * @param skullBoardView  the skullBoardView of this match
      * @param enemyViews the enemyViews of this match
      */
     public void attachAll(MapView mapView, SkullBoardView skullBoardView, List<EnemyView> enemyViews) {
         //Cell -> mapView
         map.attach(mapView);
-        //GM -> skullBardView
+        //GH -> skullBardView
         attach(skullBoardView);
     }
 

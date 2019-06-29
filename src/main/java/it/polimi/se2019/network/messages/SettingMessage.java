@@ -21,19 +21,22 @@ public class SettingMessage implements HandlerServerMessage, HandlerConfigMessag
         return map;
     }
 
-    public int getSkulls() {
-        return skulls;
-    }
-
-    public boolean isSuddendDeacth() {
-        return suddendDeath;
-    }
-
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of WaitingRoom in order to handle the setting chosen correctly.
+     * @param w The waiting room who has to handle this message
+     * @param sender The server who send this message
+     */
     @Override
     public void handleMessage(WaitingRoom w, Server sender) {
         w.handleSettingMessage(map, skulls, suddendDeath, sender)   ;
     }
 
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the object which receives this message in order to forward him correctly.
+     * @param s The object who has to switch this message
+     */
     @Override
     public void handleMessage(SwitchServerMessage s) {
         s.forwardConfigMessage(this);
