@@ -1,21 +1,23 @@
 package it.polimi.se2019.controller;
 
+import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.controller.actions.Shoot;
+import it.polimi.se2019.controller.actions.ShootFrenzyGroup1;
 import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.TeleporterCard;
+import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.ActionMessage;
-import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
-import it.polimi.se2019.view.ViewControllerMess.TeleporterMessage;
+import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
@@ -101,65 +103,143 @@ public class ActionSelectedControllerStateTest {
     }
 
 
-
     @Test
-    public void handleAction() {
+    public void handleReloadPositive() {
+        //action ShootFrenzy permits reloading
+        Action action = new ShootFrenzyGroup1(gameHandler,controller);
+        controller.setState(new ActionSelectedControllerState(controller,gameHandler,action));
+        try {
+            authorPlayer.setPosition(gameHandler.getCellByCoordinate(1,1));
+        } catch (NotPresentException e) {
+            //shouldn't happen
+        }
+        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
 
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+        };
+        weaponCard.unload();
+        try {
+            authorPlayer.setAmmoBag(1,0,0); //not enough ammo
+        } catch (TooManyException e) {
+            //shouldn0t happen
+        }
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertTrue(weaponCard.isReloaded());
     }
 
     @Test
-    public void handleCardSpawn() {
+    public void handleReloadNotPresentNegative() {
+        //action ShootFrenzy permits reloading
+        Action action = new ShootFrenzyGroup1(gameHandler,controller);
+        controller.setState(new ActionSelectedControllerState(controller,gameHandler,action));
+        try {
+            authorPlayer.setPosition(gameHandler.getCellByCoordinate(1,1));
+        } catch (NotPresentException e) {
+            //shouldn't happen
+        }
+        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
+
+        ReloadMessage reloadMessage = new ReloadMessage(new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        }, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(ActionSelectedControllerState.WEAPON_NOT_PRESENT
+                + ShootFrenzyGroup1.FIRST_MESSAGE, playerView.getLastStringPrinted());
     }
 
     @Test
-    public void handleTargetingWrongInput(){
+    public void handleAlreadyReloadedNegative() {
+        //action ShootFrenzy permits reloading
+        Action action = new ShootFrenzyGroup1(gameHandler,controller);
+        controller.setState(new ActionSelectedControllerState(controller,gameHandler,action));
+        try {
+            authorPlayer.setPosition(gameHandler.getCellByCoordinate(1,1));
+        } catch (NotPresentException e) {
+            //shouldn't happen
+        }
+        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
 
-
-
-
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        };
+        weaponCard.reload();
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(ActionSelectedControllerState.WEAPON_LOADED_RELOAD
+                + ShootFrenzyGroup1.FIRST_MESSAGE, playerView.getLastStringPrinted());
     }
 
     @Test
-    public void handleFiremode() {
-    }
+    public void handleNotEnoughAmmoNegative() {
+        //action ShootFrenzy permits reloading
+        Action action = new ShootFrenzyGroup1(gameHandler,controller);
+        controller.setState(new ActionSelectedControllerState(controller,gameHandler,action));
+        try {
+            authorPlayer.setPosition(gameHandler.getCellByCoordinate(1,1));
+        } catch (NotPresentException e) {
+            //shouldn't happen
+        }
+        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
+        controller.update(null, cellMessage);
 
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
 
-    @Test
-    public void handle5() {
-    }
-
-    @Test
-    public void handle6() {
-    }
-
-    @Test
-    public void handle7() {
-    }
-
-    @Test
-    public void handle8() {
-    }
-
-    @Test
-    public void handle9() {
-    }
-
-    @Test
-    public void handle10() {
-    }
-
-    @Test
-    public void handle11() {
-    }
-
-    @Test
-    public void handle12() {
-    }
-
-
-    @Test
-    public void isFireModePositive() {
-        //ViewControllerMessage msg = new FireModeMessage(Identificator.CYBERBLADE_1, authorID, playerView);
-        //boolean value = isFireModePositive(); E' stato commentato perché non compilava
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+        };
+        weaponCard.unload();
+        try {
+            authorPlayer.setAmmoBag(0,0,0); //not enough ammo
+        } catch (TooManyException e) {
+            //shouldn0t happen
+        }
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(ActionSelectedControllerState.NOT_ENOUGH
+                + ShootFrenzyGroup1.FIRST_MESSAGE, playerView.getLastStringPrinted());
     }
 }
