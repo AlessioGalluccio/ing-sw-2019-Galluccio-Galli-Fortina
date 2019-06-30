@@ -354,6 +354,7 @@ public class ControllerLogin implements UiInterface {
         updatePlayerCharacter();
 
 
+
     }
 
     /**
@@ -521,7 +522,7 @@ public class ControllerLogin implements UiInterface {
      */
     private void setPlayerFrenzy(){
         if(clientView.getPlayerCopy().isFrenzyDeath()){
-            controller.frenzyPlayer();
+           controller.frenzyPlayer();
         }
     }
 
