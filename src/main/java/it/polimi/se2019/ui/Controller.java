@@ -58,7 +58,7 @@ public class Controller implements Initializable {
     public Button bconvertAmmo4;
 
     //true when all the skull are taken
-    private boolean isFrenzyTime = false;
+    static boolean isFrenzyTime = false;
 
 
     //button to close wainting room
@@ -1465,15 +1465,15 @@ public class Controller implements Initializable {
     public void sendActionMessage(ActionEvent event) {
         Object source = event.getSource();
 
-        if (moveButton == source) {
+        if (moveButton == source || bFrenzyMove1 == source) {
             ControllerLogin.clientView.createActionMessage(1);
         }
 
-        if (grabButton == source) {
+        if (grabButton == source || bFrenzyGrab1 == source || bFrenzyGrab2 == source) {
             ControllerLogin.clientView.createActionMessage(2);
         }
 
-        if (shootButton == source) {
+        if (shootButton == source || bFrenzyShoot1 == source || bFrenzyShoot2 == source) {
             ControllerLogin.clientView.createActionMessage(3);
         }
     }
@@ -1802,7 +1802,6 @@ public class Controller implements Initializable {
      */
      void updateWeaponMap() {
 
-        Platform.runLater(() -> {
             try {
 
                 ArrayList<ImageView> redWeapons = new ArrayList<>();
@@ -1853,7 +1852,6 @@ public class Controller implements Initializable {
             catch (Exception e){
                 Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
             }
-        });
 
     }
 
@@ -2445,6 +2443,9 @@ public class Controller implements Initializable {
                     yourCharacter.setVisible(true);
                     yourCharacter.setImage(image.get(0));
                     possibleActions.setImage(image.get(1));
+                    if(isFrenzyTime){
+                        frenzyPlayer();
+                    }
 
                 } catch (NullPointerException e) {
                     Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
@@ -2864,44 +2865,43 @@ public class Controller implements Initializable {
      * change player's images with frenzy's
      */
      void frenzyPlayer() {
-        Platform.runLater(() ->  {
-                try {
+         Platform.runLater(() -> {
+             try {
+                 if (ControllerLogin.clientView.getPlayerCopy().isFrenzyDeath()) {
+                     ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
+                     yourCharacter.setImage(images.get(0));
+                     possibleActions.setImage(images.get(1));
+                 }
+                 moveButton.setDisable(true);
+                 moveButton.setVisible(false);
+                 grabButton.setDisable(true);
+                 grabButton.setVisible(false);
+                 shootButton.setDisable(true);
+                 shootButton.setVisible(false);
 
-                    ArrayList<Image> images = setFrenzyCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId());
-                    yourCharacter.setImage(images.get(0));
-                    possibleActions.setImage(images.get(1));
-                    moveButton.setDisable(true);
-                    moveButton.setVisible(false);
-                    grabButton.setDisable(true);
-                    grabButton.setVisible(false);
-                    shootButton.setDisable(true);
-                    shootButton.setVisible(false);
+                 if (ControllerLogin.clientView.getPlayerCopy().isFirstGroupFrenzy()) {
+                     bFrenzyGrab1.setVisible(true);
+                     bFrenzyGrab1.setDisable(false);
+                     bFrenzyGrab1.setStyle(transparent);
+                     bFrenzyMove1.setVisible(true);
+                     bFrenzyMove1.setDisable(false);
+                     bFrenzyMove1.setStyle(transparent);
+                     bFrenzyShoot1.setVisible(true);
+                     bFrenzyShoot1.setStyle(transparent);
+                     bFrenzyShoot1.setDisable(false);
+                 } else {
+                     bFrenzyGrab2.setVisible(true);
+                     bFrenzyGrab2.setDisable(false);
+                     bFrenzyGrab2.setStyle(transparent);
+                     bFrenzyShoot2.setVisible(true);
+                     bFrenzyShoot2.setStyle(transparent);
+                     bFrenzyShoot2.setDisable(false);
+                 }
+             } catch (Exception e) {
+                 Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+             }
+         });
 
-                    if(ControllerLogin.clientView.getPlayerCopy().isFirstGroupFrenzy()){
-                        bFrenzyGrab1.setVisible(true);
-                        bFrenzyGrab1.setDisable(false);
-                        bFrenzyGrab1.setStyle(transparent);
-                        bFrenzyMove1.setVisible(true);
-                        bFrenzyMove1.setDisable(false);
-                        bFrenzyMove1.setStyle(transparent);
-                        bFrenzyShoot1.setVisible(true);
-                        bFrenzyShoot1.setStyle(transparent);
-                        bFrenzyShoot1.setDisable(false);
-                    }
-                    else{
-                        bFrenzyGrab2.setVisible(true);
-                        bFrenzyGrab2.setDisable(false);
-                        bFrenzyGrab2.setStyle(transparent);
-                        bFrenzyShoot2.setVisible(true);
-                        bFrenzyShoot2.setStyle(transparent);
-                        bFrenzyShoot2.setDisable(false);
-                    }
-                }
-                catch (Exception e){
-                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
-                }
-
-        });
     }
 
     /**

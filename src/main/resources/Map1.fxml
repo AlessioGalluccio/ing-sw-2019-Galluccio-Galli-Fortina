@@ -633,11 +633,11 @@
          <font>
             <Font size="25.0" />
          </font></Button>
-      <Button fx:id="bFrenzyShoot1" disable="true" layoutX="70.0" layoutY="540.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
-      <Button fx:id="bFrenzyMove1" disable="true" layoutX="70.0" layoutY="566.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
-      <Button fx:id="bFrenzyGrab1" disable="true" layoutX="70.0" layoutY="592.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
-      <Button fx:id="bFrenzyShoot2" disable="true" layoutX="70.0" layoutY="646.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
-      <Button fx:id="bFrenzyGrab2" disable="true" layoutX="70.0" layoutY="674.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyShoot1" disable="true" layoutX="70.0" layoutY="540.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyMove1" disable="true" layoutX="70.0" layoutY="566.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyGrab1" disable="true" layoutX="70.0" layoutY="592.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyShoot2" disable="true" layoutX="70.0" layoutY="646.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" visible="false" />
+      <Button fx:id="bFrenzyGrab2" disable="true" layoutX="70.0" layoutY="674.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" visible="false" />
       <Button fx:id="moveButton" layoutX="70.0" layoutY="556.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="22.0" prefWidth="51.0" />
       <Button fx:id="grabButton" layoutX="70.0" layoutY="589.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
       <Button fx:id="shootButton" layoutX="70.0" layoutY="622.0" mnemonicParsing="false" onAction="#sendActionMessage" prefHeight="25.0" prefWidth="51.0" />
