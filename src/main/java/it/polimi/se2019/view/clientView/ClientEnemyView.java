@@ -35,6 +35,10 @@ public class ClientEnemyView extends EnemyView {
         }
     }
 
+    /**
+     * Set the attribute UI of this object and set this object as one of the enemyView of the ui
+     * @param ui The us to set and to be set
+     */
     public void setUi(UiInterface ui) {
         this.ui = ui;
         ui.setEnemyView(this);

@@ -48,8 +48,9 @@ public class SocketClient extends Client {
                         disconnect();
                     } catch (StreamCorruptedException | java.io.EOFException e) {
                         createNewStream();
-                    }
-                    catch (IOException | ClassNotFoundException e) {
+                    } catch (java.net.SocketTimeoutException e) {
+                        System.out.println("Your connection is slow, if something went wrong please retry.");
+                    } catch (IOException | ClassNotFoundException e) {
                         Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem reading obj through socket", e);
                     }
                 }

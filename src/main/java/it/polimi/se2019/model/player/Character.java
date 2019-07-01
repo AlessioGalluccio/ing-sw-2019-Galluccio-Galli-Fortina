@@ -45,6 +45,11 @@ public class Character implements Serializable {
         this.id = id;
     }
 
+    /**
+     * String the full character, representing each attributes with color and name
+     * Work with ANSI code
+     * @return The representation of the character
+     */
     @Override
     public String toString() {
         return ConsoleColor.colorByColor(color) + nameCharacter + ConsoleColor.RESET;
@@ -64,6 +69,11 @@ public class Character implements Serializable {
         return color;
     }
 
+    /**
+     * Compare the character based on the name and the color
+     * @param o The other character to compare
+     * @return True if the two characters have the same name and color. False otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

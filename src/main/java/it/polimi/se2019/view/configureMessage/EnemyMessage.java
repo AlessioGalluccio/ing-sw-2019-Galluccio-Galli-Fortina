@@ -13,6 +13,12 @@ public class EnemyMessage implements HandlerNetworkMessage, Serializable {
         this.nickname = nickname;
     }
 
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the client who receive this message
+     * in order to create an enemy view for this player.
+     * @param client The Client object which has to handle this message
+     */
     @Override
     public void handleMessage(Client client) {
         client.handleEnemyMessage(nickname);

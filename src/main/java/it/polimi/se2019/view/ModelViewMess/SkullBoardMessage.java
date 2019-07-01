@@ -10,10 +10,12 @@ public class SkullBoardMessage implements ModelViewMessage, HandlerSkullViewMess
     private static final long serialVersionUID = -6227107342873236285L;
     private static int ID=0;
     private int ack;
+    private int originalSkull;
     private int numSkullCopy;
     private List<Death> deathCopy;
 
-    public SkullBoardMessage(int numSkullCopy, List<Death> deathCopy) {
+    public SkullBoardMessage(int originalSkull, int numSkullCopy, List<Death> deathCopy) {
+        this.originalSkull = originalSkull;
         this.numSkullCopy = numSkullCopy;
         this.deathCopy = deathCopy;
         ID++;
@@ -30,7 +32,7 @@ public class SkullBoardMessage implements ModelViewMessage, HandlerSkullViewMess
 
     @Override
     public void handleMessage(SkullBoardView s) {
-        s.handleSkullMessage(numSkullCopy, deathCopy);
+        s.handleSkullMessage(originalSkull, numSkullCopy, deathCopy);
     }
 
     @Override

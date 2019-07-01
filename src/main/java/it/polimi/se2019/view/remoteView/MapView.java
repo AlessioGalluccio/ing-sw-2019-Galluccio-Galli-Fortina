@@ -2,7 +2,6 @@ package it.polimi.se2019.view.remoteView;
 
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.map.CellAmmo;
 import it.polimi.se2019.model.map.CellSpawn;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.ui.ConsoleColor;
@@ -43,7 +42,7 @@ public class MapView extends Observable implements Observer {
     }
 
     /**
-     * Return only the spawn cell of the map
+     * Return only the spawn cells of the map
      * @return A list with all the spawn cell
      */
     public List<CellSpawn> getCellSpawn() {
@@ -54,8 +53,11 @@ public class MapView extends Observable implements Observer {
         return cellSpawnList;
     }
 
-
-
+    /**
+     * Receive message from the model and forward it to the networkHandler
+     * @param o null
+     * @param arg the message receive to forward
+     */
     @Override
     public void update(java.util.Observable o /*Will be always null*/, Object arg) {
         HandlerMapViewMessage message = (HandlerMapViewMessage) arg;
@@ -63,20 +65,31 @@ public class MapView extends Observable implements Observer {
         notifyObservers(message); //Forward message to client
     }
 
+    /**
+     * This method is call at the beginning of the game to set the map of the view.
+     * @param m The map to set.
+     */
     public void handleMapMessage(Map m) {
         mapCopy = m;
         cells = m.getCell();
     }
 
+    /**
+     * This method is call whenever a cell is changed.
+     * Update the corresponding cell with the new one.
+     * @param c The new cell changed.
+     */
     public void handleCellMessage(Cell c) {
         cells[c.getCoordinateX()][c.getCoordinateY()] = c;
     }
 
 
     /**
-     * Print the map on System.out
+     * Create a string of a specific row of the map.
+     * Works with UTF-8 and ANSI code.
      * @param block the bloc of cell to print
      * @param row the line to print
+     * @return The string to print
      */
     public String printRow(int block, int row) {
         String space = ConsoleColor.BLACK + "◙" + ConsoleColor.RESET;
@@ -103,7 +116,13 @@ public class MapView extends Observable implements Observer {
         return s;
     }
 
-
+    /**
+     * Create a string with the weapon on a specific spawn cell.
+     * Works with UTF-8 and ANSI code.
+     * @param row The row to print
+     * @param cell The cell of which you wanna print the weapons
+     * @return The string to print
+     */
     private String printWeapon(int row, int cell) {
         String s="";
         CellSpawn cellRed = (CellSpawn) this.cells[0][1];

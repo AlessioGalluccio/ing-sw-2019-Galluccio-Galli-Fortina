@@ -15,11 +15,11 @@ public class Points implements Serializable {
         addNewPoints(num);
     }
 
-    public List<PointCard> getPointCard() {
+    List<PointCard> getPointCard() {
         return new ArrayList<>(pointCard);
     }
 
-    public int getSum() {
+    int getSum() {
         return sum;
     }
 
@@ -27,8 +27,7 @@ public class Points implements Serializable {
      * Create new Point Card for a sum of num and add them to the player's list
      * @param num number of points to add
      */
-    //Tested through Player addPoints()
-    protected void addNewPoints(int num) {
+    void addNewPoints(int num) {
         sum = sum + num;
 
         int num4PointsCards = num / 4;  //division without remainder

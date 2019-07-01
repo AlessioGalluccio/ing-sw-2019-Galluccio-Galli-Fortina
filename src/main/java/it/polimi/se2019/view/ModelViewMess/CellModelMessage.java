@@ -16,15 +16,21 @@ public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage
         ack=ID;
     }
 
-    public Cell getCellCopy() {
-        return cellCopy;
-    }
-
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the mapView who receive this message in order to handle it.
+     * @param view The MapView object which has to handle this message
+     */
     @Override
     public void handleMessage(MapView view) {
         view.handleCellMessage(cellCopy);
     }
 
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the client who receive this message in order to forward it correctly.
+     * @param client The Client object which has to handle this message
+     */
     @Override
     public void handleMessage(Client client) {
         client.forwardToMapView(this);
@@ -34,11 +40,19 @@ public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage
         return ack;
     }
 
+    /**
+     * Get the X of the cell in this message
+     * @return the X of the cell in this message
+     */
     @Override
     public int getX() {
         return cellCopy.getCoordinateX();
     }
 
+    /**
+     * Get the Y of the cell in this message
+     * @return the Y of the cell in this message
+     */
     @Override
     public int getY() {
         return cellCopy.getCoordinateY();

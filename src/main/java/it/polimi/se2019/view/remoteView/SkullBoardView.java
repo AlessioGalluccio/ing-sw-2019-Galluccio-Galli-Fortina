@@ -11,11 +11,12 @@ import java.util.Observer;
 
 public class SkullBoardView extends Observable implements Observer {
 
+    private int originalSkull;
     private int numSkullCopy = 8;
     private ArrayList<Death> deathCopy = new ArrayList<>();
 
     /**
-     * getter of deathCopy
+     * Getter of deathCopy
      * @return deathCopy
      */
     public ArrayList<Death> getDeathCopy() {
@@ -23,11 +24,19 @@ public class SkullBoardView extends Observable implements Observer {
     }
 
     /**
-     * getter of numSkullCopy
+     * Getter of numSkullCopy
      * @return numSkullCopy
      */
     public int getNumSkullCopy() {
         return numSkullCopy;
+    }
+
+    /**
+     * Getter of orginalSkull
+     * @return orginalSkull
+     */
+    public int getOriginalSkull() {
+        return originalSkull;
     }
 
     /**
@@ -46,23 +55,33 @@ public class SkullBoardView extends Observable implements Observer {
         notifyObservers(message); //Forward message to client
     }
 
-    public void handleSkullMessage(int numSkullCopy, List<Death> deathCopy) {
+    /**
+     * This method is call whenever the skull board changed.
+     * @param originalSkull the nueber of skull at the beginning of the match
+     * @param numSkullCopy the number of skull
+     * @param deathCopy the new array of death who has changed
+     */
+    public void handleSkullMessage(int originalSkull, int numSkullCopy, List<Death> deathCopy) {
+        this.originalSkull = originalSkull;
         this.numSkullCopy = numSkullCopy;
         this.deathCopy = (ArrayList<Death>) deathCopy;
     }
 
+    /**
+     * String the full skull board, representing each attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return The representation of the skull board
+     */
     @Override
     public String toString() {
-        int skull = numSkullCopy;
         String s ="8 6 4 2 1 1 \t";
         for(Death death : deathCopy) {
-            skull--;
             for(int i=0; i<death.getPoints(); i++) {
                 s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) + "○" + ConsoleColor.RESET;
             }
             s+=" ";
         }
-        for(int i=0; i<skull; i++) {
+        for(int i=0; i<numSkullCopy; i++) {
             s += ConsoleColor.RED + "† " + ConsoleColor.RESET;
         }
         return s;

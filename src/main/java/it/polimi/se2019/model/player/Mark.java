@@ -25,6 +25,11 @@ public class Mark implements Serializable {
         return new ArrayList<>(markDone);
     }
 
+    /**
+     * Return the number of mark done to a specific enemy
+     * @param target The enemy
+     * @return The number of mark done to param target
+     */
     public int getNumMarkDoneTo(Player target){
         int numMarks = 0;
         for(Player temp : markDone){
@@ -44,26 +49,40 @@ public class Mark implements Serializable {
     }
 
     /**
-     *
+     * Keep trace of the mark to an enemy
+     * This method add a mark done to an enemy
      * @param enemyToMark opponent player you want to mark
+     * @throws TooManyException If try to add more than three marks on the same enemy
      */
-    protected void addMarkDoneTo(Player enemyToMark) throws TooManyException {
+    void addMarkDoneTo(Player enemyToMark) throws TooManyException {
         if(Collections.frequency(markDone, enemyToMark) == MAX_MARK) throw new TooManyException("You have already marked three times " + enemyToMark.getNickname());
         else markDone.add(enemyToMark);
     }
 
-    protected void addMarkReceivedBy(Player enemy) {
+    /**
+     * Keep trace of the mark received by an enemy
+     * This method add a mark received by an enemy
+     * @param enemy The enemy who marked you
+     */
+    void addMarkReceivedBy(Player enemy) {
         markReceived.add(enemy);
     }
 
     /**
+     * Keep trace of the mark received by an enemy
+     * This method remove all the marks received by an enemy
      * @param enemy opponent player whose mark you want to remove from yourself
      */
-    protected void removeMarkReceivedBy(Player enemy) {
+    void removeMarkReceivedBy(Player enemy) {
         while(markReceived.remove(enemy));
     }
 
-    protected void removeMarkDoneTo(Player enemyMarked) {
+    /**
+     * Keep trace of the mark to an enemy
+     * This method remove all the marks done to an enemy
+     * @param enemyMarked the enemy you had marked and want to un-mark
+     */
+    void removeMarkDoneTo(Player enemyMarked) {
         while(markDone.remove(enemyMarked));
     }
 

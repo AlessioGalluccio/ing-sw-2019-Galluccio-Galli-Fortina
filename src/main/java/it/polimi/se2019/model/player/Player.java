@@ -586,7 +586,7 @@ public class Player extends Observable implements Target, Serializable {
      * Compare the player based on the ID, the nickname and the character
      * Character could be null
      * @param o The other player to compare
-     * @return True if the two player has the same ID, nickname and character. False otherwise.
+     * @return True if the two players have the same ID, nickname and character. False otherwise.
      */
     @Override
     public boolean equals(Object o) {
@@ -677,7 +677,7 @@ public class Player extends Observable implements Target, Serializable {
         for(Player p : damage) {
             s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
         }
-        s+="\033[3m (remember adrenaline actions)";
+        s+= ConsoleColor.RESET + "(remember adrenaline actions)";
         s+=ConsoleColor.RESET+"\n  Skulls: ";
         if(!isFrenzyDeath) {
             s+="8 6 4 2 1 1 \t";
