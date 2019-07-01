@@ -19,6 +19,11 @@ public abstract class Action implements AddActionMethods {
     protected PlayerView playerView;
     protected Controller controller;
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public Action(GameHandler gameHandler, Controller controller) {
         this.gameHandler = gameHandler;
         this.controller = controller;
@@ -26,20 +31,40 @@ public abstract class Action implements AddActionMethods {
         this.playerView = controller.getPlayerView();
     }
 
+    /**
+     * get the string and messages needed for the action
+     * @return an ArrayList of StringAndMessage of the input and requests of this action
+     */
     public abstract ArrayList<StringAndMessage> getStringAndMessageExpected();
 
+    /**
+     * get the gamehandler of this match
+     * @return the GameHandler of this match
+     */
     public GameHandler getGameHandler() {
         return gameHandler;
     }
 
+    /**
+     * get the author Player of this action
+     * @return the author Player of this action
+     */
     public Player getPlayerAuthor() {
         return playerAuthor;
     }
 
+    /**
+     * get the PlayerView of the author player
+     * @return the PlayerView if the author
+     */
     public PlayerView getPlayerView() {
         return playerView;
     }
 
+    /**
+     * get the Controller of the author player
+     * @return the Controller of the author player
+     */
     public Controller getController() {
         return controller;
     }
@@ -85,6 +110,10 @@ public abstract class Action implements AddActionMethods {
         throw new WrongInputException();
     }
 
+    /**
+     * get the cost of the entire action, optional effects included
+     * @return the AmmoBag cost of the entire action
+     */
     public abstract AmmoBag getCost();
 
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class Move extends Action {
 
     private Cell cellObjective;
-    private final static int DISTANCE_MAX = 3;
+    private static final int DISTANCE_MAX = 3;
 
     //messages
     static final StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell");
@@ -24,14 +24,14 @@ public class Move extends Action {
     //errors
     static final String TOO_DISTANT_CELL = "This cell is too distant. ";
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public Move(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
 
-    }
-
-
-    public void executeAction() throws WrongInputException{
-        playerAuthor.setPosition(cellObjective);
     }
 
     @Override
@@ -71,5 +71,12 @@ public class Move extends Action {
      */
     protected int getMaxDistance(){
         return DISTANCE_MAX;
+    }
+
+    /**
+     * execute this action move
+     */
+    private void executeAction(){
+        playerAuthor.setPosition(cellObjective);
     }
 }

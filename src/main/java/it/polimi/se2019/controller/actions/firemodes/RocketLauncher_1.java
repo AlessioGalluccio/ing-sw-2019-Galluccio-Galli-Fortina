@@ -129,7 +129,7 @@ public class RocketLauncher_1 extends FireMode {
                 (shoot.getOptionalSelected().isEmpty() || !shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL)))){
 
-                shoot.addOptionalSelected(numOptional);
+                shoot.addOptionalFromFiremode(numOptional);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.CELL_MESSAGE, SELECT_CELL_TO_MOVE_YOURSELF);
                 controller.addMessageListImmediateNext(stringAndMessage);
                 nextCellIsForOptional1 = true;
@@ -142,7 +142,7 @@ public class RocketLauncher_1 extends FireMode {
                 throw new WrongInputException(SELECT_TARGET_BEFORE);
             }
             else{
-                shoot.addOptionalSelected(numOptional);
+                shoot.addOptionalFromFiremode(numOptional);
                 for(Player target : shoot.getTargetsCells().get(0).getPlayerHere()){
                     shoot.addPlayerTargetFromFireMode(target,true);
                 }

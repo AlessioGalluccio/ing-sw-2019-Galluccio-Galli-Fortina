@@ -116,7 +116,7 @@ public class GrenadeLauncher_1 extends FireMode {
             if(shoot.getTargetsPlayer().isEmpty()) {
                 throw new WrongInputException(SELECT_FIRST_TARGET_BEFORE);
             }
-            shoot.addOptionalSelected(numOptional);
+            shoot.addOptionalFromFiremode(numOptional);
             StringAndMessage stringAndMessage = new StringAndMessage(Identificator.CELL_MESSAGE,
                     OPTIONAL_MESSAGE);
             controller.addMessageListImmediateNext(stringAndMessage);

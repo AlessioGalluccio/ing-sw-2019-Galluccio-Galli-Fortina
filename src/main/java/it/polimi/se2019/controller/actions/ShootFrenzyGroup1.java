@@ -17,6 +17,11 @@ public class ShootFrenzyGroup1 extends ShootAdrenaline {
     //errors
     public static final String CANT_DO_RELOAD = "You can't reload now. ";
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public ShootFrenzyGroup1(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }

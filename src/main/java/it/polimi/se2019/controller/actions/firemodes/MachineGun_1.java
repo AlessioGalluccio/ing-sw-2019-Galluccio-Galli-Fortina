@@ -98,13 +98,13 @@ public class MachineGun_1 extends FireMode {
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         if(numOptional == Identificator.FIRST_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL)){
-            shoot.addOptionalSelected(Identificator.FIRST_OPTIONAL);
+            shoot.addOptionalFromFiremode(Identificator.FIRST_OPTIONAL);
             shoot.addCost(new AmmoBag(0,1,0));
         }
         else if(numOptional == Identificator.SECOND_OPTIONAL
                 && !shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL)
                 && shoot.getTargetsPlayer().size() == 2){
-                shoot.addOptionalSelected(Identificator.SECOND_OPTIONAL);
+                shoot.addOptionalFromFiremode(Identificator.SECOND_OPTIONAL);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                         OPTIONAL_SECOND_MSG);
                 controller.addMessageListExpected(stringAndMessage);

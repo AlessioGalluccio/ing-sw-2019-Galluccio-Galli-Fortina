@@ -36,22 +36,13 @@ public class Grab extends Action{
     public static final String CANT_PAY_THIS_WEAPON = "You can't pay this weapon. ";
 
 
-
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public Grab(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
-    }
-
-    private void grabForAmmoCell(){
-        playerAuthor.setPosition(cellObjective);
-        try{
-            AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
-            cardObjective.useCard(playerAuthor);
-
-        }catch(NotCardException e){
-            //do nothing
-        }catch (TooManyException e) {
-            //do nothing
-        }
     }
 
     @Override
@@ -126,9 +117,6 @@ public class Grab extends Action{
                 //should never happen
             }
         }
-        else{
-            //shouldn't happen
-        }
     }
 
     @Override
@@ -153,7 +141,27 @@ public class Grab extends Action{
         return new AmmoBag(0,0,0);
     }
 
+    /**
+     * get the max distance of moving in this action
+     * @return the integer of the max distance of moving
+     */
     protected int getMaxDistance(){
         return DISTANCE_MAX;
+    }
+
+    /**
+     * handles the grab action if the target cell is an AmmoCell
+     */
+    private void grabForAmmoCell(){
+        playerAuthor.setPosition(cellObjective);
+        try{
+            AmmoCard cardObjective = (AmmoCard) cellObjective.grabCard(cellObjective.getCardID().get(0));
+            cardObjective.useCard(playerAuthor);
+
+        }catch(NotCardException e){
+            //do nothing
+        }catch (TooManyException e) {
+            //do nothing
+        }
     }
 }

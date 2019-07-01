@@ -13,6 +13,11 @@ public class GrabFrenzy extends Grab {
 
     private static final int MAX_DISTANCE = 3;
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public GrabFrenzy(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }

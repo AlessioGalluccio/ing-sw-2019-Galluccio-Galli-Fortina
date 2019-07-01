@@ -90,7 +90,7 @@ public class LockRifle_1 extends FireMode {
                 throw new WrongInputException(SELECT_FIRST_TARGET_BEFORE);
             }
             else{
-                shoot.addOptionalSelected(numOptional);
+                shoot.addOptionalFromFiremode(numOptional);
                 StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                         SECOND_MSG_STR);
                 controller.addMessageListImmediateNext(stringAndMessage);

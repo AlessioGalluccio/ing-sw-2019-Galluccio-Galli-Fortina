@@ -117,8 +117,9 @@ public class VortexCannon_1 extends FireMode {
     @Override
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()
+                && !shoot.getTargetsCells().isEmpty()
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL))){
-            shoot.addOptionalSelected(numOptional);
+            shoot.addOptionalFromFiremode(numOptional);
             List<StringAndMessage> list = new ArrayList<>();
             list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE,SELECT_SECOND_TARGET_VORTEX_OPTIONAL));
             list.add(new StringAndMessage(Identificator.PLAYER_MESSAGE,SELECT_THIRD_TARGET_VORTEX_OPTIONAL));

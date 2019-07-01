@@ -40,6 +40,11 @@ public class Shoot extends Action{
     //TODO manca WeaponCardMess per StringAndMessage !!!!!
     private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public Shoot(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
         fireMode = null;
@@ -154,7 +159,7 @@ public class Shoot extends Action{
     }
 
 
-
+    @Override
     public void fire() throws WrongInputException{
         if(fireMode != null){
             fireMode.fire();
@@ -166,29 +171,49 @@ public class Shoot extends Action{
 
     //METHODS ONLY FOR FIREMODES
 
+    /**
+     * get the targets player added to shoot
+     * @return an ArrayList of players already selected
+     */
     public ArrayList<Player> getTargetsPlayer() {
         return targets;
     }
 
+    /**
+     * get the target cells added to shoot
+     * @return an ArrayList of cells already selected
+     */
     public ArrayList<Cell> getTargetsCells() {
         return cells;
     }
 
+    /**
+     * get the possible targets for a targeting scope for this action shoot
+     * @return an ArrayList of possible targets for targeting scope in this action shoot
+     */
     public ArrayList<Player> getCanBeTargetedPlayers() {
         return canBeTargetedPlayers;
     }
 
+    /**
+     * get the Optional firemodes selected
+     * @return an ArrayList of the optional firemodes selected
+     */
     public ArrayList<Integer> getOptionalSelected() {
         return optionalSelected;
     }
 
+    /**
+     * get the targeting Scope cards used inthis shoot action
+     * @return an ArrayList of the targeting scope cards used
+     */
     public ArrayList<PowerupCard> getTargetingScopeCards() {
         return targetingScopeCards;
     }
 
     /**
      * returns the weapon of the action
-     * @return
+     * @return the weapon selected in this shoot action
      */
     public WeaponCard getWeapon(){return weapon;}
 
@@ -220,6 +245,10 @@ public class Shoot extends Action{
         }
     }
 
+    /**
+     * add a selected cell from a firemode
+     * @param cell the selected Cell from the firemode
+     */
     public void addCellFromFireMode(Cell cell){
         cells.add(cell);
     }
@@ -249,7 +278,11 @@ public class Shoot extends Action{
         neededTargetForTargeting = false;
     }
 
-    public void addOptionalSelected(int numOptional){
+    /**
+     * add an optional selected from firemode
+     * @param numOptional the number of the optional firemode
+     */
+    public void addOptionalFromFiremode(int numOptional){
         this.optionalSelected.add(numOptional);
     }
 
@@ -271,7 +304,7 @@ public class Shoot extends Action{
 
     /**
      * set this flag, if true, next PlayerMessage is for the Targeting, not the weapon
-     * @param neededTargetForTargeting
+     * @param neededTargetForTargeting true PlayerMessage is for the Targeting, not the weapon, false if not
      */
     public void setNeededTargetForTargeting(boolean neededTargetForTargeting) {
         this.neededTargetForTargeting = neededTargetForTargeting;
