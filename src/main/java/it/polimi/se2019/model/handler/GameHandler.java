@@ -113,7 +113,7 @@ public class GameHandler extends Observable {
     private void setNewTurn() {
         map.reloadAllCell();
         if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
-        if(firstFrenzyPlayer.equals(orderPlayerList.get(turn))) endGame();
+        if(orderPlayerList.get(turn).equals(firstFrenzyPlayer)) endGame();
         else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
         getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
 
