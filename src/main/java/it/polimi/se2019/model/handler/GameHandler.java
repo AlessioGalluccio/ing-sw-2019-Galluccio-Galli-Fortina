@@ -113,10 +113,12 @@ public class GameHandler extends Observable {
     private void setNewTurn() {
         map.reloadAllCell();
         if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
-        if(orderPlayerList.get(turn).equals(firstFrenzyPlayer)) endGame();
-        else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
-        getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
+        else if(orderPlayerList.get(turn).equals(firstFrenzyPlayer)) endGame();
 
+        if(matchID!=-1) { //If the match isn't ended
+            forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
+            getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
+        }
     }
 
     /**
@@ -158,6 +160,7 @@ public class GameHandler extends Observable {
     private void endGame() {
         cashSkullBoardPoint();
         forwardAllViews(new RankingMessage(getRanking()));
+        matchID = -1;
         WaitingRoom.deleteMatch(this);
     }
 
