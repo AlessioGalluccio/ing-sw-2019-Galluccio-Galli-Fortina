@@ -677,7 +677,7 @@ public class Player extends Observable implements Target, Serializable {
         for(Player p : damage) {
             s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
         }
-        s+="\033[3m (remember adrenaline actions)";
+        s+= ConsoleColor.RESET + "(remember adrenaline actions)";
         s+=ConsoleColor.RESET+"\n  Skulls: ";
         if(!isFrenzyDeath) {
             s+="8 6 4 2 1 1 \t";

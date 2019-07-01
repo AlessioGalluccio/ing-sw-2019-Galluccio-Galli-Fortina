@@ -74,16 +74,14 @@ public class SkullBoardView extends Observable implements Observer {
      */
     @Override
     public String toString() {
-        int skull = numSkullCopy;
         String s ="8 6 4 2 1 1 \t";
         for(Death death : deathCopy) {
-            skull--;
             for(int i=0; i<death.getPoints(); i++) {
                 s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) + "○" + ConsoleColor.RESET;
             }
             s+=" ";
         }
-        for(int i=0; i<skull; i++) {
+        for(int i=0; i<numSkullCopy; i++) {
             s += ConsoleColor.RED + "† " + ConsoleColor.RESET;
         }
         return s;
