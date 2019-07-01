@@ -92,7 +92,7 @@ public class PlasmaGun_1 extends FireMode {
                 (shoot.getOptionalSelected().isEmpty() || !shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL))
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL))){
 
-            shoot.addOptionalSelected(numOptional);
+            shoot.addOptionalFromFiremode(numOptional);
             StringAndMessage stringAndMessage = new StringAndMessage(Identificator.CELL_MESSAGE,
                     SELECT_CELL_TO_MOVE);
             controller.addMessageListImmediateNext(stringAndMessage);
@@ -101,7 +101,7 @@ public class PlasmaGun_1 extends FireMode {
         else if(numOptional == Identificator.SECOND_OPTIONAL &&
                 (shoot.getOptionalSelected().isEmpty() || !shoot.getOptionalSelected().contains(Identificator.SECOND_OPTIONAL))
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_SECOND_OPTIONAL))){
-            shoot.addOptionalSelected(numOptional); //it's just for adding one more damage
+            shoot.addOptionalFromFiremode(numOptional); //it's just for adding one more damage
             shoot.addCost(COST_SECOND_OPTIONAL);
 
         }

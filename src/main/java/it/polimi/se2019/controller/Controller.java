@@ -32,8 +32,12 @@ public class Controller implements Observer {
     private int numOfActionTaken;
     private int numOfMaxActions = 2;
 
-    private String stringToPlayerView;
-
+    /**
+     * constructor
+     * @param gameHandler the GameHandler of the match
+     * @param playerAuthor the author Player of this Controller
+     * @param playerView the PlayerView of the author player
+     */
     public Controller(GameHandler gameHandler, Player playerAuthor, PlayerView playerView) {
         this.gameHandler = gameHandler;
         this.messageListExpected = new ArrayList<>();
@@ -45,14 +49,7 @@ public class Controller implements Observer {
 
     /////////////////GETTERS
 
-    /**
-     * set the author of the messages received
-     * @param author the Player author
-     */
-    public void setAuthor(Player author){
-        //TODO fai in modo che Controller lo setti davvero!
-        this.playerAuthor = author;
-    }
+
 
     /**
      * returns the author of the messages
@@ -70,7 +67,10 @@ public class Controller implements Observer {
         return numOfMaxActions;
     }
 
-
+    /**
+     * get a copy of the list of the requests to the user and the messages expected from user
+     * @return an ArrayList of StringAndMessage of requests and expected messages
+     */
     public ArrayList<StringAndMessage> getCopyMessageListExpected() {
         Gson gson = new Gson();
 
@@ -80,58 +80,88 @@ public class Controller implements Observer {
         return gson.fromJson(gson.toJson(this.messageListExpected, TYPE), TYPE);
     }
 
+    /**
+     * the the index of the message expected
+     * @return the int index of the message expected
+     */
     public int getIndexExpected() {
         return indexExpected;
     }
 
-
-
-
-    /////////////////////SETTERS
-
-
-
+    /**
+     * get the State of the controller
+     * @return the State of the controller
+     */
     public StateController getState() {
         return state;
     }
 
+    /**
+     * get the number of the actions took by the player in the current turn
+     * @return the number of the actions took by the player in this turn
+     */
     public int getNumOfActionTaken() {
         return numOfActionTaken;
     }
 
+
+    /////////////////////SETTERS
+
+    /**
+     * set the author of the messages received
+     * @param author the Player author
+     */
+    public void setAuthor(Player author){
+        //TODO fai in modo che Controller lo setti davvero!
+        this.playerAuthor = author;
+    }
+
+
+    /**
+     * set the PlayerView of the author
+     * @param playerView the PlayerView
+     */
     public void setPlayerView(PlayerView playerView) {
         this.playerView = playerView;
     }
 
-
-
-
-
-
-    public void setMessageListExpected(ArrayList<StringAndMessage> messageListExpected) {
-        this.messageListExpected = messageListExpected;
-    }
-
-
+    /**
+     * add a list of messages expected at the end of the list
+     * @param arg the Listt of StringAndMessage
+     */
     public void addMessageListExpected(List<StringAndMessage> arg) {
         this.messageListExpected.addAll(arg);
     }
 
+    /**
+     * add a message expected at the end of the list
+     * @param arg the StringAndMessage
+     */
     public void addMessageListExpected(StringAndMessage arg) {
         this.messageListExpected.add(arg);
     }
 
+    /**
+     * add a List of messages expected that will become the expected ones (in sequence)
+     * @param messageListExpected the List of messages expected
+     */
     public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(indexExpected , messageListExpected);
 
     }
 
+    /**
+     * add a message expected that will become the expected one
+     * @param messageExpected the message expected
+     */
     public void addMessageListImmediateNext(StringAndMessage messageExpected){
         this.messageListExpected.add(indexExpected , messageExpected);
     }
 
-
-
+    /**
+     * add a List of expected messages before the last one
+     * @param messageList the List of expected messages
+     */
     public void addMessageListBeforeLastOne(List<StringAndMessage> messageList){
         if(messageList.isEmpty()){
             //do nothing
@@ -145,23 +175,17 @@ public class Controller implements Observer {
 
     }
 
-    public void addMessageListBeforeLastOne(StringAndMessage messageList){
-        if(this.messageListExpected.isEmpty()){
-            this.messageListExpected.add(messageList);
-        }
-        else{
-            this.messageListExpected.add(this.messageListExpected.size()- 1, messageList);
-        }
-    }
-
+    /**
+     * call it when a message expected has arrived and it's valid. It will move the expectedIndex on the next one
+     */
     public void addReceived() {
         this.indexExpected++;
     }
 
-    public void setIndexExpected(int indexExpected) {
-        this.indexExpected = indexExpected;
-    }
-
+    /**
+     * set the State of the Controller
+     * @param state the new State
+     */
     public void setState(StateController state) {
         this.state = state;
     }
@@ -180,20 +204,19 @@ public class Controller implements Observer {
     public void addNumOfActionTaken() {
         this.numOfActionTaken++;
     }
+
     /**
      * change the number of max actions per turn. The default is 2
-     * @param numOfMaxActions
+     * @param numOfMaxActions integer of max actions per turn
      */
     public void setNumOfMaxActions(int numOfMaxActions) {
         this.numOfMaxActions = numOfMaxActions;
     }
 
-    //methods
-
     @Override
     public synchronized void update(java.util.Observable o /*will be always NULL*/, Object arg) {
         try {
-            stringToPlayerView = state.handle((ViewControllerMessage) arg);
+            String stringToPlayerView = state.handle((ViewControllerMessage) arg);
             if(stringToPlayerView != null){ //otherwise states that are killed would print null
                 playerView.printFromController(stringToPlayerView);
             }
@@ -213,7 +236,7 @@ public class Controller implements Observer {
     /**
      * it empties the messages after Model is modified
      */
-    public void resetMessages() {
+    void resetMessages() {
         this.messageListExpected = new ArrayList<>();
         indexExpected = 0;
     }

@@ -102,7 +102,7 @@ public class Thor_1 extends FireMode {
     public void addOptional(int numOptional) throws WrongInputException, NotEnoughAmmoException {
         if(numOptional == Identificator.FIRST_OPTIONAL && shoot.getOptionalSelected().isEmpty()
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_FIRST_OPTIONAL))){
-            shoot.addOptionalSelected(numOptional);
+            shoot.addOptionalFromFiremode(numOptional);
             StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                     SELECT_TARGET_OPTIONAL_1);
             controller.addMessageListImmediateNext(stringAndMessage);
@@ -114,7 +114,7 @@ public class Thor_1 extends FireMode {
         else if(numOptional == Identificator.SECOND_OPTIONAL &&
                 (!shoot.getOptionalSelected().isEmpty() || shoot.getOptionalSelected().contains(Identificator.FIRST_OPTIONAL))
                 && author.canPayAmmo(AmmoBag.sumAmmoBag(shoot.getCost(), COST_SECOND_OPTIONAL))) {
-            shoot.addOptionalSelected(numOptional);
+            shoot.addOptionalFromFiremode(numOptional);
             StringAndMessage stringAndMessage = new StringAndMessage(Identificator.PLAYER_MESSAGE,
                     SELECT_TARGET_OPTIONAL_2);
             controller.addMessageListImmediateNext(stringAndMessage);

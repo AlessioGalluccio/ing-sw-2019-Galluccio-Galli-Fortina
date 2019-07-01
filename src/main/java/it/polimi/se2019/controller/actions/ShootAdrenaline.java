@@ -21,6 +21,11 @@ public class ShootAdrenaline extends Shoot {
     public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
     public static final String CELL_NOT_PRESENT = "This cell is not present. ";
 
+    /**
+     * constructor
+     * @param gameHandler the gamehandler of the match
+     * @param controller the controller of the player
+     */
     public ShootAdrenaline(GameHandler gameHandler, Controller controller) {
         super(gameHandler, controller);
     }
@@ -62,6 +67,10 @@ public class ShootAdrenaline extends Shoot {
 
     }
 
+    /**
+     * get the max distance of moving of this action
+     * @return the integer of the max distance of moving during this action
+     */
     protected int getMaxDistance(){
         return DISTANCE_MAX;
     }

@@ -20,7 +20,6 @@ public class ActionSelectedControllerState extends StateController {
     private boolean hasShoot = false;
     private boolean skipSelected = false;
 
-
     /**
      * constructor
      * @param controller the Controller of the player
@@ -35,7 +34,6 @@ public class ActionSelectedControllerState extends StateController {
         this.controller.addMessageListExpected(action.getStringAndMessageExpected());
         this.controller.getPlayerView().printFromController(controller.getCopyMessageListExpected().get(0).getString());
     }
-
 
     @Override
     public void handleAction(int actionID) {
@@ -101,7 +99,7 @@ public class ActionSelectedControllerState extends StateController {
         try{
             action.addOptional(numOptional);
         }catch (WrongInputException e){
-            errorString = e.getMessage();;
+            errorString = e.getMessage();
         }catch (NotEnoughAmmoException e){
             errorString = NOT_ENOUGH;
         }
@@ -157,7 +155,6 @@ public class ActionSelectedControllerState extends StateController {
 
     @Override
     public void handleTeleporter(TeleporterCard usedCard) {
-        //TODO niente entra qui dentro. Starting Handler blocca
         errorString = CANT_DO_THIS;
     }
 
@@ -241,7 +238,6 @@ public class ActionSelectedControllerState extends StateController {
      *              0 if not (message is discarded)
      */
     private boolean startingHandler(ViewControllerMessage arg) {
-        //TODO sistemare starting a ending handler
         int index = controller.getIndexExpected();
         int expectedID = controller.getCopyMessageListExpected().get(index).getMessageID();
         int messageID = arg.getMessageID();
