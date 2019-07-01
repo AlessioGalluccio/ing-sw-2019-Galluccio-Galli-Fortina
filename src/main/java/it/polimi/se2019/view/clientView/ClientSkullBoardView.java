@@ -35,6 +35,10 @@ public class ClientSkullBoardView extends SkullBoardView {
         }
     }
 
+    /**
+     * Usual getter for the lastAck attribute
+     * @return The value of lastAck
+     */
     public int getLastAck() {
         return lastAck;
     }

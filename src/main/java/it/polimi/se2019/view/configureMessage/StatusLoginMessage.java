@@ -17,14 +17,12 @@ public class StatusLoginMessage implements HandlerNetworkMessage, Serializable {
         this.nickname = nickname;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public boolean isFirst() {
-        return isFirst;
-    }
-
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the client who receive this message
+     * in order to notify the user about the status of the login.
+     * @param client The Client object which has to handle this message
+     */
     @Override
     public void handleMessage(Client client) {
         client.handleLoginMessage(status, isFirst, nickname);

@@ -15,7 +15,7 @@ public class Frenzy implements Modality {
      * Return the correct action base on modality (normal in this case) and life points of the player
      * @param actionID action which want the user
      * @param controller the controller linked to the user, this method need to know his damage (adrenaline action vs normal)
-     * @param gameHandler
+     * @param gameHandler game handler of the match that require the action
      * @throws WrongInputException if the actionID doesn't have a corresponding action
      * @return the correct action based on the life point of the player and the ID
      */

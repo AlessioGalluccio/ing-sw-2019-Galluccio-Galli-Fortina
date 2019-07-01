@@ -127,7 +127,11 @@ public class EnemyView extends Observable implements Observer, Serializable{
         return ID;
     }
 
-
+    /**
+     * Receive message from the model and forward it to the networkHandler
+     * @param o null
+     * @param arg the message receive to forward
+     */
     @Override
     public void update(java.util.Observable o/*Will be always null*/, Object arg) {
         HandlerEnemyViewMessage message = (HandlerEnemyViewMessage) arg;
@@ -135,6 +139,11 @@ public class EnemyView extends Observable implements Observer, Serializable{
         notifyObservers(message);
     }
 
+    /**
+     * This method is call whenever a enemy is changed.
+     * Update all the attribute with the new ones.
+     * @param enemy The new enemy with the attributes changed.
+     */
     public void handlePlayerMessage(Player enemy) {
         this.nickname = enemy.getNickname();
         this.ID = enemy.getID();
@@ -152,6 +161,11 @@ public class EnemyView extends Observable implements Observer, Serializable{
         this.isFrenzyDeath = enemy.isFrenzyDeath();
     }
 
+    /**
+     * String only the main info of the enemy, representing the attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return A short representation of the enemy
+     */
     public String toStringShort() {
         String s = nickname;
         if(character!=null) s += " - " + character.toString();
@@ -167,6 +181,11 @@ public class EnemyView extends Observable implements Observer, Serializable{
         return s;
     }
 
+    /**
+     * String the full enemy, representing each attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return The representation of the enemy
+     */
     @Override
     public String toString() {
         String s = toStringShort();

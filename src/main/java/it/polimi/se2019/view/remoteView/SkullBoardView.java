@@ -46,11 +46,21 @@ public class SkullBoardView extends Observable implements Observer {
         notifyObservers(message); //Forward message to client
     }
 
+    /**
+     * This method is call whenever the skull board changed.
+     * @param deathCopy the new array of death who has changed
+     * @param numSkullCopy the number of skull
+     */
     public void handleSkullMessage(int numSkullCopy, List<Death> deathCopy) {
         this.numSkullCopy = numSkullCopy;
         this.deathCopy = (ArrayList<Death>) deathCopy;
     }
 
+    /**
+     * String the full skull board, representing each attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return The representation of the skull board
+     */
     @Override
     public String toString() {
         int skull = numSkullCopy;

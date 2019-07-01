@@ -13,10 +13,13 @@ public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMess
         this.matchID = matchID;
     }
 
-
+    /**
+     * This message isn't handel by the view, so this method dose do nothing
+     * @param view the view which has to handle this message.
+     */
     @Override
-    public void handleMessage(View p) {
-
+    public void handleMessage(View view) {
+        //DO nothing
     }
 
     @Override
@@ -24,12 +27,14 @@ public class StartGameMessage implements ModelViewMessage, HandlerPlayerViewMess
         return 0;
     }
 
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of the client who receive this message
+     * in order to notify the users about the start of the game.
+     * @param client The Client object which has to handle this message
+     */
     @Override
     public void handleMessage(Client client) {
         client.handleStartGame(matchID);
-    }
-
-    public int getMatchID() {
-        return matchID;
     }
 }

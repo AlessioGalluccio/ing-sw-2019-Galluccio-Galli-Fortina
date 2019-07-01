@@ -1,13 +1,10 @@
 package it.polimi.se2019.view.remoteView;
 
-import it.polimi.se2019.model.deck.*;
-
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.network.messages.PossibleCharacterMessage;
 import it.polimi.se2019.view.ModelViewMess.HandlerPlayerViewMessage;
-import it.polimi.se2019.view.ModelViewMess.PossibleTargetMessage;
 import it.polimi.se2019.view.View;
 
 import java.util.ArrayList;
@@ -16,10 +13,7 @@ import java.util.List;
 
 public class PlayerView extends View /*View implement observer/observable*/{
     private Player playerCopy;
-    private ArrayList<? extends Target> possibleTargets;
-    private ArrayList<? extends Target> selectedTargets;
     private ArrayList<Character> possibleCharacter;
-    private Character choosenCharacter;
     private Server networkHandler;
 
     //for tests
@@ -48,38 +42,6 @@ public class PlayerView extends View /*View implement observer/observable*/{
     }
 
     /**
-     * getter of selectedTargets
-     * @return selectedTargets
-     */
-    public List<? extends Target> getSelectedTargets() {
-        return selectedTargets;
-    }
-
-    /**
-     * getter of choosenCharacter
-     * @return choosenCharacter
-     */
-    public Character getChoosenCharacter() {
-        return choosenCharacter;
-    }
-
-    /**
-     * getter of possibleCharacter
-     * @return possibleCharacter
-     */
-    public List<Character> getPossibleCharacter() {
-        return possibleCharacter;
-    }
-
-    /**
-     * getter of possibleTargets
-     * @return possibleTargets
-     */
-    public List<? extends Target> getPossibleTargets() {
-        return possibleTargets;
-    }
-
-    /**
      * Receive message from the model and forward it to the networkHandler
      * @param o null
      * @param arg the message receive to forward
@@ -99,16 +61,6 @@ public class PlayerView extends View /*View implement observer/observable*/{
         return lastStringPrinted;
     }
 
-
-    /**
-     * Set possible target to be aim by th weapon
-     * Receive them from the controller and forward them to the networkHandler
-     * @param targets possible target
-     */
-    public void setPossibleTargets(List<? extends Target> targets){
-        this.possibleTargets = (ArrayList<? extends Target>) targets;
-        if(networkHandler!=null) networkHandler.update(null, new PossibleTargetMessage(targets));
-    }
 
     /**
      * Receive a string message from the controller and forward it to the networkHandler
@@ -145,16 +97,30 @@ public class PlayerView extends View /*View implement observer/observable*/{
         //Is only to forward, already done by update()
     }
 
+    /**
+     * Forward the possible character to the network handler
+     * @param characters A list of character form which chose
+     */
     @Override
     public void setPossibleCharacter(List<Character> characters) {
         if(networkHandler!=null) networkHandler.update(null, new PossibleCharacterMessage(characters));
     }
 
+    /**
+     * Usual setter for the NetworkHandler attribute
+     * To use in case of reconnection
+     * @param networkHandler The network handler to set
+     */
     //To use for reconnection
     public void setNetworkHandler(Server networkHandler) {
         this.networkHandler = networkHandler;
     }
 
+    /**
+     * Set or cancel a timer for this user.
+     * When the timer is out, the user will be disconnected from the match.
+     * @param set True if wanna set the timer, false for cancel it.
+     */
     public void setTimer(boolean set) {
         if(set) networkHandler.setTimer();
         else networkHandler.cancelTimer();

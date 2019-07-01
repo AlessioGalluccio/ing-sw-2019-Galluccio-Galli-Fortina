@@ -153,7 +153,7 @@ public class GameHandler extends Observable {
 
     /**
      * To call at the end of the game.
-     * Send to all user connected the ranking and delete the match
+     *  Cash the skull board, send to all user connected the ranking and delete the match
      */
     private void endGame() {
         cashSkullBoardPoint();
@@ -344,7 +344,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * Sort list of layer according to their frequency in that list
+     * Sort list of player according to their frequency in that list
      * @param listToOrdinate list of player which you want to ordinate by damage
      * @return A list with the same element of the @param but sorted
      */
@@ -425,7 +425,8 @@ public class GameHandler extends Observable {
      * @param lastCash true if we are at the end of frenzy mode
      * @return 2 if p is the first who shoot and made a double kill
      *         1 if p is the first who shoot
-     *         0 other way
+     *         1 if p made a double kill
+     *         0 otherwise
      */
     private int bonusPoint(Player p, Player whoDied, boolean doubleKill, boolean lastCash) {
         List<Player> damage = whoDied.getDamage();
@@ -719,7 +720,7 @@ public class GameHandler extends Observable {
 
     /**
      * Respawn a disconnected player in a random cellSpawn
-     * @param player the player who must reaspawn, but he is disconnected
+     * @param player the player who must respawn, but he is disconnected
      */
     public void randomRespawnNotConnectedPlayer(Player player){
         PowerupCard powerupCard = powerupDeck.pick();
@@ -732,5 +733,3 @@ public class GameHandler extends Observable {
         nextTurn(); // we must return to this function
     }
 }
-
-

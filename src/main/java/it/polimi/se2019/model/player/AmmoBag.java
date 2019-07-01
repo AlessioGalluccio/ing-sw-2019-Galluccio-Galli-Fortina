@@ -13,7 +13,6 @@ public class AmmoBag implements Serializable {
 
     /**
      * Create a new ammo bag for the player
-     * (Accessible only in model.player package)
      * @param redAmmo the new red ammo to set
      * @param yellowAmmo the new yellow ammo to set
      * @param blueAmmo the new blue ammo to set
@@ -36,6 +35,11 @@ public class AmmoBag implements Serializable {
         return yellowAmmo;
     }
 
+    /**
+     * Create a Ammo Bag starting from a list of ColorRYB
+     * @param list the list to convert to Ammo Bag
+     * @return The ammo bag with the ammo corresponding to the list
+     */
     public static AmmoBag createAmmoFromList(List<ColorRYB> list){
         if(list == null || list.isEmpty()){
             return new AmmoBag(0,0,0);
@@ -61,6 +65,13 @@ public class AmmoBag implements Serializable {
         }
     }
 
+    /**
+     * Sum the number of ammo of two ammo bag
+     * Sum the ammo according to their color, red with red, blue with blue etc.
+     * @param first The first ammo bag to sum
+     * @param second The second ammo bag to sum
+     * @return A new ammo bag with the sum of the color
+     */
     public static AmmoBag sumAmmoBag(AmmoBag first, AmmoBag second){
         int newRed = first.getRedAmmo() + second.getRedAmmo();
         int newYellow = first.getYellowAmmo() + second.getYellowAmmo();
@@ -69,6 +80,11 @@ public class AmmoBag implements Serializable {
         return new AmmoBag(newRed, newYellow, newBlue);
     }
 
+    /**
+     * String the full ammo bag, representing each attributes with symbol and color
+     * Work with UTF-8 and ANSI code
+     * @return The representation of the ammo bag
+     */
     @Override
     public String toString() {
         String s = "";
