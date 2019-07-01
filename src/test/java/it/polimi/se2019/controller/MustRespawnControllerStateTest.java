@@ -149,7 +149,7 @@ public class MustRespawnControllerStateTest {
     }
 
     @Test
-    //controls the all these methods write the correct string to playerView
+    //controls that all these methods write the correct string to playerView
     public void youMustRepawnPositiveCall() {
         NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
         controller.update(null, nopeMessage);

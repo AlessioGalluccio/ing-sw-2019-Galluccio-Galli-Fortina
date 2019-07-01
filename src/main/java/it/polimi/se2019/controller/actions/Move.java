@@ -19,7 +19,7 @@ public class Move extends Action {
     private final static int DISTANCE_MAX = 3;
 
     //messages
-    private final static StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell");
+    static final StringAndMessage FIRST_STRING_AND_MESS = new StringAndMessage(Identificator.CELL_MESSAGE, "Select a Cell");
 
     //errors
     static final String TOO_DISTANT_CELL = "This cell is too distant. ";
@@ -65,6 +65,10 @@ public class Move extends Action {
         return new AmmoBag(0,0,0);
     }
 
+    /**
+     * get max distance of this action Move
+     * @return the in max distance
+     */
     protected int getMaxDistance(){
         return DISTANCE_MAX;
     }

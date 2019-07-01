@@ -4,16 +4,18 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
-import it.polimi.se2019.model.player.ColorRYB;
-import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
+import it.polimi.se2019.view.ViewControllerMess.DiscardWeaponMessage;
 import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
+import it.polimi.se2019.view.ViewControllerMess.ReloadMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -105,6 +107,186 @@ public class EmptyControllerStateTest {
         assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
         controller.getState().handleDiscardWeapon(1);
         assertEquals(EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleReloadPositive() {
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+        };
+        weaponCard.unload();
+        try {
+            authorPlayer.setAmmoBag(1,0,0); //not enough ammo
+        } catch (TooManyException e) {
+            //shouldn0t happen
+        }
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertTrue(controller.getState() instanceof HasReloadedControllerState);
+    }
+
+    @Test
+    public void handleReloadNotPresentNegative() {
+        ReloadMessage reloadMessage = new ReloadMessage(new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        }, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(EmptyControllerState.NOT_PRESENT_WEAPON_RELOAD
+                + EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleAlreadyReloadedNegative() {
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        };
+        weaponCard.reload();
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(EmptyControllerState.WEAPON_LOADED_RELOAD
+                + EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleNotEnoughAmmoNegative() {
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+        };
+        weaponCard.unload();
+        try {
+            authorPlayer.setAmmoBag(0,0,0); //not enough ammo
+        } catch (TooManyException e) {
+            //shouldn0t happen
+        }
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        ReloadMessage reloadMessage = new ReloadMessage(weaponCard, authorPlayer.getID(), playerView);
+        controller.update(null, reloadMessage);
+        assertEquals(EmptyControllerState.NOT_ENOUGH_AMMO_RELOAD
+                + EmptyControllerState.SELECT_ACTION_REQUEST, playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleDiscardWeaponPositive() {
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+
+            @Override
+            public int getID() {
+                return 1;
+            }
+        };
+
+        try {
+            authorPlayer.addWeaponCard(weaponCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        assertFalse(authorPlayer.getWeaponCardList().isEmpty());
+        DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(weaponCard,authorPlayer.getID(), playerView);
+        controller.update(null, discardWeaponMessage);
+        assertTrue(authorPlayer.getWeaponCardList().isEmpty());
+    }
+
+    @Test
+    public void handleDiscardWeaponNegative() {
+        WeaponCard weaponCard = new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+
+            @Override
+            public List<ColorRYB> getReloadCost() {
+                List<ColorRYB> list = new ArrayList<>();
+                list.add(ColorRYB.RED);
+                return list;
+            }
+
+            @Override
+            public int getID() {
+                return 1;
+            }
+        };
+        assertTrue(authorPlayer.getWeaponCardList().isEmpty());
+        DiscardWeaponMessage discardWeaponMessage = new DiscardWeaponMessage(weaponCard,authorPlayer.getID(), playerView);
+        controller.update(null, discardWeaponMessage);
+        assertEquals(EmptyControllerState.WEAPON_NOT_PRESENT + EmptyControllerState.SELECT_ACTION_REQUEST,
+                playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleDiscardPowerupPositive() {
+        PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
+
+        try {
+            authorPlayer.addPowerupCard(powerupCard);
+        } catch (TooManyException e) {
+            //should't happen
+        }
+        assertFalse(authorPlayer.getPowerupCardList().isEmpty());
+        DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(powerupCard,authorPlayer.getID(), playerView);
+        controller.update(null, discardPowerupMessage);
+        assertTrue(authorPlayer.getPowerupCardList().isEmpty());
+    }
+
+    @Test
+    public void handleDiscardPowerupNegative() {
+        PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
+        assertTrue(authorPlayer.getPowerupCardList().isEmpty());
+        DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(powerupCard,authorPlayer.getID(), playerView);
+        controller.update(null, discardPowerupMessage);
+        assertEquals(EmptyControllerState.POWERUP_NOT_PRESENT_DISCARD + EmptyControllerState.SELECT_ACTION_REQUEST,
+                playerView.getLastStringPrinted());
     }
 
 }
