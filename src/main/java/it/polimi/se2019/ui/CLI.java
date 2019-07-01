@@ -273,7 +273,7 @@ public class CLI implements UiInterface {
      */
     private void printLogo() {
         out.println(ConsoleColor.RED_BOLD);
-        out.print("\t\t  /\\                                                                         \n" +
+        out.print("\t\t\t/\\                                                                         \n" +
                 "\t\t      \\     __ \\    _ \\   ____|   \\  |     \\     |     _ _|   \\  |  ____| \n" +
                 "\t\t    __ \\    |   |  |   |  __|      \\ |    _ \\    |       |     \\ |  __|   \n" +
                 "\t\t   ____ \\   |   |  __ <   |      |\\  |   ___ \\   |       |   |\\  |  |     \n" +

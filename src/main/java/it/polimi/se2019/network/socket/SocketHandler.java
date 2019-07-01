@@ -50,7 +50,9 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
                 if(open) disconnect();
             } catch (java.io.EOFException | StreamCorruptedException e) {
                 createNewStream();
-            } catch (ClassNotFoundException | IOException e) {
+            } catch (java.net.SocketTimeoutException e) {
+                view.printFromController("Your connection is slow, if something went wrong please retry.");
+            }catch (ClassNotFoundException | IOException e) {
                 Logger.getLogger(SocketHandler.class.getName()).log(Level.WARNING, "Problem receiving obj through socket", e);
             }
         }
