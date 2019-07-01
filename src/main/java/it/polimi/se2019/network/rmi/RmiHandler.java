@@ -79,8 +79,10 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                executor.submit(new Sender(new DisconnectMessage()));
-                disconnect();
+                if(!executor.isShutdown()) {
+                    executor.submit(new Sender(new DisconnectMessage()));
+                    disconnect();
+                }
             }
         }, duration);
     }
@@ -120,6 +122,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
 
     @Override
     public void closeAll() {
+        timer.cancel();
         pingTimer.cancel();
         executor.shutdown();
         server.disconnect(this);
