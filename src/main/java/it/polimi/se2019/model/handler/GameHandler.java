@@ -42,9 +42,10 @@ public class GameHandler extends Observable {
     private int turn;
     private List<Death> arrayDeath = new ArrayList<>();
     private Stack<Player> justDied = new Stack<>();
-    private Modality modality;
+    private transient Modality modality;
     private int skull;
-    private int lastLap;
+    private int originalSkull;
+    private Player firstFrenzyPlayer;
     private boolean suddenDeath;
     private boolean firstTurn = true;
     private transient List<Controller> controllers = new ArrayList<>();
@@ -111,16 +112,15 @@ public class GameHandler extends Observable {
      */
     private void setNewTurn() {
         map.reloadAllCell();
-        lastLap--;
         if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
-        if(lastLap==0) endGame(); //Start from -1, go to 0 only in frenzy mode
+        if(firstFrenzyPlayer.equals(orderPlayerList.get(turn))) endGame();
         else forwardAllViews(new NewTurnMessage(orderPlayerList.get(turn).getNickname()));
         getViewByPlayer(orderPlayerList.get(turn)).setTimer(true);
 
     }
 
     /**
-     * If sudden death is not active, it switches the modality of the game in Frenzy mode
+     * If sudden death is not active, it switches the modality of the game in Frenzy mode.
      * Otherwise call endGame()
      */
     private void setFrenzy() {
@@ -134,9 +134,9 @@ public class GameHandler extends Observable {
             }
         }
 
-        if(!suddenDeath && lastLap<0) {
+        if(!suddenDeath && firstFrenzyPlayer==null) {
             modality = new Frenzy();
-            lastLap = playerConnected();
+            firstFrenzyPlayer = orderPlayerList.get(turn);
         }
         else endGame();
     }
@@ -311,6 +311,14 @@ public class GameHandler extends Observable {
     }
 
     /**
+     * Return the number of skulls at the beginning of the match
+     * @return number of skulls at the beginning of the match
+     */
+    public int getOriginalSkull() {
+        return originalSkull;
+    }
+
+    /**
      * When a player pass his turn, this method check if someone has died
      * If his the case create a Death object, cash point, reset damage of the death and ask player to re-spawn
      */
@@ -323,7 +331,7 @@ public class GameHandler extends Observable {
                 skull--;
                 if(skull>=0) {
                     arrayDeath.add(new Death(orderPlayerList.get(turn), p));
-                    notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
+                    notifyObservers(new SkullBoardMessage(originalSkull, skull, cloneDeath()));
                 }
                 if(p.isOverKilled()) {
                     try {
@@ -576,6 +584,7 @@ public class GameHandler extends Observable {
 
     public void setSkull(int skulls) {
         this.skull = skulls;
+        this.originalSkull = skulls;
     }
 
     public void setSuddenDeath(boolean suddenDeath) {
@@ -605,7 +614,7 @@ public class GameHandler extends Observable {
         for(Player p : orderPlayerList) {
             p.notifyObservers(new PlayerModelMessage(p.clone()));
         }
-        notifyObservers(new SkullBoardMessage(skull, cloneDeath()));
+        notifyObservers(new SkullBoardMessage(originalSkull, skull, cloneDeath()));
 
         if(orderPlayerList.size()>3) {
             try {
@@ -638,7 +647,6 @@ public class GameHandler extends Observable {
     public void setPlayerConnectionStatus(Player player, boolean isConnected){
         player.setConnected(isConnected);
         if(isConnected) {
-           // PlayerView playerView = getViewByPlayer(player); //WHY??
            forwardAllViews(player.getNickname() + " is back!\n");
         } else {
             forwardAllViews(player.getNickname() + " has been disconnected! \n");

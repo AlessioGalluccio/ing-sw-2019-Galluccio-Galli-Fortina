@@ -1760,11 +1760,11 @@ public class Controller implements Initializable {
                 skull.add(imSkull1);
 
                 int teschi = Integer.parseInt(skullNumber);
-                if (ControllerLogin.skullBoardView.getDeathCopy().size() == teschi){
+                if (ControllerLogin.skullBoardView.getNumSkullCopy() == 0){
                     isFrenzyTime=true;
                 }
                 //teschi--;
-                for (int counter = 0; counter < skull.size(); counter++) {
+                for(int counter = 0; counter < skull.size(); counter++) {
                     skull.get(counter).setVisible(false);
                 }
                 /*

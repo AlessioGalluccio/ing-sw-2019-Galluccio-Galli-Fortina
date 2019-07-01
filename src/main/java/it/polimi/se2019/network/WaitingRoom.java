@@ -166,7 +166,8 @@ public class WaitingRoom {
             for(Player p : m.gameHandler.getOrderPlayerList()) {
                 networkHandler.update(null, new PlayerModelMessage(p.clone()));
             }
-            networkHandler.update(null, new SkullBoardMessage(m.gameHandler.getSkull(), m.gameHandler.cloneDeath()));
+            networkHandler.update(null, new SkullBoardMessage(m.gameHandler.getOriginalSkull(),
+                    m.gameHandler.getSkull(), m.gameHandler.cloneDeath()));
             for(PlayerView pw : m.playerViews) {
                 if(pw.getPlayerCopy().getNickname().equals(nickname)) {
                     networkHandler.setPlayerView(pw);
