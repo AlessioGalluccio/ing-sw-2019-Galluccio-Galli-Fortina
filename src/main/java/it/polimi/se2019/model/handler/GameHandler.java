@@ -736,6 +736,7 @@ public class GameHandler extends Observable {
         Room room = getRoomByID(color);
         Cell cellSpawn = room.getSpawnCell();
         player.setPosition(cellSpawn);
+        player.resurrection();
         powerupCard.discard();
         removeJustDied(player);
         nextTurn(); // we must return to this function
