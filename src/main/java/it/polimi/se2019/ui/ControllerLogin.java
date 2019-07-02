@@ -392,10 +392,8 @@ public class ControllerLogin implements UiInterface {
 
     @Override
     public void updateSkullBoard() {
-        if(skullNumber == 0){
-            skullNumber = ControllerLogin.skullBoardView.getNumSkullCopy();
-        }
-        updateSkullMap(skullNumber);
+
+        updateSkullMap(ControllerLogin.skullBoardView.getOriginalSkull());
         //updateSetting(mapView.getMapCopy().getID(), skullNumber);
     }
 
