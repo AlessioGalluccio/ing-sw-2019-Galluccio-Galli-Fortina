@@ -1938,52 +1938,53 @@ public class Controller implements Initializable {
     void updateAmmoCardMap() {
 
         Platform.runLater(() ->  {
-        ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
-        ArrayList<ImageView> imAmmoCell = new ArrayList<>();
+            try{
+            ArrayList<CellAmmo> cellAmmos = new ArrayList<>();
+            ArrayList<ImageView> imAmmoCell = new ArrayList<>();
 
 
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 2));
-        imAmmoCell.add(ammoCell02);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 0));
-        imAmmoCell.add(ammoCell10);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 1));
-        imAmmoCell.add(ammoCell11);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 2));
-        imAmmoCell.add(ammoCell12);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 0));
-        imAmmoCell.add(ammoCell20);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 1));
-        imAmmoCell.add(ammoCell21);
-        cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 1));
-        imAmmoCell.add(ammoCell31);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 2));
+            imAmmoCell.add(ammoCell02);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 0));
+            imAmmoCell.add(ammoCell10);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 1));
+            imAmmoCell.add(ammoCell11);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(1, 2));
+            imAmmoCell.add(ammoCell12);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 0));
+            imAmmoCell.add(ammoCell20);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(2, 1));
+            imAmmoCell.add(ammoCell21);
+            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 1));
+            imAmmoCell.add(ammoCell31);
 
 
-        if (ControllerLogin.mapView.getMapCopy().getID() == 1) {
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
-            imAmmoCell.add(ammoCell32);
-        }
+            if (ControllerLogin.mapView.getMapCopy().getID() == 1) {
+                cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
+                imAmmoCell.add(ammoCell32);
+            }
 
-        if (ControllerLogin.mapView.getMapCopy().getID() == 2) {
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
-            imAmmoCell.add(ammoCell00);
-        }
+            if (ControllerLogin.mapView.getMapCopy().getID() == 2) {
+                cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
+                imAmmoCell.add(ammoCell00);
+            }
 
-        if (ControllerLogin.mapView.getMapCopy().getID() == 3) {
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
-            imAmmoCell.add(ammoCell00);
-            cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
-            imAmmoCell.add(ammoCell32);
-        }
+            if (ControllerLogin.mapView.getMapCopy().getID() == 3) {
+                cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(0, 0));
+                imAmmoCell.add(ammoCell00);
+                cellAmmos.add((CellAmmo) ControllerLogin.mapView.getCell(3, 2));
+                imAmmoCell.add(ammoCell32);
+            }
 
-        try {
-        for (int i = 0; i < cellAmmos.size(); i++) {
-            imAmmoCell.get(i).setVisible(false);
-                if(cellAmmos.get(i).getAmmo()!=null) {
-                    imAmmoCell.get(i).setVisible(true);
-                    imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+
+            for (int i = 0; i < cellAmmos.size(); i++) {
+                imAmmoCell.get(i).setVisible(false);
+                    if(cellAmmos.get(i).getAmmo()!=null) {
+                        imAmmoCell.get(i).setVisible(true);
+                        imAmmoCell.get(i).setImage(setAmmoCard(cellAmmos.get(i).getAmmo().getIDtype()));
+                    }
                 }
             }
-        }
         catch (NullPointerException e){
             Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
         }
