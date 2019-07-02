@@ -7,6 +7,8 @@
 .idea/
 *.iml
 *.iws
+.META-INF/
+*.MF
 
 # Mac
 .DS_Store
