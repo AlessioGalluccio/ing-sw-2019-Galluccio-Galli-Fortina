@@ -110,11 +110,12 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * set isFirstGroup boolean variable
-     * @param isFirstGroup
+     * Set isFirstGroup boolean variable
+     * @param isFirstGroup true if the player is first frenzy, false if second
      */
     public void setFirstGroupFrenzy(Boolean isFirstGroup){
         this.isFirstGroupFrenzy= isFirstGroup;
+        notifyObservers(new PlayerModelMessage(clone()));
     }
     /**
      *

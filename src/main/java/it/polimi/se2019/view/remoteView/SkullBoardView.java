@@ -32,8 +32,8 @@ public class SkullBoardView extends Observable implements Observer {
     }
 
     /**
-     * Getter of orginalSkull
-     * @return orginalSkull
+     * Getter of originalSkull
+     * @return originalSkull
      */
     public int getOriginalSkull() {
         return originalSkull;
