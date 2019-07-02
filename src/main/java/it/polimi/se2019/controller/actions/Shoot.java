@@ -109,19 +109,21 @@ public class Shoot extends Action{
     public void addFireMode(int fireModeID) throws WrongInputException {
         fireModeID = Identificator.createFiremode(this.weapon.getID(), fireModeID);
         FireMode fireModeSelected = gameHandler.getFireModeByID(fireModeID);
-        fireModeSelected.addShoot(this);
+        if(fireModeSelected != null){
+            fireModeSelected.addShoot(this);
 
-        AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
-        if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
-            if(Identificator.containsFiremode(weapon, fireModeSelected)){
-                this.fireMode = fireModeSelected;
-                this.cost = newCost;
-                //adding expected messages of firemode before fire message
-                controller.addMessageListBeforeLastOne(fireMode.getMessageListExpected());
+            AmmoBag newCost = AmmoBag.sumAmmoBag(this.cost, AmmoBag.createAmmoFromList(fireModeSelected.getCost()));
+            if(this.fireMode == null && weapon != null && playerAuthor.canPayAmmo(newCost)){
+                if(Identificator.containsFiremode(weapon, fireModeSelected)){
+                    this.fireMode = fireModeSelected;
+                    this.cost = newCost;
+                    //adding expected messages of firemode before fire message
+                    controller.addMessageListBeforeLastOne(fireMode.getMessageListExpected());
 
-            }
-            else{
-                throw new WrongInputException();
+                }
+                else{
+                    throw new WrongInputException();
+                }
             }
         }
         else{
