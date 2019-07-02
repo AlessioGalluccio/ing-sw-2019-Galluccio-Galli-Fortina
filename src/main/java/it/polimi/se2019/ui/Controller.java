@@ -1792,7 +1792,6 @@ public class Controller implements Initializable {
 
         });
 
-
     }
 
 
@@ -1801,7 +1800,7 @@ public class Controller implements Initializable {
      * update weaponcards image on map
      */
      void updateWeaponMap() {
-
+        Platform.runLater(() -> {
             try {
 
                 ArrayList<ImageView> redWeapons = new ArrayList<>();
@@ -1850,8 +1849,9 @@ public class Controller implements Initializable {
                 }
             }
             catch (Exception e){
-                Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+                Logger.getLogger(Controller.class.getName()).log(Level.INFO, "Do nothing");
             }
+        });
 
     }
 
@@ -1986,7 +1986,7 @@ public class Controller implements Initializable {
                 }
             }
         catch (NullPointerException e){
-            Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+            Logger.getLogger(Controller.class.getName()).log(Level.INFO, "do nothing");
         }
 
         });
@@ -3442,15 +3442,16 @@ public class Controller implements Initializable {
 
                     List<Player> players = cell.getPlayerHere();
                     ArrayList<ImageView> imPlayerPosition = setCellPlayersPosition(cell.getCoordinateX(), cell.getCoordinateY());
-                    for (int i = 0; i < imPlayerPosition.size(); i++) {
-                        imPlayerPosition.get(i).setVisible(false);
+                    for (ImageView imageView : imPlayerPosition) {
+                        imageView.setVisible(false);
                     }
                     for (int i = 0; i < players.size(); i++) {
                         imPlayerPosition.get(i).setImage(setPositionPlayerImages(players.get(i).getCharacter().getId()));
                         imPlayerPosition.get(i).setVisible(true);
                     }
                 } catch (Exception e) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+                    Logger.getLogger(Controller.class.getName()).log(Level.INFO, "do nothing");
+
 
                 }
 

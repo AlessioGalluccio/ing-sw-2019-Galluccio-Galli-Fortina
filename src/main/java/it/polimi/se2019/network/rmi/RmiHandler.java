@@ -122,7 +122,7 @@ public class RmiHandler extends UnicastRemoteObject implements Observer, RmiHand
 
     @Override
     public void closeAll() {
-        timer.cancel();
+        if(timer!=null) timer.cancel();
         pingTimer.cancel();
         executor.shutdown();
         server.disconnect(this);

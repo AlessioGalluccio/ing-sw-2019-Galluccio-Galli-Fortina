@@ -75,7 +75,7 @@ public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     public void closeAll() {
        try {
            open = false;
-           timer.cancel();
+           if(timer!=null) timer.cancel();
            scannerSocket.close();
            socket.close();
         } catch (IOException e) {
