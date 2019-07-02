@@ -50,7 +50,7 @@
       <ImageView fx:id="imweaponDeck" disable="true" fitHeight="128.0" fitWidth="86.0" layoutX="682.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="impowerupDeck" disable="true" fitHeight="83.0" fitWidth="66.0" layoutX="702.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <TabPane fx:id="container1" layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="0.0">
+      <TabPane fx:id="container1" layoutX="810.0" layoutY="478.0" prefHeight="225.0" prefWidth="564.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="0.0">
         <tabs>
           <Tab text="Powerup Cards">
             <content>
@@ -112,17 +112,17 @@
                         <Button fx:id="bDiscardWeapon1" layoutX="125.0" layoutY="2.0" mnemonicParsing="false" onAction="#discardWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bDiscardWeapon2" layoutX="315.0" layoutY="2.0" mnemonicParsing="false" onAction="#discardWeapon" prefHeight="25.0" prefWidth="31.0" />
                         <Button fx:id="bDiscardWeapon3" layoutX="505.0" layoutY="2.0" mnemonicParsing="false" onAction="#discardWeapon" prefHeight="25.0" prefWidth="31.0" />
-                        <Button fx:id="addFire1" layoutX="98.0" layoutY="169.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
+                        <Button fx:id="addFire1" layoutX="98.0" layoutY="145.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addFire2" layoutX="287.0" layoutY="169.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
+                        <Button fx:id="addFire2" layoutX="287.0" layoutY="145.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Button>
-                        <Button fx:id="addFire3" layoutX="478.0" layoutY="170.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
+                        <Button fx:id="addFire3" layoutX="478.0" layoutY="145.0" mnemonicParsing="false" onAction="#selectFiremode" prefHeight="25.0" prefWidth="86.0" text="ADD FIREMODE">
                            <font>
                               <Font size="10.0" />
                            </font>
