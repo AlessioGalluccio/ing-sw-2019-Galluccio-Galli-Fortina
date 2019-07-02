@@ -503,6 +503,7 @@ class ParserCLI {
 
     private void parsePass(String[] command) {
         view.createPassTurnMessage();
+        cli.setYourTurn(false);
     }
 
     private void parseReload(String[] command) {

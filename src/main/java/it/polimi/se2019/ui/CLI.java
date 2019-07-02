@@ -449,4 +449,8 @@ public class CLI implements UiInterface {
         out.println(mapView.printRow(0,6));
         out.println(mapView.printRow(-1,0));
     }
+
+    void setYourTurn(boolean yourTurn) {
+        this.yourTurn = yourTurn;
+    }
 }
