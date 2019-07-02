@@ -1049,7 +1049,7 @@ public class Controller implements Initializable {
                 ControllerLogin.clientView.getPlayerCopy().getAmmo().getYellowAmmo());
 
         //set skull on map
-        String skullnum = Integer.toString(ControllerLogin.skullBoardView.getNumSkullCopy());
+        String skullnum = Integer.toString(ControllerLogin.skullBoardView.getOriginalSkull());
         updateSkullBoard(skullnum);
 
 
@@ -1142,6 +1142,46 @@ public class Controller implements Initializable {
         updateWeaponMap();
         //update player's weapon
         updateWeaponPlayer();
+
+
+        //update enemy
+        if(ControllerLogin.enemyView1!=null){
+            updateEnemyCharacter(ControllerLogin.enemyView1);
+            updateEnemyWeapon(ControllerLogin.enemyView1);
+            frenzyEnemy(ControllerLogin.enemyView1);
+            updateEnemyDamage(ControllerLogin.enemyView1);
+            updateEnemyMarks(ControllerLogin.enemyView1);
+            updateEnemySkull(ControllerLogin.enemyView1);
+        }
+
+        if(ControllerLogin.enemyView2!=null){
+            updateEnemyCharacter(ControllerLogin.enemyView2);
+            updateEnemyWeapon(ControllerLogin.enemyView2);
+            frenzyEnemy(ControllerLogin.enemyView2);
+            updateEnemyDamage(ControllerLogin.enemyView2);
+            updateEnemyMarks(ControllerLogin.enemyView2);
+            updateEnemySkull(ControllerLogin.enemyView2);
+        }
+
+        if(ControllerLogin.enemyView3!=null){
+            updateEnemyCharacter(ControllerLogin.enemyView3);
+            updateEnemyWeapon(ControllerLogin.enemyView3);
+            frenzyEnemy(ControllerLogin.enemyView3);
+            updateEnemyDamage(ControllerLogin.enemyView3);
+            updateEnemyMarks(ControllerLogin.enemyView3);
+            updateEnemySkull(ControllerLogin.enemyView3);
+        }
+
+        if(ControllerLogin.enemyView4!=null){
+            updateEnemyCharacter(ControllerLogin.enemyView4);
+            updateEnemyWeapon(ControllerLogin.enemyView4);
+            frenzyEnemy(ControllerLogin.enemyView4);
+            updateEnemyDamage(ControllerLogin.enemyView4);
+            updateEnemyMarks(ControllerLogin.enemyView4);
+            updateEnemySkull(ControllerLogin.enemyView4);
+        }
+
+
 
 
     }
