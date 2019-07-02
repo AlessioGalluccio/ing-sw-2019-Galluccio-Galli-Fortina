@@ -1,6 +1,5 @@
 package it.polimi.se2019.ui;
 
-import it.polimi.se2019.MyThread;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.CellAmmo;
@@ -411,10 +410,6 @@ public class Controller implements Initializable {
     public ImageView enemy4Damage11;
 
 
-
-
-    @FXML
-    MyThread myThread;
 
     @FXML
     public Label mylabel;
@@ -1147,10 +1142,6 @@ public class Controller implements Initializable {
         updateWeaponMap();
         //update player's weapon
         updateWeaponPlayer();
-
-
-        myThread = new MyThread(this);
-        myThread.start();
 
 
     }
