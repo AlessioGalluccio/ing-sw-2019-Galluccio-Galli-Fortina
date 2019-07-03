@@ -20,7 +20,7 @@ public class WaitingRoomTest {
     public void uniqueNickname() {
 
         SocketHandler mock =  mock(SocketHandler.class);
-        waitingRoom.handleSettingMessage(1, 2, false, mock);
+        waitingRoom.handleSettingMessage(1, 2, false);
 
         waitingRoom.receiveMessage(new LoginMessage("Steve Jobs"), mock);
         assertEquals(1, waitingRoom.getPlayerWaiting().size());
