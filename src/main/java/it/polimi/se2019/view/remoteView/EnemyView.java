@@ -5,7 +5,6 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
@@ -21,7 +20,7 @@ import static it.polimi.se2019.ui.ConsoleSymbol.*;
 public class EnemyView extends Observable implements Observer, Serializable{
     private static final long serialVersionUID = -3162602651843385228L;
 
-    private int ID;
+    private int ID = -1;
     private String nickname;
     private Character character;
     private AmmoBag ammo;

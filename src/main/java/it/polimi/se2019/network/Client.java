@@ -89,8 +89,10 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
             while (mapView.getMapCopy() == null ||
                     skullBoardView.getLastAck() == -1 ||
                     clientView.getPlayerCopy() == null ||
-                    enemyViews.get(0).getNickname() == null ||
-                    enemyViews.get(1).getNickname() == null) {
+                    (!enemyViews.isEmpty() && enemyViews.get(0).getID() == -1) ||
+                    (enemyViews.size()>1 && enemyViews.get(1).getID() == -1) ||
+                    (enemyViews.size()>2 && enemyViews.get(2).getID() == -1) ||
+                    (enemyViews.size()>3 && enemyViews.get(3).getID() == -1)) {
                 try {
                     clientView.wait();
                 } catch (InterruptedException e) {

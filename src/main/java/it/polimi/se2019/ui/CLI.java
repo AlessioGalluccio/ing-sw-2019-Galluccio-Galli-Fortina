@@ -329,6 +329,7 @@ public class CLI implements UiInterface {
                 map = in.nextInt();
                 in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             }catch (InputMismatchException e) {
+                if(parser!=null) return;
                 out.println("You can insert only a digit");
                 in.nextLine();
             }
@@ -342,6 +343,7 @@ public class CLI implements UiInterface {
                 skulls = in.nextInt();
                 in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             }catch (InputMismatchException e) {
+                if(parser!=null) return;
                 out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
                 in.nextLine();
             }
@@ -361,6 +363,7 @@ public class CLI implements UiInterface {
                     sd = true;
                 }
             }catch (InputMismatchException e) {
+                if(parser!=null) return;
                 out.println("You can insert only 1 or 2");
                 in.nextLine();
             }
