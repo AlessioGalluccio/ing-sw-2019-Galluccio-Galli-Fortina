@@ -313,10 +313,10 @@ public class WaitingRoom {
                 networkHandler.closeAll();
             }
             if(matches.remove(m))
-                Logger.getLogger(WaitingRoom.class.getName()).log(Level.FINE,
+                Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO,
                     "Deleted match #" + gameHandler.getMatchID());
         } catch (NotMatchException e) {
-            Logger.getLogger(WaitingRoom.class.getName()).log(Level.WARNING,
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.FINE,
                     "Impossible delete match #" + gameHandler.getMatchID() ,e);
         }
     }

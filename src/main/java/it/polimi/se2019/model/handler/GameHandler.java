@@ -160,8 +160,8 @@ public class GameHandler extends Observable {
     private void endGame() {
         cashSkullBoardPoint();
         forwardAllViews(new RankingMessage(getRanking()));
-        matchID = -1;
         WaitingRoom.deleteMatch(this);
+        matchID = -1;
     }
 
     /**
