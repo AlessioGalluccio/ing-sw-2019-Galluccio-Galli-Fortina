@@ -259,8 +259,6 @@ public class Controller implements Initializable {
     @FXML
     public RadioButton firemodeOp2;
     @FXML
-    public RadioButton firemodeOp3;
-    @FXML
     public ToggleGroup AddFiremode;
     @FXML
     public TextField skulls;
@@ -1029,7 +1027,7 @@ public class Controller implements Initializable {
                 frenzyPlayer();
             }
             else{
-                //TODO gestire il caso in cui è frenzy solo le action
+
                 ArrayList<Image> images= setCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId(),isFrenzyTime);
                 yourCharacter.setImage(images.get(0));
                 possibleActions.setImage(images.get(1));
@@ -1052,6 +1050,10 @@ public class Controller implements Initializable {
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getOriginalSkull());
         updateSkullBoard(skullnum);
 
+        updatePlayerSkull();
+        updatePlayerMarks();
+        updatePoints(ControllerLogin.clientView.getPlayerCopy().getNumPoints());
+        updatePlayerDamage();
 
 
         setDiscardReload();
@@ -1418,11 +1420,6 @@ public class Controller implements Initializable {
         }
         if (firemodeOp2.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(2);
-            Stage stage = (Stage) firemodeOp1.getScene().getWindow();
-            stage.close();
-        }
-        if (firemodeOp3.isSelected()) {
-            ControllerLogin.clientView.createOptionalMessage(3);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
