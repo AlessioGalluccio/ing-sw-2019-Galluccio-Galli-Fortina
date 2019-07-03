@@ -187,6 +187,14 @@ public class GameHandler extends Observable {
     }
 
     /**
+     * get the Modality of the game
+     * @return the modality of the game
+     */
+    public Modality getModality() {
+        return modality;
+    }
+
+    /**
      * @param id ID of a Player
      * @return the Player object who has this ID, null if there's not
      */
