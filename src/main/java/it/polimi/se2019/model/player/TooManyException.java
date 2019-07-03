@@ -4,6 +4,9 @@ public class TooManyException extends Exception {
 
     private static final long serialVersionUID = -1477742108064011104L;
 
+    /**
+     * constructor
+     */
     public TooManyException(String message) {
         super(message);
     }

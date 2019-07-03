@@ -19,6 +19,10 @@ public class Points implements Serializable {
         return new ArrayList<>(pointCard);
     }
 
+    /**
+     * get the sum of the points
+     * @return the integer sum of the poitns
+     */
     int getSum() {
         return sum;
     }

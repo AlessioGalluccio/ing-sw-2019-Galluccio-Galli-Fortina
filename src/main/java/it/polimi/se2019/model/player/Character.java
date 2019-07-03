@@ -12,12 +12,21 @@ public class Character implements Serializable {
     private final String color;
     private final int id;
 
+    /**
+     * constructor
+     * @param nameCharacter the String name of the character
+     * @param color the color of the Character
+     */
     public Character(String nameCharacter, String color) {
         this.nameCharacter = nameCharacter;
         this.color = color;
         this.id = 0;
     }
 
+    /**
+     * constructor
+     * @param id the ID of the character
+     */
     public Character(int id) {
         switch (id) {
             case 1:
@@ -88,6 +97,10 @@ public class Character implements Serializable {
         return Objects.hash(nameCharacter, color);
     }
 
+    /**
+     * get the ID of the character
+     * @return the integer ID of the character
+     */
     public int getId() {
         return id;
     }
