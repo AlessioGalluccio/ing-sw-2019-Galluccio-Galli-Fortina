@@ -259,8 +259,6 @@ public class Controller implements Initializable {
     @FXML
     public RadioButton firemodeOp2;
     @FXML
-    public RadioButton firemodeOp3;
-    @FXML
     public ToggleGroup AddFiremode;
     @FXML
     public TextField skulls;
@@ -1418,11 +1416,6 @@ public class Controller implements Initializable {
         }
         if (firemodeOp2.isSelected()) {
             ControllerLogin.clientView.createOptionalMessage(2);
-            Stage stage = (Stage) firemodeOp1.getScene().getWindow();
-            stage.close();
-        }
-        if (firemodeOp3.isSelected()) {
-            ControllerLogin.clientView.createOptionalMessage(3);
             Stage stage = (Stage) firemodeOp1.getScene().getWindow();
             stage.close();
         }
