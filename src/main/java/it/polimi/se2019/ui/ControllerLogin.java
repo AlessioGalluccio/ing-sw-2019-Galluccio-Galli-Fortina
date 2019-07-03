@@ -199,6 +199,7 @@ public class ControllerLogin implements UiInterface {
      * @param width of the window
      * @param height of the window
      * @throws Exception when opening the fxml file
+     * @return FXMLLoader to get controller
      */
     public static FXMLLoader open(String fileName, String windowName, int width, int height) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ControllerLogin.class.getClassLoader().getResource(fileName));
