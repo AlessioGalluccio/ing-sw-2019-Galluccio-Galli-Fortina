@@ -85,13 +85,11 @@ public class RailGun_1Test {
         authorPlayer.addWeaponCard(weapon);
         WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
         controller.update(null, weaponMessage);
-
-        //System.out.println(playerView.getLastStringPrinted());
+;
 
         //add firemode
         FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
-        controller.update(null, fireModeMessage);
-        //System.out.println(playerView.getLastStringPrinted());
+        controller.update(null, fireModeMessage);;
 
     }
 

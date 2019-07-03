@@ -161,6 +161,10 @@ public class Player extends Observable implements Target, Serializable {
         return points.getSum();
     }
 
+    /**
+     * get the Character of the player
+     * @return the character of the player
+     */
     public Character getCharacter() {
         return character;
     }
@@ -189,6 +193,10 @@ public class Player extends Observable implements Target, Serializable {
         return points.getPointCard();
     }
 
+    /**
+     * get the Mark object of the player
+     * @return the Mark object of the player
+     */
     public Mark getMark() {
         return mark.clone();
     }

@@ -38,12 +38,16 @@ public class PowerGlove_2 extends FireMode {
 
     @Override
     public void fire() throws WrongInputException{
-        if(shoot.getTargetsCells().isEmpty()) throw new WrongInputException(CANT_DO_FIRE);
-        for(Player targetPlayer : shoot.getTargetsPlayer()) {
-            addDamageAndMarks(targetPlayer, 2,0,true);
+        if(shoot.getTargetsCells().isEmpty() ){
+            throw new WrongInputException(CANT_DO_FIRE);
         }
-        author.setPosition(shoot.getTargetsCells().get(shoot.getTargetsCells().size()-1));
-        super.fire();
+        else{
+            for(Player targetPlayer : shoot.getTargetsPlayer()) {
+                addDamageAndMarks(targetPlayer, 2,0,true);
+            }
+            author.setPosition(shoot.getTargetsCells().get(shoot.getTargetsCells().size()-1));
+            super.fire();
+        }
     }
 
     @Override

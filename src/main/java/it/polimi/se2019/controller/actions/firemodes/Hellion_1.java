@@ -51,6 +51,14 @@ public class Hellion_1 extends FireMode {
     }
 
 
+    /**
+     * fire for Hellion firemodes
+     * @param numDamageFirst num of damage for the first target
+     * @param numMarksFirst num of marks for the first target
+     * @param numDamageOthers num of damage for second and others targets
+     * @param numMarksOthers num of marks for second and others targets
+     * @throws WrongInputException if it can't do fire
+     */
     protected void fireHellion(int numDamageFirst, int numMarksFirst, int numDamageOthers, int numMarksOthers) throws WrongInputException{
         if(shoot.getTargetsPlayer().isEmpty()){
             throw new WrongInputException(CANT_DO_FIRE);

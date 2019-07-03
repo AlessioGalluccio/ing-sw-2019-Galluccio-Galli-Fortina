@@ -72,7 +72,6 @@ public class FlameThrower_1Test {
         targetPlayer2.setPosition(gameHandler.getCellByCoordinate(3,2));
 
         //target 3 is in another room
-        //TODO controlla che sia un'altra statnza!!
         notVisibleCell = gameHandler.getCellByCoordinate(1,2);
         targetPlayer3.setPosition(notVisibleCell);
 

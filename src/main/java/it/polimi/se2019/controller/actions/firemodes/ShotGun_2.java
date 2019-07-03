@@ -13,11 +13,11 @@ public class ShotGun_2 extends FireMode {
     private static final long serialVersionUID = 1155806501696304392L;
 
     //messages
-    public static final String SELECT_PLAYER_DISTANT_ONE = "Select a target distant one cell. ";
+    static final String SELECT_PLAYER_DISTANT_ONE = "Select a target distant one cell. ";
 
 
     //errors
-    public static final String INVALID_TARGET_SHOTGUN2 = "Invalid target. ";
+    static final String INVALID_TARGET_SHOTGUN2 = "Invalid target. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

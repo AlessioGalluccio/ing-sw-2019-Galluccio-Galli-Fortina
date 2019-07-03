@@ -112,7 +112,7 @@ public class MachineGun_1 extends FireMode {
 
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_DO);
         }
 
     }

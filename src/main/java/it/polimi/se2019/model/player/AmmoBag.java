@@ -26,14 +26,26 @@ public class AmmoBag implements Serializable {
         this.blueAmmo = blueAmmo;
     }
 
+    /**
+     * returns the number of red ammo
+     * @return the integer of the red ammo
+     */
     public int getRedAmmo() {
         return redAmmo;
     }
 
+    /**
+     * returns the number of blue ammo
+     * @return the integer of the blue ammo
+     */
     public int getBlueAmmo() {
         return blueAmmo;
     }
 
+    /**
+     * returns the number of yellow ammo
+     * @return the integer of the yellow ammo
+     */
     public int getYellowAmmo() {
         return yellowAmmo;
     }

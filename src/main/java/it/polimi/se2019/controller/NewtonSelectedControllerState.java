@@ -25,14 +25,14 @@ public class NewtonSelectedControllerState extends StateController {
     private Player target = null;
 
     //messages
-    public static final String SELECT_TARGET_NEWTON = "Select a player target. ";
-    public static final String SELECT_CELL_NEWTON = "Select a cell. ";
+    static final String SELECT_TARGET_NEWTON = "Select a player target. ";
+    static final String SELECT_CELL_NEWTON = "Select a cell. ";
 
     //errors
     public static final String CELL_NOT_PRESENT = "This cell is not present on the map. ";
-    public static final String PLAYER_ALREADY_SELECTED_NEWTON = "The target is already selected. ";
-    public static final String SELECTED_YOURSELF = "You can't select yourself. ";
-    public static final String NOT_VALID_CELL = "This cell is not valid. ";
+    static final String PLAYER_ALREADY_SELECTED_NEWTON = "The target is already selected. ";
+    static final String SELECTED_YOURSELF = "You can't select yourself. ";
+    static final String NOT_VALID_CELL = "This cell is not valid. ";
 
     /**
      * constructor

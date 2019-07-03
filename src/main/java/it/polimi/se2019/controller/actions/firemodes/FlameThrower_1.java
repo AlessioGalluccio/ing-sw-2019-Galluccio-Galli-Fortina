@@ -15,13 +15,13 @@ public class FlameThrower_1 extends FireMode {
     //firstly, we choose a direction of fire with CellMessage, then we select the targets inside
 
     //messages
-    public static final String CHOOSE_CELL_DIRECTION = "Select a cell for the direction. ";
-    public static final String SELECT_FIRST_TARGET = "Select a player target. ";
-    public static final String SELECT_SECOND_TARGET = "Select a player target in another cell or fire. ";
+    static final String CHOOSE_CELL_DIRECTION = "Select a cell for the direction. ";
+    static final String SELECT_FIRST_TARGET = "Select a player target. ";
+    static final String SELECT_SECOND_TARGET = "Select a player target in another cell or fire. ";
 
     //errors
-    public static final String NOT_IN_RANGE = "This cell is not in range. ";
-    public static final String TARGET_NOT_VALID = "This target is not valid. ";
+    static final String NOT_IN_RANGE = "This cell is not in range. ";
+    static final String TARGET_NOT_VALID = "This target is not valid. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -114,6 +114,12 @@ public class FlameThrower_1 extends FireMode {
         return cellTargets;
     }
 
+    /**
+     * get the direction of a distance max 2 cell from the shooter
+     * @param cellTarget the target cell
+     * @return N if north direction, S if south, E if east, W if west
+     * @throws WrongInputException if the target cell is invalid
+     */
     protected char getDirectionMax2(Cell cellTarget) throws WrongInputException{
         int x = cellTarget.getCoordinateX();
         int y = cellTarget.getCoordinateY();

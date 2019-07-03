@@ -87,7 +87,6 @@ public class Grab extends Action{
                 throw new WrongInputException(TOO_MUCH_DISTANCE);
             }
         }catch(NotPresentException e){
-            //TODO controlla
             //should not happen
             throw new WrongInputException();
         }

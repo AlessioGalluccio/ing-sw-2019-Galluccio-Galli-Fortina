@@ -14,13 +14,12 @@ public class GrenadeLauncher_1 extends FireMode {
     private boolean nextCellIsForOptional = false;
     private AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);
 
-    public static final String FIRST_MESSAGE = "Select a player from possible targets";
-    //TODO controlla questo messaggio
-    public static final String SECOND_MESSAGE = "Select a cell where to move the target. Select the cell where he is if you don't want to move him";
-    public static final String OPTIONAL_MESSAGE = "Select a cell to launch the extra granade";
+    static final String FIRST_MESSAGE = "Select a player from possible targets";
+    static final String SECOND_MESSAGE = "Select a cell where to move the target";
+    static final String OPTIONAL_MESSAGE = "Select a cell to launch the extra granade";
 
-    public static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-    public static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
+    static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
+    static final String TOO_MUCH_DISTANCE = "This cell is too distant.";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

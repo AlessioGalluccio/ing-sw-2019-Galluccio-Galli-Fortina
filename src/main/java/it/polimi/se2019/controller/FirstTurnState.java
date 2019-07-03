@@ -16,9 +16,9 @@ public class FirstTurnState extends StateController {
     private String errorString;
     private String stringToPlayerView;
 
-    public static final String CHARACTER_REQUEST = "Please, select a Character";
-    public static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
-    public static final String TOO_MANY_CARDS = "The player has already three cards. ";
+    static final String CHARACTER_REQUEST = "Please, select a Character";
+    static final String POWERUP_DISCARD_REQUEST = "Please, discard a Powerup to spawn";
+    static final String TOO_MANY_CARDS = "The player has already three cards. ";
 
     private static final StringAndMessage firstMessage =
             new StringAndMessage(Identificator.CHARACTER_MESSAGE, CHARACTER_REQUEST);
@@ -154,7 +154,7 @@ public class FirstTurnState extends StateController {
 
             //if it's null, there are no errors. If it is, we don't change the state and we wait another message
             //we don't do addReceived for this reason. We wait for a DiscardPowerupMessage
-            if(errorString == null){ //TODO check
+            if(errorString == null){
                 //spawn process is finished. we go to the next state
                 controller.setState(new EmptyControllerState(controller, gameHandler));
             }

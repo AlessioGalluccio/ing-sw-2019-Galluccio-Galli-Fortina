@@ -18,15 +18,15 @@ public class RocketLauncher_1 extends FireMode {
     private static final long serialVersionUID = -6606954983898981384L;
 
     //messages
-    public static final String SELECT_PLAYER_VISIBLE_NOT_AUTHOR_CELL = "Select a visible player not in your cell. ";
-    public static final String SELECT_CELL_TO_MOVE_TARGET = "Select a cell where to move the target. ";
-    public static final String SELECT_CELL_TO_MOVE_YOURSELF = "Select a cell where to move yourself. ";
+    static final String SELECT_PLAYER_VISIBLE_NOT_AUTHOR_CELL = "Select a visible player not in your cell. ";
+    static final String SELECT_CELL_TO_MOVE_TARGET = "Select a cell where to move the target. ";
+    static final String SELECT_CELL_TO_MOVE_YOURSELF = "Select a cell where to move yourself. ";
 
     //errors
-    public static final String TOO_DISTANT_CELL_YOURSELF = "This cell is too distant from you. ";
-    public static final String TOO_DISTANT_CELL_TARGET = "This cell is too distant from the target. ";
-    public static final String SELECT_TARGET_BEFORE = "Select a target before. ";
-    public static final String SAME_CELL_AUTHOR = "You can't shoot at a target in your cell. ";
+    static final String TOO_DISTANT_CELL_YOURSELF = "This cell is too distant from you. ";
+    static final String TOO_DISTANT_CELL_TARGET = "This cell is too distant from the target. ";
+    static final String SELECT_TARGET_BEFORE = "Select a target before. ";
+    static final String SAME_CELL_AUTHOR = "You can't shoot at a target in your cell. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

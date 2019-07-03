@@ -112,10 +112,8 @@ public class Controller implements Observer {
      * @param author the Player author
      */
     public void setAuthor(Player author){
-        //TODO fai in modo che Controller lo setti davvero!
         this.playerAuthor = author;
     }
-
 
     /**
      * set the PlayerView of the author
@@ -147,7 +145,6 @@ public class Controller implements Observer {
      */
     public void addMessageListImmediateNext(List<StringAndMessage> messageListExpected){
         this.messageListExpected.addAll(indexExpected , messageListExpected);
-
     }
 
     /**

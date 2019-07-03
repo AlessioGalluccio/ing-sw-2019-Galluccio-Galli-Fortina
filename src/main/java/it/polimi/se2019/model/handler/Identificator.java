@@ -37,7 +37,6 @@ public class Identificator {
     //list of num for Optional
     public static final int FIRST_OPTIONAL = 1;
     public static final int SECOND_OPTIONAL = 2;
-    public static final int THIRD_OPTIONAL = 3;
 
     //list of ID of powerups
     public static final int TARGETING_SCOPE_RED = 0;

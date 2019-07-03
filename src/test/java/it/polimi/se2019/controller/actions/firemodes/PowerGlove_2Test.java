@@ -99,9 +99,11 @@ public class PowerGlove_2Test {
 
     @Test
     public void noPlayer() throws Exception {
+        assertEquals(PowerGlove_2.SELECT_CELL, playerView.getLastStringPrinted());
         controller.update(null,
                 new CellMessage(2,1, authorPlayer.getID(), playerView));
 
+        assertEquals(PowerGlove_2.SELECT_PLAYER, playerView.getLastStringPrinted());
         controller.update(null,
                 new FireMessage(authorPlayer.getID(), playerView));
 

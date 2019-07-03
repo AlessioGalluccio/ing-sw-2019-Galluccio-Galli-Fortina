@@ -14,7 +14,6 @@ public class DisconnectedControllerState extends StateController {
     //this string is for finding errors in testing. Should never appear
     public static final String STILL_DISCONNECTED = "Still disconnected";
 
-
     /**
      * constructor
      * @param controller the controller of the player

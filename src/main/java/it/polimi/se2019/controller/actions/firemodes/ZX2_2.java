@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ZX2_2 extends FireMode {
     private static final long serialVersionUID = -1615539718713764664L;
+
     //messages
     static final String SELECT_PLAYER1 = "Select first player of max 3. ";
     static final String SELECT_PLAYER2 = "Select second player of max 3. ";

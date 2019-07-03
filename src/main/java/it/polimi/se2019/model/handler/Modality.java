@@ -7,10 +7,22 @@ import it.polimi.se2019.model.player.Player;
 
 public interface Modality {
 
-    public static final String CANT_CHOOSE_ACTION = "You can't choose this action. ";
+    String CANT_CHOOSE_ACTION = "You can't choose this action. ";
 
+    /**
+     * get the object Action by its ID
+     * @param actionID the ID of the action
+     * @param controller the controller of the player
+     * @param gameHandler the gamehandler of the macth
+     * @return the Action of that ID
+     * @throws WrongInputException if invalid ID
+     */
     Action getActionByID(int actionID, Controller controller, GameHandler gameHandler) throws WrongInputException;
 
+    /**
+     * get true if frenzy is available, false if not
+     * @return true if frenzy is available, false if not
+     */
     boolean isFrenzyEnable();
 
 }

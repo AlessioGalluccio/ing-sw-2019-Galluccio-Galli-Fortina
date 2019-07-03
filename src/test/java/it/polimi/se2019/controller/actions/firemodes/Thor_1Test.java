@@ -88,12 +88,9 @@ public class Thor_1Test {
         WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
         controller.update(null, weaponMessage);
 
-        //System.out.println(playerView.getLastStringPrinted());
-
         //add firemode
         FireModeMessage fireModeMessage = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, fireModeMessage);
-        //System.out.println(playerView.getLastStringPrinted());
 
     }
 
