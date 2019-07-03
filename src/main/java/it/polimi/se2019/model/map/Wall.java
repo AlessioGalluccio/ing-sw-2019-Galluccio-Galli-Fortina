@@ -1,9 +1,12 @@
 package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.ui.Printable;
 
 import java.io.PrintWriter;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
 public class Wall implements Border {
 
@@ -43,10 +46,10 @@ public class Wall implements Border {
         String s = color.toString();
         if(horizontal) {
             for(int i = 0; i< Printable.DIMROW; i++){
-                        s+="◙";
+                        s+= WALL;
             }
         } else {
-            s+="◙";
+            s+=WALL;
         }
         return  s;
     }

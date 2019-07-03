@@ -14,6 +14,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
+
 public abstract class WeaponCard implements Card {
 
     private static final long serialVersionUID = -3963551867744677662L;
@@ -183,10 +185,10 @@ public abstract class WeaponCard implements Card {
     public String toStringShort() {
         String string = name + ": " +
                 ConsoleColor.colorByColor(ammoGranted.toString()) +
-                "▲ " + ConsoleColor.RESET;
+                AMMO + " " + ConsoleColor.RESET;
         if(ammoNotGranted!=null) {
             for (ColorRYB c : ammoNotGranted) {
-                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + "▲" + ConsoleColor.RESET;
+                if (c != null) string += ConsoleColor.colorByColor(c.toString()) + AMMO.toString() + ConsoleColor.RESET;
             }
         }
         return string;

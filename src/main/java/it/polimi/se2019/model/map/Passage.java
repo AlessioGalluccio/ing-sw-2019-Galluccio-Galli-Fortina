@@ -1,7 +1,10 @@
 package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.ui.Printable;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
 public class Passage implements Border {
 
@@ -39,15 +42,15 @@ public class Passage implements Border {
     @Override
     public String printByDirection(int row, boolean horizontal, ConsoleColor color) {
         String s = color.toString();
-        String space = ConsoleColor.BLACK + "◙" + color;
+        String space = ConsoleColor.BLACK + WALL.toString() + color;
         if(horizontal) {
-            s+="◙";
+            s+=WALL;
             for(int i=1; i< Printable.DIMROW-1; i++){
                 s+=space;
             }
-            s+="◙";
+            s+=WALL;
         } else {
-            if(row==0||row==Printable.DIMROW) s+="◙";
+            if(row==0||row==Printable.DIMROW) s+=WALL;
             else s+=space;
         }
         return s;

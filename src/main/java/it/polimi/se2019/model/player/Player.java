@@ -16,6 +16,7 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 
 import java.io.Serializable;
@@ -23,6 +24,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.PLAYER;
+import static it.polimi.se2019.ui.ConsoleSymbol.SKULL;
 
 public class Player extends Observable implements Target, Serializable {
     private static final long serialVersionUID = -889271951458445330L;
@@ -672,18 +676,18 @@ public class Player extends Observable implements Target, Serializable {
         if(character!=null) s += " - " + character.toString();
         s+="\n  Marks: ";
         for(Player p : mark.getMarkReceived()) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + PLAYER.toString();
         }
         s+=ConsoleColor.RESET+ "\n  Damages: " + damage.size() + "/12 ";
         for(Player p : damage) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + PLAYER.toString();
         }
         s+= ConsoleColor.RESET + "(remember adrenaline actions)";
         s+=ConsoleColor.RESET+"\n  Skulls: ";
         if(!isFrenzyDeath) {
             s+="8 6 4 2 1 1 \t";
             for(int i=0; i<skull; i++) {
-                s+= ConsoleColor.RED + " †" + ConsoleColor.RESET;
+                s+= ConsoleColor.RED + " "+ SKULL.toString() + ConsoleColor.RESET;
             }
         }
         else s+="2 1 1 1 ";

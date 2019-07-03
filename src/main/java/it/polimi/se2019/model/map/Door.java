@@ -3,6 +3,8 @@ package it.polimi.se2019.model.map;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.ui.Printable;
 
+import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
+
 public class Door implements Border {
 
     private static final long serialVersionUID = -4178550241484863775L;
@@ -27,11 +29,11 @@ public class Door implements Border {
     @Override
     public String printByDirection( int row, boolean horizontal, ConsoleColor color) {
         String s = color.toString();
-        String space = ConsoleColor.BLACK + "◙" + color;
+        String space = ConsoleColor.BLACK + WALL.toString() + color;
         if(horizontal) {
-            s+="◙◙◙" +space+space+space+ "◙◙◙";
+            s+=WALL.toString()+WALL+WALL +space+space+space+ WALL+WALL+WALL;
         } else {
-            if(row<3||row>Printable.DIMROW-6) s+="◙";
+            if(row<3||row>Printable.DIMROW-6) s+=WALL;
             else s+=space;
         }
         return s;

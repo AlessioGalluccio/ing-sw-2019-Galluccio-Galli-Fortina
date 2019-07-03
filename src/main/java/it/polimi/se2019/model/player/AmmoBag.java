@@ -1,9 +1,12 @@
 package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 
 import java.io.Serializable;
 import java.util.List;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
 
 public class AmmoBag implements Serializable {
     private static final long serialVersionUID = -3617983877168060807L;
@@ -89,13 +92,13 @@ public class AmmoBag implements Serializable {
     public String toString() {
         String s = "";
         for(int i=0; i<redAmmo; i++) {
-            s += ConsoleColor.RED + "▲";
+            s += ConsoleColor.RED + AMMO.toString();
         }
         for(int i=0; i<blueAmmo; i++) {
-            s += ConsoleColor.BLUE + "▲";
+            s += ConsoleColor.BLUE + AMMO.toString();
         }
         for(int i=0; i<yellowAmmo; i++) {
-            s += ConsoleColor.YELLOW + "▲";
+            s += ConsoleColor.YELLOW + AMMO.toString();
         }
         s+=ConsoleColor.RESET;
         return  s;

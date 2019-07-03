@@ -5,6 +5,7 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 
 import java.io.Serializable;
@@ -14,6 +15,8 @@ import it.polimi.se2019.model.Observable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observer;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.*;
 
 public class EnemyView extends Observable implements Observer, Serializable{
     private static final long serialVersionUID = -3162602651843385228L;
@@ -171,11 +174,11 @@ public class EnemyView extends Observable implements Observer, Serializable{
         if(character!=null) s += " - " + character.toString();
         s+="\n  Marks: ";
         for(Player p : mark) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + PLAYER.toString();
         }
         s+=ConsoleColor.RESET+ "\n  Damages: " + damage.size() + "/12 ";
         for(Player p : damage) {
-            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + "○";
+            s+= ConsoleColor.colorByColor(p.getCharacter().getColor()) + PLAYER.toString();
         }
         s+=ConsoleColor.RESET;
         return s;
@@ -193,17 +196,17 @@ public class EnemyView extends Observable implements Observer, Serializable{
         if(isFrenzyDeath) s+="2 1 1 1 ";
         else s+="8 6 4 2 1 1 \t";
         for(int i=0; i<skull; i++) {
-            s+= ConsoleColor.RED + " †" + ConsoleColor.RESET;
+            s+= ConsoleColor.RED + SKULL.toString() +" "+ ConsoleColor.RESET;
         }
         s+="\n  Ammo: ";
         for(int i=0; i< ammo.getBlueAmmo(); i++) {
-            s+= ConsoleColor.BLUE_BOLD_BRIGHT + "▲";
+            s+= ConsoleColor.BLUE_BOLD_BRIGHT + AMMO.toString();
         }
         for(int i=0; i< ammo.getYellowAmmo(); i++) {
-            s+= ConsoleColor.YELLOW_BOLD+ "▲";
+            s+= ConsoleColor.YELLOW_BOLD+ AMMO.toString();
         }
         for(int i=0; i< ammo.getRedAmmo(); i++) {
-            s+= ConsoleColor.RED_BOLD_BRIGHT+ "▲";
+            s+= ConsoleColor.RED_BOLD_BRIGHT+ AMMO.toString();
         }
         s+= ConsoleColor.RESET + "\n  Weapons loaded: " + loadedWeapon;
         s+= "\n  Weapons unloaded: ";

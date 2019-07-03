@@ -1,7 +1,5 @@
 package it.polimi.se2019.ui;
 
-import it.polimi.se2019.model.player.ColorRYB;
-
 public enum ConsoleColor {
     RESET("\033[0m"),
 

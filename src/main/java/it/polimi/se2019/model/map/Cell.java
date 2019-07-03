@@ -4,6 +4,7 @@ import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
@@ -11,6 +12,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.*;
 
 public abstract class Cell extends Observable implements Printable, Target, Serializable {
 
@@ -194,7 +197,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     public String printRow(int row) {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "◙" + color;
+        String space = ConsoleColor.BLACK + WALL.toString() + color;
         if(isActive()) s+=color;
         switch (row) {
             case 0:
@@ -211,7 +214,7 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
                 s+=space;
                 if(getPlayerHere().size()==5) {
                     s+=ConsoleColor.colorByColor(getPlayerHere().get(4).getCharacter().getColor());
-                    s+="○";
+                    s+=PLAYER;
                 }else s+=space;
                 s+=space;
                 s+=space + space;
@@ -248,16 +251,16 @@ public abstract class Cell extends Observable implements Printable, Target, Seri
     private String printPlayerOnCell(int player1, int player2) {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "◙" + color;
+        String space = ConsoleColor.BLACK + WALL.toString() + color;
         s+=space + space;
         if(getPlayerHere().size()>=player1) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player1-1).getCharacter().getColor());
-            s+="○";
+            s+=PLAYER;
         }else s+=space;
         s+=space;
         if(getPlayerHere().size()>=player2) {
             s+=ConsoleColor.colorByColor(getPlayerHere().get(player2-1).getCharacter().getColor());
-            s+="○";
+            s+=PLAYER;
         }else s+=space;
         s+=space + space;
         return s;

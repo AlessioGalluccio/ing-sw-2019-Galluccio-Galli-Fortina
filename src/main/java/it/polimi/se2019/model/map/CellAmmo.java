@@ -7,10 +7,14 @@ import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
+import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
 public class CellAmmo extends Cell {
     private static final long serialVersionUID = 2030465796514725765L;
@@ -107,14 +111,14 @@ public class CellAmmo extends Cell {
     String printMiddleRow() {
         String s ="";
         ConsoleColor color = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "◙" + color;
+        String space = ConsoleColor.BLACK + WALL.toString() + color;
         s+=getWestBorder().printByDirection(3, false, color);
         if(ammo!=null) {
            s+= space + space
                     + ConsoleColor.colorByColor(ammo.getAmmo().get(0).toString()) +
-                    "▲" + ConsoleColor.colorByColor(ammo.getAmmo().get(1).toString()) +
-                    "▲" + thirdAmmo(ammo.getAmmo()) +
-                    "▲" + ConsoleColor.colorByColor(getRoom().getColor()) +
+                   AMMO + ConsoleColor.colorByColor(ammo.getAmmo().get(1).toString()) +
+                   AMMO + thirdAmmo(ammo.getAmmo()) +
+                   AMMO + ConsoleColor.colorByColor(getRoom().getColor()) +
                     space + space;
         } else s+=space + space + space + space + space + space + space;
         s+=getEastBorder().printByDirection(3, false, color);

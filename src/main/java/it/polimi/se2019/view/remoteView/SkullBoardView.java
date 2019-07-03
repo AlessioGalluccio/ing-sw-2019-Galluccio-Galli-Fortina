@@ -3,6 +3,7 @@ package it.polimi.se2019.view.remoteView;
 import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.handler.Death;
 import it.polimi.se2019.ui.ConsoleColor;
+import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.HandlerSkullViewMessage;
 
 import java.util.ArrayList;
@@ -77,12 +78,13 @@ public class SkullBoardView extends Observable implements Observer {
         String s ="8 6 4 2 1 1 \t";
         for(Death death : deathCopy) {
             for(int i=0; i<death.getPoints(); i++) {
-                s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) + "○" + ConsoleColor.RESET;
+                s+= ConsoleColor.colorByColor(death.getWhoKilled().getCharacter().getColor()) +
+                        ConsoleSymbol.PLAYER.toString()+ ConsoleColor.RESET;
             }
             s+=" ";
         }
         for(int i=0; i<numSkullCopy; i++) {
-            s += ConsoleColor.RED + "† " + ConsoleColor.RESET;
+            s += ConsoleColor.RED + " "+ConsoleSymbol.SKULL.toString() + ConsoleColor.RESET;
         }
         return s;
     }

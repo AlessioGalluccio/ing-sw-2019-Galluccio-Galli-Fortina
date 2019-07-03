@@ -15,6 +15,9 @@ import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.ui.ConsoleColor;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
+import static it.polimi.se2019.ui.ConsoleSymbol.SPAWN;
+import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
+
 public class CellSpawn extends Cell {
     private static final long serialVersionUID = 4308424924665943011L;
     private final int MAX_WEAPONCARD = 3;
@@ -171,10 +174,10 @@ public class CellSpawn extends Cell {
     String printMiddleRow() {
         String s ="";
         ConsoleColor printColor = ConsoleColor.colorByColor(getRoom().getColor());
-        String space = ConsoleColor.BLACK + "◙" + printColor;
+        String space = ConsoleColor.BLACK + WALL.toString() + printColor;
         s+=getWestBorder().printByDirection(3, false, printColor);
         s+=space + space +
-                "☼☼☼" +
+                SPAWN+SPAWN+SPAWN +
                 space + space;
         s+=getEastBorder().printByDirection(3, false, printColor);
         return s;

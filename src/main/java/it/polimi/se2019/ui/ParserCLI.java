@@ -544,7 +544,7 @@ class ParserCLI {
     }
 
     private void parseExit() {
-        cli.println("Are you sure do you wanna exit? \tಥ_ಥ");
+        cli.println("Are you sure do you wanna exit? \t:'(");
         String decision = in.nextLine();
         switch (decision.toUpperCase()) {
             case "Y":
@@ -556,7 +556,7 @@ class ParserCLI {
                 break;
             case "N":
             case "NO":
-                cli.println("Enjoy the game! \t୧☉□☉୨");
+                cli.println("Enjoy the game! \t(@•̀␣•́)↵✧");
                 break;
             default:
                     cli.println(decision + " is not a command.\n" +

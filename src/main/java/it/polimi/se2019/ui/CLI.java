@@ -82,7 +82,7 @@ public class CLI implements UiInterface {
         out.println("\n");
         printLine();
         out.println(ConsoleColor.RED +
-                "OH NO!  ಥ_ಥ \nYou have been disconnected" +
+                "OH NO!  :'( \nYou have been disconnected" +
                 ConsoleColor.RESET);
         out.println("If the game has started and you want to reconnect to the same match remember this ID: "
                 + ConsoleColor.BLACK_BOLD + matchID + ConsoleColor.RESET );
@@ -176,7 +176,7 @@ public class CLI implements UiInterface {
         printLine();
         out.println(ConsoleColor.MAGENTA_BOLD + "\t\tGAME OVER!\n" + ConsoleColor.RESET);
         out.printf("%-25.25s %d %s%n", "  1. " + players.get(0).getNickname(), players.get(0).getNumPoints(),
-                ConsoleColor.GREEN + "\t(๑•̀ㅂ•́)ง✧" + ConsoleColor.RESET);
+                ConsoleColor.GREEN + "\t♕" + ConsoleColor.RESET);
         for(int i=1; i<players.size(); i++) {
             out.printf("%-25.25s %d %n", "  "+i+". " + players.get(i).getNickname(), players.get(i).getNumPoints());
         }
@@ -193,8 +193,8 @@ public class CLI implements UiInterface {
     public void turn(String nickname, boolean yourTurn) {
         this.yourTurn = yourTurn;
         printAll();
-        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn! \t୧☉□☉୨" + ConsoleColor.RESET);
-        else out.println("It's " + nickname + "'s turn \tಠᴗಠ");
+        if(yourTurn) out.println(ConsoleColor.GREEN + "It's your turn! \t(@•̀␣•́)↵✧" + ConsoleColor.RESET);
+        else out.println("It's " + nickname + "'s turn \t☉ᴗ☉");
     }
 
     /**
@@ -234,7 +234,7 @@ public class CLI implements UiInterface {
      * Let the users choose the type of connection they prefer
      */
     private void setConnection() {
-        out.println("HI!  ｡◕‿◕｡ ");
+        out.println("HI!  ∘◕‿◕∘ ");
         out.println("Please, insert the server's IP: ");
         String IP = in.nextLine();
 
@@ -273,7 +273,7 @@ public class CLI implements UiInterface {
      */
     private void printLogo() {
         out.println(ConsoleColor.RED_BOLD);
-        out.print("\t\t\t/\\                                                                         \n" +
+        out.print("\t\t  /\\                                                                         \n" +
                 "\t\t      \\     __ \\    _ \\   ____|   \\  |     \\     |     _ _|   \\  |  ____| \n" +
                 "\t\t    __ \\    |   |  |   |  __|      \\ |    _ \\    |       |     \\ |  __|   \n" +
                 "\t\t   ____ \\   |   |  __ <   |      |\\  |   ___ \\   |       |   |\\  |  |     \n" +
