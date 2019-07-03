@@ -281,6 +281,14 @@ public class WaitingRoom {
         Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, "Map&Co. set");
     }
 
+    /**
+     * Disconnect a player from the match specified
+     * After the execution of the method the Model can't communicate with the Client View anymore
+     * If the match hasn't started yet, the player will be deleted from the waiting player
+     * @param server Player's server who has to be disconnected
+     * @param view Player's view who has to be disconnected
+     * @param matchID Player's match's ID who has to be disconnected
+     */
     public void disconnect(Server server, PlayerView view, int matchID) {
         for(WaitingPlayer wp : playerWaiting) {
             if(wp.player.getNickname().equals(view.getPlayerCopy().getNickname())) {
@@ -306,6 +314,12 @@ public class WaitingRoom {
         }
     }
 
+    /**
+     * This method disconnect all the players and delete the match.
+     * After this method another user can log in with the same nickname
+     * To call when a match is over.
+     * @param gameHandler Match's GameHandler which has to be deleted.
+     */
     public static void deleteMatch(GameHandler gameHandler) {
         try {
             Match m = getMatchById(gameHandler.getMatchID());

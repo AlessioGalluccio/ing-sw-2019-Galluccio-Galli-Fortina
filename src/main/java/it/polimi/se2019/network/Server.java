@@ -1,6 +1,5 @@
 package it.polimi.se2019.network;
 
-import it.polimi.se2019.view.ModelViewMess.ModelViewMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.Observer;
@@ -8,7 +7,7 @@ import java.util.Observer;
 public interface Server extends Observer {
 
     /**
-     * et the playerView to the server
+     * Set the playerView to the server
      * @param pw the player view to set
      */
     void setPlayerView(PlayerView pw);
@@ -29,7 +28,14 @@ public interface Server extends Observer {
      */
     void cancelTimer();
 
+    /**
+     * The the match's ID of this server object
+     * @param matchID The id of this match
+     */
     void setMatchID(int matchID);
 
+    /**
+     * Close all stream open and terminate all the thread in order to disconnect correctly a client
+     */
     void closeAll();
 }

@@ -13,7 +13,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import java.util.Observable;
-import java.util.concurrent.*;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +20,6 @@ import java.util.logging.Logger;
 public class RMIClient extends Client implements RmiClientInterface, Observer {
     private static final long serialVersionUID = 7523008212736615992L;
     private transient RmiHandlerInterface server;
-    private transient ExecutorService executor;
-    private static int nThreads =0;
     private String IP;
 
     public RMIClient(ClientView view, String IP) throws RemoteException {
@@ -32,7 +29,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
 
     @Override
     public void connect() throws RemoteException {
-        //executor = Executors.newCachedThreadPool();
         Registry registry = null;
         try {
             registry = LocateRegistry.getRegistry(IP, Registry.REGISTRY_PORT);
@@ -47,7 +43,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     public void closeAll() {
         try {
             unreferenced();
-            //executor.shutdown();
         } catch (NoSuchObjectException e) {
             Logger.getLogger(RMIClient.class.getName()).log(Level.WARNING, "Can't shutdown RMI", e);
         }
@@ -59,7 +54,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
         try {
             server.send((HandlerServerMessage) arg);
         } catch (RemoteException e) {
-           // Logger.getLogger(RMIClient.class.getName()).log(Level.SEVERE, "Can't send message to RMI server", e);
             new DisconnectMessage().handleMessage(this);
         }
     }
@@ -67,7 +61,6 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     @Override
     public void receiveMessage(HandlerNetworkMessage message) throws RemoteException {
         message.handleMessage(this);
-        //executor.submit(new Receiver(message, this));
     }
 
     @Override
@@ -78,23 +71,5 @@ public class RMIClient extends Client implements RmiClientInterface, Observer {
     @Override
     public void ping() throws RemoteException {
         return;
-    }
-
-    private class Receiver implements Runnable {
-        HandlerNetworkMessage message;
-        RMIClient client;
-
-        Receiver(HandlerNetworkMessage message, RMIClient client) {
-            this.message = message;
-            this.client = client;
-        }
-
-        @Override
-        public void run() {
-            RMIClient.nThreads++; //For testing
-            message.handleMessage(client);
-            RMIClient.nThreads--;
-            Logger.getLogger(RMIClient.class.getName()).log(Level.FINE, "Threads running: " + nThreads);
-        }
     }
 }

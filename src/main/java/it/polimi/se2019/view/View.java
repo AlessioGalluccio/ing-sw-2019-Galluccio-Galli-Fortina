@@ -14,13 +14,35 @@ import java.util.Observer;
  */
 public abstract class View extends Observable implements Observer {
 
+    /**
+     * Receive a string message from the controller and forward it to the networkHandler
+     * @param string the message
+     */
     public abstract void printFromController(String string);
 
+    /**
+     * Set the attribute playerCopy to the new playerCopy
+     * @param p the new playerCopy
+     */
     public abstract void handlePlayerMessage(Player p);
 
+    /**
+     * This method is call by a NewTurnMessage object.
+     * It notify the user that a new turn is begin
+     * @param nickname the player's nickname of the turn
+     */
     public abstract void handleTurnMessage(String nickname);
 
+    /**
+     * This method is call by a RankingMessage object.
+     * It forward to the ui the ranking of the game
+     * @param ranking the ranking
+     */
     public abstract void handleRankingMessage(List<Player> ranking) throws Exception;
 
+    /**
+     * set possible character for the player
+     * @param characters list of possible character
+     */
     public abstract void setPossibleCharacter(List<Character> characters);
 }

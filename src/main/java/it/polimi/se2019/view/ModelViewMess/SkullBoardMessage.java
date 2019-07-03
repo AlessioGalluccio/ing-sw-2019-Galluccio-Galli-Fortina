@@ -22,24 +22,32 @@ public class SkullBoardMessage implements ModelViewMessage, HandlerSkullViewMess
         ack=ID;
     }
 
-    public int getNumSkullCopy() {
-        return numSkullCopy;
-    }
-
-    public List<Death> getDeathCopy() {
-        return deathCopy;
-    }
-
+    /**
+     * Only the message itself can't know how to handle himself.
+     * This method call the right method of SkullBoardView in order to handle him correctly.
+     * @param s The Skull Board View object which has to handle this message
+     */
     @Override
     public void handleMessage(SkullBoardView s) {
         s.handleSkullMessage(originalSkull, numSkullCopy, deathCopy);
     }
 
+    /**
+     * Only the message itself can't know how to handle itself.
+     * This method call the right method of the client who receive this message in order to forward it to the MapView object.
+     * @param client The Client object which has to handle this message
+     */
     @Override
     public void handleMessage(Client client) {
         client.forwardToSkullBoardView(this);
     }
 
+    /**
+     * Each message has an ack in order to handle its receiving correctly.
+     * Only if this message's ack is grater the last one received should be handled.
+     * This method return the ack of this message.
+     * @return the ack of this message.
+     */
     public int getAck() {
         return ack;
     }

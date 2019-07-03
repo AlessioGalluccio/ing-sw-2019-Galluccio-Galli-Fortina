@@ -27,6 +27,12 @@ public class RMIServer extends UnicastRemoteObject implements RmiServerInterface
         this.timerTurn= timerTurn;
     }
 
+    /**
+     * Start the RMI sever
+     * @param port Server's port used by client to connect
+     * @param timerWaiting Duration of the timer during the login phase
+     * @param timerTurn Duration of the timer for a single turn
+     */
     public static void start(int port, int timerWaiting, int timerTurn) {
         try {
             RMIServer obj = new RMIServer(timerWaiting, timerTurn);
@@ -50,6 +56,10 @@ public class RMIServer extends UnicastRemoteObject implements RmiServerInterface
         client.connect(handler);
     }
 
+    /**
+     * Usual getter for the WaitingRoom param
+     * @return The Waiting Room object linked to this server
+     */
     public WaitingRoom getWaitingRoom() {
         return waitingRoom;
     }

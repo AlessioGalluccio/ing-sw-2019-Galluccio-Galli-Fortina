@@ -13,10 +13,6 @@ import java.util.logging.Logger;
 
 public class WeaponDeck extends Deck<WeaponCard> {
 
-    /**
-     *
-     * @throws FileNotFoundException If can't find the Json file from which deserialize the cards
-     */
     public WeaponDeck() {
         super(initializeCard());
     }

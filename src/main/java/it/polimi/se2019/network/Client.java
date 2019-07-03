@@ -36,11 +36,22 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
      */
     public abstract void connect() throws UnknownHostException, RemoteException;
 
+    /**
+     * Forward the status of login at the UI.
+     * @param success True if login is successful, false otherwise
+     * @param isFirst True if the user is the first of the match and must choose the map
+     * @param nickname nickname of the user who has logged in
+     */
     public void handleLoginMessage(boolean success, boolean isFirst, String nickname) {
         if(success) this.ID = nickname;
         clientView.handleLogin(success, isFirst);
     }
 
+    /**
+     * Forward the message to the client view object
+     * @param message The message to forward
+     * @param nickname The player's nickname who has generate the message
+     */
     public void forwardToClientView(ModelViewMessage message, String nickname) {
         synchronized (clientView) {
             if (nickname.equals(ID) || nickname.equalsIgnoreCase("BROADCAST")) {
@@ -50,16 +61,28 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         }
     }
 
+    /**
+     * Create an EnemyView object for the player with the specified nickname
+     * @param nickname Enemy's nickname
+     */
     public synchronized void handleEnemyMessage(String nickname) {
         enemyViews.add(new ClientEnemyView(nickname, ui));
         notifyAll();
     }
 
+    /**
+     * Notify the View the user has been disconnected and close the client
+     */
     public void handleDisconnection() {
         clientView.handleDisconnection();
         closeAll();
     }
 
+    /**
+     * Notify the View the game is started.
+     * This method is executed when all the views has been set correctly.
+     * @param matchID The match's ID which has started
+     */
     public void handleStartGame(int matchID) {
         synchronized (clientView) {
             //If views are not initialized wait
@@ -79,6 +102,11 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         clientView.handleStartGameMessage(matchID);
     }
 
+    /**
+     * Forward the message to the correct enemy view object
+     * @param message The message to forward
+     * @param nickname The player's nickname who has generate the message
+     */
     public void forwardToEnemyView(ModelViewMessage message, String nickname) {
         synchronized (clientView) {
             for (ClientEnemyView ew : enemyViews) {
@@ -88,6 +116,10 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         }
     }
 
+    /**
+     * Forward the message to the map view object
+     * @param message The message to forward
+     */
     public void forwardToMapView(ModelViewMessage message) {
         synchronized (clientView) {
             mapView.update(null, message);
@@ -95,10 +127,19 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
         }
     }
 
+    /**
+     * Forward the message to the skull board view object
+     * @param message The message to forward
+     */
     public void forwardToSkullBoardView(ModelViewMessage message) {
         skullBoardView.update(null, message);
     }
 
+    /**
+     * Set the ui param of this object.
+     * Set the Client param of SkullBoardView and MapView
+     * @param ui The UI object to set
+     */
     public void setUpUi(UiInterface ui) {
         this.ui = ui;
         skullBoardView = new ClientSkullBoardView(ui);
@@ -114,12 +155,23 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
 
+    /**
+     * Shutdown correctly an RMI client
+     * @throws NoSuchObjectException If the object has already been unreferenced
+     */
     protected void unreferenced() throws NoSuchObjectException {
         UnicastRemoteObject.unexportObject(this, true);
     }
 
+    /**
+     * Close all stream open and terminate all the thread in order to disconnect correctly a client
+     */
     public abstract void closeAll();
 
+    /**
+     * Forward to the view the list of possible characters form which a user can choose
+     * @param character The list of possible characters.
+     */
     public void handleCharacterMessage(List<Character> character) {
         clientView.setPossibleCharacter(character);
     }

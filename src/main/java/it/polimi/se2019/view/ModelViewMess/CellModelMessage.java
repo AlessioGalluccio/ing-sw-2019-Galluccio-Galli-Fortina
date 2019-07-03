@@ -36,6 +36,12 @@ public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage
         client.forwardToMapView(this);
     }
 
+    /**
+     * Each message has an ack in order to handle its receiving correctly.
+     * Only if this message's ack is grater the last one received should be handled.
+     * This method return the ack of this message.
+     * @return the ack of this message.
+     */
     public int getAck() {
         return ack;
     }
