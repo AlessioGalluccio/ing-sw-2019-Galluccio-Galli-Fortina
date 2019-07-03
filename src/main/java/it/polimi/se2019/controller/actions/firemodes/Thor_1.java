@@ -16,14 +16,14 @@ public class Thor_1 extends FireMode {
     private static final long serialVersionUID = 5449929047676709791L;
 
     //messages
-    public static final String SELECT_TARGET_NORMAL = "Select a player target you can see. ";
-    public static final String SELECT_TARGET_OPTIONAL_1 = "Select a player target whom the first target can see. ";
-    public static final String SELECT_TARGET_OPTIONAL_2 = "Select a player target whom the second target can see. ";
+    static final String SELECT_TARGET_NORMAL = "Select a player target you can see. ";
+    static final String SELECT_TARGET_OPTIONAL_1 = "Select a player target whom the first target can see. ";
+    static final String SELECT_TARGET_OPTIONAL_2 = "Select a player target whom the second target can see. ";
 
     //errors
-    public static final String NOT_VISIBLE_BY_AUTHOR = "This target is not visible by author. ";
-    public static final String NOT_VISIBLE_BY_FIRST_TARGET= "This target is not visible by first target. ";
-    public static final String NOT_VISIBLE_BY_SECOND_TARGET= "This target is not visible by second target. ";
+    static final String NOT_VISIBLE_BY_AUTHOR = "This target is not visible by author. ";
+    static final String NOT_VISIBLE_BY_FIRST_TARGET= "This target is not visible by first target. ";
+    static final String NOT_VISIBLE_BY_SECOND_TARGET= "This target is not visible by second target. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

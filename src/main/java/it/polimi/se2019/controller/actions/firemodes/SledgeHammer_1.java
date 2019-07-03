@@ -16,7 +16,7 @@ public class SledgeHammer_1 extends FireMode {
     public static final String SELECT_PLAYER = "Select a player on your cell. ";
 
     //errors
-    public static final String NOT_ON_YOUR_CELL = "This player is not on your cell. ";
+    static final String NOT_ON_YOUR_CELL = "This player is not on your cell. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

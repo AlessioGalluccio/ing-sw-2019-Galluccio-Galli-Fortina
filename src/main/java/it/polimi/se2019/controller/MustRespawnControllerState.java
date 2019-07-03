@@ -16,8 +16,8 @@ public class MustRespawnControllerState extends StateController {
     boolean completedRespawn = false;
 
 
-    public static final String POWERUP_DISCARD_REQUEST = "Please, discard a PowerUp to spawn";
-    public static final String TOO_MANY_CARDS = "You have already three PowerUps. ";
+    static final String POWERUP_DISCARD_REQUEST = "Please, discard a PowerUp to spawn";
+    static final String TOO_MANY_CARDS = "You have already three PowerUps. ";
 
     /**
      * constructor

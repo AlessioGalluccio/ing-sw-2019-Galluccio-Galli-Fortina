@@ -15,17 +15,17 @@ public class VortexCannon_1 extends FireMode {
     private static final long serialVersionUID = 826096278509667369L;
 
     //messages
-    public static final String SELECT_CELL_VORTEX = "Select a cell for vortex. ";
-    public static final String SELECT_FIRST_TARGET_VORTEX = "Select a player target near the vortex. ";
-    public static final String SELECT_SECOND_TARGET_VORTEX_OPTIONAL = "Select a second target player. ";
-    public static final String SELECT_THIRD_TARGET_VORTEX_OPTIONAL = "Select a third target player. ";
+    static final String SELECT_CELL_VORTEX = "Select a cell for vortex. ";
+    static final String SELECT_FIRST_TARGET_VORTEX = "Select a player target near the vortex. ";
+    static final String SELECT_SECOND_TARGET_VORTEX_OPTIONAL = "Select a second target player. ";
+    static final String SELECT_THIRD_TARGET_VORTEX_OPTIONAL = "Select a third target player. ";
 
 
     //errors
-    public static final String CELL_NOT_VISIBLE = "This cell is not visible. ";
-    public static final String INVALID_TARGET_VORTEX = "This target is too distant from vortex. ";
-    public static final String TOO_MANY_TARGETS = "Can't add more targets. ";
-    public static final String PLAYER_ALREADY_SELECTED = "This player is already selected. ";
+    static final String CELL_NOT_VISIBLE = "This cell is not visible. ";
+    static final String INVALID_TARGET_VORTEX = "This target is too distant from vortex. ";
+    static final String TOO_MANY_TARGETS = "Can't add more targets. ";
+    static final String PLAYER_ALREADY_SELECTED = "This player is already selected. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

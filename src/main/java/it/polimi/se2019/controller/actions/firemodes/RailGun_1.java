@@ -14,10 +14,10 @@ public class RailGun_1 extends FireMode {
     private static final long serialVersionUID = 4684255276743354888L;
 
     //messages
-    public static final String SELECT_PLAYER_RAILGUN = "Select a target player. ";
+    static final String SELECT_PLAYER_RAILGUN = "Select a target player. ";
 
     //errors
-    public static final String INVALID_TARGET = "Invalid target. ";
+    static final String INVALID_TARGET = "Invalid target. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
@@ -53,6 +53,11 @@ public class RailGun_1 extends FireMode {
         }
     }
 
+    /**
+     * returns true if cell target is in valid position for RailGun
+     * @param cellOfTarget the target cell
+     * @return true if valid target cell, false if not
+     */
     protected boolean isInValidPosition(Cell cellOfTarget){
         return(gameHandler.getMap().getCellInDirection(author.getCell(),'N').contains(cellOfTarget) ||
             gameHandler.getMap().getCellInDirection(author.getCell(),'E').contains(cellOfTarget) ||

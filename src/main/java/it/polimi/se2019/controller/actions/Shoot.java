@@ -37,9 +37,6 @@ public class Shoot extends Action{
     static final String NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL = "Finish Targeting before Optional, please. ";
     static final String SELECT_FIREMODE_BEFORE_OPTIONAL = "Select a a base firemode before an optional one. ";
 
-    //TODO manca WeaponCardMess per StringAndMessage !!!!!
-    private final static StringAndMessage SECOND_STRING_AND_MESS = new StringAndMessage(Identificator.FIRE_MODE_MESSAGE, "Select a Firemode");
-
     /**
      * constructor
      * @param gameHandler the gamehandler of the match

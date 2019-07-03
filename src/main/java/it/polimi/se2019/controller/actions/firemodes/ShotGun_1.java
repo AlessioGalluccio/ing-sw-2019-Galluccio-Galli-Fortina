@@ -14,12 +14,12 @@ public class ShotGun_1 extends FireMode {
     private static final long serialVersionUID = 5078758035082132955L;
 
     //messages
-    public static final String SELECT_PLAYER_IN_YOUR_CELL = "Select a target in your cell. ";
-    public static final String SELECT_CELL_TO_MOVE = "Select a cell where to move the target or fire. ";
+    static final String SELECT_PLAYER_IN_YOUR_CELL = "Select a target in your cell. ";
+    static final String SELECT_CELL_TO_MOVE = "Select a cell where to move the target or fire. ";
 
     //errors
-    public static final String INVALID_CELL = "Invalid cell. ";
-    public static final String TOO_DISTANT_TARGET = "Target too distant. ";
+    static final String INVALID_CELL = "Invalid cell. ";
+    static final String TOO_DISTANT_TARGET = "Target too distant. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

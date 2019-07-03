@@ -43,7 +43,6 @@ public class Move extends Action {
 
     @Override
     public void addCell(int x, int y) throws WrongInputException {
-        //TODO discutere sull'executeAction()
         List<Cell> arrayCell = gameHandler.getMap().getCellAtDistance(playerAuthor.getCell(), getMaxDistance());
 
         try {

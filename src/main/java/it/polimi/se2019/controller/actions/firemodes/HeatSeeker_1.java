@@ -11,13 +11,12 @@ import java.util.List;
 public class HeatSeeker_1 extends FireMode {
 
     private static final long serialVersionUID = 4760119110368705474L;
-    private static String FIRST_MSG_STR = "Select a player target. ";
 
     //messsages
-    public static final String SELECT_TARGET_NOT_VISIBLE = "Select a target not visible. ";
+    static final String SELECT_TARGET_NOT_VISIBLE = "Select a target not visible. ";
 
     //errors
-    public static final String TARGET_NOT_VALID = "This target is not valid. ";
+    static final String TARGET_NOT_VALID = "This target is not valid. ";
 
 
     @Override

@@ -13,8 +13,8 @@ public class RailGun_2 extends RailGun_1 {
 
     private static final long serialVersionUID = 3954418059011118447L;
 
-    public static final String PLAYER_ALREADY_SELECTED = "This player is already selected. ";
-    public static final String SELECT_SECOND_PLAYER = "Select another target player or fire. ";
+    static final String PLAYER_ALREADY_SELECTED = "This player is already selected. ";
+    static final String SELECT_SECOND_PLAYER = "Select another target player or fire. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

@@ -18,7 +18,7 @@ public class FlameThrower_2 extends FlameThrower_1 {
     private List<Player> targetsDamage1 = new ArrayList<>();
     private List<Player> targetsDamage2 = new ArrayList<>();
     //errors
-    public static final String TARGET_NOT_NEEDED = "This target is not needed. ";
+    static final String TARGET_NOT_NEEDED = "This target is not needed. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

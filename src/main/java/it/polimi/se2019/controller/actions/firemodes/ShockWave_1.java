@@ -14,12 +14,12 @@ public class ShockWave_1 extends FireMode {
     private static final long serialVersionUID = -7666019166677851905L;
 
     //messages
-    public static final String SELECT_FIRST_PLAYER = "Select a first target player. ";
-    public static final String SELECT_SECOND_PLAYER = "Select a second target player or fire. ";
-    public static final String SELECT_THIRD_PLAYER = "Select a third target player or fire. ";
+    static final String SELECT_FIRST_PLAYER = "Select a first target player. ";
+    static final String SELECT_SECOND_PLAYER = "Select a second target player or fire. ";
+    static final String SELECT_THIRD_PLAYER = "Select a third target player or fire. ";
 
     //errors
-    public static final String INVALID_TARGET = "Invalid target. ";
+    static final String INVALID_TARGET = "Invalid target. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {

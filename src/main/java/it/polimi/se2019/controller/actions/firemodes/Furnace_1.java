@@ -48,6 +48,12 @@ public class Furnace_1 extends FireMode {
         }
     }
 
+    /**
+     * method of fire for Furnace firemodes
+     * @param damage the damage the targets will take
+     * @param marks the marks the tagets will take
+     * @throws WrongInputException if it can't do fire
+     */
     protected void fireFurnace(int damage, int marks) throws WrongInputException{
         if(shoot.getTargetsPlayer().isEmpty()){
             throw new WrongInputException(CANT_DO_FIRE);

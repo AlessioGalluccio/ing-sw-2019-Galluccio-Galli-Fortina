@@ -32,15 +32,14 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     protected transient Player author;
     protected transient PlayerView playerView;
 
-    public static final String NOT_PRESENT = "Can't do more damage to this player";
-    public static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
-    public static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
-    public static final String KILLED = "You killed ths Player";
+     static final String NOT_PRESENT = "Can't do more damage to this player";
+    static final String TOO_MANY = "You have already three marks on this Player, you will not add more marks";
+    static final String OVERKILLED = "You have overkilled this player, you can't do more damage";
+    static final String KILLED = "You killed ths Player";
 
-    public static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
-    public static final String CANT_PAY = "You don't have enough Ammo for this. ";
+    static final String NO_TARGET_TARGETING = "Select a target for your firemode before";
+    static final String CANT_PAY = "You don't have enough Ammo for this. ";
 
-    public static final String NO_TARGET_NO_ACTION = "No target available, action is aborted. ";
 
     //common used in firemodes
     public static final String CANT_DO = "You can't do this.  ";
@@ -48,12 +47,14 @@ public abstract class FireMode implements AddFireModeMethods, Serializable {
     public static final String SELECTED_YOURSELF = "Error, you have selected yourself. ";
     public static final String NOT_VISIBLE = "Error, this player is not visible. ";
     public static final String CANT_DO_FIRE = "You can't do fire now. ";
-    public static final String NO_VISIBLE_FOR_TARGETING = "No visible target for Targeting. ";
     public static final String INVALID_TARGET_FOR_TARGETING = "Invalid target for targeting scope. ";
 
 
+    /**
+     * method used for testing
+     * @return the GameHandler saved in the Firemode
+     */
     public GameHandler getGameHandler() {
-        //TODO Eliminala, serve SOLO PER TESTING
         return gameHandler;
     }
 

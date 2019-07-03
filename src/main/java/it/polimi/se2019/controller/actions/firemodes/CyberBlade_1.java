@@ -14,13 +14,13 @@ public class CyberBlade_1 extends FireMode {
     private AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(0,0,0);
     private AmmoBag COST_SECOND_OPTIONAL = new AmmoBag(0,1,0);
 
-    public static final String FIRST_MESSAGE = "Select a player target. ";
-    public static final String FIRST_OPTIONAL_MESSAGE = "Select a cell where to move. ";
-    public static final String SECOND_OPTIONAL_MESSAGE = "Select a second player target. ";
+    static final String FIRST_MESSAGE = "Select a player target. ";
+    static final String FIRST_OPTIONAL_MESSAGE = "Select a cell where to move. ";
+    static final String SECOND_OPTIONAL_MESSAGE = "Select a second player target. ";
 
-    public static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
-    public static final String OPTIONAL_ALREADY_SELECTED = "Optional already selected. ";
-    public static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
+    static final String SELECT_FIRST_TARGET_BEFORE = "Select a target for the normal firemode before.";
+    static final String OPTIONAL_ALREADY_SELECTED = "Optional already selected. ";
+    static final String TOO_MUCH_DISTANCE = "This cell is too distant. ";
 
     @Override
     public List<StringAndMessage> getMessageListExpected() {
