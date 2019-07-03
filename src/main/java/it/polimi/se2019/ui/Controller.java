@@ -1027,7 +1027,7 @@ public class Controller implements Initializable {
                 frenzyPlayer();
             }
             else{
-                //TODO gestire il caso in cui è frenzy solo le action
+
                 ArrayList<Image> images= setCharacter(ControllerLogin.clientView.getPlayerCopy().getCharacter().getId(),isFrenzyTime);
                 yourCharacter.setImage(images.get(0));
                 possibleActions.setImage(images.get(1));
@@ -1050,6 +1050,10 @@ public class Controller implements Initializable {
         String skullnum = Integer.toString(ControllerLogin.skullBoardView.getOriginalSkull());
         updateSkullBoard(skullnum);
 
+        updatePlayerSkull();
+        updatePlayerMarks();
+        updatePoints(ControllerLogin.clientView.getPlayerCopy().getNumPoints());
+        updatePlayerDamage();
 
 
         setDiscardReload();
