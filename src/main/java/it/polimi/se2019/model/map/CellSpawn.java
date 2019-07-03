@@ -80,6 +80,7 @@ public class CellSpawn extends Cell {
         for(int i=0; i<MAX_WEAPONCARD; i++) {
             if(weapon[i]==null) {
                 weapon[i]=card;
+                notifyObservers(new CellModelMessage(this.clone()));
                 return cardToReplace;
             }
         }
