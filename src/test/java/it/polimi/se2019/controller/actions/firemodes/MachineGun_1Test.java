@@ -31,11 +31,9 @@ public class MachineGun_1Test {
     private Cell commonCell;
 
     private final static int MACHINE_WEAPON_ID = 15;
-    private final static int MACHINE_FIREMODE_ID = 151;
 
     @Before
     public void setUp() throws Exception {
-        //TODO playerview non testata
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);

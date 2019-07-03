@@ -37,13 +37,11 @@ public class TestLockRifle_1 {
     private Cell notVisibleCell;
     private PlayerView playerView;
 
-    private final static int LOCK_RIFLE_WEAPON_ID = 14;
-    private final static int LOCK_RIFLE_FIREMODE_ID = 141;
+    private final static int LOCK_RIFLE_WEAPON_ID = 14;;
 
 
     @Before
     public void setUp() throws Exception {
-        //TODO playerview non testata
         authorPlayer = new Player("TonyStark", new Character("IronMan", "yellow"), 2008);
         targetPlayer1 = new Player("SteveRogers", new Character("CapAmerica", "blue"), 2011);
         targetPlayer2 = new Player("Hulk", new Character("Hulk", "yellow"), 3);
@@ -76,7 +74,6 @@ public class TestLockRifle_1 {
         targetPlayer2.setPosition(commonCell);
 
         //target 3 is in another room
-        //TODO controlla che sia un'altra statnza!!
         notVisibleCell = gameHandler.getCellByCoordinate(1, 2);
         targetPlayer3.setPosition(notVisibleCell);
 
@@ -92,13 +89,6 @@ public class TestLockRifle_1 {
         //add firemode
         shoot.addFireMode(1);
 
-
-    }
-
-    @Test
-    public void sendPossibleTargetTest() {
-        //TODO trovare un metodo per testarlo
-        //lockRifle_1.sendPossibleTargetsAtStart();
 
     }
 

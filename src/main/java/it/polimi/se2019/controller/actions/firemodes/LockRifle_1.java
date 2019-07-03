@@ -41,7 +41,7 @@ public class LockRifle_1 extends FireMode {
             super.fire();
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_DO_FIRE);
         }
     }
 
@@ -72,12 +72,12 @@ public class LockRifle_1 extends FireMode {
                 shoot.addPlayerTargetFromFireMode(target, false);
             }
             else{
-                throw new WrongInputException();
+                throw new WrongInputException(CANT_DO);
             }
 
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_DO);
         }
 
     }
@@ -101,17 +101,6 @@ public class LockRifle_1 extends FireMode {
         }
         else{
             throw new WrongInputException(CANT_DO);
-        }
-    }
-
-    @Override
-    public void addTargetingScope(int targetingCardID, AmmoBag cost) throws WrongInputException, NotPresentException,
-            NotEnoughAmmoException, FiremodeOfOnlyMarksException {
-        if(shoot.getTargetsPlayer().size() == 1) {
-            super.addTargetingScope(targetingCardID, cost);
-        }
-        else{
-            throw new WrongInputException();
         }
     }
 }
