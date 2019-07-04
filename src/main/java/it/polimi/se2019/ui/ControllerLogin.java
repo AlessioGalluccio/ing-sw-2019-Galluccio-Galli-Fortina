@@ -4,12 +4,10 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
-import it.polimi.se2019.network.messages.LoginMessage;
 import it.polimi.se2019.network.rmi.RMIClient;
 import it.polimi.se2019.network.socket.SocketClient;
 import it.polimi.se2019.view.clientView.ClientEnemyView;
 import it.polimi.se2019.view.clientView.ClientMapView;
-import it.polimi.se2019.view.clientView.ClientSkullBoardView;
 import it.polimi.se2019.view.clientView.ClientView;
 import it.polimi.se2019.view.remoteView.EnemyView;
 import it.polimi.se2019.view.remoteView.MapView;
@@ -30,7 +28,6 @@ import javafx.stage.Stage;
 import java.net.UnknownHostException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +64,7 @@ public class ControllerLogin implements UiInterface {
     static ClientEnemyView enemyView3;
     static ClientEnemyView enemyView4;
     static ClientMapView mapView;
+    private static final Object lock = new Object();
 
 
 
@@ -149,7 +147,7 @@ public class ControllerLogin implements UiInterface {
     public void login(boolean success, boolean isFirst) {
 
         Platform.runLater(() ->  {
-
+            synchronized (lock) {
                 if (success && isFirst && firstAgain) {
                     try {
                         fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
@@ -157,8 +155,7 @@ public class ControllerLogin implements UiInterface {
                     } catch (Exception e) {
                         Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
                     }
-                }
-                else if (success) {
+                } else if (success) {
 
                     status.setText("LOGIN SUCCESSFUL!");
                     Stage stage = (Stage) login.getScene().getWindow();
@@ -169,6 +166,7 @@ public class ControllerLogin implements UiInterface {
 
                             fxmlLoader = open("chooseMap.fxml", " CHOOSE MAP", 450, 530);
                             controller = fxmlLoader.getController();
+                            lock.notifyAll();
                             firstAgain = true;
 
                         } catch (Exception e) {
@@ -178,6 +176,7 @@ public class ControllerLogin implements UiInterface {
                         try {
                             fxmlLoader = open("WaitingRoom.fxml", "LEAN BACK AND CHILL", 520, 400);
                             controller = fxmlLoader.getController();
+                            lock.notifyAll();
                         } catch (Exception e) {
                             Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
                         }
@@ -186,7 +185,7 @@ public class ControllerLogin implements UiInterface {
                     status.setText("LOGIN FAILED");
 
                 }
-
+            }
 
         });
 
@@ -226,24 +225,25 @@ public class ControllerLogin implements UiInterface {
      * open map window
      */
     @Override
-    public void startGame() {
+    public synchronized void startGame() {
+
+        Platform.runLater(() -> {
+            synchronized (lock) {
+                try {
+
+                    fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
+                    Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
+                    stage.close();
+                    controller = fxmlLoader.getController();
+                    lock.notifyAll();
+                } catch (Exception e) {
+                    Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
+                }
+            }
+        });
 
 
-        Platform.runLater(() ->  {
-
-        try {
-
-            fxmlLoader = open("Map1.fxml", "ADRENALINE", 1366, 768);
-            Stage stage = (Stage) controller.getCloseWaiting().getScene().getWindow();
-            stage.close();
-            controller = fxmlLoader.getController();
-        }
-        catch (Exception e) {
-            Logger.getLogger(ControllerLogin.class.getName()).log(Level.FINE, "do nothing");
-        }
-            });
-
-        }
+    }
 
 
     /**
@@ -285,7 +285,6 @@ public class ControllerLogin implements UiInterface {
     @Override
     public void setSkullBoard(SkullBoardView skullBoard) {
         skullBoardView = skullBoard;
-        //Controller.setSkullBoard((ClientSkullBoardView) skullBoardView);
     }
 
     /**
@@ -334,9 +333,18 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void updateCell(Cell cell) {
-        controller.updatePlayersPosition(cell);
-        controller.updateWeaponMap();
-        updateAmmoCardMap();
+        synchronized (lock) {
+            while (controller == null) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            controller.updatePlayersPosition(cell);
+            controller.updateWeaponMap();
+            updateAmmoCardMap();
+        }
     }
 
     /**
@@ -344,18 +352,24 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void updatePlayer() {
-        updateWeaponPlayer();
-        updatePlayerPowerup();
-        updatePlayerPoints();
-        updatePlayerAmmo();
-        setPlayerFrenzy();
-        updatePlayerDamage();
-        updatePlayerSkull();
-        updatePlayerMark();
-        updatePlayerCharacter();
-
-
-
+        synchronized (lock) {
+            while (controller == null) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            updateWeaponPlayer();
+            updatePlayerPowerup();
+            updatePlayerPoints();
+            updatePlayerAmmo();
+            setPlayerFrenzy();
+            updatePlayerDamage();
+            updatePlayerSkull();
+            updatePlayerMark();
+            updatePlayerCharacter();
+        }
     }
 
     /**
@@ -383,19 +397,35 @@ public class ControllerLogin implements UiInterface {
      */
     @Override
     public void updateEnemy(ClientEnemyView enemyView) {
-        controller.updateEnemyCharacter(enemyView);
-        controller.updateEnemyWeapon(enemyView);
-        controller.frenzyEnemy(enemyView);
-        controller.updateEnemyDamage(enemyView);
-        controller.updateEnemyMarks(enemyView);
-        controller.updateEnemySkull(enemyView);
+        synchronized (lock) {
+            while (controller == null) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            controller.updateEnemyCharacter(enemyView);
+            controller.updateEnemyWeapon(enemyView);
+            controller.frenzyEnemy(enemyView);
+            controller.updateEnemyDamage(enemyView);
+            controller.updateEnemyMarks(enemyView);
+            controller.updateEnemySkull(enemyView);
+        }
     }
 
     @Override
     public void updateSkullBoard() {
-
-        updateSkullMap(ControllerLogin.skullBoardView.getOriginalSkull());
-        //updateSetting(mapView.getMapCopy().getID(), skullNumber);
+        synchronized (lock) {
+            while (controller == null) {
+                try {
+                    lock.wait();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            updateSkullMap(ControllerLogin.skullBoardView.getOriginalSkull());
+        }
     }
 
     /**
