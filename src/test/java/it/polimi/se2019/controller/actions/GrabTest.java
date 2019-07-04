@@ -75,7 +75,6 @@ public class GrabTest {
         targetPlayer2.setPosition(commonCell);
 
         //target 3 is in another room
-        //TODO controlla che sia un'altra statnza!!
         notVisibleCell = gameHandler.getCellByCoordinate(1,2);
         targetPlayer3.setPosition(notVisibleCell);
 

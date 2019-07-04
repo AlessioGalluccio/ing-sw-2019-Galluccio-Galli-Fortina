@@ -7,10 +7,7 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.network.Server;
-import it.polimi.se2019.view.ViewControllerMess.DiscardPowerupMessage;
-import it.polimi.se2019.view.ViewControllerMess.DiscardWeaponMessage;
-import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
-import it.polimi.se2019.view.ViewControllerMess.ReloadMessage;
+import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 import org.junit.Before;
 import org.junit.Test;
@@ -288,5 +285,69 @@ public class EmptyControllerStateTest {
         assertEquals(EmptyControllerState.POWERUP_NOT_PRESENT_DISCARD + EmptyControllerState.SELECT_ACTION_REQUEST,
                 playerView.getLastStringPrinted());
     }
+
+    @Test
+    public void handleNewtonPositive() {
+        NewtonCard newtonCard = new NewtonCard(ColorRYB.BLUE,1,1);
+        try {
+            authorPlayer.addPowerupCard(newtonCard);
+        } catch (TooManyException e) {
+            //shouldn't happen
+        }
+        NewtonMessage newtonMessage = new NewtonMessage(newtonCard, authorID, playerView);
+        controller.update(null, newtonMessage);
+        assertTrue(controller.getState() instanceof NewtonSelectedControllerState);
+    }
+
+    @Test
+    public void handleNewtonNegative() {
+        NewtonCard newtonCard = new NewtonCard(ColorRYB.BLUE,1,1);
+        //we don't add the powerup to the player
+        NewtonMessage newtonMessage = new NewtonMessage(newtonCard, authorID, playerView);
+        controller.update(null, newtonMessage);
+        assertEquals(EmptyControllerState.POWERUP_NOT_PRESENT_USE + EmptyControllerState.SELECT_ACTION_REQUEST,
+                playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handleTeleporterPositive() {
+        TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);
+        try {
+            authorPlayer.addPowerupCard(teleporterCard);
+        } catch (TooManyException e) {
+            //shouldn't happen
+        }
+        TeleporterMessage teleporterMessage = new TeleporterMessage(teleporterCard, authorID, playerView);
+        controller.update(null, teleporterMessage);
+        assertTrue(controller.getState() instanceof TeleporterSelectedControllerState);
+    }
+
+    @Test
+    public void handleTeleporterNegative() {
+        TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);;
+        //we don't add the powerup to the player
+        TeleporterMessage teleporterMessage = new TeleporterMessage(teleporterCard, authorID, playerView);
+        controller.update(null, teleporterMessage);
+        assertEquals(EmptyControllerState.POWERUP_NOT_PRESENT_USE + EmptyControllerState.SELECT_ACTION_REQUEST,
+                playerView.getLastStringPrinted());
+    }
+
+    @Test
+    public void handlePassTurn() {
+        PassTurnMessage passTurnMessage = new PassTurnMessage(authorID, playerView);
+        controller.update(null, passTurnMessage);
+        assertTrue(controller.getState() instanceof NotYourTurnState);
+    }
+
+    /**
+     * we test the disconnection message
+     */
+    @Test
+    public void handleDisconnection() {
+        ReconnectionMessage reconnectionMessage = new ReconnectionMessage(false,authorID, playerView);
+        controller.update(null, reconnectionMessage);
+        assertTrue(controller.getState() instanceof DisconnectedControllerState);
+    }
+
 
 }

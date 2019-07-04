@@ -4,10 +4,8 @@ import it.polimi.se2019.controller.ActionSelectedControllerState;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.firemodes.FireMode;
-import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
-import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.network.Server;
 import it.polimi.se2019.view.ViewControllerMess.CellMessage;
@@ -16,13 +14,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-public class MoveTest {
-
+public class MoveFrenzyTest {
     private Player authorPlayer;
     private Player targetPlayer1;
     private Player targetPlayer2;
@@ -59,13 +55,13 @@ public class MoveTest {
         controller = new Controller(gameHandler, null, playerView);
         controller.setPlayerView(playerView);
         controller.setAuthor(authorPlayer);
-        action = new Move(gameHandler, controller);
+        action = new MoveFrenzy(gameHandler, controller);
 
         controller.setState(new ActionSelectedControllerState(controller, gameHandler, action));
         stateController = controller.getState();
 
         //author, target 1 and target 2 in the same cell
-        commonCell = gameHandler.getCellByCoordinate(0,1);
+        commonCell = gameHandler.getCellByCoordinate(0,2);
         authorPlayer.setPosition(commonCell);
         targetPlayer1.setPosition(commonCell);
         targetPlayer2.setPosition(commonCell);
@@ -78,80 +74,11 @@ public class MoveTest {
     }
 
     @Test
-    public void movePositive() {
-        CellMessage cellMessage = new CellMessage(1,1,authorPlayer.getID(), playerView);
+    public void correctMovement() {
+        CellMessage cellMessage = new CellMessage(3,1,authorPlayer.getID(),playerView);
         controller.update(null, cellMessage);
-        assertEquals(1, authorPlayer.getCell().getCoordinateX());
+        assertEquals(3, authorPlayer.getCell().getCoordinateX());
         assertEquals(1, authorPlayer.getCell().getCoordinateY());
     }
 
-    @Test
-    public void moveTooDistantNegative() {
-        CellMessage cellMessage = new CellMessage(3,2,authorPlayer.getID(), playerView);
-        controller.update(null, cellMessage);
-        assertEquals(Move.TOO_DISTANT_CELL + Move.FIRST_STRING_AND_MESS.getString(), playerView.getLastStringPrinted());
-    }
-
-    @Test
-    public void getCost() {
-        assertEquals(action.getCost().getRedAmmo(), 0);
-        assertEquals(action.getCost().getBlueAmmo(), 0);
-        assertEquals(action.getCost().getYellowAmmo(), 0);
-    }
-
-    @Test
-    public void getMaxDistance() {
-        Move move = new Move(gameHandler,controller);
-        assertEquals(3,move.getMaxDistance());
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addPlayerTargetNegative() throws Exception {
-        action.addPlayerTarget(1);
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addTargetingScopeNegative() throws Exception {
-        action.addTargetingScope(1, new AmmoBag(1,0,0));
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addReloadNegative() throws Exception {
-        action.addReload(1);
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addFiremodeNegative() throws Exception {
-        action.addFireMode(1);
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addWeaponNegative() throws Exception {
-        action.addWeapon(new WeaponCard() {
-            @Override
-            public List<FireMode> getFireMode() {
-                return null;
-            }
-        });
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addOptionalNegative() throws Exception {
-        action.addOptional(1);
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addFireNegative() throws Exception {
-        action.fire();
-    }
-
-    @Test(expected = WrongInputException.class)
-    public void addDiscardWeaponNegative() throws Exception {
-        action.addDiscardWeapon(new WeaponCard() {
-            @Override
-            public List<FireMode> getFireMode() {
-                return null;
-            }
-        });
-    }
 }

@@ -82,6 +82,8 @@ public class HasReloadedControllerStateTest {
     public void ReloadOrPassPositive() {
         NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
         controller.update(null, nopeMessage);
+        assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED
+                + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
         controller.getState().handleAction(1);
         assertEquals(HasReloadedControllerState.CANT_DO_ALREADY_RELOADED
                 + HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());

@@ -1,12 +1,15 @@
 package it.polimi.se2019.controller;
 
-import it.polimi.se2019.model.deck.PowerupCard;
-import it.polimi.se2019.model.deck.TagbackGrenadeCard;
+import it.polimi.se2019.controller.actions.firemodes.FireMode;
+import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.GameHandler;
 import it.polimi.se2019.model.map.Cell;
+import it.polimi.se2019.model.player.AmmoBag;
+import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.network.Server;
+import it.polimi.se2019.view.ViewControllerMess.NopeMessage;
 import it.polimi.se2019.view.ViewControllerMess.PlayerMessage;
 import it.polimi.se2019.view.ViewControllerMess.TagbackGrenadeMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
@@ -14,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -70,40 +74,44 @@ public class NotYourTurnStateTest {
         targetPlayer2.setPosition(gameHandler.getCellByCoordinate(0,1));
     }
 
+    /**
+     * here it's tested the response when there's an invalid input
+     */
     @Test
-    public void handleAction() {
-    }
-
-    @Test
-    public void handleCardSpawn() {
-    }
-
-    @Test
-    public void handleCell() {
-    }
-
-    @Test
-    public void handleFiremode() {
-    }
-
-    @Test
-    public void handleLogin() {
-    }
-
-    @Test
-    public void handleNewton() {
-    }
-
-    @Test
-    public void handleNope() {
-    }
-
-    @Test
-    public void handlePlayer() {
-    }
-
-    @Test
-    public void handleReload() {
+    public void waitYourTurnResponse() {
+        NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
+        controller.update(null, nopeMessage);
+        controller.getState().handleAction(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleCell(1,1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleFiremode(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleNewton(new NewtonCard(ColorRYB.BLUE,1,1));
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleOptional(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handlePlayer(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleReload(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleTargeting(new TargetingScopeCard(ColorRYB.BLUE,1,1), new AmmoBag(0,1,0));
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleTeleporter(new TeleporterCard(ColorRYB.BLUE,1,1));
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleWeaponCard(new WeaponCard() {
+            @Override
+            public List<FireMode> getFireMode() {
+                return null;
+            }
+        });
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleFire();
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleDiscardWeapon(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
+        controller.getState().handleDiscardPowerup(1);
+        assertEquals(NotYourTurnState.NOT_YOUR_TURN_RESPONSE, playerView.getLastStringPrinted());
     }
 
     @Test
@@ -137,15 +145,6 @@ public class NotYourTurnStateTest {
     }
 
     @Test
-    public void handleTargeting() {
-    }
-
-    @Test
-    public void handleTeleporter() {
-
-    }
-
-    @Test
     public void handleReconnectionDisconnected(){
         stateController.handleReconnection(false);
         assertEquals( true, controller.getState() instanceof DisconnectedControllerState);
@@ -156,13 +155,5 @@ public class NotYourTurnStateTest {
         stateController.handleReconnection(true);
         assertEquals(false, controller.getState() instanceof DisconnectedControllerState );
         assertEquals(true, controller.getState() instanceof NotYourTurnState);
-    }
-
-    @Test
-    public void handleIsTurnPlayerNow() {
-        //ViewControllerMessage msg = new CellMessage(1,2);
-        //stateController.handle(msg);
-
-
     }
 }

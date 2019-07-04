@@ -9,6 +9,7 @@ import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
 
 /**
  * @author Galli
+ * @author Galluccio
  */
 public class AmmoBag implements Serializable {
     private static final long serialVersionUID = -3617983877168060807L;

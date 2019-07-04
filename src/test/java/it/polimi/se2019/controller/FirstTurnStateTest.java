@@ -118,7 +118,7 @@ public class FirstTurnStateTest {
 
     @Test
     //controls that all these methods write the correct string to playerView
-    public void notReconnected() {
+    public void notCorrectMessages() {
         NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
         controller.update(null, nopeMessage);
         assertEquals(FirstTurnState.CANT_DO_THIS + FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
