@@ -14,6 +14,10 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class RMIServer extends UnicastRemoteObject implements RmiServerInterface {
     private static final long serialVersionUID = 7125169937302118373L;
     static RmiServerInterface remoteObj;

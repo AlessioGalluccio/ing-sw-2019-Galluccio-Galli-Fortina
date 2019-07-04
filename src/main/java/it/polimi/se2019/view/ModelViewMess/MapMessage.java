@@ -8,6 +8,9 @@ import it.polimi.se2019.view.remoteView.MapView;
  * Send a copy of the map to the view
  * Util ONLY at the start of the game, when the view has to know which map represent
  * After that use CellMessage!
+ * @author Galli
+ * @author Fortina
+ *
  */
 public class MapMessage implements ModelViewMessage, HandlerMapViewMessage  {
     private static final long serialVersionUID = -5176554593125828697L;

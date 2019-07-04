@@ -8,6 +8,9 @@ import java.net.ServerSocket;
 import java.util.logging.*;
 import java.util.concurrent.*;
 
+/**
+ * @author Galli
+ */
 public class SocketServer {
     private int port;
     private boolean open = true;

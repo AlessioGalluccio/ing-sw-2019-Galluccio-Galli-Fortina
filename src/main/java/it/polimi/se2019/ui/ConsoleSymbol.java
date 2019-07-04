@@ -1,5 +1,8 @@
 package it.polimi.se2019.ui;
 
+/**
+ * @author Galli
+ */
 public enum ConsoleSymbol {
     WALL("■"),
     PLAYER("⊚"),

@@ -3,6 +3,9 @@ package it.polimi.se2019.model.deck;
 
 import java.io.Serializable;
 
+/**
+ * @author Galli
+ */
 public class PointCard implements Serializable {
 
     private static final long serialVersionUID = 2961486207387549526L;

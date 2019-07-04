@@ -1,6 +1,5 @@
 package it.polimi.se2019.model.player;
 
-
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -27,6 +26,10 @@ import java.util.Objects;
 import static it.polimi.se2019.ui.ConsoleSymbol.PLAYER;
 import static it.polimi.se2019.ui.ConsoleSymbol.SKULL;
 
+/**
+ * @author Galli
+ * @author Galluccio
+ */
 public class Player extends Observable implements Target, Serializable {
     private static final long serialVersionUID = -889271951458445330L;
     private String nickname;
@@ -209,8 +212,8 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Returns a list for possible targets of Tagback granade
-     * @return a List of Players of possible targets of Tagback Granade
+     * Returns a list for possible targets of Tagback Grenade
+     * @return a List of Players of possible targets of Tagback Grenade
      */
     public List<Integer> getTargetsForTagBack() {
         return targetsForTagBack;
@@ -390,7 +393,7 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      * When someone shoot me, all my mark made by the shooter has to be eliminated and converted in damage.
-     * Remove all marks made by enemy
+     * Remove all marks made by enemy.
      * @param enemy who made marks I want to remove
      */
     public void removeMarkReceivedBy(Player enemy) {
@@ -399,7 +402,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Load the weapon selected, using ordinary ammo and ammo gained from discarded Powerups
+     * Load the weapon selected, using ordinary ammo and ammo gained from discarded Powerups.
      * @param weaponID the ID of the weapon
      * @throws NotPresentException if the Player doesn't have this weapon
      * @throws WeaponIsLoadedException if the weapon is already loaded
@@ -430,10 +433,12 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      * Discard a Powerup card.
-     * If it's discarded explicity by the player in order to gain the corresponding ammo, it adds the ammo in the temporary ammo.
+     * If it's discarded explicity by the player in order to gain the corresponding ammo,
+     * it adds the ammo in the temporary ammo.
      * If not used for a cost in the turn, the ammo will vanish.
      * @param powerupCard the card which has to be discarded
-     * @param isRespawnOrUse true if it's a respawn or it is used (don't add temporary ammo), false if not (add temporary ammo)
+     * @param isRespawnOrUse true if it's a respawn or it is used (don't add temporary ammo),
+     *                       false if not (add temporary ammo)
      * @throws NotPresentException if the card is not possessed by the Player
      */
     public void discardCard(PowerupCard powerupCard, boolean isRespawnOrUse) throws NotPresentException {
@@ -618,16 +623,16 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      * Used by clone to set the copy of mark
-     * @param markClone
+     * @param markClone tha mark object to clone
      */
     private void addMark(Mark markClone) {
         this.mark = markClone;
     }
 
     /**
-     * Used by clone to set the copy damage
+     * Used by clone to set the copy damage.
      * To add a damage by a enemy use receiveDamageBy()
-     * @param damageCopy
+     * @param damageCopy The player list to set
      */
     private void addDamage(ArrayList<Player> damageCopy) {
         this.damage = damageCopy;
@@ -635,7 +640,7 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      * If player die during the last turn or in frenzy mode set isFrenzyDeath as true.
-     * In this case the player can be cash only for 2-1-1-1 points and not for 8-6-4-2-1-1
+     * In this case the player can be cash only for 2-1-1-1 points and not for 8-6-4-2-1-1.
      */
     public void setFrenzyDeath() {
         isFrenzyDeath = true;
@@ -643,7 +648,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Deep clone of player for the view
+     * Deep clone of player for the view.
      * Not all the attributes are copied, only the NOT transient!
      * @return Deep copy of player
      */
@@ -674,7 +679,7 @@ public class Player extends Observable implements Target, Serializable {
 
     /**
      * String the full player, representing each attributes with symbol and color.
-     * Work with UTF-8 and ANSI code
+     * Work with UTF-8 and ANSI code.
      * @return The representation of the player
      */
     @Override

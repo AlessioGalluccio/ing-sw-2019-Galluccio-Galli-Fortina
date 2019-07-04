@@ -4,6 +4,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.Observer;
 
+/**
+ * @author Galli
+ */
 public interface Server extends Observer {
 
     /**

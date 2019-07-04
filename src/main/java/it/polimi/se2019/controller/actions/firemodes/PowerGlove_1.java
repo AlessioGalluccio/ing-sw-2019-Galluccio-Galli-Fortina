@@ -9,6 +9,10 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galli
+ * @author Galluccio
+ */
 public class PowerGlove_1 extends FireMode {
     static final String SELECT_PLAYER = "Select a player on any cell near you. ";
     static final String WRONG_PLAYER = "You can't select that player. ";

@@ -1,13 +1,15 @@
 package it.polimi.se2019.model.player;
 
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 
 import java.io.Serializable;
 import java.util.List;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
 
+/**
+ * @author Galli
+ */
 public class AmmoBag implements Serializable {
     private static final long serialVersionUID = -3617983877168060807L;
     private final int redAmmo;

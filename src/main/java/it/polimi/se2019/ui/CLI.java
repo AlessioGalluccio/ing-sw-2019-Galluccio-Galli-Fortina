@@ -18,6 +18,9 @@ import java.util.InputMismatchException;
 import java.util.*;
 import java.io.PrintWriter;
 
+/**
+ * @author Galli
+ */
 public class CLI implements UiInterface {
     private final int MIN_SKULL = 1;
     boolean endGame;

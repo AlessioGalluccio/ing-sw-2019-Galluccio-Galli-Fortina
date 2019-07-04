@@ -1,5 +1,8 @@
 package it.polimi.se2019.model.player;
 
+/**
+ * @author Galli
+ */
 public enum ColorRYB {
     RED,
     YELLOW,

@@ -1,6 +1,8 @@
 package it.polimi.se2019.network.messages;
 
-
+/**
+ * @author Galli
+ */
 public interface HandlerServerMessage {
 
     /**

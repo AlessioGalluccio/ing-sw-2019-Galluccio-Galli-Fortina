@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 import static it.polimi.se2019.model.player.ColorRYB.*;
 
-
+/**
+ * @author Galli
+ */
 public class AmmoPowerupCard implements AmmoCard {
     private static final long serialVersionUID = -65131800141018976L;
     private final int ID;

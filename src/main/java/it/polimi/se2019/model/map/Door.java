@@ -5,6 +5,9 @@ import it.polimi.se2019.ui.Printable;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
+/**
+ * @author Galli
+ */
 public class Door implements Border {
 
     private static final long serialVersionUID = -4178550241484863775L;

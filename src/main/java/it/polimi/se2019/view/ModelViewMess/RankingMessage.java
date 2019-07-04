@@ -6,6 +6,9 @@ import it.polimi.se2019.view.View;
 
 import java.util.List;
 
+/**
+ * @author Galli
+ */
 public class RankingMessage implements ModelViewMessage, HandlerPlayerViewMessage  {
     private static final long serialVersionUID = 210769547339910879L;
     private List<Player> ranking;

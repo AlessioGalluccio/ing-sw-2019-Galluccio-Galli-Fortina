@@ -4,6 +4,9 @@ import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerEnemyViewMessage;
 import it.polimi.se2019.view.remoteView.EnemyView;
 
+/**
+ * @author Galli
+ */
 public class ClientEnemyView extends EnemyView {
     private UiInterface ui;
     private int lastAck;

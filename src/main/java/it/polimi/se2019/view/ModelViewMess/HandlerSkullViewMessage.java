@@ -2,6 +2,9 @@ package it.polimi.se2019.view.ModelViewMess;
 
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 
+/**
+ * @author Galli
+ */
 public interface HandlerSkullViewMessage {
 
     /**

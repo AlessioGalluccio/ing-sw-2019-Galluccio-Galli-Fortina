@@ -18,6 +18,9 @@ import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 import static it.polimi.se2019.ui.ConsoleSymbol.SPAWN;
 import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
+/**
+ * @author Galli
+ */
 public class CellSpawn extends Cell {
     private static final long serialVersionUID = 4308424924665943011L;
     private final int MAX_WEAPONCARD = 3;

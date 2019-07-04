@@ -15,7 +15,10 @@ import it.polimi.se2019.network.messages.LoginMessage;
 
 import java.util.List;
 
-
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class ClientView extends View /*View implement observer/observable*/{
 
     private Player playerCopy;

@@ -7,6 +7,9 @@ import it.polimi.se2019.network.HandlerNetworkMessage;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Galli
+ */
 public class PossibleCharacterMessage implements HandlerNetworkMessage, Serializable {
 
     private static final long serialVersionUID = 3661734970314913421L;

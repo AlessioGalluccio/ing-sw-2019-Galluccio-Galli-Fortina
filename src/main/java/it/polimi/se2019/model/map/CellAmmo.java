@@ -7,7 +7,6 @@ import it.polimi.se2019.model.JsonAdapter;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
 import java.util.List;
@@ -16,6 +15,9 @@ import java.util.ArrayList;
 import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
 import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
+/**
+ * @author Galli
+ */
 public class CellAmmo extends Cell {
     private static final long serialVersionUID = 2030465796514725765L;
     private AmmoCard ammo;

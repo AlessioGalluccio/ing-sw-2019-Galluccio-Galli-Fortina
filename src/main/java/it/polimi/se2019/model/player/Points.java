@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galli
+ */
 public class Points implements Serializable {
     private static final long serialVersionUID = -7847198853015015370L;
     private ArrayList<PointCard> pointCard = new ArrayList<>();

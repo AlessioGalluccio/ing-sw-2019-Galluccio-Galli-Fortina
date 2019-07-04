@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * @author Galli
+ */
 public abstract class Map extends Observable implements Serializable {
     private static final long serialVersionUID = 7730216440770140648L;
     private int ID;
@@ -218,6 +221,9 @@ public abstract class Map extends Observable implements Serializable {
     }
 }
 
+/**
+ * @author Galli
+ */
 class InitializeMap {
     Cell[][] cell;
     ArrayList<Room> room = new ArrayList<>();

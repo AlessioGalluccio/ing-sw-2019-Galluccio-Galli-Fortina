@@ -11,6 +11,10 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * @author Galli
+ */
 public class WeaponDeck extends Deck<WeaponCard> {
 
     public WeaponDeck() {

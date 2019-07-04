@@ -12,13 +12,14 @@ import com.google.gson.JsonSerializer;
 /**
  * Used by Gson to serialize/deserialize concrete class that are saved through an interface or an abstract class
  * @param <T> abstract class or interface extended/implemented by the concrete class
+ * @author Galli
  */
 public class JsonAdapter<T>
         implements JsonSerializer<T>, JsonDeserializer<T> {
 
     /**
-     * Create a serializer for Gson for object saved thought the interface they implement
-     * Works whit abstract classes to
+     * Create a serializer for Gson for object saved thought the interface they implement.
+     * Works whit abstract classes too.
      * @param object The object which implements the interface
      * @param interfaceType the interface implemented
      * @param context
@@ -36,8 +37,8 @@ public class JsonAdapter<T>
     }
 
     /**
-     * Create a deserializer for Gson for object saved thought the interface they implement
-     * Works whit abstract classes to
+     * Create a deserializer for Gson for object saved thought the interface they implement.
+     * Works whit abstract classes too.
      * @param elem The Json element of the object which implements the interface
      * @param interfaceType the interface implemented
      * @param context

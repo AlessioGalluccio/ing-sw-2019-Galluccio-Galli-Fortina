@@ -6,6 +6,9 @@ import it.polimi.se2019.model.player.TooManyException;
 
 import java.util.List;
 
+/**
+ * @author Galli
+ */
 public interface AmmoCard extends Card {
 
     /**

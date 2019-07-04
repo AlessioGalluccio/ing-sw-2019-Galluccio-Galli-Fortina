@@ -1,9 +1,12 @@
 package it.polimi.se2019.model.deck;
 
-
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
 
+
+/**
+ * @author Galli
+ */
 public class TagbackGrenadeCard extends PowerupCard{
     private static final long serialVersionUID = -7421528938667576629L;
 

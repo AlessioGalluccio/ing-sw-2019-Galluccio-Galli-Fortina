@@ -1,11 +1,13 @@
 package it.polimi.se2019.model.map;
 
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.ui.Printable;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.WALL;
 
+/**
+ * @author Galli
+ */
 public class Passage implements Border {
 
     private static final long serialVersionUID = -2039080465510300245L;

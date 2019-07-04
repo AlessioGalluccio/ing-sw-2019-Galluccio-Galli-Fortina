@@ -5,6 +5,10 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
+
+/**
+ * @author Galli
+ */
 public abstract class PowerupCard implements Card {
     private static final long serialVersionUID = -678444631696460338L;
     private final int ID;
