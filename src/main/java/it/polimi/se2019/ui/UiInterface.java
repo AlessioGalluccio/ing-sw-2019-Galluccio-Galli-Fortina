@@ -9,7 +9,9 @@ import it.polimi.se2019.view.remoteView.MapView;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.util.List;
-
+/**
+ * @author Fortina
+ */
 public interface UiInterface {
 
     /**
