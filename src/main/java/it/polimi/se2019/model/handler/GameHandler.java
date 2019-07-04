@@ -355,9 +355,14 @@ public class GameHandler extends Observable {
                 cashPoint(p, doubleKill, false);
                 justDied.add(p);
                 p.resetDamage();
-                if(skull<=0) p.setFrenzyDeath();    //if skull <= 0 is going to start frenzy mode
-                                                    // so who is dead now has to be flipped
+
                 doubleKill=true;
+            }
+        }
+        if(skull<=0 && !justDied.isEmpty()) {
+            for (Player dead : justDied) {
+                dead.setFrenzyDeath();  //if skull <= 0 is going to start frenzy mode
+                                        // so who is dead now has to be flipped
             }
         }
     }
