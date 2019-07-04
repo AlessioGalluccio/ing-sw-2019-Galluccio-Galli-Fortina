@@ -110,8 +110,8 @@ public abstract class Deck<T> {
     }
 
     /**
-     * Pick the first card of the deck
-     * If the card picked is the last one, mix the deck
+     * Pick the first card of the deck.
+     * If the card picked is the last one, mix the deck.
      * @return The first elements of the deck
      */
     public T pick(){
@@ -122,7 +122,7 @@ public abstract class Deck<T> {
     }
 
     /**
-     * Move the card in the discarded pile
+     * Move the card in the discarded pile.
      * DON'T USE WITH THOSE CARDS WHICH DOSE NOT HAVE A DISCARDED PILE
      * @param card Card to discard
      */

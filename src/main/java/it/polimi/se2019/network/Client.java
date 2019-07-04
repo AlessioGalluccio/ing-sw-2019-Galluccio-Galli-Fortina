@@ -99,9 +99,8 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
                     Thread.currentThread().interrupt();
                 }
             }
+            clientView.handleStartGameMessage(matchID);
         }
-
-        clientView.handleStartGameMessage(matchID);
     }
 
     /**
@@ -139,7 +138,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
 
     /**
      * Set the ui param of this object.
-     * Set the Client param of SkullBoardView and MapView
+     * Set the Client param of SkullBoardView and MapView.
      * @param ui The UI object to set
      */
     public void setUpUi(UiInterface ui) {
@@ -166,7 +165,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     /**
-     * Close all stream open and terminate all the thread in order to disconnect correctly a client
+     * Close all streams open and terminate all threads in order to disconnect correctly a client
      */
     public abstract void closeAll();
 

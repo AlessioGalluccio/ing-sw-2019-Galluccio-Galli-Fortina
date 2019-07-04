@@ -16,7 +16,6 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.map.Map;
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.view.ModelViewMess.PlayerModelMessage;
 
 import java.io.Serializable;
@@ -218,7 +217,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Set player's ammo to value indicated by params
+     * Set player's ammo to value indicated by params.
      * If some param is grater than three the relative ammo is set to 3
      * @param numRed new value of red ammo
      * @param numYellow new value of yellow ammo
@@ -390,7 +389,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * When someone shoot me, all my mark made by the shooter has to be eliminated and converted in damage
+     * When someone shoot me, all my mark made by the shooter has to be eliminated and converted in damage.
      * Remove all marks made by enemy
      * @param enemy who made marks I want to remove
      */
@@ -576,7 +575,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Move player to a new cell
+     * Move player to a new cell.
      * It change also the player list on the cell!
      * @param position the new cell of the player
      */
@@ -596,8 +595,8 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * Compare the player based on the ID, the nickname and the character
-     * Character could be null
+     * Compare the player based on the ID, the nickname and the character.
+     * Character could be null.
      * @param o The other player to compare
      * @return True if the two players have the same ID, nickname and character. False otherwise.
      */
@@ -635,7 +634,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * If player die during the last turn or in frenzy mode set isFrenzyDeath as true
+     * If player die during the last turn or in frenzy mode set isFrenzyDeath as true.
      * In this case the player can be cash only for 2-1-1-1 points and not for 8-6-4-2-1-1
      */
     public void setFrenzyDeath() {
@@ -674,7 +673,7 @@ public class Player extends Observable implements Target, Serializable {
     }
 
     /**
-     * String the full player, representing each attributes with symbol and color
+     * String the full player, representing each attributes with symbol and color.
      * Work with UTF-8 and ANSI code
      * @return The representation of the player
      */

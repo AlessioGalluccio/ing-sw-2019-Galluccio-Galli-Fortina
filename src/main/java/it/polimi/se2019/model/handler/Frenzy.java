@@ -5,9 +5,9 @@ import it.polimi.se2019.controller.actions.*;
 import it.polimi.se2019.model.player.Player;
 
 /**
- * This modality is for the last part of the game
- * After the endgame you can have two or three 'frenzy' action
- * This modality terminate at the end of the game
+ * This modality is for the last part of the game.
+ * After the endgame you can have two or three 'frenzy' action.
+ * This modality terminate at the end of the game.
  */
 public class Frenzy implements Modality {
 

@@ -37,6 +37,7 @@ public abstract class View extends Observable implements Observer {
      * This method is call by a RankingMessage object.
      * It forward to the ui the ranking of the game
      * @param ranking the ranking
+     * @throws Exception if something goes wrong on GUI
      */
     public abstract void handleRankingMessage(List<Player> ranking) throws Exception;
 

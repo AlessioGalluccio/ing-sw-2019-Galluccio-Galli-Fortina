@@ -81,7 +81,7 @@ public class AmmoBag implements Serializable {
     }
 
     /**
-     * Sum the number of ammo of two ammo bag
+     * Sum the number of ammo of two ammo bag.
      * Sum the ammo according to their color, red with red, blue with blue etc.
      * @param first The first ammo bag to sum
      * @param second The second ammo bag to sum
@@ -96,7 +96,7 @@ public class AmmoBag implements Serializable {
     }
 
     /**
-     * String the full ammo bag, representing each attributes with symbol and color
+     * String the full ammo bag, representing each attributes with symbol and color.
      * Work with UTF-8 and ANSI code
      * @return The representation of the ammo bag
      */

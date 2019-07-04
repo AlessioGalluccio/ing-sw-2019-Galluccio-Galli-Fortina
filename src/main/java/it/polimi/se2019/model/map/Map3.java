@@ -16,7 +16,7 @@ public class Map3 extends Map {
         So we can't generate the cell[][] matrix and pass it to super() but we have to recall a static method inside super()
         In order to create rooms and cells together I create a new class (InitializeMap)
          */
-        super(initialize(weaponDeck, ammoDeck), "This map is excellent for 5 players!", 3);
+        super(initialize(weaponDeck, ammoDeck), 3);
     }
 
     private static InitializeMap initialize(WeaponDeck weaponDeck, AmmoDeck ammoDeck) {

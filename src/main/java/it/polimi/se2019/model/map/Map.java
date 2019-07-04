@@ -21,7 +21,7 @@ public abstract class Map extends Observable implements Serializable {
     private transient final ArrayList<Room> room;
 
 
-    Map(InitializeMap init, String description, int ID) {
+    Map(InitializeMap init, int ID) {
         this.cell = init.cell;
         this.room = init.room;
         this.ID = ID;
@@ -86,7 +86,7 @@ public abstract class Map extends Observable implements Serializable {
      * @param cellStart Cell from which start
      * @param range the maximum distance
      * @return list of cell in the range
-     * @throws IllegalArgumentException Range must be >= 0
+     * @throws IllegalArgumentException Range must be gather than 0
      */
     public List<Cell> getCellAtDistance(Cell cellStart, int range) throws IllegalArgumentException {
         if(range < 0) throw new IllegalArgumentException();
@@ -206,7 +206,7 @@ public abstract class Map extends Observable implements Serializable {
 
     /**
      * Attach itself and all cells at the mapView
-     * @param mapView
+     * @param mapView View to attach
      */
     public void attach(MapView mapView) {
         attach((Observer) mapView);
@@ -240,7 +240,7 @@ class InitializeMap {
     }
 
     /**
-     * Map 4 and map 2 have the same yellow and green room
+     * Map 4 and map 2 have the same yellow and green room.
      * This method initialize the common room
      * @param weaponDeck
      * @param ammoDeck
@@ -268,7 +268,7 @@ class InitializeMap {
     }
 
     /**
-     * Map 4 and map 3 have the same red room
+     * Map 4 and map 3 have the same red room.
      * This method initialize the common room
      * @param weaponDeck
      * @param ammoDeck

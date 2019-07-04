@@ -105,10 +105,10 @@ public class GameHandler extends Observable {
 
     /**
      * Set everything necessary for a new turn:
-     * - Reload of cell of the map;
-     * - Notify the user of the change of the turn
-     * - If is the case, set the frenzy
-     * - If is the case, end the game
+     * <li> Reload of cell of the map;</>
+     * <li> Notify the user of the change of the turn</>
+     * <li> If is the case, set the frenzy</>
+     * <li> If is the case, end the game</>
      */
     private void setNewTurn() {
         map.reloadAllCell();
@@ -357,7 +357,7 @@ public class GameHandler extends Observable {
     /**
      * Sort list of player according to their frequency in that list
      * @param listToOrdinate list of player which you want to ordinate by damage
-     * @return A list with the same element of the @param but sorted
+     * @return A list with the element of the @param but sorted and without repetition
      */
     private List<Player> sortListByFrequency(List<Player> listToOrdinate) {
         HashMap<Integer, List<Player>> hm = new HashMap<>();
@@ -396,7 +396,7 @@ public class GameHandler extends Observable {
     }
 
     /**
-     * If some players have died this method calculate the point and give it to each player
+     * If some players had died this method calculate the point and give it to each player
      * @param whoDied the player who has died and has to be cash
      * @param doubleKill true if a player has killed more then one enemy in this turn
      * @param lastCash true if we are at the end of frenzy mode

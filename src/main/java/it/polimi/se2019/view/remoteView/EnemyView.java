@@ -164,7 +164,7 @@ public class EnemyView extends Observable implements Observer, Serializable{
     }
 
     /**
-     * String only the main info of the enemy, representing the attributes with symbol and color
+     * String only the main info of the enemy, representing the attributes with symbol and color.
      * Work with UTF-8 and ANSI code
      * @return A short representation of the enemy
      */
@@ -184,7 +184,7 @@ public class EnemyView extends Observable implements Observer, Serializable{
     }
 
     /**
-     * String the full enemy, representing each attributes with symbol and color
+     * String the full enemy, representing each attributes with symbol and color.
      * Work with UTF-8 and ANSI code
      * @return The representation of the enemy
      */
