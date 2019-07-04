@@ -5,6 +5,9 @@ import it.polimi.se2019.model.deck.TagbackGrenadeCard;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
+/**
+ * @author Fortina
+ */
 public class TagbackGrenadeMessage extends ViewControllerMessage {
 
     private static final long serialVersionUID = -6223826044088291462L;

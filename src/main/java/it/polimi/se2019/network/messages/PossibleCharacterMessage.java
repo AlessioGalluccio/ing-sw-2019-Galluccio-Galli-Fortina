@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * @author Galli
+ * @author Fortina
  */
 public class PossibleCharacterMessage implements HandlerNetworkMessage, Serializable {
 

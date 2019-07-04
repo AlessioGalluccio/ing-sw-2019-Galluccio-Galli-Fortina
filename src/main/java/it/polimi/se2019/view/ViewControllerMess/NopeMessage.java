@@ -4,6 +4,9 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
+/**
+ * @author Fortina
+ */
 public class NopeMessage extends ViewControllerMessage {
 
 

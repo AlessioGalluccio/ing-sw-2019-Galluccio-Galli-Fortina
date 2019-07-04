@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Galli
+ * @author Fortina
  */
 public class RMIClient extends Client implements RmiClientInterface, Observer {
     private static final long serialVersionUID = 7523008212736615992L;

@@ -12,6 +12,7 @@ import java.util.Observer;
  * Observer of network handler and model.
  * Observable by network handler and controller.
  * @author Galli
+ * @author Fortina
  */
 public abstract class View extends Observable implements Observer {
 

@@ -5,6 +5,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+/**
+ * @author Fortina
+ */
 public class PassTurnMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 6933077226306380352L;
 

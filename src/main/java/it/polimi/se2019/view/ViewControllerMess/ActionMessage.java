@@ -6,6 +6,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+/**
+ * @author Fortina
+ */
 public class ActionMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 2669404197323021204L;
     private int actionID;

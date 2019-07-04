@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * @author Galli
+ * @author Fortina
  */
 public class LoginMessage implements HandlerServerMessage, HandlerConfigMessage, Serializable {
     private static final long serialVersionUID = -2692756102145802983L;

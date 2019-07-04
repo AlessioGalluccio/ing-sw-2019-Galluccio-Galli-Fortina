@@ -9,6 +9,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Fortina
+ */
 public abstract class ViewControllerMessage implements HandlerServerMessage, Serializable {
     protected int authorID; //Protected: can be accessed only in this package, so only by class message. It's OK!
     protected View authorView;

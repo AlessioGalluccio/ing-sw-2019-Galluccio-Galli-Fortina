@@ -8,6 +8,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
+/**
+ * @author Fortina
+ */
 public class ReloadMessage extends ViewControllerMessage {
 
     private static final long serialVersionUID = -5035315248432532602L;

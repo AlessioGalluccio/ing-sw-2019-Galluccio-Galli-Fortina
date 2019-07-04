@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 /**
  * @author Galli
+ * @author Fortina
  */
 public interface RmiServerInterface extends Remote {
 

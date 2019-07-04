@@ -8,6 +8,9 @@ import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+/**
+ * @author Fortina
+ */
 public class TargetingScopeMessage extends ViewControllerMessage {
 
     private static final long serialVersionUID = -4381929763624561191L;
