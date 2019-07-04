@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
+/**
+ * @author Galli
+ */
 public class PowerupDeck extends Deck<PowerupCard> {
 
 

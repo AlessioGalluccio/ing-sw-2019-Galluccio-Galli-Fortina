@@ -18,6 +18,9 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Galli
+ */
 public class SocketHandler implements Runnable, Server, SwitchServerMessage {
     private Socket socket;
     private SocketServer server;

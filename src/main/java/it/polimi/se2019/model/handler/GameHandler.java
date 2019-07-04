@@ -30,6 +30,9 @@ import it.polimi.se2019.view.remoteView.SkullBoardView;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * @author Galli
+ */
 public class GameHandler extends Observable {
 
     private int matchID;

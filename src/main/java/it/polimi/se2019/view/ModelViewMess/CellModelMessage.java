@@ -4,6 +4,9 @@ import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.network.Client;
 import it.polimi.se2019.view.remoteView.MapView;
 
+/**
+ * @author Galli
+ */
 public class CellModelMessage implements ModelViewMessage, HandlerMapViewMessage  {
     private static final long serialVersionUID = -2405952324047251480L;
     private static int ID=0;

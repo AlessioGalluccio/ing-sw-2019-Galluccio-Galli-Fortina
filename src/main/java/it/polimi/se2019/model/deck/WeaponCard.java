@@ -16,6 +16,9 @@ import java.util.List;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.AMMO;
 
+/**
+ * @author Galli
+ */
 public abstract class WeaponCard implements Card {
 
     private static final long serialVersionUID = -3963551867744677662L;
@@ -106,7 +109,6 @@ public abstract class WeaponCard implements Card {
     }
 
     /**
-     * HELPER METHOD
      * Serialize and deserialize FireMode in order to make a deep copy
      * @param fireModeList fire modes to copy
      * @return deep copy of fireModeList
@@ -126,8 +128,8 @@ public abstract class WeaponCard implements Card {
     }
 
     /**
-     * Set his deck for the card
-     * But weapons are created reading a Json file, so thi method is never called
+     * Set his deck for the card.
+     * But weapons are created reading a Json file, so thi method is never called.
      * @param deck Deck of relatives cards to set
      * @throws AlreadyDeckException If you try to reset the deck, it can change during game
      */
@@ -137,7 +139,7 @@ public abstract class WeaponCard implements Card {
     }
 
     /**
-     * In general, discard the card
+     * In general, discard the card.
      * But weapons CANNOT be discarded, so this method dose nothing.
      */
     @Override
@@ -147,8 +149,8 @@ public abstract class WeaponCard implements Card {
 
 
     /**
-     * String the full card, representing each attributes with symbols and color
-     * Works with UTF-8 and ANSI code
+     * String the full card, representing each attributes with symbols and color.
+     * Works with UTF-8 and ANSI code.
      * @return The representation of the card
      */
     @Override
@@ -160,8 +162,8 @@ public abstract class WeaponCard implements Card {
     }
 
     /**
-     * String the fire mode of this card, representing each attributes with symbols and color
-     * Works with UTF-8 and ANSI code
+     * String the fire mode of this card, representing each attributes with symbols and color.
+     * Works with UTF-8 and ANSI code.
      * @return The representation of the fire mode list
      */
     private String toStringFireMode() {
@@ -178,8 +180,8 @@ public abstract class WeaponCard implements Card {
     }
 
     /**
-     * String the only the card's name and the cost, representing each attributes with symbols and color
-     * Works with UTF-8 and ANSI code
+     * String the only the card's name and the cost, representing each attributes with symbols and color.
+     * Works with UTF-8 and ANSI code.
      * @return A short representation of the card
      */
     public String toStringShort() {

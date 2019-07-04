@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Observer;
 
+/**
+ * @author Galli
+ */
 public class Observable implements Serializable {
     private static final long serialVersionUID = -4790956875928753691L;
     private transient List<Observer> observers = new LinkedList<>();

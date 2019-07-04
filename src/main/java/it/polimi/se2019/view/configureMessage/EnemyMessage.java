@@ -5,6 +5,9 @@ import it.polimi.se2019.network.HandlerNetworkMessage;
 
 import java.io.Serializable;
 
+/**
+ * @author Galli
+ */
 public class EnemyMessage implements HandlerNetworkMessage, Serializable {
     private static final long serialVersionUID = -55782681386881588L;
     private String nickname;

@@ -6,6 +6,10 @@ import it.polimi.se2019.view.remoteView.SkullBoardView;
 
 import java.util.List;
 
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class SkullBoardMessage implements ModelViewMessage, HandlerSkullViewMessage {
     private static final long serialVersionUID = -6227107342873236285L;
     private static int ID=0;

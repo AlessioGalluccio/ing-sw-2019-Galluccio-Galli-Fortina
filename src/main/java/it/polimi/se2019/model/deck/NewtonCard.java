@@ -4,6 +4,9 @@ package it.polimi.se2019.model.deck;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
 
+/**
+ * @author Galli
+ */
 public class NewtonCard extends PowerupCard{
     private static final long serialVersionUID = -8414803787414827397L;
 

@@ -5,6 +5,9 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galli
+ */
 public class BaseWeapon extends WeaponCard {
 
     private static final long serialVersionUID = 8502911012102121335L;

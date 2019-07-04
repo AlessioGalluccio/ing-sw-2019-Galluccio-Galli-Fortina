@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Observer;
 
 /**
- * Common class between Client View and Remote View
- * Observer of network handler and model
- * Observable by network handler and controller
+ * Common class between Client View and Remote View.
+ * Observer of network handler and model.
+ * Observable by network handler and controller.
+ * @author Galli
  */
 public abstract class View extends Observable implements Observer {
 

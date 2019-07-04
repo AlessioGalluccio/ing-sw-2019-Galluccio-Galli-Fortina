@@ -4,7 +4,6 @@ import it.polimi.se2019.model.Observable;
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.ui.ConsoleColor;
-import it.polimi.se2019.ui.ConsoleSymbol;
 import it.polimi.se2019.ui.Printable;
 import it.polimi.se2019.view.ModelViewMess.CellModelMessage;
 
@@ -15,6 +14,9 @@ import java.util.Objects;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.*;
 
+/**
+ * @author Galli
+ */
 public abstract class Cell extends Observable implements Printable, Target, Serializable {
 
     private static final long serialVersionUID = -7765300319324575872L;

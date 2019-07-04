@@ -10,6 +10,10 @@ import it.polimi.se2019.model.Observable;
 
 import java.util.*;
 
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class MapView extends Observable implements Observer {
 
     private Map mapCopy;

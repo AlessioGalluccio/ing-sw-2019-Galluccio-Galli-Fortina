@@ -4,7 +4,9 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 
 import java.util.*;
 
-
+/**
+ * @author Galli
+ */
 public class OptionWeapon extends WeaponCard {
 
     private static final long serialVersionUID = 4350546617698640742L;

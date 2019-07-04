@@ -24,6 +24,9 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Galli
+ */
 public class WaitingRoom {
     private static int matchID = 100;
     private static WaitingRoom instance = null;

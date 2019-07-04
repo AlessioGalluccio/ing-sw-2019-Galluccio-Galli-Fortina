@@ -6,6 +6,9 @@ import it.polimi.se2019.model.player.ColorRYB;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * @author Galli
+ */
 public class AmmoDeck extends Deck<AmmoCard> {
 
     public AmmoDeck(PowerupDeck powerupDeck) {

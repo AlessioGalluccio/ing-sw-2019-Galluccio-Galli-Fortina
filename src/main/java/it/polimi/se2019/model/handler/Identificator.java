@@ -3,6 +3,10 @@ package it.polimi.se2019.model.handler;
 import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import it.polimi.se2019.model.deck.WeaponCard;
 
+
+/**
+ * @author Galli
+ */
 public class Identificator {
 
     //list of ID of messages

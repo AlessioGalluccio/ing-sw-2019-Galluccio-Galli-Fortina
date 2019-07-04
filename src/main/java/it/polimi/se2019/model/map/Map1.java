@@ -5,6 +5,9 @@ import it.polimi.se2019.model.deck.WeaponDeck;
 
 import java.util.ArrayList;
 
+/**
+ * @author Galli
+ */
 public class Map1 extends Map {
 
     private static final String description = "This map is excellent for any number of players!";

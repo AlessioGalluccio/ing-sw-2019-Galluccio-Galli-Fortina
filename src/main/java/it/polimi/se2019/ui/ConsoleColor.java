@@ -1,5 +1,8 @@
 package it.polimi.se2019.ui;
 
+/**
+ * @author Galli
+ */
 public enum ConsoleColor {
     RESET("\033[0m"),
 

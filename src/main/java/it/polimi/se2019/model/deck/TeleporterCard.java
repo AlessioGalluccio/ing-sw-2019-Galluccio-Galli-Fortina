@@ -3,6 +3,9 @@ package it.polimi.se2019.model.deck;
 import it.polimi.se2019.model.player.ColorRYB;
 import it.polimi.se2019.ui.ConsoleColor;
 
+/**
+ * @author Galli
+ */
 public class TeleporterCard extends PowerupCard{
     private static final long serialVersionUID = -8724215878484689333L;
 

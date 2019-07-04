@@ -16,6 +16,9 @@ import java.util.Observer;
 import java.util.List;
 import java.util.LinkedList;
 
+/**
+ * @author Galli
+ */
 public abstract class Client extends UnicastRemoteObject implements Observer {
 
     private static final long serialVersionUID = -1040745061995072394L;

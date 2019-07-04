@@ -5,6 +5,9 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author Galli
+ */
 @Immutable
 public class Coordinate implements Serializable {
     private static final long serialVersionUID = -8917867784167746187L;

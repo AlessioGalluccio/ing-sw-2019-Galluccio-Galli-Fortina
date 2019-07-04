@@ -17,6 +17,9 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Galli
+ */
 public class RMIClient extends Client implements RmiClientInterface, Observer {
     private static final long serialVersionUID = 7523008212736615992L;
     private transient RmiHandlerInterface server;

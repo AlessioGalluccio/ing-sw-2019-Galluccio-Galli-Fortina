@@ -1,5 +1,8 @@
 package it.polimi.se2019.ui;
 
+/**
+ * @author Galli
+ */
 import it.polimi.se2019.model.deck.*;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.ColorRYB;

@@ -8,6 +8,9 @@ import it.polimi.se2019.controller.actions.firemodes.FireMode;
 import java.lang.reflect.Type;
 import java.util.*;
 
+/**
+ * @author Galli
+ */
 public abstract class Deck<T> {
 
     private Stack<T> unusedCard;

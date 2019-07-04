@@ -3,6 +3,9 @@ package it.polimi.se2019.network.rmi;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * @author Galli
+ */
 public interface RmiServerInterface extends Remote {
 
     /**

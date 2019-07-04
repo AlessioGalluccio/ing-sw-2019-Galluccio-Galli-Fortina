@@ -5,6 +5,9 @@ import it.polimi.se2019.network.HandlerNetworkMessage;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * @author Galli
+ */
 public interface RmiClientInterface extends Remote {
 
     /**

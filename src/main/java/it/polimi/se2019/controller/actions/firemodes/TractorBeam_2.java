@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * @author Galli
+ * @author Galluccio
+ */
 public class TractorBeam_2 extends FireMode {
     private static final long serialVersionUID = 5530034654912263654L;
     private final String TOO_DISTANT = "The target you chose is too distant from you.\n";

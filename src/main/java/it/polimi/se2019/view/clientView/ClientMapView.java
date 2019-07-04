@@ -4,6 +4,9 @@ import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerMapViewMessage;
 import it.polimi.se2019.view.remoteView.MapView;
 
+/**
+ * @author Galli
+ */
 public class ClientMapView extends MapView {
     private UiInterface ui;
     private boolean first = true;

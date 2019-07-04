@@ -4,7 +4,9 @@ import it.polimi.se2019.ui.UiInterface;
 import it.polimi.se2019.view.ModelViewMess.HandlerSkullViewMessage;
 import it.polimi.se2019.view.remoteView.SkullBoardView;
 
-
+/**
+ * @author Galli
+ */
 public class ClientSkullBoardView extends SkullBoardView {
     private UiInterface ui;
     private int lastAck = -1;

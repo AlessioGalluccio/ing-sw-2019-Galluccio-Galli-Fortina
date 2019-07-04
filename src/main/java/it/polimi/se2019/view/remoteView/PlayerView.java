@@ -10,7 +10,10 @@ import it.polimi.se2019.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class PlayerView extends View /*View implement observer/observable*/{
     private Player playerCopy;
     private ArrayList<Character> possibleCharacter;

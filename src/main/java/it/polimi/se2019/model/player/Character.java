@@ -5,6 +5,9 @@ import it.polimi.se2019.ui.ConsoleColor;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author Galli
+ */
 public class Character implements Serializable {
 
     private static final long serialVersionUID = -6097552840845310529L;

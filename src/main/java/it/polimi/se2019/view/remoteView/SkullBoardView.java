@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class SkullBoardView extends Observable implements Observer {
 
     private int originalSkull;

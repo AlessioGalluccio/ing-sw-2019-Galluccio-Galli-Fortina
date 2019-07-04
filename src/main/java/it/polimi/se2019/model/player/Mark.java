@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
+/**
+ * @author Galli
+ */
 public class Mark implements Serializable {
     private static final int MAX_MARK = 3;
     private static final long serialVersionUID = 7677576860792993751L;

@@ -17,6 +17,10 @@ import java.util.Observer;
 
 import static it.polimi.se2019.ui.ConsoleSymbol.*;
 
+/**
+ * @author Galli
+ * @author Fortina
+ */
 public class EnemyView extends Observable implements Observer, Serializable{
     private static final long serialVersionUID = -3162602651843385228L;
 
@@ -42,7 +46,7 @@ public class EnemyView extends Observable implements Observer, Serializable{
 
     /**
      * getter of mark
-     * @return arraylist of players
+     * @return ArrayList of players
      */
     public ArrayList<Player> getMark() {
         return mark;
@@ -74,7 +78,7 @@ public class EnemyView extends Observable implements Observer, Serializable{
 
     /**
      * getter of enemy character
-     * @return cìenemy character
+     * @return enemy character
      */
     public Character getCharacter() {
         return character;
@@ -82,7 +86,7 @@ public class EnemyView extends Observable implements Observer, Serializable{
 
     /**
      * getter of enemy UnloadedWeapon
-     * @return Arrylist of UnloadedWeapon
+     * @return ArrayList of UnloadedWeapon
      */
     public ArrayList<WeaponCard> getUnloadedWeapon() {
         return unloadedWeapon;
