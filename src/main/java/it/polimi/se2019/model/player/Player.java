@@ -29,6 +29,7 @@ import static it.polimi.se2019.ui.ConsoleSymbol.SKULL;
 /**
  * @author Galli
  * @author Galluccio
+ * @author Fortina
  */
 public class Player extends Observable implements Target, Serializable {
     private static final long serialVersionUID = -889271951458445330L;

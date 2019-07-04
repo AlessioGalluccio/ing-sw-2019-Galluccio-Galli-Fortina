@@ -7,6 +7,7 @@ import it.polimi.se2019.model.deck.WeaponCard;
 /**
  * @author Galli
  * @author Galluccio
+ * @author Fortina
  */
 public class Identificator {
 
