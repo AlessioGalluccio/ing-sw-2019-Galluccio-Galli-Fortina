@@ -8,6 +8,9 @@ import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+/**
+ * @author Galluccio
+ */
 public class TeleporterSelectedControllerState extends StateController{
     private Player playerAuthor;
     private String message;

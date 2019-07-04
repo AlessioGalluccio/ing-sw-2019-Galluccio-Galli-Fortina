@@ -6,6 +6,9 @@ import it.polimi.se2019.model.player.AmmoBag;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
+/**
+ * @author Galluccio
+ */
 public class DisconnectedControllerState extends StateController {
     private Player player;
     private String stringToPlayerView = STILL_DISCONNECTED;

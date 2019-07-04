@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class GrenadeLauncher_1 extends FireMode {
     private static final long serialVersionUID = -6042825291183206795L;
     private boolean nextCellIsForOptional = false;

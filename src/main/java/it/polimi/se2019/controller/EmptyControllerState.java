@@ -8,7 +8,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
-
+/**
+ * @author Galluccio
+ */
 public class EmptyControllerState extends StateController {
 
     private Player player;

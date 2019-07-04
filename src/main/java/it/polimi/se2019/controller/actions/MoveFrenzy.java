@@ -3,6 +3,9 @@ package it.polimi.se2019.controller.actions;
 import it.polimi.se2019.controller.Controller;
 import it.polimi.se2019.model.handler.GameHandler;
 
+/**
+ * @author Galluccio
+ */
 public class MoveFrenzy extends Move {
 
     private static final int MAX_DISTANCE = 4;

@@ -7,6 +7,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class ShockWave_2 extends FireMode {
 
     private static final long serialVersionUID = 8956505216147899205L;

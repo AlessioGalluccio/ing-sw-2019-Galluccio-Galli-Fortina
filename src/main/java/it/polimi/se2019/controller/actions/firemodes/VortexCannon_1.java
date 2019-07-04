@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class VortexCannon_1 extends FireMode {
     //COSTS
     private static final AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(1,0,0);

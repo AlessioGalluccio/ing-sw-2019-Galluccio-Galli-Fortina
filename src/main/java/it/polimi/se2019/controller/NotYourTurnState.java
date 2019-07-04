@@ -8,6 +8,9 @@ import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
+/**
+ * @author Galluccio
+ */
 public class NotYourTurnState extends StateController {
 
     private Player playerAuthor;

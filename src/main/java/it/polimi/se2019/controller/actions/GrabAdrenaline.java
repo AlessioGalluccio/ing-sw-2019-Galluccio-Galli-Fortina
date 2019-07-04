@@ -9,6 +9,9 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
+/**
+ * @author Galluccio
+ */
 public class GrabAdrenaline extends Grab {
 
     //the only change between GrabAdrenaline and Grab

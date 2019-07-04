@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class CyberBlade_1 extends FireMode {
     private static final long serialVersionUID = 6386804975541460018L;
     private AmmoBag COST_FIRST_OPTIONAL = new AmmoBag(0,0,0);

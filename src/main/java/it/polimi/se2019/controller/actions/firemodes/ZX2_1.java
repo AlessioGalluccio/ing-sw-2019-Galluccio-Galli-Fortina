@@ -8,6 +8,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class ZX2_1 extends FireMode {
     private static final long serialVersionUID = 1525303002085550524L;
     static final String SELECT_PLAYER = "Select a player you can see it. ";

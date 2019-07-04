@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class RailGun_2 extends RailGun_1 {
 
     private static final long serialVersionUID = 3954418059011118447L;

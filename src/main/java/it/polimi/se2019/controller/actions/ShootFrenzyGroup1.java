@@ -10,6 +10,9 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
+/**
+ * @author Galluccio
+ */
 public class ShootFrenzyGroup1 extends ShootAdrenaline {
 
     private static final int MAX_DISTANCE = 1;

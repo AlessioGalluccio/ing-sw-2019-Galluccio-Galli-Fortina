@@ -13,6 +13,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 
 import java.util.ArrayList;
 
+/**
+ * @author Galluccio
+ */
 public abstract class Action implements AddActionMethods {
     protected GameHandler gameHandler;
     protected Player playerAuthor;

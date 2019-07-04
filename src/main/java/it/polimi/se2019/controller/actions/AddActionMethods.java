@@ -10,6 +10,7 @@ import it.polimi.se2019.model.player.WeaponIsLoadedException;
 /**
  * this methods must be implemented by Action classes to permit a correct comunication. They also include the
  * AddFireMode methods of the firemodes
+ * @author Galluccio
  */
 public interface AddActionMethods extends AddFireModeMethods{
     //THE COMMENTED lines are already implemented in AddFireModeMethods

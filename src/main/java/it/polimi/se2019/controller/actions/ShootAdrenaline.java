@@ -11,7 +11,9 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 
 import java.util.ArrayList;
 
-
+/**
+ * @author Galluccio
+ */
 public class ShootAdrenaline extends Shoot {
 
     private int DISTANCE_MAX = 1;
