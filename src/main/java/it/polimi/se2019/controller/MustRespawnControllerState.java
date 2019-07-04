@@ -9,6 +9,9 @@ import it.polimi.se2019.model.player.TooManyException;
 import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
+/**
+ * @author Galluccio
+ */
 public class MustRespawnControllerState extends StateController {
     private Player playerAuthor;
     private String errorString;

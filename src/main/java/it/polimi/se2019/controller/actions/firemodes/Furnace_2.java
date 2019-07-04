@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class Furnace_2 extends Furnace_1 {
     private static final long serialVersionUID = -315490042639058980L;
 

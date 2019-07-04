@@ -8,6 +8,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class Thor_1 extends FireMode {
 
     //COSTS

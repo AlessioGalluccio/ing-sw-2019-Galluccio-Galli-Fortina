@@ -18,6 +18,10 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Galli
+ * @author Galluccio
+ */
 public abstract class FireMode implements AddFireModeMethods, Serializable {
     private static final long serialVersionUID = 9095800883593243992L;
     private ArrayList<ColorRYB> cost;

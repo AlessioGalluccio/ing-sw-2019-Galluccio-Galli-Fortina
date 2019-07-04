@@ -6,6 +6,9 @@ import it.polimi.se2019.model.player.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class ElectroScythe_2 extends ElectroScythe_1 {
 
     private static final long serialVersionUID = 6200012478870176300L;

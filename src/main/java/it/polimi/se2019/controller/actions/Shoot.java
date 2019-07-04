@@ -13,6 +13,9 @@ import it.polimi.se2019.view.StringAndMessage;
 
 import java.util.ArrayList;
 
+/**
+ * @author Galluccio
+ */
 public class Shoot extends Action{
     protected WeaponCard weapon;
     protected FireMode fireMode;

@@ -16,6 +16,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class Grab extends Action{
     private Cell cellObjective;
     private WeaponCard weaponToDiscard;

@@ -16,6 +16,9 @@ import it.polimi.se2019.view.ViewControllerMess.ViewControllerMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class NewtonSelectedControllerState extends StateController {
     private Player playerAuthor;
     private String errorString;

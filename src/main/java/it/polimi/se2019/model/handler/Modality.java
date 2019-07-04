@@ -5,6 +5,9 @@ import it.polimi.se2019.controller.actions.Action;
 import it.polimi.se2019.controller.actions.WrongInputException;
 import it.polimi.se2019.model.player.Player;
 
+/**
+ * @author Galli
+ */
 public interface Modality {
 
     String CANT_CHOOSE_ACTION = "You can't choose this action. ";

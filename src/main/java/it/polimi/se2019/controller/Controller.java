@@ -21,7 +21,9 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * @author Galluccio
+ */
 public class Controller implements Observer {
     private Player playerAuthor;
     private PlayerView playerView;

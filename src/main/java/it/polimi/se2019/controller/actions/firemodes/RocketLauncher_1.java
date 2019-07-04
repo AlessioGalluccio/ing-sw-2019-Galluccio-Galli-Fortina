@@ -9,6 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class RocketLauncher_1 extends FireMode {
     private boolean nextCellIsForOptional1 = false; //true if next cell message is for optional 1
 

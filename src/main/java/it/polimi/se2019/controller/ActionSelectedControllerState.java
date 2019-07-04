@@ -10,7 +10,9 @@ import it.polimi.se2019.model.player.*;
 import it.polimi.se2019.view.ViewControllerMess.*;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
-
+/**
+ * @author Galluccio
+ */
 public class ActionSelectedControllerState extends StateController {
 
     private Player playerAuthor;

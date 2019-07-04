@@ -9,6 +9,9 @@ import it.polimi.se2019.model.player.NotPresentException;
 import it.polimi.se2019.model.player.Player;
 import it.polimi.se2019.view.ViewControllerMess.*;
 
+/**
+ * @author Galluccio
+ */
 public abstract class StateController {
     //they are public for tests
 

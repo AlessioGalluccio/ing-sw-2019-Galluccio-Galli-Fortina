@@ -6,6 +6,9 @@ import it.polimi.se2019.model.player.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Galluccio
+ */
 public class Hellion_2 extends Hellion_1 {
 
     private static final long serialVersionUID = -3964732490391201864L;

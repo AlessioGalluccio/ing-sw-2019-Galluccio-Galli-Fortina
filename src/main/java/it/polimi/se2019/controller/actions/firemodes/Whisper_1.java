@@ -9,7 +9,9 @@ import it.polimi.se2019.view.StringAndMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Galluccio
+ */
 public class Whisper_1 extends FireMode {
     private static final long serialVersionUID = 2287199755551717645L;
 
