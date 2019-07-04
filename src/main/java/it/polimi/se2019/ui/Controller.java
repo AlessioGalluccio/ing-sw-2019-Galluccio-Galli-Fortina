@@ -29,7 +29,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * @author Fortina
+ */
 public class Controller implements Initializable {
 
     boolean yourDead = false;
@@ -1010,9 +1012,15 @@ public class Controller implements Initializable {
 
         //update players position after disconnection
         Cell[][] cells = ControllerLogin.mapView.getCells();
+
         for(int i=0; i<4; i++){
             for(int j=0; j<3; j++){
-                updatePlayersPosition(cells[i][j]);
+                try {
+                    updatePlayersPosition(cells[i][j]);
+                }catch (Exception e){
+                    Logger.getLogger(Controller.class.getName()).log(Level.FINE, "do nothing");
+
+                }
             }
         }
 
