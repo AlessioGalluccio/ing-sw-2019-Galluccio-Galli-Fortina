@@ -30,8 +30,8 @@ public class EmptyControllerState extends StateController {
     @Override
     public void handleAction(int actionID) {
         if(controller.getNumOfActionTaken() < controller.getNumOfMaxActions()){
-            //if there is no weapon loaded, you can't select shoot
-            if(actionID == Identificator.SHOOT){
+            //if there is no weapon loaded and it's not frenzy modality, you can't select shoot
+            if(actionID == Identificator.SHOOT && !gameHandler.getModality().isFrenzyEnable()){
                 boolean canShoot = false;
                 for(WeaponCard weaponCard : player.getWeaponCardList()){
                     if(weaponCard.isReloaded()){
