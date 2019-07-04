@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
+ * message from view to controller
  * @author Fortina
+ * @author Galluccio
  */
 public abstract class ViewControllerMessage implements HandlerServerMessage, Serializable {
     protected int authorID; //Protected: can be accessed only in this package, so only by class message. It's OK!

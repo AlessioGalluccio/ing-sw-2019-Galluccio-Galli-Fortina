@@ -7,7 +7,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for selecting a weapon
  * @author Fortina
+ * @author Galluccio
  */
 public class WeaponMessage extends ViewControllerMessage {
     private static final long serialVersionUID = -835200389203068573L;

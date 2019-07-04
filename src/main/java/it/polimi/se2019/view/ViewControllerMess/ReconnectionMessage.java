@@ -4,6 +4,10 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
+/**
+ * message for disconnection or reconnection of the player
+ * @author Galluccio
+ */
 public class ReconnectionMessage extends ViewControllerMessage {
 
     private static final long serialVersionUID = 5269430019416553245L;

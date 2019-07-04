@@ -9,7 +9,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for selecting a targeting scope powerup and its ammo cost
  * @author Fortina
+ * @author Galluccio
  */
 public class TargetingScopeMessage extends ViewControllerMessage {
 

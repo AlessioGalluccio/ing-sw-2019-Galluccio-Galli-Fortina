@@ -6,7 +6,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for selecting a non optional firemode (base or alternative)
  * @author Fortina
+ * @author Galluccio
  */
 public class FireModeMessage extends ViewControllerMessage {
 

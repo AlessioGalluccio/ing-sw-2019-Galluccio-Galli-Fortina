@@ -6,7 +6,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for target cell
  * @author Fortina
+ * @author Galluccio
  */
 public class CellMessage extends ViewControllerMessage {
 

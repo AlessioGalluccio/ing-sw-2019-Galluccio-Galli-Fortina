@@ -6,7 +6,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
 /**
+ * message for using a tagback grenade powerup
  * @author Fortina
+ * @author Galluccio
  */
 public class TagbackGrenadeMessage extends ViewControllerMessage {
 

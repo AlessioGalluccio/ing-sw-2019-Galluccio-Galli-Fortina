@@ -6,7 +6,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
 /**
+ * mesage for discarding a weapon
  * @author Fortina
+ * @author Galluccio
  */
 public class DiscardWeaponMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 8135867227123013091L;

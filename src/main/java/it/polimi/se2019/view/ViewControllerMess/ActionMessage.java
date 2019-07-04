@@ -7,7 +7,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for action chosen
  * @author Fortina
+ * @author Galluccio
  */
 public class ActionMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 2669404197323021204L;

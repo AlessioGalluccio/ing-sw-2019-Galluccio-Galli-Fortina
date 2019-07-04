@@ -5,7 +5,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
 /**
+ * message for skipping the action
  * @author Fortina
+ * @author Galluccio
  */
 public class NopeMessage extends ViewControllerMessage {
 

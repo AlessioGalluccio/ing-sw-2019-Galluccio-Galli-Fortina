@@ -5,7 +5,9 @@ import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.view.View;
 
 /**
+ * message for selecting an optional firemode
  * @author Fortina
+ * @author Galluccio
  */
 public class OptionalMessage extends ViewControllerMessage{
     private static final long serialVersionUID = -1651278236277548533L;

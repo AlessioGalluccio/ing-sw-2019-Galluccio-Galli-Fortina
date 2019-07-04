@@ -6,7 +6,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for fire with a weapon
  * @author Fortina
+ * @author Galluccio
  */
 public class FireMessage extends ViewControllerMessage {
 

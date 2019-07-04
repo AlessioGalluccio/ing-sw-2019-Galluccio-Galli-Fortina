@@ -9,7 +9,9 @@ import it.polimi.se2019.view.remoteView.PlayerView;
 import java.util.ArrayList;
 
 /**
+ * message for reloading a weapon
  * @author Fortina
+ * @author Galluccio
  */
 public class ReloadMessage extends ViewControllerMessage {
 

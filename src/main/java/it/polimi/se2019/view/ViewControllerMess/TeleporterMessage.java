@@ -8,7 +8,9 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message for selecting a Teleporter powerup
  * @author Fortina
+ * @author Galluccio
  */
 public class TeleporterMessage extends ViewControllerMessage {
 

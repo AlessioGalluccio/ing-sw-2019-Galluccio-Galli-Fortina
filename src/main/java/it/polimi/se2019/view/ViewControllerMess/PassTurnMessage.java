@@ -6,12 +6,12 @@ import it.polimi.se2019.view.View;
 import it.polimi.se2019.view.remoteView.PlayerView;
 
 /**
+ * message to pass the turn
  * @author Fortina
+ * @author Galluccio
  */
 public class PassTurnMessage extends ViewControllerMessage {
     private static final long serialVersionUID = 6933077226306380352L;
-
-    //TO PASS THE TURN
 
     /**
      * PassTurnMessage class constructor
