@@ -6,6 +6,7 @@ import it.polimi.se2019.controller.StateController;
 import it.polimi.se2019.controller.actions.Shoot;
 import it.polimi.se2019.model.deck.WeaponCard;
 import it.polimi.se2019.model.handler.GameHandler;
+import it.polimi.se2019.model.handler.Identificator;
 import it.polimi.se2019.model.map.Cell;
 import it.polimi.se2019.model.player.Character;
 import it.polimi.se2019.model.player.Player;
@@ -34,6 +35,7 @@ public class PowerGlove_2Test {
     private Cell commonCell;
     private PlayerView playerView;
     private StateController stateController;
+    private WeaponCard weaponOfPlayer;
 
     private final static int WEAPON_ID = 10;
     private final static int FIREMODE_ID = 2;
@@ -86,6 +88,7 @@ public class PowerGlove_2Test {
 
         //weapon
         WeaponCard weapon = gameHandler.getWeaponCardByID(WEAPON_ID);
+        this.weaponOfPlayer = weapon;
         weapon.reload();
         authorPlayer.addWeaponCard(weapon);
         WeaponMessage weaponMessage = new WeaponMessage(weapon,authorPlayer.getID(), playerView);
@@ -96,6 +99,22 @@ public class PowerGlove_2Test {
         FireModeMessage fireModeMessage = new FireModeMessage(FIREMODE_ID, authorPlayer.getID(), playerView);
         controller.update(null, fireModeMessage);
     }
+
+    /**
+     * behaviour if player doesn't have the ammo for the firemode
+     * @throws Exception shouldn't happen
+     */
+    @Test
+    public void noAmmo() throws Exception {
+        authorPlayer.setAmmoBag(0,0,0);
+        controller.setState(new ActionSelectedControllerState(controller, gameHandler, new Shoot(gameHandler,controller)));
+        WeaponMessage weaponMessage = new WeaponMessage(weaponOfPlayer,authorPlayer.getID(), playerView);
+        controller.update(null, weaponMessage);
+        FireModeMessage fireModeMessage = new FireModeMessage(FIREMODE_ID, authorPlayer.getID(), playerView);
+        controller.update(null, fireModeMessage);
+        assertEquals(Shoot.CANT_SELECT_FIREMODE + Shoot.SECOND_MESSAGE, playerView.getLastStringPrinted());
+    }
+
 
     @Test
     public void noPlayer() throws Exception {

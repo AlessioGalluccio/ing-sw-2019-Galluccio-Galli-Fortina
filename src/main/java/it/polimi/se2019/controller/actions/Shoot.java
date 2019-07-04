@@ -36,6 +36,7 @@ public class Shoot extends Action{
     //errors
     static final String NEEDED_TARGET_FOR_TARGETING_BEFORE_OPTIONAL = "Finish Targeting before Optional, please. ";
     static final String SELECT_FIREMODE_BEFORE_OPTIONAL = "Select a a base firemode before an optional one. ";
+    public static final String CANT_SELECT_FIREMODE = "You can't select this firemode. ";
 
     /**
      * constructor
@@ -119,12 +120,15 @@ public class Shoot extends Action{
 
                 }
                 else{
-                    throw new WrongInputException();
+                    throw new WrongInputException(CANT_SELECT_FIREMODE);
                 }
+            }
+            else{
+                throw new WrongInputException(CANT_SELECT_FIREMODE);
             }
         }
         else{
-            throw new WrongInputException();
+            throw new WrongInputException(CANT_SELECT_FIREMODE);
         }
 
     }
