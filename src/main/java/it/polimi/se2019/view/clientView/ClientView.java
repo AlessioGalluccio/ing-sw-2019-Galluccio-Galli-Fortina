@@ -200,7 +200,8 @@ public class ClientView extends View /*View implement observer/observable*/{
 
     /**
      * create a CharacterMessage that the client send to the server
-     * @param characterID id of the character choosen
+     * @param characterID id of the character chosen
+     * @throws NotCharacterException If is chose a character not present
      */
     public void createCharacterMessage(int characterID) throws NotCharacterException {
         if(verifyCharacter(characterID))

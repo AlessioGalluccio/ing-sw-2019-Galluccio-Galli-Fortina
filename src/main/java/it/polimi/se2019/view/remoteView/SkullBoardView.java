@@ -69,7 +69,7 @@ public class SkullBoardView extends Observable implements Observer {
     }
 
     /**
-     * String the full skull board, representing each attributes with symbol and color
+     * String the full skull board, representing each attributes with symbol and color.
      * Work with UTF-8 and ANSI code
      * @return The representation of the skull board
      */

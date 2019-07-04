@@ -29,7 +29,7 @@ public class SettingMessage implements HandlerServerMessage, HandlerConfigMessag
      */
     @Override
     public void handleMessage(WaitingRoom w, Server sender) {
-        w.handleSettingMessage(map, skulls, suddendDeath, sender)   ;
+        w.handleSettingMessage(map, skulls, suddendDeath)   ;
     }
 
     /**

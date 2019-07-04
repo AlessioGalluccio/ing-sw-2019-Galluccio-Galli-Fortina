@@ -44,7 +44,7 @@ public class WaitingRoom {
      * Since WaitingRoom is singleton, this method create new instance of WaitingRoom only if is the first time
      * @param duration Duration of timer in seconds
      * @return The instance of WaitingRoom
-     * @throws IllegalArgumentException if duration <= 0
+     * @throws IllegalArgumentException if duration is minor than 0
      */
     public static WaitingRoom create(int duration) {
         if(duration <= 0) throw new IllegalArgumentException();
@@ -122,6 +122,12 @@ public class WaitingRoom {
                 }
             }
             playerWaiting.add(new WaitingPlayer(player, playerView, controller, networkHandler, enemyView));
+
+            if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true, nickname));
+            else networkHandler.update(null, new StatusLoginMessage(true, false, nickname));
+
+            Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, nickname + " has join");
+
             if(playerWaiting.size() == 3) setTimer();
             if(playerWaiting.size() == 5) {
                 while(matches.get(matches.size()-1).gameHandler.getMap()==null) {
@@ -133,11 +139,6 @@ public class WaitingRoom {
                 }
                 startMatch();
             }
-
-            if(isFirst) networkHandler.update(null, new StatusLoginMessage(true, true, nickname));
-            else networkHandler.update(null, new StatusLoginMessage(true, false, nickname));
-
-            Logger.getLogger(WaitingRoom.class.getName()).log(Level.INFO, nickname + " has join");
         }
     }
 
@@ -253,7 +254,7 @@ public class WaitingRoom {
     private void setNewMatch() {
         playerWaiting.clear();
         isFirst = true;
-        timer.cancel();
+        if(timer!=null) timer.cancel();
         timer = null;
         matches.add(new Match(matchID, new GameHandler(matchID)));
         matchID++;
@@ -266,9 +267,8 @@ public class WaitingRoom {
      * @param map the number of the map chosen
      * @param skulls the number of skull of the game
      * @param suddenDeath if the player want play with the sudden death modality
-     * @param sender who has send the setting
      */
-    public synchronized void handleSettingMessage(int map, int skulls, boolean suddenDeath, Server sender) {
+    public synchronized void handleSettingMessage(int map, int skulls, boolean suddenDeath) {
         if(isFirst) {
             GameHandler gm = matches.get(matches.size() - 1).gameHandler;
             gm.setMap(map);

@@ -5,9 +5,9 @@ import it.polimi.se2019.controller.actions.*;
 import it.polimi.se2019.model.player.Player;
 
 /**
- * This modality is for the 90% of the game
- * Before the endgame you can have three 'normal' action
- * This modality terminate when the number of skull is zero, at this point may begin the frenzy mode
+ * This modality is for the 90% of the game.
+ * Before the endgame you can have three 'normal' action.
+ * This modality terminate when the number of skull is zero, at this point may begin the frenzy mode.
  */
 public class Normal implements Modality {
 

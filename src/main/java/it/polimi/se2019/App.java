@@ -1,6 +1,5 @@
 package it.polimi.se2019;
 
-import it.polimi.se2019.network.socket.SocketHandler;
 import it.polimi.se2019.network.socket.SocketServer;
 import it.polimi.se2019.ui.CLI;
 import it.polimi.se2019.ui.ControllerLogin;
@@ -12,13 +11,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
-/**
- * Hello world!
- */
 public class App extends Application {
     private static SocketServer socketServer;
     private static RMIServer rmi;

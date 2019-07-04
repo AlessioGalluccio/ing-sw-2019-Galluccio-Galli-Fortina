@@ -89,17 +89,18 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
             while (mapView.getMapCopy() == null ||
                     skullBoardView.getLastAck() == -1 ||
                     clientView.getPlayerCopy() == null ||
-                    enemyViews.get(0).getNickname() == null ||
-                    enemyViews.get(1).getNickname() == null) {
+                    (!enemyViews.isEmpty() && enemyViews.get(0).getID() == -1) ||
+                    (enemyViews.size()>1 && enemyViews.get(1).getID() == -1) ||
+                    (enemyViews.size()>2 && enemyViews.get(2).getID() == -1) ||
+                    (enemyViews.size()>3 && enemyViews.get(3).getID() == -1)) {
                 try {
                     clientView.wait();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
+            clientView.handleStartGameMessage(matchID);
         }
-
-        clientView.handleStartGameMessage(matchID);
     }
 
     /**
@@ -137,7 +138,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
 
     /**
      * Set the ui param of this object.
-     * Set the Client param of SkullBoardView and MapView
+     * Set the Client param of SkullBoardView and MapView.
      * @param ui The UI object to set
      */
     public void setUpUi(UiInterface ui) {
@@ -164,7 +165,7 @@ public abstract class Client extends UnicastRemoteObject implements Observer {
     }
 
     /**
-     * Close all stream open and terminate all the thread in order to disconnect correctly a client
+     * Close all streams open and terminate all threads in order to disconnect correctly a client
      */
     public abstract void closeAll();
 
