@@ -115,7 +115,7 @@ public class GameHandler extends Observable {
      */
     private void setNewTurn() {
         map.reloadAllCell();
-        if(skull==0 && !modality.isFrenzyEnable()) setFrenzy();
+        if(skull<=0 && !modality.isFrenzyEnable()) setFrenzy();
         else if(orderPlayerList.get(turn).equals(firstFrenzyPlayer)) endGame();
 
         if(matchID!=-1) { //If the match isn't ended
