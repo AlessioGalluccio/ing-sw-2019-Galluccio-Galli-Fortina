@@ -23,6 +23,7 @@ import java.io.PrintWriter;
  */
 public class CLI implements UiInterface {
     private final int MIN_SKULL = 1;
+    private final int MAX_SKULL = 8;
     boolean endGame;
     private ClientView view;
     private boolean online = true;
@@ -53,7 +54,7 @@ public class CLI implements UiInterface {
             out.println(ConsoleColor.GREEN + "You're in!\n" +ConsoleColor.RESET);if(isFirst) chooseSetting();
             else {
                 clearScreen();
-                if(online) out.println("Waiting for other players...");
+                if(online) out.println("\nWaiting for other players...");
             }
         }
 
@@ -64,12 +65,12 @@ public class CLI implements UiInterface {
     }
 
     /**
-     * otify the users about the starting of the game
+     * Notify the users about the starting of the game
      */
     @Override
     public void startGame() {
         clearScreen();
-        out.println(ConsoleColor.WHITE_BRIGHT + "LET'S START! \t(๑•̀ㅂ•́)ง✧\n" + ConsoleColor.RESET);
+        out.println(ConsoleColor.WHITE_BRIGHT + "LET'S START! \t(@•̀␣•́)↵✧\n" + ConsoleColor.RESET);
         parser = new ParserCLI(view, this);
     }
 
@@ -347,10 +348,10 @@ public class CLI implements UiInterface {
                 in.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             }catch (InputMismatchException e) {
                 if(parser!=null) return;
-                out.println("You can't insert only a digit between " + MIN_SKULL + " and 8" );
+                out.println("You can't insert only a digit between " + MIN_SKULL + " and " + MAX_SKULL );
                 in.nextLine();
             }
-        }while(skulls<MIN_SKULL|| skulls >8);
+        }while(skulls<MIN_SKULL|| skulls>MAX_SKULL);
 
         int decision = 0;
         boolean sd = false;
@@ -374,6 +375,7 @@ public class CLI implements UiInterface {
 
         view.createSettingMessage(map, skulls, sd);
 
+        clearScreen();
         if(online) out.println("\nWaiting for other players...");
     }
 
