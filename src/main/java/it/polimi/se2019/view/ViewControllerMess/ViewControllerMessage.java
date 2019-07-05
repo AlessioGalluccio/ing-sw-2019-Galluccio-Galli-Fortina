@@ -21,10 +21,18 @@ public abstract class ViewControllerMessage implements HandlerServerMessage, Ser
     private ArrayList<ViewControllerMessage> nextMessage;
 
 
+    /**
+     * get the ID of the author
+     * @return the integer ID of the author
+     */
     public int getAuthorID() {
         return authorID;
     }
 
+    /**
+     * get the View of the author
+     * @return the View of the author
+     */
     public View getAuthorView() {
         return authorView;
     }
