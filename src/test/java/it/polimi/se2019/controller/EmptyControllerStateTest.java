@@ -138,6 +138,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if weapon is not present in the player
     public void handleReloadNotPresentNegative() {
         ReloadMessage reloadMessage = new ReloadMessage(new WeaponCard() {
             @Override
@@ -151,6 +152,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if weapon is already reloaded
     public void handleAlreadyReloadedNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -171,6 +173,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if not enough ammo for reloading
     public void handleNotEnoughAmmoNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -203,6 +206,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if discarding a weapon is possible
     public void handleDiscardWeaponPositive() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -235,6 +239,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //player doesn't have the weapon
     public void handleDiscardWeaponNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -262,6 +267,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if discarding the powerup is possible
     public void handleDiscardPowerupPositive() {
         PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
 
@@ -277,6 +283,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //if the player doesn't have the powerup
     public void handleDiscardPowerupNegative() {
         PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
         assertTrue(authorPlayer.getPowerupCardList().isEmpty());
@@ -287,6 +294,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //player can use newton
     public void handleNewtonPositive() {
         NewtonCard newtonCard = new NewtonCard(ColorRYB.BLUE,1,1);
         try {
@@ -300,6 +308,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //player can't use newton
     public void handleNewtonNegative() {
         NewtonCard newtonCard = new NewtonCard(ColorRYB.BLUE,1,1);
         //we don't add the powerup to the player
@@ -310,6 +319,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //player can use teleporter
     public void handleTeleporterPositive() {
         TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);
         try {
@@ -323,6 +333,7 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //player can't use teleporter
     public void handleTeleporterNegative() {
         TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);;
         //we don't add the powerup to the player
@@ -333,16 +344,16 @@ public class EmptyControllerStateTest {
     }
 
     @Test
+    //pass turn
     public void handlePassTurn() {
         PassTurnMessage passTurnMessage = new PassTurnMessage(authorID, playerView);
         controller.update(null, passTurnMessage);
         assertTrue(controller.getState() instanceof NotYourTurnState);
     }
 
-    /**
-     * we test the disconnection message
-     */
+
     @Test
+    //we test the disconnection message
     public void handleDisconnection() {
         ReconnectionMessage reconnectionMessage = new ReconnectionMessage(false,authorID, playerView);
         controller.update(null, reconnectionMessage);

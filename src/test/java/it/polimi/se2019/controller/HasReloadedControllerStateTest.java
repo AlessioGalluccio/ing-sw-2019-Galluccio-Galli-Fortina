@@ -61,6 +61,7 @@ public class HasReloadedControllerStateTest {
 
 
     @Test
+    //can't choose an action in this state
     public void handleAction() {
         assertEquals(HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
         ActionMessage actionMessage = new ActionMessage(5,authorPlayer.getID(), playerView);
@@ -70,6 +71,7 @@ public class HasReloadedControllerStateTest {
 
 
     @Test
+    //can't select a cell in this state
     public void handleCell() {
         assertEquals(HasReloadedControllerState.RELOAD_OR_PASS, playerView.getLastStringPrinted());
         CellMessage message = new CellMessage(1,1,authorPlayer.getID(), playerView);
@@ -128,6 +130,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //reloading if valid input
     public void handleReloadPositive() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -159,6 +162,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //weapon not present
     public void handleReloadNotPresentNegative() {
         ReloadMessage reloadMessage = new ReloadMessage(new WeaponCard() {
             @Override
@@ -172,6 +176,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //weapon already loaded
     public void handleAlreadyReloadedNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -192,6 +197,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //not enough ammo for reloading
     public void handleNotEnoughAmmoNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -225,6 +231,7 @@ public class HasReloadedControllerStateTest {
 
 
     @Test
+    //can discard the weapon
     public void handleDiscardWeaponPositive() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -257,6 +264,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //weapon not present
     public void handleDiscardWeaponNegative() {
         WeaponCard weaponCard = new WeaponCard() {
             @Override
@@ -284,6 +292,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //can discard powerup
     public void handleDiscardPowerupPositive() {
         PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
 
@@ -299,6 +308,7 @@ public class HasReloadedControllerStateTest {
     }
 
     @Test
+    //powerup not present
     public void handleDiscardPowerupNegative() {
         PowerupCard powerupCard = gameHandler.getPowerupCardByID(1);
         assertTrue(authorPlayer.getPowerupCardList().isEmpty());

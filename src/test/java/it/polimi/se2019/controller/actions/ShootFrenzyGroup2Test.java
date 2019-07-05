@@ -81,6 +81,7 @@ public class ShootFrenzyGroup2Test {
     }
 
     @Test
+    //distance between player and target cell is 2, so it's possible
     public void correctCallFromControllerDistance2(){
         //we pick a weapon and we unload it. Player must reload it to shoot
         WeaponCard weapon = gameHandler.getWeaponDeck().pick();

@@ -82,6 +82,7 @@ public class GrabTest {
     }
 
     @Test
+    //valid input
     public void correctCallFromController(){
 
         assertEquals(Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
@@ -109,6 +110,7 @@ public class GrabTest {
     }
 
     @Test
+    //target cell is too distant
     public void tooDistantCell(){
 
         assertEquals(Grab.CHOOSE_CELL, playerView.getLastStringPrinted());
@@ -120,6 +122,7 @@ public class GrabTest {
     }
 
     @Test
+    //when picking up a weapon and the player already has three weapons
     public void switchWeaponsWithFullAmmo(){
         try{
             authorPlayer.setAmmoBag(3,3,3);
@@ -167,6 +170,7 @@ public class GrabTest {
     }
 
     @Test
+    //when not enough ammo to switch a weapon
     public void switchWeaponsWithCostANdNotEnoughAmmo(){
         try{
             authorPlayer.setAmmoBag(0,0,0);

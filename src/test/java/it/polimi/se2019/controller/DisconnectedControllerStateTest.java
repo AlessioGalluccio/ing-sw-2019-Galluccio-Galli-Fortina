@@ -78,6 +78,7 @@ public class DisconnectedControllerStateTest {
     }
 
     @Test
+    //if reconnection, new state is NotYourTurnState
     public void hasReconnected(){
         ReconnectionMessage reconnectionMessage = new ReconnectionMessage(true, authorPlayer.getID(), playerView);
         controller.update(null, reconnectionMessage);

@@ -80,6 +80,7 @@ public class MustRespawnControllerStateTest {
     }
 
     @Test
+    //correct respawing
     public void handleCardSpawn() {
         assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST,playerView.getLastStringPrinted());
         assertTrue(authorPlayer.getPowerupCardList().size() == 1);
@@ -92,51 +93,8 @@ public class MustRespawnControllerStateTest {
         assertEquals(1, authorPlayer.getSkull());
     }
 
-/*
     @Test
-    public void handleCardSpawnIfNextPlayerIsDead() {
-        for(int i = 0; i < 4; i++){
-            gameHandler.nextTurn();
-        }
-        controller.setState(new MustRespawnControllerState(controller, gameHandler));
-        assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST,playerView.getLastStringPrinted());
-        assertTrue(authorPlayer.getPowerupCardList().size() == 2);
-        PowerupCard card = authorPlayer.getPowerupCardList().get(0);
-
-        DiscardPowerupMessage discardPowerupMessage = new DiscardPowerupMessage(card,authorPlayer.getID(), playerView);
-        controller.update(null, discardPowerupMessage);
-        assertTrue(controller.getState() instanceof NotYourTurnState);
-        assertTrue(secondController.getState() instanceof EmptyControllerState);
-        assertEquals(targetPlayer1.getID(), gameHandler.getTurnPlayerID());
-        for(int i = 0; i < 12; i++){
-            try {
-                targetPlayer2.receiveDamageBy(targetPlayer1);
-            } catch (NotPresentException e) {
-                //do nothing
-            } catch (YouDeadException e) {
-                //do nothing
-            } catch (YouOverkilledException e) {
-                //do nothing
-            }
-        }
-
-        PassTurnMessage passTurnMessage = new PassTurnMessage(authorPlayer.getID(), playerView);
-        controller.update(null, passTurnMessage);
-
-        assertTrue(targetPlayer2.getPowerupCardList().size() == 1);
-        PowerupCard card2 = targetPlayer2.getPowerupCardList().get(0);
-
-        DiscardPowerupMessage discardPowerupMessage2 = new DiscardPowerupMessage(card2,targetPlayer2.getID(), playerView);
-        thirdController.update(null, discardPowerupMessage2);
-        assertTrue(thirdController.getState() instanceof NotYourTurnState);
-        assertEquals(targetPlayer2.getID(), gameHandler.getTurnPlayerID());
-
-
-
-    }
-*/
-
-    @Test
+    //disconnection case
     public void handleDisconnection() {
         assertEquals(MustRespawnControllerState.POWERUP_DISCARD_REQUEST,playerView.getLastStringPrinted());
         assertTrue(authorPlayer.getPowerupCardList().size() == 1);

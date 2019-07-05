@@ -64,6 +64,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't select action
     public void handleAction() {
         ActionMessage message = new ActionMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -72,6 +73,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //valid input
     public void handleCellPositive() {
         assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
         assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
@@ -86,6 +88,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //cell is not present on the map (1,3)
     public void handleCellNotPresentCell() {
         assertEquals(TeleporterSelectedControllerState.SELECT_CELL_TELEPORTER, playerView.getLastStringPrinted());
         assertTrue(authorPlayer.getPowerupCardList().contains(teleporterCard));
@@ -100,6 +103,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleFiremode() {
         FireModeMessage message = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -108,6 +112,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleNewton() {
         NewtonMessage message = new NewtonMessage(new NewtonCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -116,6 +121,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can skip
     public void handleNope() {
         NopeMessage message = new NopeMessage(authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -123,6 +129,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleOptional() {
         OptionalMessage message = new OptionalMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -131,6 +138,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handlePlayer() {
         PlayerMessage message = new PlayerMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -139,6 +147,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleReload() {
         ReloadMessage message = new ReloadMessage(new WeaponCard() {
             @Override
@@ -152,6 +161,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleTagback() {
         TagbackGrenadeMessage message = new TagbackGrenadeMessage(new TagbackGrenadeCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -160,6 +170,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleTargeting() {
         TargetingScopeMessage message = new TargetingScopeMessage(new TargetingScopeCard(ColorRYB.BLUE,1,1),ColorRYB.BLUE, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -168,6 +179,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleTeleporter() {
         TeleporterMessage message = new TeleporterMessage(new TeleporterCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -176,6 +188,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleWeaponCard() {
         WeaponMessage message = new WeaponMessage(new WeaponCard() {
             @Override
@@ -189,6 +202,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleFire() {
         FireMessage message = new FireMessage(authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -197,6 +211,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleDiscardPowerup() {
         DiscardPowerupMessage message = new DiscardPowerupMessage(new NewtonCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -205,6 +220,7 @@ public class TeleporterSelectedControllerStateTest {
     }
 
     @Test
+    //can't do this
     public void handleDiscardWeapon() {
         DiscardWeaponMessage message = new DiscardWeaponMessage(new WeaponCard() {
             @Override

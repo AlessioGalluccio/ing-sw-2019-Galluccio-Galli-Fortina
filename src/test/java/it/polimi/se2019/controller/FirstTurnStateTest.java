@@ -66,8 +66,8 @@ public class FirstTurnStateTest {
     }
 
     @Test
+    //from spawing to selecting an action
     public void handleAction() {
-        //TODO errore in ottenere l'azione, manca il metodo!!!
         assertEquals(FirstTurnState.CHARACTER_REQUEST, playerView.getLastStringPrinted());
 
         CharacterMessage characterMessage = new CharacterMessage(1, authorPlayer.getID(),playerView);
@@ -92,9 +92,8 @@ public class FirstTurnStateTest {
     }
 
     @Test
+    //from spawing with the character already selected (reconnection) to selecting an action
     public void handleActionWithCharacterAlreadySelected() {
-        //TODO errore in ottenere l'azione, manca il metodo!!!
-
         authorPlayer.setCharacter( new Character("IronMan", "yellow"));
 
         controller.setState(new FirstTurnState(controller, gameHandler));

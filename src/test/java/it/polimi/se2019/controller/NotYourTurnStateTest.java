@@ -115,6 +115,7 @@ public class NotYourTurnStateTest {
     }
 
     @Test
+    //behaviour if valid inputs
     public void handleTagbackPositive() {
         try{
             authorPlayer.receiveDamageBy(targetPlayer1);
@@ -145,12 +146,14 @@ public class NotYourTurnStateTest {
     }
 
     @Test
+    //if disconnection
     public void handleReconnectionDisconnected(){
         stateController.handleReconnection(false);
         assertEquals( true, controller.getState() instanceof DisconnectedControllerState);
     }
 
     @Test
+    //if message of positive connection. No effect
     public void handleReconnectionNoEffect(){
         stateController.handleReconnection(true);
         assertEquals(false, controller.getState() instanceof DisconnectedControllerState );

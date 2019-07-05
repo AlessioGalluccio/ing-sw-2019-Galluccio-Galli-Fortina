@@ -72,6 +72,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't select an action
     public void handleAction() {
         ActionMessage message = new ActionMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -80,6 +81,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //case with valid input
     public void handlePositive() {
         try{
             targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
@@ -106,6 +108,7 @@ public class NewtonSelectedControllerStateTest {
 
 
     @Test
+    //the cell selected is not present on the map (1,3)
     public void handleCellNotPresent() {
         try{
             targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
@@ -128,6 +131,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //cell is not in direction
     public void handleCellNotValid() {
         try{
             targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
@@ -150,6 +154,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //sending two player targets
     public void handleTooManyTargets() {
         try{
             targetPlayer1.setPosition(gameHandler.getCellByCoordinate(0,2));
@@ -174,6 +179,7 @@ public class NewtonSelectedControllerStateTest {
 
 
     @Test
+    //can't select firemode
     public void handleFiremode() {
         FireModeMessage message = new FireModeMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -182,6 +188,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't select newton
     public void handleNewton() {
         NewtonMessage message = new NewtonMessage(new NewtonCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -190,6 +197,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can skip
     public void handleNope() {
         NopeMessage message = new NopeMessage(authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -197,6 +205,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't select optional
     public void handleOptional() {
         OptionalMessage message = new OptionalMessage(1, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -206,6 +215,7 @@ public class NewtonSelectedControllerStateTest {
 
 
     @Test
+    //can't reload weapon
     public void handleReload() {
         ReloadMessage message = new ReloadMessage(new WeaponCard() {
             @Override
@@ -219,6 +229,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't use tagback
     public void handleTagback() {
         TagbackGrenadeMessage message = new TagbackGrenadeMessage(new TagbackGrenadeCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -227,6 +238,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't use targeting
     public void handleTargeting() {
         TargetingScopeMessage message = new TargetingScopeMessage(new TargetingScopeCard(ColorRYB.BLUE,1,1),ColorRYB.BLUE, authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -235,6 +247,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't use teleporter
     public void handleTeleporter() {
         TeleporterMessage message = new TeleporterMessage(new TeleporterCard(ColorRYB.BLUE,1,1), authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -243,6 +256,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't select a weapon
     public void handleWeaponCard() {
         WeaponMessage message = new WeaponMessage(new WeaponCard() {
             @Override
@@ -256,6 +270,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't fire
     public void handleFire() {
         FireMessage message = new FireMessage(authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -264,6 +279,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't discard powerip
     public void handleDiscardPowerup() {
         DiscardPowerupMessage message = new DiscardPowerupMessage(new NewtonCard(ColorRYB.BLUE,1,1),  authorPlayer.getID(), playerView);
         controller.update(null, message);
@@ -272,6 +288,7 @@ public class NewtonSelectedControllerStateTest {
     }
 
     @Test
+    //can't discard a weapon
     public void handleDiscardWeapon() {
         DiscardWeaponMessage message = new DiscardWeaponMessage(new WeaponCard() {
             @Override

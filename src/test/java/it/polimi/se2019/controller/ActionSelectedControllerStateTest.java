@@ -67,6 +67,7 @@ public class ActionSelectedControllerStateTest {
     }
 
     @Test
+    //controller calls the right method
     public void correctCallOfHandleFromController(){
 
         TeleporterCard teleporterCard = new TeleporterCard(ColorRYB.BLUE,1,1);
@@ -82,6 +83,7 @@ public class ActionSelectedControllerStateTest {
     }
 
     @Test
+    //skip an action brings to EmptyControllerState
     public void skipPositive(){
 
         NopeMessage nopeMessage = new NopeMessage(authorPlayer.getID(), playerView);
@@ -104,6 +106,7 @@ public class ActionSelectedControllerStateTest {
 
 
     @Test
+    //valid reloading with shootFrenzy
     public void handleReloadPositive() {
         //action ShootFrenzy permits reloading
         Action action = new ShootFrenzyGroup1(gameHandler,controller);
@@ -146,6 +149,7 @@ public class ActionSelectedControllerStateTest {
     }
 
     @Test
+    //if weapon is not present
     public void handleReloadNotPresentNegative() {
         //action ShootFrenzy permits reloading
         Action action = new ShootFrenzyGroup1(gameHandler,controller);
@@ -170,6 +174,7 @@ public class ActionSelectedControllerStateTest {
     }
 
     @Test
+    //if weapon is already reloaded
     public void handleAlreadyReloadedNegative() {
         //action ShootFrenzy permits reloading
         Action action = new ShootFrenzyGroup1(gameHandler,controller);
@@ -201,6 +206,7 @@ public class ActionSelectedControllerStateTest {
     }
 
     @Test
+    //if not enough ammo for reloading
     public void handleNotEnoughAmmoNegative() {
         //action ShootFrenzy permits reloading
         Action action = new ShootFrenzyGroup1(gameHandler,controller);
