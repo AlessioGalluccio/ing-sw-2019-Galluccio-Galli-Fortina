@@ -147,7 +147,9 @@ public class RocketLauncher_1 extends FireMode {
             else{
                 shoot.addOptionalFromFiremode(numOptional);
                 for(Player target : shoot.getTargetsCells().get(0).getPlayerHere()){
-                    shoot.addPlayerTargetFromFireMode(target,true);
+                    if(target.getID() != shoot.getTargetsPlayer().get(0).getID()){
+                        shoot.addPlayerTargetFromFireMode(target,true);
+                    }
                 }
                 shoot.addCost(COST_SECOND_OPTIONAL);
 
